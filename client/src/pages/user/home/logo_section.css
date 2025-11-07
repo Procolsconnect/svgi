@@ -1,0 +1,140 @@
+/* === Random Logo Slider Styling === */
+.random-logo-slider {
+    padding: 0;
+    background-color: #ffffff;
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    height: 40vh;
+}
+
+.random-logo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: auto;
+    padding: 20px 10px;
+}
+
+.random-logo-sub-header {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: #000;
+    font-weight: 700;
+}
+
+.random-logo-positions {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    /* max-width: 1200px; */
+    /* overflow: hidden; */
+}
+
+.random-logo-position {
+    width: 25%;
+    padding: 15px;
+    transition: all 0.5s cubic-bezier(0.694, 0.0482, 0.335, 1);
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.random-logo-position.out {
+    opacity: 0;
+    transform: translateY(5px);
+}
+
+.random-logo-position img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.random-logo-position img:hover {
+    transform: scale(1.05);
+}
+
+.random-logo-network-list {
+    display: none;
+}
+
+/* === Responsiveness === */
+@media (min-width: 1024px) {
+
+    .random-logo-position {
+        width: 25%;
+    }
+
+    .random-logo-sub-header {
+        font-size: 1.8rem;
+    }
+}
+@media (max-width: 991px) {
+
+    .random-logo-position {
+        width: 25%;
+    }
+
+    .random-logo-sub-header {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* .random-logo-positions {
+        gap: 10px;
+    } */
+     .random-logo-slider {
+    height: 30vh;
+}
+
+    .random-logo-position {
+        width: 25%;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .random-logo-position>img {
+        width: 100px;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .random-logo-sub-header {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .random-logo-slider {
+    height: 50vh;
+}
+
+    .random-logo-position {
+        width: 50%;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .random-logo-position>img {
+        width: 90px;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .random-logo-sub-header {
+        font-size: 1.2rem;
+    }
+}
