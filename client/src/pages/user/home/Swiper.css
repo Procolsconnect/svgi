@@ -1,0 +1,257 @@
+
+
+.swiper-carousel-body {
+  display: grid;
+  place-items: center;
+  min-height: 89vh;
+  background: white;
+}
+
+.swiper-carousel-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-carousel-title {
+  color: #dbd56e;
+  background: -webkit-linear-gradient(25deg, #eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 3rem;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid;
+  animation: swiper-type 1.5s steps(90) 1.5s 1 normal both, swiper-cursor 1s step-end infinite;
+  position: relative;
+}
+
+@keyframes swiper-type {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes swiper-cursor {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.swiper-carousel-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-carousel-wrapper .swiper-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 120px;
+}
+
+.swiper-carousel-wrapper .swiper-slide {
+  scale: 1.25;
+  transition: scale 250ms ease-in-out;
+}
+
+.swiper-carousel-wrapper .swiper-slide.swiper-slide-active {
+  scale: 2;
+  z-index: 10;
+}
+
+.swiper-carousel-wrapper .swiper-slide.swiper-slide-prev,
+.swiper-carousel-wrapper .swiper-slide.swiper-slide-next {
+  scale: 1.7;
+  z-index: 5;
+  transition-duration: 150ms;
+}
+
+.swiper-carousel-wrapper .swiper-slide.swiper-slide-next + .swiper-slide {
+  z-index: 2;
+}
+
+.swiper-carousel-wrapper .swiper-slide img {
+  display: block;
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.swiper-button {
+  --position: 17%;
+  background-color: #F04E23;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 0.5rem;
+}
+
+.swiper-carousel-prev {
+  left: var(--position) !important;
+}
+
+.swiper-carousel-next {
+  right: var(--position) !important;
+}
+
+.swiper-button:hover {
+  background-color: #4A261F;
+}
+
+.swiper-button::after {
+  font-size: 1.5rem !important;
+  color: white !important;
+}
+
+/* ============================================
+   MOBILE STYLES (Portrait and Small Screens)
+   ============================================ */
+@media (max-width: 768px) {
+  .swiper-carousel-body {
+    min-height: 100vh;
+    padding: 20px 0;
+  }
+
+  .swiper-carousel-header {
+    padding: 0 20px;
+    margin-bottom: 30px;
+  }
+
+  .swiper-carousel-title {
+    font-size: 2rem;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .swiper-carousel-wrapper {
+    width: 90% !important;
+    height: 70vh !important;
+    max-height: 600px;
+    margin: 0 auto;
+  }
+
+  .swiper-carousel-wrapper .swiper-wrapper {
+    flex-direction: column;
+    margin-bottom: 0;
+    justify-content: center;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide {
+    scale: 1 !important;
+    width: 100% !important;
+    margin: 10px 0;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-active {
+    scale: 1.3 !important;
+    z-index: 10;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-prev,
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-next {
+    scale: 1.1 !important;
+    z-index: 5;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide img {
+    border-radius: 1rem;
+  }
+
+  /* Hide navigation buttons on mobile */
+  .swiper-button,
+  .swiper-carousel-prev,
+  .swiper-carousel-next {
+    display: none !important;
+  }
+  @keyframes swiper-type {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+}
+
+
+@media (max-width: 480px) {
+  .swiper-carousel-title {
+    font-size: 1.0rem;
+  }
+
+  .swiper-carousel-wrapper {
+    width: 90% !important;
+    height: 65vh !important;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide {
+    margin: 8px 0;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-active {
+    scale: 1.2 !important;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide img {
+    border-radius: 0.75rem;
+  }
+   @keyframes swiper-type {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+}
+
+/* ============================================
+   TABLET PORTRAIT (768px - 1024px)
+   ============================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .swiper-carousel-title {
+    font-size: 2.5rem;
+  }
+
+  .swiper-button {
+    --position: 10%;
+  }
+  
+}
+
+/* ============================================
+   LANDSCAPE MOBILE (Small height screens)
+   ============================================ */
+@media (max-height: 600px)  {
+  .swiper-carousel-body {
+    min-height: 100vh;
+    padding: 10px 0;
+  }
+
+  .swiper-carousel-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .swiper-carousel-wrapper {
+    height: 80vh !important;
+    max-height: none;
+  }
+}
+
+/* ============================================
+   DESKTOP (Above 1024px)
+   ============================================ */
+@media (min-width: 1025px) {
+  .swiper-carousel-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
