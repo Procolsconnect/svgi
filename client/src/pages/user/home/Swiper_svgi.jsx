@@ -1,6 +1,6 @@
-// SwiperCarousel.jsx  ← YOUR FILE (only 3 lines fixed)
-import React, { useEffect, useRef } from 'react';
-import './Swiper.css';
+// SwiperCarousel.jsx
+import React, { useEffect, useRef } from "react";
+import "./Swiper.css";
 
 const demoData = [
   { id: 1, src: "/images/placements 1.jpg", alt: "Placement 1" },
@@ -18,66 +18,64 @@ const SwiperCarousel = () => {
   const swiperInstanceRef = useRef(null);
 
   useEffect(() => {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
     document.head.appendChild(link);
 
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+
     script.onload = () => {
-      if (window.Swiper && swiperRef.current) {
+      if (!window.Swiper || !swiperRef.current) return;
 
-        const wrapper = swiperRef.current.querySelector('.swiper-wrapper');
-        wrapper.innerHTML = '';
-        demoData.forEach(item => {
-          const slide = document.createElement('div');
-          slide.className = 'swiper-slide';
-          slide.innerHTML = `<img src="${item.src}" alt="${item.alt}" />`;
-          wrapper.appendChild(slide);
-        });
+      const wrapper = swiperRef.current.querySelector(".swiper-wrapper");
+      wrapper.innerHTML = "";
 
-        const isMobile = window.innerWidth <= 768;
+      demoData.forEach((item) => {
+        const slide = document.createElement("div");
+        slide.className = "swiper-slide";
+        slide.innerHTML = `<img src="${item.src}" alt="${item.alt}" />`;
+        wrapper.appendChild(slide);
+      });
 
-        swiperInstanceRef.current = new window.Swiper(swiperRef.current, {
-          slidesPerView: isMobile ? 1 : 5,
-          spaceBetween: isMobile ? 1 : 0,
-          centeredSlides: true,
-          loop: true,
-          simulateTouch: true,
+      const isMobile = window.innerWidth <= 768;
 
-          // ONLY THIS LINE FIXED
-          direction: isMobile ? 'vertical' : 'horizontal',
+      swiperInstanceRef.current = new window.Swiper(swiperRef.current, {
+        slidesPerView: isMobile ? 3: 5,
+        spaceBetween: isMobile ? 1 : 0,
+        centeredSlides: true,
+        loop: isMobile ? true : true,
+        simulateTouch: true,
+        direction: isMobile ? "vertical" : "horizontal",
+        mousewheel: isMobile,
+        navigation: {
+          nextEl: ".swiper-carousel-next",
+          prevEl: ".swiper-carousel-prev",
+        },
+      });
 
-          // ADD THIS LINE TO ENABLE UP/DOWN SWIPE ON MOBILE
-          mousewheel: isMobile,
-
-          navigation: {
-            nextEl: ".swiper-carousel-next",
-            prevEl: ".swiper-carousel-prev",
-          },
-        });
-
-        calculateHeight();
-      }
+      updateSlideHeights();
     };
+
     document.head.appendChild(script);
 
-    const calculateHeight = () => {
-      const slides = document.querySelectorAll('.swiper-slide');
-      slides.forEach(slide => {
+    const updateSlideHeights = () => {
+      const slides = swiperRef.current?.querySelectorAll(".swiper-slide") || [];
+      slides.forEach((slide) => {
         const width = slide.getBoundingClientRect().width;
         slide.style.height = `${width * 0.5625}px`; // 16:9
       });
     };
-    window.addEventListener('resize', calculateHeight);
-    calculateHeight();
+
+    window.addEventListener("resize", updateSlideHeights);
 
     return () => {
-      if (swiperInstanceRef.current) swiperInstanceRef.current.destroy();
-      window.removeEventListener('resize', calculateHeight);
-      document.head.removeChild(link);
-      document.head.removeChild(script);
+      swiperInstanceRef.current?.destroy();
+      window.removeEventListener("resize", updateSlideHeights);
+
+      if (document.head.contains(link)) document.head.removeChild(link);
+      if (document.head.contains(script)) document.head.removeChild(script);
     };
   }, []);
 

@@ -1,9 +1,10 @@
-
-
+/* ============================================
+   BASE LAYOUT
+============================================ */
 .swiper-carousel-body {
   display: grid;
   place-items: center;
-  min-height: 89vh;
+  height: 100vh;
   background: white;
 }
 
@@ -24,28 +25,29 @@
   overflow: hidden;
   white-space: nowrap;
   border-right: 2px solid;
-  animation: swiper-type 1.5s steps(90) 1.5s 1 normal both, swiper-cursor 1s step-end infinite;
+  animation: swiper-type 1.5s steps(90) 1.5s 1 normal both,
+             swiper-cursor 1s step-end infinite;
   position: relative;
 }
 
+/* Typewriter Effect */
 @keyframes swiper-type {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+  from { width: 0; }
+  to { width: 100%; }
 }
 
 @keyframes swiper-cursor {
-  50% {
-    border-color: transparent;
-  }
+  50% { border-color: transparent; }
 }
 
+/* ============================================
+   SWIPER CORE
+============================================ */
 .swiper-carousel-wrapper {
   width: 100%;
   height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .swiper-carousel-wrapper .swiper-wrapper {
@@ -84,6 +86,9 @@
   user-select: none;
 }
 
+/* ============================================
+   NAVIGATION BUTTONS
+============================================ */
 .swiper-button {
   --position: 17%;
   background-color: #F04E23;
@@ -92,13 +97,8 @@
   border-radius: 0.5rem;
 }
 
-.swiper-carousel-prev {
-  left: var(--position) !important;
-}
-
-.swiper-carousel-next {
-  right: var(--position) !important;
-}
+.swiper-carousel-prev { left: var(--position) !important; }
+.swiper-carousel-next { right: var(--position) !important; }
 
 .swiper-button:hover {
   background-color: #4A261F;
@@ -110,148 +110,147 @@
 }
 
 /* ============================================
-   MOBILE STYLES (Portrait and Small Screens)
-   ============================================ */
+   MOBILE OPTIMIZATION (360px - 768px)
+============================================ */
+
+/* Base mobile styles (overrides desktop scale) */
 @media (max-width: 768px) {
   .swiper-carousel-body {
-    min-height: 100vh;
-    padding: 20px 0;
-  }
-
-  .swiper-carousel-header {
-    padding: 0 20px;
-    margin-bottom: 30px;
-  }
-
-  .swiper-carousel-title {
-    font-size: 2rem;
-    text-align: center;
-    white-space: normal;
-    word-wrap: break-word;
+    height: 80vh;
+    padding: 1rem 0;
   }
 
   .swiper-carousel-wrapper {
-    width: 90% !important;
-    height: 70vh !important;
-    max-height: 600px;
+    width: 95vw;
+    max-width: 400px;
+    height: 65vh;
     margin: 0 auto;
   }
 
   .swiper-carousel-wrapper .swiper-wrapper {
-    flex-direction: column;
-    margin-bottom: 0;
-    justify-content: center;
+    margin-bottom: 20px;
   }
 
+  /* Reduce scale to prevent overflow */
   .swiper-carousel-wrapper .swiper-slide {
-    scale: 1 !important;
-    width: 100% !important;
-    margin: 10px 0;
+    scale: 1;
+    opacity: 0.6;
+    transition: all 300ms ease;
   }
 
   .swiper-carousel-wrapper .swiper-slide.swiper-slide-active {
-    scale: 1.3 !important;
+    scale: 1.2;
+    opacity: 1;
     z-index: 10;
   }
 
   .swiper-carousel-wrapper .swiper-slide.swiper-slide-prev,
   .swiper-carousel-wrapper .swiper-slide.swiper-slide-next {
-    scale: 1.1 !important;
+    scale: 1.1;
+    opacity: 0.8;
     z-index: 5;
   }
 
   .swiper-carousel-wrapper .swiper-slide img {
-    border-radius: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Extra Small Phones: 360px - 480px */
+@media (max-width: 480px) {
+  .swiper-carousel-wrapper {
+    width: 88vw;
+    max-width: 340px;
+    height: 60vh;
   }
 
-  /* Hide navigation buttons on mobile */
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-active {
+    scale: 1.08;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-prev,
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-next {
+    scale: 1.02;
+  }
+
+  .swiper-carousel-title {
+    font-size: 1.4rem;
+    line-height: 1.3;
+    padding: 0 1rem;
+  }
+}
+
+/* Small Phones: 481px - 576px */
+@media (min-width: 481px) and (max-width: 576px) {
+  .swiper-carousel-wrapper {
+    width: 90vw;
+    max-width: 380px;
+    height: 62vh;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-active {
+    scale: 1.1;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-prev,
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-next {
+    scale: 1.03;
+  }
+}
+
+/* Medium Phones: 577px - 660px */
+@media (min-width: 577px) and (max-width: 660px) {
+  .swiper-carousel-wrapper {
+    width: 92vw;
+    max-width: 420px;
+    height: 65vh;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-active {
+    scale: 1.12;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-prev,
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-next {
+    scale: 1.04;
+  }
+}
+
+/* Large Phones: 661px - 768px */
+@media (min-width: 661px) and (max-width: 768px) {
+  .swiper-carousel-wrapper {
+    width: 94vw;
+    max-width: 460px;
+    height: 68vh;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-active {
+    scale: 1.15;
+  }
+
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-prev,
+  .swiper-carousel-wrapper .swiper-slide.swiper-slide-next {
+    scale: 1.05;
+  }
+
+  .swiper-carousel-title {
+    font-size: 2rem;
+  }
+}
+
+/* Hide navigation buttons on all mobile */
+@media (max-width: 768px) {
   .swiper-button,
   .swiper-carousel-prev,
   .swiper-carousel-next {
     display: none !important;
   }
-  @keyframes swiper-type {
-  from {
-    height: 0;
-  }
-  to {
-    height: 100%;
-  }
-}
 }
 
-
-@media (max-width: 480px) {
-  .swiper-carousel-title {
-    font-size: 1.0rem;
-  }
-
-  .swiper-carousel-wrapper {
-    width: 90% !important;
-    height: 65vh !important;
-  }
-
-  .swiper-carousel-wrapper .swiper-slide {
-    margin: 8px 0;
-  }
-
-  .swiper-carousel-wrapper .swiper-slide.swiper-slide-active {
-    scale: 1.2 !important;
-  }
-
-  .swiper-carousel-wrapper .swiper-slide img {
-    border-radius: 0.75rem;
-  }
-   @keyframes swiper-type {
-  from {
-    height: 0;
-  }
-  to {
-    height: 100%;
-  }
-}
-}
-
-/* ============================================
-   TABLET PORTRAIT (768px - 1024px)
-   ============================================ */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .swiper-carousel-title {
-    font-size: 2.5rem;
-  }
-
-  .swiper-button {
-    --position: 10%;
-  }
-  
-}
-
-/* ============================================
-   LANDSCAPE MOBILE (Small height screens)
-   ============================================ */
-@media (max-height: 600px)  {
-  .swiper-carousel-body {
-    min-height: 100vh;
-    padding: 10px 0;
-  }
-
-  .swiper-carousel-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-
-  .swiper-carousel-wrapper {
-    height: 80vh !important;
-    max-height: none;
-  }
-}
-
-/* ============================================
-   DESKTOP (Above 1024px)
-   ============================================ */
-@media (min-width: 1025px) {
-  .swiper-carousel-wrapper {
-    max-width: 1400px;
-    margin: 0 auto;
+/* Optional: Improve touch swipe feedback */
+@media (max-width: 768px) {
+  .swiper-slide {
+    -webkit-tap-highlight-color: transparent;
   }
 }
