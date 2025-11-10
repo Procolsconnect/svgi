@@ -27,6 +27,7 @@ const Home = () => {
     <OurTeam />
     <RandomLogoSlider />
     <LogoSlider1 />
+    <Sports />
     </div>
   )
 }

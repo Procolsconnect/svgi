@@ -72,7 +72,7 @@ const ExpandingCards = () => {
       void main() {
         vec2 uv = gl_FragCoord.xy;
         float angle = PI * 2.5 * sin(time * 0.1);
-        float a = 200.0 + 200.0 * sin(angle * 0.25);
+        float a = 200.0 + 100.0 * sin(angle * 0.25);
         float k = uv.y / a;
         float delta = 75.0 * sin(k + angle * 1.5) + 150.0 * cos(k + angle * 1.5);
 
