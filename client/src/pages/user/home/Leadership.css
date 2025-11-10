@@ -1,0 +1,227 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+.leaders-body-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  padding-bottom: 6%;
+  background: #ededed;
+  font-family: 'Satoshi', sans-serif;
+  --scale: clamp(200px, 22vw, 300px);
+  overflow: hidden;
+  gap: 70px;
+  position: relative;
+}
+
+/* Left Heading */
+.leaders-left-heading {
+  position: absolute;
+  top: 30%;
+  right: 35%;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: #2e2e2e;
+  font-weight: 600;
+  max-width: 300px;
+  line-height: 1.2;
+  z-index: 10;
+}
+
+.leaders-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1065px;
+}
+
+.leaders-row.reverse {
+  flex-direction: row-reverse;
+}
+
+/* Card */
+.leaders-card {
+  --clr: #2f322e;
+  --fclr: #f0ffe2;
+  width: var(--scale);
+  height: 254px;
+  min-width: var(--scale);
+  background: var(--clr);
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  cursor: pointer;
+  margin: auto 24px;
+  width: 33%;
+  box-shadow:
+    -8px -8px 24px #fffc,
+    1px 1px 3px #7da07277,
+    12px 42px 24px -8px #7da07233,
+    10px 24px 42px #7da07233,
+    1px 4px 12px #7da07244;
+}
+
+.leaders-card:nth-child(2) {
+  --clr: #2e2e2e;
+  --fclr: #fefefe;
+  box-shadow:
+    -8px -8px 24px #fffc,
+    1px 1px 3px #0006,
+    12px 42px 24px -8px #0003,
+    10px 24px 42px #0003,
+    1px 4px 12px #0006;
+}
+
+.leaders-card:nth-child(3) {
+  --clr: #fff;
+  --fclr: #000;
+}
+
+.leaders-model {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: -10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leaders-image-model {
+  width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  transition: filter 0.4s ease-in-out;
+}
+
+.leaders-glass {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background: linear-gradient(transparent, var(--clr) 80%);
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  overflow: hidden;
+}
+
+.leaders-overflow {
+  pointer-events: none;
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  overflow: hidden;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 75% 60%, 75% 100%, 25% 100%, 25% 60%, 0 60%);
+}
+
+
+
+.leaders-content h2,  
+.leaders-content p {
+  position: relative;
+  z-index: 1;
+  width: 100%;               /* ✅ ensures text stays inside card */
+  padding-left: 10%;
+  box-sizing: border-box;    /* ✅ prevents overflow from padding */
+  color: var(--fclr);
+}
+
+.leaders-content h2,
+.leaders-content p {
+  max-width: calc(100% - 48px);   /* ✅ prevents overflow (24px + 24px padding) */
+  white-space: normal;            /* ✅ normal wrapping, no breaking words forcibly */
+}
+.leaders-content h2 {
+  font-size: 1.5rem;     /* ✅ smaller, fits inside card */
+}
+
+
+/* Text */
+.leaders-text {
+  width: 100%;
+  font-size: 16px;
+  color: #2e2e2e;
+  line-height: 1.3;
+}@media (max-width: 768px) {
+  .leaders-body-wrapper {
+    padding-top: 10%;
+    
+  }
+  .leaders-left-heading {
+    position: static !important;
+    margin: 0 auto 32px;
+    text-align: center;
+    font-size: 2.6rem !important;
+    max-width: 90%;
+    padding: 0 20px;
+    transform: none !important;
+    padding-bottom: 10%;
+  }
+
+  /* 2. One card per screen – desktop look */
+  .leaders-row { 
+    flex-direction: column !important;
+    align-items: center;
+    gap: 48px;
+    padding: 0 20px;
+    padding-bottom: 13%;
+  }
+  .leaders-card {
+    width:100% !important;
+    min-width: var(--scale) !important;
+    height: 254px !important;
+    margin: 0 !important;
+  }
+
+  /* 3. Text inside card – perfect fit */
+  .leaders-content h2,
+  .leaders-content p {
+    padding-left: 10% !important;
+    max-width: calc(90% - 48px) !important;
+  }
+  .leaders-content h2 { font-size: 1.2rem !important; }
+  .leaders-content p  { font-size: 1rem !important; }
+}
+/* Fix 2nd image shoulder pop-out (exact Card #1 match) */
+/* Card #2 shoulder pop-out = Card #1 */
+.leaders-card:nth-child(2) .leaders-model {
+  bottom: -10% !important;  
+}
+.leaders-card:nth-child(2) .leaders-image-model {
+  width: 80% !important;   
+}
+/* Normalize all images */
+.leaders-image-model {
+  width: 80%;
+  max-height: 80%;  
+  object-fit: contain;
+  object-position: center bottom; /* ✅ forces alignment */
+}
+
+.leaders-card:nth-child(2) {
+  margin-top: 100px !important;   /* adjust value as you want */
+}
+/* Force same pop-out for ALL cards */
+.leaders-model {
+  bottom: -10% !important;  /* ✅ equal pop-out */
+}
+
+/* If MODEL 2 still overshoots, reduce its scale */
+.leaders-card:nth-child(2) .leaders-image-model {
+  transform: scale(0.22);  /* ✅ shrink ONLY 2nd image to match 1st */
+}
+.leaders-text {
+  width: 100%;
+  font-size: 18px;
+  color: #2e2e2e;
+  line-height: 1.3;
+}
