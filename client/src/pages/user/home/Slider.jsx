@@ -1,55 +1,45 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Slider.css'; // External CSS file
+import axios from 'axios';
+import './Slider.css';
 
 const CustomSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [slides, setSlides] = useState([]); // Store API data here
+
   const startTimeRef = useRef(null);
   const rafIdRef = useRef(null);
-  const duration = 15000;
-
-  const slides = [
-    {
-      type: 'video',
-      src: '/videos/College Dron.mp4',
-      title: 'Welcome to SVGI',
-      subtitle: 'Group of Institutions',
-      description: 'Transforming knowledge into real-world impact, Shree Vengadeshwara empowers you with skills for a thriving career. Your future-ready education starts here.',
-      button: 'Explore',
-      align: 'center'
-    },
-    {
-      type: 'image',
-      src: '/images/WhatsApp Image 2025-07-31 at 17.54.07_0eeece1f.jpg',
-      title: 'Skill-Focused & Actionable',
-      description: '"Beyond the classroom, into your career. We bridge theory with practice, ensuring you gain the essential skills employers demand."',
-      button: 'Learn More',
-      align: 'center'
-    },
-    {
-      type: 'image',
-      src: '/images/sky clg.jpg',
-      title: '"Pedagogy" The method and practice of teaching',
-      description: 'A place for higher learning, sometimes part of a university.',
-      button: 'See More',
-      align: 'left'
-    },
-    {
-      type: 'video',
-      src: '/videos/College Dron 1.mp4',
-      title: 'Beach Video',
-      description: 'Another video slide slowed down.',
-      button: 'Dive In',
-      align: 'left'
-    }
-  ];
-
   const videoRefs = useRef([]);
-
-  /* ---------- AUTO PLAY LOGIC ---------- */
+  const duration = 15000;
+ const apiurl=import.meta.env.VITE_API_URL
+  // ---------- FETCH SLIDES FROM API ----------
   useEffect(() => {
-    if (!isPlaying) return;
+    const fetchSlides = async () => {
+      try {
+        const { data } = await axios.get(`${apiurl}/api/hero`);
+        // Map your API data to slide format
+        const mappedSlides = data.data.map((item) => ({
+          id: item.id,
+          type: item.media_type === 'video' ? 'video' : 'image',
+          src: `${import.meta.env.VITE_API_URL}${item.media_url}`, // full URL
+          title: item.title,
+          description: item.description,
+          button: item.button_text,
+          align: 'center', // optional, customize as needed
+        }));
+        setSlides(mappedSlides);
+      } catch (err) {
+        console.error('Failed to fetch slides:', err);
+      }
+    };
+
+    fetchSlides();
+  }, []);
+
+  // ---------- AUTO PLAY ----------
+  useEffect(() => {
+    if (!isPlaying || slides.length === 0) return;
 
     const loop = (now) => {
       if (!startTimeRef.current) startTimeRef.current = now;
@@ -66,28 +56,25 @@ const CustomSlider = () => {
     };
 
     rafIdRef.current = requestAnimationFrame(loop);
-
     return () => cancelAnimationFrame(rafIdRef.current);
   }, [isPlaying, activeIndex, slides.length]);
 
-  /* ---------- VIDEO SPEED & LOAD ONLY ACTIVE ---------- */
+  // ---------- VIDEO HANDLING ----------
   useEffect(() => {
     videoRefs.current.forEach((video, i) => {
-      if (video) {
-        if (i === activeIndex) {
-          video.playbackRate = 0.5;
-          if (!video.src) {
-            video.src = slides[i].src;
-            video.load();
-          }
-        } else {
-          video.playbackRate = 1.0;
+      if (!video) return;
+      if (i === activeIndex) {
+        video.playbackRate = 0.5;
+        if (!video.src) {
+          video.src = slides[i].src;
+          video.load();
         }
+      } else {
+        video.playbackRate = 1.0;
       }
     });
   }, [activeIndex, slides]);
 
-  /* ---------- PAGINATION CLICK ---------- */
   const handlePagination = (index) => {
     if (index === activeIndex) return;
     setActiveIndex(index);
@@ -95,7 +82,6 @@ const CustomSlider = () => {
     startTimeRef.current = performance.now();
   };
 
-  /* ---------- PLAY / PAUSE ---------- */
   const togglePlayPause = () => {
     if (isPlaying) {
       setIsPlaying(false);
@@ -109,13 +95,13 @@ const CustomSlider = () => {
 
   const PlayIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="svgi-svg-icon" viewBox="0 0 24 24">
-      <path d="M8 5v14l11-7z"/>
+      <path d="M8 5v14l11-7z" />
     </svg>
   );
 
   const PauseIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="svgi-svg-icon" viewBox="0 0 24 24">
-      <path d="M6 19h4V5H6zm8-14v14h4V5h-4z"/>
+      <path d="M6 19h4V5H6zm8-14v14h4V5h-4z" />
     </svg>
   );
 
@@ -124,10 +110,7 @@ const CustomSlider = () => {
       <div className="svgi-main-slider">
         <div className="svgi-slider-wrapper">
           {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`svgi-slide ${index === activeIndex ? 'svgi-slide-active' : ''}`}
-            >
+            <div key={slide.id} className={`svgi-slide ${index === activeIndex ? 'svgi-slide-active' : ''}`}>
               <div className="svgi-item">
                 {slide.type === 'video' ? (
                   <div className="svgi-video">
@@ -137,20 +120,19 @@ const CustomSlider = () => {
                       loop
                       muted
                       playsInline
-                      preload={index === activeIndex ? "auto" : "none"}
+                      preload={index === activeIndex ? 'auto' : 'none'}
                     >
                       {index === activeIndex && <source src={slide.src} type="video/mp4" />}
                     </video>
                   </div>
                 ) : (
                   <picture className="svgi-picture">
-                    <img src={slide.src} alt="Slide" />
+                    <img src={slide.src} alt={slide.title} />
                   </picture>
                 )}
                 <div className="svgi-parent-text">
                   <div className={`svgi-info-text ${slide.align === 'left' ? 'svgi-align-left' : ''}`}>
                     <h2>{slide.title}</h2>
-                    {slide.subtitle && <h2>{slide.subtitle}</h2>}
                     <p>{slide.description}</p>
                     <a href="#">{slide.button}</a>
                   </div>
@@ -166,32 +148,27 @@ const CustomSlider = () => {
             <span
               key={index}
               className={`svgi-pagination-bullet ${index === activeIndex ? 'svgi-bullet-active' : ''}`}
-              onClick={() => handlePagination(index)}   
+              onClick={() => handlePagination(index)}
             >
-             {index === activeIndex ? (
+              {index === activeIndex ? (
                 <div className="svgi-bullet-content">
                   <div
                     role="button"
                     tabIndex={0}
                     className="svgi-playpause-btn"
-                    style={{ pointerEvents: 'auto', outline: 'none' }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      e.preventDefault();
                       togglePlayPause();
                     }}
-                    onKeyDown={(e) => e.key === 'Enter' && togglePlayPause()}
                   >
                     {isPlaying ? <PauseIcon /> : <PlayIcon />}
                   </div>
-
                   <div
                     className="svgi-percentage svgi-show"
-                    style={{ 
+                    style={{
                       '--p': progress,
-                      background: `conic-gradient(#1C69D4 0deg, #1C69D4 ${progress * 3.6}deg, #c9d6d7 ${progress * 3.6}deg, #c9d6d7 360deg)`
+                      background: `conic-gradient(#1C69D4 0deg, #1C69D4 ${progress * 3.6}deg, #c9d6d7 ${progress * 3.6}deg, #c9d6d7 360deg)`,
                     }}
-                    onClick={(e) => e.stopPropagation()}
                   >
                     <div className="svgi-number">{index + 1}</div>
                   </div>

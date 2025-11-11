@@ -1,6 +1,9 @@
 const HeroService= require('../../services/home/HomeHeroServices');
 
+
+
 async function createHeroController(req, res) {
+
   try {
     const createdBy = 1;
     const ip = req.ip; 
@@ -37,7 +40,47 @@ const getHeroController = async (req, res) => {
     });
   }
 };
+const updateHeroController = async (req, res) => {
+
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    const file = req.file;
+    const hero = await HeroService.updateHero(id,data,file);
+    res.status(200).json({
+      success: true,
+      message: 'Hero updated successfully',
+      data: hero,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update hero',
+      error: err.message,
+    });
+  }
+};
+ 
+ const deleteHeroController = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const hero = await HeroService.deleteHero(id);
+    res.status(200).json({
+      success: true,
+      message: 'Hero deleted successfully',
+      data: hero,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete hero',
+      error: err.message,
+    });
+  }
+};
 
 module.exports = { 
   getHeroController,
-  createHeroController };
+  createHeroController,
+  updateHeroController,
+  deleteHeroController};
