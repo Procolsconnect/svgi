@@ -13,5 +13,21 @@ const updateHeroSchema = Joi.object({
   button_text: Joi.string().trim().max(100).optional(),
   status: Joi.number().integer().valid(0, 1).optional()
 });
+const createInstitutionSchema = Joi.object({
+  title: Joi.string().trim().min(3).max(255).required(),
+  description: Joi.string().trim().min(3).required(),
+  link: Joi.string().trim().max(100).required(),
+  status: Joi.number().integer().valid(0, 1).required()
+});
+const updateInstitutionSchema = Joi.object({
+  title: Joi.string().trim().min(3).max(255).optional(),
+  description: Joi.string().trim().min(3).optional(),
+  link: Joi.string().trim().max(100).optional(),
+  status: Joi.number().integer().valid(0, 1).optional()
+});
 
-module.exports = { createHeroSchema, updateHeroSchema };
+module.exports = {
+   createHeroSchema,
+   updateHeroSchema,
+   createInstitutionSchema,
+   updateInstitutionSchema };

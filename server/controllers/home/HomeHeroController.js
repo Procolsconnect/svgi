@@ -1,7 +1,5 @@
 const HeroService= require('../../services/home/HomeHeroServices');
 
-
-
 async function createHeroController(req, res) {
 
   try {

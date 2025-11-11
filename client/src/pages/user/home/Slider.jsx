@@ -13,7 +13,7 @@ const CustomSlider = () => {
   const videoRefs = useRef([]);
   const duration = 15000;
  const apiurl=import.meta.env.VITE_API_URL
-  // ---------- FETCH SLIDES FROM API ----------
+ 
   useEffect(() => {
     const fetchSlides = async () => {
       try {
