@@ -1,9 +1,15 @@
 const home = require("../controllers/home/HomeHeroController");
+const Institution = require("../controllers/home/InstutionController");
 const service = require("../controllers/home/ServiceOfferingsController");
 const upload = require("../middleware/multer");
 const {validate} = require("../middleware/validate");
-const {createHeroSchema, updateHeroSchema} = require("../inputvalidations/home.validation");
 const {auth} = require("../middleware/auth");
+const {
+  createHeroSchema,
+  updateHeroSchema, 
+  createInstitutionSchema, 
+  updateInstitutionSchema } = require("../inputvalidations/home.validation");
+
 
 module.exports = function homeRoutes(app) {
   //Hero API
@@ -12,11 +18,16 @@ module.exports = function homeRoutes(app) {
   app.put("/api/hero/:id",upload.single("media"),validate(updateHeroSchema),home.updateHeroController);
   app.delete("/api/hero/:id",home.deleteHeroController);
 
+  //Institution API
+  app.post("/api/institution",upload.fields([{ name: "image", maxCount: 1 }, { name: "logo", maxCount: 1 }]),validate(createInstitutionSchema),Institution.createInstitutionController);
   app.get("/api/service-offerings",service.getServiceOfferingsController);
   app.post("/api/service-offerings",upload.single("image"),service.createServiceOfferingController);
   app.put("/api/service-offerings/:id",upload.single("image"),service.updateServiceOfferingController);
   app.delete("/api/service-offerings/:id",service.deleteServiceOfferingController);
 
 
+  app.get("/api/institution",Institution.getInstitutionsController);
+  app.put("/api/institution/:id",upload.fields([{ name: "image", maxCount: 1 }, { name: "logo", maxCount: 1 }]),validate(updateInstitutionSchema),Institution.updateInstitutionController);
+  app.delete("/api/institution/:id",Institution.deleteInstitutionController);  
 
 };
