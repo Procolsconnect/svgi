@@ -26,8 +26,7 @@ async function createHero(body, file, createdBy, ip) {
   };
 
   const sql = `
-    INSERT INTO home_hero 
-    (title, description, media_url, media_type, button_text, status)
+    INSERT INTO home_hero (title, description, media_url, media_type, button_text, status)
     VALUES (?, ?, ?, ?, ?, ?)
   `;
 
@@ -39,10 +38,14 @@ async function createHero(body, file, createdBy, ip) {
     data.button_text,
     data.status,
   ];
-
   const [result] = await db.promise().query(sql, values);
-
   return { heroId: result.insertId, ...data };
 }
 
-module.exports = createHero;
+async function getHero() {
+  const sql = `SELECT * FROM home_hero WHERE status = 1`;
+  const [result] = await db.promise().query(sql);
+  return result;
+}
+
+module.exports = { createHero, getHero };
