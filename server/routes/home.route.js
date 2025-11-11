@@ -1,5 +1,6 @@
 const home = require("../controllers/home/HomeHeroController");
 const Institution = require("../controllers/home/InstutionController");
+const service = require("../controllers/home/ServiceOfferingsController");
 const upload = require("../middleware/multer");
 const {validate} = require("../middleware/validate");
 const {auth} = require("../middleware/auth");
@@ -19,6 +20,11 @@ module.exports = function homeRoutes(app) {
 
   //Institution API
   app.post("/api/institution",upload.fields([{ name: "image", maxCount: 1 }, { name: "logo", maxCount: 1 }]),validate(createInstitutionSchema),Institution.createInstitutionController);
+  app.get("/api/service-offerings",service.getServiceOfferingsController);
+  app.post("/api/service-offerings",upload.single("image"),service.createServiceOfferingController);
+  app.put("/api/service-offerings/:id",upload.single("image"),service.updateServiceOfferingController);
+  app.delete("/api/service-offerings/:id",service.deleteServiceOfferingController);
+
 
   app.get("/api/institution",Institution.getInstitutionsController);
   app.put("/api/institution/:id",upload.fields([{ name: "image", maxCount: 1 }, { name: "logo", maxCount: 1 }]),validate(updateInstitutionSchema),Institution.updateInstitutionController);
