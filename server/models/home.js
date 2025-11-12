@@ -10,7 +10,7 @@ const homeHeroSchema = new mongoose.Schema({
   media_type: { type: String, enum: ['image', 'video'], default: 'image' },
   button_text: { type: String },
   status: { type: Number, default: 1 }
-}, { 
+}, {
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } 
 });
 
