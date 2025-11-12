@@ -3,6 +3,9 @@ const InstitutionService = require('../../services/home/InstitutionService');
 // CREATE
 const createInstitutionController = async (req, res) => {
   try {
+    console.log("FILES:", req.files);
+console.log("BODY:", req.body);
+
     // Get files from multer
     const image_url = req.files?.image ? '/uploads/' + req.files.image[0].filename : null;
     const logo_url = req.files?.logo ? '/uploads/' + req.files.logo[0].filename : null;
