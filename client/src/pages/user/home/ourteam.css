@@ -227,6 +227,10 @@
   .carousel-wrapper{
     gap: 30px;
   }
+  .card {
+    width: 220px;
+    height: 280px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -314,6 +318,7 @@
 @media (max-width: 480px) {
   .carousel-wrapper{
     height: 70vh;
+    gap: 0px;
   }
 
   .carousel-container {
