@@ -4,8 +4,8 @@ async function createHeroController(req, res) {
 
   try {
     const createdBy = 1;
-    const ip = req.ip; 
-    const data = req.body; 
+    const ip = req.ip;
+    const data = req.body;
     const hero = await HeroService.createHero(data,req.file, createdBy, ip);
     res.status(201).json({
       success: true,
@@ -19,7 +19,6 @@ async function createHeroController(req, res) {
       error: err.message,
     });
   }
-  
 }
 
 const getHeroController = async (req, res) => {

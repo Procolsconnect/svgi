@@ -201,7 +201,7 @@
 /* ---------- Responsive Design ---------- */
 @media (min-width: 1024px) {
   .placement-cards-container {
-    height: 100vh;
+    height: auto;
   }
 
   .placement-section {
@@ -375,8 +375,9 @@
   }
 
   .placement-arrow-btn {
-    padding: 0.6rem;
-    font-size: 1.5rem;
+    /* padding: 0.6rem;
+    font-size: 1.5rem; */
+    display: none;
   }
 }
 
@@ -434,8 +435,9 @@
   }
 
   .placement-arrow-btn {
-    padding: 0.6rem;
-    font-size: 1.3rem;
+    /* padding: 0.6rem;
+    font-size: 1.3rem; */
+    display: none;
   }
 }
 

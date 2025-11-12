@@ -223,6 +223,12 @@
 
 
 /* ---------- Responsive ---------- */
+@media (max-width: 1400px) {
+  .carousel-wrapper{
+    gap: 30px;
+  }
+}
+
 @media (max-width: 992px) {
   .carousel-container {
     height: 360px;
