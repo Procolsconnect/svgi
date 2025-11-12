@@ -225,7 +225,11 @@
 /* ---------- Responsive ---------- */
 @media (max-width: 1400px) {
   .carousel-wrapper{
-    gap: 30px;
+    gap: 10px;
+  }
+  .card {
+    width: 220px;
+    height: 280px;
   }
 }
 

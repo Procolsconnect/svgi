@@ -22,7 +22,7 @@ const CustomSlider = () => {
         const mappedSlides = data.data.map((item) => ({
           id: item.id,
           type: item.media_type === 'video' ? 'video' : 'image',
-          src: `${import.meta.env.VITE_API_URL}${item.media_url}`, // full URL
+          src: `${item.media_url}`, // full URL
           title: item.title,
           description: item.description,
           button: item.button_text,
