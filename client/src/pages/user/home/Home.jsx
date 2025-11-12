@@ -8,7 +8,6 @@ import Campus from './Campus'
 import AnimatedCards from './AnimatedCards'
 import CardsWithArrows from './sports_section.jsx';
 import BigCatStack from './animal.jsx';
-import Sports from './sports.jsx';
 import OurTeam from './OurTeam.jsx';
 import RandomLogoSlider from './Logo_Section.jsx';
 import LogoSlider1 from './Logo_Section1.jsx';
@@ -16,18 +15,17 @@ const Home = () => {
   return (
     <div className='home'>
       <Slider />
-      <Achievement/>
+      <Achievement />
       <Leadership />
       <Swiper_svgi />
       <WhySvg />
       <Campus />
       <CardsWithArrows />
-    <BigCatStack />
-    <AnimatedCards />
-    <OurTeam />
-    <RandomLogoSlider />
-    <LogoSlider1 />
-    <Sports />
+      <BigCatStack />
+      <AnimatedCards />
+      <OurTeam />
+      <RandomLogoSlider />
+      <LogoSlider1 />
     </div>
   )
 }

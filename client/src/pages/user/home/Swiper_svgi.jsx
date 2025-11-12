@@ -1,23 +1,36 @@
-// SwiperCarousel.jsx
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import "./Swiper.css";
 
-const demoData = [
-  { id: 1, src: "/images/placements 1.jpg", alt: "Placement 1" },
-  { id: 2, src: "/images/placement 2.jpeg", alt: "Placement 2" },
-  { id: 3, src: "/images/companys.jpg", alt: "Companies" },
-  { id: 4, src: "/images/company2.webp", alt: "Company 2" },
-  { id: 5, src: "/images/placements 1.jpg", alt: "Placement 1" },
-  { id: 6, src: "/images/placement 2.jpeg", alt: "Placement 2" },
-  { id: 7, src: "/images/companys.jpg", alt: "Companies" },
-  { id: 8, src: "/images/company2.webp", alt: "Company 2" },
-];
+const apiurl = import.meta.env.VITE_API_URL;
 
 const SwiperCarousel = () => {
   const swiperRef = useRef(null);
   const swiperInstanceRef = useRef(null);
+  const [swiperData, setSwiperData] = useState([]);
 
+  // ✅ Fetch API data once
   useEffect(() => {
+    const fetchSwiperData = async () => {
+      try {
+        const res = await axios.get(`${apiurl}/api/placement-swiper`);
+        if (res.data && Array.isArray(res.data)) {
+          setSwiperData(res.data);
+        } else if (res.data?.data) {
+          setSwiperData(res.data.data);
+        }
+      } catch (err) {
+        console.error("Error fetching placement swiper:", err);
+      }
+    };
+
+    fetchSwiperData();
+  }, []);
+
+  // ✅ Initialize Swiper after data load
+  useEffect(() => {
+    if (!swiperData.length) return;
+
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
@@ -29,29 +42,43 @@ const SwiperCarousel = () => {
     script.onload = () => {
       if (!window.Swiper || !swiperRef.current) return;
 
+      // 🧹 Clear old slides
       const wrapper = swiperRef.current.querySelector(".swiper-wrapper");
       wrapper.innerHTML = "";
 
-      demoData.forEach((item) => {
+      // 🖼️ Inject slides dynamically
+      swiperData.forEach((item) => {
         const slide = document.createElement("div");
         slide.className = "swiper-slide";
-        slide.innerHTML = `<img src="${item.src}" alt="${item.alt}" />`;
+        slide.innerHTML = `<img src="${apiurl}${item.image_url}" alt="Placement" />`;
         wrapper.appendChild(slide);
       });
 
       const isMobile = window.innerWidth <= 768;
 
+      // 🧨 Destroy old instance if exists
+      if (swiperInstanceRef.current) {
+        swiperInstanceRef.current.destroy(true, true);
+      }
+
+      // 🚀 Initialize Swiper correctly
       swiperInstanceRef.current = new window.Swiper(swiperRef.current, {
-        slidesPerView: isMobile ? 3: 5,
+        slidesPerView: isMobile ? 3 : 5,
         spaceBetween: isMobile ? 1 : 0,
         centeredSlides: true,
-        loop: isMobile ? true : true,
+        loop: true,
+        initialSlide: 0,
         simulateTouch: true,
         direction: isMobile ? "vertical" : "horizontal",
         mousewheel: isMobile,
         navigation: {
           nextEl: ".swiper-carousel-next",
           prevEl: ".swiper-carousel-prev",
+        },
+        on: {
+          init: (swiper) => {
+            swiper.slideToLoop(0, 0); // ✅ start from first slide
+          },
         },
       });
 
@@ -64,20 +91,19 @@ const SwiperCarousel = () => {
       const slides = swiperRef.current?.querySelectorAll(".swiper-slide") || [];
       slides.forEach((slide) => {
         const width = slide.getBoundingClientRect().width;
-        slide.style.height = `${width * 0.5625}px`; // 16:9
+        slide.style.height = `${width * 0.5625}px`; // maintain 16:9 aspect ratio
       });
     };
 
     window.addEventListener("resize", updateSlideHeights);
 
     return () => {
-      swiperInstanceRef.current?.destroy();
+      swiperInstanceRef.current?.destroy(true, true);
       window.removeEventListener("resize", updateSlideHeights);
-
       if (document.head.contains(link)) document.head.removeChild(link);
       if (document.head.contains(script)) document.head.removeChild(script);
     };
-  }, []);
+  }, [swiperData]);
 
   return (
     <div className="swiper-carousel-body">
