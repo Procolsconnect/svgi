@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -5,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const setRoutes = require('./routes');
 const path = require('path');
+const connectDB = require("./config/db");
+
 
 const app = express();
 
@@ -51,5 +54,6 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server started on http://localhost:${port}`);
 });
+connectDB();
 
 module.exports = app;

@@ -12,6 +12,7 @@ const ExpandingCards = () => {
   
   const cardRefs = useRef([]);
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
   const glRef = useRef(null);
   const programRef = useRef(null);
   const animationFrameRef = useRef(null);
@@ -67,7 +68,7 @@ const ExpandingCards = () => {
       uniform vec2 resolution;
 
       const float PI = 3.141592653589793;
-      const float DEG_90 = 1.5707963267948966;
+      const float DEG_90 = 1.5707963967948966;
 
       void main() {
         vec2 uv = gl_FragCoord.xy;
@@ -154,34 +155,31 @@ const ExpandingCards = () => {
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-      if (pageIsOpen && currentCardIndex !== null) {
-        const card = cardRefs.current[currentCardIndex];
-        if (card) {
-          const cardPosition = card.getBoundingClientRect();
-          const newCoverStyle = calculateCoverStyle(cardPosition);
-          setCoverStyle(newCoverStyle);
-        }
+      if (pageIsOpen && currentCardIndex !== null && containerRef.current) {
+        updateCoverStyle();
       }
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [pageIsOpen, currentCardIndex, windowSize]);
+  }, [pageIsOpen, currentCardIndex]);
 
-  const calculateCoverStyle = (cardPosition) => {
-    const scaleX = windowSize.width / cardPosition.width;
-    const scaleY = windowSize.height / cardPosition.height;
-    const offsetX = (windowSize.width / 2 - cardPosition.width / 2 - cardPosition.left) / scaleX;
-    const offsetY = (windowSize.height / 2 - cardPosition.height / 2 - cardPosition.top) / scaleY;
-
-    return {
-      left: `${cardPosition.left}px`,
-      top: `${cardPosition.top}px`,
-      width: `${cardPosition.width}px`,
-      height: `${cardPosition.height}px`,
-      transform: `scaleX(${scaleX}) scaleY(${scaleY}) translate3d(${offsetX}px, ${offsetY}px, 0px)`,
-      backgroundColor: window.getComputedStyle(cardRefs.current[currentCardIndex]).backgroundColor
-    };
+  const updateCoverStyle = () => {
+    if (!containerRef.current || currentCardIndex === null) return;
+    
+    const card = cardRefs.current[currentCardIndex];
+    const cardStyle = window.getComputedStyle(card);
+    const containerPosition = containerRef.current.getBoundingClientRect();
+    
+    setCoverStyle({
+      position: 'fixed',
+      left: '0',
+      top: `${containerPosition.top}px`,
+      width: '100vw',
+      height: `${containerPosition.height}px`,
+      backgroundColor: cardStyle.backgroundColor,
+      zIndex: 99
+    });
   };
 
   const handleCardClick = (index) => {
@@ -191,57 +189,42 @@ const ExpandingCards = () => {
     setCurrentCardIndex(index);
     setClickedCard(index);
 
+    // Animate other cards out with delay
     const otherCardIndices = cardsData.map((_, i) => i).filter(i => i !== index);
-    
-    setTimeout(() => {
-      otherCardIndices.forEach((cardIndex, i) => {
-        setTimeout(() => {
-          setOutCards(prev => [...prev, cardIndex]);
-        }, i * 100);
-      });
-    }, 100);
+    let delay = 100;
+    otherCardIndices.forEach((cardIndex) => {
+      setTimeout(() => {
+        setOutCards(prev => [...prev, cardIndex]);
+      }, delay);
+      delay += 100;
+    });
 
+    // Show background and content
     setTimeout(() => {
-      const cardPosition = card.getBoundingClientRect();
-      const newCoverStyle = calculateCoverStyle(cardPosition);
-      setCoverStyle(newCoverStyle);
+      updateCoverStyle();
       setOpenContentData({
         title: cardsData[index].title,
         image: cardsData[index].image
       });
       setPageIsOpen(true);
-      setTimeout(() => window.scroll(0, 0), 300);
     }, 500);
   };
 
   const handleClose = () => {
     setPageIsOpen(false);
+    setCoverStyle({});
     
-    if (currentCardIndex !== null) {
-      const card = cardRefs.current[currentCardIndex];
-      if (card) {
-        const cardPosition = card.getBoundingClientRect();
-        setCoverStyle({
-          left: `${cardPosition.left}px`,
-          top: `${cardPosition.top}px`,
-          width: `${cardPosition.width}px`,
-          height: `${cardPosition.height}px`,
-          transform: 'scaleX(1) scaleY(1) translate3d(0px, 0px, 0px)',
-          backgroundColor: window.getComputedStyle(card).backgroundColor
-        });
-      }
-    }
-
     setTimeout(() => {
       setOpenContentData({ title: '', image: '' });
-      setCoverStyle({ width: '0px', height: '0px' });
       setClickedCard(null);
       
       const otherCardIndices = cardsData.map((_, i) => i).filter(i => i !== currentCardIndex);
-      otherCardIndices.forEach((cardIndex, i) => {
+      let delay = 100;
+      otherCardIndices.forEach((cardIndex) => {
         setTimeout(() => {
           setOutCards(prev => prev.filter(idx => idx !== cardIndex));
-        }, i * 100);
+        }, delay);
+        delay += 100;
       });
     }, 301);
   };
@@ -249,14 +232,15 @@ const ExpandingCards = () => {
   return (
     <div className="ec-body">
       <canvas ref={canvasRef} className="ec-background-canvas"></canvas>
-      <div className="ec-container">
-        <div className="ec-card-column ec-column-0">
+      <div ref={containerRef} className="ec-container" style={{ position: 'relative', minHeight: '600px' }}>
+        <div className="ec-card-column ec-column-0" style={{ visibility: pageIsOpen ? 'hidden' : 'visible' }}>
           {[0, 2].map((index) => (
             <div
               key={index}
               ref={el => cardRefs.current[index] = el}
               className={`ec-card ${cardsData[index].color} ${clickedCard === index ? 'ec-clicked' : ''} ${outCards.includes(index) ? 'ec-out' : ''}`}
               onClick={() => handleCardClick(index)}
+              style={{ visibility: clickedCard === index && pageIsOpen ? 'visible' : 'inherit' }}
             >
               <div className="ec-border"></div>
               <img src={cardsData[index].image} alt="" />
@@ -264,13 +248,14 @@ const ExpandingCards = () => {
             </div>
           ))}
         </div>
-        <div className="ec-card-column ec-column-1">
+        <div className="ec-card-column ec-column-1" style={{ visibility: pageIsOpen ? 'hidden' : 'visible' }}>
           {[1, 3].map((index) => (
             <div
               key={index}
               ref={el => cardRefs.current[index] = el}
               className={`ec-card ${cardsData[index].color} ${clickedCard === index ? 'ec-clicked' : ''} ${outCards.includes(index) ? 'ec-out' : ''}`}
               onClick={() => handleCardClick(index)}
+              style={{ visibility: clickedCard === index && pageIsOpen ? 'visible' : 'inherit' }}
             >
               <div className="ec-border"></div>
               <img src={cardsData[index].image} alt="" />
@@ -278,23 +263,36 @@ const ExpandingCards = () => {
             </div>
           ))}
         </div>
-      </div>
-      <div id="ec-cover" className="ec-cover" style={coverStyle}></div>
-      <div id="ec-open-content" className={`ec-open-content ${pageIsOpen ? 'ec-open' : ''}`}>
-        <a href="#" id="ec-close-content" className="ec-close-content" onClick={(e) => { e.preventDefault(); handleClose(); }}>
-          <span className="ec-x-1"></span>
-          <span className="ec-x-2"></span>
-        </a>
-        <img id="ec-open-content-image" src={openContentData.image} alt="" />
-        <div className="ec-text" id="ec-open-content-text">
-          {openContentData.title && (
+        
+        <div 
+          id="ec-open-content" 
+          className={`ec-open-content ${pageIsOpen ? 'ec-open' : ''}`} 
+          style={{ 
+            position: 'absolute', 
+            top: 0, 
+            left: 0, 
+            right: 0,
+            height: '100%',
+            overflowY: 'auto',
+            overflowX: 'hidden'
+          }}
+        >
+          <a href="#" id="ec-close-content" className="ec-close-content" onClick={(e) => { e.preventDefault(); handleClose(); }}>
+            <span className="ec-x-1"></span>
+            <span className="ec-x-2"></span>
+          </a>
+          {openContentData.image && (
             <>
-              <h1>{openContentData.title}</h1>
-              <div dangerouslySetInnerHTML={{ __html: paragraphText }} />
+              <img id="ec-open-content-image" src={openContentData.image} alt="" />
+              <div className="ec-text" id="ec-open-content-text">
+                <h1>{openContentData.title}</h1>
+                <div dangerouslySetInnerHTML={{ __html: paragraphText }} />
+              </div>
             </>
           )}
         </div>
       </div>
+      <div id="ec-cover" className="ec-cover" style={coverStyle}></div>
     </div>
   );
 };
