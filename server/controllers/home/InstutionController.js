@@ -4,11 +4,11 @@ const InstitutionService = require('../../services/home/InstitutionService');
 const createInstitutionController = async (req, res) => {
   try {
     console.log("FILES:", req.files);
-console.log("BODY:", req.body);
+    console.log("BODY:", req.body);
 
-    // Get files from multer
-    const image_url = req.files?.image ? '/uploads/' + req.files.image[0].filename : null;
-    const logo_url = req.files?.logo ? '/uploads/' + req.files.logo[0].filename : null;
+    // Get files from multer Cloudinary
+    const image_url = req.files?.image ? req.files.image[0].path : null;
+    const logo_url = req.files?.logo ? req.files.logo[0].path : null;
 
     const { title, description, link, status } = req.body;
 
@@ -93,8 +93,8 @@ const updateInstitutionController = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const image_url = req.files?.image ? '/uploads/' + req.files.image[0].filename : undefined;
-    const logo_url = req.files?.logo ? '/uploads/' + req.files.logo[0].filename : undefined;
+    const image_url = req.files?.image ? req.files.image[0].path : undefined;
+    const logo_url = req.files?.logo ? req.files.logo[0].path : undefined;
 
     const { title, description, link, status } = req.body;
 

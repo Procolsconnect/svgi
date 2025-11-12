@@ -6,7 +6,7 @@ async function createServiceOffering(body, file) {
 
   // Handle file upload
   if (file) {
-    image = "/uploads/" + file.filename;
+    image = file.path; 
   }
 
   const data = {
@@ -33,7 +33,7 @@ async function updateServiceOffering(id, body, file) {
 
   // Update file if provided
   if (file) {
-    offering.image = "/uploads/" + file.filename;
+    offering.image = file.path; 
   }
 
   // Update other fields
