@@ -1,35 +1,45 @@
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
 
-// Create upload directory if not exists
-const uploadDir = path.join(__dirname, '../public/uploads');
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-
-// Storage config
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
-  }
+// 🔹 Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Filter for images & videos
-function fileFilter(req, file, cb) {
-  const allowedTypes = /jpeg|jpg|png|gif|mp4|mov|avi|mkv/;
-  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = allowedTypes.test(file.mimetype);
 
-  if (extname && mimetype) {
-    cb(null, true);
-  } else {
-    cb(new Error('Only image/video files are allowed!'));
-  }
-}
+// 🔹 Storage engine for Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: async (req, file) => {
+    let folder = "svgi"; // You can customize per module if needed
+    let resource_type = "auto"; // auto handles image & video
 
-const upload = multer({ storage, fileFilter });
+    return {
+      folder,
+      resource_type,
+      format: undefined, // keep original format
+      public_id: Date.now() + "-" + file.originalname.split(".")[0],
+    };
+  },
+});
+
+// 🔹 Multer upload with filter
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = /jpeg|jpg|png|gif|mp4|mov|avi|mkv/;
+    const extname = allowedTypes.test(
+      file.originalname.toLowerCase().split(".").pop()
+    );
+    const mimetype = allowedTypes.test(file.mimetype);
+
+    if (extname && mimetype) cb(null, true);
+    else cb(new Error("Only image/video files are allowed!"));
+  },
+});
 
 module.exports = upload;
