@@ -50,7 +50,7 @@ const SwiperCarousel = () => {
       swiperData.forEach((item) => {
         const slide = document.createElement("div");
         slide.className = "swiper-slide";
-        slide.innerHTML = `<img src="${apiurl}${item.image_url}" alt="Placement" />`;
+        slide.innerHTML = `<img src="${item.image_url}" alt="Placement" />`;
         wrapper.appendChild(slide);
       });
 

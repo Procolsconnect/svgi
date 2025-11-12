@@ -54,7 +54,7 @@ const ServiceOfferings = () => {
             <div
               className={`card-circle card-${index + 1}`}
               style={{
-                backgroundImage: `url(${apiurl}/${card.image})`,
+                backgroundImage: `url(${card.image})`,
               }}
             ></div>
             <div className="card-content">

@@ -8,7 +8,7 @@ async function getPlacementSwiper() {
 // CREATE SWIPER
 async function createPlacementSwiper(file) {
   try {
-    const imagePath = file ? `/uploads/${file.filename}` : null;
+    const imagePath = file ?file.path : null;
 
     const swiper = new PlacementSwiper({
       image_url: imagePath,

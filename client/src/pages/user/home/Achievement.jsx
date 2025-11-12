@@ -114,7 +114,7 @@ const InstitutionsGrid = () => {
 
                 {/* ✅ Correct image and logo URLs */}
                 <img
-                  src={`${apiurl}${inst.logo_url}`}
+                  src={`${inst.logo_url}`}
                   alt="Logo"
                   className={styles.icon}
                 />
@@ -122,7 +122,7 @@ const InstitutionsGrid = () => {
                   <span>Watch now</span>
                 </a>
                 <img
-                  src={`${apiurl}${inst.image_url}`}
+                  src={`${inst.image_url}`}
                   alt={inst.title}
                   className={styles.cardImg}
                 />

@@ -7,7 +7,7 @@ async function createHero(body, file, createdBy, ip) {
 
   // File handling (same logic)
   if (file) {
-    media_url = "/uploads/" + file.filename;
+    media_url = file.path; 
 
     if (file.mimetype.startsWith("image")) {
       media_type = "image";
