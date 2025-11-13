@@ -107,6 +107,21 @@ const eventSchema = new mongoose.Schema(
 
 
 /* =========================
+  Our Team SECTION
+========================= */
+
+const teamSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    role: { type: String, required: true },
+    img: { type: String, required: true }, // URL or uploaded path
+  },
+  { timestamps: true }
+);
+
+
+
+/* =========================
    EXPORT ALL MODELS
 ========================= */
 const HomeHero = mongoose.model('HomeHero', homeHeroSchema);
@@ -116,6 +131,7 @@ const ServiceOffering = mongoose.model('ServiceOffering', serviceOfferingSchema)
 const CampusInfrastructure = mongoose.model('CampusInfrastructure', campusSchema);
 const Placement = mongoose.model("Placement", placementSchema);
 const Event = mongoose.model("Event", eventSchema);
+const Team = mongoose.model("Team", teamSchema);
 
 module.exports = {
   HomeHero,
@@ -125,4 +141,5 @@ module.exports = {
   CampusInfrastructure,
   Placement,
   Event,
+  Team,
 };

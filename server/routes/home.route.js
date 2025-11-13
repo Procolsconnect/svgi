@@ -14,6 +14,7 @@ const {
 
 const placementController = require("../controllers/home/placementController");
 const eventController = require("../controllers/home/eventController");
+const teamController = require("../controllers/home/teamController");
 
 
 module.exports = function homeRoutes(app) {
@@ -79,6 +80,13 @@ app.delete("/api/campus/:id", infra.deleteCampusController);
   app.get("/api/events/:id", eventController.getEventByIdController);
   app.put("/api/events/:id", upload.single("img"), eventController.updateEventController);
   app.delete("/api/events/:id", eventController.deleteEventController);
+
+  // Team Member API
+  app.post("/api/ourteam", upload.single("img"), teamController.createTeamController);
+  app.get("/api/ourteam", teamController.getTeamMembersController);
+  app.get("/api/ourteam/:id", teamController.getTeamMemberByIdController);
+  app.put("/api/ourteam/:id", upload.single("img"), teamController.updateTeamController);
+  app.delete("/api/ourteam/:id", teamController.deleteTeamController);
 
 
 };
