@@ -3,6 +3,7 @@ const Institution = require("../controllers/home/InstutionController");
 const service = require("../controllers/home/ServiceOfferingsController");
 const placement = require("../controllers/home/PlacementSwiperController");
 const infra = require("../controllers/home/CollegeInfraController");
+const studentAchivement = require("../controllers/home/StudenAchivementController");
 const upload = require("../middleware/multer");
 const {validate} = require("../middleware/validate");
 const {auth} = require("../middleware/auth");
@@ -62,13 +63,28 @@ app.put(
 );
 app.delete("/api/campus/:id", infra.deleteCampusController);
 
-
-
   // Placements Card API
   app.get("/api/placements", placementController.getPlacementsController);
   app.post("/api/placements",upload.single("img"), placementController.createPlacementController);
   app.get("/api/placements/:id", placementController.getPlacementByIdController);
   app.put("/api/placements/:id",upload.single("img"), placementController.updatePlacementController);
   app.delete("/api/placements/:id", placementController.deletePlacementController);
+
+  // Student Achievements
+ app.get("/api/student-achievements", studentAchivement.getStudentAchivementController);
+  app.post(
+    "/api/student-achievements",
+    upload.single("image"),
+    studentAchivement.createStudentAchivementController
+  );
+  app.put(
+    "/api/student-achievements/:id",
+    upload.single("image"),
+    studentAchivement.updateStudentAchivementController
+  );
+  app.delete(
+    "/api/student-achievements/:id",
+    studentAchivement.deleteStudentAchivementController
+  );
 
 };

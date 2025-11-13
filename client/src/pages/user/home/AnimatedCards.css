@@ -112,6 +112,14 @@
 }
 
 /* The open page content */
+
+.ec-body {
+  position: relative;
+  overflow: hidden; /* stops background bleed */
+  isolation: isolate; /* ensures z-index stacking only inside */
+  background: inherit; /* keeps your same section background */
+}
+
 .ec-open-content {
   width: 100%;
   z-index: 110;
@@ -127,6 +135,66 @@
   margin-top: 20px;
   z-index: 5;
 }
+.ec-popup {
+  position: fixed; /* stays fixed on screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.85); /* dark overlay */
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+
+.ec-popup-content {
+  background: transparent;
+  width: 80%;
+  padding: 30px;
+  text-align: center;
+  overflow-y: auto;
+  max-height: 80vh;
+  position: relative;
+}
+
+.ec-popup-content img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.ec-popup-content h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.ec-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.ec-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  align-items: start;
+  padding: 40px;
+}
+
 
 .ec-open-content .ec-text {
   background: #fff;
