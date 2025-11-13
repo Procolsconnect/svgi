@@ -1,8 +1,32 @@
-// CollegeCampus.jsx
-import React from 'react';
-import './Campus.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./Campus.css";
 
 const CollegeCampus = () => {
+  const [campusData, setCampusData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL
+
+  useEffect(() => {
+    const fetchCampusData = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/api/campus`);
+        setCampusData(res.data.data);
+      } catch (err) {
+        console.error("Error fetching campus data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCampusData();
+  }, [API_URL]);
+
+  if (loading) return <p className="cc-loading">Loading campus details...</p>;
+  if (!campusData) return <p className="cc-error">No campus data found.</p>;
+
+  const { imagesCard, videosCard, toursCard } = campusData;
+
   return (
     <main className="cc-main">
       <div className="cc-heading">
@@ -29,23 +53,27 @@ const CollegeCampus = () => {
           <div className="cc-card-inner">
             <div className="cc-box">
               <div className="cc-imgBox">
-                <img src="/images/enginner.jpg" alt="College infrastructure" />
+                <img
+                  src={imagesCard?.[0]?.image || "/images/default.jpg"}
+                  alt="College infrastructure"
+                />
               </div>
               <div className="cc-more">
                 <ul>
-                  <li>
-                    <img src="/images/arts.jpeg" alt="Arts" />
-                  </li>
-                  <li>
-                    <img src="/images/artss.jpg" alt="Arts" />
-                  </li>
-                  <li>
-                    <img src="/images/paramedical.jpeg" alt="Paramedical" />
-                  </li>
-                  <li>
-                    <img src="/images/arts college.jpg" alt="College" />
-                    <span>50+</span>
-                  </li>
+                  {imagesCard?.slice(1, 4)?.map((img, index) => (
+                    <li key={index}>
+                      <img src={img.image} alt={`Campus ${index + 1}`} />
+                    </li>
+                  ))}
+                  {imagesCard?.length > 4 && (
+                    <li>
+                      <img
+                        src={imagesCard[4].image}
+                        alt="More"
+                      />
+                      <span>{imagesCard.length}+</span>
+                    </li>
+                  )}
                 </ul>
               </div>
               <div className="cc-tag">
@@ -56,70 +84,82 @@ const CollegeCampus = () => {
         </div>
 
         {/* Video Card */}
-        <div className="cc-card cc-video">
-          <div className="cc-card-inner">
-            <div className="cc-box">
-              <div className="cc-videoBox">
-                <video
-                  id="cc-dronVideo"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  onClick={(e) => {
-                    const video = e.currentTarget;
-                    video.paused ? video.play() : video.pause();
-                  }}
-                >
-                  <source src="/videos/College Dron.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <div className="cc-tag">
-                <a href="#">#view full screen</a>
+        {videosCard?.length > 0 && (
+          <div className="cc-card cc-video">
+            <div className="cc-card-inner">
+              <div className="cc-box">
+                <div className="cc-videoBox">
+                  <video
+                    id="cc-dronVideo"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    onClick={(e) => {
+                      const video = e.currentTarget;
+                      video.paused ? video.play() : video.pause();
+                    }}
+                  >
+                    <source
+                      src={videosCard[0].image}
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <div className="cc-tag">
+                  <a href={videosCard[0].image} target="_blank" rel="noopener noreferrer">
+                    #view full screen
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* 360 View Card */}
-        <div className="cc-card">
-          <p className="cc-more-link">
-            <a href="#">More about tours</a>
-          </p>
-          <div className="cc-card-inner">
-            <div className="cc-box">
-              <div className="cc-imgBox">
-                <img src="/images/instu.jpg" alt="360 view" />
-              </div>
-              <div className="cc-more">
-                <a
-                  href="https://maps.app.goo.gl/ngE5ywtRyomy69CJA"
-                  className="cc-arrow"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
+        {toursCard?.length > 0 && (
+          <div className="cc-card">
+            <p className="cc-more-link">
+              <a href="#">More about tours</a>
+            </p>
+            <div className="cc-card-inner">
+              <div className="cc-box">
+                <div className="cc-imgBox">
+                  <img
+                    src={toursCard[0].image}
+                    alt="360 view"
+                  />
+                </div>
+                <div className="cc-more">
+                  <a
+                    href="https://maps.app.goo.gl/ngE5ywtRyomy69CJA"
+                    className="cc-arrow"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m4.5 19.5 15-15M19.5 4.5H8.25m11.25 0v11.25"
-                    />
-                  </svg>
-                </a>
-              </div>
-              <div className="cc-tag">
-                <a href="#">#360 view</a>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m4.5 19.5 15-15M19.5 4.5H8.25m11.25 0v11.25"
+                      />
+                    </svg>
+                  </a>
+                </div>
+                <div className="cc-tag">
+                  <a href="#">#360 view</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </main>
   );

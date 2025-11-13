@@ -48,6 +48,29 @@ const serviceOfferingSchema = new mongoose.Schema({
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } 
 });
 
+
+const campusSchema = new mongoose.Schema({
+  imagesCard: [
+    {
+      image: { type: String, required: true },
+    },
+  ],
+  videosCard: [
+    {
+      image: { type: String, required: true },
+    },
+  ],
+
+  // Card 3 - 360 Tours
+  toursCard: [
+    {
+      image: { type: String, required: true }, 
+    },
+  ],
+}, { timestamps: true });
+
+
+
 /* =========================
    EXPORT ALL MODELS
 ========================= */
@@ -55,10 +78,11 @@ const HomeHero = mongoose.model('HomeHero', homeHeroSchema);
 const HomeInstitution = mongoose.model('HomeInstitution', homeInstitutionSchema);
 const PlacementSwiper = mongoose.model('PlacementSwiper', placementSwiperSchema);
 const ServiceOffering = mongoose.model('ServiceOffering', serviceOfferingSchema);
-
+const CampusInfrastructure = mongoose.model('CampusInfrastructure', campusSchema);
 module.exports = {
   HomeHero,
   HomeInstitution,
   PlacementSwiper,
-  ServiceOffering
+  ServiceOffering,
+  CampusInfrastructure
 };
