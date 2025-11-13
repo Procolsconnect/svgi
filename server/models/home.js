@@ -69,12 +69,18 @@ const campusSchema = new mongoose.Schema({
   ],
 })
 
+
 const placementSchema = new mongoose.Schema({
   img: { type: String, required: true },
   title: { type: String, required: true },
   desc: { type: String, required: true },
 }, { timestamps: true });
 
+const studentachivementSchema = new mongoose.Schema({
+  img: { type: String, required: true },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+}, { timestamps: true });
 
 
 
@@ -153,6 +159,7 @@ const PlacementSwiper = mongoose.model('PlacementSwiper', placementSwiperSchema)
 const ServiceOffering = mongoose.model('ServiceOffering', serviceOfferingSchema);
 const CampusInfrastructure = mongoose.model('CampusInfrastructure', campusSchema);
 const Placement = mongoose.model("Placement", placementSchema);
+const studentachivement = mongoose.model("studentachivement", studentachivementSchema);
 const Event = mongoose.model("Event", eventSchema);
 const Team = mongoose.model("Team", teamSchema);
 const Logo = mongoose.model("Logo", logoSchema);
@@ -165,6 +172,7 @@ module.exports = {
   ServiceOffering,
   CampusInfrastructure,
   Placement,
+  studentachivement,
   Event,
   Team,
   Logo,

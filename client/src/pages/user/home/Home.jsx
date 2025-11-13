@@ -5,7 +5,7 @@ import Leadership from './Leadership'
 import Swiper_svgi from './Swiper_svgi'
 import WhySvg from './WhySvg'
 import Campus from './Campus'
-import AnimatedCards from './AnimatedCards'
+import StudentAchivements from './StudentAchivements'
 import CardsWithArrows from './sports_section.jsx';
 import BigCatStack from './animal.jsx';
 import OurTeam from './OurTeam.jsx';
@@ -22,7 +22,7 @@ const Home = () => {
       <Campus />
       <CardsWithArrows />
       <BigCatStack />
-      <AnimatedCards />
+      <StudentAchivements />
       <OurTeam />
       <RandomLogoSlider />
       <LogoSlider1 />
