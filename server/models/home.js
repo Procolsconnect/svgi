@@ -49,9 +49,26 @@ const serviceOfferingSchema = new mongoose.Schema({
 });
 
 
-/* =========================
-   Placements Card SECTION
-========================= */
+const campusSchema = new mongoose.Schema({
+  imagesCard: [
+    {
+      image: { type: String, required: true },
+    },
+  ],
+  videosCard: [
+    {
+      image: { type: String, required: true },
+    },
+  ],
+
+  // Card 3 - 360 Tours
+  toursCard: [
+    {
+      image: { type: String, required: true }, 
+    },
+  ],
+})
+
 const placementSchema = new mongoose.Schema({
   img: { type: String, required: true },
   title: { type: String, required: true },
@@ -96,6 +113,7 @@ const HomeHero = mongoose.model('HomeHero', homeHeroSchema);
 const HomeInstitution = mongoose.model('HomeInstitution', homeInstitutionSchema);
 const PlacementSwiper = mongoose.model('PlacementSwiper', placementSwiperSchema);
 const ServiceOffering = mongoose.model('ServiceOffering', serviceOfferingSchema);
+const CampusInfrastructure = mongoose.model('CampusInfrastructure', campusSchema);
 const Placement = mongoose.model("Placement", placementSchema);
 const Event = mongoose.model("Event", eventSchema);
 
@@ -104,6 +122,7 @@ module.exports = {
   HomeInstitution,
   PlacementSwiper,
   ServiceOffering,
+  CampusInfrastructure,
   Placement,
   Event,
 };
