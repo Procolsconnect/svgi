@@ -2,6 +2,7 @@ const home = require("../controllers/home/HomeHeroController");
 const Institution = require("../controllers/home/InstutionController");
 const service = require("../controllers/home/ServiceOfferingsController");
 const placement = require("../controllers/home/PlacementSwiperController");
+const infra = require("../controllers/home/CollegeInfraController");
 const upload = require("../middleware/multer");
 const {validate} = require("../middleware/validate");
 const {auth} = require("../middleware/auth");
@@ -37,6 +38,31 @@ module.exports = function homeRoutes(app) {
   app.get("/api/placement-swiper",placement.getPlacementSwiperController);
   app.post("/api/placement-swiper",upload.single("image"),placement.createPlacementSwiperController); 
   app.delete("/api/placement-swiper/:id",placement.deletePlacementSwiperController); 
+ 
+  //Collage API
+app.post(
+  "/api/campus",
+  upload.fields([
+    { name: "images", maxCount: 5 },
+    { name: "video", maxCount: 1 },
+    { name: "image", maxCount: 1 },
+  ]),
+  infra.createCampusController
+);
+
+app.get("/api/campus", infra.getCampusController);
+app.put(
+  "/api/campus/:id",
+  upload.fields([
+    { name: "images", maxCount: 5 },
+    { name: "video", maxCount: 1 },
+    { name: "image", maxCount: 1 },
+  ]),
+  infra.updateCampusController
+);
+app.delete("/api/campus/:id", infra.deleteCampusController);
+
+
 
   // Placements Card API
   app.get("/api/placements", placementController.getPlacementsController);
