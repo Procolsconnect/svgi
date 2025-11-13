@@ -1,67 +1,50 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './animal.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./animal.css";
+import axios from "axios";
+
+const apiurl = import.meta.env.VITE_API_URL;
 
 const BigCatStack = () => {
+  const [cards, setCards] = useState([]);
   const [k, setK] = useState(0);
-  const n = 7;
   const sectionRef = useRef(null);
 
+  // Fetch cards from backend
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const res = await axios.get(`${apiurl}/api/events`);
+
+        // ✅ Expect response: { data: [ { title, desc, img }, ... ] }
+        const fetched = res.data.data || res.data || [];
+
+        // ✅ Add a random rotation angle for each card
+        const cardsWithAngle = fetched.map((card) => ({
+          ...card,
+          angle: `${Math.floor(Math.random() * 20 - 10)}deg`, // random -10° to +10°
+        }));
+
+        setCards(cardsWithAngle);
+      } catch (err) {
+        console.error("Failed to fetch placements:", err);
+      }
+    };
+
+    fetchCards();
+  }, []);
+
+  // Update CSS variable for animation
   useEffect(() => {
     if (sectionRef.current) {
-      sectionRef.current.style.setProperty('--k', k);
+      sectionRef.current.style.setProperty("--k", k);
     }
   }, [k]);
 
   const handleClick = (inc) => {
-    setK((prev) => (prev + inc + n) % n);
+    setK((prev) => (prev + inc + cards.length) % cards.length);
   };
 
-  const cards = [
-    {
-      title: 'Magizh 2025',
-      desc: "This is the first time such a grand function has been held in our college. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      img: '/images/magizh .jpg',
-      angle: '-7deg',
-    },
-    {
-      title: 'National Service Awareness',
-      desc: 'A discussion was held for students on National Service Awareness.',
-      img: '/images/natunal .jpg',
-      angle: '8deg',
-    },
-    {
-      title: '1st Year Inauguration Ceremony',
-      desc: 'Department of BE / B.Tech',
-      img: '/images/inagration.jpg',
-      angle: '-3deg',
-    },
-    {
-      title: 'Tech Trend Path of Success',
-      desc: 'The future of technology is bright and full of possibilities.',
-      img: '/images/tech .jpg',
-      angle: '6deg',
-    },
-    {
-      title: 'Freshers Day 2025',
-      desc: 'Department of Computer Application',
-      img: '/images/Freshers.jpg',
-      angle: '-11deg',
-    },
-    {
-      title: 'Farewell Day 2025',
-      desc: 'Grand celebration of the physiotherapy class.',
-      img: '/images/farawell.jpg',
-      angle: '9deg',
-    },
-    {
-      title: 'Cougar',
-      desc: 'Puma concolor',
-      img: '/images/inagration.jpg',
-      angle: '-4deg',
-    },
-  ];
-
-  const currentCard = cards[k];
+  const currentCard = cards[k] || {};
 
   return (
     <div className="bigcat-container">
@@ -72,13 +55,17 @@ const BigCatStack = () => {
       <div className="bigcat-content">
         {/* === LEFT COLUMN === */}
         <div className="bigcat-left">
-          {/* === Image Stack Section (No Counters Here) === */}
-          <section ref={sectionRef} className="animal-section" style={{ '--n': n }}>
+          {/* === Image Stack Section === */}
+          <section
+            ref={sectionRef}
+            className="animal-section"
+            style={{ "--n": cards.length }}
+          >
             {cards.map((card, index) => (
               <article
-                key={index}
+                key={card._id || index}
                 className="animal-card"
-                style={{ '--i': index, '--a': card.angle }}
+                style={{ "--i": index, "--a": card.angle }}
               >
                 <img
                   src={card.img}
@@ -105,17 +92,24 @@ const BigCatStack = () => {
           </div>
         </div>
 
-
         {/* === RIGHT COLUMN === */}
         <div className="bigcat-right">
-          <div className="bigcat-title-row">
-            <h2 className="bigcat-image-title">{currentCard.title}</h2>
-            <span className="bigcat-counter">{k + 1}/{n}</span>
-          </div>
-          <p
-            className="bigcat-image-desc"
-            dangerouslySetInnerHTML={{ __html: currentCard.desc }}
-          ></p>
+          {cards.length > 0 ? (
+            <>
+              <div className="bigcat-title-row">
+                <h2 className="bigcat-image-title">{currentCard.title}</h2>
+                <span className="bigcat-counter">
+                  {k + 1}/{cards.length}
+                </span>
+              </div>
+              <p
+                className="bigcat-image-desc"
+                dangerouslySetInnerHTML={{ __html: currentCard.desc }}
+              ></p>
+            </>
+          ) : (
+            <p className="text-center mt-5">Loading events...</p>
+          )}
         </div>
       </div>
     </div>

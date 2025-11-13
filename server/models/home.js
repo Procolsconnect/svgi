@@ -83,6 +83,73 @@ const studentachivementSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 
+
+/* =========================
+   Events Card SECTION
+========================= */
+
+const eventSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, "Event title is required"],
+      trim: true,
+    },
+    desc: {
+      type: String,
+      required: [true, "Event description is required"],
+      trim: true,
+    },
+    img: {
+      type: String, // Cloudinary URL or local file path
+      required: [true, "Event image is required"],
+    },
+  },
+  {
+    timestamps: true, // adds createdAt and updatedAt
+  }
+);
+
+
+
+/* =========================
+  Our Team SECTION
+========================= */
+
+const teamSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    role: { type: String, required: true },
+    img: { type: String, required: true }, // URL or uploaded path
+  },
+  { timestamps: true }
+);
+
+
+
+
+/* =========================
+  Logo Section 1 SECTION
+========================= */
+
+const logoSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    img: { type: String, required: true }, // URL or local path
+  },
+  { timestamps: true }
+);
+
+const logoSchema1 = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    img: { type: String, required: true }, // URL or local path
+  },
+  { timestamps: true }
+);
+
+
+
 /* =========================
    EXPORT ALL MODELS
 ========================= */
@@ -93,6 +160,10 @@ const ServiceOffering = mongoose.model('ServiceOffering', serviceOfferingSchema)
 const CampusInfrastructure = mongoose.model('CampusInfrastructure', campusSchema);
 const Placement = mongoose.model("Placement", placementSchema);
 const studentachivement = mongoose.model("studentachivement", studentachivementSchema);
+const Event = mongoose.model("Event", eventSchema);
+const Team = mongoose.model("Team", teamSchema);
+const Logo = mongoose.model("Logo", logoSchema);
+const Logo1 = mongoose.model("Logo1", logoSchema1);
 
 module.exports = {
   HomeHero,
@@ -101,5 +172,9 @@ module.exports = {
   ServiceOffering,
   CampusInfrastructure,
   Placement,
-  studentachivement
+  studentachivement,
+  Event,
+  Team,
+  Logo,
+  Logo1,
 };
