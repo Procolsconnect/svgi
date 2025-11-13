@@ -48,6 +48,18 @@ const serviceOfferingSchema = new mongoose.Schema({
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } 
 });
 
+
+/* =========================
+   Placements Card SECTION
+========================= */
+const placementSchema = new mongoose.Schema({
+  img: { type: String, required: true },
+  title: { type: String, required: true },
+  desc: { type: String, required: true },
+}, { timestamps: true });
+
+
+
 /* =========================
    EXPORT ALL MODELS
 ========================= */
@@ -55,10 +67,12 @@ const HomeHero = mongoose.model('HomeHero', homeHeroSchema);
 const HomeInstitution = mongoose.model('HomeInstitution', homeInstitutionSchema);
 const PlacementSwiper = mongoose.model('PlacementSwiper', placementSwiperSchema);
 const ServiceOffering = mongoose.model('ServiceOffering', serviceOfferingSchema);
+const Placement = mongoose.model("Placement", placementSchema);
 
 module.exports = {
   HomeHero,
   HomeInstitution,
   PlacementSwiper,
-  ServiceOffering
+  ServiceOffering,
+  Placement,
 };

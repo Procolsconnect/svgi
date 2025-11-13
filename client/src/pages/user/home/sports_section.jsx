@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./sports_section.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+const apiurl = import.meta.env.VITE_API_URL;
 
 const PlacementCards = () => {
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+  const fetchPlacements = async () => {
+    try {
+      const res = await axios.get(`${apiurl}/api/placements`);
+      // ensure cards is an array
+      setCards(Array.isArray(res.data.data) ? res.data.data : []);
+    } catch (err) {
+      console.error("Failed to fetch placements:", err);
+      setCards([]);
+    }
+  };
+
+  fetchPlacements();
+}, []);
+
+
   const scrollCards = (direction) => {
     const container = document.getElementById("placement-cardList");
     const card = container.querySelector(".placement-card-item");
@@ -12,39 +32,6 @@ const PlacementCards = () => {
       behavior: "smooth",
     });
   };
-
-  const cards = [
-    {
-      img: "../../../public/images/training.jpg",
-      title: "AI-Powered Supply Chains",
-      desc: "Explore how real-time data and automation are transforming logistics and redefining global supply chain resilience.",
-    },
-    {
-      img: "../../../public/images/images.jpeg",
-      title: "Building Trust with Responsible AI",
-      desc: "Companies are putting transparency and ethics at the center of their AI development.",
-    },
-    {
-      img: "../../../public/images/training 1.jpg",
-      title: "Energy Innovation at Scale",
-      desc: "Digital twins and analytics are helping speed up the transition to cleaner energy systems.",
-    },
-    {
-      img: "https://raw.githubusercontent.com/mobalti/open-props-interfaces/refs/heads/main/hdr-palettes-astro-op/src/assets/images/img-4.avif",
-      title: "The Future of Smart Manufacturing",
-      desc: "See how automation and IoT are enabling fast, precise production at scale.",
-    },
-    {
-      img: "https://raw.githubusercontent.com/mobalti/open-props-interfaces/refs/heads/main/hdr-palettes-astro-op/src/assets/images/img-5.avif",
-      title: "Connected Construction",
-      desc: "See how real-time collaboration tools and automation are streamlining complex building projects.",
-    },
-    {
-      img: "https://raw.githubusercontent.com/mobalti/open-props-interfaces/refs/heads/main/hdr-palettes-astro-op/src/assets/images/img-6.avif",
-      title: "Financial Services Reimagined",
-      desc: "AI and cloud infrastructure are redefining fraud detection and client experiences.",
-    },
-  ];
 
   return (
     <div className="placement-cards-container">
@@ -68,8 +55,8 @@ const PlacementCards = () => {
           </button>
 
           <ul className="placement-cards d-flex" id="placement-cardList">
-            {cards.map((card, index) => (
-              <li className="placement-card-item" key={index}>
+            {cards.map((card) => (
+              <li className="placement-card-item" key={card._id}>
                 <div className="placement-visual">
                   <img src={card.img} alt={card.title} />
                 </div>

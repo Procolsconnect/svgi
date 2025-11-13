@@ -15,23 +15,33 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
-    let folder = "svgi"; // You can customize per module if needed
-    let resource_type = "auto"; // auto handles image & video
+    const folder = "svgi";
+    const resource_type = "auto";
+
+    // ✅ Sanitize filename (remove spaces/special chars)
+    const originalName = file.originalname
+      .split(".")[0]
+      .trim()
+      .replace(/\s+/g, "_") // replace spaces with underscore
+      .replace(/[^a-zA-Z0-9_-]/g, ""); // remove illegal characters
+
+    const ext = file.originalname.split(".").pop();
 
     return {
       folder,
       resource_type,
-      format: undefined, // keep original format
-      public_id: Date.now() + "-" + file.originalname.split(".")[0],
+      format: ext,
+      public_id: `${Date.now()}-${originalName}`,
     };
   },
 });
+
 
 // 🔹 Multer upload with filter
 const upload = multer({
   storage,
   fileFilter: (req, file, cb) => {
-    const allowedTypes = /jpeg|jpg|png|gif|mp4|mov|avi|mkv/;
+    const allowedTypes = /(jpeg|jpg|pjpeg|png|gif|mp4|mov|avi|mkv)$/i;
     const extname = allowedTypes.test(
       file.originalname.toLowerCase().split(".").pop()
     );
