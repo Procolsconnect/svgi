@@ -43,6 +43,11 @@
 /* ============================================
    SWIPER CORE
 ============================================ */
+/* .swiper-wrapper{
+  height: 100px;
+  width: 100%;
+} */
+
 .swiper-carousel-wrapper {
   width: 100%;
   height: 100vh;
@@ -58,6 +63,8 @@
 
 .swiper-carousel-wrapper .swiper-slide {
   scale: 1.25;
+  width: 250px;
+  height: 300px;
   transition: scale 250ms ease-in-out;
 }
 
@@ -118,6 +125,10 @@
   .swiper-carousel-body {
     height: 80vh;
     padding: 1rem 0;
+  }
+
+  .swiper-wrapper{
+
   }
 
   .swiper-carousel-wrapper {

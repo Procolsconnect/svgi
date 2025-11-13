@@ -67,6 +67,12 @@ const campusSchema = new mongoose.Schema({
       image: { type: String, required: true }, 
     },
   ],
+/* =========================
+   Placements Card SECTION
+const placementSchema = new mongoose.Schema({
+  img: { type: String, required: true },
+  title: { type: String, required: true },
+  desc: { type: String, required: true },
 }, { timestamps: true });
 
 
@@ -79,10 +85,13 @@ const HomeInstitution = mongoose.model('HomeInstitution', homeInstitutionSchema)
 const PlacementSwiper = mongoose.model('PlacementSwiper', placementSwiperSchema);
 const ServiceOffering = mongoose.model('ServiceOffering', serviceOfferingSchema);
 const CampusInfrastructure = mongoose.model('CampusInfrastructure', campusSchema);
+const Placement = mongoose.model("Placement", placementSchema);
+
 module.exports = {
   HomeHero,
   HomeInstitution,
   PlacementSwiper,
   ServiceOffering,
   CampusInfrastructure
+  Placement,
 };

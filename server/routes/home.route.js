@@ -12,6 +12,8 @@ const {
   createInstitutionSchema, 
   updateInstitutionSchema } = require("../inputvalidations/home.validation");
 
+const placementController = require("../controllers/home/placementController");
+
 
 module.exports = function homeRoutes(app) {
   //Hero API
@@ -61,5 +63,12 @@ app.put(
 app.delete("/api/campus/:id", infra.deleteCampusController);
 
 
+
+  // Placements Card API
+  app.get("/api/placements", placementController.getPlacementsController);
+  app.post("/api/placements",upload.single("img"), placementController.createPlacementController);
+  app.get("/api/placements/:id", placementController.getPlacementByIdController);
+  app.put("/api/placements/:id",upload.single("img"), placementController.updatePlacementController);
+  app.delete("/api/placements/:id", placementController.deletePlacementController);
 
 };
