@@ -17,6 +17,16 @@ const eventController = require("../controllers/home/eventController");
 const teamController = require("../controllers/home/teamController");
 
 
+const { Logo, Logo1 } = require("../models/home");
+
+// Import the factory function for logo controllers
+const createLogoController = require("../controllers/home/logoController");
+
+// Create separate controller instances for each collection
+const logoSection1 = createLogoController(Logo);
+const logoSection2 = createLogoController(Logo1);
+
+
 module.exports = function homeRoutes(app) {
   //Hero API
   app.post("/api/hero", upload.single("media"), validate(createHeroSchema), home.createHeroController);
@@ -37,32 +47,32 @@ module.exports = function homeRoutes(app) {
   app.delete("/api/institution/:id", Institution.deleteInstitutionController);
 
   //placemet swiper API
-  app.get("/api/placement-swiper",placement.getPlacementSwiperController);
-  app.post("/api/placement-swiper",upload.single("image"),placement.createPlacementSwiperController); 
-  app.delete("/api/placement-swiper/:id",placement.deletePlacementSwiperController); 
- 
-  //Collage API
-app.post(
-  "/api/campus",
-  upload.fields([
-    { name: "images", maxCount: 5 },
-    { name: "video", maxCount: 1 },
-    { name: "image", maxCount: 1 },
-  ]),
-  infra.createCampusController
-);
+  app.get("/api/placement-swiper", placement.getPlacementSwiperController);
+  app.post("/api/placement-swiper", upload.single("image"), placement.createPlacementSwiperController);
+  app.delete("/api/placement-swiper/:id", placement.deletePlacementSwiperController);
 
-app.get("/api/campus", infra.getCampusController);
-app.put(
-  "/api/campus/:id",
-  upload.fields([
-    { name: "images", maxCount: 5 },
-    { name: "video", maxCount: 1 },
-    { name: "image", maxCount: 1 },
-  ]),
-  infra.updateCampusController
-);
-app.delete("/api/campus/:id", infra.deleteCampusController);
+  //Collage API
+  app.post(
+    "/api/campus",
+    upload.fields([
+      { name: "images", maxCount: 5 },
+      { name: "video", maxCount: 1 },
+      { name: "image", maxCount: 1 },
+    ]),
+    infra.createCampusController
+  );
+
+  app.get("/api/campus", infra.getCampusController);
+  app.put(
+    "/api/campus/:id",
+    upload.fields([
+      { name: "images", maxCount: 5 },
+      { name: "video", maxCount: 1 },
+      { name: "image", maxCount: 1 },
+    ]),
+    infra.updateCampusController
+  );
+  app.delete("/api/campus/:id", infra.deleteCampusController);
 
 
 
@@ -87,6 +97,20 @@ app.delete("/api/campus/:id", infra.deleteCampusController);
   app.get("/api/ourteam/:id", teamController.getTeamMemberByIdController);
   app.put("/api/ourteam/:id", upload.single("img"), teamController.updateTeamController);
   app.delete("/api/ourteam/:id", teamController.deleteTeamController);
+
+  // Define routes for Logo Section 1
+  app.post("/api/logosection1", upload.single("img"), logoSection1.createLogoController);
+  app.get("/api/logosection1", logoSection1.getLogosController);
+  app.get("/api/logosection1/:id", logoSection1.getLogoByIdController);
+  app.put("/api/logosection1/:id", upload.single("img"), logoSection1.updateLogoController);
+  app.delete("/api/logosection1/:id", logoSection1.deleteLogoController);
+
+  // Define routes for Logo Section 2
+  app.post("/api/logosection2", upload.single("img"), logoSection2.createLogoController);
+  app.get("/api/logosection2", logoSection2.getLogosController);
+  app.get("/api/logosection2/:id", logoSection2.getLogoByIdController);
+  app.put("/api/logosection2/:id", upload.single("img"), logoSection2.updateLogoController);
+  app.delete("/api/logosection2/:id", logoSection2.deleteLogoController);
 
 
 };

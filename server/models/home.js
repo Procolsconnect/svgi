@@ -121,6 +121,29 @@ const teamSchema = new mongoose.Schema(
 
 
 
+
+/* =========================
+  Logo Section 1 SECTION
+========================= */
+
+const logoSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    img: { type: String, required: true }, // URL or local path
+  },
+  { timestamps: true }
+);
+
+const logoSchema1 = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    img: { type: String, required: true }, // URL or local path
+  },
+  { timestamps: true }
+);
+
+
+
 /* =========================
    EXPORT ALL MODELS
 ========================= */
@@ -132,6 +155,8 @@ const CampusInfrastructure = mongoose.model('CampusInfrastructure', campusSchema
 const Placement = mongoose.model("Placement", placementSchema);
 const Event = mongoose.model("Event", eventSchema);
 const Team = mongoose.model("Team", teamSchema);
+const Logo = mongoose.model("Logo", logoSchema);
+const Logo1 = mongoose.model("Logo1", logoSchema1);
 
 module.exports = {
   HomeHero,
@@ -142,4 +167,6 @@ module.exports = {
   Placement,
   Event,
   Team,
+  Logo,
+  Logo1,
 };
