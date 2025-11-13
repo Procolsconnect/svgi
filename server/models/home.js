@@ -60,6 +60,35 @@ const placementSchema = new mongoose.Schema({
 
 
 
+
+/* =========================
+   Events Card SECTION
+========================= */
+
+const eventSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, "Event title is required"],
+      trim: true,
+    },
+    desc: {
+      type: String,
+      required: [true, "Event description is required"],
+      trim: true,
+    },
+    img: {
+      type: String, // Cloudinary URL or local file path
+      required: [true, "Event image is required"],
+    },
+  },
+  {
+    timestamps: true, // adds createdAt and updatedAt
+  }
+);
+
+
+
 /* =========================
    EXPORT ALL MODELS
 ========================= */
@@ -68,6 +97,7 @@ const HomeInstitution = mongoose.model('HomeInstitution', homeInstitutionSchema)
 const PlacementSwiper = mongoose.model('PlacementSwiper', placementSwiperSchema);
 const ServiceOffering = mongoose.model('ServiceOffering', serviceOfferingSchema);
 const Placement = mongoose.model("Placement", placementSchema);
+const Event = mongoose.model("Event", eventSchema);
 
 module.exports = {
   HomeHero,
@@ -75,4 +105,5 @@ module.exports = {
   PlacementSwiper,
   ServiceOffering,
   Placement,
+  Event,
 };
