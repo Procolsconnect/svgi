@@ -1,0 +1,326 @@
+/* ================= BODY ================= */
+.heroUI-body {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f9fafb;
+}
+
+/* ================= HERO ================= */
+.heroUI-hero {
+  min-height: 350px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.heroUI-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.heroUI-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+.heroUI-hero-title {
+  position: relative;
+  font-size: 52px;
+  font-weight: bold;
+  z-index: 1;
+  letter-spacing: 1px;
+  font-family: 'Playfair Display', serif;
+}
+
+.heroUI-hero-title::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  border-radius: 3px;
+  animation: heroUI-underline-pulse 2s infinite;
+}
+
+@keyframes heroUI-underline-pulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.8; }
+  50% { transform: scaleX(1.4); opacity: 1; }
+}
+
+/* ================= CONTAINER ================= */
+.heroUI-container {
+  display: grid;
+  padding: 32px;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+}
+
+/* ================= HEADER ================= */
+.heroUI-header {
+  grid-area: 1/1/2/4;
+  display: flex;
+  align-items: center;
+}
+.heroUI-header i {
+  margin-right: 12px;
+}
+.heroUI-header div {
+  width: 131px;
+  height: 27px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.heroUI-header div h5 {
+  color: #fff;
+  margin: 0;
+}
+
+/* ================= IMAGES ================= */
+.heroUI-top-img {
+  grid-area: 3/2/7/-2;
+  background-image: url('https://images.unsplash.com/photo-1513827379601-9dba5099a3f9');
+  background-size: cover;
+  background-position: center;
+}
+
+.heroUI-center-img {
+  grid-area: -8/2/-5/5;
+  background-image: url('https://images.unsplash.com/photo-1513827379601-9dba5099a3f9');
+  background-size: cover;
+  background-position: center;
+}
+
+.heroUI-bottom-img {
+  grid-area: -6/4/-2/-2;
+  background-image: url('https://images.unsplash.com/photo-1513827379601-9dba5099a3f9');
+  background-size: cover;
+  background-position: center;
+}
+
+/* ================= DIV AREAS ================= */
+.heroUI-divArea-1, .heroUI-divArea-2 {
+  background-color: #001F54; /* Dark Blue */
+  z-index: -100;
+  width: 66%;
+}
+.heroUI-divArea-1 {
+  grid-area: 2/1/5/4;
+  height: 66%;
+}
+.heroUI-divArea-2 {
+  grid-area: -7/-4/-5/-1;
+  height: 100%;
+}
+
+/* ================= TITLES ================= */
+.heroUI-title2 {
+  font-size: 48px;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+.heroUI-italic {
+  font-style: italic;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ================= POSITIONING ================= */
+.heroUI-rightTop {
+  grid-area: 2/-4/3/-2;
+  position: relative;
+  justify-self: end;
+  align-self: end;
+}
+
+.heroUI-leftBottom {
+  grid-area: 7/2/8/3;
+  position: relative;
+}
+
+.heroUI-trans-90 { transform: rotate(90deg); }
+.heroUI-trans-180 { transform: rotate(180deg); }
+.heroUI-trans-270 { transform: rotate(270deg); }
+
+.heroUI-pos-left { position: absolute; left: -50%; top: -50%; }
+.heroUI-pos-right { position: absolute; left: 50%; top: 200%; }
+.heroUI-f-l { float: left; }
+
+/* ================= DIVS ================= */
+.heroUI-div1, .heroUI-div2 {
+  border: 20px solid #001F54; /* Dark Blue */
+  z-index: -100;
+  height: 66%;
+  width: 80%;
+}
+.heroUI-div1 { grid-area: 5/4/8/-1; justify-self: center; align-self: center; }
+.heroUI-div2 { grid-area: -7/1/-4/-4; justify-self: center; align-self: center; }
+
+/* ================= CONTENT ================= */
+.heroUI-content {
+  grid-area: 9/3/13/-2;
+  position: relative;
+}
+.heroUI-content .heroUI-italic {
+  position: absolute;
+  top: 100px;
+  left: -200px;
+}
+.heroUI-content h2 { margin: 0; }
+
+/* ================= PATTERN ================= */
+.heroUI-pattern1 {
+  grid-area: -3/2/-1/5;
+  height: 50%;
+  width: 66%;
+  background-image: url('https://hexschool.github.io/THE_F2E_Design/week4-product%20gallery/assets/pattern%20unit.png');
+  background-repeat: repeat-x;
+  justify-self: center;
+  align-self: center;
+  filter: hue-rotate(-120deg) saturate(300%);
+}
+
+/* ================= BUTTON ================= */
+.heroUI-wrapper-no4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #BEEDFF, white);
+  height: 60vh;
+  width: 100%;
+  position: relative;
+}
+
+.heroUI-button-bird {
+  width: 300px;
+  height: 88px;
+  background-color: #131335;
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  margin-top: 20px;
+  overflow: visible;
+}
+
+.heroUI-button-bird__text {
+  font-size: 20px;
+  color: #BEEDFF;
+  position: relative;
+  z-index: 10;
+}
+
+.heroUI-button-bird.active {
+  background-color: transparent;
+  transition: all 0.2s linear 0.1s;
+}
+
+.heroUI-button-bird.active .heroUI-button-bird__text {
+  color: #131335;
+  animation: heroUI-text-fade 1.5s 0.2s;
+}
+
+.heroUI-feather {
+  position: absolute;
+  width: 18%;
+  left: 40%;
+  top: 12px;
+  display: none;
+  opacity: 0;
+  fill: #131335;
+}
+
+.heroUI-button-bird.active .heroUI-feather {
+  display: block;
+  animation: heroUI-feather-fade 1.5s linear forwards;
+}
+
+/* ================= BIRDS ================= */
+.heroUI-button-bird .heroUI-bird--1,
+.heroUI-button-bird .heroUI-bird--2,
+.heroUI-button-bird .heroUI-bird--3,
+.heroUI-button-bird .heroUI-bird--4,
+.heroUI-button-bird .heroUI-bird--5,
+.heroUI-button-bird .heroUI-bird--6,
+.heroUI-button-bird .heroUI-bird--7,
+.heroUI-button-bird .heroUI-bird--8,
+.heroUI-button-bird .heroUI-bird--9,
+.heroUI-button-bird .heroUI-bird--10,
+.heroUI-button-bird .heroUI-bird--11,
+.heroUI-button-bird .heroUI-bird--12,
+.heroUI-button-bird .heroUI-bird--13,
+.heroUI-button-bird .heroUI-bird--14,
+.heroUI-button-bird .heroUI-bird--15,
+.heroUI-button-bird .heroUI-bird--16,
+.heroUI-button-bird .heroUI-bird--17,
+.heroUI-button-bird .heroUI-bird--18,
+.heroUI-button-bird .heroUI-bird--19,
+.heroUI-button-bird .heroUI-bird--20,
+.heroUI-button-bird .heroUI-bird--21,
+.heroUI-button-bird .heroUI-bird--22,
+.heroUI-button-bird .heroUI-bird--23,
+.heroUI-button-bird .heroUI-bird--24,
+.heroUI-button-bird .heroUI-bird--25,
+.heroUI-button-bird .heroUI-bird--26,
+.heroUI-button-bird .heroUI-bird--27,
+.heroUI-button-bird .heroUI-bird--28,
+.heroUI-button-bird .heroUI-bird--29,
+.heroUI-button-bird .heroUI-bird--30 {
+  opacity: 1;
+  display: block;
+  position: absolute;
+  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+  background-size: auto 100%;
+  width: 60px;
+  height: 33px;
+  top: 0;
+  left: 0;
+}
+
+/* Hover Bird Animation */
+.heroUI-button-bird:hover .heroUI-bird--1,
+.heroUI-button-bird:hover .heroUI-bird--2,
+.heroUI-button-bird:hover .heroUI-bird--3,
+.heroUI-button-bird:hover .heroUI-bird--4,
+.heroUI-button-bird:hover .heroUI-bird--5 {
+  animation: heroUI-bird-fly 1.5s ease-in-out forwards;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes heroUI-bird-fly {
+  0% { transform: translate(0,0) rotate(0deg); opacity: 1; }
+  50% { transform: translate(300px,-150px) rotate(20deg); opacity: 0.5; }
+  100% { transform: translate(600px,-300px) rotate(-10deg); opacity: 0; }
+}
+
+@keyframes heroUI-text-fade {
+  0% { color: transparent; opacity: 1; }
+  50% { color: transparent; opacity: 0; }
+  100% { color: #131335; opacity: 1; }
+}
+
+@keyframes heroUI-feather-fade {
+  0% { top: -100px; opacity: 0; }
+  50% { top: -50px; opacity: 0.5; }
+  100% { top: 12px; opacity: 1; }
+}
