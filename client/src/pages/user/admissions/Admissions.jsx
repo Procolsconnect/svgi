@@ -1,10 +1,12 @@
 import React from 'react'
 import Ug from './Ug'
+import Overview from './Overview'
 
 const Admissions = () => {
   return (
     <div>
-        <Ug/>
+        {/* <Ug/> */}
+        <Overview/>
     </div>
   )
 }
