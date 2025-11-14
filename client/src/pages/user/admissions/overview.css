@@ -1,0 +1,389 @@
+:root {
+    --svgio-bg: #fdfdfd;
+    --svgio-text: #333;
+}
+
+.svgio-root {
+    font-family: 'Poppins', sans-serif;
+    background: var(--svgio-bg);
+    color: var(--svgio-text);
+    scroll-behavior: smooth;
+}
+
+/* wrapper */
+.svgio-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* HERO */
+.svgio-hero {
+    min-height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+.svgio-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.svgio-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.svgio-hero__title {
+    position: relative;
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.svgio-hero__title::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 5px;
+    margin: 14px auto 0;
+    background: linear-gradient(90deg, #ff512f, #dd2476);
+    border-radius: 3px;
+    animation: svgio-underline-pulse 2s infinite;
+}
+
+@keyframes svgio-underline-pulse {
+
+    0%,
+    100% {
+        transform: scaleX(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scaleX(1.4);
+        opacity: 1;
+    }
+}
+
+/* Scroll button */
+.svgio-scroll {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    background: black;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-top: -25px;
+    margin-right: -25px;
+    color: white;
+    font-size: 26px;
+    line-height: 26px;
+    cursor: pointer;
+    position: absolute;
+    right: 50%;
+    transition: transform 0.6s ease, right 0.6s ease, top 0.6s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.svgio-scroll--clicked {
+    transform: rotate(360deg);
+    position: fixed;
+    bottom: -200px;
+    right: 50px;
+    top: 90px;
+}
+
+.svgio-scroll--rotate {
+    transform: rotate(180deg);
+}
+
+.svgio-arrow {
+    display: inline-block;
+    position: relative;
+}
+
+.svgio-arrow-bounce {
+    animation: svgio-arrow 1s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes svgio-arrow {
+    0% {
+        bottom: -13px;
+    }
+
+    50% {
+        bottom: -8px;
+    }
+
+    100% {
+        bottom: -13px;
+    }
+}
+
+/* Gradient Mask Text Section */
+.svgio-gradient-section {
+    width: 90%;
+    max-width: 1100px;
+    margin: 60px auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.svgio-gradient-shape {
+    -webkit-mask-image: radial-gradient(circle 30vw at 0% 0%, white 60%, transparent 95%, transparent);
+    mask-image: radial-gradient(circle 30vw at 0% 0%, white 60%, transparent 95%, transparent);
+    shape-outside: radial-gradient(circle 30vw at 0% 0%, white 60%, transparent 95%, transparent);
+    shape-image-threshold: 0.35;
+    float: left;
+    width: 40%;
+    max-width: 400px;
+    margin-right: 20px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.svgio-gradient-text {
+    flex: 1;
+}
+
+.svgio-gradient-section h2 {
+    text-align: left;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.svgio-gradient-section p {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+/* SECTION BELOW HERO */
+.svgio-section {
+    width: 100%;
+    padding: 60px 20px;
+}
+
+.svgio-wrap-grid {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 940px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.svgio-col {
+    flex: 1 1 45%;
+}
+
+.svgio-content6-headline {
+    margin-bottom: 30px;
+}
+
+.svgio-tagline {
+    opacity: 0.6;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.svgio-text-16 {
+    font-size: 16px;
+    line-height: 26px;
+    opacity: 0.7;
+}
+
+.svgio-content6-pic {
+    width: 100%;
+    height: 320px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+}
+
+.svgio-content6-image1 {
+    background-image: url("https://uploads-ssl.webflow.com/5b9041fb091628c1f868ff07/5b90ff8fc5a9c462aaf3b0c9_sacha-styles-769064-unsplash.jpg");
+}
+
+.svgio-content6-image2 {
+    background-image: url("https://uploads-ssl.webflow.com/5b9041fb091628c1f868ff07/5b90ff8fc5a9c49e5bf3b0c5_ivan-bandura-659533-unsplash.jpg");
+}
+
+.svgio-content6-image3 {
+    background-image: url("https://uploads-ssl.webflow.com/5b9041fb091628c1f868ff07/5b90ff8fc5a9c43a70f3b0cb_ivars-utinsns-707750-unsplash.jpg");
+}
+
+.svgio-content6-image4 {
+    background-image: url("https://uploads-ssl.webflow.com/5b9041fb091628c1f868ff07/5b90ff8fc5a9c41962f3b0c7_ruth-troughton-384709-unsplash.jpg");
+}
+
+/* Responsive */
+@media(max-width: 1250px) {
+    .svgio-gradient-shape {
+        -webkit-mask-image: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
+    mask-image: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
+    shape-outside: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
+    shape-image-threshold: 0.35;
+    }
+}
+@media(max-width: 991px) {
+    .svgio-wrap-grid {
+        flex-direction: column;
+    }
+
+    .svgio-col {
+        flex: 1 1 100%;
+    }
+
+    .svgio-gradient-section {
+        flex-direction: column;
+    }
+
+    .svgio-gradient-shape {
+        width: 100%;
+        max-width: none;
+        height: 450px;
+        float: none;
+        margin: 0 auto 20px;
+        -webkit-mask-image: linear-gradient(to bottom, white 40%, transparent 95%);
+        mask-image: linear-gradient(to bottom, white 40%, transparent 95%);
+        shape-outside: linear-gradient(to bottom, white 40%, transparent 95%);
+        shape-image-threshold: 0.35;
+    }
+
+    .svgio-gradient-section h2 {
+        text-align: center;
+    }
+}
+
+@media(max-width: 420px) {
+    .svgio-gradient-shape {
+        height: 200px;
+    }
+}
+
+/* CONTACT SECTION */
+.svgio-contact-section {
+    padding: 50px 20px;
+    text-align: center;
+    background: #fff;
+}
+
+.svgio-contact-section h2 {
+    color: #0a2540;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+.svgio-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.svgio-card {
+    border-radius: 14px;
+    padding: 25px;
+    text-align: left;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    animation: svgio-float 4s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #f5f7fa;
+}
+
+.svgio-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+}
+
+.svgio-card:nth-child(1) {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+.svgio-card--alt {
+    background: linear-gradient(135deg, #141e30, #243b55);
+}
+
+.svgio-card--dark {
+    background: linear-gradient(135deg, #1a2a6c, #162447, #0f172a);
+}
+
+@keyframes svgio-float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.svgio-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    display: inline-block;
+    padding-bottom: 5px;
+    color: #ffffff;
+}
+
+.svgio-info {
+    margin: 12px 0;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+
+}
+
+.svgio-info span {
+    margin-right: 8px;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    color: #00d4ff;
+}
+
+.svgio-contact-section a {
+    color: #00d4ff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.svgio-contact-section a:hover {
+    text-decoration: underline;
+}
+
+/* small accessibility tweak for keyboard focus */
+.svgio-scroll:focus {
+    outline: 3px solid rgba(0, 0, 0, 0.2);
+}
+
+/* end of file */

@@ -10,3 +10,26 @@
 html, body {
     overflow-x: hidden;
   }
+
+  /* Tailwind CSS custom classes (add to global CSS): */
+/* Gradient Mask */
+.gradient-mask-img {
+  -webkit-mask-image: radial-gradient(circle 30vw at 0% 0%, white 60%, transparent 95%);
+  mask-image: radial-gradient(circle 30vw at 0% 0%, white 60%, transparent 95%);
+  shape-outside: radial-gradient(circle 30vw at 0% 0%, white 60%, transparent 95%);
+  float: left;
+  width: 40%;
+  border-radius: 8px;
+}
+
+/* Float Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Underline Pulse */
+@keyframes underline-pulse {
+  0%, 100% { opacity: .8; }
+  50% { opacity: 1; }
+}
