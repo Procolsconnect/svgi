@@ -107,9 +107,8 @@
 .svgio-scroll--clicked {
     transform: rotate(360deg);
     position: fixed;
-    bottom: -200px;
+    top: 40px;
     right: 50px;
-    top: 90px;
 }
 
 .svgio-scroll--rotate {
@@ -147,6 +146,7 @@
     display: flex;
     align-items: flex-start;
     gap: 20px;
+    overflow: hidden;
 }
 
 .svgio-gradient-shape {
@@ -241,11 +241,12 @@
 @media(max-width: 1250px) {
     .svgio-gradient-shape {
         -webkit-mask-image: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
-    mask-image: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
-    shape-outside: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
-    shape-image-threshold: 0.35;
+        mask-image: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
+        shape-outside: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
+        shape-image-threshold: 0.35;
     }
 }
+
 @media(max-width: 991px) {
     .svgio-wrap-grid {
         flex-direction: column;
@@ -282,109 +283,135 @@
     }
 }
 
-/* CONTACT SECTION */
-.svgio-contact-section {
-    padding: 50px 20px;
-    text-align: center;
-    background: #fff;
+/* CONTACT SECTION (Fixed Height + Centering) */
+.svgio-contact-section{
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.svgio-contact-section-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .svgio-contact-section h2 {
-    color: #0a2540;
-    font-size: 2rem;
-    font-weight: 900;
     margin-bottom: 40px;
-    position: relative;
-    display: inline-block;
-}
-
-.svgio-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-.svgio-card {
-    border-radius: 14px;
-    padding: 25px;
-    text-align: left;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-    animation: svgio-float 4s ease-in-out infinite;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: #f5f7fa;
-}
-
-.svgio-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
-}
-
-.svgio-card:nth-child(1) {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-}
-
-.svgio-card--alt {
-    background: linear-gradient(135deg, #141e30, #243b55);
-}
-
-.svgio-card--dark {
-    background: linear-gradient(135deg, #1a2a6c, #162447, #0f172a);
-}
-
-@keyframes svgio-float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-.svgio-card h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-weight: 800;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    display: inline-block;
-    padding-bottom: 5px;
-    color: #ffffff;
 }
 
-.svgio-info {
-    margin: 12px 0;
-    font-size: 0.95rem;
+.expand-container {
     display: flex;
+    justify-content: center;
     align-items: center;
-
+    flex-wrap: wrap;
+    padding: 30px;
+    max-width: 1200px;
+    gap: 20px;
 }
 
-.svgio-info span {
-    margin-right: 8px;
-    font-size: 1.1rem;
+.e-card{
+    min-height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.expand-card {
+    max-width: 300px;
+    height: 150px;
+    background: #fff;
+    margin: 30px 10px;
+    padding: 20px 20px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 200px rgba(0, 0, 0, 0.5);
+    transition: 0.5s ease-in-out;
+}
+
+.expand-card:hover {
+    height: 380px;
+}
+
+.expand-card:hover .expand-content {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+
+.expand-card .expand-image {
+    position: relative;
+    width: 230px;
+    height: 160px;
+    top: -60px;
+    z-index: 1;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.expand-card .expand-image img {
+    max-width: 100%;
+    height: 170px;
+    border-radius: 4px;
+}
+
+.expand-card .expand-content {
+    position: relative;
+    padding: 10px 15px;
+    text-align: center;
+    color: #111;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+}
+
+/* Title styling */
+.expand-content h3 {
+    margin-bottom: 15px;
+    margin-top: -10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0a2540;
+}
+
+/* Info Rows */
+.info {
+    margin: 10px 0;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1d3557;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.info:hover {
+    background: #dce9ff;
+}
+
+.info span {
+    font-size: 18px;
+    color: #0466c8;
     flex-shrink: 0;
-    color: #00d4ff;
 }
 
-.svgio-contact-section a {
-    color: #00d4ff;
+/* Links */
+.expand-content a {
+    color: #0466c8;
     font-weight: 600;
     text-decoration: none;
 }
 
-.svgio-contact-section a:hover {
+.expand-content a:hover {
     text-decoration: underline;
 }
-
-/* small accessibility tweak for keyboard focus */
-.svgio-scroll:focus {
-    outline: 3px solid rgba(0, 0, 0, 0.2);
-}
-
-/* end of file */
