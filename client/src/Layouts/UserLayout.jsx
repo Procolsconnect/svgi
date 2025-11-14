@@ -1,15 +1,15 @@
 // src/layouts/UserLayout.jsx
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 export default function UserLayout() {
   return (
     <div>
     <NavBar/>
-      <main>
-        <Outlet /> {/* user pages load here */}
+      <main >
+        <Outlet />
       </main>
-
-      <footer>User Footer</footer>
+      <Footer/>
     </div>
   );
 }

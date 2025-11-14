@@ -1,12 +1,18 @@
-import React from 'react'
-import Ug from './Ug'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Ug from "./Ug";
+import Pg from "./Pg";
 
 const Admissions = () => {
   return (
     <div>
-        <Ug/>
+      <Routes>
+      
+        <Route path="ug" element={<Ug />} />
+        <Route path="pg" element={<Pg />} />
+      </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default Admissions
+export default Admissions;
