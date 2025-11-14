@@ -220,7 +220,16 @@ body {
   background-repeat: repeat-x;
   justify-self: center;
   align-self: center;
-  filter: hue-rotate(-120deg) saturate(300%);
+    background: repeating-linear-gradient(
+    135deg,
+    #001f54,
+    #001f54 11.5px,
+    transparent 11.5px,
+    transparent 27px,
+    #001f54 27px,
+    #001f54 35.5px
+  );
+
 }
 
 

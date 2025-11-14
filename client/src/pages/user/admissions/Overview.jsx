@@ -1,5 +1,6 @@
 // SVGIOverview.jsx
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './overview.css';
 
 export default function SVGIOverview() {
@@ -96,12 +97,12 @@ export default function SVGIOverview() {
                                 18 hours a day. Whatever.
                             </p>
                         </div>
-                        <div className="svgio-content6-pic svgio-content6-image1" />
-                        <div className="svgio-content6-pic svgio-content6-image2" />
+                     <Link to={'/admissions/ug'}><div className="svgio-content6-pic svgio-content6-image1" /></Link>
+                       <Link to={'/admissions/pg'}> <div className="svgio-content6-pic svgio-content6-image2" /></Link>  
                     </div>
                     <div className="svgio-col">
-                        <div className="svgio-content6-pic svgio-content6-image3" />
-                        <div className="svgio-content6-pic svgio-content6-image4" />
+                   <Link to={'/admissions/procedure'}> <div className="svgio-content6-pic svgio-content6-image3" /></Link>  
+                <Link to={'/admissions/ug'}><div className="svgio-content6-pic svgio-content6-image4" /></Link>  
                     </div>
                 </div>
             </section>
