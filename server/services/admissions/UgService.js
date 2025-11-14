@@ -1,0 +1,1 @@
+const {Ughero, UgCourse} = require('../models/admissions');
