@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import './nav.css';
+import "./nav.css";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,69 +15,62 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id) => {
+  // SCROLL SECTIONS ONLY ON HOME PAGE
+  const scrollToSection = (sectionId) => {
     if (location.pathname !== "/") {
-      navigate(`${id}`);
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) element.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    } else {
-      const element = document.getElementById(id);
-      if (element) element.scrollIntoView({ behavior: "smooth" });
+      navigate("/", { state: { scrollTo: sectionId } });
+      return;
     }
-    setIsMobileMenuOpen(false);
+
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const navItems = [
-    { label: "Home", id: "/" },
-    { label: "Admission", id: "/admission" },
-    { label: "About", id: "about" },
-    { label: "Testimonials", id: "testimonials" },
-    { label: "Contact", id: "contact" },
+    { label: "Home", type: "page", value: "/" },
+    { label: "Admissions", type: "page", value: "/admissions" },
+    { label: "About", type: "section", value: "about" },
+    { label: "Testimonials", type: "section", value: "testimonials" },
+    { label: "Contact", type: "section", value: "contact" },
   ];
+
+  const handleNav = (item) => {
+    if (item.type === "page") {
+      navigate(item.value);
+    } else {
+      scrollToSection(item.value);
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header className={isScrolled ? "scrolled" : ""}>
       <div className="header-container">
         <div className="logo">
-          <img src="/logos/Logo_new.png" alt="Amar Tourism Logo" />
+          <img src="/logos/Logo_new.png" alt="logo" />
         </div>
 
         <nav className="nav-items">
-          {navItems.map(item => (
-            <button
-              key={item.id}
-              onClick={() =>
-                item.label === "Packages"
-                  ? navigate("/package-details")
-                  : scrollToSection(item.id)
-              }
-            >
+          {navItems.map((item) => (
+            <button key={item.label} onClick={() => handleNav(item)}>
               {item.label}
             </button>
           ))}
         </nav>
 
-
         <button
           className="mobile-menu-button"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       <div className={`mobile-menu ${isMobileMenuOpen ? "show" : ""}`}>
-        {navItems.map(item => (
-          <button
-            key={item.id}
-            onClick={() =>
-              item.label === "Packages"
-                ? navigate("/package-details")
-                : scrollToSection(item.id)
-            }
-          >
+        {navItems.map((item) => (
+          <button key={item.label} onClick={() => handleNav(item)}>
             {item.label}
           </button>
         ))}
