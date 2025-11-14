@@ -1,0 +1,216 @@
+/* All classes prefixed with hp- to avoid conflicts */
+
+.hp-wrapper {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f9fafb;
+}
+
+/* HERO */
+.hp-hero {
+  min-height: 350px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.hp-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.hp-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hp-hero h1 {
+  position: relative;
+  font-size: 52px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: 'Playfair Display', serif;
+  z-index: 2;
+}
+
+.hp-hero h1::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  border-radius: 3px;
+  animation: hp-underline-pulse 2s infinite;
+}
+
+@keyframes hp-underline-pulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.8; }
+  50% { transform: scaleX(1.4); opacity: 1; }
+}
+
+/* GRID LAYOUT */
+.hp-container {
+  display: grid;
+  padding: 32px;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+}
+
+.hp-header {
+  grid-area: 1/1/2/4;
+  display: flex;
+  align-items: center;
+}
+
+.hp-header div {
+  width: 131px;
+  height: 27px;
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* IMAGES */
+.hp-top-img, .hp-center-img, .hp-bottom-img {
+  background-image: url('https://images.unsplash.com/photo-1513827379601-9dba5099a3f9');
+  background-size: cover;
+  background-position: center;
+}
+
+.hp-top-img { grid-area: 3/2/7/-2; }
+.hp-center-img { grid-area: -8/2/-5/5; }
+.hp-bottom-img { grid-area: -6/4/-2/-2; }
+
+/* BLUE AREAS */
+.hp-divArea-1, .hp-divArea-2 {
+  background-color: #001F54;
+  width: 66%;
+}
+
+.hp-divArea-1 { grid-area: 2/1/5/4; height: 66%; }
+.hp-divArea-2 { grid-area: -7/-4/-5/-1; height: 100%; }
+
+/* TITLES */
+.hp-title2 {
+  font-size: 48px;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+.hp-italic { font-style: italic; }
+
+/* ROTATIONS */
+.hp-trans-90 { transform: rotate(90deg); }
+.hp-trans-180 { transform: rotate(180deg); }
+.hp-trans-270 { transform: rotate(270deg); }
+
+.hp-pos-left { position: absolute; left: -50%; top: -50%; }
+.hp-pos-right { position: absolute; left: 50%; top: 200%; }
+
+.hp-rightTop { grid-area: 2/-4/3/-2; position: relative; }
+.hp-leftBottom { grid-area: 7/2/8/3; position: relative; }
+
+/* BORDER BOXES */
+.hp-div1, .hp-div2 {
+  border: 20px solid #001F54;
+  width: 80%;
+  height: 66%;
+}
+
+.hp-div1 { grid-area: 5/4/8/-1; }
+.hp-div2 { grid-area: -7/1/-4/-4; }
+
+/* CONTENT */
+.hp-content { grid-area: 9/3/13/-2; position: relative; }
+.hp-content .hp-italic { position: absolute; top: 100px; left: -200px; }
+
+/* PATTERN (red) */
+.hp-pattern1 {
+  grid-area: -3/2/-1/5;
+  height: 50%;
+  width: 66%;
+  background-image: url('https://hexschool.github.io/THE_F2E_Design/week4-product%20gallery/assets/pattern%20unit.png');
+  background-repeat: repeat-x;
+  filter: hue-rotate(-120deg) saturate(300%);
+}
+
+/* BUTTON SECTION */
+.hp-wrapper-no4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, #BEEDFF, white);
+  height: 60vh;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.hp-button-bird {
+  width: 300px;
+  height: 88px;
+  background-color: #131335;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hp-button-bird__text {
+  color: #BEEDFF;
+  font-size: 20px;
+  z-index: 10;
+  position: absolute;
+}
+
+.hp-feather {
+  width: 18%;
+  position: absolute;
+  top: 12px;
+  left: 40%;
+  display: none;
+  opacity: 0;
+}
+
+.hp-button-bird.active { background: transparent; }
+.hp-button-bird.active .hp-button-bird__text { color: #131335; animation: hp-text-fade 1.5s; }
+.hp-button-bird.active .hp-feather { display: block; animation: hp-feather-fade 1.5s forwards; }
+
+/* BIRDS */
+.hp-bird {
+  position: absolute;
+  width: 60px;
+  height: 33px;
+  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+  background-size: auto 100%;
+  animation: hp-fly 0.6s steps(3) infinite;
+}
+
+@keyframes hp-fly { 100% { background-position: -360px 0; } }
+
+@keyframes hp-text-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes hp-feather-fade {
+  0% { top: -100px; opacity: 0; }
+  100% { top: 12px; opacity: 1; }
+}

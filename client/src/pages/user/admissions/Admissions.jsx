@@ -1,9 +1,10 @@
+
 import React from "react";
 import Ug from './Ug'
 import Overview from './Overview'
 import { Routes, Route } from "react-router-dom";
 import Pg from "./Pg";
-import Procedure from "./Procedure"
+import Research from "./Research";
 
 const Admissions = () => {
   return (
