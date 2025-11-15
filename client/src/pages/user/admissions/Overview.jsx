@@ -102,7 +102,7 @@ export default function SVGIOverview() {
                     </div>
                     <div className="svgio-col">
                    <Link to={'/admissions/procedure'}> <div className="svgio-content6-pic svgio-content6-image3" /></Link>  
-                <Link to={'/admissions/ug'}><div className="svgio-content6-pic svgio-content6-image4" /></Link>  
+                <Link to={'/admissions/research'}><div className="svgio-content6-pic svgio-content6-image4" /></Link>  
                     </div>
                 </div>
             </section>
