@@ -44,7 +44,7 @@ async function updateHero(id, body, file) {
 
   // Update media if new file uploaded
   if (file) {
-    hero.media_url = "/uploads/" + file.filename;
+    hero.media_url = file.path; 
     hero.media_type = file.mimetype.startsWith("image") ? "image" : "video";
   }
 

@@ -6,7 +6,6 @@ import { Routes, Route } from "react-router-dom";
 import Pg from "./Pg";
 import Research from "./Research";
 import Procedure from "./Procedure";
-
 const Admissions = () => {
   return (
     <div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import UserLayout from "./layouts/UserLayout.jsx";
+import UserLayout from "./Layouts/UserLayout.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
 import Home from "./pages/user/home/Home.jsx";
 import Admissions from "./pages/user/admissions/Admissions.jsx";

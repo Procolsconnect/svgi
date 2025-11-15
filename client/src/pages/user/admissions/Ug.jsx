@@ -1,19 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './ug.css';
 
 const UndergraduateCoursesPage = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
+  const [heroData, setHeroData] = useState({ title: '', image: '' });
+  const [courseData, setCourseData] = useState({
+    image1: '',
+    image2: '',
+    image3: '',
+    top_text: '',
+    bottom_text: ''
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [heroRes, courseRes] = await Promise.all([
+          axios.get(`${API_URL}/api/ughero`),
+          axios.get(`${API_URL}/api/ugcourse`)
+        ]);
+
+        if (heroRes.data.success && heroRes.data.data.length > 0) {
+          const { title, image } = heroRes.data.data[0];
+          setHeroData({ title, image });
+        }
+
+        if (courseRes.data.success && courseRes.data.data.length > 0) {
+          const data = courseRes.data.data[0];
+          setCourseData({
+            image1: data.image1,
+            image2: data.image2,
+            image3: data.image3,
+            top_text: data.top_text,
+            bottom_text: data.bottom_text
+          });
+        }
+
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load data');
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [API_URL]);
 
   const handleButtonClick = () => {
     setIsButtonActive(!isButtonActive);
   };
 
+  // Split top_text
+  const topTextParts = (loading || error || !courseData.top_text)
+    ? ['LINEN', 'BLAZER']
+    : courseData.top_text.trim().split(/\s+/, 2);
+  const topText1 = topTextParts[0] || 'LINEN';
+  const topText2 = topTextParts[1] || 'BLAZER';
+
+  // Split bottom_text
+  const bottomTextParts = (loading || error || !courseData.bottom_text)
+    ? ['TOP', '01']
+    : courseData.bottom_text.trim().split(/\s+/, 2);
+  const bottomText1 = bottomTextParts[0] || 'TOP';
+  const bottomText2 = bottomTextParts[1] || '01';
+
   return (
     <div className="uc-page-wrapper">
       {/* HERO SECTION */}
       <div className="uc-hero-section">
-        <img src="hero img.jpg" alt="Hero Background" className="uc-hero-image" />
-        <h1 className="uc-hero-title">Undergraduate cources</h1>
+        {loading ? (
+          <div className="uc-hero-image" style={{ background: '#ccc', height: '400px' }}></div>
+        ) : error ? (
+          <>
+            <img src="hero img.jpg" alt="Fallback" className="uc-hero-image" />
+            <h1 className="uc-hero-title">Undergraduate cources</h1>
+          </>
+        ) : (
+          <>
+            <img src={heroData.image} alt="Hero Background" className="uc-hero-image" />
+            <h1 className="uc-hero-title">{heroData.title}</h1>
+          </>
+        )}
       </div>
 
       <div className="uc-main-container">
@@ -24,17 +96,24 @@ const UndergraduateCoursesPage = () => {
           </div>
         </div>
 
-        <div className="uc-top-image"></div>
+        <div 
+          className="uc-top-image" 
+          style={{ 
+            backgroundImage: loading || error ? 'none' : `url(${courseData.image1})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        ></div>
         <div className="uc-div-area-1"></div>
 
         <div className="uc-right-top-section uc-end">
-          <div className="uc-title-2">LINEN</div>
-          <div className="uc-title-2 uc-trans-90 uc-pos-right">BLAZER</div>
+          <div className="uc-title-2">{topText1}</div>
+          <div className="uc-title-2 uc-trans-90 uc-pos-right">{topText2}</div>
         </div>
 
         <div className="uc-left-bottom-section">
-          <div className="uc-title-2 uc-trans-180 uc-f-l">TOP</div>
-          <div className="uc-title-2 uc-trans-270 uc-pos-left">01</div>
+          <div className="uc-title-2 uc-trans-180 uc-f-l">{bottomText1}</div>
+          <div className="uc-title-2 uc-trans-270 uc-pos-left">{bottomText2}</div>
         </div>
 
         <div className="uc-div1"></div>
@@ -57,8 +136,24 @@ const UndergraduateCoursesPage = () => {
           </p>
         </div>
 
-        <div className="uc-bottom-img"></div>
-        <div className="uc-center-img"></div>
+        <div 
+          className="uc-bottom-img"
+          style={{ 
+            backgroundImage: loading || error ? 'none' : `url(${courseData.image3})`,
+            backgroundSize: 'cover',
+            backgroundPosition:'appel center'
+          }}
+        ></div>
+
+        <div 
+          className="uc-center-img"
+          style={{ 
+            backgroundImage: loading || error ? 'none' : `url(${courseData.image2})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        ></div>
+
         <div className="uc-divArea-2"></div>
         <div className="uc-div2"></div>
         <div className="uc-pattern1"></div>
