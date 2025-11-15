@@ -1,0 +1,347 @@
+/* Base Reset */
+.crs-body {
+    font-family: 'Playfair Display', serif;
+    background-color: #f9fafb;
+    color: #222;
+}
+
+/* -----------------------------------
+   HERO SECTION
+----------------------------------- */
+#crs-hero {
+    min-height: 350px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    flex-direction: column;
+}
+
+#crs-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+#crs-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+#crs-hero h1 {
+    position: relative;
+    font-size: 52px;
+    font-weight: bold;
+    z-index: 1;
+    letter-spacing: 1px;
+}
+
+#crs-hero h1::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 5px;
+    margin: 14px auto 0;
+    background: linear-gradient(90deg, #ff512f, #dd2476);
+    border-radius: 3px;
+    animation: underline-pulse 2s infinite;
+}
+
+@keyframes underline-pulse {
+
+    0%,
+    100% {
+        transform: scaleX(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scaleX(1.4);
+        opacity: 1;
+    }
+}
+
+@media(max-width: 768px) {
+    #hero h1 {
+        font-size: 36px;
+        padding: 0 20px;
+    }
+}
+
+/* -----------------------------------
+   MAIN SECTION
+----------------------------------- */
+.crs-main-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 3em 2em;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.crs-unravel-section {
+    flex: 1;
+}
+
+.crs-unravel-section h1 {
+    margin-bottom: 0.5em;
+    font-size: 3em;
+    line-height: 1.2;
+    cursor: pointer;
+}
+
+.crs-unravel-section code {
+    display: block;
+    margin-top: 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.527);
+}
+
+/* -----------------------------------
+   GALLERY
+----------------------------------- */
+.crs-gallery {
+    flex: 1;
+    position: relative;
+    min-height: 500px;
+}
+
+.crs-gallery img {
+    position: absolute;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 6px solid #fff;
+}
+
+.crs-gallery img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+    z-index: 5;
+}
+
+.crs-gallery img:nth-child(1) {
+    top: 0;
+    left: 0;
+    width: 60%;
+    z-index: 3;
+}
+
+.crs-gallery img:nth-child(2) {
+    top: 20%;
+    right: 0;
+    width: 55%;
+    z-index: 2;
+}
+
+.crs-gallery img:nth-child(3) {
+    bottom: 15%;
+    left: 10%;
+    width: 50%;
+    z-index: 4;
+}
+
+/* -----------------------------------
+   Left Heading
+----------------------------------- */
+.crs-left-heading {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #2e2e2e;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* -----------------------------------
+   HOVER CARDS
+----------------------------------- */
+.crs-hover-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px 0;
+}
+
+.crs-snip1116 {
+    font-family: 'Raleway', Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    min-width: 200px;
+    max-width: 280px;
+    max-height: 220px;
+    width: 100%;
+    background: #000000;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+}
+
+.crs-snip1116 * {
+    box-sizing: border-box;
+    transition: all 0.45s ease-in-out;
+}
+
+.crs-snip1116 img {
+    max-width: 100%;
+    position: relative;
+    opacity: 0.9;
+}
+
+/* .crs-snip1116:hover img {
+    opacity: .3;
+    transform: scale(1.1);
+} */
+
+.crs-snip1116 figcaption {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 13%;
+    right: 13%;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-width: 1px 1px 0;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.crs-snip1116 h2 {
+    padding: 15px 20px;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+
+.crs-snip1116 h2 span {
+    font-weight: 800;
+}
+
+.crs-snip1116 .caption {
+    overflow: hidden;
+    transform: translateY(50%);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.crs-snip1116 p {
+    display: table;
+    margin: 0 auto;
+    padding: 0 10px;
+    position: relative;
+    text-align: center;
+    width: auto;
+    color: rgba(255, 255, 255, 0);
+    font-size: 0.8em;
+}
+
+.crs-snip1116 p:before,
+.crs-snip1116 p:after {
+    position: absolute;
+    width: 150%;
+    height: 1px;
+    content: '';
+    background: white;
+    bottom: 50%;
+    transition: all 0.45s ease-in-out;
+    transition-delay: 0.35s;
+}
+
+.crs-snip1116 p:before {
+    left: -100%;
+}
+
+.crs-snip1116 p:after {
+    right: -100%;
+}
+
+.crs-snip1116 a {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.crs-snip1116:hover img,
+.crs-snip1116.hover img {
+    opacity: 0.35;
+    transform: scale(1.1);
+}
+
+.crs-snip1116:hover p,
+.crs-snip1116.hover p {
+    opacity: 1;
+    transition-delay: 0.35s;
+    color: #ffffff;
+}
+
+.crs-snip1116:hover p:before,
+.crs-snip1116.hover p:before,
+.crs-snip1116:hover p:after,
+.crs-snip1116.hover p:after {
+    transition-delay: 0s;
+}
+
+.crs-snip1116:hover p:before,
+.crs-snip1116.hover p:before {
+    left: -150%;
+}
+
+.crs-snip1116:hover p:after,
+.crs-snip1116.hover p:after {
+    right: -150%;
+}
+
+
+/* -----------------------------------
+   RESPONSIVE
+----------------------------------- */
+
+@media (max-width: 900px) {
+    .crs-main-section {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .crs-gallery {
+        flex: 1;
+        min-height: 200px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    #crs-hero h1 {
+        font-size: 36px;
+    }
+
+    .crs-main-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .crs-gallery {
+        min-height: 350px;
+    }
+}
