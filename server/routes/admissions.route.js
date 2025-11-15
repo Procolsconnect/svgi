@@ -16,6 +16,12 @@ module.exports = function admissionsRoutes(app) {
   app.put("/api/ugcourse/:id",upload.fields([{ name: "image1", maxCount: 1 }, { name: "image2", maxCount: 1 }, { name: "image3", maxCount: 1 }]),ughome.updateUgCourse,);
   app.delete("/api/ugcourse/:id", ughome.deleteUgCourse);
   app.get("/api/ugcourse/:id", ughome.getUgCourse);
+  // 
+  app.post("/api/ugcourse", upload.fields([{ name: "image1", maxCount: 1 }, { name: "image2", maxCount: 1 }, { name: "image3", maxCount: 1 }]),ughome.createUgCourse,);
+  app.get("/api/ugcourse", ughome.getAllUgCourses);
+  app.put("/api/ugcourse/:id",upload.fields([{ name: "image1", maxCount: 1 }, { name: "image2", maxCount: 1 }, { name: "image3", maxCount: 1 }]),ughome.updateUgCourse,);
+  app.delete("/api/ugcourse/:id", ughome.deleteUgCourse);
+  app.get("/api/ugcourse/:id", ughome.getUgCourse);
    
   
 

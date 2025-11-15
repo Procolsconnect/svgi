@@ -97,12 +97,12 @@ export default function SVGIOverview() {
                                 18 hours a day. Whatever.
                             </p>
                         </div>
-                     <Link to={'/admissions/ug'}><div className="svgio-content6-pic svgio-content6-image1" /></Link>
-                       <Link to={'/admissions/pg'}> <div className="svgio-content6-pic svgio-content6-image2" /></Link>  
+                        <Link to={'/admissions/ug'}><div className="svgio-content6-pic svgio-content6-image1" /></Link>
+                        <Link to={'/admissions/pg'}> <div className="svgio-content6-pic svgio-content6-image2" /></Link>
                     </div>
                     <div className="svgio-col">
-                   <Link to={'/admissions/procedure'}> <div className="svgio-content6-pic svgio-content6-image3" /></Link>  
-                <Link to={'/admissions/research'}><div className="svgio-content6-pic svgio-content6-image4" /></Link>  
+                        <Link to={'/admissions/procedure'}> <div className="svgio-content6-pic svgio-content6-image3" /></Link>
+                        <Link to={'/admissions/ug'}><div className="svgio-content6-pic svgio-content6-image4" /></Link>
                     </div>
                 </div>
             </section>
@@ -110,35 +110,117 @@ export default function SVGIOverview() {
             {/* NEW CONTACT SECTION */}
             <section className="svgio-contact-section">
                 <h2 className='svgio-contact-section-h2'>📞 SVGI Contact Information</h2>
-                <div className="svgio-cards">
-                    <div className="svgio-card">
-                        <h3>SVGI Engineering College</h3>
-                        <div className="svgio-info"><span>👤</span> Dr. Ramesh Kumar, Director - UG Admissions</div>
-                        <div className="svgio-info"><span>📍</span> SVGI Campus, Tiruvannamalai, Tamil Nadu - 606601</div>
-                        <div className="svgio-info"><span>📞</span> +91-4175-220101</div>
-                        <div className="svgio-info"><span>✉️</span> engg@svgicollege.edu.in</div>
-                        <div className="svgio-info"><span>⏰</span> 9 am - 5 pm; Mon-Sat (Excluding holidays)</div>
-                    </div>
+                <div className='svgio-contact-section-container'>
+                    <div className="expand-container">
 
-                    <div className="svgio-card svgio-card--alt">
-                        <h3>SVGI Arts & Science College</h3>
-                        <div className="svgio-info"><span>👤</span> Dr. Priya Lakshmi, Director - PG Admissions</div>
-                        <div className="svgio-info"><span>📍</span> SVGI Campus, Tiruvannamalai, Tamil Nadu - 606601</div>
-                        <div className="svgio-info"><span>📞</span> +91-4175-220202</div>
-                        <div className="svgio-info"><span>✉️</span> arts@svgicollege.edu.in</div>
-                        <div className="svgio-info"><span>📠</span> +91-4175-220203</div>
-                    </div>
+                        {/* Engineering */}
+                        <div className="e-card">
+                            <div className="expand-card">
+                                <div className="expand-image">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
+                                        alt="engineering"
+                                    />
+                                </div>
 
-                    <div className="svgio-card svgio-card--dark">
-                        <h3>SVGI Paramedical & Nursing</h3>
-                        <div className="svgio-info"><span>👤</span> Dr. Meena S, Director - Nursing & Paramedical</div>
-                        <div className="svgio-info"><span>📍</span> SVGI Health Campus, Tiruvannamalai, Tamil Nadu - 606601</div>
-                        <div className="svgio-info"><span>📞</span> +91-4175-220303</div>
-                        <div className="svgio-info"><span>✉️</span> nursing@svgicollege.edu.in</div>
-                        <div className="svgio-info"><span>🌐</span> <a href="https://goo.gl/maps/xyz" target="_blank" rel="noreferrer">View Location</a></div>
+                                <div className="expand-content">
+                                    <h3>SVGI Engineering College</h3>
+                                    <div className="info"><span>📞</span> +91-4175-220101</div>
+                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
+                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="e-card">
+                            <div className="expand-card">
+                                <div className="expand-image">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
+                                        alt="engineering"
+                                    />
+                                </div>
+
+                                <div className="expand-content">
+                                    <h3>SVGI Engineering College</h3>
+                                    <div className="info"><span>📞</span> +91-4175-220101</div>
+                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
+                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="e-card">
+                            <div className="expand-card">
+                                <div className="expand-image">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
+                                        alt="engineering"
+                                    />
+                                </div>
+
+                                <div className="expand-content">
+                                    <h3>SVGI Engineering College</h3>
+                                    <div className="info"><span>📞</span> +91-4175-220101</div>
+                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
+                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="e-card">
+                            <div className="expand-card">
+                                <div className="expand-image">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
+                                        alt="engineering"
+                                    />
+                                </div>
+
+                                <div className="expand-content">
+                                    <h3>SVGI Engineering College</h3>
+                                    <div className="info"><span>📞</span> +91-4175-220101</div>
+                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
+                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="e-card">
+                            <div className="expand-card">
+                                <div className="expand-image">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
+                                        alt="engineering"
+                                    />
+                                </div>
+
+                                <div className="expand-content">
+                                    <h3>SVGI Engineering College</h3>
+                                    <div className="info"><span>📞</span> +91-4175-220101</div>
+                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
+                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="e-card">
+                            <div className="expand-card">
+                                <div className="expand-image">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
+                                        alt="engineering"
+                                    />
+                                </div>
+
+                                <div className="expand-content">
+                                    <h3>SVGI Engineering College</h3>
+                                    <div className="info"><span>📞</span> +91-4175-220101</div>
+                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
+                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
+
 
         </div>
     );

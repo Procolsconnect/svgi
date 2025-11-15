@@ -9,9 +9,9 @@ import Procedure from "./Procedure";
 const Admissions = () => {
   return (
     <div>
-  
+
       <Routes>
-          <Route index element={<Overview/> } /> 
+        <Route index element={<Overview />} />
         <Route path="ug" element={<Ug />} />
         <Route path="pg" element={<Pg />} />
         <Route path="procedure" element={<Procedure />} />
