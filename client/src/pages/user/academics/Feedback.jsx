@@ -97,11 +97,11 @@ const SVGIFeedback = () => {
 
                 {/* Text Content */}
                 <div className="text-wrapper">
-                    <header>
-                        <h1 style={{ fontFamily: "'Merriweather',serif", fontSize: '3em' }}>
+                    <div>
+                        <h1 style={{ fontFamily: "'Merriweather',serif", fontSize: '3em' }} className='text-wrapper-title'>
                             SVGI – Overall Feedback Summary
                         </h1>
-                    </header>
+                    </div>
                     <ul style={{ padding: '2.5em 2.5em', fontSize: '1em', lineHeight: '1.5em', listStyleType: 'disc', textAlign: 'left' }}>
                         <li>The overall campus environment is appreciated for being clean, secure, and student-friendly.</li>
                         <li>Students expressed satisfaction with the quality of teaching across Engineering, Arts, Nursing, and Paramedical streams.</li>
@@ -114,20 +114,20 @@ const SVGIFeedback = () => {
                         <li>Overall satisfaction levels across departments indicate a positive student experience.</li>
                     </ul>
 
-                    <header>
-                        <h1 style={{ fontFamily: "'Merriweather',serif", fontSize: '2.2em' }}>Key Observations</h1>
-                    </header>
+                    <div>
+                        <h1 style={{ fontFamily: "'Merriweather',serif", fontSize: '2.2em' }} className='text-wrapper-title'>Key Observations</h1>
+                    </div>
                     <ul style={{ padding: '1.5em 2.5em', listStyleType: 'disc' }}>
                         <li>Students want more hands-on workshops and real-time project exposure.</li>
                         <li>Some departments requested upgraded lab equipment and additional subject-oriented tools.</li>
                         <li>Few students suggested enhancing sports activities and inter-college events.</li>
                     </ul>
 
-                    <header>
-                        <h1 style={{ fontFamily: "'Merriweather',serif", fontSize: '2.2em' }}>
+                    <div>
+                        <h1 style={{ fontFamily: "'Merriweather',serif", fontSize: '2.2em' }} className='text-wrapper-title'>
                             Recommendations for Improvement
                         </h1>
-                    </header>
+                    </div>
                     <ul style={{ padding: '1.5em 2.5em', listStyleType: 'disc' }}>
                         <li>Introduce department-wise industry mentorship programs.</li>
                         <li>Conduct monthly technical seminars and career-oriented bootcamps.</li>
@@ -137,7 +137,9 @@ const SVGIFeedback = () => {
             </section>
 
             {/* Lightbox */}
-            <div className="lightbox" onClick={() => setLightboxActive(false)}>
+            <div className={`lightbox ${lightboxActive ? "active" : ""}`}
+                onClick={() => setLightboxActive(false)}
+            >
                 <span className="lightbox-close" onClick={() => setLightboxActive(false)}>&times;</span>
                 <img src="https://images.unsplash.com/photo-1642478881792-4726327bb0bc?crop=entropy&cs=srgb&fm=jpg" alt="SVGI Group Full Image" onClick={(e) => e.stopPropagation()} />
             </div>
