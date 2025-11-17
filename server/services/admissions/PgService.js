@@ -1,24 +1,24 @@
-const {Ughero, UgCourse} = require('../../models/admissions');
+const {PgHero, PgCourse} = require('../../models/admissions');
 
 async function createHero(body, file) {
   const data = {
     title: body.title,
     image: file.path
   };
-  const hero = new Ughero(data);
+  const hero = new Pghero(data);
   const savedHero = await hero.save();
   return savedHero;
 }
 
 // GET HEROES
 async function getHero() {
-  const heroes = await Ughero.find().sort({ created_at: -1 });
+  const heroes = await Pghero.find().sort({ created_at: -1 });
   return heroes;
 }
 
 // UPDATE HERO
 async function updateHero(id, body, file) {
-  const hero = await Ughero.findById(id);
+  const hero = await Pghero.findById(id);
   if (!hero) throw new Error("Hero not found");
 
   if (file) {
@@ -31,14 +31,15 @@ async function updateHero(id, body, file) {
 
 // DELETE HERO
 async function deleteHero(id) {
-  const deletedHero = await Ughero.findByIdAndDelete(id);
+  const deletedHero = await Pghero.findByIdAndDelete(id);
   if (!deletedHero) throw new Error("Hero not found");
   return deletedHero;
 }
 
 //  UG COURSE ******************************
 async function createCourse(body, files) {
-  return await UgCourse.create({
+  return await PgCourse.create({
+    content: body.content,
     image1: files?.image1 ? files.image1[0].path : null,
     image2: files?.image2 ? files.image2[0].path : null,
     image3: files?.image3 ? files.image3[0].path : null,
@@ -48,15 +49,16 @@ async function createCourse(body, files) {
 }
 
 async function getAllCourses() {
-  return await UgCourse.find();
+  return await PgCourse.find();
 }
 
 async function getCourse(id) {
-  return await UgCourse.findById(id);
+  return await PgCourse.findById(id);
 }
 
 async function updateCourse(id, body, files) {
   const updateData = {
+    content: body.content,
     top_text: body.top_text,
     bottom_text: body.bottom_text,
   };
@@ -65,11 +67,11 @@ async function updateCourse(id, body, files) {
   if (files?.image2) updateData.image2 = files.image2[0].path;
   if (files?.image3) updateData.image3 = files.image3[0].path;
 
-  return await UgCourse.findByIdAndUpdate(id, updateData, { new: true });
+  return await PgCourse.findByIdAndUpdate(id, updateData, { new: true });
 }
 
 async function deleteCourse(id) {
-  return await UgCourse.findByIdAndDelete(id);
+  return await PgCourse.findByIdAndDelete(id);
 }
 
 
