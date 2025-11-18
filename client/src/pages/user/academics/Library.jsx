@@ -67,7 +67,7 @@ export default function LibraryPage() {
         <div className="lp-body">
             {/* HERO SECTION */}
             <div id="lp-hero" className="lp-hero">
-                <img src="hero img.jpg" alt="Hero Background" />
+                <img src="/images/instu.jpg" alt="Hero Background" />
                 <div className="lp-wrapper">
                     <h1>Our Library</h1>
                 </div>

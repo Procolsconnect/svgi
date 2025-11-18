@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import CourseOutcome from "./CourseOutcome";
 import Library from "./Library";
 import Feedback from "./Feedback";
+import Rdbc from "./Rdbc";
+
 const Admissions = () => {
   return (
     <div>
@@ -12,7 +14,7 @@ const Admissions = () => {
         <Route path="courseoutcome" element={<CourseOutcome />} />
         <Route path="library" element={<Library />} />
         <Route path="feedback" element={<Feedback />} />
-        {/* <Route path="research" element={<Research />} /> */}
+        <Route path="rdbc" element={<Rdbc />} />
       </Routes>
     </div>
   );
