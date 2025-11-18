@@ -1,4 +1,4 @@
-const {PgHero, PgCourse} = require('../../models/admissions');
+const {Pghero, PgCourse} = require('../../models/admissions');
 
 async function createHero(body, file) {
   const data = {

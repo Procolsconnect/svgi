@@ -535,10 +535,13 @@
 }
 
 .border-image {
+    display: grid;
     margin: 1em auto;
-    width: min(80cqw, 40em);
+    width:100%;
     color: black;
+    justify-content: center;
     padding: 3em 0;
+    background: url(https://images.unsplash.com/photo-1546345414-16d37d6baa05?w=1400) 50% / cover;
 }
 
 @media (max-width: 900px) {

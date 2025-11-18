@@ -137,10 +137,10 @@ const SVGIFeedback = () => {
             </section>
 
             {/* Lightbox */}
-            <div className="lightbox" onClick={() => setLightboxActive(false)}>
+            {/* <div className="lightbox" onClick={() => setLightboxActive(false)}>
                 <span className="lightbox-close" onClick={() => setLightboxActive(false)}>&times;</span>
                 <img src="https://images.unsplash.com/photo-1642478881792-4726327bb0bc?crop=entropy&cs=srgb&fm=jpg" alt="SVGI Group Full Image" onClick={(e) => e.stopPropagation()} />
-            </div>
+            </div> */}
 
             {/* Grid Layout Sections */}
             <section className="grid-layout">
@@ -148,7 +148,7 @@ const SVGIFeedback = () => {
                 <p>The content is restricted to a certain max-width in the middle, but the section and consequently its image background is full-width.</p>
             </section>
 
-            <section className="border-image">
+            <section className="border-image ">
                 <h2>Heading: border-image solution</h2>
                 <p>The section is restricted to a certain max-width in the middle, but the border-image created backdrop is full-width.</p>
             </section>
