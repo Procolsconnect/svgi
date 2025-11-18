@@ -128,9 +128,7 @@
 .pg-productimg {
   width: 75%;
   height: 55.56%;
-  background: url(https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80) center -330px;
   background-color: #ddd;
-  background-size: cover;
   position: absolute;
   top: -300;
   bottom: 0;
@@ -138,6 +136,16 @@
   right: 0;
   margin: auto;
   z-index: 2;
+}
+
+.pg-cover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .pg-detailtop:before {
@@ -175,7 +183,7 @@
 
 .pg-boxtitle,
 .pg-detailcontent h1 {
-  font-size: 4.8rem;
+  font-size: 3rem;
   font-weight: 900;
 }
 
@@ -247,8 +255,6 @@
 .pg-detailbottom .pg-leftitem .pg-itemimg {
   width: 37.5%;
   padding-bottom: 31.25%;
-  background: url(https://images.unsplash.com/photo-1519406686401-e9ef2420c15b?ixlib=rb-0.3.5&auto=format&fit=crop&w=1950&q=80) center center;
-  background-size: cover;
   position: absolute;
   top: 0;
   left: 120px;
@@ -268,8 +274,6 @@
 .pg-detailbottom .pg-rightitem .pg-itemimg {
   width: 50%;
   padding-bottom: 41.67%;
-  background: url(https://images.unsplash.com/photo-1519406728390-b536d7be138f?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80) center center;
-  background-size: cover;
   position: absolute;
   right: 120px;
   bottom: 80px;

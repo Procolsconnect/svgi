@@ -176,7 +176,7 @@ module.exports = {
   createPgHeroController,
   updatePgHeroController,
   deletePgHeroController,
-    createPgCourse,
+  createPgCourse,
   getAllPgCourses,
   getPgCourse,
   updatePgCourse,

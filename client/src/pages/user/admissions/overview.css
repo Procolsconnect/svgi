@@ -211,6 +211,11 @@
     line-height: 26px;
     opacity: 0.7;
 }
+.svgio-text-17 {
+    font-size: 16px;
+    line-height: 26px;
+    opacity: 0.7;
+}
 
 .svgio-content6-pic {
     width: 100%;
@@ -299,8 +304,9 @@
     min-height: 100vh;
 }
 
-.svgio-contact-section h2 {
-    margin-bottom: 40px;
+.svgio-contact-section-h1 {
+    margin-bottom: 10px;
+    margin-top: 100px;
     font-weight: 800;
     text-align: center;
 }
@@ -388,22 +394,52 @@
     font-size: 15px;
     color: #1d3557;
     display: flex;
-    justify-content: center;
     gap: 10px;
     align-items: center;
     font-weight: 500;
     transition: all 0.3s ease;
+    max-width: 250px;      
+    white-space: nowrap;
+     overflow: hidden;
+ 
 }
+/* 
+.info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+} */
+
+.info-icon {
+    flex-shrink: 0;       /* icon never shrinks or hides */
+    display: flex;
+    align-items: center;
+}
+
+.info-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    min-width: 0;     
+    color: #111;    /* critical for ellipsis inside flex */
+}
+
+
+.svgio-icon {
+    font-size: 18px;
+    margin-right: 6px;
+}
+
 
 .info:hover {
     background: #dce9ff;
 }
 
-.info span {
-    font-size: 18px;
-    color: #0466c8;
-    flex-shrink: 0;
-}
+
 
 /* Links */
 .expand-content a {

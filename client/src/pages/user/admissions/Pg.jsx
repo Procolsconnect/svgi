@@ -29,6 +29,12 @@ const PostgraduateCoursesPage = () => {
 
         <div className="pg-detailtop">
           <div className="pg-productimg">
+            <img 
+              src="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80" 
+              alt="" 
+              className="pg-cover-img" 
+              style={{ objectPosition: 'center -330px' }} 
+            />
             <div className="pg-boxtop">
               <div className="pg-boxtitle pg-boxtitletop1">VINTAGE</div>
               <div className="pg-boxtitle pg-boxtitletop2">DENIM</div>
@@ -51,10 +57,22 @@ const PostgraduateCoursesPage = () => {
 
         <div className="pg-detailbottom">
           <div className="pg-leftitem">
-            <div className="pg-itemimg"></div>
+            <div className="pg-itemimg">
+              <img 
+                src="https://images.unsplash.com/photo-1519406686401-e9ef2420c15b?ixlib=rb-0.3.5&auto=format&fit=crop&w=1950&q=80" 
+                alt="" 
+                className="pg-cover-img" 
+              />
+            </div>
           </div>
           <div className="pg-rightitem">
-            <div className="pg-itemimg"></div>
+            <div className="pg-itemimg">
+              <img 
+                src="https://images.unsplash.com/photo-1519406728390-b536d7be138f?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80" 
+                alt="" 
+                className="pg-cover-img" 
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -1,66 +1,140 @@
 // SVGIOverview.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import {
+    AiOutlinePhone,
+    AiOutlineMail,
+    AiOutlineGlobal,
+    AiOutlineClockCircle,
+    AiOutlineEnvironment,
+    AiOutlineInfoCircle
+} from "react-icons/ai";
+
 import './overview.css';
 
 export default function SVGIOverview() {
+    const [overview, setOverview] = useState(null);
+    const [cards, setCards] = useState([]);
+    const [hero, setHero] = useState(null);
+
     const [count, setCount] = useState(0);
     const [clicked, setClicked] = useState(false);
     const [rotated, setRotated] = useState(false);
+
     const scrollRef = useRef(null);
     const arrowRef = useRef(null);
 
+    const getClickableLink = (text) => {
+        if (!text) return null;
+        const lower = text.toLowerCase();
+
+        // MAP URL
+        const mapRegex = /^(https?:\/\/)?(maps\.app\.goo\.gl|maps\.google\.[a-z.]+|www\.google\.[a-z.]+\/maps)\/.+/i;
+        if (mapRegex.test(text)) return text;
+
+        // EMAIL
+        if (lower.includes("@")) return `mailto:${text}`;
+
+        // PHONE
+        if (/[0-9]{5,}/.test(text) && !lower.includes("@")) return `tel:${text}`;
+
+        // WEBSITE
+        if (lower.startsWith("http") || lower.includes("www")) return text;
+
+        return null;
+    };
+
+    // Fetch overview, hero, cards
     useEffect(() => {
-        // ensure arrow-bounce exists on mount
-        if (arrowRef.current) arrowRef.current.classList.add('svgio-arrow-bounce');
+        const fetchData = async () => {
+            try {
+                const API_URL = import.meta.env.VITE_API_URL || process.env.REACT_APP_API_URL;
+
+                const overviewRes = await axios.get(`${API_URL}/api/overview`);
+                const cardsRes = await axios.get(`${API_URL}/api/contact-card`);
+                const heroRes = await axios.get(`${API_URL}/api/overviewhero`);
+
+                setOverview(overviewRes.data.data[0]);
+                setCards(cardsRes.data.data);
+                setHero(heroRes.data.data[0]);
+            } catch (error) {
+                console.error("Fetch failed:", error);
+            }
+        };
+
+        fetchData();
     }, []);
 
-    const handleScrollClick = () => {
-        const sections = Array.from(document.querySelectorAll('section'));
-        const btn = scrollRef.current;
+    // arrow bounce on mount
+   useEffect(() => {
+    if (arrowRef.current) {
+        arrowRef.current.classList.add("svgio-arrow-bounce");
+    }
+}, [overview, hero]); // run again when overview/hero are loaded
 
 
-        // position the button fixed at a computed spot once clicked (mimics original animate)
-        if (btn && !clicked) {
-            btn.style.position = 'fixed';
-            btn.style.top = 'auto';      // <-- THIS FIXES THE ISSUE
-            btn.style.bottom = '50px';   // optional, forces bottom positioning
-        }
+    // SCROLL ARROW FUNCTIONALITY (fixed)
+const handleScrollClick = () => {
+    const sections = Array.from(document.querySelectorAll('section'));
+    const btn = scrollRef.current;
 
+    if (btn && !clicked) {
+        btn.style.position = 'fixed';
+        btn.style.top = 'auto';
+        btn.style.bottom = '50px';
+    }
 
-        // trigger movement (css transition handles the rest)
-        setClicked(true);
+    setClicked(true);
 
-        // determine target
-        if (count > (sections.length - 1)) {
-            // go to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            setRotated(false);
-            setCount(0);
-        } else {
-            const target = sections[count];
-            if (target) {
+    if (count > sections.length - 1) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setRotated(false);
+        setCount(0);
+    } else {
+        const target = sections[count];
+        if (target) {
+            setTimeout(() => {
                 target.scrollIntoView({ behavior: 'smooth' });
-            }
-            if (count === (sections.length - 1)) setRotated(true);
-            setCount(prev => prev + 1);
+            }, 200); // 50–100ms delay is usually enough
         }
+        if (count === (sections.length - 1)) setRotated(true);
+        setCount(prev => prev + 1);
+    }
 
-        // remove arrow bounce after first click
-        if (arrowRef.current) arrowRef.current.classList.remove('svgio-arrow-bounce');
+    if (arrowRef.current) arrowRef.current.classList.remove('svgio-arrow-bounce');
+};
+
+
+    const detectIcon = (text) => {
+        if (!text) return <AiOutlineInfoCircle />;
+        const lower = text.toLowerCase();
+
+        const gmapRegex = /^(https?:\/\/)?(maps\.app\.goo\.gl|maps\.google\.[a-z.]+|www\.google\.[a-z.]+\/maps)\/.+/i;
+        if (gmapRegex.test(text)) return <AiOutlineEnvironment />;
+        if (lower.includes("maps.app.goo.gl") || lower.includes("google.com/maps")) return <AiOutlineEnvironment />;
+
+        if (/[0-9]{3,}/.test(text) && !lower.includes("@")) return <AiOutlinePhone />;
+        if (lower.includes("@")) return <AiOutlineMail />;
+        if (lower.startsWith("http") || lower.includes("www") || lower.includes(".edu") || lower.includes(".ac")) return <AiOutlineGlobal />;
+        if (lower.includes("am") || lower.includes("pm") || lower.includes("mon")) return <AiOutlineClockCircle />;
+
+        return <AiOutlineInfoCircle />;
     };
+
+    if (!overview || !hero) return <div min-h-screen>Loading…</div>;
 
     return (
         <div className="svgio-root">
             {/* HERO */}
-            <div className="svgio-hero" id="svgio-hero">
-                <img className="svgio-hero__img" src="images/instu.jpg" alt="Hero Background" />
+            <div className="svgio-hero">
+                <img className="svgio-hero__img" src={hero.image} alt={hero.title} />
                 <div className="svgio-wrapper">
-                    <h1 className="svgio-hero__title">Overview</h1>
+                    <h1 className="svgio-hero__title">{hero.title}</h1>
                 </div>
             </div>
 
-            {/* SCROLL ARROW */}
+          {/* SCROLL ARROW */}
             <div
                 ref={scrollRef}
                 className={`svgio-scroll ${clicked ? 'svgio-scroll--clicked' : ''} ${rotated ? 'svgio-scroll--rotate' : ''}`}
@@ -73,157 +147,89 @@ export default function SVGIOverview() {
                 <span ref={arrowRef} className="svgio-arrow">&#8595;</span>
             </div>
 
-            {/* GRADIENT MASK SECTION */}
+
+            {/* SECTION 1 */}
             <section className="svgio-gradient-section">
-                <img id="svgio-gradient-shape" className="svgio-gradient-shape" src="images/training.jpg" alt="" />
+                <img id="svgio-gradient-shape" className="svgio-gradient-shape" src={overview.image1} alt="" />
                 <div className="svgio-gradient-text">
-                    <h2>Align text to a gradient mask on image</h2>
-                    <p>
-                        Color is the visual perception produced by the activation of the different types of cone cells in the eye caused by light. Though color is not an inherent property of matter, color perception is related to an object's light absorption, emission, reflection and transmission. For most humans, visible wavelengths of light are the ones perceived in the visible light spectrum, with three types of cone cells.
-                    </p>
+                    <h2>{overview.title1}</h2>
+                    <p>{overview.para1}</p>
                 </div>
             </section>
 
-            {/* SECTION BELOW HERO */}
+            {/* SECTION 2 */}
             <section className="svgio-section" id="svgio-overview">
                 <div className="svgio-wrap-grid">
+                    {/* LEFT COL */}
                     <div className="svgio-col">
                         <div className="svgio-content6-headline">
-                            <div className="svgio-tagline">My Life in pictures</div>
-                            <h2>I'm active on Instagram</h2>
-                            <p className="svgio-text-16">
-                                I love to wander around the world with my ultimate camera and take pictures of everything
-                                I see so I can pretend that I'm supercool guy even though I sit in front of my MacBook
-                                18 hours a day. Whatever.
-                            </p>
+                            <h2>{overview.title2}</h2>
+                            <p className="svgio-text-16">{overview.para2}</p>
                         </div>
-                        <Link to={'/admissions/ug'}><div className="svgio-content6-pic svgio-content6-image1" /></Link>
-                        <Link to={'/admissions/pg'}> <div className="svgio-content6-pic svgio-content6-image2" /></Link>
+                        <Link to={'/admissions/ug'}>
+                            <div className="svgio-content6-pic" style={{ backgroundImage: `url(${overview.ug})` }} />
+                        </Link>
+                        <Link to={'/admissions/pg'}>
+                            <div className="svgio-content6-pic" style={{ backgroundImage: `url(${overview.pg})` }} />
+                        </Link>
                     </div>
+
+                    {/* RIGHT COL */}
                     <div className="svgio-col">
-                        <Link to={'/admissions/procedure'}> <div className="svgio-content6-pic svgio-content6-image3" /></Link>
-                        <Link to={'/admissions/ug'}><div className="svgio-content6-pic svgio-content6-image4" /></Link>
+                        <Link to={'/admissions/procedure'}>
+                            <div className="svgio-content6-pic" style={{ backgroundImage: `url(${overview.research})` }} />
+                        </Link>
+                        <Link to={'/admissions/procedure'}>
+                            <div className="svgio-content6-pic" style={{ backgroundImage: `url(${overview.procedure})` }} />
+                        </Link>
+                        <div className="svgio-content6-headline">
+                            <p className="svgio-text-17">{overview.para3}</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* NEW CONTACT SECTION */}
+            {/* CONTACT CARDS */}
             <section className="svgio-contact-section">
-                <h2 className='svgio-contact-section-h2'>📞 SVGI Contact Information</h2>
-                <div className='svgio-contact-section-container'>
+                <h1 className="svgio-contact-section-h1">SVGI Contact Information</h1>
+                <div className="svgio-contact-section-container">
                     <div className="expand-container">
-
-                        {/* Engineering */}
-                        <div className="e-card">
-                            <div className="expand-card">
-                                <div className="expand-image">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
-                                        alt="engineering"
-                                    />
-                                </div>
-
-                                <div className="expand-content">
-                                    <h3>SVGI Engineering College</h3>
-                                    <div className="info"><span>📞</span> +91-4175-220101</div>
-                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
-                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="e-card">
-                            <div className="expand-card">
-                                <div className="expand-image">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
-                                        alt="engineering"
-                                    />
-                                </div>
-
-                                <div className="expand-content">
-                                    <h3>SVGI Engineering College</h3>
-                                    <div className="info"><span>📞</span> +91-4175-220101</div>
-                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
-                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
+                        {cards.map(card => (
+                            <div className="e-card" key={card._id}>
+                                <div className="expand-card">
+                                    <div className="expand-image">
+                                        <img src={card.image} alt={card.title} />
+                                    </div>
+                                    <div className="expand-content">
+                                        <h3>{card.title}</h3>
+                                        <div className="info"><AiOutlinePhone /> {card.phone}</div>
+                                        <div className="info"><AiOutlineMail /> {card.email}</div>
+                                        <div className="info">
+                                            {getClickableLink(card.description) ? (
+                                                <a
+                                                    href={getClickableLink(card.description)}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="info-link"
+                                                    style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: "inherit" }}
+                                                >
+                                                    {detectIcon(card.description)}
+                                                    <span>{card.description}</span>
+                                                </a>
+                                            ) : (
+                                                <>
+                                                    {detectIcon(card.description)}
+                                                    <span>{card.description}</span>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="e-card">
-                            <div className="expand-card">
-                                <div className="expand-image">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
-                                        alt="engineering"
-                                    />
-                                </div>
-
-                                <div className="expand-content">
-                                    <h3>SVGI Engineering College</h3>
-                                    <div className="info"><span>📞</span> +91-4175-220101</div>
-                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
-                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="e-card">
-                            <div className="expand-card">
-                                <div className="expand-image">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
-                                        alt="engineering"
-                                    />
-                                </div>
-
-                                <div className="expand-content">
-                                    <h3>SVGI Engineering College</h3>
-                                    <div className="info"><span>📞</span> +91-4175-220101</div>
-                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
-                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="e-card">
-                            <div className="expand-card">
-                                <div className="expand-image">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
-                                        alt="engineering"
-                                    />
-                                </div>
-
-                                <div className="expand-content">
-                                    <h3>SVGI Engineering College</h3>
-                                    <div className="info"><span>📞</span> +91-4175-220101</div>
-                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
-                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="e-card">
-                            <div className="expand-card">
-                                <div className="expand-image">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1503457574462-bd27054394c1"
-                                        alt="engineering"
-                                    />
-                                </div>
-
-                                <div className="expand-content">
-                                    <h3>SVGI Engineering College</h3>
-                                    <div className="info"><span>📞</span> +91-4175-220101</div>
-                                    <div className="info"><span>✉️</span> engg@svgicollege.edu.in</div>
-                                    <div className="info"><span>⏰</span> 9 am - 5 pm; Mon–Sat</div>
-                                </div>
-                            </div>
-                        </div>
-
+                        ))}
                     </div>
                 </div>
             </section>
-
-
         </div>
     );
 }
-
-

@@ -31,7 +31,7 @@ const Header = () => {
   const navItems = [
     { label: "Home", type: "page", value: "/" },
     { label: "Admissions", type: "page", value: "/admissions" },
-    { label: "About", type: "section", value: "about" },
+    { label: "Academics", type: "page", value: "/academics" },
     { label: "Testimonials", type: "section", value: "testimonials" },
     { label: "Contact", type: "section", value: "contact" },
   ];
