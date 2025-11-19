@@ -5,6 +5,7 @@ import AdminLayout from "./layouts/AdminLayout.jsx";
 import Home from "./pages/user/home/Home.jsx";
 import Admissions from "./pages/user/admissions/Admissions.jsx";
 import Academics from "./pages/user/academics/Academics.jsx"
+import AboutOverview from "./pages/user/about/about.jsx"
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="admissions/*" element={<Admissions />} />
           <Route path="academics/*" element={<Academics />} />
+          <Route path="about/*" element={<AboutOverview />} />
         </Route>
 
         {/* <Route path="/admin" element={<AdminLayout />}>
