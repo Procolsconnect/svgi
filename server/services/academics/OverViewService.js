@@ -1,4 +1,4 @@
-const {Academicshero,AcademicsCard} = require('../../models/academics');
+const {Academicshero,AcademicsCard,AcademicsContent} = require('../../models/academics');
 
 async function createHero(body, file) {
   const data = {
@@ -83,6 +83,45 @@ async function getCardById(id) {
   return card;
 }
 
+async function createContent(body) {
+  const data = {
+    content: body.content,
+    name: body.name,
+  };
+
+  const card = new AcademicsContent(data);
+  const savedContent = await card.save();
+  return savedContent;
+}
+
+// GET ALL
+async function getContents() {
+  const content = await AcademicsContent.find().sort({ created_at: -1 });
+  return content;
+}
+
+// UPDATE
+async function updateContent(id, body) {
+  const content = await AcademicsContent.findById(id);
+  if (!content) throw new Error("Content not found");
+
+  // Update fields
+  if (file) content.image = file.path;
+  content.content = body.content ?? content.content;
+  content.name = body.name ?? content.name;
+
+  const updated = await card.save();
+  return updated;
+}
+
+// DELETE
+async function deleteContent(id) {
+  const deleted = await AcademicsContent.findByIdAndDelete(id);
+  if (!deleted) throw new Error("Content not found");
+  return deleted;
+}
+
+
 module.exports = {
   createHero,
   getHero,
@@ -92,5 +131,9 @@ module.exports = {
   getCards,
   updateCard,
   deleteCard,
-  getCardById
+  getCardById,
+  createContent,
+  getContents,
+  updateContent,
+  deleteContent
 };

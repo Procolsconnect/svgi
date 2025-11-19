@@ -186,6 +186,82 @@ const deleteacademicsCardController = async (req, res) => {
   }
 };
 
+// CREATE CONTENT
+const createacademicsContentController = async (req, res) => {
+  try {
+    const content = await AcademicsService.createContent(req.body);
+
+    res.status(201).json({
+      success: true,
+      message: 'Content created successfully',
+      data: content,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to create content',
+      error: err.message,
+    });
+  }
+};
+
+// GET ALL CONTENTS
+const getacademicsContentsController = async (req, res) => {
+  try {
+    const contents = await AcademicsService.getContents();
+
+    res.status(200).json({
+      success: true,
+      message: 'Contents fetched successfully',
+      data: contents,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch contents',
+      error: err.message,
+    });
+  }
+};
+
+// UPDATE CONTENT
+const updateacademicsContentController = async (req, res) => {
+  try {
+    const content = await AcademicsService.updateContent(req.params.id, req.body);
+
+    res.status(200).json({
+      success: true,
+      message: 'Content updated successfully',
+      data: content,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update content',
+      error: err.message,
+    });
+  }
+};
+
+// DELETE CONTENT
+const deleteacademicsContentController = async (req, res) => {
+  try {
+    const deleted = await AcademicsService.deleteContent(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Content deleted successfully',
+      data: deleted,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete content',
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   // HERO
   createacademicsHeroController,
@@ -198,5 +274,11 @@ module.exports = {
   getacademicsCardController,
   getacademicsCardByIdController,
   updateacademicsCardController,
-  deleteacademicsCardController
+  deleteacademicsCardController,
+
+  // CONTENT
+  createacademicsContentController,
+  getacademicsContentsController,
+  updateacademicsContentController,
+  deleteacademicsContentController,
 };

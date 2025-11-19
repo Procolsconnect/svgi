@@ -160,7 +160,7 @@ const SVGIFeedback = () => {
                         &#8249;
                     </span>
                     <span className="testim-arrow right" onClick={() => setCurrentSlide((currentSlide + 1) % testimonials.length)}>
-                        &#8250;
+                        &#8250; 
                     </span>
                     <div className="testim-dots">
                         {testimonials.map((_, idx) => (

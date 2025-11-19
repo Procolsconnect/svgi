@@ -224,7 +224,7 @@
     display: block;
 }
 
-.op-grid__item img {
+.op-grid-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -233,7 +233,7 @@
     transition: all .25s ease;
 }
 
-.op-grid__item img:hover {
+.op-grid-item img:hover {
     transform: scale(1.03);
 }
 

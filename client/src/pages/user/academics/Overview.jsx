@@ -1,18 +1,54 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import "./overview.css";
 
 export default function OverviewPage() {
+  const [hero, setHero] = useState(null);
+  const [cards, setCards] = useState([]);
+  const [contents, setContents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const scrollRef = useRef(null);
+  const arrowRef = useRef(null);
   const [count, setCount] = useState(0);
   const [clicked, setClicked] = useState(false);
   const [rotated, setRotated] = useState(false);
 
-  const scrollRef = useRef(null);
-  const arrowRef = useRef(null);
+  const API = import.meta.env.VITE_API_URL;
 
-  useEffect(() => {
+  // ADD BOUNCE ON FIRST LOAD
+ useEffect(() => {
+  if (!loading) {
     arrowRef.current?.classList.add("op-arrow-bounce");
-  }, []);
+  }
+}, [loading]);
 
+
+  // FETCH DATA
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [heroRes, cardRes, contentRes] = await Promise.all([
+          axios.get(`${API}/api/academicshero`),
+          axios.get(`${API}/api/academicscard`),
+          axios.get(`${API}/api/academicscontent`)
+        ]);
+
+        setHero(heroRes.data.data[0] || null);
+        setCards(cardRes.data.data || []);
+        setContents(contentRes.data.data || []);
+      } catch (err) {
+        console.error("Fetch Error:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [API]);
+
+
+  // SCROLL LOGIC (UNCHANGED)
   const handleScrollClick = () => {
     const sections = [...document.querySelectorAll("section")];
 
@@ -40,8 +76,8 @@ export default function OverviewPage() {
     arrowRef.current?.classList.remove("op-arrow-bounce");
   };
 
-  /* --------- DATA FOR CLEANER JSX ---------- */
 
+  /* STATIC GRID */
   const gridImages = [
     { class: "one", src: 11 },
     { class: "three", src: 13 },
@@ -57,48 +93,16 @@ export default function OverviewPage() {
     { class: "twelve", src: 18 },
   ];
 
-  const cards = [
-    {
-      color: "blue",
-      title: "Card Title",
-      sub: "This explains the card in more detail",
-      img: 1041,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    },
-    {
-      color: "red",
-      title: "That's Another Card",
-      sub: "I don't need to explain anything here",
-      img: 1080,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    },
-    {
-      color: "green",
-      title: "And a Third Card",
-      sub: "You know what this is by now",
-      img: 1039,
-      text: "Duis aute irure dolor in reprehenderit in voluptate.",
-    },
-  ];
-
-  const contents = [
-    { num: 6, title: "Editor's Note", author: "Rachel Andrew" },
-    { num: 8, title: "Towards Ethics By Default, One Step At A Time", author: "Vitaly Friedman" },
-    { num: 17, title: "Designing For Addiction", author: "Trine Falbe" },
-    { num: 28, title: "It's Not About You", author: "Heather Burns & Morten Rand-Hendriksen" },
-    { num: 35, title: "This One Weird Trick Tells Us Everything About You", author: "Laura Kalbag" },
-    { num: 46, title: "Quieting Disquiet", author: "Stuart Langridge" },
-    { num: 53, title: "Advertising Is Not The Problem", author: "Cennydd Bowles" },
-  ];
+  if (loading) return <div className="loading">Loading...</div>;
 
   return (
     <div className="op-container">
 
-      {/* HERO */}
-      <div id="op-hero">
-        <img src="https://picsum.photos/1600/600?blur=2" alt="Hero" />
-        <div className="op-hero-wrapper"><h1>Overview</h1></div>
-      </div>
+      {/* ❗ SECTION 1 — HERO */}
+      <section id="op-hero">
+        <img src={hero?.image} alt="Hero" />
+        <div className="op-hero-wrapper"><h1>{hero?.title}</h1></div>
+      </section>
 
       {/* SCROLL BUTTON */}
       <div
@@ -109,8 +113,8 @@ export default function OverviewPage() {
         <span ref={arrowRef} className="op-arrow">&#8595;</span>
       </div>
 
-      {/* TEXT + GRID */}
-      <div className="op-hero-section">
+      {/* ❗ SECTION 2 — GRID + TEXT */}
+      <section className="op-hero-section">
         <div className="op-text">
           <p className="op-text-short">Lorem ipsum dolor sit amet</p>
           <h1 className="op-text-title">Lorem ipsum dolor sit amet</h1>
@@ -128,39 +132,40 @@ export default function OverviewPage() {
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* CARDS */}
-      <div className="projcard-container">
-        {cards.map((c, i) => (
-          <div key={i} className={`projcard projcard-${c.color}`}>
-            <img className="projcard-img" src={`https://picsum.photos/800/600?image=${c.img}`} alt="" />
+      {/* ❗ SECTION 3 — CARDS */}
+      <section className="projcard-container">
+        {cards.map((c) => (
+          <div key={c._id} className="projcard projcard-blue">
+            <img className="projcard-img" src={c.image} alt="" />
             <div className="projcard-textbox">
               <div className="projcard-title">{c.title}</div>
-              <div className="projcard-subtitle">{c.sub}</div>
+              <div className="projcard-subtitle">{c.subtitle}</div>
               <div className="projcard-bar"></div>
-              <p>{c.text}</p>
+              <p>{c.description}</p>
             </div>
           </div>
         ))}
-      </div>
+      </section>
 
-      {/* CONTENTS */}
-      <div className="contents-page">
+      {/* ❗ SECTION 4 — CONTENTS */}
+      <section className="contents-page">
         <main className="contents-main">
           <h1>Contents</h1>
 
-          {contents.map((c, i) => (
-            <div key={i} className="item">
-              <div className="item__number">{c.num}</div>
+          {contents.map((c, index) => (
+            <div key={c._id} className="item">
+              <div className="item__number">{index + 1}</div>
+
               <div className="item__topic">
-                <div className="item__topic__title">{c.title}</div>
-                <div className="item__topic__author">by {c.author}</div>
+                <div className="item__topic__title">{c.content}</div>
+                <div className="item__topic__author">{c.name}</div>
               </div>
             </div>
           ))}
         </main>
-      </div>
+      </section>
 
     </div>
   );

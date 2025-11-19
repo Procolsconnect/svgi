@@ -18,7 +18,7 @@ async function createPlacement(body, file) {
     const placement = new Placement(data);
     return await placement.save();
   } catch (err) {
-    console.error("❌ createPlacement Error:", err);
+    console.error(" createPlacement Error:", err);
     throw err;
   }
 }
@@ -28,7 +28,7 @@ async function getAllPlacements() {
   try {
     return await Placement.find({}).sort({ createdAt: -1 });
   } catch (err) {
-    console.error("❌ getAllPlacements Error:", err);
+    console.error(" getAllPlacements Error:", err);
     throw err;
   }
 }
