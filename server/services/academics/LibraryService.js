@@ -2,7 +2,8 @@ const {
   Libraryhero,
   Libraryimage,
   Libraryvideo,
-  Libraryvideocard
+  Libraryvideocard,
+  LibraryResources
 } = require("../../models/academics");
 
 
@@ -149,6 +150,38 @@ async function updateLibraryvideoCard(id, data, file) {
 }
 
 
+// CREATE
+async function createLibraryResources(data) {
+  const item = new LibraryResources(data);
+  return await item.save();
+}
+
+// GET ALL
+async function getLibraryResources() {
+  return await LibraryResources.find().sort({ createdAt: -1 });
+}
+
+// GET BY ID
+async function getLibraryResourcesById(id) {
+  return await LibraryResources.findById(id);
+}
+
+// UPDATE
+async function updateLibraryResources(id, data) {
+  const updated = await LibraryResources.findByIdAndUpdate(id, data, { new: true });
+  if (!updated) throw new Error("Resource not found");
+  return updated;
+}
+
+// DELETE
+async function deleteLibraryResources(id) {
+  const deleted = await LibraryResources.findByIdAndDelete(id);
+  if (!deleted) throw new Error("Resource not found");
+  return deleted;
+}
+
+
+
 
 module.exports = {
   createHero,
@@ -169,4 +202,10 @@ module.exports = {
   createLibraryvideoCard,
   deleteLibraryvideoCard,
   updateLibraryvideoCard,
+
+  createLibraryResources,
+  getLibraryResources,
+  getLibraryResourcesById,
+  updateLibraryResources,
+  deleteLibraryResources
 };

@@ -1,55 +1,71 @@
+// upload.js
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
-// 🔹 Cloudinary config
+// 🔹 CLOUDINARY CONFIG
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-
-// 🔹 Storage engine for Cloudinary
+// 🔹 CLOUDINARY STORAGE CONFIG
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: async (req, file) => {
-    const folder = "svgi";
-    const resource_type = "auto";
+  params: async (_, file) => {
+    const ext = file.originalname.split(".").pop().toLowerCase();
 
-    // ✅ Sanitize filename (remove spaces/special chars)
-    const originalName = file.originalname
+    // Detect if file is a document
+    const documentExt = ["pdf", "ppt", "pptx"];
+    const isDocument = documentExt.includes(ext);
+
+    // Clean file name
+    const sanitizedName = file.originalname
       .split(".")[0]
       .trim()
-      .replace(/\s+/g, "_") // replace spaces with underscore
-      .replace(/[^a-zA-Z0-9_-]/g, ""); // remove illegal characters
-
-    const ext = file.originalname.split(".").pop();
+      .replace(/\s+/g, "_")
+      .replace(/[^a-zA-Z0-9_-]/g, "");
 
     return {
-      folder,
-      resource_type,
+      folder: "svgi",
+      resource_type: isDocument ? "raw" : "auto",  // KEY LINE
+      public_id: `${Date.now()}-${sanitizedName}`,
       format: ext,
-      public_id: `${Date.now()}-${originalName}`,
     };
   },
 });
 
-
-// 🔹 Multer upload with filter
+// 🔹 MULTER FILE FILTER
 const upload = multer({
   storage,
-  fileFilter: (req, file, cb) => {
-    const allowedTypes = /(jpeg|jpg|pjpeg|png|gif|mp4|mov|avi|mkv)$/i;
-    const extname = allowedTypes.test(
-      file.originalname.toLowerCase().split(".").pop()
-    );
-    const mimetype = allowedTypes.test(file.mimetype);
+  fileFilter: (_, file, cb) => {
+    const allowed = [
+      // Images
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
 
-    if (extname && mimetype) cb(null, true);
-    else cb(new Error("Only image/video files are allowed!"));
+      // Videos
+      "video/mp4",
+      "video/mov",
+      "video/avi",
+      "video/mkv",
+
+      // Documents
+      "application/pdf",
+      "application/vnd.ms-powerpoint",
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    ];
+
+    if (!allowed.includes(file.mimetype)) {
+      return cb(new Error("Only images, videos, PDF, and PPT/PPTX are allowed!"));
+    }
+
+    cb(null, true);
   },
+  limits: { fileSize: 50 * 1024 * 1024 }, // 50 MB (optional)
 });
-
 module.exports = upload;
