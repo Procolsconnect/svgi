@@ -32,8 +32,8 @@ const Header = () => {
     { label: "Home", type: "page", value: "/" },
     { label: "Admissions", type: "page", value: "/admissions" },
     { label: "Academics", type: "page", value: "/academics" },
-    { label: "Testimonials", type: "section", value: "testimonials" },
-    { label: "Contact", type: "section", value: "contact" },
+    { label: "About", type: "page", value: "/about" },
+    { label: "Placement&Training", type: "page", value: "/placement" },
   ];
 
   const handleNav = (item) => {
