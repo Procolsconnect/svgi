@@ -288,10 +288,98 @@ async function deletelibraryVideoCardController(req, res) {
     }
 }
 
+const createLibraryResourcesController = async (req, res) => {
+    try {
+        const result = await LibraryService.createLibraryResources(req.body);
+        res.status(201).json({
+            success: true,
+            message: "Library resources created successfully",
+            data: result
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to create library resources",
+            error: err.message
+        });
+    }
+};
 
-/* ===============================
-    📌 EXPORT ALL
-=============================== */
+// GET ALL
+const getLibraryResourcesController = async (req, res) => {
+    try {
+        const result = await LibraryService.getLibraryResources();
+        res.status(200).json({
+            success: true,
+            message: "Library resources fetched successfully",
+            data: result
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch library resources",
+            error: err.message
+        });
+    }
+};
+
+// GET BY ID
+const getLibraryResourcesByIdController = async (req, res) => {
+    try {
+        const result = await LibraryService.getLibraryResourcesById(req.params.id);
+        res.status(200).json({
+            success: true,
+            message: "Resource fetched successfully",
+            data: result
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch resource",
+            error: err.message
+        });
+    }
+};
+
+// UPDATE
+const updateLibraryResourcesController = async (req, res) => {
+    try {
+        const result = await LibraryService.updateLibraryResources(
+            req.params.id,
+            req.body
+        );
+        res.status(200).json({
+            success: true,
+            message: "Resource updated successfully",
+            data: result
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to update resource",
+            error: err.message
+        });
+    }
+};
+
+// DELETE
+const deleteLibraryResourcesController = async (req, res) => {
+    try {
+        const result = await LibraryService.deleteLibraryResources(req.params.id);
+        res.status(200).json({
+            success: true,
+            message: "Resource deleted successfully",
+            data: result
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to delete resource",
+            error: err.message
+        });
+    }
+};
+
 
 module.exports = {
     // HERO
@@ -316,4 +404,11 @@ module.exports = {
     getlibraryVideoCardController,
     updatelibraryVideoCardController,
     deletelibraryVideoCardController,
+
+    // RESOURCES
+    createLibraryResourcesController,
+    getLibraryResourcesController,
+    getLibraryResourcesByIdController,
+    updateLibraryResourcesController,
+    deleteLibraryResourcesController
 };

@@ -51,6 +51,26 @@ const libraryvideoSchema = new mongoose.Schema({
   description: { type: String , required: true},
 })
 
+const libraryResourcesSchema = new mongoose.Schema({
+  campus: { type: String, required: true },
+  totalBooks: { type: String, required: true },
+  totalBackVolumes: { type: String, required: true },
+  printJournalsMagazines: { type: String, required: true },
+  national: { type: String, required: true },
+  international: { type: String, required: true },
+  onlineDatabases: { type: String, required: true },  // example: "16,829"
+  databaseList: { type: String, required: true },     // big string
+  ebooks: { type: String, required: true }
+}, { timestamps: true });
+
+const courseOutcomeSchema = new mongoose.Schema({
+  image: { type: String, required: true },
+  title: { type: String, required: true },
+  description: { type: String , required: true},
+  pdf: { type: String, required: true }
+})
+
+
 const Academicshero = mongoose.model('Academicshero', academicsheroSchema);
 const AcademicsCard = mongoose.model('AcademicsCard', academicsCardSchema);
 const Feedbackhero = mongoose.model('Feedbackhero', feedbackheroSchema);
@@ -61,6 +81,8 @@ const Libraryhero = mongoose.model('libraryhero', libraryheroSchema);
 const Libraryimage = mongoose.model('libraryimage', libraryimageSchema);
 const Libraryvideo = mongoose.model('libraryvideo', libraryvideoSchema);
 const Libraryvideocard = mongoose.model('libraryvideocard', libraryvideoCardSchema);
+const LibraryResources = mongoose.model('LibraryResources', libraryResourcesSchema);
+const CourseOutcome = mongoose.model('CourseOutcome', courseOutcomeSchema);
 module.exports = {
     Academicshero,
     AcademicsCard,
@@ -71,5 +93,7 @@ module.exports = {
     Libraryhero,
     Libraryimage,
     Libraryvideo,
-    Libraryvideocard
+    Libraryvideocard,
+    LibraryResources,
+    CourseOutcome
 }
