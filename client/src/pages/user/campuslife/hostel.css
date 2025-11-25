@@ -1,0 +1,345 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Archivo+Black&display=swap');
+
+/* Reset */
+.hostel__wrapper * {
+  box-sizing: border-box;
+}
+
+.hostel__wrapper {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+/* HERO SECTION */
+.hostel__hero {
+  min-height: 350px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  z-index: 1;
+}
+
+.hostel__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.hostel__hero-overlay {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.hostel__hero h1 {
+  position: relative;
+  font-size: 52px;
+  font-weight: bold;
+  z-index: 1;
+  letter-spacing: 1px;
+  font-family: 'Playfair Display', serif;
+}
+
+.hostel__hero h1::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  border-radius: 3px;
+  animation: hostel__underline-pulse 2s infinite;
+}
+
+@keyframes hostel__underline-pulse {
+  0%, 100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
+}
+
+@media(max-width: 768px) {
+  .hostel__hero h1 {
+    font-size: 36px;
+    padding: 0 20px;
+  }
+}
+
+/* Hostel Section */
+.hostel__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8%;
+  min-height: calc(100vh - 350px);
+}
+
+.hostel__content {
+  max-width: 500px;
+}
+
+.hostel__content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Card Stack Container */
+.hostel__isoCardStack {
+  transform: rotateX(65deg) rotateZ(40deg);
+  transform-style: preserve-3d;
+  position: relative;
+  right: 0;
+  top: 100px;
+}
+
+.hostel__isoCardStack div {
+  transform-style: preserve-3d;
+  background-color: white;
+  height: 300px;
+  width: 220px;
+  position: relative;
+  border-radius: 8px;
+  display: grid;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.hostel__isoCardStack div > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+@keyframes hostel__cardMovement {
+  from {
+    transform: translateZ(60px);
+  }
+  to {
+    transform: translateZ(130px);
+  }
+}
+
+.hostel__isoCardStack div > div {
+  will-change: transform;
+  transform: translateZ(60px);
+  animation: hostel__cardMovement 1.5s cubic-bezier(0.83, 0, 0.17, 1) infinite alternate;
+}
+
+.hostel__isoCardStack img {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .hostel__container {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .hostel__isoCardStack {
+    margin-top: 40px;
+    transform: rotateX(60deg) rotateZ(30deg);
+    top: 0;
+  }
+}
+
+/* CARDS SECTION */
+.hostel__cards-container {
+  width: min(100vw - 3rem, 100ch);
+  margin: auto;
+  padding-block: 2rem;
+}
+
+.hostel__cards-container > * + * {
+  margin-top: min(5rem, 10vh);
+}
+
+.hostel__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(45ch, 1fr));
+  gap: clamp(1.5rem, 6vmax, 3rem);
+}
+
+.hostel__col-copy {
+  max-width: 45ch;
+}
+
+.hostel__col-copy h2 {
+  font-family: "Archivo Black", serif;
+  margin: 0 0 1rem 0;
+}
+
+.hostel__col-copy p {
+  font-family: "Montserrat", serif;
+  line-height: 1.6;
+  color: #444;
+}
+
+@media only screen and (max-width: 65rem) {
+  .hostel__col-image {
+    order: -1;
+  }
+}
+
+/* IMAGE SLIDER (2 IMAGE AUTO MOVE) */
+.hostel__slider {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.hostel__slider img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  opacity: 0;
+  animation: hostel__slideShow 8s infinite;
+}
+
+.hostel__slider img:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.hostel__slider img:nth-child(2) {
+  animation-delay: 4s;
+}
+
+@keyframes hostel__slideShow {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* FAQ HEADER — LEFT ALIGNED */
+.hostel__faq-header {
+  font-size: 42px;
+  border-bottom: 1px dotted #ccc;
+  padding: 24px 0;
+  font-weight: 100;
+  text-align: left;
+  width: 900px;
+  max-width: 90%;
+  margin: 4rem auto 0;
+}
+
+/* FAQ CONTENT WRAPPER */
+.hostel__faq-content {
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 0 1rem;
+}
+
+/* EACH QUESTION BLOCK */
+.hostel__faq-question {
+  padding: 20px 0;
+  border-bottom: 1px dotted #ccc;
+  position: relative;
+}
+
+/* TITLE */
+.hostel__panel-title {
+  font-size: 24px;
+  width: 100%;
+  margin: 0;
+  padding: 10px 10px 0 48px;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* BODY CONTENT */
+.hostel__panel-content {
+  font-size: 20px;
+  padding: 0 14px;
+  margin: 0 40px;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: .4s ease;
+}
+
+.hostel__panel-content-open {
+  height: auto;
+  opacity: 1;
+  padding: 14px;
+}
+
+.hostel__panel-content a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.hostel__panel-content a:hover {
+  color: #0056b3;
+}
+
+/* PLUS ICON */
+.hostel__plus {
+  position: absolute;
+  left: 16px;
+  top: 20px;
+  font-size: 32px;
+  transition: .2s ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ROTATION */
+.hostel__plus-open {
+  transform: rotate(45deg);
+}
+
+@media (max-width: 768px) {
+  .hostel__faq-header {
+    font-size: 32px;
+  }
+  
+  .hostel__panel-title {
+    font-size: 20px;
+  }
+  
+  .hostel__panel-content {
+    font-size: 18px;
+  }
+}
