@@ -1,0 +1,354 @@
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+
+/* Font Awesome Icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+/* Reset */
+.campus__wrapper-main * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.campus__wrapper-main {
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+  background: #fdfdfd;
+  color: #333;
+}
+
+.campus__wrapper-main h1,
+.campus__wrapper-main h2 {
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.campus__wrapper-main h3 {
+  font-weight: 500;
+}
+
+.campus__wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* HERO SECTION */
+.campus__hero {
+  min-height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  z-index: 1;
+}
+
+.campus__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.campus__hero-overlay {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.campus__hero h1 {
+  position: relative;
+  font-size: 52px;
+  z-index: 1;
+}
+
+.campus__hero h1::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  border-radius: 3px;
+  animation: campus__underline-pulse 2s infinite;
+}
+
+@keyframes campus__underline-pulse {
+  0%, 100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
+}
+
+/* Scroll button */
+.campus__scroll {
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  background: black;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-top: -25px;
+  margin-right: -25px;
+  color: white;
+  font-size: 26px;
+  line-height: 26px;
+  cursor: pointer;
+  position: absolute;
+  right: 50%;
+  transition: transform 0.6s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.campus__scroll.campus__clicked {
+  transform: rotate(360deg);
+  position: fixed;
+  right: 5%;
+  top: 90%;
+}
+
+.campus__scroll.campus__rotate {
+  transform: rotate(180deg);
+}
+
+.campus__arrow-bounce {
+  animation: campus__arrow 1s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  position: relative;
+}
+
+@keyframes campus__arrow {
+  0% {
+    bottom: -13px;
+  }
+  50% {
+    bottom: -8px;
+  }
+  100% {
+    bottom: -13px;
+  }
+}
+
+/* BANNER SECTION */
+.campus__banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 70px 8%;
+  min-height: 70vh;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .campus__banner {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 50px 5%;
+    min-height: auto;
+  }
+
+  .campus__banner img {
+    width: 260px !important;
+    height: 260px !important;
+    position: static !important;
+    transform: none !important;
+    margin-top: 40px;
+  }
+}
+
+.campus__banner-content {
+  max-width: 520px;
+}
+
+.campus__banner h2 {
+  margin: 0 0 10px;
+  font-size: 42px;
+  line-height: 1.2;
+  color: #111;
+}
+
+.campus__banner h3 {
+  margin: 10px 0 20px;
+  color: #555;
+  font-size: 18px;
+}
+
+.campus__banner p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+@keyframes campus__morph {
+  0%, 100% {
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+  }
+  34% {
+    border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+  }
+  67% {
+    border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+  }
+}
+
+.campus__banner img {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 50%;
+  animation: campus__morph 4s linear infinite;
+  cursor: grab;
+  user-select: none;
+  transform: translateY(-50%);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease-out;
+  z-index: 2;
+}
+
+.campus__color-trail {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: opacity 0.9s ease-out;
+  filter: blur(8px);
+  z-index: 1;
+}
+
+.campus__highlight {
+  color: #ff4b4b;
+  font-weight: 600;
+}
+
+/* CAMPUS SECTION */
+.campus__campus-section {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  min-height: 550px;
+}
+
+.campus__left-panel {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.campus__left-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1.05);
+  transition: transform 1.5s ease;
+}
+
+.campus__left-panel:hover img {
+  transform: scale(1.06);
+}
+
+.campus__right-panel {
+  flex: 1;
+  background: linear-gradient(135deg, #001f3f 0%, #013b7a 100%);
+  color: #fff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
+  padding: 60px 0;
+}
+
+.campus__right-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.07), transparent 60%);
+}
+
+.campus__content-grid {
+  display: grid;
+  width: 80%;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  z-index: 2;
+}
+
+.campus__item {
+  text-align: center;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.campus__icon {
+  font-size: 42px;
+  color: #fff;
+  margin-bottom: 12px;
+  transition: all 0.4s ease;
+}
+
+.campus__item span {
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  color: #fff;
+  transition: color 0.4s ease;
+}
+
+.campus__item:hover .campus__icon {
+  color: #000;
+  text-shadow: 0 0 15px #fff;
+  transform: translateY(-6px);
+}
+
+.campus__item:hover span {
+  color: #000;
+}
+
+/* Responsive for campus section */
+@media (max-width: 992px) {
+  .campus__campus-section {
+    flex-direction: column;
+  }
+  .campus__right-panel {
+    clip-path: none;
+  }
+  .campus__content-grid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 90%;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .campus__content-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}
+
+/* Ensure sections are properly spaced */
+.campus__section {
+  margin-bottom: 0;
+}

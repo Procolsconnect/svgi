@@ -166,3 +166,79 @@ header.scrolled .logo p {
     display: flex;
   }
 }
+/* Desktop Dropdown */
+.nav-item-wrapper {
+  position: relative;
+}
+/* Show desktop dropdown on hover */
+.nav-item-wrapper:hover > .dropdown {
+  display: flex;
+}
+
+/* Desktop Dropdown Items Centered & Styled */
+.nav-item-wrapper .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%); /* center dropdown under nav item */
+  display: none;
+  flex-direction: column;
+  background-color: var(--background);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-travel);
+  min-width: 200px; /* enough for content */
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  z-index: 100;
+  text-align: center; /* ensure inline content centers */
+}
+
+.dropdown-item {
+  display: block; /* make full width */
+  width: 100%;    /* fill parent dropdown */
+  padding: 1rem 1.5rem;
+  color: var(--accent);
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 1.05rem;
+  transition: var(--transition-smooth);
+  text-align: center; /* center text inside button */
+}
+
+.dropdown-item:hover {
+  color: var(--primary);
+  background-color: rgba(255, 213, 0, 0.15);
+  font-weight: 600;
+  transform: scale(1.03);
+}
+
+/* Mobile Dropdown */
+.mobile-item-wrapper {
+  position: relative;
+}
+
+.mobile-dropdown {
+  display: none;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.mobile-item-wrapper.open .mobile-dropdown {
+  display: flex;
+}
+
+.mobile-dropdown-item {
+  padding: 0.5rem 1.5rem;
+  color: var(--accent);
+  background: none;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.mobile-dropdown-item:hover {
+  color: var(--primary);
+  background-color: rgba(255, 213, 0, 0.1);
+}
