@@ -113,6 +113,7 @@
     }
 }
 
+
 /* Layout */
 .svgio-hero-section {
     display: flex;
@@ -288,91 +289,203 @@
     color: #555;
 }
 
-/* 
-@media (max-width: 1024px) {
 
-    .svgio-bigger,
+/* ============================================================
+   ⭐ LARGE LAPTOPS / SMALL DESKTOPS — 1200px and down
+============================================================ */
+@media (max-width: 1200px) {
+    .svgio-hero-title {
+        font-size: 46px;
+    }
+
     .svgio-hero-section {
-        gap: 2em;
-        padding: 2em;
+        gap: 1.8em;
+        margin: 2.5em 2em;
     }
 
-    .svgio-text,
-    .svgio-text-bigger {
-        width: 50%;
-    }
-
-    .svgio-grid-tilt {
-        grid-template-columns: repeat(4, 100px);
+    .svgio-text {
+        height: auto;
     }
 }
 
+/* ============================================================
+   ⭐ TABLETS LANDSCAPE — 992px and down
+============================================================ */
+@media (max-width: 992px) {
+    .svgio-hero-title {
+        font-size: 38px;
+    }
 
-@media (max-width: 768px) {
+    .svgio-hero {
+        min-height: 300px;
+    }
 
-    .svgio-bigger,
     .svgio-hero-section {
         flex-direction: column;
         text-align: center;
-        gap: 3em;
+        margin: 2em 1.5em;
+        gap: 2.5em;
     }
 
-    .svgio-text,
-    .svgio-text-bigger {
+    .svgio-text {
         width: 100%;
         height: auto;
     }
 
+    /* Prevent overlapping grid items */
+    .svgio-grid-container>div {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        min-height: 180px;
+    }
+
+    .svgio-bigger {
+        flex-direction: column;
+        text-align: center;
+        padding: 2em;
+        gap: 3em;
+    }
+
     .svgio-grid-tilt {
-        transform: rotate(0deg);
-        grid-template-columns: repeat(2, 140px);
-        justify-content: center;
+        transform: rotate(-6deg);
+        grid-template-columns: repeat(4, 100px);
+        gap: 14px;
     }
 
-    .svgio-text-title-bigger {
-        font-size: 2.6rem;
-    }
-
-    .svgio-hero-title {
-        font-size: 40px;
-    }
-
-    .svgio-grid-container {
-        grid-template-columns: repeat(4, 1fr);
+    .svgio-text-bigger {
+        max-width: 100%;
     }
 }
 
-@media (max-width: 480px) {
+/* ============================================================
+   ⭐ TABLETS PORTRAIT — 768px and down
+============================================================ */
+@media (max-width: 768px) {
+    .svgio-hero {
+        min-height: 260px;
+    }
+
+    .svgio-hero-title {
+        font-size: 32px;
+    }
+
+    #svgio-scroll {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+        margin-right: -20px;
+    }
+
+    .svgio-grid-tilt {
+        grid-template-columns: repeat(3, 90px);
+        gap: 12px;
+        transform: rotate(-5deg);
+    }
+
+    .svgio-text-title-bigger {
+        font-size: 2.5rem;
+    }
+
+    .svgio-text-description-bigger {
+        font-size: 1.1rem;
+    }
+}
+
+/* ============================================================
+   ⭐ MOBILE LARGE — 576px and down
+============================================================ */
+@media (max-width: 576px) {
+    .svgio-hero {
+        min-height: 220px;
+    }
+
     .svgio-hero-title {
         font-size: 28px;
     }
 
-    #svgio-scroll {
-        right: 50%;
-        width: 40px;
-        height: 40px;
-        font-size: 22px;
+    .svgio-hero-section {
+        gap: 1.5em;
+        margin: 1.5em 0.8em;
+    }
+
+    .svgio-text-description {
+        font-size: 0.95rem;
+    }
+
+    .svgio-grid-container div {
+        min-height: 130px;
     }
 
     .svgio-grid-tilt {
-        grid-template-columns: repeat(2, 100px);
+        grid-template-columns: repeat(2, 90px);
         gap: 10px;
+        transform: rotate(-4deg);
     }
 
     .svgio-text-title-bigger {
         font-size: 2rem;
     }
+}
 
-    .svgio-text-description-bigger {
-        font-size: 1rem;
+/* ============================================================
+   ⭐ MOBILE SMALL — 400px and down
+============================================================ */
+@media (max-width: 400px) {
+    .svgio-hero-title {
+        font-size: 24px;
+    }
+
+    #svgio-scroll {
+        width: 36px;
+        height: 36px;
+        font-size: 17px;
+        margin-right: -16px;
+    }
+
+    .svgio-text-description {
+        font-size: 0.85rem;
     }
 
     .svgio-grid-container {
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 0.5em;
+        grid-template-columns: 1fr;
     }
 
-    .svgio-grid-item {
-        border-radius: 8px;
+    .svgio-grid-container div {
+        min-height: 150px;
     }
-} */
+
+    .svgio-grid-tilt {
+        grid-template-columns: repeat(2, 75px);
+        transform: rotate(-3deg);
+    }
+
+    .svgio-text-title-bigger {
+        font-size: 1.7rem;
+    }
+
+    .svgio-text-description-bigger {
+        font-size: 0.95rem;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .svgio-grid-container {
+        width: 100%;
+        transform: scale(0.7);
+        transform-origin: top center;
+        margin: 0 auto;
+        padding: 0;
+        gap: 10px;  /* same spacing, proportional */
+    }
+
+    /* Optional text scaling */
+    .svgio-text-title-bigger {
+        font-size: 1.6rem;
+    }
+
+    .svgio-text-description-bigger {
+        font-size: 0.85rem;
+    }
+}
+
