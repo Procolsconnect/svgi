@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import AboutOverview from "./AboutOverview";
-// import Library from "./Library";
+import VisMis from "./VisMis";
+import LeadershipMaterialCards from "./LeadershipPage";
 // import Feedback from "./Feedback";
 // import Rdbc from "./Rdbc";
 
@@ -10,9 +11,9 @@ const About = () => {
 
       <Routes>
         <Route index element={<AboutOverview />} />
-        {/* <Route path="AboutOverview" element={<AboutOverview />} />
-        <Route path="library" element={<Library />} />
-        <Route path="feedback" element={<Feedback />} />
+        <Route path="vission&mission" element={<VisMis />} />
+        <Route path="leadership" element={<LeadershipMaterialCards />} />
+        {/* <Route path="feedback" element={<Feedback />} />
         <Route path="rdbc" element={<Rdbc />} /> */}
       </Routes>
     </div>

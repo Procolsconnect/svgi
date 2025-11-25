@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "@mui/icons-material": "^7.3.5",
     "@mui/material": "^7.3.5",
     "@radix-ui/react-slot": "^1.2.4",
@@ -20,8 +21,10 @@
     "bootstrap": "^5.3.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "feather-icons": "^4.29.2",
     "gsap": "^3.13.0",
     "install": "^0.13.0",
+    "jquery": "^3.7.1",
     "lucide-react": "^0.552.0",
     "npm": "^9.6.5",
     "react": "^19.1.1",
