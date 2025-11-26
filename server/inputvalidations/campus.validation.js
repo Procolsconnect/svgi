@@ -104,6 +104,22 @@ const updateGreensvgiHeroSchema = Joi.object({
     title: Joi.string().trim().min(1).max(255).optional(),
 });
 
+// Greensvgi Image
+const createGreensvgiImageSchema = Joi.object({
+    title: Joi.string().trim().min(1).max(255).required(),
+});
+const updateGreensvgiImageSchema = Joi.object({
+    title: Joi.string().trim().min(1).max(255).optional(),
+});
+
+// Greensvgi Image Gallary
+const createGreensvgiImageGallarySchema = Joi.object({
+    title: Joi.string().trim().min(1).max(255).required(),
+});
+const updateGreensvgiImageGallarySchema = Joi.object({
+    title: Joi.string().trim().min(1).max(255).optional(),
+});
+
 // Festival Card
 const createFestivalCardSchema = Joi.object({
     title: Joi.string().trim().min(1).max(255).required(),
@@ -161,8 +177,12 @@ module.exports = {
     updateFestivalHeroSchema,
     createGreensvgiHeroSchema,
     updateGreensvgiHeroSchema,
+    createGreensvgiImageSchema,
+    updateGreensvgiImageSchema,
+    createGreensvgiImageGallarySchema,
+    updateGreensvgiImageGallarySchema,
     createFestivalCardSchema,
     updateFestivalCardSchema,
     createFestivalEventSchema,
     updateFestivalEventSchema,
-};
+}

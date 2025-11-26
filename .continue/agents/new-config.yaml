@@ -1,0 +1,13 @@
+name: Continue Config
+version: 1.0.0
+schema: v1
+
+models:
+  - name: deepseek
+    provider: openai
+    baseUrl: https://api.deepseek.com
+    model: deepseek-chat
+    apiKey: ${{ secrets.DEEPSEEK_API_KEY }}
+
+mcpServers:
+  - uses: anthropic/memory-mcp

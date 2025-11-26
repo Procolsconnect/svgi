@@ -94,6 +94,8 @@ const CampusFestivalHero = mongoose.model('CampusFestivalHero', campusFestivalHe
 const CampusFestivalCard = mongoose.model('CampusFestivalCard', campusFestivalCardSchema);
 const CampusFestivalEvent = mongoose.model('CampusFestivalEvent', campusFestivalEventSchema);
 const CampusGreensvgiHero = mongoose.model('CampusGreensvgiHero', campusGreensvgiHeroSchema);
+const CampusGreensvgiImage = mongoose.model('CampusGreensvgiImage', campusGreensvgiImageSchema);
+const CampusGreensvgiImageGallary = mongoose.model('CampusGreensvgiImageGallary', campusGreensvgiImageGallarySchema);
 
 const CampusOverviewHero = mongoose.model('CampusOverviewHero', campusOverviewHeroSchema);
 const CampusSportsHero = mongoose.model('CampusSportsHero', campusSportsHeroSchema);
@@ -121,5 +123,6 @@ module.exports = {
     CampusFestivalCard,
     CampusFestivalEvent,
     CampusGreensvgiHero,
-
+    CampusGreensvgiImage,
+    CampusGreensvgiImageGallary,
 }

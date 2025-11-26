@@ -50,7 +50,7 @@ module.exports = function campusRoutes(app) {
     );
 
     app.get(
-        "/api/campus/hostelhero",
+        "/api/campus/hostelhero",   
         campusHostel.getHostelHero
     );
 
@@ -159,6 +159,66 @@ module.exports = function campusRoutes(app) {
     app.delete(
         "/api/campus/greensvgihero/:id",
         campusGreensvgi.deleteGreensvgiHero
+    );
+
+    // CAMPUS GREENSVGI IMAGE API
+    app.post(
+        "/api/campus/greensvgiimage",
+        upload.single("image"),
+        validate(campusSchemas.createGreensvgiImageSchema),
+        campusGreensvgi.createGreensvgiImage
+    );
+
+    app.get(
+        "/api/campus/greensvgiimage",
+        campusGreensvgi.getGreensvgiImages
+    );
+
+    app.get(
+        "/api/campus/greensvgiimage/:id",
+        campusGreensvgi.getGreensvgiImageById
+    );
+
+    app.put(
+        "/api/campus/greensvgiimage/:id",
+        upload.single("image"),
+        validate(campusSchemas.updateGreensvgiImageSchema),
+        campusGreensvgi.updateGreensvgiImage
+    );
+
+    app.delete(
+        "/api/campus/greensvgiimage/:id",
+        campusGreensvgi.deleteGreensvgiImage
+    );
+
+    // CAMPUS GREENSVGI IMAGE GALLARY API
+    app.post(
+        "/api/campus/greensvgiimagegallary",
+        upload.single("image"),
+        validate(campusSchemas.createGreensvgiImageGallarySchema),
+        campusGreensvgi.createGreensvgiImageGallary
+    );
+
+    app.get(
+        "/api/campus/greensvgiimagegallary",
+        campusGreensvgi.getGreensvgiImageGallaries
+    );
+
+    app.get(
+        "/api/campus/greensvgiimagegallary/:id",
+        campusGreensvgi.getGreensvgiImageGallaryById
+    );
+
+    app.put(
+        "/api/campus/greensvgiimagegallary/:id",
+        upload.single("image"),
+        validate(campusSchemas.updateGreensvgiImageGallarySchema),
+        campusGreensvgi.updateGreensvgiImageGallary
+    );
+
+    app.delete(
+        "/api/campus/greensvgiimagegallary/:id",
+        campusGreensvgi.deleteGreensvgiImageGallary
     );
 
     // CAMPUS FESTIVAL CARD API
