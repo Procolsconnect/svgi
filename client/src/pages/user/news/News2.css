@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+/* Reset */
+.ds-container *,
+.ds-container *::before,
+.ds-container *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.ds-container {
+  font-family: 'Open Sans', sans-serif;
+  background: #fff;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* ScrollSmoother Required Structure */
+#smooth-wrapper {
+  overflow: hidden;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+#smooth-content {
+  overflow: visible;
+  width: 100%;
+  position: relative;
+}
+
+/* Section 1 - Behind Curtain */
+.ds-section-one {
+  display: flex;
+  padding: 6rem;
+  min-height: 100vh;
+}
+
+.ds-section-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 6rem;
+  width: 100%;
+}
+
+@media (min-width: 1280px) {
+  .ds-section-content {
+    flex-direction: row;
+  }
+}
+
+.ds-reverse-scroll {
+  /* Will be animated by GSAP */
+}
+
+.ds-heading {
+  font-size: clamp(8rem, 11.077vw + 0.731rem, 12.5rem);
+  line-height: 0.95;
+  font-weight: 600;
+  line-height: 0.8;
+}
+
+.ds-paragraph-top {
+  padding-top: 2rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.ds-paragraph {
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.ds-image-wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+@media (min-width: 1280px) {
+  .ds-image-wrapper {
+    justify-content: flex-end;
+  }
+}
+
+.ds-image {
+  width: 100%;
+  max-width: 760px;
+  display: block;
+}
+
+/* Section 2 - Pinned Text Reveal */
+.ds-section-stick {
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  position: relative;
+}
+
+.ds-opacity-reveal {
+  font-size: 4.5rem;
+  text-align: center;
+  width: 60%;
+  font-weight: 500;
+}
+
+/* Section 3 - Liquify Video */
+.ds-video-section {
+  position: relative;
+  min-height: 100vh;
+  background: white;
+  margin-top: -1px;
+}
+
+.ds-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+.ds-liquify-scroll {
+  filter: url('#liquify');
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  font-size: 6rem;
+  font-weight: 600;
+  padding-left: 15rem;
+  padding-right: 15rem;
+}
+
+.ds-hidden {
+  display: none;
+}
+
+/* Author Credit */
+.ds-author {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  color: #404040;
+  font-size: 0.9rem;
+  z-index: 10;
+}
+
+.ds-author a {
+  color: #404040;
+  text-decoration: none;
+  position: relative;
+}
+
+.ds-author a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 6px;
+  background: #c584f8;
+  z-index: -1;
+  transition: width 0.3s ease;
+}
+
+.ds-author a:hover::after {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ds-section-one {
+    padding: 3rem;
+  }
+  
+  .ds-section-content {
+    gap: 3rem;
+  }
+  
+  .ds-opacity-reveal {
+    font-size: 2.5rem;
+    width: 90%;
+  }
+  
+  .ds-liquify-scroll {
+    font-size: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

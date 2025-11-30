@@ -1,0 +1,322 @@
+
+.container {
+  --bg-main: #eee;
+  --white: #ffffff;
+  --black: #000000;
+  --red: #FF0000;
+}
+
+.container * { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+.container {
+  background: var(--bg-main);
+  color: #222;
+  font-family: 'Alef', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.container a { 
+  color: #00f; 
+  text-decoration: underline; 
+}
+
+.container a:hover { 
+  text-decoration: none; 
+}
+
+/* ================
+   Wrapper & Hero
+   ================ */
+.wrapper {
+  position: relative; 
+  width: 100%; 
+  z-index: 1;
+  overflow: hidden; /* Crucial: prevent scrollbars during animation */
+}
+
+.content { 
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Prevent overflow */
+}
+
+.section { 
+  width: 100%; 
+  height: 100vh; 
+}
+
+.heroSection {
+  background: url("https://images.unsplash.com/photo-1589848315097-ba7b903cc1cc?q=80&w=2070&auto=format&fit=crop") center/cover no-repeat;
+  transform-origin: center center; /* Better scaling origin */
+}
+
+/* image overlay */
+.imageContainer {
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 2;
+  perspective: 500px;
+  overflow: hidden; /* Crucial: hide overflow during scale */
+  pointer-events: none;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center center; /* Better scaling origin */
+  will-change: transform; /* Performance optimization */
+}
+
+/* ================
+   Second Section (Bouncer)
+   ================ */
+.secondSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-main);
+  padding: 60px 20px;
+  width: 100%;
+height: 50%;
+  position: relative;
+  z-index: 3; /* Ensure it's above the pinned section */
+}
+
+.bouncerContainer { 
+  width: 100%; 
+  max-width: 1100px; 
+  padding: 0 20px; 
+  text-align: center; 
+  margin: 0 auto; 
+}
+
+.bouncer {
+  margin: 0 auto;
+  display: inline-block;
+  text-align: center;
+  font-size: 40px;
+  outline: none;
+  width: 100%;
+  max-width: 100%;
+  cursor: text;
+  background: rgba(255,255,255,0.0);
+  -webkit-user-modify: read-write;
+  border: none;
+  font-family: inherit;
+}
+
+.cloned {
+  cursor: pointer;
+  position: relative;
+}
+
+.word {
+  display: inline-block;
+  position: relative;
+}
+
+.word.lit {
+  color: var(--red);
+  text-shadow: 0 0 3px var(--red);
+}
+
+.ball {
+  position: absolute;
+  top: 0;
+  left: -20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: var(--red);
+  margin-left: -5px;
+  transition-property: left, top;
+  transition-timing-function: cubic-bezier(.25,.1,.25,1), cubic-bezier(.25,.1,.25,1);
+  display: none;
+  z-index: 10;
+}
+
+/* ================
+   Fancy Text (Article grid)
+   ================ */
+.fancyText {
+  display: grid;
+  grid-template-columns: 2fr 3fr auto 1fr;
+  margin: calc(1rem + 5vh) 1rem;
+  gap: 1rem;
+  align-items: start;
+  position: relative;
+  z-index: 3; /* Ensure it's above the pinned section */
+}
+
+.fancyTextBody { 
+  grid-column: 3 / 4; 
+}
+
+.fancyTitle {
+  font-size: calc(1em + 10vw);
+  line-height: 1;
+  margin: 0 0 0.5em;
+  font-weight: 800;
+  grid-column: 2 / 4;
+  max-width: 8ch;
+  word-break: break-word;
+}
+
+.fancyText p {
+  font-size: calc(0.875em + .625vw);
+  line-height: 1.5;
+  margin: 0 0 1em;
+  max-width: 50ch;
+}
+
+.pink { 
+  display: none; 
+}
+
+/* ===========================
+   Student Clubs 3D Cards area
+   =========================== */
+.cardsSection {
+  background: var(--white);
+  padding: 80px 20px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 3; /* Ensure it's above the pinned section */
+}
+
+.pageTitle {
+  text-align: center;
+  font-size: 64px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  color: var(--black);
+  letter-spacing: 3px;
+  margin: 0 0 24px;
+  text-transform: uppercase;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+@media (max-width: 1000px) {
+  .cardsContainer { 
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
+
+@media (max-width: 760px) {
+  .cardsContainer { 
+    grid-template-columns: repeat(2, 1fr); 
+    padding: 18px; 
+  }
+  
+  .fancyText { 
+    grid-template-columns: 1fr; 
+    margin: 2rem 1rem; 
+  }
+  
+  .fancyTextBody { 
+    grid-column: 1 / -1; 
+  }
+  
+  .fancyTitle { 
+    max-width: 18ch; 
+    font-size: calc(1.4rem + 6vw); 
+  }
+}
+
+.gameCard {
+  position: relative;
+  width: 100%;
+  padding-bottom: 150%;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.gameCardCover {
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transform-style: preserve-3d;
+  transform-origin: top center;
+  will-change: transform;
+  transform: skewX(0.001deg);
+  transition: transform 0.35s ease-in-out, box-shadow 0.35s ease-in-out;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  border-radius: 8px;
+}
+
+.gameCardCover::after {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 120%;
+  background: linear-gradient(226deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 35%, rgba(255,255,255,0.2) 42%, rgba(255,255,255,0) 60%);
+  transform: translateY(-20%);
+  transition: transform 0.65s cubic-bezier(0.18,0.9,0.58,1);
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+.gameCard:hover .gameCardCover {
+  transform: rotateX(7deg) translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.gameCard:hover .gameCardCover::after {
+  transform: translateY(0%);
+}
+
+.gameCard::before {
+  content: "";
+  position: absolute;
+  top: 5%; 
+  left: 5%;
+  width: 90%; 
+  height: 90%;
+  background: rgba(0,0,0,0.5);
+  box-shadow: 0 6px 12px 12px rgba(0,0,0,0.35);
+  transform-origin: top center;
+  transform: skewX(0.001deg);
+  transition: transform 0.35s ease-in-out, opacity 0.5s ease-in-out;
+  border-radius: 8px;
+  z-index: -1;
+}
+
+.gameCard:hover::before {
+  opacity: 0.6;
+  transform: rotateX(7deg) translateY(-6px) scale(1.05);
+}
+
+/* small utility spacing */
+.spacer { 
+  height: 40px; 
+}

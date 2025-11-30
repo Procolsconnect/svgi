@@ -1,0 +1,145 @@
+.newshero * { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+.newshero {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* ==================== HERO ==================== */
+.newshero-hero {
+  min-height: 100vh;
+  background: url('https://images.unsplash.com/photo-1512998844734-cd2cca565822?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 0 5vw;
+}
+
+.newshero-hero-content {
+  flex: 1;
+  padding-right: 60px;
+  z-index: 2;
+}
+
+.newshero-title {
+  font-size: 6.5rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+  text-shadow: 3px 3px 15px rgba(0,0,0,0.7);
+}
+
+.newshero-description {
+  font-size: 1.9rem;
+  max-width: 600px;
+  opacity: 0.95;
+  line-height: 1.7;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+}
+
+.newshero-hero-image {
+  flex: 1;
+  overflow: hidden;
+}
+
+.newshero-hero-image img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.75);
+  opacity: 0.55;
+  transition: opacity 0.7s ease;
+}
+
+.newshero-hero-image img:hover {
+  opacity: 0.70;
+}
+
+/* ==================== VIDEO + TEXT SECTION ==================== */
+.newshero-feature {
+  background: black;
+  padding: 140px 5vw;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.newshero-video-wrapper {
+  flex: 1;
+  min-width: 300px;
+}
+
+.newshero-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  filter: grayscale(100%);
+  border: 10px solid #111;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+}
+
+.newshero-text-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.newshero-feature-title {
+  font-size: 3.5rem;
+  margin-bottom: 25px;
+}
+
+.newshero-highlight { 
+  color: salmon; 
+}
+
+.newshero-feature-text {
+  font-size: 1.6rem;
+  opacity: 0.9;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.newshero-link {
+  color: white;
+  font-size: 1.4rem;
+  border-bottom: 3px solid white;
+  text-decoration: none;
+  padding-bottom: 8px;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.newshero-link:hover {
+  color: salmon;
+  border-color: salmon;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 992px) {
+  .newshero-title { font-size: 5rem; }
+  .newshero-hero-content { padding-right: 30px; }
+}
+
+@media (max-width: 768px) {
+  .newshero-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 120px 20px;
+  }
+  .newshero-hero-content { padding: 0 0 50px 0; }
+  .newshero-hero-image img { height: 60vh; opacity: 0.5; }
+
+  .newshero-feature {
+    flex-direction: column;
+    text-align: center;
+    padding: 100px 20px;
+  }
+  .newshero-video-wrapper { order: 1; }
+  .newshero-text-content { order: 2; }
+}

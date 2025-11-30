@@ -5,10 +5,12 @@ import AdminLayout from "./layouts/AdminLayout.jsx";
 import Home from "./pages/user/home/Home.jsx";
 import Admissions from "./pages/user/admissions/Admissions.jsx";
 import Academics from "./pages/user/academics/Academics.jsx"
-import AboutOverview from "./pages/user/about/about.jsx"
+import AboutOverview from "./pages/user/about/About.jsx"
 import PlacementAndTraining from "./pages/user/Training/PlacementAndTraining.jsx";
 import Campuslife from "./pages/user/campuslife/Campuslife.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import Advertisement from "./pages/user/addvertisement/Advertisement.jsx";
+import News from "./pages/user/news/News.jsx";
 
 const App = () => {
   return (
@@ -22,6 +24,8 @@ const App = () => {
           <Route path="about/*" element={<AboutOverview />} />
           <Route path="placement/*" element={<PlacementAndTraining />} />
           <Route path="campuslife/*" element={<Campuslife/>} />
+          <Route path="advertisement/*" element={<Advertisement/>} />
+          <Route path="news/*" element={<News/>} />
         </Route>
 
         {/* <Route path="/admin" element={<AdminLayout />}>
