@@ -2,6 +2,7 @@ const academics = require("../controllers/academics/AcademicsController");
 const feedback = require("../controllers/academics/FeedBackController");
 const upload = require("../middleware/multer");
 const library = require("../controllers/academics/LibraryController");
+const outcome = require("../controllers/academics/OutcomeController");
 
 
 module.exports = function academicRoutes(app) {
@@ -70,5 +71,27 @@ app.delete("/api/faq/:id",feedback.deleteFaqController);
   app.get("/api/libraryvideocard", library.getlibraryVideoCardController);
   app.put("/api/libraryvideocard/:id", upload.single("video"), library.updatelibraryVideoCardController);
   app.delete("/api/libraryvideocard/:id", library.deletelibraryVideoCardController);
+
+// ---------------- RESOURCES ROUTES ----------------
+
+app.post("/api/library/resources", library.createLibraryResourcesController);
+app.get("/api/library/resources", library.getLibraryResourcesController);
+app.get("/api/library/resources/:id", library.getLibraryResourcesByIdController);
+app.put("/api/library/resources/:id", library.updateLibraryResourcesController);
+app.delete("/api/library/resources/:id", library.deleteLibraryResourcesController);
+ 
+
+//outcome routes
+app.post("/api/outcome",  upload.fields([
+    { name: "image", maxCount: 1 },
+    { name: "pdf", maxCount: 1 }
+  ]),outcome.createOutcome);
+app.get("/api/outcome", outcome.getAllOutcomes);
+app.get("/api/outcome/:id", outcome.getOutcomeById);
+app.put("/api/outcome/:id", upload.fields([
+    { name: "image", maxCount: 1 },
+    { name: "pdf", maxCount: 1 }
+  ]), outcome.updateOutcome);
+app.delete("/api/outcome/:id", outcome.deleteOutcome);
 
 };

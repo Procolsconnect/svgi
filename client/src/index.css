@@ -8,9 +8,14 @@
   padding: 0;
 }
 
-html, body {
-    overflow-x: hidden;
-  }
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: clip;   /* modern safe value */
+}
+
 
   /* Tailwind CSS custom classes (add to global CSS): */
 /* Gradient Mask */

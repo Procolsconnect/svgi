@@ -1,0 +1,211 @@
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+
+/* Root container - isolates styles */
+.kfa-root {
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  font-family: 'Prata', serif;
+  padding: 3vmin;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.kfa-root *,
+.kfa-root *::before,
+.kfa-root *::after {
+  box-sizing: border-box;
+}
+
+/* ===============================
+   Main App Container
+   =============================== */
+.kfa-app {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  padding-bottom: 4vmin;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  color: #3a3535;
+  z-index: 100;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.kfa-app:hover {
+  opacity: 0.5;
+}
+
+/* ===============================
+   Title Animation
+   =============================== */
+.kfa-title {
+  padding-left: 1em;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  font-size: 8vw;
+  z-index: 2;
+  display: inline-block;
+  animation: kfa-outer-left 1s 1s ease forwards;
+}
+
+.kfa-title-inner {
+  display: inline-block;
+  animation: kfa-inner-left 1s 1s ease forwards;
+}
+
+.kfa-cafe,
+.kfa-mozart {
+  display: inline-block;
+  animation: kfa-outer-left 1s 1s cubic-bezier(0.5, 0, 0.1, 1) forwards;
+}
+
+.kfa-cafe-inner {
+  display: inline-block;
+  animation: 
+    kfa-inner-left 1s 1s ease forwards,
+    kfa-text-clip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) forwards;
+}
+
+.kfa-mozart-inner {
+  display: inline-block;
+  animation: kfa-text-clip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) forwards;
+}
+
+/* ===============================
+   Keyframe Animations
+   =============================== */
+@keyframes kfa-text-clip {
+  from {
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@keyframes kfa-outer-left {
+  from {
+    transform: translateX(50%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes kfa-inner-left {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes kfa-image-in {
+  from {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* ===============================
+   Image Animation
+   =============================== */
+.kfa-image {
+  grid-row: 1;
+  grid-column: 2;
+  margin-left: -2rem;
+  opacity: 0.7;
+  animation: kfa-image-in 1s cubic-bezier(0.5, 0, 0.1, 1) 2s backwards;
+}
+
+.kfa-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* ===============================
+   Replay Hint
+   =============================== */
+.kfa-hint {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  background: #3a3535;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kfa-hint:hover {
+  opacity: 1;
+}
+
+/* ===============================
+   Responsive Design
+   =============================== */
+@media (max-width: 768px) {
+  .kfa-app {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding-bottom: 2vmin;
+  }
+
+  .kfa-title {
+    font-size: 6vw;
+    padding-left: 0.5em;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .kfa-image {
+    grid-column: 1;
+    grid-row: 2;
+    margin-left: 0;
+    margin-top: 2rem;
+    animation: kfa-image-in 1s cubic-bezier(0.5, 0, 0.1, 1) 2s backwards;
+  }
+}
+
+@media (max-width: 480px) {
+  .kfa-root {
+    padding: 1.5vmin;
+  }
+
+  .kfa-app {
+    padding-bottom: 2vmin;
+  }
+
+  .kfa-title {
+    font-size: 5vw;
+    padding-left: 0.25em;
+  }
+
+  .kfa-image {
+    margin-top: 1.5rem;
+  }
+
+  .kfa-hint {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+    bottom: 10px;
+    right: 10px;
+  }
+}

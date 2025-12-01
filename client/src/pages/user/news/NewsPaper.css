@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Roboto:wght@400;700&display=swap');
+
+.snp-container {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 1.2cm 1.5cm;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12pt;
+  line-height: 1.5;
+  color: #000;
+  background: white;
+}
+
+.snp-header {
+  margin-bottom: 30px;
+  padding-bottom: 12px;
+  border-bottom: 4px double #000;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.snp-header-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 58px;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.snp-header-subtitle {
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-left: 20px;
+}
+
+.snp-header-date {
+  font-size: 12px;
+  margin-left: auto;
+  font-weight: 500;
+}
+
+.snp-article {
+  margin-top: 40px;
+  page-break-inside: avoid;
+}
+
+.snp-article:first-of-type {
+  margin-top: 0;
+}
+
+.snp-article-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.snp-article-mediaImage {
+  height: 48px;
+  margin-right: 15px;
+}
+
+.snp-article-title {
+  flex: 1;
+  font-family: Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  text-align: justify;
+  padding-top: 10px;
+  border-top: 1px solid #000;
+}
+
+.snp-article-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.snp-article-image {
+  flex: 0 0 48%;
+}
+
+.snp-article-image img {
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: cover;
+  display: block;
+}
+
+.snp-article-description {
+  flex: 1 1 48%;
+  text-align: justify;
+  text-indent: 20px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.snp-article-description::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  background: #000;
+  border-radius: 50%;
+}
+
+/* Full width when no image */
+.snp-article-image img[src=""],
+.snp-article-image img:not([src]) {
+  display: none;
+}
+
+.snp-article-image:has(img[src=""]),
+.snp-article-image:has(img:not([src])) + .snp-article-description {
+  flex: 0 0 100%;
+  padding-left: 0;
+}
