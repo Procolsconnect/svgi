@@ -71,6 +71,25 @@ const LeadershipHero = mongoose.model("LeadershipHero", LeadershipHeroSchema);
 const MaterialCard = mongoose.model("MaterialCard", MaterialCardSchema);
 const QuoteCard = mongoose.model("QuoteCard", QuoteSchema);
 
+
+
+const vmHeroSchema = new mongoose.Schema({
+    title: String,
+    image: String,
+}, { timestamps: true });
+const VMHeroSchema = mongoose.model("VMHeroSchema", vmHeroSchema);
+
+const vmCardSchema = new mongoose.Schema({
+title: { type: String, required: true },
+desc: { type: String, required: true },
+image: { type: String, required: true },
+link: { type: String, required: true }
+}, { timestamps: true });
+const VMCardSchema = mongoose.model("VMCardSchema", vmCardSchema);
+
+
+
+
 // ------------------ EXPORT ALL MODELS ------------------
 module.exports = {
     BalticData,
@@ -78,5 +97,7 @@ module.exports = {
     AboutOverviewContent,
     LeadershipHero,
     MaterialCard,
-    QuoteCard
+    QuoteCard,
+    VMHeroSchema,
+    VMCardSchema,
 };

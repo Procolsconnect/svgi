@@ -1,6 +1,7 @@
 const BalticController = require("../controllers/about/BalticSliderController");
 const OverviewController = require("../controllers/about/AboutOverviewController");
 const LeadershipController = require("../controllers/about/leadershipController");
+const VisMisController = require("../controllers/about/VisMisController")
 const upload = require("../middleware/multer");
 
 module.exports = function routes(app) {
@@ -57,5 +58,17 @@ module.exports = function routes(app) {
     app.get("/api/leadership/quote",  LeadershipController.getQuotesController);
     app.put("/api/leadership/quote/:id", upload.single("image"), LeadershipController.updateQuoteController);
     app.delete("/api/leadership/quote/:id", LeadershipController.deleteQuoteController);
+    /* ------------------ Vission Mission --------------------*/
+    app.post("/api/about/vismishero", upload.single("image"), VisMisController.createVMHero);
+    app.get("/api/about/vismishero",  VisMisController.getOverviewHero);
+    app.get("/api/about/vismishero/:id",  VisMisController.getOverviewHeroById);
+    app.put("/api/about/vismishero/:id", upload.single("image"), VisMisController.updateOverviewHero);
+    app.delete("/api/about/vismishero/:id", VisMisController.deleteOverviewHero);
+    /* ------------------ Vission Mission Card Section --------------------*/
+    app.post("/api/about/vismiscard", upload.single("image"), VisMisController.createVMCard);
+    app.get("/api/about/vismiscard",  VisMisController.getVMCard);
+    app.get("/api/about/vismishero/:id",  VisMisController.getOverviewHeroById);
+    app.put("/api/about/vismishero/:id", upload.single("image"), VisMisController.updateOverviewHero);
+    app.delete("/api/about/vismishero/:id", VisMisController.deleteOverviewHero);
 
 };

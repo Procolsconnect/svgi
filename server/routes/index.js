@@ -3,6 +3,7 @@ const admissionsRoutes = require("./admissions.route");
 const academicRoute = require("./academic.route");
 const placementRoute = require("./placement.route");
 const campusRoutes = require("./campus.route");
+const about = require("./about.route");
 const AdvertisemenRoutes = require("./advertisement.route");
 module.exports = function setRoutes(app) {
   homeRoutes(app);
@@ -11,4 +12,5 @@ module.exports = function setRoutes(app) {
   placementRoute(app);
   campusRoutes(app);
   AdvertisemenRoutes(app);
+  about(app);
 };

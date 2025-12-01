@@ -152,6 +152,8 @@ height: 50%;
 /* ================
    Fancy Text (Article grid)
    ================ */
+
+
 .fancyText {
   display: grid;
   grid-template-columns: 2fr 3fr auto 1fr;

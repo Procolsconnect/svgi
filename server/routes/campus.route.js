@@ -6,6 +6,10 @@ const campusHostel = require("../controllers/campus/CampusHostelController");
 const campusHealth = require("../controllers/campus/CampusHealthController");
 const campusFestival = require("../controllers/campus/CampusFestivalController");
 const campusGreensvgi = require("../controllers/campus/CampusGreensvgiController");
+const campusEventGallery = require("../controllers/welfare/CampusEventGalleryController");
+const campusAlumaniStudent = require("../controllers/welfare/AlumaniStudentController");
+const Welfare = require("../controllers/welfare/WelfareController");
+
 
 module.exports = function campusRoutes(app) {
     // CAMPUS OVERVIEW HERO API
@@ -50,7 +54,7 @@ module.exports = function campusRoutes(app) {
     );
 
     app.get(
-        "/api/campus/hostelhero",   
+        "/api/campus/hostelhero",
         campusHostel.getHostelHero
     );
 
@@ -515,4 +519,179 @@ module.exports = function campusRoutes(app) {
         "/api/campus/sportsathelets/:id",
         campusSports.deleteSportsAthelet
     );
+
+
+    // Welfare
+    //EventGallery
+    app.post(
+        "/api/campus/eventgallery",
+        upload.single("image"),
+        campusEventGallery.createEventGalleryImage
+    );
+
+    app.get(
+        "/api/campus/eventgallery",
+        campusEventGallery.getEventGalleryImages
+    );
+
+    app.get(
+        "/api/campus/eventgallery/:id",
+        campusEventGallery.getEventGalleryImageById
+    );
+
+    app.put(
+        "/api/campus/eventgallery/:id",
+        upload.single("image"),
+        campusEventGallery.updateEventGalleryImage
+    );
+
+    app.delete(
+        "/api/campus/eventgallery/:id",
+        campusEventGallery.deleteEventGalleryImage
+    );
+
+    // AlumaniStudent
+    app.post(
+        "/api/campus/alumanistudent",
+        upload.single("image"),
+        campusAlumaniStudent.createAlumaniStudent
+    );
+
+    app.get(
+        "/api/campus/alumanistudent",
+        campusAlumaniStudent.getAlumaniStudents
+    );
+
+    app.get(
+        "/api/campus/alumanistudent/:id",
+        campusAlumaniStudent.getAlumaniStudentById
+    );
+
+    app.put(
+        "/api/campus/alumanistudent/:id",
+        upload.single("image"),
+        campusAlumaniStudent.updateAlumaniStudent
+    );
+
+    app.delete(
+        "/api/campus/alumanistudent/:id",
+        campusAlumaniStudent.deleteAlumaniStudent
+    );
+
+
+
+    // WelfareHero
+    app.post(
+        "/api/campus/welfarehero",
+        upload.single("image"),
+        Welfare.createHeroImage
+    );
+
+    app.get(
+        "/api/campus/welfarehero",
+        Welfare.getHeroImages
+    );
+
+    app.get(
+        "/api/campus/welfarehero/:id",
+        Welfare.getHeroImageById
+    );
+
+    app.put(
+        "/api/campus/welfarehero/:id",
+        upload.single("image"),
+        Welfare.updateHeroImage
+    );
+
+    app.delete(
+        "/api/campus/welfarehero/:id",
+        Welfare.deleteHeroImage
+    );
+
+
+    // WelfareBouncerTitle
+    app.post(
+        "/api/campus/bouncertitle",
+        Welfare.createBouncerTitle
+    );
+
+    app.get(
+        "/api/campus/bouncertitle",
+        Welfare.getBouncerTitle
+    );
+
+    app.get(
+        "/api/campus/bouncertitle/:id",
+        Welfare.getBouncerTitleById
+    );
+
+    app.put(
+        "/api/campus/bouncertitle/:id",
+        upload.single("image"),
+        Welfare.updateBouncerTitle
+    );
+
+    app.delete(
+        "/api/campus/bouncertitle/:id",
+        Welfare.deleteBouncerTitle
+    );
+
+    // Fancy Text
+    app.post(
+        "/api/campus/fancytext",
+        upload.single("image"),
+        Welfare.createFancyText
+    );
+
+    app.get(
+        "/api/campus/fancytext",
+        Welfare.getFancyText
+    );
+
+    app.get(
+        "/api/campus/fancytext/:id",
+        Welfare.getFancyTextById
+    );
+
+    app.put(
+        "/api/campus/fancytext/:id",
+        upload.single("image"),
+        Welfare.updateFancyText
+    );
+
+    app.delete(
+        "/api/campus/fancytext/:id",
+        Welfare.deleteFancyText
+    );
+
+
+    // Student Clubs
+    app.post(
+        "/api/campus/studentclubs",
+        upload.single("image"),
+        Welfare.createStudentClub
+    );
+
+    app.get(
+        "/api/campus/studentclubs",
+        Welfare.getStudentClub
+    );
+
+    app.get(
+        "/api/campus/studentclubs/:id",
+        Welfare.getStudentClubById
+    );
+
+    app.put(
+        "/api/campus/studentclubs/:id",
+        upload.single("image"),
+        Welfare.updateStudentClubById
+    );
+
+    app.delete(
+        "/api/campus/studentclubs/:id",
+        Welfare.deleteStudentClub
+    );
+
+
 };

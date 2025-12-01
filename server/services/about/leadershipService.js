@@ -16,14 +16,9 @@ async function getHero() {
 async function updateHero(id, body, file) {
     const hero = await LeadershipHero.findById(id);
     if (!hero) throw new Error("Hero not found");
-
-
     if (body.title) hero.title = body.title;
     if (file) hero.image = file.path;
-
     return await hero.save();
-
-
 }
 
 async function deleteHero(id) {
