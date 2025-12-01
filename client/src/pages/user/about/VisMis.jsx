@@ -1,5 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './vismis.css'
+import axios from 'axios'
+const apiurl = import.meta.env.VITE_API_URL;
 
 
 export default function CampusCanvas() {
@@ -113,27 +115,39 @@ export default function CampusCanvas() {
         };
     }, []);
 
+    const [heroBG, setHeroBG] = useState();
+    const [card, setCard] = useState();
+    useEffect(() =>{
+        axios.get(`${apiurl}/api/about/vismishero`)
+        .then(res => setHeroBG(res.data.data))
+        .catch(err => console.log(err))
+
+        axios.get(`${apiurl}/api/about/vismiscard`)
+        .then(res => setCard(res.data.data))
+        .catch(err => console.log(err))
+    }, [])
+
     return (
         <div className="cc-wrapper">
 
             {/* HERO */}
             <div id="cc-hero">
                 {/* Replace these with valid image paths in your project */}
-                <img src="/images/instu.jpg" alt="Hero Background" />
-                <h1>Our Mission and Visions</h1>
+                <img src={heroBG?.image} alt="Hero Background" />
+                <h1>{heroBG?.title}</h1>
             </div>
 
             {/* CARDS */}
             <ol className="cc-cards__container" title="Blog entries">
-                {[1, 2, 3].map((id) => (
-                    <li className="cc-card" key={id}>
+                {card?.map((card) => (
+                    <li className="cc-card" key={card.id}>
                         <div className="cc-card__thumb">
-                            <img src={`https://picsum.photos/id/${id}/800/800`} alt={`Card ${id}`} />
+                            <img src={card.image} alt={`Card ${card.id}`} />
                         </div>
                         <div className="cc-card__content">
-                            <h3 className="cc-card__title">Card Title {id}</h3>
-                            <p className="cc-card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <a className="cc-card__btn" href="#" aria-label={`Read more about Card Title ${id}`}><i data-feather="arrow-right" /></a>
+                            <h3 className="cc-card__title">{card.title}</h3>
+                            <p className="cc-card__text">{card.desc}</p>
+                            <a className="cc-card__btn" href={card.link} aria-label={`Read more about Card Title ${card.id}`}><i data-feather="arrow-right" /></a>
                         </div>
                     </li>
                 ))}

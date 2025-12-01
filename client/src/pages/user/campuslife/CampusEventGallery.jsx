@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+const apiurl = import.meta.env.VITE_API_URL;
 import './CampusEventGallery.css';
 
 const HorizontalScrollGallery = () => {
@@ -22,7 +24,7 @@ const HorizontalScrollGallery = () => {
       // Calculate how far we've scrolled into the pinned section
       const scrolled = Math.abs(rect.top);
       const maxScroll = strip.scrollWidth - window.innerWidth;
-      
+
       // Clamp the translation to not exceed max scroll
       const translateX = Math.min(scrolled, maxScroll);
       strip.style.transform = `translateX(-${translateX}px)`;
@@ -30,7 +32,7 @@ const HorizontalScrollGallery = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Initialize on mount
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -48,14 +50,24 @@ const HorizontalScrollGallery = () => {
     return () => window.removeEventListener('resize', updateStripWidth);
   }, []);
 
-  const projectImages = [
-    'https://assets.codepen.io/16327/portrait-image-1.jpg',
-    'https://assets.codepen.io/16327/portrait-image-2.jpg',
-    'https://assets.codepen.io/16327/portrait-image-3.jpg',
-    'https://assets.codepen.io/16327/portrait-image-4.jpg',
-    'https://assets.codepen.io/16327/portrait-image-5.jpg',
-    'https://assets.codepen.io/16327/portrait-image-6.jpg'
-  ];
+  // const projectImages = [
+  //   'https://assets.codepen.io/16327/portrait-image-1.jpg',
+  //   'https://assets.codepen.io/16327/portrait-image-2.jpg',
+  //   'https://assets.codepen.io/16327/portrait-image-3.jpg',
+  //   'https://assets.codepen.io/16327/portrait-image-4.jpg',
+  //   'https://assets.codepen.io/16327/portrait-image-5.jpg',
+  //   'https://assets.codepen.io/16327/portrait-image-6.jpg'
+  // ];
+  const [projectImages, setProjectImages] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${apiurl}/api/campus/eventgallery`)
+      .then(res => {
+        setProjectImages(res.data.data.map(img => img.image));
+      })
+      .catch(err => console.error(err));
+  }, []);
+
 
   return (
     <div className="hsg-root">
@@ -75,14 +87,14 @@ const HorizontalScrollGallery = () => {
       <section className="hsg-portfolio" ref={portfolioRef}>
         <div className="hsg-container-fluid">
           <div className="hsg-horiz-gallery-wrapper">
-            <div 
+            <div
               className="hsg-horiz-gallery-strip"
               ref={stripRef}
             >
               {projectImages.map((imgSrc, index) => (
                 <div key={index} className="hsg-project-wrap">
-                  <img 
-                    src={imgSrc} 
+                  <img
+                    src={imgSrc}
                     alt={`Campus event ${index + 1}`}
                     loading="lazy"
                   />
@@ -93,7 +105,7 @@ const HorizontalScrollGallery = () => {
         </div>
       </section>
 
-  
+
     </div>
   );
 };

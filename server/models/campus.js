@@ -88,6 +88,37 @@ const campusGreensvgiImageGallarySchema = new mongoose.Schema({
 }, { timestamps: true });
 
 
+// Welfare
+const campusEventGallery = new mongoose.Schema({
+    title: { type: String, required: true },
+    image: { type: String, required: true },
+}, { timestamps: true });
+const alumaniStudent = new mongoose.Schema({
+    title: { type: String, required: true },
+    image: { type: String, required: true },
+}, { timestamps: true });
+const welfareHeroImage = new mongoose.Schema({
+    title: { type: String, required: true },
+    image: { type: String, required: true },
+}, { timestamps: true });
+const bouncerTitle = new mongoose.Schema({
+    title: { type: String, required: true },
+}, { timestamps: true });
+
+const fancyText = new mongoose.Schema({
+    rowoneTitle: { type: String, required: true,},
+    rowoneImage: {type: String,required: true,},
+    rowtwoPara: [{type: String,required: true,}],
+    rowtwoImage: {type: String,required: true,}},
+    { timestamps: true });
+
+
+const studentClubs = new mongoose.Schema({
+    title: { type: String, required: true },
+    image: { type: String, required: true },
+}, { timestamps: true });
+
+
 const CampusHealthHero = mongoose.model('CampusHealthHero', campusHealthHeroSchema);
 const CampusHealthCard = mongoose.model('CampusHealthCard', campusHealthCardSchema);
 const CampusFestivalHero = mongoose.model('CampusFestivalHero', campusFestivalHeroSchema);
@@ -107,6 +138,13 @@ const CampusHostelHero = mongoose.model('CampusHostelHero', campusHostelHeroSche
 const CampusHostelCard = mongoose.model('CampusHostelCard', campusHostelCardSchema);
 const CampusHostelFaq = mongoose.model('CampusHostelFaq', campusHostelfaqSchema);
 
+const CampusEventGallery = mongoose.model('CampusEventGallery', campusEventGallery);
+const AlumaniStudent = mongoose.model('AlumaniStudent', alumaniStudent);
+const WelfareHeroImage = mongoose.model('WelfareHeroImage', welfareHeroImage);
+const BouncerTitle = mongoose.model('BouncerTitle', bouncerTitle);
+const FancyText = mongoose.model('FancyText', fancyText);
+const StudentClubs = mongoose.model('StudentClubs', studentClubs);
+
 module.exports = {
     CampusSportsHero,
     CampusOverviewHero,
@@ -125,4 +163,10 @@ module.exports = {
     CampusGreensvgiHero,
     CampusGreensvgiImage,
     CampusGreensvgiImageGallary,
+    CampusEventGallery,
+    AlumaniStudent,
+    WelfareHeroImage,
+    BouncerTitle,
+    FancyText,
+    StudentClubs,
 }
