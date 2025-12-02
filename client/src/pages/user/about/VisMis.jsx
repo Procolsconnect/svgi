@@ -60,16 +60,20 @@ export default function CampusCanvas() {
 
             function showContent(i) {
                 const item = items.eq(i);
-                const target = item.attr("data-title");
+                const target = item.attr("data-title"); // Academics, Research etc.
 
+                // Update React state for active section
+                setActive(target.toLowerCase()[0]);
 
+                // Manage active circle item
                 items.removeClass("cc-circle__item--active");
                 item.addClass("cc-circle__item--active");
 
-
+                // Manage visible right-side content
                 $(".cc-circle__content-inner").removeClass("cc-circle__content-inner--is-visible");
                 $("#" + target).addClass("cc-circle__content-inner--is-visible");
             }
+
 
 
             function startAutoRotate() {
@@ -117,14 +121,27 @@ export default function CampusCanvas() {
 
     const [heroBG, setHeroBG] = useState();
     const [card, setCard] = useState();
-    useEffect(() =>{
+    const [mvv, setMvv] = useState(null);
+    const [data, setData] = useState(null);
+    const [active, setActive] = useState("common");
+
+
+    useEffect(() => {
         axios.get(`${apiurl}/api/about/vismishero`)
-        .then(res => setHeroBG(res.data.data))
-        .catch(err => console.log(err))
+            .then(res => setHeroBG(res.data.data))
+            .catch(err => console.log(err))
 
         axios.get(`${apiurl}/api/about/vismiscard`)
-        .then(res => setCard(res.data.data))
-        .catch(err => console.log(err))
+            .then(res => setCard(res.data.data))
+            .catch(err => console.log(err))
+
+        axios.get(`${apiurl}/api/about/vismislist`)
+            .then(res => setMvv(res.data.data))
+            .catch(err => console.error(err));
+
+        axios.get(`${apiurl}/api/about/vismiscircle`)
+            .then(res => { setData(res.data.data[0]); })
+            .catch(err => console.error("Fetch Error:", err));
     }, [])
 
     return (
@@ -155,63 +172,79 @@ export default function CampusCanvas() {
 
             {/* SVG SECTION */}
             <div className="cc-svg-wrapper">
-                <svg id="svg4136" xmlns="http://www.w3.org/2000/svg" version="1.1"
-                    viewBox="0 0 1000 670" preserveAspectRatio="xMidYMid meet">
-                    <g id="layer1">
-                        <path id="path4806"
-                            d="m0.83398 57.5v315h261.4l-0.15234-0.11914 245.41-314.88h-506.66z"
-                            fill="#cacaca" />
+                {mvv?.length > 0 && (
+                    <svg
+                        id="svg4136"
+                        xmlns="http://www.w3.org/2000/svg"
+                        version="1.1"
+                        viewBox="0 0 1000 670"
+                        preserveAspectRatio="xMidYMid meet"
+                    >
+                        {/* MISSION */}
+                        <g id="layer1">
+                            <path
+                                id="path4806"
+                                d="m0.83398 57.5v315h261.4l-0.15234-0.11914 245.41-314.88h-506.66z"
+                                fill="#cacaca"
+                            />
 
-                        <text x="15" y="110">Mission</text>
+                            <text x="15" y="110">{mvv[0].mission.title}</text>
 
-                        <text x="15" y="140" className="sub-text">We are reliable partners</text>
-                        <text x="15" y="155" className="sub-mission">Provide superior products and services</text>
-                        <text x="15" y="170" className="sub-mission">Deliver Swiss quality</text>
-                        <text x="15" y="185" className="sub-mission">Be cost competitive</text>
+                            {mvv[0].mission.sections.map((section, index) => (
+                                <React.Fragment key={index}>
+                                    <text x="15" y={140 + index * 70} className="sub-text">
+                                        {section.subtitle}
+                                    </text>
 
-                        <text x="15" y="210" className="sub-text">We are transparent &amp; strive for excellence</text>
-                        <text x="15" y="225" className="sub-mission">Use synergies &amp; effectively bundle skills</text>
-                        <text x="15" y="240" className="sub-mission">Have efficient, resilient &amp; transparent processes</text>
-                        <text x="15" y="255" className="sub-mission">Leverage competences and expertise</text>
-                        <text x="15" y="270" className="sub-mission">Monitor performance</text>
+                                    {section.points.map((point, pIndex) => (
+                                        <text
+                                            key={`${index}-p-${pIndex}`}
+                                            x="15"
+                                            y={155 + index * 70 + pIndex * 15}
+                                            className="sub-mission"
+                                        >
+                                            {point}
+                                        </text>
+                                    ))}
+                                </React.Fragment>
+                            ))}
+                        </g>
 
-                        <text x="15" y="295" className="sub-text">We develop our suppliers</text>
-                        <text x="15" y="310" className="sub-mission">Optimizing our level of vertical integration</text>
-                        <text x="15" y="325" className="sub-mission">Sustaining partnerships</text>
-                        <text x="15" y="340" className="sub-mission">Managing our supply base</text>
-                    </g>
+                        {/* VISION */}
+                        <g id="layer2">
+                            <path
+                                id="path4804"
+                                d="m514.89 57.5-108.17 138.79 254.83 365.38h138.45v-504.17h-285.11z"
+                                fill="#cacaca"
+                            />
 
-                    <g id="layer2">
-                        <path id="path4804"
-                            d="m514.89 57.5-108.17 138.79 254.83 365.38h138.45v-504.17h-285.11z"
-                            fill="#cacaca" />
+                            <text x="520" y="110">{mvv[0].vision.title}</text>
 
-                        <text x="520" y="110">Vision</text>
+                            {mvv[0].vision.lines.map((line, index) => (
+                                <text key={index} x="520" y={140 + index * 20} className="sub-text">
+                                    {line}
+                                </text>
+                            ))}
+                        </g>
 
-                        <text x="520" y="140" className="sub-text">We add value and competitiveness</text>
-                        <text x="520" y="160" className="sub-text">to Schindler Group through</text>
-                        <text x="520" y="180" className="sub-text">excellence in Sourcing,</text>
-                        <text x="520" y="200" className="sub-text">Manufacturing and Distribution</text>
-                    </g>
+                        {/* VALUES */}
+                        <g id="layer3">
+                            <path
+                                id="rect4715"
+                                d="m0.83398 378.33v183.33h653.61l-127.86-183.33h-525.74z"
+                                fill="#cacaca"
+                            />
 
-                    <path id="path4802" fill="none"
-                        d="m402.97 201.1-133.59 171.4h253.13l-119.54-171.4z" />
+                            <text x="15" y="430">{mvv[0].values.title}</text>
 
-                    <g id="layer3">
-                        <path id="rect4715"
-                            d="m0.83398 378.33v183.33h653.61l-127.86-183.33h-525.74z"
-                            fill="#cacaca" />
-
-                        <text x="15" y="430">Values</text>
-
-                        <text x="15" y="460" className="sub-text">Safety</text>
-                        <text x="15" y="480" className="sub-text">Create value for the customer</text>
-                        <text x="15" y="500" className="sub-text">Commitment to people development</text>
-                        <text x="15" y="520" className="sub-text">Integrity and Trust</text>
-                        <text x="15" y="540" className="sub-text">Quality</text>
-                    </g>
-                </svg>
-
+                            {mvv[0].values.list.map((value, index) => (
+                                <text key={index} x="15" y={460 + index * 20} className="sub-text">
+                                    {value}
+                                </text>
+                            ))}
+                        </g>
+                    </svg>
+                )}
                 <div className="cc-left-heading">Our Core Values</div>
             </div>
 
@@ -222,59 +255,130 @@ export default function CampusCanvas() {
             <div className="cc-circle">
                 <div className="cc-circle__items">
                     <div className="cc-circle__items-inner">
+
+                        {/* LOGO */}
                         <div className="cc-circle__inner">
-                            <img src="cour value.png" className="cc-circle__logo" alt="Logo" />
+                            <img src={data?.logo} className="cc-circle__logo" alt="Logo" />
                         </div>
 
-                        <div className="cc-circle__item cc-circle__item--hidden cc-circle__item--one" data-title="Academics" />
-                        <div className="cc-circle__item cc-circle__item--hidden cc-circle__item--two" data-title="Research" />
-                        <div className="cc-circle__item cc-circle__item--hidden cc-circle__item--three" data-title="Campus" />
-                        <div className="cc-circle__item cc-circle__item--hidden cc-circle__item--four" data-title="Placements" />
+                        {/* Clickable Circle Items */}
+                        <div
+                            className={`cc-circle__item cc-circle__item--one`}
+                            data-title={data?.academics?.title}
+                            onActive={() => setActive("academics")}
+                            onClick={() => setActive("academics")}
+                        />
+
+                        <div
+                            className={`cc-circle__item cc-circle__item--two`}
+                            data-title={data?.research?.title}
+                            onClick={() => setActive("research")}
+                        />
+
+                        <div
+                            className={`cc-circle__item cc-circle__item--three`}
+                            data-title={data?.campus?.title}
+                            onClick={() => setActive("campus")}
+                        />
+
+                        <div
+                            className={`cc-circle__item cc-circle__item--four`}
+                            data-title={data?.placements?.title}
+                            onClick={() => setActive("placements")}
+                        />
                     </div>
                 </div>
 
+
+                {/* RIGHT SIDE CONTENT */}
                 <div className="cc-circle__content">
-                    <div className="cc-circle__content-inner" id="common">
-                        <p>Select a category to explore more information.</p>
+
+                    {/* DEFAULT VIEW */}
+                    <div className={`cc-circle__content-inner ${active === "common" ? "cc-circle__content-inner--is-visible" : ""}`}>
+                        {active === "common" && (
+                            <p>Select a category to explore more information.</p>
+                        )}
                     </div>
 
-                    <div className="cc-circle__content-inner" id="Academics">
-                        <div className="cc-circle__title">Academics</div>
-                        <ul className="cc-circle__link-list">
-                            <li>
-                                <a href="#"><h3>Undergraduate Programs</h3><p>Diverse courses for future leaders.</p></a>
-                            </li>
-                            <li>
-                                <a href="#"><h3>Postgraduate Programs</h3><p>Advanced studies fostering expertise.</p></a>
-                            </li>
-                        </ul>
+                    {/* ACADEMICS */}
+                    <div className={`cc-circle__content-inner ${active === "academics" ? "cc-circle__content-inner--is-visible" : ""}`}>
+                        {active === "academics" && (
+                            <>
+                                <div className="cc-circle__title">{data?.academics?.title}</div>
+                                <ul className="cc-circle__link-list">
+                                    {data?.academics?.items?.map(item => (
+                                        <li key={item._id}>
+                                            <a href="#">
+                                                <h3>{item.heading}</h3>
+                                                <p>{item.description}</p>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        )}
                     </div>
 
-                    <div className="cc-circle__content-inner" id="Research">
-                        <div className="cc-circle__title">Research</div>
-                        <ul className="cc-circle__link-list">
-                            <li><a href="#"><h3>Innovation Labs</h3><p>Advanced labs enabling interdisciplinary work.</p></a></li>
-                            <li><a href="#"><h3>Publications</h3><p>Impactful research globally.</p></a></li>
-                        </ul>
+                    {/* RESEARCH */}
+                    <div className={`cc-circle__content-inner ${active === "research" ? "cc-circle__content-inner--is-visible" : ""}`}>
+                        {active === "research" && (
+                            <>
+                                <div className="cc-circle__title">{data?.research?.title}</div>
+                                <ul className="cc-circle__link-list">
+                                    {data?.research?.items?.map(item => (
+                                        <li key={item._id}>
+                                            <a href="#">
+                                                <h3>{item.heading}</h3>
+                                                <p>{item.description}</p>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        )}
                     </div>
 
-                    <div className="cc-circle__content-inner" id="Campus">
-                        <div className="cc-circle__title">Campus Life</div>
-                        <ul className="cc-circle__link-list">
-                            <li><a href="#"><h3>Clubs & Societies</h3><p>A vibrant community fostering creativity.</p></a></li>
-                            <li><a href="#"><h3>Sports & Culture</h3><p>Facilities encouraging growth.</p></a></li>
-                        </ul>
+                    {/* CAMPUS */}
+                    <div className={`cc-circle__content-inner ${active === "campus" ? "cc-circle__content-inner--is-visible" : ""}`}>
+                        {active === "campus" && (
+                            <>
+                                <div className="cc-circle__title">{data?.campus?.title}</div>
+                                <ul className="cc-circle__link-list">
+                                    {data?.campus?.items?.map(item => (
+                                        <li key={item._id}>
+                                            <a href="#">
+                                                <h3>{item.heading}</h3>
+                                                <p>{item.description}</p>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        )}
                     </div>
 
-                    <div className="cc-circle__content-inner" id="Placements">
-                        <div className="cc-circle__title">Placements</div>
-                        <ul className="cc-circle__link-list">
-                            <li><a href="#"><h3>Career Services</h3><p>Guiding students toward success.</p></a></li>
-                            <li><a href="#"><h3>Top Recruiters</h3><p>Global opportunities from top companies.</p></a></li>
-                        </ul>
+                    {/* PLACEMENTS */}
+                    <div className={`cc-circle__content-inner ${active === "placements" ? "cc-circle__content-inner--is-visible" : ""}`}>
+                        {active === "placements" && (
+                            <>
+                                <div className="cc-circle__title">{data?.placements?.title}</div>
+                                <ul className="cc-circle__link-list">
+                                    {data?.placements?.items?.map(item => (
+                                        <li key={item._id}>
+                                            <a href="#">
+                                                <h3>{item.heading}</h3>
+                                                <p>{item.description}</p>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        )}
                     </div>
+
                 </div>
             </div>
+
         </div>
     );
 }

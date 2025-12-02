@@ -87,6 +87,57 @@ link: { type: String, required: true }
 }, { timestamps: true });
 const VMCardSchema = mongoose.model("VMCardSchema", vmCardSchema);
 
+const MVVSection = new mongoose.Schema({
+    mission: {
+        title: { type: String, required: true },
+        sections: [
+            {
+                subtitle: { type: String, required: true },
+                points: [{ type: String, required: true }]
+            }
+        ]
+    },
+
+    vision: {
+        title: { type: String, required: true },
+        lines: [{ type: String, required: true }]
+    },
+
+    values: {
+        title: { type: String, required: true },
+        list: [{ type: String, required: true }]
+    }
+}, { timestamps: true });
+
+const MVSection = mongoose.model("MVSection", MVVSection);
+
+
+// ------------------- Circular Section ---------------------------
+
+const circleItemSchema = new mongoose.Schema({
+    heading: { type: String, required: true },
+    description: { type: String, required: true }
+});
+
+const categorySchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    items: [circleItemSchema]
+});
+
+const campusCircleSchema = new mongoose.Schema(
+    {
+        logo: { type: String, required: true },   // <-- ADDED LOGO FIELD
+
+        academics: categorySchema,
+        research: categorySchema,
+        campus: categorySchema,
+        placements: categorySchema
+    },
+    { timestamps: true }
+);
+
+const  CampusCircle = mongoose.model("CampusCircle", campusCircleSchema);
+
 
 
 
@@ -100,4 +151,6 @@ module.exports = {
     QuoteCard,
     VMHeroSchema,
     VMCardSchema,
+    MVSection,
+    CampusCircle,
 };

@@ -67,8 +67,20 @@ module.exports = function routes(app) {
     /* ------------------ Vission Mission Card Section --------------------*/
     app.post("/api/about/vismiscard", upload.single("image"), VisMisController.createVMCard);
     app.get("/api/about/vismiscard",  VisMisController.getVMCard);
-    app.get("/api/about/vismishero/:id",  VisMisController.getOverviewHeroById);
-    app.put("/api/about/vismishero/:id", upload.single("image"), VisMisController.updateOverviewHero);
-    app.delete("/api/about/vismishero/:id", VisMisController.deleteOverviewHero);
+    app.get("/api/about/vismiscard/:id",  VisMisController.getVMCardByID);
+    app.put("/api/about/vismiscard/:id", upload.single("image"), VisMisController.updateVMCard);
+    app.delete("/api/about/vismiscard/:id", VisMisController.deleteVMCard);
+    /* ------------------ Vission Mission List Section --------------------*/
+    app.post("/api/about/vismislist", upload.single("image"), VisMisController.createMVVSection);
+    app.get("/api/about/vismislist",  VisMisController.getAllMVVSections);
+    app.get("/api/about/vismislist/:id",  VisMisController.getAllMVVSections);
+    app.put("/api/about/vismislist/:id", upload.single("image"), VisMisController.updateMVVSection);
+    app.delete("/api/about/vismislist/:id", VisMisController.deleteMVVSection);
+    /* ------------------ Vission Mission Circular Section --------------------*/
+    app.post("/api/about/vismiscircle", upload.single("image"), VisMisController.createCampusCircle);
+    app.get("/api/about/vismiscircle",  VisMisController.getCampusCircles);
+    app.get("/api/about/vismiscircle/:id",  VisMisController.getCampusCircleById);
+    app.put("/api/about/vismiscircle/:id", upload.single("image"), VisMisController.updateCampusCircle);
+    app.delete("/api/about/vismiscircle/:id", VisMisController.deleteCampusCircle);
 
 };
