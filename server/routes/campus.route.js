@@ -9,7 +9,7 @@ const campusGreensvgi = require("../controllers/campus/CampusGreensvgiController
 const campusEventGallery = require("../controllers/welfare/CampusEventGalleryController");
 const campusAlumaniStudent = require("../controllers/welfare/AlumaniStudentController");
 const Welfare = require("../controllers/welfare/WelfareController");
-
+const policy = require("../controllers/campus/CampusPolicyController")
 
 module.exports = function campusRoutes(app) {
     // CAMPUS OVERVIEW HERO API
@@ -691,6 +691,91 @@ module.exports = function campusRoutes(app) {
     app.delete(
         "/api/campus/studentclubs/:id",
         Welfare.deleteStudentClub
+    );
+
+    // Policy-Hero
+    app.post(
+        "/api/campus/policyhero",
+        upload.single("image"),
+        policy.createPolicyHero
+    );
+
+    app.get(
+        "/api/campus/policyhero",
+        policy.getPolicyHero
+    );
+
+    app.get(
+        "/api/campus/policyhero/:id",
+        policy.getPolicyHeroById
+    );
+
+    app.put(
+        "/api/campus/policyhero/:id",
+        upload.single("image"),
+        policy.updatePolicyHero
+    );
+
+    app.delete(
+        "/api/campus/policyhero/:id",
+        policy.deletePolicyHero
+    );
+
+    // Policy-Title
+    app.post(
+        "/api/campus/policytitle",
+        upload.single("image"),
+        policy.createPolicyTitle
+    );
+
+    app.get(
+        "/api/campus/policytitle",
+        policy.getPolicyTitle
+    );
+
+    app.get(
+        "/api/campus/policytitle/:id",
+        policy.getPolicyTitleById
+    );
+
+    app.put(
+        "/api/campus/policytitle/:id",
+        upload.single("image"),
+        policy.updatePolicyTitle
+    );
+
+    app.delete(
+        "/api/campus/policytitle/:id",
+        policy.deletePolicyTitle
+    );
+
+
+    // Policy-card
+    app.post(
+        "/api/campus/policycard",
+        upload.single("image"),
+        policy.createPolicyCard
+    );
+
+    app.get(
+        "/api/campus/policycard",
+        policy.getPolicyCard
+    );
+
+    app.get(
+        "/api/campus/policycard/:id",
+        policy.getPolicyCardById
+    );
+
+    app.put(
+        "/api/campus/policycard/:id",
+        upload.single("image"),
+        policy.updatePolicyCard
+    );
+
+    app.delete(
+        "/api/campus/policycard/:id",
+        policy.deletePolicyCard
     );
 
 

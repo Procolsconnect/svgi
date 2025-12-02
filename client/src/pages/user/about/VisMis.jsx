@@ -60,10 +60,10 @@ export default function CampusCanvas() {
 
             function showContent(i) {
                 const item = items.eq(i);
-                const target = item.attr("data-title"); // Academics, Research etc.
+                const target = item.attr("data-title");
 
                 // Update React state for active section
-                setActive(target.toLowerCase()[0]);
+                setActive(target.toLowerCase());
 
                 // Manage active circle item
                 items.removeClass("cc-circle__item--active");
