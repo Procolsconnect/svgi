@@ -5,6 +5,7 @@ const placementRoute = require("./placement.route");
 const campusRoutes = require("./campus.route");
 const about = require("./about.route");
 const AdvertisemenRoutes = require("./advertisement.route");
+const newsRoutes = require("./news.route");
 module.exports = function setRoutes(app) {
   homeRoutes(app);
   admissionsRoutes(app);
