@@ -119,6 +119,21 @@ const studentClubs = new mongoose.Schema({
 }, { timestamps: true });
 
 
+const policyHero = new mongoose.Schema({
+    title: { type: String, required: true },
+    image: { type: String, required: true },
+}, { timestamps: true });
+
+const policyTitle = new mongoose.Schema({
+    title: { type: String, required: true },
+    subTitle: { type: String, required: true },
+}, { timestamps: true });
+
+const policyCard = new mongoose.Schema({
+    title: { type: String, required: true },
+    image: { type: String, required: true },
+}, { timestamps: true });
+
 const CampusHealthHero = mongoose.model('CampusHealthHero', campusHealthHeroSchema);
 const CampusHealthCard = mongoose.model('CampusHealthCard', campusHealthCardSchema);
 const CampusFestivalHero = mongoose.model('CampusFestivalHero', campusFestivalHeroSchema);
@@ -145,6 +160,10 @@ const BouncerTitle = mongoose.model('BouncerTitle', bouncerTitle);
 const FancyText = mongoose.model('FancyText', fancyText);
 const StudentClubs = mongoose.model('StudentClubs', studentClubs);
 
+const PolicyHero = mongoose.model('PolicyHero', policyHero);
+const PolicyTitle = mongoose.model('PolicyTitle', policyTitle);
+const PolicyCard = mongoose.model('PolicyCard', policyCard);
+
 module.exports = {
     CampusSportsHero,
     CampusOverviewHero,
@@ -169,4 +188,7 @@ module.exports = {
     BouncerTitle,
     FancyText,
     StudentClubs,
+    PolicyHero,
+    PolicyTitle,
+    PolicyCard,
 }

@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+const apiurl = import.meta.env.VITE_API_URL;
 import './policies.css';
 
 export default function CourseOutcome() {
@@ -55,22 +57,60 @@ export default function CourseOutcome() {
     new ParallaxTiltEffect({ element: $('.co-wrap--3'), tiltEffect: 'reverse' });
   }, []);
 
+
+  // get data
+  const [hero, setHero] = useState();
+  const [title, setTitle] = useState();
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${apiurl}/api/campus/policyhero`)
+      .then(res => {
+        setHero(res.data.data[0]);
+      })
+      .catch(err => console.error(err));
+
+    axios.get(`${apiurl}/api/campus/policytitle`)
+      .then(res => {
+        setTitle(res.data.data[0]);
+      })
+      .catch(err => console.error(err));
+
+    axios.get(`${apiurl}/api/campus/policycard`)
+      .then(res => {
+        const data = Array.isArray(res.data.data) ? res.data.data : res.data;
+        if (Array.isArray(data)) setCards(data);
+        console.log(data);
+      })
+      .catch(err => console.error(err));
+  }, []);
+
+
+
+
   return (
     <div className="co-root">
       {/* HERO */}
       <div className="co-hero" id="co-hero">
-        <img src="hero img.jpg" alt="Hero Background" className="co-hero-img"/>
-        <h1>SVGI Policies</h1>
+        <img src={hero?.image} alt="Hero Background" className="co-hero-img" />
+        <h1>{hero?.title}</h1>
       </div>
 
       {/* SECTION HEADING */}
       <div className="co-section-heading-wrapper">
-        <h1 className="co-section-title">Policies on Core Values</h1>
-        <p className="co-section-subtitle">Hover over the cards</p>
+        <h1 className="co-section-title">{title?.title}</h1>
+        <p className="co-section-subtitle">{title?.subTitle}</p>
       </div>
 
       {/* CARDS */}
       <section className="co-main">
+        {/* {cards.map((card) => {
+          <div className="co-wrap co-wrap--1" key={card._id}>
+            <div className="co-container co-container--1" style={{ backgroundImage: `url(${card.image})` }}>
+              <p>{card.title}</p>
+            </div>
+          </div>
+        })} */}
         <div className="co-wrap co-wrap--1">
           <div className="co-container co-container--1">
             <p>1. Equity, Diversity and Inclusion Policy</p>
