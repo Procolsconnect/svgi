@@ -1,53 +1,57 @@
+// HeroHighlight.jsx
 import React, { useEffect } from "react";
-import "./rdbc.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import styles from "./rdbc.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroHighlight() {
     useEffect(() => {
-        document.querySelectorAll(".hh-text-highlight").forEach((el) => {
+        document.querySelectorAll(`.${styles.hhTextHighlight}`).forEach((el) => {
             ScrollTrigger.create({
                 trigger: el,
                 start: "-100px center",
-                onEnter: () => el.classList.add("active"),
+                onEnter: () => el.classList.add(styles.hhTextHighlightActive),
             });
         });
     }, []);
 
     return (
-        <div className="hh-body">
+        <div className={styles.hhBody}>
             {/* HERO SECTION */}
-            <div id="hh-hero">
+            <div className={styles.hhHero}>
                 <img src="/images/instu.jpg" alt="Hero Background" />
-                <h1>RDC</h1>
+                <h1>RDBC</h1>
             </div>
 
             {/* TOP ROW */}
-            <section className="hh-top-row">
-                <div className="hh-top-row__column-two"></div>
+            <section className={styles.hhTopRow}>
+                <div className={styles.hhTopRowColumnTwo}></div>
             </section>
 
             {/* HEADINGS */}
-            <div className="hh-right-heading">Regulations ,<br />Discipline</div>
-            <div className="hh-left-heading">and <br /> Capacity Development</div>
+            <div className={styles.hhRightHeading}>
+                Regulations ,<br />Discipline
+            </div>
+            <div className={styles.hhLeftHeading}>
+                and <br /> Capacity Development
+            </div>
 
             {/* BOTTOM ROW */}
-            <section className="hh-bottom-row">
-                <div className="hh-bottom-row__column-one">
+            <section className={styles.hhBottomRow}>
+                <div className={styles.hhBottomRowColumnOne}>
                     <p>
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa
                         consectetur illum accusantium vel pariatur? Commodi unde labore culpa
                         blanditiis in!
                     </p>
                 </div>
-                <div className="hh-bottom-row__column-two"></div>
+                <div className={styles.hhBottomRowColumnTwo}></div>
             </section>
 
             {/* HIGHLIGHT SECTION */}
-            <section className="hh-highlight-section">
+            <section className={styles.hhHighlightSection}>
                 <h1>The Carbon in Our Apple Pies</h1>
 
                 <p>
@@ -63,17 +67,20 @@ export default function HeroHighlight() {
                 <p>
                     Great turbulent clouds something incredible is waiting to be known
                     Jean-François Champollion hundreds of thousands science hearts of the
-                    stars. <mark className="hh-text-highlight">Bits of moving fluff</mark> another world brain is the
-                    seed of intelligence how far away bits of moving fluff realm of the
-                    galaxies? Cosmic fugue a still more glorious dawn awaits rings of
-                    Uranus dream of the mind's eye not a sunrise but a galaxyrise the only
-                    home we've ever known.
+                    stars.{" "}
+                    <mark className={styles.hhTextHighlight}>
+                        Bits of moving fluff
+                    </mark>{" "}
+                    another world brain is the seed of intelligence how far away bits of
+                    moving fluff realm of the galaxies? Cosmic fugue a still more glorious
+                    dawn awaits rings of Uranus dream of the mind's eye not a sunrise but a
+                    galaxyrise the only home we've ever known.
                 </p>
 
                 <p>
                     Quasar intelligent beings cosmic ocean realm of the galaxies
                     Jean-François Champollion descended from astronomers?
-                    <mark className="hh-text-highlight">
+                    <mark className={styles.hhTextHighlight}>
                         Flatland prime number concept of the number one Euclid the carbon in
                         our apple pies bits of moving fluff
                     </mark>
@@ -92,7 +99,7 @@ export default function HeroHighlight() {
                     global death another world. Encyclopaedia galactica emerged into
                     consciousness the sky calls to us at the edge of forever across the
                     centuries emerged into consciousness.
-                    <mark className="hh-text-highlight">
+                    <mark className={styles.hhTextHighlight}>
                         At the edge of forever descended from astronomers vanquish the
                         impossible descended from astronomers another world invent the
                         universe
@@ -107,7 +114,10 @@ export default function HeroHighlight() {
                     interiors of collapsing stars? Made in the interiors of collapsing
                     stars two ghostly white figures in coveralls and helmets are softly
                     dancing dream of the mind's eye Apollonius of Perga
-                    <mark className="hh-text-highlight">inconspicuous motes of rock and gas</mark> Apollonius of Perga?
+                    <mark className={styles.hhTextHighlight}>
+                        inconspicuous motes of rock and gas
+                    </mark>{" "}
+                    Apollonius of Perga?
                 </p>
 
                 <p>
@@ -116,7 +126,7 @@ export default function HeroHighlight() {
                     the cosmic ocean decipherment? Of brilliant syntheses rich in mystery
                     something incredible is waiting to be known colonies rings of Uranus
                     hundreds of thousands?
-                    <mark className="hh-text-highlight">
+                    <mark className={styles.hhTextHighlight}>
                         From which we spring of brilliant syntheses extraordinary claims
                         require extraordinary evidence Orion's sword Sea of Tranquility
                         descended from astronomers
@@ -128,10 +138,10 @@ export default function HeroHighlight() {
                     Cosmos of brilliant syntheses Rig Veda rings of Uranus explorations
                     rich in heavy atoms. Shores of the cosmic ocean extraordinary claims
                     require extraordinary evidence made
-                    <mark className="hh-text-highlight">
+                    <mark className={styles.hhTextHighlight}>
                         in the interiors of collapsing stars the carbon in our apple pies
                         paroxysm
-                    </mark>
+                    </mark>{" "}
                     of global death realm of the galaxies? Hundreds of thousands globular
                     star cluster across the centuries a mote of dust suspended in a
                     sunbeam globular star cluster made in the interiors of collapsing
@@ -143,20 +153,25 @@ export default function HeroHighlight() {
                     preserve and cherish that pale blue dot as a patch of light. A still
                     more glorious dawn awaits the only home we've ever known globular star
                     cluster invent the universe
-                    <mark className="hh-text-highlight">Cambrian explosion Flatland</mark>. Vastness is bearable only
-                    through love invent the universe dream of the mind's eye kindling the
-                    energy hidden in matter gathered by gravity inconspicuous motes of rock
-                    and gas.
+                    <mark className={styles.hhTextHighlight}>
+                        Cambrian explosion Flatland
+                    </mark>
+                    . Vastness is bearable only through love invent the universe dream of
+                    the mind's eye kindling the energy hidden in matter gathered by gravity
+                    inconspicuous motes of rock and gas.
                 </p>
 
                 <p>
                     Intelligent beings something incredible is waiting to be known
                     extraordinary claims require extraordinary evidence a very small stage
                     in a vast cosmic arena realm of the galaxies hundreds of thousands.
-                    <mark className="hh-text-highlight">Vanquish the impossible astonishment</mark>. Tunguska event
-                    invent the universe a still more glorious dawn awaits at the edge of
-                    forever? Across the centuries vanquish the impossible bits of moving
-                    fluff prime number great turbulent clouds courage of our questions?
+                    <mark className={styles.hhTextHighlight}>
+                        Vanquish the impossible astonishment
+                    </mark>
+                    . Tunguska event invent the universe a still more glorious dawn awaits
+                    at the edge of forever? Across the centuries vanquish the impossible
+                    bits of moving fluff prime number great turbulent clouds courage of our
+                    questions?
                 </p>
 
                 <p>
@@ -165,11 +180,14 @@ export default function HeroHighlight() {
                     vanquish the impossible another world concept of the number one Euclid.
                     Emerged into consciousness white dwarf citizens of distant epochs Sea
                     of Tranquility great turbulent
-                    <mark className="hh-text-highlight">clouds invent the universe</mark>. Courage of our questions
-                    courage of our questions two ghostly white figures in coveralls and
-                    helmets are softly dancing bits of moving fluff kindling the energy
-                    hidden in matter Sea of Tranquility and billions upon billions upon
-                    billions upon billions upon billions upon billions upon billions.
+                    <mark className={styles.hhTextHighlight}>
+                        clouds invent the universe
+                    </mark>
+                    . Courage of our questions courage of our questions two ghostly white
+                    figures in coveralls and helmets are softly dancing bits of moving
+                    fluff kindling the energy hidden in matter Sea of Tranquility and
+                    billions upon billions upon billions upon billions upon billions upon
+                    billions upon billions.
                 </p>
             </section>
         </div>

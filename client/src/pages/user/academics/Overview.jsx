@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import "./overview.css";
+import styles from "./overview.module.css";
 
 export default function OverviewPage() {
   const [hero, setHero] = useState(null);
@@ -16,15 +16,12 @@ export default function OverviewPage() {
 
   const API = import.meta.env.VITE_API_URL;
 
-  // ADD BOUNCE ON FIRST LOAD
- useEffect(() => {
-  if (!loading) {
-    arrowRef.current?.classList.add("op-arrow-bounce");
-  }
-}, [loading]);
+  useEffect(() => {
+    if (!loading) {
+      arrowRef.current?.classList.add(styles.opArrowBounce);
+    }
+  }, [loading]);
 
-
-  // FETCH DATA
   useEffect(() => {
     async function fetchData() {
       try {
@@ -43,12 +40,9 @@ export default function OverviewPage() {
         setLoading(false);
       }
     }
-
     fetchData();
   }, [API]);
 
-
-  // SCROLL LOGIC (UNCHANGED)
   const handleScrollClick = () => {
     const sections = [...document.querySelectorAll("section")];
 
@@ -68,105 +62,93 @@ export default function OverviewPage() {
       setRotated(false);
     } else {
       sections[count]?.scrollIntoView({ behavior: "smooth" });
-
       if (count === sections.length - 1) setRotated(true);
       setCount((p) => p + 1);
     }
 
-    arrowRef.current?.classList.remove("op-arrow-bounce");
+    arrowRef.current?.classList.remove(styles.opArrowBounce);
   };
 
-
-  /* STATIC GRID */
   const gridImages = [
-    { class: "one", src: 11 },
-    { class: "three", src: 13 },
-    { class: "two", src: 12 },
-    { class: "four" },
-    { class: "five", src: 14 },
-    { class: "six" },
-    { class: "seven", src: 15 },
-    { class: "eight" },
-    { class: "nine" },
-    { class: "ten", src: 16 },
-    { class: "eleven", src: 17 },
-    { class: "twelve", src: 18 },
+    { class: styles.one, src: 11 },
+    { class: styles.three, src: 13 },
+    { class: styles.two, src: 12 },
+    { class: styles.four },
+    { class: styles.five, src: 14 },
+    { class: styles.six },
+    { class: styles.seven, src: 15 },
+    { class: styles.eight },
+    { class: styles.nine },
+    { class: styles.ten, src: 16 },
+    { class: styles.eleven, src: 17 },
+    { class: styles.twelve, src: 18 },
   ];
 
-  if (loading) return <div className="loading">Loading...</div>;
+  if (loading) return <div className={styles.loading}>Loading...</div>;
 
   return (
-    <div className="op-container">
-
-      {/* ❗ SECTION 1 — HERO */}
-      <section id="op-hero">
+    <div className={styles.opContainer}>
+      <section className={styles.opHero}>
         <img src={hero?.image} alt="Hero" />
-        <div className="op-hero-wrapper"><h1>{hero?.title}</h1></div>
+        <div><h1>{hero?.title}</h1></div>
       </section>
 
-      {/* SCROLL BUTTON */}
       <div
         ref={scrollRef}
-        className={`op-scroll ${clicked ? "op-scroll--clicked" : ""} ${rotated ? "op-scroll--rotate" : ""}`}
+        className={`${styles.opScroll} ${clicked ? styles.opScrollClicked : ""} ${rotated ? styles.opScrollRotate : ""}`}
         onClick={handleScrollClick}
       >
-        <span ref={arrowRef} className="op-arrow">&#8595;</span>
+        <span ref={arrowRef} className={styles.opArrow}>&#8595;</span>
       </div>
 
-      {/* ❗ SECTION 2 — GRID + TEXT */}
-      <section className="op-hero-section">
-        <div className="op-text">
-          <p className="op-text-short">Lorem ipsum dolor sit amet</p>
-          <h1 className="op-text-title">Lorem ipsum dolor sit amet</h1>
-          <p className="op-text-description">
+      <section className={styles.opHeroSection}>
+        <div className={styles.opText}>
+          <p className={styles.opTextShort}>Lorem ipsum dolor sit amet</p>
+          <h1 className={styles.opTextTitle}>Lorem ipsum dolor sit amet</h1>
+          <p className={styles.opTextDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Laboriosam sequi magni doloremque fugit temporibus, voluptate possimus.
           </p>
-          <a className="op-text-button" href="#">Learn more</a>
+          <a className={styles.opTextButton} href="#">Learn more</a>
         </div>
 
-        <div className="op-grid">
+        <div className={styles.opGrid}>
           {gridImages.map((g, i) => (
-            <div key={i} className={`op-grid-item ${g.class}`}>
+            <div key={i} className={`${styles.opGridItem} ${g.class}`}>
               {g.src && <img src={`https://picsum.photos/500/500?random=${g.src}`} alt="" />}
             </div>
           ))}
         </div>
       </section>
 
-      {/* ❗ SECTION 3 — CARDS */}
-      <section className="projcard-container">
+      <section className={styles.projcardContainer}>
         {cards.map((c) => (
-          <div key={c._id} className="projcard projcard-blue">
-            <img className="projcard-img" src={c.image} alt="" />
-            <div className="projcard-textbox">
-              <div className="projcard-title">{c.title}</div>
-              <div className="projcard-subtitle">{c.subtitle}</div>
-              <div className="projcard-bar"></div>
+          <div key={c._id} className={`${styles.projcard} ${styles.projcardBlue}`}>
+            <img className={styles.projcardImg} src={c.image} alt="" />
+            <div className={styles.projcardTextbox}>
+              <div className={styles.projcardTitle}>{c.title}</div>
+              <div className={styles.projcardSubtitle}>{c.subtitle}</div>
+              <div className={styles.projcardBar}></div>
               <p>{c.description}</p>
             </div>
           </div>
         ))}
       </section>
 
-      {/* ❗ SECTION 4 — CONTENTS */}
-      <section className="contents-page">
-        <main className="contents-main">
+      <section className={styles.contentsPage}>
+        <main className={styles.contentsMain}>
           <h1>Contents</h1>
-
           {contents.map((c, index) => (
-            <div key={c._id} className="item">
-              <div className="item__number">{index + 1}</div>
-
-              <div className="item__topic">
-                <div className="item__topic__title">{c.content}</div>
-                <div className="item__topic__author">{c.name}</div>
+            <div key={c._id} className={styles.item}>
+              <div className={styles.itemNumber}>{index + 1}</div>
+              <div className={styles.itemTopic}>
+                <div className={styles.itemTopicTitle}>{c.content}</div>
+                <div className={styles.itemTopicAuthor}>{c.name}</div>
               </div>
             </div>
           ))}
         </main>
       </section>
-
     </div>
   );
 }

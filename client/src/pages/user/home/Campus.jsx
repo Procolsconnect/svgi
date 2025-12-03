@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./Campus.css";
+import styles from "./CollegeCampus.module.css";
 
 const CollegeCampus = () => {
   const [campusData, setCampusData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const API_URL = import.meta.env.VITE_API_URL
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchCampusData = async () => {
@@ -22,20 +22,20 @@ const CollegeCampus = () => {
     fetchCampusData();
   }, [API_URL]);
 
-  if (loading) return <p className="cc-loading">Loading campus details...</p>;
-  if (!campusData) return <p className="cc-error">No campus data found.</p>;
+  if (loading) return <p className={styles.cdLoading}>Loading campus details...</p>;
+  if (!campusData) return <p className={styles.cdError}>No campus data found.</p>;
 
   const { imagesCard, videosCard, toursCard } = campusData;
 
   return (
-    <main className="cc-main">
-      <div className="cc-heading">
-        <h1 className="cc-title">
+    <main className={styles.cdMain}>
+      <div className={styles.cdHeading}>
+        <h1 className={styles.cdTitle}>
           College Campus <br />
           Infrastructure
         </h1>
-        <aside className="cc-aside">
-          <p className="cc-desc">
+        <aside className={styles.cdAside}>
+          <p className={styles.cdDesc}>
             Shree Vengadeshwara Institution offers a modern, tech-enabled campus
             with smart classrooms, advanced labs, digital library, high-speed
             internet, and a dedicated placement cell. Our well-maintained
@@ -43,22 +43,22 @@ const CollegeCampus = () => {
             surroundings provide a perfect blend of learning and lifestyle. A
             truly inspiring space for academic and personal growth.
           </p>
-          <p className="cc-since">Since 2011</p>
+          <p className={styles.cdSince}>Since 2011</p>
         </aside>
       </div>
 
-      <div className="cc-container">
+      <div className={styles.cdContainer}>
         {/* Image Card */}
-        <div className="cc-card">
-          <div className="cc-card-inner">
-            <div className="cc-box">
-              <div className="cc-imgBox">
+        <div className={styles.cdCard}>
+          <div className={styles.cdCardInner}>
+            <div className={styles.cdBox}>
+              <div className={styles.cdImgBox}>
                 <img
                   src={imagesCard?.[0]?.image || "/images/default.jpg"}
                   alt="College infrastructure"
                 />
               </div>
-              <div className="cc-more">
+              <div className={styles.cdMore}>
                 <ul>
                   {imagesCard?.slice(1, 4)?.map((img, index) => (
                     <li key={index}>
@@ -76,7 +76,7 @@ const CollegeCampus = () => {
                   )}
                 </ul>
               </div>
-              <div className="cc-tag">
+              <div className={styles.cdTag}>
                 <a href="#">#view all images</a>
               </div>
             </div>
@@ -85,12 +85,12 @@ const CollegeCampus = () => {
 
         {/* Video Card */}
         {videosCard?.length > 0 && (
-          <div className="cc-card cc-video">
-            <div className="cc-card-inner">
-              <div className="cc-box">
-                <div className="cc-videoBox">
+          <div className={`${styles.cdCard} ${styles.cdVideo}`}>
+            <div className={styles.cdCardInner}>
+              <div className={styles.cdBox}>
+                <div className={styles.cdVideoBox}>
                   <video
-                    id="cc-dronVideo"
+                    id="cd-dronVideo"
                     autoPlay
                     loop
                     muted
@@ -107,7 +107,7 @@ const CollegeCampus = () => {
                     Your browser does not support the video tag.
                   </video>
                 </div>
-                <div className="cc-tag">
+                <div className={styles.cdTag}>
                   <a href={videosCard[0].image} target="_blank" rel="noopener noreferrer">
                     #view full screen
                   </a>
@@ -119,22 +119,22 @@ const CollegeCampus = () => {
 
         {/* 360 View Card */}
         {toursCard?.length > 0 && (
-          <div className="cc-card">
-            <p className="cc-more-link">
+          <div className={styles.cdCard}>
+            <p className={styles.cdMoreLink}>
               <a href="#">More about tours</a>
             </p>
-            <div className="cc-card-inner">
-              <div className="cc-box">
-                <div className="cc-imgBox">
+            <div className={styles.cdCardInner}>
+              <div className={styles.cdBox}>
+                <div className={styles.cdImgBox}>
                   <img
                     src={toursCard[0].image}
                     alt="360 view"
                   />
                 </div>
-                <div className="cc-more">
+                <div className={styles.cdMore}>
                   <a
                     href="https://maps.app.goo.gl/ngE5ywtRyomy69CJA"
-                    className="cc-arrow"
+                    className={styles.cdArrow}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -153,7 +153,7 @@ const CollegeCampus = () => {
                     </svg>
                   </a>
                 </div>
-                <div className="cc-tag">
+                <div className={styles.cdTag}>
                   <a href="#">#360 view</a>
                 </div>
               </div>

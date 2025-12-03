@@ -1,53 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import './AnimatedCards.css';
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import styles from "./StudentAchivement.module.css";
 
-const ExpandingCards = () => {
+const StudentAchivement = () => {
   const [cardsData, setCardsData] = useState([]);
-  const [pageIsOpen, setPageIsOpen] = useState(false);
-  const [currentCard, setCurrentCard] = useState(null);
-  const [coverStyle, setCoverStyle] = useState({});
   const canvasRef = useRef(null);
   const glRef = useRef(null);
   const programRef = useRef(null);
   const animationFrameRef = useRef(null);
-  const apiurl = import.meta.env.VITE_API_URL
+  const apiurl = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
 
-  // Fetch from API dynamically
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const res = await axios.get(`${apiurl}/api/student-achievements`); // change API URL
+        const res = await axios.get(`${apiurl}/api/student-achievements`);
         setCardsData(res.data.data || []);
       } catch (err) {
-        console.error('Error fetching cards:', err);
+        console.error("Error fetching cards:", err);
       }
     };
     fetchCards();
   }, []);
 
-useEffect(() => {
-  if (pageIsOpen) {
-    // Disable background scrolling
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = '';
-  }
-
-  return () => {
-    document.body.style.overflow = '';
-  };
-}, [pageIsOpen]);
-
-
-
-
-  // WebGL animated background (same as your design)
+  // WebGL background animation (unchanged)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const gl = canvas.getContext('webgl');
+    const gl = canvas.getContext("webgl");
     if (!gl) return;
     glRef.current = gl;
 
@@ -56,11 +38,11 @@ useEffect(() => {
       canvas.height = canvas.clientHeight;
     };
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
 
-    const compileShader = (source, type) => {
+    const compileShader = (src, type) => {
       const shader = gl.createShader(type);
-      gl.shaderSource(shader, source);
+      gl.shaderSource(shader, src);
       gl.compileShader(shader);
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
         console.error(gl.getShaderInfoLog(shader));
@@ -98,11 +80,10 @@ useEffect(() => {
             if (uv.x >= current_x1_screen && uv.x < current_x2_screen) {
               float rb_val = (255.0 * ((x2_js - x1_js) / 130.0));
               rb_val = clamp(rb_val, 0.0, 255.0);
-              if (mod(float(i), 2.0) == 0.0) {
-                finalColor = vec3(rb_val / 255.0, 32.0 / 255.0, 0.0);
-              } else {
-                finalColor = vec3(0.0, 32.0 / 255.0, rb_val / 255.0);
-              }
+              if (mod(float(i), 2.0) == 0.0)
+                finalColor = vec3(rb_val / 255.0, 32.0/255.0, 0.0);
+              else
+                finalColor = vec3(0.0, 32.0/255.0, rb_val/255.0);
               break;
             }
           }
@@ -111,12 +92,12 @@ useEffect(() => {
       }
     `;
 
-    const vertexShader = compileShader(vertexSource, gl.VERTEX_SHADER);
-    const fragmentShader = compileShader(fragmentSource, gl.FRAGMENT_SHADER);
+    const vShader = compileShader(vertexSource, gl.VERTEX_SHADER);
+    const fShader = compileShader(fragmentSource, gl.FRAGMENT_SHADER);
 
     const program = gl.createProgram();
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
+    gl.attachShader(program, vShader);
+    gl.attachShader(program, fShader);
     gl.linkProgram(program);
     gl.useProgram(program);
     programRef.current = program;
@@ -129,18 +110,18 @@ useEffect(() => {
       gl.STATIC_DRAW
     );
 
-    const position = gl.getAttribLocation(program, 'position');
-    gl.enableVertexAttribArray(position);
-    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+    const pos = gl.getAttribLocation(program, "position");
+    gl.enableVertexAttribArray(pos);
+    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
 
-    const resolutionLocation = gl.getUniformLocation(program, 'resolution');
-    const timeLocation = gl.getUniformLocation(program, 'time');
+    const resolutionLoc = gl.getUniformLocation(program, "resolution");
+    const timeLoc = gl.getUniformLocation(program, "time");
 
-    const render = (time) => {
+    const render = (t) => {
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-      gl.uniform1f(timeLocation, time * 0.001);
+      gl.uniform2f(resolutionLoc, canvas.width, canvas.height);
+      gl.uniform1f(timeLoc, t * 0.001);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       animationFrameRef.current = requestAnimationFrame(render);
     };
@@ -148,65 +129,38 @@ useEffect(() => {
     render(0);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener("resize", resizeCanvas);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
   }, []);
 
- const handleCardClick = (card, index) => {
-  setCurrentCard({ ...card, colorIndex: index % 4 }); // store card color index
-  setPageIsOpen(true);
-
-  // dynamically set background to clicked card color
-  const cardColors = ["#EB5160", "#8F3985", "#8DAA91", "#888DA7"];
-  setCoverStyle({
-    backgroundColor: cardColors[index % 4],
-  });
-};
-
-
-  const handleClose = () => {
-    setPageIsOpen(false);
-    setCurrentCard(null);
-    setCoverStyle({});
+  const handleNavigate = (card) => {
+    navigate(`/student-achievements/${card._id}`);
   };
 
   return (
-    <div className="ec-body">
-      <canvas ref={canvasRef} className="ec-background-canvas"></canvas>
+    <div className={styles.body}>
+      <canvas ref={canvasRef} className={styles.backgroundCanvas}></canvas>
+      
+      <h1 className={styles.title}>Student Achievements</h1>
 
-      <div className="ec-container" style={{ position: 'relative', minHeight: '600px' }}>
-        {/* Normal card grid */}
-        <div className="ec-card-grid" style={{ opacity: pageIsOpen ? 0 : 1, transition: '0.3s' }}>
+      <div className={styles.container} style={{ position: "relative", minHeight: "600px" }}>
+        <div className={styles.cardGrid}>
           {cardsData.map((card, index) => (
             <div
               key={card._id}
-              className={`ec-card ec-card-color-${index % 4}`}
-              onClick={() => handleCardClick(card,index)}
+              className={`${styles.card} ${styles[`cardColor${index % 4}`]}`}
+              onClick={() => handleNavigate(card)}
             >
-              <div className="ec-border"></div>
+              <div className={styles.border}></div>
               <img src={card.img} alt={card.title} />
               <h1>{card.title}</h1>
             </div>
           ))}
         </div>
-
-        {/* Popup Card */}
-        {pageIsOpen && currentCard && (
-          <div className="ec-popup" style={{ ...coverStyle }}>
-            <div className="ec-popup-content">
-              <button className="ec-close-btn" onClick={handleClose}>
-                ✕
-              </button>
-              <img src={currentCard.img} alt={currentCard.title} />
-              <h1>{currentCard.title}</h1>
-              <p>{currentCard.description}</p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
 };
 
-export default ExpandingCards;
+export default StudentAchivement;

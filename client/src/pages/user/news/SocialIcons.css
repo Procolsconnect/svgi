@@ -1,43 +1,43 @@
-/* Everything safely scoped inside .sicon-root */
-
 .sicon-root {
   width: 100%;
   height: 100vh;
   background: #fff;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* safe */
 }
 
 .sicon-flex {
   display: flex;
-  flex-direction: row;
-  gap: 40px;
+  justify-content: space-between; /* spread 4 icons evenly */
+  width: 100%;
+  max-width: 1200px; /* optional max width */
+  box-sizing: border-box;
+  flex-wrap: nowrap;
 }
 
 .sicon-icon {
-  cursor: pointer;
+  flex: 0 0 calc((100% - 3 * 2%) / 4); /* 4 icons, 3 gaps of 2% */
+  aspect-ratio: 1 / 1; /* keep circle square */
+  border: 6px solid #000;
+  border-radius: 50%;
+  background: url("https://picsum.photos/id/811/600/600") center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  width: 240px;
-  height: 240px;
-
   color: #fff;
-  font-size: 4.8rem;
-
-  border-radius: 50%;
-  border: 6px solid #000;
-
-  background: url("https://picsum.photos/id/811/600/600") center/cover no-repeat;
-
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-
+  font-size: 4rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   transition: 0.35s ease;
+}
+
+/* Gaps handled via margin-right except last icon */
+.sicon-icon:not(:last-child) {
+  margin-right: 2%;
 }
 
 .sicon-icon:hover {
@@ -46,11 +46,15 @@
   transform: scale(1.09);
 }
 
-/* Responsive */
+/* Responsive font only */
 @media (max-width: 1000px) {
   .sicon-icon {
-    width: 160px;
-    height: 160px;
-    font-size: 3.2rem;
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .sicon-icon {
+    font-size: 2.5rem;
   }
 }

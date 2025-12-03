@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600;700&display=swap');
+
+.wrapper {
+  width: 100%;
+  font-family: 'Playfair Display', serif;
+  color: #001f54;
+  background: #f9fafb;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 50vh;
+  }
+}
+
+.heroBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.heroOverlay {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.heroTitle {
+  position: relative;
+  z-index: 1;
+  font-size: 48px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 32px;
+    padding: 0 20px;
+  }
+}
+
+.heroTitle::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  border-radius: 3px;
+  animation: underlinePulse 2s infinite;
+}
+
+@keyframes underlinePulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.8; }
+  50% { transform: scaleX(1.4); opacity: 1; }
+}
+
+/* TEXT + VIDEO */
+.content {
+  display: flex;
+  width: 100%;
+  padding: 60px 0;
+  background: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+}
+
+.textContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  font-family: "PP Neue Montreal", "Inter", sans-serif;
+}
+
+.text {
+  font-size: 2rem;
+  line-height: 1.4;
+  max-width: 500px;
+  margin: 0;
+}
+
+.lineWrapper {
+  overflow: hidden;
+  margin-bottom: 0.2em;
+}
+
+.line {
+  display: block;
+  will-change: transform, opacity, filter;
+}
+
+.videoBox {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: #ffffff;
+}
+
+.video {
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 900px) {
+  .video {
+    width: 100%;
+  }
+}
+
+/* BUBBLE CHAT SECTION */
+.bubbleSection {
+  font-size: 62.5%; /* 1rem = 10px */
+  background: #f9fafb;
+  padding: 4rem 0;
+}
+
+.leftHeading {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #333333;
+  text-align: left;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  border-left: 0.5rem solid #333333;
+  margin-left: 4rem;
+}
+
+.container {
+  padding: 4rem;
+}
+
+.bubble {
+  position: relative;
+  padding: 2.8rem;
+  margin-bottom: -0.5rem;
+}
+
+.bubble p {
+  font-size: 1.6rem;
+  background-color: #F5F5F5;
+  border-radius: 14rem;
+  padding: 1.5rem;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  line-height: 1.4;
+}
+
+.bubble::before {
+  content: "";
+  position: absolute;
+  inset: 0.1rem;
+  border: 0.25rem dotted #00008B;
+  border-radius: 0;
+  z-index: 0;
+}
+
+.bubble:nth-child(2n + 1)::before {
+  right: 50%;
+  border-top-left-radius: 16rem;
+  border-bottom-left-radius: 16rem;
+  border-right: none;
+}
+
+.bubble:nth-child(2n)::before {
+  left: 50%;
+  border-top-right-radius: 16rem;
+  border-bottom-right-radius: 16rem;
+  border-left: none;
+}
+
+/* Mobile Responsive for Bubble Section */
+@media (max-width: 768px) {
+  .bubbleSection {
+    font-size: 50%;
+  }
+
+  .leftHeading {
+    font-size: 3rem;
+    margin-left: 2rem;
+    padding-left: 0.8rem;
+    border-left: 0.3rem solid #333333;
+  }
+
+  .container {
+    padding: 2rem;
+  }
+
+  .bubble {
+    padding: 2rem;
+  }
+
+  .bubble p {
+    font-size: 2.5rem;
+    padding: 2.5rem;
+    border-radius: 10rem;
+  }
+
+  .bubble::before {
+    border-width: 0.3rem;
+  }
+
+  .bubble:nth-child(2n + 1)::before {
+    border-top-left-radius: 12rem;
+    border-bottom-left-radius: 12rem;
+  }
+
+  .bubble:nth-child(2n)::before {
+    border-top-right-radius: 12rem;
+    border-bottom-right-radius: 12rem;
+  }
+}

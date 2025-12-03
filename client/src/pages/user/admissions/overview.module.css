@@ -1,0 +1,403 @@
+/* SVGIOverview.module.css */
+
+:global(:root) {
+  --svgio-bg: #fdfdfd;
+  --svgio-text: #333;
+}
+
+.root {
+  font-family: 'Poppins', sans-serif;
+  background: var(--svgio-bg);
+  color: var(--svgio-text);
+  scroll-behavior: smooth;
+}
+
+.wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hero {
+  min-height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 5, 5, 0.5);
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.heroTitle {
+  position: relative;
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  z-index: 1;
+}
+
+.heroTitle::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  border-radius: 3px;
+  animation: underlinePulse 2s infinite;
+}
+
+@keyframes underlinePulse {
+  0%, 100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
+}
+
+.scroll {
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  background: black;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-top: -25px;
+  margin-right: -25px;
+  color: white;
+  font-size: 26px;
+  line-height: 26px;
+  cursor: pointer;
+  position: absolute;
+  right: 50%;
+  transition: transform 0.6s ease, right 0.6s ease, top 0.6s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.scrollClicked {
+  transform: rotate(360deg);
+  position: fixed;
+  top: 40px;
+  right: 50px;
+}
+
+.scrollRotate {
+  transform: rotate(180deg);
+}
+
+.arrow {
+  display: inline-block;
+  position: relative;
+}
+
+.arrowBounce {
+  animation: arrowAnim 1s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes arrowAnim {
+  0% { bottom: -13px; }
+  50% { bottom: -8px; }
+  100% { bottom: -13px; }
+}
+
+.gradientSection {
+  width: 90%;
+  max-width: 1100px;
+  margin: 60px auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.gradientShape {
+  -webkit-mask-image: radial-gradient(circle 30vw at 0% 0%, white 60%, transparent 95%, transparent);
+  mask-image: radial-gradient(circle 30vw at 0% 0%, white 60%, transparent 95%, transparent);
+  shape-outside: radial-gradient(circle 30vw at 0% 0%, white 60%, transparent 95%, transparent);
+  shape-image-threshold: 0.35;
+  float: left;
+  width: 40%;
+  max-width: 400px;
+  margin-right: 20px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.gradientText {
+  flex: 1;
+}
+
+.gradientSection h2 {
+  text-align: left;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+.gradientSection p {
+  text-align: justify;
+  line-height: 1.6;
+}
+
+.section {
+  width: 100%;
+  padding: 60px 20px;
+}
+
+.wrapGrid {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 940px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.col {
+  flex: 1 1 45%;
+}
+
+.content6Headline {
+  margin-bottom: 30px;
+}
+
+.tagline {
+  opacity: 0.6;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.text16 {
+  font-size: 16px;
+  line-height: 26px;
+  opacity: 0.7;
+}
+
+.text17 {
+  font-size: 16px;
+  line-height: 26px;
+  opacity: 0.7;
+}
+
+.content6Pic {
+  width: 100%;
+  height: 320px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 20px;
+}
+
+.contactSection {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.contactSectionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.contactSectionH1 {
+  margin-bottom: 10px;
+  margin-top: 100px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.expandContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 30px;
+  max-width: 1200px;
+  gap: 20px;
+}
+
+.eCard {
+  min-height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.expandCard {
+  max-width: 300px;
+  height: 150px;
+  background: #fff;
+  margin: 30px 10px;
+  padding: 20px 20px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 200px rgba(0, 0, 0, 0.5);
+  transition: 0.5s ease-in-out;
+}
+
+.expandCard:hover {
+  height: 380px;
+}
+
+.expandCard:hover .expandContent {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.expandImage {
+  position: relative;
+  width: 230px;
+  height: 160px;
+  top: -60px;
+  z-index: 1;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.expandImage img {
+  max-width: 100%;
+  height: 170px;
+  border-radius: 4px;
+}
+
+.expandContent {
+  position: relative;
+  padding: 10px 15px;
+  text-align: center;
+  color: #111;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s ease-in-out;
+}
+
+.expandContent h3 {
+  margin-bottom: 15px;
+  margin-top: -10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0a2540;
+}
+
+.info {
+  margin: 10px 0;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #1d3557;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.infoIcon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.infoText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  min-width: 0;
+  color: #111;
+}
+
+.icon {
+  font-size: 18px;
+  margin-right: 6px;
+}
+
+.info:hover {
+  background: #dce9ff;
+}
+
+.expandContent a {
+  color: #0466c8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.expandContent a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 1250px) {
+  .gradientShape {
+    -webkit-mask-image: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
+    mask-image: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
+    shape-outside: radial-gradient(circle 40vw at 0% 0%, white 60%, transparent 95%, transparent);
+    shape-image-threshold: 0.35;
+  }
+}
+
+@media (max-width: 991px) {
+  .wrapGrid {
+    flex-direction: column;
+  }
+  .col {
+    flex: 1 1 100%;
+  }
+  .gradientSection {
+    flex-direction: column;
+  }
+  .gradientShape {
+    width: 100%;
+    max-width: none;
+    height: 450px;
+    float: none;
+    margin: 0 auto 20px;
+    -webkit-mask-image: linear-gradient(to bottom, white 40%, transparent 95%);
+    mask-image: linear-gradient(to bottom, white 40%, transparent 95%);
+    shape-outside: linear-gradient(to bottom, white 40%, transparent 95%);
+    shape-image-threshold: 0.35;
+  }
+  .gradientSection h2 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .gradientShape {
+    height: 200px;
+  }
+}

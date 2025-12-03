@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./logo_section1.css";
+import styles from "./logo_section1.module.css";
 
 const apiurl = import.meta.env.VITE_API_URL;
 
@@ -15,9 +15,8 @@ const InfiniteLogoSlider = () => {
         const data = res?.data?.data || res?.data || [];
 
         if (Array.isArray(data)) {
-          // Extract URL field from each logo object
           const urls = data.map((item) => item.url || item.img || item.image || item);
-          setLogos(urls.filter(Boolean)); // remove empty/null URLs
+          setLogos(urls.filter(Boolean));
         } else {
           throw new Error("Invalid data format from API");
         }
@@ -30,54 +29,50 @@ const InfiniteLogoSlider = () => {
     fetchLogos();
   }, []);
 
-  // ✅ Show error message
   if (error) {
     return (
-      <div className="infinite-logo-slider-container">
+      <div className={styles.infiniteLogoSliderContainer}>
         <p style={{ color: "red" }}>{error}</p>
       </div>
     );
   }
 
-  // ✅ Loading fallback
   if (logos.length === 0) {
     return (
-      <div className="infinite-logo-slider-container">
+      <div className={styles.infiniteLogoSliderContainer}>
         <p>Loading logos...</p>
       </div>
     );
   }
 
-  // ✅ Split for two-row animation (mobile)
   const half = Math.ceil(logos.length / 2);
   const topRowLogos = logos.slice(0, half);
   const bottomRowLogos = logos.slice(half);
 
-  // ✅ Render same design safely
   return (
-    <div className="infinite-logo-slider-container">
+    <div className={styles.infiniteLogoSliderContainer}>
       {/* Desktop / Tablet: Single Track */}
-      <div className="infinite-logo-slider-track desktop-track">
+      <div className={`${styles.infiniteLogoSliderTrack} ${styles.desktopTrack}`}>
         {logos.concat(logos).map((logo, index) => (
-          <div key={index} className="infinite-logo-slide">
+          <div key={index} className={styles.infiniteLogoSlide}>
             <img src={logo} alt={`logo-${index}`} loading="lazy" />
           </div>
         ))}
       </div>
 
       {/* Mobile: Two Opposite Rows */}
-      <div className="infinite-logo-mobile">
-        <div className="infinite-logo-slider-row top-row">
+      <div className={styles.infiniteLogoMobile}>
+        <div className={`${styles.infiniteLogoSliderRow} ${styles.topRow}`}>
           {topRowLogos.concat(topRowLogos).map((logo, index) => (
-            <div key={`top-${index}`} className="infinite-logo-slide">
+            <div key={`top-${index}`} className={styles.infiniteLogoSlide}>
               <img src={logo} alt={`top-logo-${index}`} loading="lazy" />
             </div>
           ))}
         </div>
 
-        <div className="infinite-logo-slider-row bottom-row">
+        <div className={`${styles.infiniteLogoSliderRow} ${styles.bottomRow}`}>
           {bottomRowLogos.concat(bottomRowLogos).map((logo, index) => (
-            <div key={`bottom-${index}`} className="infinite-logo-slide">
+            <div key={`bottom-${index}`} className={styles.infiniteLogoSlide}>
               <img src={logo} alt={`bottom-logo-${index}`} loading="lazy" />
             </div>
           ))}
