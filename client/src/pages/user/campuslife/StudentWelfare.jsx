@@ -1,11 +1,13 @@
 // MergedHeroComponent.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './StudentWelfare.module.css';
 import CampusEventsGallery from './CampusEventGallery';
 import AlumaniStudent from './AlumaniStudent';
 import OurDiamonds from './OurDiamonds';
+import axios from 'axios';
+const apiurl = import.meta.env.VITE_API_URL;
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -28,7 +30,7 @@ const MergedHeroComponent = () => {
         end: "+=150%",
         pin: true,
         scrub: true,
-        markers: false ,// Set to true for debugging
+        markers: false,// Set to true for debugging
         anticipatePin: 1
       }
     });
@@ -39,11 +41,11 @@ const MergedHeroComponent = () => {
       transformOrigin: "center center",
       ease: "power1.inOut"
     })
-    .to(heroSectionRef.current, {
-      scale: 1.1,
-      transformOrigin: "center center",
-      ease: "power1.inOut"
-    }, "<");
+      .to(heroSectionRef.current, {
+        scale: 1.1,
+        transformOrigin: "center center",
+        ease: "power1.inOut"
+      }, "<");
 
     // Clean up ScrollTrigger instances
     return () => {
@@ -153,7 +155,7 @@ const MergedHeroComponent = () => {
       if (!bouncerRef.current) return;
 
       const elemText = bouncerRef.current.textContent || '';
-      
+
       // Create cloned element
       const cloned = bouncerRef.current.cloneNode(true);
       cloned.className = `${styles.cloned} ${styles.bouncer}`;
@@ -230,62 +232,120 @@ const MergedHeroComponent = () => {
     }
   }, []);
 
+  const [heroBgImg, setHeroBgImg] = useState();
+  const [bouncerTitle, setBouncerTitle] = useState();
+  const [fancyData, setFancyData] = useState(null);
+  const [cardData, setCardData] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${apiurl}/api/campus/welfarehero`)
+      .then(res => {
+        setHeroBgImg(res.data.data.map(img => img.image));
+      })
+      .catch(err => console.error(err));
+
+    axios.get(`${apiurl}/api/campus/bouncertitle`)
+      .then(res => {
+        setBouncerTitle(res.data.data.map(title => title.title))
+      })
+      .catch(err => console.error(err));
+
+    axios.get(`${apiurl}/api/campus/fancytext`)
+      .then(res => {
+        setFancyData(res.data.data[0])
+      })
+      .catch(err => console.error(err));
+
+    axios.get(`${apiurl}/api/campus/studentclubs`)
+      .then(res => {
+        setCardData(res.data.data)
+      })
+      .catch(err => console.error(err));
+  },
+    []);
+
   return (
     <div className={styles.container}>
       {/* Hero Section */}
       <div ref={wrapperRef} className={styles.wrapper}>
         <div className={styles.content}>
-          <section 
+          <section
             ref={heroSectionRef}
             className={`${styles.section} ${styles.heroSection}`}
           ></section>
         </div>
 
         <div className={styles.imageContainer}>
-          <img 
+          <img
             ref={heroImageRef}
-            src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp" 
-            alt="Hero overlay" 
+            // src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp" 
+            src={heroBgImg}
+            alt="Hero overlay"
             className={styles.heroImage}
           />
         </div>
       </div>
 
       {/* Bouncer Section */}
-      <section 
+      <section
         ref={secondSectionRef}
         className={`${styles.section} ${styles.secondSection}`}
       >
         <div className={styles.bouncerContainer}>
-          <p 
+          <p
             ref={bouncerRef}
             className={styles.bouncer}
             contentEditable
             suppressContentEditableWarning
           >
-            While some see them as the crazy ones, we see genius.
+            {/* While some see them as the crazy ones, we see genius. */}{bouncerTitle}
           </p>
         </div>
       </section>
 
       {/* Fancy Text Section */}
       <div className={styles.fancyText} aria-labelledby="news-heading">
-        <h1 id="news-heading" className={styles.fancyTitle}>
-          Meghan And Harry's Baby
-        </h1>
+        <div className="rowone">
+          <h1 id="news-heading" className={styles.fancyTitle}>
+            {/* Meghan And Harry's Baby */}{fancyData?.rowoneTitle}
+          </h1>
+          <div>
+            <img
+              // ref={heroImageRef}
+              // src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp" 
+              src={fancyData?.rowoneImage}
+              alt="Hero overlay"
+              className={styles.heroImage}
+            />
+          </div>
+        </div>
 
         <div className={styles.fancyTextBody}>
-          <p>
-            Buckingham Palace announced that Meghan had gone into labour during the early hours of May 6. 
-            Harry was by her side, and an announcement would be made soon, read the broadcast. Shortly after, 
-            <a href="https://www.instagram.com/sussexroyal/">@sussexroyal</a>, 
-            the official Instagram of the couple, shared the news that a baby boy had been born.
-          </p>
+          <div>
+            {/* <p>
+              Buckingham Palace announced that Meghan had gone into labour during the early hours of May 6.
+              Harry was by her side, and an announcement would be made soon, read the broadcast. Shortly after,
+              <a href="https://www.instagram.com/sussexroyal/">@sussexroyal</a>,
+              the official Instagram of the couple, shared the news that a baby boy had been born.
+            </p>
 
-          <p>
-            Upon greeting media outside Frogmore Cottage during the afternoon of May 6, Harry said: 
-            "I'm so incredibly proud of my wife... How any woman does what they do is beyond comprehension."
-          </p>
+            <p>
+              Upon greeting media outside Frogmore Cottage during the afternoon of May 6, Harry said:
+              "I'm so incredibly proud of my wife... How any woman does what they do is beyond comprehension."
+            </p> */}
+            {fancyData?.rowtwoPara?.map((item, index) => (
+              <p key={index} dangerouslySetInnerHTML={{ __html: item }} />
+            ))}
+          </div>
+          <div>
+            <img
+              // ref={heroImageRef}
+              // src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp" 
+              src={fancyData?.rowtwoImage}
+              alt="Hero overlay"
+              className={styles.heroImage}
+            />
+          </div>
         </div>
 
         <span className={styles.pink}>2/3</span>
@@ -302,48 +362,59 @@ const MergedHeroComponent = () => {
         </h2>
 
         <div className={styles.cardsContainer}>
-          <div className={styles.gameCard}>
-            <div 
+          {/* <div className={styles.gameCard}>
+            <div
               className={styles.gameCardCover}
-              style={{ 
-                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_1.jpg)' 
+              style={{
+                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_1.jpg)'
               }}
             ></div>
           </div>
 
           <div className={styles.gameCard}>
-            <div 
+            <div
               className={styles.gameCardCover}
-              style={{ 
-                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_2.jpg)' 
+              style={{
+                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_2.jpg)'
               }}
             ></div>
           </div>
 
           <div className={styles.gameCard}>
-            <div 
+            <div
               className={styles.gameCardCover}
-              style={{ 
-                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_3.jpg)' 
+              style={{
+                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_3.jpg)'
               }}
             ></div>
           </div>
 
           <div className={styles.gameCard}>
-            <div 
+            <div
               className={styles.gameCardCover}
-              style={{ 
-                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_4.jpg)' 
+              style={{
+                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_4.jpg)'
               }}
             ></div>
-          </div>
+          </div> */}
+          {cardData.map((card) => (
+            <div className={styles.gameCard} key={card._id}>
+              <div
+                className={styles.gameCardCover}
+                style={{
+                  backgroundImage: `url(${card.image})`
+                }}
+              ></div>
+            </div>
+          ))}
         </div>
       </section>
-        {/* Campus Events Gallery Section */}
-        <section >
-      <CampusEventsGallery />
-      <AlumaniStudent />
-    
+      {/* Campus Events Gallery Section */}
+      <section >
+        <CampusEventsGallery />
+        <AlumaniStudent />
+        {/* <OurDiamonds/> */}
+
       </section>
     </div>
   );

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './AlunmaniStudent.css';
+const apiurl = import.meta.env.VITE_API_URL;
 
 const KeyframeAnimation = () => {
   const [resetKey, setResetKey] = useState(0);
@@ -7,6 +9,15 @@ const KeyframeAnimation = () => {
   const handleReplay = () => {
     setResetKey(prev => prev + 1);
   };
+  const [bgImg, setBgImg] = useState();
+
+  useEffect(() => {
+    axios.get(`${apiurl}/api/campus/alumanistudent`)
+      .then(res => {
+        setBgImg(res.data.data.map(img => img.image));
+      })
+      .catch(err => console.error(err));
+  }, []);
 
   return (
     <div className="kfa-root">
@@ -29,8 +40,9 @@ const KeyframeAnimation = () => {
 
         {/* Image Section */}
         <div className="kfa-image">
-          <img 
-            src="https://images.unsplash.com/photo-1616362355051-6a9f8c434fff?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYxNzE0MTYzNQ&ixlib=rb-1.2.1&q=80&w=800&h=600" 
+          <img
+            // src="https://images.unsplash.com/photo-1616362355051-6a9f8c434fff?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYxNzE0MTYzNQ&ixlib=rb-1.2.1&q=80&w=800&h=600" 
+            src={bgImg}
             alt="AlumniStudents"
           />
         </div>
