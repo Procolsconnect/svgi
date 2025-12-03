@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import "./WhySvg.css";
+import styles from "./WhySvg.module.css";
 
 const apiurl = import.meta.env.VITE_API_URL;
 
@@ -11,7 +11,12 @@ const ServiceOfferings = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchCards = async () => {
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * Fetches the service offerings from the API and updates the state
+ * @returns {Promise<void>} 
+ */
+/*******  52c85ef0-c1fc-4428-a999-8d7d1958f3db  *******/    const fetchCards = async () => {
       try {
         const response = await fetch(`${apiurl}/api/service-offerings`);
         if (!response.ok) {
@@ -30,37 +35,37 @@ const ServiceOfferings = () => {
   }, []);
 
   return (
-    <section className="service-container">
-      <div className="service-header">
-        <div className="service-label">
+    <section className={styles.serviceContainer}>
+      <div className={styles.serviceHeader}>
+        <div className={styles.serviceLabel}>
           what we're offering
           <ArrowRight size={24} />
         </div>
-        <h1 className="service-title">Why Choose SVGI?</h1>
+        <h1 className={styles.serviceTitle}>Why Choose SVGI?</h1>
       </div>
 
       {loading && <p className="loading-text">Loading offerings...</p>}
       {error && <p className="error-text">{error}</p>}
 
-      <div className="service-grid">
+      <div className={styles.serviceGrid}>
         {cards.map((card, index) => (
           <div
             key={card.id}
-            className="service-card"
+            className={styles.serviceCard}
             onMouseEnter={() => setHoveredCard(card.id)}
             onMouseLeave={() => setHoveredCard(null)}
           >
-            <div className="card-background"></div>
+            <div className={styles.cardBackground}></div>
             <div
-              className={`card-circle card-${index + 1}`}
+              className={`${styles.cardCircle} ${styles[`card${index + 1}`]}`}
               style={{
                 backgroundImage: `url(${card.image})`,
               }}
             ></div>
-            <div className="card-content">
-              <div className="card-content-wrapper">
-                <h2 className="card-title">{card.title}</h2>
-                <p className="card-description">{card.description}</p>
+            <div className={styles.cardContent}>
+              <div className={styles.cardContentWrapper}>
+                <h2 className={styles.cardTitle}>{card.title}</h2>
+                <p className={styles.cardDescription}>{card.description}</p>
               </div>
             </div>
           </div>

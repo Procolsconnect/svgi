@@ -11,7 +11,7 @@ import {
     AiOutlineInfoCircle
 } from "react-icons/ai";
 
-import './overview.css';
+import styles from './overview.module.css';
 
 export default function SVGIOverview() {
     const [overview, setOverview] = useState(null);
@@ -125,92 +125,89 @@ const handleScrollClick = () => {
     if (!overview || !hero) return <div min-h-screen>Loading…</div>;
 
     return (
-        <div className="svgio-root">
+       <div className={styles.root}>
             {/* HERO */}
-            <div className="svgio-hero">
-                <img className="svgio-hero__img" src={hero.image} alt={hero.title} />
-                <div className="svgio-wrapper">
-                    <h1 className="svgio-hero__title">{hero.title}</h1>
+            <div className={styles.hero}>
+                <img className={styles.heroImg} src={hero.image} alt={hero.title} />
+                <div className={styles.wrapper}>
+                    <h1 className={styles.heroTitle}>{hero.title}</h1>
                 </div>
             </div>
 
-          {/* SCROLL ARROW */}
+            {/* SCROLL ARROW */}
             <div
                 ref={scrollRef}
-                className={`svgio-scroll ${clicked ? 'svgio-scroll--clicked' : ''} ${rotated ? 'svgio-scroll--rotate' : ''}`}
+                className={`${styles.scroll} ${clicked ? styles.scrollClicked : ''} ${rotated ? styles.scrollRotate : ''}`}
                 onClick={handleScrollClick}
                 aria-label="Scroll"
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleScrollClick(); }}
             >
-                <span ref={arrowRef} className="svgio-arrow">&#8595;</span>
+                <span ref={arrowRef} className={`${styles.arrow} ${styles.arrowBounce}`}> &#8595;</span>
+                     
             </div>
 
-
             {/* SECTION 1 */}
-            <section className="svgio-gradient-section">
-                <img id="svgio-gradient-shape" className="svgio-gradient-shape" src={overview.image1} alt="" />
-                <div className="svgio-gradient-text">
+            <section className={styles.gradientSection}>
+                <img className={styles.gradientShape} src={overview.image1} alt="" />
+                <div className={styles.gradientText}>
                     <h2>{overview.title1}</h2>
                     <p>{overview.para1}</p>
                 </div>
             </section>
 
             {/* SECTION 2 */}
-            <section className="svgio-section" id="svgio-overview">
-                <div className="svgio-wrap-grid">
-                    {/* LEFT COL */}
-                    <div className="svgio-col">
-                        <div className="svgio-content6-headline">
+            <section className={styles.section} id="svgio-overview">
+                <div className={styles.wrapGrid}>
+                    <div className={styles.col}>
+                        <div className={styles.content6Headline}>
                             <h2>{overview.title2}</h2>
-                            <p className="svgio-text-16">{overview.para2}</p>
+                            <p className={styles.text16}>{overview.para2}</p>
                         </div>
                         <Link to={'/admissions/ug'}>
-                            <div className="svgio-content6-pic" style={{ backgroundImage: `url(${overview.ug})` }} />
+                            <div className={styles.content6Pic} style={{ backgroundImage: `url(${overview.ug})` }} />
                         </Link>
                         <Link to={'/admissions/pg'}>
-                            <div className="svgio-content6-pic" style={{ backgroundImage: `url(${overview.pg})` }} />
+                            <div className={styles.content6Pic} style={{ backgroundImage: `url(${overview.pg})` }} />
                         </Link>
                     </div>
 
-                    {/* RIGHT COL */}
-                    <div className="svgio-col">
+                    <div className={styles.col}>
                         <Link to={'/admissions/procedure'}>
-                            <div className="svgio-content6-pic" style={{ backgroundImage: `url(${overview.research})` }} />
+                            <div className={styles.content6Pic} style={{ backgroundImage: `url(${overview.research})` }} />
                         </Link>
                         <Link to={'/admissions/procedure'}>
-                            <div className="svgio-content6-pic" style={{ backgroundImage: `url(${overview.procedure})` }} />
+                            <div className={styles.content6Pic} style={{ backgroundImage: `url(${overview.procedure})` }} />
                         </Link>
-                        <div className="svgio-content6-headline">
-                            <p className="svgio-text-17">{overview.para3}</p>
+                        <div className={styles.content6Headline}>
+                            <p className={styles.text17}>{overview.para3}</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* CONTACT CARDS */}
-            <section className="svgio-contact-section">
-                <h1 className="svgio-contact-section-h1">SVGI Contact Information</h1>
-                <div className="svgio-contact-section-container">
-                    <div className="expand-container">
+            <section className={styles.contactSection}>
+                <h1 className={styles.contactSectionH1}>SVGI Contact Information</h1>
+                <div className={styles.contactSectionContainer}>
+                    <div className={styles.expandContainer}>
                         {cards.map(card => (
-                            <div className="e-card" key={card._id}>
-                                <div className="expand-card">
-                                    <div className="expand-image">
+                            <div className={styles.eCard} key={card._id}>
+                                <div className={styles.expandCard}>
+                                    <div className={styles.expandImage}>
                                         <img src={card.image} alt={card.title} />
                                     </div>
-                                    <div className="expand-content">
+                                    <div className={styles.expandContent}>
                                         <h3>{card.title}</h3>
-                                        <div className="info"><AiOutlinePhone /> {card.phone}</div>
-                                        <div className="info"><AiOutlineMail /> {card.email}</div>
-                                        <div className="info">
+                                        <div className={styles.info}><AiOutlinePhone /> {card.phone}</div>
+                                        <div className={styles.info}><AiOutlineMail /> {card.email}</div>
+                                        <div className={styles.info}>
                                             {getClickableLink(card.description) ? (
                                                 <a
                                                     href={getClickableLink(card.description)}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="info-link"
                                                     style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: "inherit" }}
                                                 >
                                                     {detectIcon(card.description)}

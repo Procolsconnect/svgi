@@ -1,0 +1,213 @@
+/* src/components/HeroHighlight/HeroHighlight.module.css */
+
+.hhBody {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    background-color: #f9fafb;
+}
+
+.hhHero {
+    min-height: 350px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+.hhHero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.hhHero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.hhHero h1 {
+    position: relative;
+    font-size: 52px;
+    font-weight: bold;
+    z-index: 1;
+    letter-spacing: 1px;
+}
+
+.hhHero h1::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 5px;
+    margin: 14px auto 0;
+    background: linear-gradient(90deg, #ff512f, #dd2476);
+    border-radius: 3px;
+    animation: hhUnderlinePulse 2s infinite;
+}
+
+@keyframes hhUnderlinePulse {
+    0%, 100% { transform: scaleX(1); opacity: 0.8; }
+    50% { transform: scaleX(1.4); opacity: 1; }
+}
+
+/* TOP ROW */
+.hhTopRow {
+    display: flex;
+    width: 70vw;
+    height: 200px;
+}
+
+.hhTopRowColumnTwo {
+    height: 100%;
+    flex: 0 0 30vw;
+    margin-left: auto;
+    background: rgb(240, 7, 46);
+}
+
+/* HEADINGS */
+.hhLeftHeading {
+    position: absolute;
+    top: 356px;
+    right: 40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #2e2e2e;
+    font-weight: 600;
+    max-width: 300px;
+    line-height: 1.2;
+    z-index: 10;
+}
+
+.hhRightHeading {
+    position: absolute;
+    top: 369px;
+    right: 840px;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #2e2e2e;
+    font-weight: 600;
+    max-width: 300px;
+    line-height: 1.5;
+    z-index: 10;
+}
+
+/* BOTTOM ROW */
+.hhBottomRow {
+    display: flex;
+    align-items: center;
+    height: 200px;
+}
+
+.hhBottomRowColumnOne {
+    padding-left: 50px;
+}
+
+.hhBottomRowColumnOne p {
+    width: 75%;
+}
+
+.hhBottomRowColumnTwo {
+    height: 100%;
+    flex: 0 0 30vw;
+    background: rgb(8, 29, 113);
+}
+
+/* Highlight Scroll Section */
+:root {
+    --hh-bg-color-hsl: 59, 3%, 94%;
+    --hh-bg-color: hsl(var(--hh-bg-color-hsl));
+    --hh-bg-color-highlight: hsl(60, 90%, 50%);
+    --hh-color-text: hsl(192, 14%, 20%);
+    --hh-color-text-highlight: hsl(192, 14%, 0%);
+    --hh-page-width: 80vw;
+    --hh-paragraph-font-size: min(max(1.2rem, 4vw), 1.4rem);
+    --hh-header-font-size: min(max(2rem, 8vw), 4rem);
+    --hh-padding: 8vmin;
+    --hh-duration: 1s;
+    --hh-ease: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hhHighlightSection {
+    font-family: 'Lora', serif;
+    color: var(--hh-color-text);
+    background-color: var(--hh-bg-color);
+    padding: var(--hh-padding);
+    max-width: var(--hh-page-width);
+    margin: 6rem auto;
+}
+
+.hhHighlightSection h1 {
+    font-size: var(--hh-header-font-size);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 4rem;
+}
+
+.hhHighlightSection p {
+    margin: 2rem 0;
+    font-size: var(--hh-paragraph-font-size);
+    line-height: 1.7;
+}
+
+.hhTextHighlight {
+    all: unset;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: 
+        color calc(var(--hh-duration) / 4) var(--hh-ease),
+        background-color calc(var(--hh-duration) / 4) var(--hh-ease),
+        background-size var(--hh-duration) var(--hh-ease);
+}
+
+.hhTextHighlightActive {
+    color: var(--hh-color-text-highlight);
+    background-size: 100% 100%;
+}
+
+.hhHighlightSection .hhTextHighlight {
+    background-image: linear-gradient(var(--hh-bg-color-highlight), var(--hh-bg-color-highlight));
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .hhRightHeading { right: 600px; }
+}
+
+@media (max-width: 992px) {
+    .hhTopRow { width: 90vw; }
+    .hhRightHeading { right: 400px; font-size: 2.5rem; }
+    .hhLeftHeading { font-size: 2.5rem; right: 20px; }
+    .hhBottomRow { flex-direction: column; height: auto; padding: 20px; }
+    .hhBottomRowColumnTwo { width: 100%; height: 150px; }
+    .hhBottomRowColumnOne p { width: 100%; }
+}
+
+@media (max-width: 768px) {
+    .hhHero h1 { font-size: 36px; padding: 0 20px; }
+    .hhTopRow { width: 100%; height: 150px; }
+    .hhTopRowColumnTwo { flex: 0 0 50vw; }
+    .hhLeftHeading, .hhRightHeading {
+        position: static;
+        text-align: center;
+        margin: 20px auto;
+        font-size: 2.5rem;
+    }
+    .hhRightHeading { margin-top: 0; }
+}
+
+@media (max-width: 576px) {
+    .hhLeftHeading, .hhRightHeading { font-size: 2rem; }
+    .hhTopRow { height: 30px; }
+    .hhBottomRowColumnTwo { flex: 0 0 10vw; }
+    .hhBottomRowColumnOne { padding-left: 20px; }
+}

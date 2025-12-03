@@ -1,0 +1,194 @@
+/* styles/Leadership.module.css */
+
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+.leadersBodyWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  padding-bottom: 6%;
+  background: #ededed;
+  font-family: 'Satoshi', sans-serif;
+  --scale: clamp(200px, 22vw, 300px);
+  overflow: hidden;
+  gap: 70px;
+  position: relative;
+}
+
+.leadersLeftHeading {
+  position: absolute;
+  top: 30%;
+  right: 35%;
+   font-family: "SUSE", sans-serif;
+  font-size: 3rem;
+  color: #2e2e2e;
+  font-weight: 600;
+  max-width: 300px;
+  line-height: 1.2;
+  z-index: 10;
+}
+
+.leadersRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1065px;
+}
+
+.leadersRow.reverse {
+  flex-direction: row-reverse;
+}
+
+.leadersCard {
+  --clr: #2f322e;
+  --fclr: #f0ffe2;
+  width: var(--scale);
+  height: 254px;
+  min-width: var(--scale);
+  background: var(--clr);
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  cursor: pointer;
+  margin: auto 24px;
+  width: 33%;
+  box-shadow:
+    -8px -8px 24px #fffc,
+    1px 1px 3px #7da07277,
+    12px 42px 24px -8px #7da07233,
+    10px 24px 42px #7da07233,
+    1px 4px 12px #7da07244;
+}
+
+.leadersCard:nth-child(2) {
+  --clr: #2e2e2e;
+  --fclr: #fefefe;
+  box-shadow:
+    -8px -8px 24px #fffc,
+    1px 1px 3px #0006,
+    12px 42px 24px -8px #0003,
+    10px 24px 42px #0003,
+    1px 4px 12px #0006;
+  margin-top: 100px;
+}
+
+.leadersModel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: -10% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leadersImageModel {
+  width: 80% !important;
+  max-height: 80%;
+  object-fit: contain;
+  object-position: center bottom;
+  transition: filter 0.4s ease-in-out;
+}
+
+.leadersCard:nth-child(2) .leadersImageModel {
+  transform: scale(0.22);
+}
+
+.leadersGlass {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background: linear-gradient(transparent, var(--clr) 80%);
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  overflow: hidden;
+}
+
+.leadersOverflow {
+  pointer-events: none;
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  overflow: hidden;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 75% 60%, 75% 100%, 25% 100%, 25% 60%, 0 60%);
+}
+
+.leadersContent h2,
+.leadersContent p {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-left: 10%;
+  box-sizing: border-box;
+  color: var(--fclr);
+  max-width: calc(100% - 48px);
+  white-space: normal;
+}
+
+.leadersContent h2 {
+  font-size: 1.5rem;
+}
+
+.leadersText {
+  width: 100%;
+  font-size: 18px;
+  color: #2e2e2e;
+  line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+  .leadersBodyWrapper {
+    padding-top: 10%;
+  }
+
+  .leadersLeftHeading {
+    position: static !important;
+    margin: 0 auto 32px;
+    text-align: center;
+    font-size: 2.6rem !important;
+    max-width: 90%;
+    padding: 0 20px;
+    transform: none !important;
+    padding-bottom: 10%;
+  }
+
+  .leadersRow {
+    flex-direction: column !important;
+    align-items: center;
+    gap: 48px;
+    padding: 0 20px;
+    padding-bottom: 13%;
+  }
+
+  .leadersCard {
+    width: 100% !important;
+    min-width: var(--scale) !important;
+    height: 254px !important;
+    margin: 0 !important;
+  }
+
+  .leadersContent h2,
+  .leadersContent p {
+    padding-left: 10% !important;
+    max-width: calc(90% - 48px) !important;
+  }
+
+  .leadersContent h2 {
+    font-size: 1.2rem !important;
+  }
+
+  .leadersContent p {
+    font-size: 1rem !important;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './pg.css';
+import styles from './pg.module.css';
 
 const PostgraduateCoursesPage = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
@@ -9,15 +9,17 @@ const PostgraduateCoursesPage = () => {
   };
 
   return (
-    <div className="pg-page-wrapper">
+    <div className={styles.root}>
       {/* HERO SECTION */}
-      <div className="pg-hero">
-        <img src="hero img.jpg" alt="Hero Background" className="pg-hero-image" />
-        <h1 className="pg-hero-title">Postgraduate Courses</h1>
+      <div className={styles.hero}>
+        <img src="hero img.jpg" alt="Hero Background" className={styles.heroImage} />
+        <div className={styles.wrapper}>
+                            <h1 className={styles.heroTitle}>Postgraduate Courses</h1>
+                        </div>
       </div>
 
-      <div className="pg-wrap">
-        <div className="pg-header">
+      <div className={styles.wrap}>
+        <div className={styles.header}>
           <h3>
             <span>
               <a href="https://codepen.io/gatesakagi/full/WyKrRB/" target="_blank" rel="noopener noreferrer">
@@ -27,67 +29,66 @@ const PostgraduateCoursesPage = () => {
           </h3>
         </div>
 
-        <div className="pg-detailtop">
-          <div className="pg-productimg">
+        <div className={styles.detailtop}>
+          <div className={styles.productimg}>
             <img 
               src="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80" 
               alt="" 
-              className="pg-cover-img" 
+              className={styles.coverImg} 
               style={{ objectPosition: 'center -330px' }} 
             />
-            <div className="pg-boxtop">
-              <div className="pg-boxtitle pg-boxtitletop1">VINTAGE</div>
-              <div className="pg-boxtitle pg-boxtitletop2">DENIM</div>
+            <div className={styles.boxtop}>
+              <div className={`${styles.boxtitle} ${styles.boxtitletop1}`}>VINTAGE</div>
+              <div className={`${styles.boxtitle} ${styles.boxtitletop2}`}>DENIM</div>
             </div>
-            <div className="pg-imgproduct"></div>
-            <div className="pg-boxbottom">
-              <div className="pg-boxtitle pg-boxtitlebottom1">06</div>
-              <div className="pg-boxtitle pg-boxtitlebottom2">TOP</div>
+            <div className={styles.boxbottom}>
+              <div className={`${styles.boxtitle} ${styles.boxtitlebottom1}`}>06</div>
+              <div className={`${styles.boxtitle} ${styles.boxtitlebottom2}`}>TOP</div>
             </div>
           </div>
         </div>
 
-        <div className="pg-detailcontent">
+        <div className={styles.detailcontent}>
           <h1>VINTAGE DENIM</h1>
           <h3>PRODUCT DETAILS</h3>
-          <div className="pg-subtitle">Kogi Cosby sweater ethical squid irony</div>
+          <div className={styles.subtitle}>Kogi Cosby sweater ethical squid irony</div>
           <p>In the tumultuous business of cutting-in and attending to a whale, there is much running backwards and forwards among the crew...</p>
           <p>We must now retrace our way a little. It was mentioned that upon first breaking ground in the whale's back...</p>
         </div>
 
-        <div className="pg-detailbottom">
-          <div className="pg-leftitem">
-            <div className="pg-itemimg">
+        <div className={styles.detailbottom}>
+          <div className={styles.leftitem}>
+            <div className={styles.itemimg}>
               <img 
                 src="https://images.unsplash.com/photo-1519406686401-e9ef2420c15b?ixlib=rb-0.3.5&auto=format&fit=crop&w=1950&q=80" 
                 alt="" 
-                className="pg-cover-img" 
+                className={styles.coverImg} 
               />
             </div>
           </div>
-          <div className="pg-rightitem">
-            <div className="pg-itemimg">
+          <div className={styles.rightitem}>
+            <div className={styles.itemimg}>
               <img 
                 src="https://images.unsplash.com/photo-1519406728390-b536d7be138f?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80" 
                 alt="" 
-                className="pg-cover-img" 
+                className={styles.coverImg} 
               />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="pg-wrapper-no4">
+      <div className={styles.wrapperNo4}>
         <p>THE complete PG cource are in side the button So</p>
         <h1>Click the Button</h1>
         <button 
-          className={`pg-button-bird ${isButtonActive ? 'active' : ''}`}
+          className={`${styles.buttonBird} ${isButtonActive ? styles.active : ''}`}
           onClick={handleButtonClick}
         >
-          <p className="pg-button-bird__text">
+          <p className={styles.buttonBirdText}>
             {isButtonActive ? 'DONE' : 'OPEN'}
           </p>
-          <svg version="1.1" className="pg-feather" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          <svg version="1.1" className={styles.feather} xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 75 38" style={{enableBackground: 'new 0 0 75 38'}} xmlSpace="preserve">
             <g>
               <path d="M20.8,31.6c3.1-0.7,2.9-2.3,2,1c9.1,4.4,20.4,3.7,29.1-0.8l0,0c0.7-2.1,1-3.9,1-3.9c0.6,0.8,0.8,1.7,1,2.9
@@ -97,37 +98,37 @@ const PostgraduateCoursesPage = () => {
                   c-0.9,0.1-10.3,4.9-22.6-12.3C5.9,17.7,11.8,26.9,20.8,31.6z"/>
             </g>
           </svg>
-          <span className="pg-bird"></span>
-          <span className="pg-bird--1"></span>
-          <span className="pg-bird--2"></span>
-          <span className="pg-bird--3"></span>
-          <span className="pg-bird--4"></span>
-          <span className="pg-bird--5"></span>
-          <span className="pg-bird--6"></span>
-          <span className="pg-bird--7"></span>
-          <span className="pg-bird--8"></span>
-          <span className="pg-bird--9"></span>
-          <span className="pg-bird--10"></span>
-          <span className="pg-bird--11"></span>
-          <span className="pg-bird--12"></span>
-          <span className="pg-bird--13"></span>
-          <span className="pg-bird--14"></span>
-          <span className="pg-bird--15"></span>
-          <span className="pg-bird--16"></span>
-          <span className="pg-bird--17"></span>
-          <span className="pg-bird--18"></span>
-          <span className="pg-bird--19"></span>
-          <span className="pg-bird--20"></span>
-          <span className="pg-bird--21"></span>
-          <span className="pg-bird--22"></span>
-          <span className="pg-bird--23"></span>
-          <span className="pg-bird--24"></span>
-          <span className="pg-bird--25"></span>
-          <span className="pg-bird--26"></span>
-          <span className="pg-bird--27"></span>
-          <span className="pg-bird--28"></span>
-          <span className="pg-bird--29"></span>
-          <span className="pg-bird--30"></span>
+          <span className={styles.bird}></span>
+          <span className={styles.bird1}></span>
+          <span className={styles.bird2}></span>
+          <span className={styles.bird3}></span>
+          <span className={styles.bird4}></span>
+          <span className={styles.bird5}></span>
+          <span className={styles.bird6}></span>
+          <span className={styles.bird7}></span>
+          <span className={styles.bird8}></span>
+          <span className={styles.bird9}></span>
+          <span className={styles.bird10}></span>
+          <span className={styles.bird11}></span>
+          <span className={styles.bird12}></span>
+          <span className={styles.bird13}></span>
+          <span className={styles.bird14}></span>
+          <span className={styles.bird15}></span>
+          <span className={styles.bird16}></span>
+          <span className={styles.bird17}></span>
+          <span className={styles.bird18}></span>
+          <span className={styles.bird19}></span>
+          <span className={styles.bird20}></span>
+          <span className={styles.bird21}></span>
+          <span className={styles.bird22}></span>
+          <span className={styles.bird23}></span>
+          <span className={styles.bird24}></span>
+          <span className={styles.bird25}></span>
+          <span className={styles.bird26}></span>
+          <span className={styles.bird27}></span>
+          <span className={styles.bird28}></span>
+          <span className={styles.bird29}></span>
+          <span className={styles.bird30}></span>
         </button>
       </div>
     </div>

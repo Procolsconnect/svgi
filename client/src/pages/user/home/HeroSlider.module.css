@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.wrapperSlider {
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+}
+
+.wrapperSlider * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mainSlider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.sliderWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+.slideActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.slideActive .item {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.picture::before,
+.video::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.item img,
+.item video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.parentText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  padding: 30px 20px;
+  color: white;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.slideActive .parentText {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.infoText {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 170px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  max-width: 90%;
+}
+
+.infoText.alignLeft {
+  align-items: flex-start;
+  left: 5%;
+  transform: none;
+  text-align: left;
+}
+
+.infoText h2 {
+  font-size: clamp(24px, 5vw, 39px);
+  text-transform: uppercase;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.infoText p {
+  font-size: clamp(14px, 2.5vw, 18px);
+  font-weight: 300;
+  text-align: inherit;
+  max-width: 700px;
+}
+
+.infoText a {
+  height: 55px;
+  font-size: 14px;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  text-decoration: none;
+  transition: 0.3s ease;
+  color: black;
+  width: 100%;
+  max-width: 210px;
+}
+
+.infoText a:hover {
+  background: #ebebeb;
+  color: #4c4c4c;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  z-index: 10;
+}
+
+.paginationBullet {
+  background: transparent;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+.number {
+  background: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+}
+
+.percentage {
+  width: 34px;
+  height: 34px;
+  mask: radial-gradient(transparent 55%, black 60% 100%);
+  -webkit-mask: radial-gradient(transparent 55%, black 60% 100%);
+  transition: opacity 0.6s ease;
+  opacity: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.percentage.show {
+  opacity: 1;
+}
+
+.percentage .number {
+  width: 80%;
+  height: 80%;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 100;
+  color: #1C69D4;
+  opacity: 1;
+}
+
+.playpauseBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.svgIcon {
+  width: 15px;
+  height: 15px;
+  fill: white;
+}
+
+.bulletContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+@media (max-width: 768px) {
+  .infoText {
+    top: 120px;
+  }
+
+  .pagination {
+    bottom: 30px;
+    gap: 15px;
+  }
+
+  .percentage {
+    width: 30px;
+    height: 30px;
+  }
+}

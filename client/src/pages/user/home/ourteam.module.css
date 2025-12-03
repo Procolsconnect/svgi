@@ -1,0 +1,393 @@
+.carouselWrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  overflow: hidden;
+  position: relative;
+  padding: 2rem 1rem;
+}
+
+.aboutTitle {
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  white-space: nowrap;
+  font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
+  background: linear-gradient(to bottom, rgb(8 42 123 / 35%) 30%, rgb(255 255 255 / 0%) 76%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+}
+
+.carouselContainer {
+  width: 100%;
+  max-width: 1200px;
+  height: 450px;
+  position: relative;
+  perspective: 1000px;
+  margin-top: 100px;
+  overflow: visible;
+}
+
+.carouselTrack {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card {
+  position: absolute;
+  width: 280px;
+  height: 380px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  backface-visibility: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.8s ease;
+  border-radius: 20px;
+}
+
+.card.center {
+  z-index: 10;
+  transform: scale(1.1) translateZ(0);
+}
+
+.card.left2 {
+  z-index: 1;
+  transform: translateX(-400px) scale(0.8) translateZ(-300px);
+  opacity: 0.7;
+}
+
+.card.left1 {
+  z-index: 5;
+  transform: translateX(-200px) scale(0.9) translateZ(-100px);
+  opacity: 0.9;
+}
+
+.card.right1 {
+  z-index: 5;
+  transform: translateX(200px) scale(0.9) translateZ(-100px);
+  opacity: 0.9;
+}
+
+.card.right2 {
+  z-index: 1;
+  transform: translateX(400px) scale(0.8) translateZ(-300px);
+  opacity: 0.7;
+}
+
+.card.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.memberInfo {
+  text-align: center;
+  margin-top: 25px;
+  transition: all 0.5s ease-out;
+}
+
+.memberName {
+  color: rgb(8, 42, 123);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.memberName::before,
+.memberName::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  width: 100px;
+  height: 2px;
+  background: rgb(8, 42, 123);
+}
+
+.memberName::before {
+  left: -120px;
+}
+
+.memberName::after {
+  right: -120px;
+}
+
+.memberRole {
+  color: #848696;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 10px 0;
+  margin-top: -10px;
+  position: relative;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(8, 42, 123, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: rgb(8, 42, 123);
+  transform: scale(1.2);
+}
+
+.navArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(8, 42, 123, 0.6);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  padding-bottom: 4px;
+}
+
+.navArrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.navArrow.left {
+  left: 10px;
+  padding-right: 3px;
+}
+
+.navArrow.right {
+  right: 10px;
+  padding-left: 3px;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .card {
+    width: 220px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 992px) {
+  .carouselContainer {
+    height: 360px;
+  }
+
+  .card {
+    width: 240px;
+    height: 320px;
+  }
+
+  .card.left2 {
+    transform: translateX(-300px) scale(0.8) translateZ(-200px);
+  }
+
+  .card.right2 {
+    transform: translateX(300px) scale(0.8) translateZ(-200px);
+  }
+
+  .aboutTitle {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .carouselContainer {
+    height: 300px;
+  }
+
+  .aboutTitle {
+    font-size: clamp(2rem, 8vw, 4rem);
+    top: 100px;
+  }
+
+  .card {
+    width: 220px;
+    height: 280px;
+  }
+
+  .card.left2 {
+    transform: translateX(-220px) scale(0.8) translateZ(-150px);
+  }
+
+  .card.left1 {
+    transform: translateX(-110px) scale(0.9) translateZ(-50px);
+  }
+
+  .card.right1 {
+    transform: translateX(110px) scale(0.9) translateZ(-50px);
+  }
+
+  .card.right2 {
+    transform: translateX(220px) scale(0.8) translateZ(-150px);
+  }
+
+  .memberName {
+    font-size: 1.5rem;
+  }
+
+  .memberRole {
+    font-size: 0.9rem;
+  }
+
+  .memberName::before,
+  .memberName::after {
+    width: 50px;
+  }
+
+  .memberName::before {
+    left: -65px;
+  }
+
+  .memberName::after {
+    right: -65px;
+  }
+
+  .navArrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carouselWrapper {
+    height: 70vh;
+  }
+
+  .carouselContainer {
+    height: 240px;
+  }
+
+  .aboutTitle {
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
+    top: 65px;
+  }
+
+  .card {
+    width: 150px;
+    height: 200px;
+  }
+
+  .card.left2,
+  .card.right2 {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .memberInfo {
+    margin-top: 45px;
+  }
+
+  .memberName {
+    font-size: 1.2rem;
+  }
+
+  .memberRole {
+    font-size: 0.8rem;
+  }
+
+  .dots {
+    margin-top: 30px;
+  }
+
+  .navArrow {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .carouselWrapper {
+    height: 70vh;
+    padding: 20px;
+  }
+
+  .carouselContainer {
+    height: 200px;
+    padding: 20px;
+  }
+
+  .aboutTitle {
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
+    top: 60px;
+  }
+
+  .card {
+    width: 160px;
+    height: 220px;
+  }
+
+  .card.left2,
+  .card.right2 {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .memberInfo {
+    margin-top: 45px;
+  }
+
+  .memberName {
+    font-size: 1.2rem;
+  }
+
+  .memberRole {
+    font-size: 0.8rem;
+  }
+
+  .dots {
+    margin-top: 30px;
+  }
+
+  .navArrow {
+    display: none;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Overview.css';
+import styles from './Overview.module.css';
 
 const TrainingPlacementsPage = () => {
   const [scrollClicked, setScrollClicked] = useState(false);
@@ -14,7 +14,6 @@ const TrainingPlacementsPage = () => {
   
   const containerRef = useRef(null);
   const trackRef = useRef(null);
-  const cloneRef = useRef(null);
   const sectionsRef = useRef([]);
 
   const cardData = [
@@ -150,58 +149,58 @@ const TrainingPlacementsPage = () => {
   }, [expandedCard]);
 
   return (
-    <div className="training-placements-page">
+    <div className={styles.page}>
       {/* Hero Section */}
-      <div className="tp-hero">
+      <div className={styles.hero}>
         <img src="hero img.jpg" alt="Hero Background" />
-        <div className="tp-hero-overlay" />
-        <h1 className="tp-hero-title">Training & Placements</h1>
+        <div className={styles.heroOverlay} />
+        <h1 className={styles.heroTitle}>Training & Placements</h1>
       </div>
 
       {/* Scroll Button */}
       <div 
-        className={`tp-scroll ${scrollClicked ? 'clicked' : ''} ${scrollRotate ? 'rotate' : ''}`}
+        className={`${styles.scroll} ${scrollClicked ? styles.clicked : ''} ${scrollRotate ? styles.rotate : ''}`}
         onClick={handleScrollClick}
       >
-        <span className="arrow-bounce">&#8595;</span>
+        <span className={styles.arrowBounce}>↓</span>
       </div>
 
       {/* About Section */}
-      <section className="tp-about-wrapper" ref={el => sectionsRef.current[0] = el}>
-        <div className="tp-container">
-          <div className="tp-row">
-            <div className="tp-col-lg-6">
-              <div className="tp-media left">
+      <section className={styles.aboutWrapper} ref={el => sectionsRef.current[0] = el}>
+        <div className={styles.container}>
+          <div className={styles.row}>
+            <div className={styles.colLg6}>
+              <div className={`${styles.media} ${styles.left}`}>
                 <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1472&q=80" alt="banner" />
               </div>
             </div>
-            <div className="tp-col-lg-6">
+            <div className={styles.colLg6}>
               <div>
-                <h6 className="tp-text-primary">About Us</h6>
+                <h6 className={styles.textPrimary}>About Us</h6>
                 <h2>What is Lorem Ipsum?</h2>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has been the industry's standard dummy text ever since the 1500s.</p>
               </div>
-              <ul className="tp-list">
+              <ul className={styles.list}>
                 <li>It has survived not only five centuries, but also the leap into electronic typesetting.</li>
                 <li>Get a view of events and trends. Be updated on our recent news.</li>
                 <li>A reader will be distracted by readable content when looking at its layout.</li>
                 <li>Stay informed with our latest developments and achievements.</li>
               </ul>
-              <button className="tp-btn-primary">Learn More</button>
+              <button className={styles.btnPrimary}>Learn More</button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Slider Section */}
-      <section className="tp-slider-section" ref={el => sectionsRef.current[1] = el}>
-        <div className="tp-header">
-          <p className="tp-subtitle">In Our College Have</p>
-          <h1 className="tp-main-title">Centralized Placement Process for all Campuses</h1>
+      <section className={styles.sliderSection} ref={el => sectionsRef.current[1] = el}>
+        <div className={styles.header}>
+          <p className={styles.subtitle}>In Our College Have</p>
+          <h1 className={styles.mainTitle}>Centralized Placement Process for all Campuses</h1>
         </div>
 
         <div 
-          className={`tp-slider-container ${isDragging ? 'dragging' : ''}`}
+          className={`${styles.sliderContainer} ${isDragging ? styles.dragging : ''}`}
           ref={containerRef}
           onMouseDown={handleDragStart}
           onMouseMove={handleDragMove}
@@ -211,13 +210,13 @@ const TrainingPlacementsPage = () => {
           onTouchMove={handleDragMove}
           onTouchEnd={handleDragEnd}
         >
-          <div className={`tp-slider-track ${expandedCard !== null ? 'blurred' : ''}`} ref={trackRef}>
+          <div className={`${styles.sliderTrack} ${expandedCard !== null ? styles.blurred : ''}`} ref={trackRef}>
             {cards.map((card, index) => {
               const pos = positions[index] || positions[5];
               return (
                 <div
                   key={index}
-                  className={`tp-card ${expandedCard === index ? 'expanded' : ''}`}
+                  className={`${styles.card} ${expandedCard === index ? styles.expanded : ''}`}
                   style={{
                     height: `${pos.height}px`,
                     clipPath: pos.clip,
@@ -227,7 +226,7 @@ const TrainingPlacementsPage = () => {
                   onClick={() => handleCardClick(index)}
                 >
                   <img src={card.image} alt={card.title} />
-                  <div className="tp-hover-overlay">
+                  <div className={styles.hoverOverlay}>
                     <span>Click to see more</span>
                   </div>
                 </div>
@@ -237,33 +236,33 @@ const TrainingPlacementsPage = () => {
         </div>
 
         <button 
-          className={`tp-close-btn ${expandedCard !== null ? 'visible' : ''}`}
+          className={`${styles.closeBtn} ${expandedCard !== null ? styles.visible : ''}`}
           onClick={closeCard}
         >
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
         </button>
-{expandedCard !== null && (
-  <div className="tp-expanded-image-wrapper">
-    <img 
-      src={cards[expandedCard].image} 
-      alt={cards[expandedCard].title} 
-      className="tp-expanded-image"
-    />
-  </div>
-)}
-        <div className={`tp-card-info ${expandedCard !== null ? 'visible' : ''}`}>
-          
+
+        {expandedCard !== null && (
+          <div className={styles.expandedImageWrapper}>
+            <img 
+              src={cards[expandedCard].image} 
+              alt={cards[expandedCard].title} 
+              className={styles.expandedImage}
+            />
+          </div>
+        )}
+        <div className={`${styles.cardInfo} ${expandedCard !== null ? styles.visible : ''}`}>
           <h2>{cardInfo.title}</h2>
           <p>{cardInfo.desc}</p>
         </div>
       </section>
 
       {/* Placement Training Section */}
-      <section className="tp-placement-training-section" ref={el => sectionsRef.current[2] = el}>
-        <div className="tp-placement-container">
-          <div className="tp-left-content">
+      <section className={styles.placementTrainingSection} ref={el => sectionsRef.current[2] = el}>
+        <div className={styles.placementContainer}>
+          <div className={styles.leftContent}>
             <h2>Placement Training</h2>
             <p>
               Our Placement Training process is designed with a structured approach to help every student
@@ -272,25 +271,25 @@ const TrainingPlacementsPage = () => {
             </p>
           </div>
 
-          <div className="tp-diagram">
-            <div className="tp-outer-circle"></div>
-            <div className="tp-center-circle">Placement<br />Training</div>
-            <div className="tp-outer-item item1">Career Awareness & Student Registration</div>
-            <div className="tp-outer-item item2">Aptitude & Soft Skills Development</div>
-            <div className="tp-outer-item item3">Technical Skill Enhancement</div>
-            <div className="tp-outer-item item4">Resume & Profile Building</div>
-            <div className="tp-outer-item item5">Group Discussion & Interview Prep</div>
-            <div className="tp-outer-item item6">Pre-Placement Orientation</div>
-            <div className="tp-outer-item item7">Campus Recruitment Drive</div>
-            <div className="tp-outer-item item8">Feedback & Continuous Improvement</div>
+          <div className={styles.diagram}>
+            <div className={styles.outerCircle}></div>
+            <div className={styles.centerCircle}>Placement<br />Training</div>
+            <div className={`${styles.outerItem} ${styles.item1}`}>Career Awareness & Student Registration</div>
+            <div className={`${styles.outerItem} ${styles.item2}`}>Aptitude & Soft Skills Development</div>
+            <div className={`${styles.outerItem} ${styles.item3}`}>Technical Skill Enhancement</div>
+            <div className={`${styles.outerItem} ${styles.item4}`}>Resume & Profile Building</div>
+            <div className={`${styles.outerItem} ${styles.item5}`}>Group Discussion & Interview Prep</div>
+            <div className={`${styles.outerItem} ${styles.item6}`}>Pre-Placement Orientation</div>
+            <div className={`${styles.outerItem} ${styles.item7}`}>Campus Recruitment Drive</div>
+            <div className={`${styles.outerItem} ${styles.item8}`}>Feedback & Continuous Improvement</div>
           </div>
         </div>
       </section>
 
       {/* Career Counselling Section */}
-      <section className="tp-career-section" ref={el => sectionsRef.current[3] = el}>
+      <section className={styles.careerSection} ref={el => sectionsRef.current[3] = el}>
         <h1>Career Counselling and Higher Education</h1>
-        <div className="tp-career-header">
+        <div className={styles.careerHeader}>
           {[1, 2, 3, 4, 5].map((num) => (
             <div key={num}>
               <img src={`https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/jeremiah-wilson-${num}.jpg`} alt={`Image ${num}`} />
@@ -298,35 +297,35 @@ const TrainingPlacementsPage = () => {
           ))}
         </div>
         <p>
-          <span className="tp-dropcap">C</span>areer Counselling & Higher Education cell, which is a unit of Career Development Centre, plays a predominant role in shaping up the career goals of students. Its primary objective is to assist students in making and implementing informed educational and occupational choices. The concept of career Counselling & Higher Education should be explicitly presented to students early in their university lives. It also aims to empower students through career counselling services, so that they could act responsibly when career-related concerns arise during the course of their entire program or course.
+          <span className={styles.dropcap}>C</span>areer Counselling & Higher Education cell, which is a unit of Career Development Centre, plays a predominant role in shaping up the career goals of students. Its primary objective is to assist students in making and implementing informed educational and occupational choices. The concept of career Counselling & Higher Education should be explicitly presented to students early in their university lives. It also aims to empower students through career counselling services, so that they could act responsibly when career-related concerns arise during the course of their entire program or course.
         </p>
       </section>
 
       {/* Industry Certifications Section */}
-      <section className="tp-industry-certifications-section" ref={el => sectionsRef.current[4] = el}>
+      <section className={styles.industryCertificationsSection} ref={el => sectionsRef.current[4] = el}>
         <h1>Industry Certifications</h1>
         <p>
           Industry certifications are recognized credentials that validate a professional's skills and knowledge in a specific field. They help students and professionals gain credibility, increase employability, and demonstrate expertise in their chosen domain. Obtaining certifications from recognized institutions or organizations provides a competitive edge in the job market and enhances career growth opportunities.
         </p>
-        <div className="tp-image-container-wrapper">
-          <div className="tp-image-container" style={{ flex: 1 }}>
+        <div className={styles.imageContainerWrapper}>
+          <div className={styles.imageContainer} style={{ flex: 1 }}>
             <img src="https://picsum.photos/300/300" alt="placeholder" />
           </div>
-          <div className="tp-image-container" style={{ flex: 1 }}>
+          <div className={styles.imageContainer} style={{ flex: 1 }}>
             <img src="https://picsum.photos/350/350" alt="placeholder" />
           </div>
-          <div className="tp-image-container" style={{ flex: 0.5 }}>
+          <div className={styles.imageContainer} style={{ flex: 0.5 }}>
             <img src="https://picsum.photos/300/600" alt="placeholder" />
           </div>
-          <div className="tp-image-container" style={{ flex: 2 }}>
+          <div className={styles.imageContainer} style={{ flex: 2 }}>
             <img src="https://picsum.photos/600/300" alt="placeholder" />
           </div>
-          <div className="tp-image-container" style={{ flex: 0.56 }}>
+          <div className={styles.imageContainer} style={{ flex: 0.56 }}>
             <img src="https://picsum.photos/450/800" alt="placeholder" />
           </div>
         </div>
-        <div className="tp-industry-card-container">
-          <div className="tp-industry-card">
+        <div className={styles.industryCardContainer}>
+          <div className={styles.industryCard}>
             <h2>Professional Benefits</h2>
             <ul>
               <li>Boost Your Resume</li>
@@ -338,7 +337,7 @@ const TrainingPlacementsPage = () => {
               <li>Job Security</li>
             </ul>
           </div>
-          <div className="tp-industry-card">
+          <div className={styles.industryCard}>
             <h2>Career Advantages</h2>
             <ul>
               <li>Global Recognition</li>
@@ -354,9 +353,9 @@ const TrainingPlacementsPage = () => {
       </section>
 
       {/* Pyramid Section */}
-      <section className="tp-pyramid-section" ref={el => sectionsRef.current[5] = el}>
+      <section className={styles.pyramidSection} ref={el => sectionsRef.current[5] = el}>
         <h1>Placement Training Functions</h1>
-        <div className="tp-pyramid">
+        <div className={styles.pyramid}>
           {[
             ['Consortium', 'Industry Conclave'],
             ['Contests', 'Hackathons'],
@@ -366,9 +365,9 @@ const TrainingPlacementsPage = () => {
             ['Soft Skills Training', 'Digital Process'],
             ['Career Counselling', 'Placement Training']
           ].map((activities, index) => (
-            <div key={index} className="tp-layer">
+            <div key={index} className={styles.layer}>
               {activities.map((activity, i) => (
-                <div key={i} className="tp-activity">{activity}</div>
+                <div key={i} className={styles.activity}>{activity}</div>
               ))}
             </div>
           ))}

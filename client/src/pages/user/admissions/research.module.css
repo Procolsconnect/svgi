@@ -1,0 +1,739 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap');
+
+.pageWrapper {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f9fafb;
+}
+  
+/* HERO SECTION */
+.heroSection {
+  min-height: 350px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.heroSection::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+.heroTitle {
+  position: relative;
+  font-size: 52px;
+  font-weight: bold;
+  z-index: 1;
+  letter-spacing: 1px;
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+}
+
+.heroTitle::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  border-radius: 3px;
+  animation: underlinePulse 2s infinite;
+}
+
+@keyframes underlinePulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.8; }
+  50% { transform: scaleX(1.4); opacity: 1; }
+}
+
+.mainContainer {
+  display: grid;
+  padding: 32px;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+}
+
+.headerSection {
+  grid-area: 1 / 1 / 2 / 4;
+  display: flex;
+  align-items: center;
+}
+
+.headerSection i {
+  margin-right: 12px;
+}
+
+.headerLogo {
+  width: 131px;
+  height: 27px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerText {
+  color: #fff;
+  margin: 0;
+}
+
+.topImage {
+  grid-area: 3 / 2 / 7 / -2;
+  background-size: cover;
+  background-position: center;
+}
+
+.centerImg {
+  grid-area: -8 / 2 / -5 / 5;
+  background-size: cover;
+  background-position: center;
+}
+
+.bottomImg {
+  grid-area: -6 / 4 / -2 / -2;
+  background-size: cover;
+  background-position: center;
+}
+
+.divArea1,
+.divArea2 {
+  background-color: #001F54;
+  z-index: -100;
+  width: 66%;
+}
+
+.divArea1 {
+  grid-area: 2 / 1 / 5 / 4;
+  height: 66%;
+}
+
+.divArea2 {
+  grid-area: -7 / -4 / -5 / -1;
+  height: 100%;
+}
+
+.title2 {
+  font-size: 48px;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+.italic {
+  font-style: italic;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.rightTopSection {
+  grid-area: 2 / -4 / 3 / -2;
+  position: relative;
+  justify-self: end;
+  align-self: end;
+}
+
+.leftBottomSection {
+  grid-area: 7 / 2 / 8 / 3;
+  position: relative;
+}
+
+.trans90 { transform: rotate(90deg); }
+.trans180 { transform: rotate(180deg); }
+.trans270 { transform: rotate(270deg); }
+
+.posLeft {
+  position: absolute;
+  left: -50%;
+  top: -50%;
+}
+
+.posRight {
+  position: absolute;
+  left: 50%;
+  top: 200%;
+}
+
+.fLeft { float: left; }
+
+.div1,
+.div2 {
+  border: 20px solid #001F54;
+  z-index: -100;
+  height: 66%;
+  width: 80%;
+}
+
+.div1 {
+  grid-area: 5 / 4 / 8 / -1;
+  justify-self: center;
+  align-self: center;
+}
+
+.div2 {
+  grid-area: -7 / 1 / -4 / -4;
+  justify-self: center;
+  align-self: center;
+}
+
+.content {
+  grid-area: 9 / 3 / 13 / -2;
+  position: relative;
+}
+
+.content .italic {
+  position: absolute;
+  top: 100px;
+  left: -200px;
+}
+
+.content h2 {
+  margin: 0;
+}
+
+.pattern1 {
+  grid-area: -3 / 2 / -1 / 5;
+  height: 50%;
+  width: 66%;
+  background: repeating-linear-gradient(
+    135deg,
+    #001f54,
+    #001f54 11.5px,
+    transparent 11.5px,
+    transparent 27px,
+    #001f54 27px,
+    #001f54 35.5px
+  );
+  justify-self: center;
+  align-self: center;
+}
+
+/* BUTTON BIRD SECTION */
+.wrapperNo4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #BEEDFF, white);
+  height: 60vh;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.wrapperNo4 p {
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.wrapperNo4 h1 {
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+.buttonBird {
+  width: 300px;
+  height: 88px;
+  background-color: #131335;
+  border-radius: 5px;
+  position: absolute;
+  opacity: 1;
+  padding: 0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 12%;
+}
+
+.buttonBirdText {
+  text-align: center;
+  font-size: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #BEEDFF;
+  position: absolute;
+  z-index: 1000;
+  top: 50%;
+  margin: 0;
+  transform: translateY(-50%);
+}
+
+.buttonBird:focus {
+  outline: none;
+}
+
+.buttonBird:hover .bird30 {
+  left: 600px;
+  top: -550px;
+  opacity: 0;
+  transition: left 1.5s cubic-bezier(0.42, 0, 0.58, 1), top 1.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.5s linear 1s;
+}
+
+.buttonBird:hover .bird30:after {
+  left: 50px;
+  top: 50px;
+  transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+}
+
+.buttonBird:hover .bird30:before {
+  left: -50px;
+  top: 50px;
+  transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+}
+
+.buttonBird .feather {
+  position: absolute;
+  width: 18%;
+  left: 40%;
+  top: 12px;
+  display: none;
+  opacity: 0;
+  fill: #131335;
+}
+
+.buttonBird.active {
+  background-color: transparent;
+  transition: all 0.2s linear 0.1s;
+}
+
+.buttonBird.active .buttonBirdText {
+  color: #131335;
+  animation: textFade 1.5s 0.2s;
+}
+
+.buttonBird.active .feather {
+  display: block;
+  animation: featherFade 1.5s linear 0.5s forwards;
+}
+
+/* Birds */
+.bird,
+.bird:before,
+.bird:after,
+[class*="bird--"] {
+  opacity: 1;
+  display: block;
+  position: absolute;
+  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+  background-size: auto 100%;
+  width: 60px;
+  height: 33px;
+  top: 0;
+  left: 0;
+  animation-name: flyCycle;
+  animation-timing-function: steps(3);
+  animation-iteration-count: infinite;
+}
+
+[class*="bird--"]:not(.bird30):after,
+[class*="bird--"]:not(.bird30):before {
+  width: 30px;
+  height: 33px;
+  top: -8px;
+  left: 8px;
+  z-index: -100;
+}
+
+@keyframes flyCycle {
+  100% { background-position: -360px 0; }
+}
+
+@keyframes textFade {
+  0% { color: transparent; opacity: 1; top: -50%; left: auto; }
+  1% { color: transparent; opacity: 0; }
+  50% { color: transparent; opacity: 0; }
+  100% { color: #131335; opacity: 1; }
+}
+
+@keyframes featherFade {
+  0% { top: -100px; opacity: 0; }
+  25% { transform: rotate(10deg); left: 30%; }
+  50% { transform: rotate(-5deg); opacity: 1; left: 45%; }
+  75% { transform: rotate(10deg); left: 32%; }
+  100% { transform: rotate(0deg); opacity: 1; top: 12px; left: 43%; }
+}@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap');
+
+.pageWrapper {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f9fafb;
+}
+  
+/* HERO SECTION */
+.heroSection {
+  min-height: 350px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.heroSection::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+.heroTitle {
+  position: relative;
+  font-size: 52px;
+  font-weight: bold;
+  z-index: 1;
+  letter-spacing: 1px;
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+}
+
+.heroTitle::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  border-radius: 3px;
+  animation: underlinePulse 2s infinite;
+}
+
+@keyframes underlinePulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.8; }
+  50% { transform: scaleX(1.4); opacity: 1; }
+}
+
+.mainContainer {
+  display: grid;
+  padding: 32px;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+}
+
+.headerSection {
+  grid-area: 1 / 1 / 2 / 4;
+  display: flex;
+  align-items: center;
+}
+
+.headerSection i {
+  margin-right: 12px;
+}
+
+.headerLogo {
+  width: 131px;
+  height: 27px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerText {
+  color: #fff;
+  margin: 0;
+}
+
+.topImage {
+  grid-area: 3 / 2 / 7 / -2;
+  background-size: cover;
+  background-position: center;
+}
+
+.centerImg {
+  grid-area: -8 / 2 / -5 / 5;
+  background-size: cover;
+  background-position: center;
+}
+
+.bottomImg {
+  grid-area: -6 / 4 / -2 / -2;
+  background-size: cover;
+  background-position: center;
+}
+
+.divArea1,
+.divArea2 {
+  background-color: #001F54;
+  z-index: -100;
+  width: 66%;
+}
+
+.divArea1 {
+  grid-area: 2 / 1 / 5 / 4;
+  height: 66%;
+}
+
+.divArea2 {
+  grid-area: -7 / -4 / -5 / -1;
+  height: 100%;
+}
+
+.title2 {
+  font-size: 48px;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+.italic {
+  font-style: italic;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.rightTopSection {
+  grid-area: 2 / -4 / 3 / -2;
+  position: relative;
+  justify-self: end;
+  align-self: end;
+}
+
+.leftBottomSection {
+  grid-area: 7 / 2 / 8 / 3;
+  position: relative;
+}
+
+.trans90 { transform: rotate(90deg); }
+.trans180 { transform: rotate(180deg); }
+.trans270 { transform: rotate(270deg); }
+
+.posLeft {
+  position: absolute;
+  left: -50%;
+  top: -50%;
+}
+
+.posRight {
+  position: absolute;
+  left: 50%;
+  top: 200%;
+}
+
+.fLeft { float: left; }
+
+.div1,
+.div2 {
+  border: 20px solid #001F54;
+  z-index: -100;
+  height: 66%;
+  width: 80%;
+}
+
+.div1 {
+  grid-area: 5 / 4 / 8 / -1;
+  justify-self: center;
+  align-self: center;
+}
+
+.div2 {
+  grid-area: -7 / 1 / -4 / -4;
+  justify-self: center;
+  align-self: center;
+}
+
+.content {
+  grid-area: 9 / 3 / 13 / -2;
+  position: relative;
+}
+
+.content .italic {
+  position: absolute;
+  top: 100px;
+  left: -200px;
+}
+
+.content h2 {
+  margin: 0;
+}
+
+.pattern1 {
+  grid-area: -3 / 2 / -1 / 5;
+  height: 50%;
+  width: 66%;
+  background: repeating-linear-gradient(
+    135deg,
+    #001f54,
+    #001f54 11.5px,
+    transparent 11.5px,
+    transparent 27px,
+    #001f54 27px,
+    #001f54 35.5px
+  );
+  justify-self: center;
+  align-self: center;
+}
+
+/* BUTTON BIRD SECTION */
+.wrapperNo4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #BEEDFF, white);
+  height: 60vh;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.wrapperNo4 p {
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.wrapperNo4 h1 {
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+.buttonBird {
+  width: 300px;
+  height: 88px;
+  background-color: #131335;
+  border-radius: 5px;
+  position: absolute;
+  opacity: 1;
+  padding: 0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 12%;
+}
+
+.buttonBirdText {
+  text-align: center;
+  font-size: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #BEEDFF;
+  position: absolute;
+  z-index: 1000;
+  top: 50%;
+  margin: 0;
+  transform: translateY(-50%);
+}
+
+.buttonBird:focus {
+  outline: none;
+}
+
+.buttonBird:hover .bird30 {
+  left: 600px;
+  top: -550px;
+  opacity: 0;
+  transition: left 1.5s cubic-bezier(0.42, 0, 0.58, 1), top 1.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.5s linear 1s;
+}
+
+.buttonBird:hover .bird30:after {
+  left: 50px;
+  top: 50px;
+  transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+}
+
+.buttonBird:hover .bird30:before {
+  left: -50px;
+  top: 50px;
+  transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+}
+
+.buttonBird .feather {
+  position: absolute;
+  width: 18%;
+  left: 40%;
+  top: 12px;
+  display: none;
+  opacity: 0;
+  fill: #131335;
+}
+
+.buttonBird.active {
+  background-color: transparent;
+  transition: all 0.2s linear 0.1s;
+}
+
+.buttonBird.active .buttonBirdText {
+  color: #131335;
+  animation: textFade 1.5s 0.2s;
+}
+
+.buttonBird.active .feather {
+  display: block;
+  animation: featherFade 1.5s linear 0.5s forwards;
+}
+
+/* Birds */
+.bird,
+.bird:before,
+.bird:after,
+[class*="bird--"] {
+  opacity: 1;
+  display: block;
+  position: absolute;
+  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+  background-size: auto 100%;
+  width: 60px;
+  height: 33px;
+  top: 0;
+  left: 0;
+  animation-name: flyCycle;
+  animation-timing-function: steps(3);
+  animation-iteration-count: infinite;
+}
+
+[class*="bird--"]:not(.bird30):after,
+[class*="bird--"]:not(.bird30):before {
+  width: 30px;
+  height: 33px;
+  top: -8px;
+  left: 8px;
+  z-index: -100;
+}
+
+@keyframes flyCycle {
+  100% { background-position: -360px 0; }
+}
+
+@keyframes textFade {
+  0% { color: transparent; opacity: 1; top: -50%; left: auto; }
+  1% { color: transparent; opacity: 0; }
+  50% { color: transparent; opacity: 0; }
+  100% { color: #131335; opacity: 1; }
+}
+
+@keyframes featherFade {
+  0% { top: -100px; opacity: 0; }
+  25% { transform: rotate(10deg); left: 30%; }
+  50% { transform: rotate(-5deg); opacity: 1; left: 45%; }
+  75% { transform: rotate(10deg); left: 32%; }
+  100% { transform: rotate(0deg); opacity: 1; top: 12px; left: 43%; }
+}

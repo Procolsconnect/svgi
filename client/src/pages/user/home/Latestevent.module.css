@@ -1,0 +1,277 @@
+:root {
+  --n: 7;
+  --k: 0;
+}
+
+@property --p {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: true;
+}
+
+@property --v {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: true;
+}
+
+/* === Container === */
+.container {
+  background: #070410;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 6rem;
+}
+
+/* === Centered Heading === */
+.heading {
+  text-align: center;
+  font-size: 3rem;
+  color: #ffffff;
+  margin-bottom: 3rem;
+  font-weight: 600;
+}
+
+/* === Main Content (2 columns) === */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1400px;
+}
+
+/* === Left Column === */
+.left {
+  position: relative;
+  margin-top: -55px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === Right Column === */
+.right {
+  text-align: left;
+  max-width: 550px;
+}
+
+.imageTitle {
+  font-size: 2rem;
+  color: #dbd56e;
+  margin-bottom: 1rem;
+}
+
+.imageDesc {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(241, 245, 249, 0.85);
+}
+
+/* === Stack Section === */
+.animalSection {
+  --p: var(--k);
+  --abs-p: abs(var(--k) - var(--p));
+  --end: clamp(0, var(--abs-p) - 1, 1);
+  --dir: calc((1 - 2 * var(--end)) * sign(var(--k) - var(--p)));
+  --fwd: calc(0.5 * (1 + var(--dir)));
+  --v: var(--k);
+  --abs-v: abs(var(--v) - var(--p));
+  --prg: calc(var(--abs-v) / (1 - var(--end) + var(--end) * (var(--n) - 1)));
+  display: grid;
+  grid-template: repeat(2, max-content) 1fr max-content / max-content 1fr;
+  grid-gap: 0.5em 4em;
+  position: relative;
+  counter-reset: k calc(1 + var(--k)) n var(--n);
+  transition: --p 0s 0.8s, --v 0.8s;
+  scale: 0.7;
+}
+
+/* === Stack Cards === */
+.animalCard {
+  --abs-top: abs(var(--k) - var(--i));
+  --not-top: min(1, var(--abs-top));
+  --top: calc(1 - var(--not-top));
+  --val-mov: ((1 - var(--fwd)) * var(--p) + var(--fwd) * var(--k) - var(--i));
+  --abs-mov: abs(var(--val-mov));
+  --not-mov: min(1, var(--abs-mov));
+  --mov: calc(1 - var(--not-mov));
+  grid-area: 1/1/-1/-1;
+  display: grid;
+  grid-template: subgrid / subgrid;
+  z-index: calc(var(--n) - var(--abs-top));
+  transition: z-index 0.8s cubic-bezier(1, -0.9, 0, 1.9);
+}
+
+.animalImage {
+  --sin: sin(var(--prg) * 0.5turn);
+  grid-area: 1/1/-1;
+  border: solid 2px rgba(82, 82, 122, 0.5);
+  height: 22em;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 0.9em;
+  translate: calc(-150% * var(--mov) * sqrt(var(--sin)));
+  rotate: calc((1 - var(--sin)) * var(--a));
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* === Navigation Buttons === */
+.animalNav {
+  display: flex;
+  gap: 2rem;
+  margin-left: -3rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: -1rem;
+  position: relative;
+}
+
+.animalBtn {
+  --sgn: -1;
+  border: none;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(129, 140, 248, 0.25);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(129, 140, 248, 0.4);
+}
+
+.animalBtn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border: solid 3px #dbd56e;
+  border-width: 3px 3px 0 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: 0.3s ease;
+}
+
+.animalBtnPrev::before {
+  transform: translate(-50%, -50%) rotate(225deg);
+}
+
+.animalBtn:hover {
+  background: rgba(219, 213, 110, 0.35);
+  box-shadow: 0 0 12px rgba(219, 213, 110, 0.6);
+}
+
+.animalBtn:hover::before {
+  border-color: #ffffff;
+}
+
+/* === Title Row === */
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.counter {
+  font-size: 1.1rem;
+  color: rgba(241, 245, 249, 0.7);
+  background: rgba(219, 213, 110, 0.15);
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(219, 213, 110, 0.4);
+  font-weight: 500;
+}
+
+/* ========== RESPONSIVE ========== */
+
+/* Medium Laptops / Tablets Landscape */
+@media (min-width: 1024px) {
+  .container {
+    padding: 3rem 4rem;
+    max-height: 100vh;
+  }
+  .heading { font-size: 2.8rem; }
+  .content { gap: 2.5rem; }
+  .animalImage { height: 20em; }
+}
+
+/* Tablets / Small Laptops */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .container { padding: 3rem; max-height: 100vh; }
+  .content { display: flex; flex-direction: row; gap: 2rem; height: fit-content; }
+  .left { gap: 1.5rem; }
+  .right { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .animalImage { height: 18em; }
+  .animalNav { gap: 2.5em; margin-top: 0; }
+  .imageTitle { font-size: 1.5rem; text-align: center; }
+  .imageDesc { font-size: 1rem; text-align: justify; }
+  .counter { display: none; }
+}
+
+/* Tablets Portrait */
+@media (max-width: 767px) and (min-width: 601px) {
+  .container { padding: 2.5rem 2rem; max-height: fit-content; }
+  .heading { font-size: 2.3rem; margin-bottom: 2rem; }
+  .content { display: flex; flex-direction: column; align-items: center; }
+  .left { width: 100%; left: 20px; }
+  .right { padding: 10px; width: 100%; margin-top: -10px; }
+  .animalImage { height: 15em; }
+  .animalNav { gap: 2em; margin-top: 0; left: 5px; }
+  .animalBtn { width: 2.2rem; height: 2.2rem; }
+  .titleRow { width: 100%; justify-content: center; }
+  .counter { display: none; }
+}
+
+/* Mobile Landscape & Small Tablets */
+@media (max-width: 600px) and (min-width: 481px) {
+  .container { padding: 2rem 1.5rem; width: 100%; }
+  .heading { font-size: 2rem; }
+  .content { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+  .left { left: 22px; }
+  .animalImage { height: 13.5em; }
+  .right { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .imageTitle { font-size: 1.4rem; text-align: center; }
+  .imageDesc { font-size: 0.9rem; text-align: justify; }
+  .animalNav { gap: 2em; }
+  .animalBtn { width: 2.5rem; height: 2.5rem; }
+  .counter { display: none; }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) and (min-width: 361px) {
+  .container { padding: 2rem 1rem; width: 100%; }
+  .content { display: flex; flex-direction: column; align-items: center; }
+  .left { width: 100%; left: 22px; gap: 10px; }
+  .animalImage { height: 11.5em; border-radius: 0.7em; }
+  .animalNav { gap: 1.5em; left: 2px; }
+  .animalBtn { width: 2.3rem; height: 2.3rem; }
+  .heading { font-size: 1.8rem; margin-bottom: 1.8rem; }
+  .right { width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .imageTitle { font-size: 1.3rem; text-align: center; }
+  .imageDesc { font-size: 0.85rem; line-height: 1.5; text-align: justify; }
+  .counter { display: none; }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+  .container { width: 100%; padding: 20px; }
+  .heading { font-size: 1.6rem; }
+  .content { gap: 1rem; display: flex; flex-direction: column; }
+  .left { width: 100%; left: 22px; margin-top: -55px; gap: 1rem; }
+  .right { width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .animalImage { height: 10em; }
+  .imageTitle { font-size: 1.2rem; }
+  .imageDesc { font-size: 0.8rem; text-align: justify; }
+  .animalNav { gap: 1em; left: 5px; }
+  .animalBtn { width: 2rem; height: 2rem; }
+  .counter { display: none; }
+}

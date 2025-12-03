@@ -1,6 +1,6 @@
 // AdmissionsSection.jsx
 import React, { useEffect, useRef } from 'react';
-import './procedure.css';
+import styles from './procedure.module.css';
 
 const AdmissionsSection = () => {
   const textRef = useRef(null);
@@ -9,14 +9,13 @@ const AdmissionsSection = () => {
     const text = textRef.current;
     if (!text) return;
 
-    // Split text into lines
     const lines = text.innerText.split('. ').filter(Boolean);
-    text.innerHTML = lines.map(line => `<div class="admissions-line-wrapper"><div class="admissions-line">${line}.</div></div>`).join('');
+    text.innerHTML = lines.map(line => 
+      `<div class="${styles.lineWrapper}"><div class="${styles.line}">${line}.</div></div>`
+    ).join('');
 
-    // Animate lines
     const animate = () => {
-      const tl = document.timeline || window;
-      const lineElements = text.querySelectorAll('.admissions-line');
+      const lineElements = text.querySelectorAll(`.${styles.line}`);
 
       lineElements.forEach((line, i) => {
         line.style.transform = 'translateY(100%)';
@@ -31,31 +30,31 @@ const AdmissionsSection = () => {
         }, i * 80);
       });
 
-      setTimeout(animate, 3000); // Repeat every 3s
+      setTimeout(animate, 3000);
     };
 
     animate();
   }, []);
 
   return (
-    <div className="admissions-wrapper">
+    <div className={styles.wrapper}>
       {/* HERO SECTION */}
-      <section className="admissions-hero">
-        <img src="hero img.jpg" alt="Hero Background" className="admissions-hero-bg" />
-        <div className="admissions-hero-overlay"></div>
-        <h1 className="admissions-hero-title">Admissions Procedure</h1>
+      <section className={styles.hero}>
+        <img src="hero img.jpg" alt="Hero Background" className={styles.heroBg} />
+        <div className={styles.heroOverlay}></div>
+        <h1 className={styles.heroTitle}>Admissions Procedure</h1>
       </section>
 
       {/* TEXT + VIDEO SECTION */}
-      <section className="admissions-content">
-        <div className="admissions-text-container">
-          <h1 ref={textRef} className="admissions-text">
+      <section className={styles.content}>
+        <div className={styles.textContainer}>
+          <h1 ref={textRef} className={styles.text}>
             Crafting digital experiences that blend innovation with intuitive design.
             Each pixel tells a story of creativity and purpose.
           </h1>
         </div>
-        <div className="admissions-video-box">
-          <video autoPlay muted loop playsInline className="admissions-video">
+        <div className={styles.videoBox}>
+          <video autoPlay muted loop playsInline className={styles.video}>
             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -63,22 +62,22 @@ const AdmissionsSection = () => {
       </section>
 
       {/* BUBBLE CHAT SECTION */}
-<section className="admissions-bubble-section">
-  <div className="admissions-left-heading">Our Student Career Foundation</div>
-  <div className="admissions-container">
-    {[
-      "Step 1: Research colleges based on interests, goals, location, programs, rankings, tuition, and campus life.",
-      "Step 2: Gather transcripts, test scores (SAT/ACT), recommendations, essays, resumes, portfolios.",
-      "Step 3: Fill out applications (Common App or specific). Note deadlines: early decision, early action, regular.",
-      "Step 4: Submit applications with fees (or waivers). Track status via portals and provide additional info if needed.",
-      "Step 5: Receive offers, compare aid, choose college. Submit deposit, complete enrollment (housing, orientation)."
-    ].map((step, i) => (
-      <div key={i} className="admissions-bubble">
-        <p>{step}</p>
-      </div>
-    ))}
-  </div>
-</section>
+      <section className={styles.bubbleSection}>
+        <div className={styles.leftHeading}>Our Student Career Foundation</div>
+        <div className={styles.container}>
+          {[
+            "Step 1: Research colleges based on interests, goals, location, programs, rankings, tuition, and campus life.",
+            "Step 2: Gather transcripts, test scores (SAT/ACT), recommendations, essays, resumes, portfolios.",
+            "Step 3: Fill out applications (Common App or specific). Note deadlines: early decision, early action, regular.",
+            "Step 4: Submit applications with fees (or waivers). Track status via portals and provide additional info if needed.",
+            "Step 5: Receive offers, compare aid, choose college. Submit deposit, complete enrollment (housing, orientation)."
+          ].map((step, i) => (
+            <div key={i} className={styles.bubble}>
+              <p>{step}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

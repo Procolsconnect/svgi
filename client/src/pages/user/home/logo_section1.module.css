@@ -1,0 +1,167 @@
+.infiniteLogoSliderContainer {
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+}
+
+/* Default Single Row (Desktop / Tablet) */
+.infiniteLogoSliderTrack {
+  display: flex;
+  width: calc(250px * 14);
+  animation: infiniteLogoScroll 40s linear infinite;
+}
+
+.desktopTrack {
+  display: flex;
+}
+
+.infiniteLogoSlide {
+  width: 250px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.infiniteLogoSlide img {
+  width: 250px;
+  height: 100px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.infiniteLogoSlide img:hover {
+  transform: scale(1.05);
+}
+
+/* Hide mobile layout by default */
+.infiniteLogoMobile {
+  display: none;
+}
+
+@keyframes infiniteLogoScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 7));
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .infiniteLogoSlide {
+    width: 200px;
+    height: 80px;
+  }
+
+  .infiniteLogoSlide img {
+    width: 200px;
+    height: 80px;
+  }
+
+  .infiniteLogoSliderTrack {
+    width: calc(200px * 14);
+    animation: infiniteLogoScroll992 35s linear infinite;
+  }
+}
+
+@keyframes infiniteLogoScroll992 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-200px * 7));
+  }
+}
+
+@media (max-width: 600px) {
+  .infiniteLogoSlide {
+    width: 150px;
+    height: 70px;
+  }
+
+  .infiniteLogoSlide img {
+    width: 140px;
+    height: 70px;
+  }
+
+  .infiniteLogoSliderTrack {
+    width: calc(150px * 14);
+    animation: infiniteLogoScroll600 30s linear infinite;
+  }
+}
+
+@keyframes infiniteLogoScroll600 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-150px * 7));
+  }
+}
+
+/* Two Opposite Infinite Rows for Mobile (≤480px) */
+@media (max-width: 480px) {
+  .desktopTrack {
+    display: none;
+  }
+
+  .infiniteLogoMobile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 160px;
+    overflow: hidden;
+  }
+
+  .infiniteLogoSliderRow {
+    display: flex;
+    width: max-content;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .topRow {
+    animation: infiniteLogoScrollLeft480 18s linear infinite;
+  }
+
+  .bottomRow {
+    animation: infiniteLogoScrollRight480 18s linear infinite;
+  }
+
+  .infiniteLogoSlide {
+    width: 120px;
+    height: 60px;
+  }
+
+  .infiniteLogoSlide img {
+    width: 110px;
+    height: 60px;
+    object-fit: contain;
+  }
+}
+
+@keyframes infiniteLogoScrollLeft480 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes infiniteLogoScrollRight480 {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

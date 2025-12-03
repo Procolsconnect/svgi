@@ -1,0 +1,467 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap');
+
+.root {
+  font-family: 'Poppins', sans-serif;
+  background: var(--svgio-bg);
+  color: var(--svgio-text);
+  scroll-behavior: smooth;
+}
+
+/* HERO SECTION */
+.hero {
+  min-height: 350px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 5, 5, 0.5);
+  opacity: 0.4;
+  z-index: 0;
+}
+
+
+.heroTitle {
+  position: relative;
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  z-index: 1;
+}
+
+.heroTitle::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 5px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  border-radius: 3px;
+  animation: underlinePulse 2s infinite;
+}
+
+
+@keyframes underlinePulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.8; }
+  50% { transform: scaleX(1.4); opacity: 1; }
+}
+
+/* RESET & BASE STYLES */
+.pageWrapper * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-size: 62.5%;
+}
+
+.pageWrapper a {
+  color: unset;
+  font-size: unset;
+  text-decoration: none;
+}
+
+/* WRAP CONTAINER */
+.wrap {
+  width: 960px;
+  margin: 0 auto;
+  font-size: 0;
+}
+
+/* HEADER */
+.header {
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+  margin-top: 40px;
+}
+
+.header h3 {
+  height: 120px;
+  text-align: left;
+  margin-left: 97px;
+}
+
+.header h3:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f060";
+  display: inline-block;
+  font-size: 2rem;
+  color: #000;
+  padding-right: 5px;
+}
+
+.header h3 span {
+  line-height: 120px;
+  font-size: 2rem;
+  color: #fff;
+  font-weight: 900;
+  padding: 2px 8px;
+  background-color: #000;
+}
+
+/* TOP SECTION */
+.detailtop {
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+
+.productimg {
+  width: 75%;
+  height: 55.56%;
+  background-color: #ddd;
+  position: absolute;
+  top: -300px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 2;
+}
+
+.coverImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.detailtop:before {
+  content: "";
+  width: 25%;
+  height: 27.78%;
+  background-color: #001f54;
+  position: absolute;
+  top: 280px;
+  left: 60px;
+}
+
+.detailtop:after {
+  content: "";
+  width: 480px;
+  height: 270px;
+  position: absolute;
+  bottom: 82px;
+  right: 60px;
+  border: 20px solid #001f54;
+  z-index: 1;
+}
+
+.boxtop {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.boxbottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.boxtitle,
+.detailcontent h1 {
+  font-size: 3rem;
+  font-weight: 900;
+}
+
+.boxtitletop1 {
+  position: relative;
+  top: -60px;
+}
+
+.boxtitletop2 {
+  position: relative;
+  top: 12px;
+  right: -140px;
+  transform: rotate(90deg);
+}
+
+.boxtitlebottom1 {
+  position: relative;
+  left: -70px;
+  bottom: -40px;
+  transform: rotate(-90deg);
+}
+
+.boxtitlebottom2 {
+  position: relative;
+  top: 50px;
+  left: 0;
+  transform: scale(-1, -1);
+}
+
+/* CONTENT SECTION */
+.detailcontent {
+  width: 100%;
+  padding: 60px 80px;
+  position: relative;
+}
+
+.detailcontent h3,
+.detailcontent .subtitle {
+  font-size: 24px;
+}
+
+.detailcontent h3 {
+  font-style: italic;
+  position: absolute;
+  top: 180px;
+  left: -100px;
+  transform: rotate(90deg);
+}
+
+.subtitle {
+  font-weight: 900;
+}
+
+.detailcontent p {
+  font-size: 1.6rem;
+  margin: 1.2rem 0;
+  line-height: 2.2rem;
+}
+
+/* BOTTOM SECTION */
+.detailbottom {
+  width: 100%;
+  height: 500px;
+  padding: 0 80px;
+  margin: auto;
+  position: relative;
+}
+
+.detailbottom .leftitem .itemimg {
+  width: 37.5%;
+  padding-bottom: 31.25%;
+  position: absolute;
+  top: 0;
+  left: 120px;
+  z-index: 2;
+}
+
+.detailbottom .leftitem:after {
+  content: "";
+  width: calc(50% - 40px);
+  height: 20.83%;
+  border: 20px solid #001f54;
+  position: absolute;
+  top: 160px;
+  left: 60px;
+}
+
+.detailbottom .rightitem .itemimg {
+  width: 50%;
+  padding-bottom: 41.67%;
+  position: absolute;
+  right: 120px;
+  bottom: 80px;
+  z-index: 1;
+}
+
+.detailbottom .rightitem:before {
+  content: "";
+  width: 240px;
+  height: 200px;
+  background-color: #001f54;
+  position: absolute;
+  top: 100px;
+  right: 60px;
+  z-index: 1;
+}
+
+.detailbottom .rightitem:after {
+  content: "";
+  width: 240px;
+  height: 100px;
+  background: repeating-linear-gradient(
+    135deg,
+    #001f54,
+    #001f54 11.5px,
+    transparent 11.5px,
+    transparent 27px,
+    #001f54 27px,
+    #001f54 35.5px
+  );
+  position: absolute;
+  bottom: 50px;
+  left: 20%;
+  z-index: 3;
+}
+
+/* BUTTON WRAPPER SECTION */
+.wrapperNo4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #BEEDFF, white);
+  height: 60vh;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.wrapperNo4 p {
+  margin: 0 0 10px 0;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.wrapperNo4 h1 {
+  margin: 0 0 30px 0;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.buttonBird {
+  width: 300px;
+  height: 88px;
+  background-color: #131335;
+  border-radius: 5px;
+  position: relative;
+  opacity: 1;
+  padding: 0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.buttonBirdText {
+  text-align: center;
+  font-size: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #BEEDFF;
+  position: absolute;
+  z-index: 1000;
+  top: 50%;
+  margin: 0;
+  transform: translateY(-50%);
+}
+
+.buttonBird:focus {
+  outline: none;
+}
+
+.buttonBird:hover .bird30 {
+  left: 600px;
+  top: -550px;
+  opacity: 0;
+  transition: left 1.5s cubic-bezier(0.42, 0, 0.58, 1), top 1.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.5s linear 1s;
+}
+
+.buttonBird:hover .bird30:after {
+  left: 50px;
+  top: 50px;
+  transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+}
+
+.buttonBird:hover .bird30:before {
+  left: -50px;
+  top: 50px;
+  transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+}
+
+.buttonBird .feather {
+  position: absolute;
+  width: 18%;
+  left: 40%;
+  top: 12px;
+  display: none;
+  opacity: 0;
+  fill: #131335;
+}
+
+/* Active Button State */
+.buttonBird.active {
+  background-color: transparent;
+  transition: all 0.2s linear 0.1s;
+}
+
+.buttonBird.active .buttonBirdText {
+  color: #131335;
+  animation: textFade 1.5s 0.2s;
+}
+
+.buttonBird.active .feather {
+  display: block;
+  animation: featherFade 1.5s linear 0.5s forwards;
+}
+
+/* Birds */
+.bird,
+.bird:before,
+.bird:after,
+[class*="bird--"] {
+  opacity: 1;
+  display: block;
+  position: absolute;
+  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+  background-size: auto 100%;
+  width: 60px;
+  height: 33px;
+  top: 0;
+  left: 0;
+  animation-name: flyCycle;
+  animation-timing-function: steps(3);
+  animation-iteration-count: infinite;
+}
+
+/* Smaller birds */
+[class*="bird--"]:not(.bird30):after,
+[class*="bird--"]:not(.bird30):before {
+  width: 30px;
+  height: 33px;
+  top: -8px;
+  left: 8px;
+  z-index: -100;
+}
+
+/* Animations */
+@keyframes flyCycle {
+  100% { background-position: -360px 0; }
+}
+
+@keyframes textFade {
+  0% { color: transparent; opacity: 1; top: -50%; left: auto; }
+  1% { color: transparent; opacity: 0; }
+  50% { color: transparent; opacity: 0; }
+  100% { color: #131335; opacity: 1; }
+}
+
+@keyframes featherFade {
+  0% { top: -100px; opacity: 0; }
+  25% { transform: rotate(10deg); left: 30%; }
+  50% { transform: rotate(-5deg); opacity: 1; left: 45%; }
+  75% { transform: rotate(10deg); left: 32%; }
+  100% { transform: rotate(0deg); opacity: 1; top: 12px; left: 43%; }
+}

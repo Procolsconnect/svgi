@@ -13,7 +13,6 @@ const PlacementAndTraining = () => {
         <Route path="placementprocess" element={<PlacementProcess/>} />
         <Route path="placementpage" element={<PlacementPage/>} />
 
-       
       </Routes>
     </div>
   )
