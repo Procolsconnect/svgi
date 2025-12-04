@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-import './Green.css';
+import styles from './Green.module.css';
 
 export default function GreenSvgiCampus() {
   const [focalPoint, setFocalPoint] = useState({ x: 0, y: 0 });
@@ -60,57 +60,62 @@ export default function GreenSvgiCampus() {
   ];
 
   return (
-    <div className="gsvgi-campus-root">
+    <div className={styles.gsvgiCampusRoot}>
       {/* Hero Section */}
-      <div className="gsvgi-hero-section gsvgi-hero-overlay">
-        <h1 className="gsvgi-hero-title">Green SVGI</h1>
+      <div className={`${styles.gsvgiHeroSection} ${styles.gsvgiHeroOverlay}`}>
+        <img 
+          className={styles.gsvgiHeroImage} 
+          src="https://images.unsplash.com/photo-1516655855035-d5215bcb5604?auto=format&fit=crop&w=1000&q=80" 
+          alt="Hero Background" 
+        />
+        <h1 className={styles.gsvgiHeroTitle}>Green SVGI</h1>
       </div>
 
       {/* Title Section */}
       <div style={{ padding: '40px' }}>
-        <h1 className="gsvgi-page-title">
+        <h1 className={styles.gsvgiPageTitle}>
           <div>
-            <span className="gsvgi-glitch gsvgi-character" data-text="S">S</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="V">V</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="G">G</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="I">I</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="">&nbsp;</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="G">G</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="R">R</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="E">E</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="E">E</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="N">N</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="">&nbsp;</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="C">C</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="A">A</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="M">M</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="P">P</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="U">U</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="S">S</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="S">S</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="V">V</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="G">G</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="I">I</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="">&nbsp;</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="G">G</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="R">R</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="E">E</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="E">E</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="N">N</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="">&nbsp;</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="C">C</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="A">A</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="M">M</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="P">P</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="U">U</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="S">S</span>
           </div>
           <div>
-            <span className="gsvgi-glitch gsvgi-character" data-text="A">A</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="N">N</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="">&nbsp;</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="E">E</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="C">C</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="O">O</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="">&nbsp;</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="F">F</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="R">R</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="I">I</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="E">E</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="N">N</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="D">D</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="L">L</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="Y">Y</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="">&nbsp;</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="C">C</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="A">A</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="M">M</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="P">P</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="U">U</span>
-            <span className="gsvgi-glitch gsvgi-character" data-text="S">S</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="A">A</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="N">N</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="">&nbsp;</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="E">E</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="C">C</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="O">O</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="">&nbsp;</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="F">F</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="R">R</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="I">I</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="E">E</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="N">N</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="D">D</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="L">L</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="Y">Y</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="">&nbsp;</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="C">C</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="A">A</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="M">M</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="P">P</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="U">U</span>
+            <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="S">S</span>
           </div>
         </h1>
       </div>
@@ -118,21 +123,21 @@ export default function GreenSvgiCampus() {
       {/* Preview Section */}
       <div style={{ position: 'relative', minHeight: '75vh', margin: '20px' }}>
   
-        <div className="gsvgi-viewport">
-          <div className="gsvgi-bg-container" style={{ backgroundPosition: bgPosition }}></div>
+        <div className={styles.gsvgiViewport}>
+          <div className={styles.gsvgiBgContainer} style={{ backgroundPosition: bgPosition }}></div>
         </div>
 
-        <div className="gsvgi-positioner">
-          <p className="gsvgi-picker-title">Choose background image focal point:</p>
-          <div className="gsvgi-picker" ref={pickerRef}>
+        <div className={styles.gsvgiPositioner}>
+          <p className={styles.gsvgiPickerTitle}>Choose background image focal point:</p>
+          <div className={styles.gsvgiPicker} ref={pickerRef}>
             <img
-              className="gsvgi-picker-img"
+              className={styles.gsvgiPickerImg}
               src="https://images.unsplash.com/photo-1516655855035-d5215bcb5604?auto=format&fit=crop&w=1000&q=80"
               alt="focal point"
             />
             <div
               ref={pointRef}
-              className="gsvgi-point"
+              className={styles.gsvgiPoint}
               onMouseDown={handleMouseDown}
               style={{
                 left: `${focalPoint.x}px`,
@@ -140,20 +145,20 @@ export default function GreenSvgiCampus() {
               }}
             />
           </div>
-          <div className="gsvgi-results">
+          <div className={styles.gsvgiResults}>
             Position: {((focalPoint.x / (pickerRef.current?.offsetWidth - 24 || 1)) * 100).toFixed(1)}% {((focalPoint.y / (pickerRef.current?.offsetHeight - 24 || 1)) * 100).toFixed(1)}%
           </div>
         </div>
       </div>
 
       {/* Photo Gallery */}
-      <ul className="gsvgi-gallery">
+      <ul className={styles.gsvgiGallery}>
         {photoStreamImages.map((img, idx) => (
-          <li key={idx} className="gsvgi-gallery-item">
-            <img src={img} alt={`gallery-${idx}`} className="gsvgi-gallery-img" />
+          <li key={idx} className={styles.gsvgiGalleryItem}>
+            <img src={img} alt={`gallery-${idx}`} className={styles.gsvgiGalleryImg} />
           </li>
         ))}
-        <li className="gsvgi-gallery-item"></li>
+        <li className={styles.gsvgiGalleryItem}></li>
       </ul>
     </div>
   );

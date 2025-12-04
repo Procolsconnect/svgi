@@ -1,42 +1,39 @@
-/* Google Font Import */
+/* CampusLife.module.css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
-
-/* Font Awesome Icons */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
 
-/* Reset */
-.campus__wrapper-main * {
+.wrapperMain * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.campus__wrapper-main {
+.wrapperMain {
   font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
   background: #fdfdfd;
   color: #333;
 }
 
-.campus__wrapper-main h1,
-.campus__wrapper-main h2 {
+.wrapperMain h1,
+.wrapperMain h2 {
   text-align: center;
   font-weight: 800;
   letter-spacing: 1px;
 }
 
-.campus__wrapper-main h3 {
+.wrapperMain h3 {
   font-weight: 500;
 }
 
-.campus__wrapper {
+.wrapper {
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
 }
 
 /* HERO SECTION */
-.campus__hero {
+.hero {
   min-height: 350px;
   display: flex;
   justify-content: center;
@@ -48,7 +45,7 @@
   z-index: 1;
 }
 
-.campus__hero img {
+.hero img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -58,7 +55,7 @@
   z-index: 0;
 }
 
-.campus__hero-overlay {
+.heroOverlay {
   content: "";
   position: absolute;
   inset: 0;
@@ -66,13 +63,13 @@
   z-index: 0;
 }
 
-.campus__hero h1 {
+.hero h1 {
   position: relative;
   font-size: 52px;
   z-index: 1;
 }
 
-.campus__hero h1::after {
+.hero h1::after {
   content: "";
   display: block;
   width: 120px;
@@ -80,22 +77,16 @@
   margin: 14px auto 0;
   background: linear-gradient(90deg, #ff512f, #dd2476);
   border-radius: 3px;
-  animation: campus__underline-pulse 2s infinite;
+  animation: underlinePulse 2s infinite;
 }
 
-@keyframes campus__underline-pulse {
-  0%, 100% {
-    transform: scaleX(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scaleX(1.4);
-    opacity: 1;
-  }
+@keyframes underlinePulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.8; }
+  50% { transform: scaleX(1.4); opacity: 1; }
 }
 
 /* Scroll button */
-.campus__scroll {
+.scroll {
   text-align: center;
   width: 50px;
   height: 50px;
@@ -117,36 +108,30 @@
   z-index: 10;
 }
 
-.campus__scroll.campus__clicked {
+.clicked {
   transform: rotate(360deg);
   position: fixed;
   right: 5%;
   top: 90%;
 }
 
-.campus__scroll.campus__rotate {
+.rotate {
   transform: rotate(180deg);
 }
 
-.campus__arrow-bounce {
-  animation: campus__arrow 1s infinite cubic-bezier(0.4, 0, 0.6, 1);
+.arrowBounce {
+  animation: arrow 1s infinite cubic-bezier(0.4, 0, 0.6, 1);
   position: relative;
 }
 
-@keyframes campus__arrow {
-  0% {
-    bottom: -13px;
-  }
-  50% {
-    bottom: -8px;
-  }
-  100% {
-    bottom: -13px;
-  }
+@keyframes arrow {
+  0% { bottom: -13px; }
+  50% { bottom: -8px; }
+  100% { bottom: -13px; }
 }
 
 /* BANNER SECTION */
-.campus__banner {
+.banner {
   position: relative;
   display: flex;
   align-items: center;
@@ -158,14 +143,14 @@
 }
 
 @media (max-width: 768px) {
-  .campus__banner {
+  .banner {
     flex-direction: column-reverse;
     text-align: center;
     padding: 50px 5%;
     min-height: auto;
   }
 
-  .campus__banner img {
+  .banner img {
     width: 260px !important;
     height: 260px !important;
     position: static !important;
@@ -174,42 +159,36 @@
   }
 }
 
-.campus__banner-content {
+.bannerContent {
   max-width: 520px;
 }
 
-.campus__banner h2 {
+.banner h2 {
   margin: 0 0 10px;
   font-size: 42px;
   line-height: 1.2;
   color: #111;
 }
 
-.campus__banner h3 {
+.banner h3 {
   margin: 10px 0 20px;
   color: #555;
   font-size: 18px;
 }
 
-.campus__banner p {
+.banner p {
   color: #666;
   line-height: 1.6;
   font-size: 15px;
 }
 
-@keyframes campus__morph {
-  0%, 100% {
-    border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
-  }
-  34% {
-    border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
-  }
-  67% {
-    border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
-  }
+@keyframes morph {
+  0%, 100% { border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%; }
+  34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+  67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
 }
 
-.campus__banner img {
+.banner img {
   position: absolute;
   right: 10%;
   top: 50%;
@@ -217,7 +196,7 @@
   height: 350px;
   object-fit: cover;
   border-radius: 50%;
-  animation: campus__morph 4s linear infinite;
+  animation: morph 4s linear infinite;
   cursor: grab;
   user-select: none;
   transform: translateY(-50%);
@@ -226,7 +205,7 @@
   z-index: 2;
 }
 
-.campus__color-trail {
+.colorTrail {
   position: absolute;
   pointer-events: none;
   border-radius: 50%;
@@ -236,13 +215,13 @@
   z-index: 1;
 }
 
-.campus__highlight {
+.highlight {
   color: #ff4b4b;
   font-weight: 600;
 }
 
 /* CAMPUS SECTION */
-.campus__campus-section {
+.campusSection {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -250,13 +229,13 @@
   min-height: 550px;
 }
 
-.campus__left-panel {
+.leftPanel {
   flex: 1;
   position: relative;
   overflow: hidden;
 }
 
-.campus__left-panel img {
+.leftPanel img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -264,11 +243,11 @@
   transition: transform 1.5s ease;
 }
 
-.campus__left-panel:hover img {
+.leftPanel:hover img {
   transform: scale(1.06);
 }
 
-.campus__right-panel {
+.rightPanel {
   flex: 1;
   background: linear-gradient(135deg, #001f3f 0%, #013b7a 100%);
   color: #fff;
@@ -280,14 +259,14 @@
   padding: 60px 0;
 }
 
-.campus__right-panel::before {
+.rightPanel::before {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.07), transparent 60%);
 }
 
-.campus__content-grid {
+.contentGrid {
   display: grid;
   width: 80%;
   grid-template-columns: repeat(3, 1fr);
@@ -295,20 +274,20 @@
   z-index: 2;
 }
 
-.campus__item {
+.item {
   text-align: center;
   transition: all 0.4s ease;
   position: relative;
 }
 
-.campus__icon {
+.icon {
   font-size: 42px;
   color: #fff;
   margin-bottom: 12px;
   transition: all 0.4s ease;
 }
 
-.campus__item span {
+.item span {
   display: block;
   font-weight: 500;
   font-size: 18px;
@@ -316,25 +295,25 @@
   transition: color 0.4s ease;
 }
 
-.campus__item:hover .campus__icon {
+.item:hover .icon {
   color: #000;
   text-shadow: 0 0 15px #fff;
   transform: translateY(-6px);
 }
 
-.campus__item:hover span {
+.item:hover span {
   color: #000;
 }
 
-/* Responsive for campus section */
+/* Responsive */
 @media (max-width: 992px) {
-  .campus__campus-section {
+  .campusSection {
     flex-direction: column;
   }
-  .campus__right-panel {
+  .rightPanel {
     clip-path: none;
   }
-  .campus__content-grid {
+  .contentGrid {
     grid-template-columns: repeat(2, 1fr);
     width: 90%;
     gap: 30px;
@@ -342,13 +321,12 @@
 }
 
 @media (max-width: 600px) {
-  .campus__content-grid {
+  .contentGrid {
     grid-template-columns: 1fr;
     gap: 25px;
   }
 }
 
-/* Ensure sections are properly spaced */
-.campus__section {
+.section {
   margin-bottom: 0;
 }

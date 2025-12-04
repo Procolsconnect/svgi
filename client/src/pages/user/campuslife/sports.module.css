@@ -1,3 +1,4 @@
+/* sports.module.css */
 /* Google Fonts Import */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;800;900&family=Open+Sans:wght@400;700&family=Montserrat:wght@400;600;700&family=Poppins:wght@400&family=Alef&display=swap');
 
@@ -28,7 +29,7 @@
 }
 
 .sports__wrapper a {
-  color: #ffffff;
+  color: #4B4D4B;
   transition: color .3s ease;
   text-decoration: none;
 }
@@ -88,7 +89,6 @@
 }
 
 .sports__hero-overlay {
-  content: "";
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, .5);

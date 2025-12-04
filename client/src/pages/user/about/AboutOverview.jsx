@@ -1,116 +1,127 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BalticSlider from "./BalticSlider";
-import "./aboutOverview.css";
+import styles from "./aboutoverview.module.css";
 
 export default function SVGIOverview() {
-    const sectionsRef = useRef([]);
-    const [index, setIndex] = useState(0);
-    const [clicked, setClicked] = useState(false);
-    const [rotate, setRotate] = useState(false);
+  const sectionsRef = useRef([]);
+  const [index, setIndex] = useState(0);
+  const [clicked, setClicked] = useState(false);
+  const [rotate, setRotate] = useState(false);
 
-    useEffect(() => {
-        // Collect all sections
-        sectionsRef.current = Array.from(document.querySelectorAll(".svgio-section"));
-    }, []);
+  useEffect(() => {
+    sectionsRef.current = Array.from(document.querySelectorAll(`.${styles.section}`));
+  }, []);
 
-    const handleScrollClick = (e) => {
-        const total = sectionsRef.current.length;
+  const handleScrollClick = () => {
+    const total = sectionsRef.current.length;
 
-        // Trigger click animation
-        setClicked(true);
-        setTimeout(() => setClicked(false), 600);
+    setClicked(true);
+    setTimeout(() => setClicked(false), 600);
 
-        // If last → scroll to top
-        if (index >= total) {
-            setRotate(false);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            setIndex(0);
-            return;
-        }
+    if (index >= total) {
+      setRotate(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setIndex(0);
+      return;
+    }
 
-        // Scroll to next section
-        const target = sectionsRef.current[index];
-        if (target) {
-            const topVal = target.offsetTop - 60;
-            window.scrollTo({ top: topVal, behavior: "smooth" });
-        }
+    const target = sectionsRef.current[index];
+    if (target) {
+      window.scrollTo({
+        top: target.offsetTop - 60,
+        behavior: "smooth",
+      });
+    }
 
-        const nextIndex = index + 1;
-        setIndex(nextIndex);
+    const nextIndex = index + 1;
+    setIndex(nextIndex);
 
-        // Last section reached → rotate arrow
-        if (nextIndex === total) {
-            setRotate(true);
-        }
-    };
+    if (nextIndex === total) {
+      setRotate(true);
+    }
+  };
 
-    return (
-        <>
-            <div className="svgio-root">
-                <div className="svgio-hero">
-                    <img src="/images/instu.jpg" alt="Hero Background" />
-                    <h1 className="svgio-hero-title">Overview</h1>
-                </div>
+  return (
+    <div className={styles.root}>
+      {/* Hero */}
+      <div className={styles.hero}>
+        <img src="/images/instu.jpg" alt="Hero Background" />
+        <h1 className={styles.heroTitle}>Overview</h1>
+      </div>
 
-                {/* SCROLL ARROW */}
-                <div
-                    id="svgio-scroll"
-                    onClick={handleScrollClick}
-                    className={`${clicked ? "svgio-clicked" : ""} ${rotate ? "svgio-rotate" : ""}`}
-                >
-                    <span className="svgio-arrow-bounce">
-                        {rotate ? "↑" : "↓"}
-                    </span>
-                </div>
+      {/* Scroll Button */}
+      <div
+        id="svgio-scroll"
+        onClick={handleScrollClick}
+        className={`${styles.scrollBtn} ${clicked ? styles.clicked : ""} ${
+          rotate ? styles.rotate : ""
+        }`}
+      >
+        <span className={styles.arrowBounce}>&#8595;</span>
+      </div>
 
-                <section className="svgio-section svgio-bigger">
-                    <div className="svgio-grid-tilt">
-                        <img src="https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=500&q=60" />
-                        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=60" />
-                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=500&q=60" />
-                        <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=500&q=60" />
-                    </div>
+      {/* Section 1 - Tilted Images + Text */}
+      <section className={`${styles.section} ${styles.bigger}`}>
+        <div className={styles.gridTilt}>
+          <img
+            src="https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=500&q=60"
+            alt=""
+          />
+          <img
+            src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=60"
+            alt=""
+          />
+          <img
+            src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=500&q=60"
+            alt=""
+          />
+          <img
+            src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=500&q=60"
+            alt=""
+          />
+        </div>
 
-                    <div className="svgio-text svgio-text-bigger">
-                        <p className="svgio-text-short-bigger">Lorem ipsum dolor sit amet</p>
-                        <h1 className="svgio-text-title-bigger">Lorem ipsum dolor sit amet</h1>
-                        <p className="svgio-text-description-bigger">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae,
-                            maiores velit laudantium similique impedit aliquid.
-                        </p>
-                    </div>
-                </section>
+        <div className={`${styles.text} ${styles.textBigger}`}>
+          <p className={styles.textShortBigger}>Lorem ipsum dolor sit amet</p>
+          <h1 className={styles.textTitleBigger}>
+            Lorem ipsum dolor sit amet
+          </h1>
+          <p className={styles.textDescriptionBigger}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae,
+            maiores velit laudantium similique impedit aliquid.
+          </p>
+        </div>
+      </section>
 
-                <section className="svgio-section gird-layout">
-                    <div className="svgio-hero-section">
-                        <div className="svgio-text">
-                            <p className="svgio-text-short">Lorem ipsum dolor sit amet</p>
-                            <h1 className="svgio-text-title">Lorem ipsum dolor sit amet</h1>
-                            <p className="svgio-text-description">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae,
-                                necessitatibus reiciendis. Voluptatem, eaque fugiat?
-                            </p>
-                        </div>
+      {/* Section 2 - Text + Grid Layout */}
+      <section className={`${styles.section} ${styles.gridLayout}`}>
+        <div className={styles.heroSection}>
+          <div className={styles.text}>
+            <p className={styles.textShort}>Lorem ipsum dolor sit amet</p>
+            <h1 className={styles.textTitle}>Lorem ipsum dolor sit amet</h1>
+            <p className={styles.textDescription}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Recusandae, necessitatibus reiciendis. Voluptatem, eaque fugiat?
+            </p>
+          </div>
 
-                        <div className="svgio-grid-container">
-                            <div className="svgio-grid-item svgio-one"></div>
-                            <div className="svgio-grid-item svgio-two"></div>
-                            <div className="svgio-grid-item svgio-three"></div>
-                            <div className="svgio-grid-item svgio-four"></div>
-                            <div className="svgio-grid-item svgio-five"></div>
-                            <div className="svgio-grid-item svgio-six"></div>
-                            <div className="svgio-grid-item svgio-seven"></div>
-                            <div className="svgio-grid-item svgio-eight"></div>
-                            <div className="svgio-grid-item svgio-nine"></div>
-                            <div className="svgio-grid-item svgio-ten"></div>
-                            <div className="svgio-grid-item svgio-eleven"></div>
-                            <div className="svgio-grid-item svgio-twelve"></div>
-                        </div>
-                    </div>
-                </section>
-
-                <BalticSlider />
-            </div>
-        </>
-    );
+          <div className={styles.gridContainer}>
+            <div className={`${styles.gridItem} ${styles.one}`}></div>
+            <div className={`${styles.gridItem} ${styles.two}`}></div>
+            <div className={`${styles.gridItem} ${styles.three}`}></div>
+            <div className={`${styles.gridItem} ${styles.four}`}></div>
+            <div className={`${styles.gridItem} ${styles.five}`}></div>
+            <div className={`${styles.gridItem} ${styles.six}`}></div>
+            <div className={`${styles.gridItem} ${styles.seven}`}></div>
+            <div className={`${styles.gridItem} ${styles.eight}`}></div>
+            <div className={`${styles.gridItem} ${styles.nine}`}></div>
+            <div className={`${styles.gridItem} ${styles.ten}`}></div>
+            <div className={`${styles.gridItem} ${styles.eleven}`}></div>
+            <div className={`${styles.gridItem} ${styles.twelve}`}></div>
+          </div>
+        </div>
+      </section>
+      <BalticSlider />
+    </div>
+  );
 }

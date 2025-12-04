@@ -1,0 +1,112 @@
+.root {
+  width: 100%;
+  background: #ffffff;
+  overflow-x: hidden;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.root * {
+  box-sizing: border-box;
+}
+
+/* Top Text Panel */
+.panel {
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.mainHeading {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.1;
+}
+
+.mainText {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* Sticky Gallery Section */
+.portfolio {
+  position: relative;
+  background: #ffffff;
+  /* Height will be auto-calculated via JS using --stripWidth */
+}
+
+/* Sticky Wrapper */
+.galleryWrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 2rem;
+  background: #ffffff;
+}
+
+/* Horizontal Strip */
+.galleryStrip {
+  display: flex;
+  gap: 2rem;
+  will-change: transform;
+}
+
+/* Individual Project Card */
+.projectWrap {
+  flex: 0 0 380px;
+  max-width: 420px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+}
+
+.projectWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.projectWrap:hover img {
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .projectWrap {
+    flex: 0 0 65vw;
+  }
+
+  .mainHeading {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .projectWrap {
+    flex: 0 0 82vw;
+  }
+
+  .galleryStrip {
+    gap: 1rem;
+  }
+
+  .galleryWrapper {
+    padding: 0 1rem;
+  }
+
+  .panel {
+    padding: 2rem 1.5rem;
+  }
+
+  .mainHeading {
+    font-size: 2.4rem;
+  }
+}

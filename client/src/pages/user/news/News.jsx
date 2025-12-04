@@ -6,15 +6,17 @@ import News4 from './News4'
 import NewsPaper from './NewsPaper'
 import SvgiNews from './SvgiNews'
 import SocialIcons from './SocialIcons'
+import Ranking from './Ranking'
 const News = () => {
   return (
     <div>
         <Newshero/>
+        <Ranking/>
         <News2/>
         <News3/>
         <News4/>
         {/* <NewsPaper/> */}
-        <SvgiNews/>
+        <SvgiNews/> 
         <SocialIcons/>
     </div>
   )

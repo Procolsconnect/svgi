@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './PlacementProcess.css';
+import React, { useState, useEffect } from 'react';
+import styles from './PlacementProcess.module.css';
 
 const PlacementProcessPage = () => {
-  const [typedBold, setTypedBold] = useState('');
-  const [typedItalic, setTypedItalic] = useState('');
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [typedBold, setTypedBold] = useState(0);
+  const [typedItalic, setTypedItalic] = useState(0);
 
-  const boldText = 'Online';
+  const boldText = 'Online Education';
   const italicText = 'education';
 
   useEffect(() => {
@@ -19,23 +18,24 @@ const PlacementProcessPage = () => {
         boldIndex++;
       } else {
         clearInterval(typeBold);
-        // Start typing italic text after bold is complete
-        const typeItalic = setInterval(() => {
+      }
+    }, 150);
+
+    const typeItalic = setInterval(() => {
           if (italicIndex < italicText.length) {
             setTypedItalic(prev => prev + italicText.charAt(italicIndex));
             italicIndex++;
           } else {
             clearInterval(typeItalic);
-            setIsTypingComplete(true);
           }
-        }, 120);
-      }
-    }, 150);
+        }, 150);
 
-    return () => {
-      clearInterval(typeBold);
-    };
-  }, []);
+        return () => {
+      clearInterval(typeBold,typeItalic)
+
+    }
+  }, 
+  []);
 
   const companies = [
     "https://media.istockphoto.com/id/1382305677/fr/vectoriel/illustration-vectorielle-de-logo-finance-%C3%A0-la-mode.jpg?s=612x612&w=0&k=20&c=XskfWT1IJtf2ijCRPOlIE1zOirMJhr6cJMWUFeq8usQ=",
@@ -72,72 +72,74 @@ const PlacementProcessPage = () => {
   ];
 
   return (
-    <div className="placement-process-page">
-      {/* Small Hero */}
-      <div className="pp-hero">
+    <div className={styles.page}>
+
+      <div className={styles.hero}>
         <img src="hero img.jpg" alt="Placement Background" />
-        <div className="pp-hero-overlay" />
-        <h1 className="pp-hero-title">Placement Process</h1>
+        <div className={styles.heroOverlay} />
+        <h1 className={styles.heroTitle}>Placement Process</h1>
       </div>
 
-      {/* Big Modern Hero */}
-      <main className="pp-hero-section">
-        <div className="pp-container-hero">
-          <div className="pp-hero-content">
-            <div className="pp-hero-text">
+      <main className={styles.heroSection}>
+        <div className={styles.heroContainer}>
+          <div className={styles.heroContent}>
+            <div className={styles.heroText}>
               <h1>
-                <span className="pp-bold">{typedBold}</span>
-                {typedBold.length === boldText.length && (
+                <span className={styles.bold}>{typedBold}</span>
+
+                {typedBold === boldText && (
                   <>
                     <br />
-                    <span className="pp-italic">{typedItalic}</span>
+                    <span className={styles.italic}>{typedItalic}</span>
                   </>
                 )}
               </h1>
+
               <p>
                 Unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,<br />
                 totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
               </p>
             </div>
-            <div className="pp-hero-image">
-              <div className="pp-background-shapes">
-                <div className="pp-shape-1"></div>
-                <div className="pp-shape-2"></div>
-                <div className="pp-shape-3"></div>
+
+            <div className={styles.heroImage}>
+              <div className={styles.shapes}>
+                <div className={styles.shape1}></div>
+                <div className={styles.shape2}></div>
+                <div className={styles.shape3}></div>
               </div>
-              <img 
-                src="https://ik.imagekit.io/gopichakradhar/assets/image.png" 
-                className="pp-hero-img" 
-                alt="Education Illustration" 
+
+              <img
+                src="https://ik.imagekit.io/gopichakradhar/assets/image.png"
+                className={styles.heroImg}
+                alt="Education Illustration"
               />
             </div>
           </div>
         </div>
       </main>
 
-      {/* 3-Card Alternating Section */}
-      <section className="pp-cards-section">
-        <div className="pp-cards-container">
-          {cards.map((card, index) => (
-            <div key={index} className="pp-card-row">
+      <section className={styles.cardsSection}>
+        <div className={styles.cardsContainer}>
+          {cards.map((card, idx) => (
+            <div key={idx} className={styles.cardRow}>
               {card.imageFirst ? (
                 <>
-                  <div className="pp-card-image">
-                    <img src={card.image} alt={`Card ${index + 1}`} />
+                  <div className={styles.cardImage}>
+                    <img src={card.image} alt="" />
                   </div>
-                  <div className="pp-card-copy">
+                  <div className={styles.cardCopy}>
                     <h2>{card.title}</h2>
                     <p>{card.description}</p>
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="pp-card-copy">
+                  <div className={styles.cardCopy}>
                     <h2>{card.title}</h2>
                     <p>{card.description}</p>
                   </div>
-                  <div className="pp-card-image">
-                    <img src={card.image} alt={`Card ${index + 1}`} />
+                  <div className={styles.cardImage}>
+                    <img src={card.image} alt="" />
                   </div>
                 </>
               )}
@@ -146,24 +148,25 @@ const PlacementProcessPage = () => {
         </div>
       </section>
 
-      {/* Recruiting Companies Section */}
-      <section className="pp-recruit-section">
-        <div className="pp-heading-box">
-          <div className="pp-heading-line"></div>
-          <div className="pp-heading-text">
+      <section className={styles.recruitSection}>
+        <div className={styles.headingBox}>
+          <div className={styles.headingLine}></div>
+          <div className={styles.headingText}>
             <span>Recruiting Companies</span>
           </div>
         </div>
-        <div className="pp-slider">
-          <ul className="pp-list">
+
+        <div className={styles.slider}>
+          <ul className={styles.list}>
             {companies.map((company, index) => (
-              <li key={index} className="pp-item" style={{ '--position': index + 1 }}>
-                <img src={company} alt={`Company ${index + 1}`} />
+              <li key={index} className={styles.item} style={{ '--position': index + 1 }}>
+                <img src={company} alt="" />
               </li>
             ))}
           </ul>
         </div>
       </section>
+
     </div>
   );
 };

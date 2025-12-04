@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './CampusLife.css';
+import styles from './CampusOverview.module.css';
 
 const CampusLife = () => {
   const scrollBtnRef = useRef(null);
@@ -40,7 +40,7 @@ const CampusLife = () => {
 
       const color = `rgb(${e.pageX % 255}, ${e.pageY % 255}, ${(e.pageX + e.pageY) % 255})`;
       const marker = document.createElement('div');
-      marker.classList.add('campus__color-trail');
+      marker.className = styles.colorTrail;
       Object.assign(marker.style, {
         backgroundColor: color,
         width: `${img.offsetWidth}px`,
@@ -76,7 +76,7 @@ const CampusLife = () => {
 
   // Scroll arrow functionality
   const handleScrollClick = () => {
-    const sections = document.querySelectorAll('.campus__section');
+    const sections = document.querySelectorAll(`.${styles.section}`);
     const scrollBtn = scrollBtnRef.current;
 
     if (!scrollBtn) return;
@@ -98,12 +98,12 @@ const CampusLife = () => {
   };
 
   return (
-    <div className="campus__wrapper-main">
+    <div className={styles.wrapperMain}>
       {/* HERO */}
-      <div id="campus__hero" className="campus__hero">
+      <div id="campus__hero" className={styles.hero}>
         <img src="hero img.jpg" alt="Hero Background" />
-        <div className="campus__hero-overlay"></div>
-        <div className="campus__wrapper">
+        <div className={styles.heroOverlay}></div>
+        <div className={styles.wrapper}>
           <h1>Campus Life</h1>
         </div>
       </div>
@@ -112,16 +112,16 @@ const CampusLife = () => {
       <div
         ref={scrollBtnRef}
         id="campus__scroll"
-        className={`campus__scroll ${isScrollClicked ? 'campus__clicked' : ''} ${isRotated ? 'campus__rotate' : ''}`}
+        className={`${styles.scroll} ${isScrollClicked ? styles.clicked : ''} ${isRotated ? styles.rotate : ''}`}
         onClick={handleScrollClick}
       >
-        <span className="campus__arrow-bounce">&#8595;</span>
+     <span className={styles.arrowBounce}>↓</span>
       </div>
 
       {/* BANNER SECTION */}
-      <section ref={bannerRef} className="campus__banner campus__section">
-        <div className="campus__banner-content">
-          <h2>Welcome to <span className="campus__highlight">SVGI</span></h2><br />
+      <section ref={bannerRef} className={`${styles.banner} ${styles.section}`}>
+        <div className={styles.bannerContent}>
+          <h2>Welcome to <span className={styles.highlight}>SVGI</span></h2><br />
           <h3>Where Curiosity Rules the Kingdom </h3>
           <p>
             SVGI College blends rigorous academics with practical, hands-on learning to prepare students for a rapidly changing world. Spread across a green, secure campus, we offer specialized programs in engineering, arts, paramedical and nursing—each designed with guidance from industry partners and academic experts. Students learn in modern labs equipped for real-world projects, participate in internships and live projects, and benefit from a strong placement network that connects them to top recruiters.
@@ -131,37 +131,37 @@ const CampusLife = () => {
       </section>
 
       {/* CAMPUS SECTION */}
-      <section className="campus__campus-section campus__section">
+      <section className={`${styles.campusSection} ${styles.section}`}>
         {/* Left Panel */}
-        <div className="campus__left-panel">
+        <div className={styles.leftPanel}>
           <img src="https://vit.ac.in/sites/default/files/inline-images/VIT-Students.jpg" alt="Campus Students" />
         </div>
 
         {/* Right Panel */}
-        <div className="campus__right-panel">
-          <div className="campus__content-grid">
-            <div className="campus__item">
-              <i className="campus__icon fas fa-users"></i>
+        <div className={styles.rightPanel}>
+          <div className={styles.contentGrid}>
+            <div className={styles.item}>
+              <i className={`campus__icon fas fa-users ${styles.icon}`}></i>
               <span>Student Welfare</span>
             </div>
-            <div className="campus__item">
-              <i className="campus__icon fas fa-guitar"></i>
+            <div className={styles.item}>
+              <i className={`campus__icon fas fa-guitar ${styles.icon}`}></i>
               <span>Fests</span>
             </div>
-            <div className="campus__item">
-              <i className="campus__icon fas fa-building"></i>
+            <div className={styles.item}>
+              <i className={`campus__icon fas fa-building ${styles.icon}`}></i>
               <span>Hostels</span>
             </div>
-            <div className="campus__item">
-              <i className="campus__icon fas fa-city"></i>
+            <div className={styles.item}>
+              <i className={`campus__icon fas fa-city ${styles.icon}`}></i>
               <span>Other Amenities</span>
             </div>
-            <div className="campus__item">
-              <i className="campus__icon fas fa-book-reader"></i>
+            <div className={styles.item}>
+              <i className={`campus__icon fas fa-book-reader ${styles.icon}`}></i>
               <span>Library</span>
             </div>
-            <div className="campus__item">
-              <i className="campus__icon fas fa-running"></i>
+            <div className={styles.item}>
+              <i className={`campus__icon fas fa-running ${styles.icon}`}></i>
               <span>Sports</span>
             </div>
           </div>

@@ -1,0 +1,201 @@
+.slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 70vh;
+}
+
+.ctnr {
+  height: 70vh;
+  position: relative;
+}
+
+.ctnr svg {
+  vertical-align: bottom;
+}
+
+/* Reveal Container */
+.reveal {
+  --width: 50%;
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, var(--width) 0, var(--width) 100%, 0 100%);
+  overflow: hidden;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+/* Range Input */
+.range {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  height: 6rem;
+  left: -1px;
+  width: calc(100% + 2px);
+  opacity: 0;
+  cursor: pointer;
+  appearance: none;
+}
+
+.range::-webkit-slider-thumb {
+  appearance: none;
+  height: 300vh;
+  width: 50px;
+  background: #fff;
+  cursor: ew-resize;
+}
+
+.range::-moz-range-thumb {
+  height: 300vh;
+  width: 50px;
+  background: #fff;
+  border: none;
+  cursor: ew-resize;
+}
+
+/* Handle */
+.ready .reveal,
+.ready image,
+.ready .handle {
+  opacity: 1;
+}
+
+.handle {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  background: white;
+  opacity: 0;
+  transition: opacity 1s;
+  transform: translateX(-50%);
+  height: 6rem;
+  width: 100%;
+  bottom: 0;
+  left: 50%;
+  clip-path: url(#balticSvgPath);
+}
+
+.handle::before,
+.handle::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  border-top: 2px solid #000;
+  border-left: 2px solid #000;
+}
+
+.handle::before {
+  left: calc(50% - 20px);
+  transform: rotate(-45deg);
+}
+
+.handle::after {
+  right: calc(50% - 30px);
+  transform: rotate(135deg);
+}
+
+/* Text Overlays */
+.text {
+  position: absolute;
+  top: 2rem;
+  width: 50%;
+  max-width: 700px;
+  z-index: 2;
+  font-size: 30px;
+  color: #fff;
+}
+
+.text * {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: 1s;
+}
+
+.textRight {
+  right: 4rem;
+  color: black;
+}
+
+.textLeft {
+  left: 4rem;
+}
+
+.text h2 {
+  font-size: 40px;
+}
+
+/* Text Animation States */
+.more .textLeft *,
+.less .textRight * {
+  opacity: 1;
+  transform: none;
+}
+
+/* Gradient Overlays */
+.ctnr::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.winter::after {
+  background: linear-gradient(-135deg, white, transparent);
+}
+
+.summer::after {
+  background: linear-gradient(135deg, #2a2d4e, transparent);
+}
+
+/* Content Section */
+.contentSection {
+  background: #ffffff;
+  padding: 4rem 2rem 6rem;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.contentSection h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.contentSection p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+/* Hidden SVG for clip-path */
+.svgDefs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .textLeft { left: 2rem; }
+  .textRight { right: 2rem; }
+
+  .contentSection {
+    padding: 3rem 1rem;
+  }
+
+  .contentSection h1 {
+    font-size: 2.5rem;
+  }
+
+  .text h2 {
+    font-size: 20px;
+  }
+
+  .text p {
+    font-size: 16px;
+  }
+}

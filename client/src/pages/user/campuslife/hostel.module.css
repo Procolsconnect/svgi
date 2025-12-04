@@ -1,3 +1,5 @@
+/* HostelPage.module.css */
+
 /* Google Fonts Import */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -117,7 +119,7 @@
 .hostel__isoCardStack div {
   transform-style: preserve-3d;
   background-color: white;
-  height: 300px;
+  height: 50vh;
   width: 220px;
   position: relative;
   border-radius: 8px;
@@ -144,7 +146,7 @@
 .hostel__isoCardStack div > div {
   will-change: transform;
   transform: translateZ(60px);
-  animation: hostel__cardMovement 1.5s cubic-bezier(0.83, 0, 0.17, 1) infinite alternate;
+  animation: hostel__cardMovement 1.5s cubic-bezier(0.53, 0, 0.17, 1) infinite alternate;
 }
 
 .hostel__isoCardStack img {

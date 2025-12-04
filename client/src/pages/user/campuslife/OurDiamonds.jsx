@@ -1,5 +1,5 @@
 import React from 'react';
-import './OurDiamonds.css';
+import styles from './OurDiamonds.module.css';
 
 const DiamondShowcase = () => {
   const cards = [
@@ -46,18 +46,18 @@ const DiamondShowcase = () => {
   ];
 
   return (
-    <div className="diamond-showcase">
+    <div className={styles['diamond-showcase']}>
       {/* HERO */}
-      <div className="diamond-hero">
+      <div className={styles['diamond-hero']}>
         <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=1200" alt="Hero Background" />
         <h1>Our Diamonds</h1>
       </div>
 
       {/* CARDS GRID */}
-      <main className="diamond-main">
+      <main className={styles['diamond-main']}>
         {cards.map((card, index) => (
-          <div key={index} className="diamond-card-animation-layer">
-            <article className="diamond-card">
+          <div key={index} className={styles['diamond-card-animation-layer']}>
+            <article className={styles['diamond-card']}>
               <img src={card.img} alt="Art" />
               <p>{card.text}</p>
               <a href="#">{card.link}</a>

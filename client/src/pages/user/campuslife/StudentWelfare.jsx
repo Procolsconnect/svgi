@@ -270,20 +270,26 @@ const MergedHeroComponent = () => {
       <div ref={wrapperRef} className={styles.wrapper}>
         <div className={styles.content}>
           <section
-            ref={heroSectionRef}
-            className={`${styles.section} ${styles.heroSection}`}
-          ></section>
+  ref={heroSectionRef}
+  className={`${styles.section} ${styles.heroSection}`}
+>
+  <img
+   src={heroBgImg}
+    alt="Hero Background"
+    className={styles.heroImage}
+  />
+</section>
         </div>
 
-        <div className={styles.imageContainer}>
-          <img
+ <div className={styles.imageContainer}>
+          <img 
             ref={heroImageRef}
-            // src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp" 
-            src={heroBgImg}
-            alt="Hero overlay"
+            src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp" 
+            alt="Hero overlay" 
             className={styles.heroImage}
           />
         </div>
+
       </div>
 
       {/* Bouncer Section */}
@@ -302,50 +308,36 @@ const MergedHeroComponent = () => {
           </p>
         </div>
       </section>
-
-      {/* Fancy Text Section */}
+{/* Fancy Text Section */}
       <div className={styles.fancyText} aria-labelledby="news-heading">
-        <div className="rowone">
-          <h1 id="news-heading" className={styles.fancyTitle}>
-            {/* Meghan And Harry's Baby */}{fancyData?.rowoneTitle}
-          </h1>
-          <div>
-            <img
-              // ref={heroImageRef}
-              // src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp" 
-              src={fancyData?.rowoneImage}
-              alt="Hero overlay"
-              className={styles.heroImage}
-            />
-          </div>
-        </div>
+  <img
+    src={fancyData?.rowoneImage}
+    alt="Hero overlay"
+    className={styles.fancyImage}
+  />
+  <img
+    src={fancyData?.rowtwoImage}
+    alt="Hero overlay"
+    className={styles.fancyImage}
+  />
+
+
+        <h1 id="news-heading" className={styles.fancyTitle}>
+          Meghan And Harry's Baby
+        </h1>
 
         <div className={styles.fancyTextBody}>
-          <div>
-            {/* <p>
-              Buckingham Palace announced that Meghan had gone into labour during the early hours of May 6.
-              Harry was by her side, and an announcement would be made soon, read the broadcast. Shortly after,
-              <a href="https://www.instagram.com/sussexroyal/">@sussexroyal</a>,
-              the official Instagram of the couple, shared the news that a baby boy had been born.
-            </p>
+          <p>
+            Buckingham Palace announced that Meghan had gone into labour during the early hours of May 6. 
+            Harry was by her side, and an announcement would be made soon, read the broadcast. Shortly after, 
+            <a href="https://www.instagram.com/sussexroyal/">@sussexroyal</a>, 
+            the official Instagram of the couple, shared the news that a baby boy had been born.
+          </p>
 
-            <p>
-              Upon greeting media outside Frogmore Cottage during the afternoon of May 6, Harry said:
-              "I'm so incredibly proud of my wife... How any woman does what they do is beyond comprehension."
-            </p> */}
-            {fancyData?.rowtwoPara?.map((item, index) => (
-              <p key={index} dangerouslySetInnerHTML={{ __html: item }} />
-            ))}
-          </div>
-          <div>
-            <img
-              // ref={heroImageRef}
-              // src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp" 
-              src={fancyData?.rowtwoImage}
-              alt="Hero overlay"
-              className={styles.heroImage}
-            />
-          </div>
+          <p>
+            Upon greeting media outside Frogmore Cottage during the afternoon of May 6, Harry said: 
+            "I'm so incredibly proud of my wife... How any woman does what they do is beyond comprehension."
+          </p>
         </div>
 
         <span className={styles.pink}>2/3</span>
@@ -355,6 +347,8 @@ const MergedHeroComponent = () => {
 
       <div className={styles.spacer} aria-hidden="true"></div>
 
+
+
       {/* Student Clubs Section */}
       <section className={styles.cardsSection} aria-labelledby="clubs-heading">
         <h2 id="clubs-heading" className={styles.pageTitle}>
@@ -362,41 +356,6 @@ const MergedHeroComponent = () => {
         </h2>
 
         <div className={styles.cardsContainer}>
-          {/* <div className={styles.gameCard}>
-            <div
-              className={styles.gameCardCover}
-              style={{
-                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_1.jpg)'
-              }}
-            ></div>
-          </div>
-
-          <div className={styles.gameCard}>
-            <div
-              className={styles.gameCardCover}
-              style={{
-                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_2.jpg)'
-              }}
-            ></div>
-          </div>
-
-          <div className={styles.gameCard}>
-            <div
-              className={styles.gameCardCover}
-              style={{
-                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_3.jpg)'
-              }}
-            ></div>
-          </div>
-
-          <div className={styles.gameCard}>
-            <div
-              className={styles.gameCardCover}
-              style={{
-                backgroundImage: 'url(https://andrewhawkes.github.io/codepen-assets/steam-game-cards/game_4.jpg)'
-              }}
-            ></div>
-          </div> */}
           {cardData.map((card) => (
             <div className={styles.gameCard} key={card._id}>
               <div

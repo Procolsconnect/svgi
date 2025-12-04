@@ -1,9 +1,7 @@
-
-/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
 
-/* Root container - isolates styles */
-.kfa-root {
+/* Root container - fully isolated */
+.root {
   width: 100%;
   height: 100vh;
   background: #ffffff;
@@ -13,18 +11,17 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}
-
-.kfa-root *,
-.kfa-root *::before,
-.kfa-root *::after {
   box-sizing: border-box;
 }
 
-/* ===============================
-   Main App Container
-   =============================== */
-.kfa-app {
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+/* Main App Container */
+.app {
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: center;
@@ -39,50 +36,46 @@
   overflow: hidden;
 }
 
-.kfa-app:hover {
+.app:hover {
   opacity: 0.5;
 }
 
-/* ===============================
-   Title Animation
-   =============================== */
-.kfa-title {
+/* Title Animation */
+.title {
   padding-left: 1em;
   grid-column: 1 / -1;
   grid-row: 1;
   font-size: 8vw;
   z-index: 2;
   display: inline-block;
-  animation: kfa-outer-left 1s 1s ease forwards;
+  animation: outerLeft 1s 1s ease forwards;
 }
 
-.kfa-title-inner {
+.titleInner {
   display: inline-block;
-  animation: kfa-inner-left 1s 1s ease forwards;
+  animation: innerLeft 1s 1s ease forwards;
 }
 
-.kfa-cafe,
-.kfa-mozart {
+.cafe,
+.mozart {
   display: inline-block;
-  animation: kfa-outer-left 1s 1s cubic-bezier(0.5, 0, 0.1, 1) forwards;
+  animation: outerLeft 1s 1s cubic-bezier(0.5, 0, 0.1, 1) forwards;
 }
 
-.kfa-cafe-inner {
+.cafeInner {
   display: inline-block;
   animation: 
-    kfa-inner-left 1s 1s ease forwards,
-    kfa-text-clip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) forwards;
+    innerLeft 1s 1s ease forwards,
+    textClip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) forwards;
 }
 
-.kfa-mozart-inner {
+.mozartInner {
   display: inline-block;
-  animation: kfa-text-clip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) forwards;
+  animation: textClip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) forwards;
 }
 
-/* ===============================
-   Keyframe Animations
-   =============================== */
-@keyframes kfa-text-clip {
+/* Keyframe Animations */
+@keyframes textClip {
   from {
     clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
   }
@@ -91,7 +84,7 @@
   }
 }
 
-@keyframes kfa-outer-left {
+@keyframes outerLeft {
   from {
     transform: translateX(50%);
   }
@@ -100,7 +93,7 @@
   }
 }
 
-@keyframes kfa-inner-left {
+@keyframes innerLeft {
   from {
     transform: translateX(-50%);
   }
@@ -109,7 +102,7 @@
   }
 }
 
-@keyframes kfa-image-in {
+@keyframes imageIn {
   from {
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
   }
@@ -118,28 +111,25 @@
   }
 }
 
-/* ===============================
-   Image Animation
-   =============================== */
-.kfa-image {
+/* Image Animation */
+.image {
   grid-row: 1;
   grid-column: 2;
   margin-left: -2rem;
   opacity: 0.7;
-  animation: kfa-image-in 1s cubic-bezier(0.5, 0, 0.1, 1) 2s backwards;
+  animation: imageIn 1s cubic-bezier(0.5, 0, 0.1, 1) 2s backwards;
 }
 
-.kfa-image img {
+.image img {
   display: block;
   width: 100%;
   height: auto;
   max-width: 100%;
+  object-fit: cover;
 }
 
-/* ===============================
-   Replay Hint
-   =============================== */
-.kfa-hint {
+/* Replay Hint */
+.hint {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -154,55 +144,53 @@
   z-index: 1;
 }
 
-.kfa-hint:hover {
+.hint:hover {
   opacity: 1;
 }
 
-/* ===============================
-   Responsive Design
-   =============================== */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .kfa-app {
+  .app {
     grid-template-columns: 1fr;
     height: auto;
     padding-bottom: 2vmin;
   }
 
-  .kfa-title {
+  .title {
     font-size: 6vw;
     padding-left: 0.5em;
     grid-column: 1;
     grid-row: 1;
   }
 
-  .kfa-image {
+  .image {
     grid-column: 1;
     grid-row: 2;
     margin-left: 0;
     margin-top: 2rem;
-    animation: kfa-image-in 1s cubic-bezier(0.5, 0, 0.1, 1) 2s backwards;
+    animation: imageIn 1s cubic-bezier(0.5, 0, 0.1, 1) 2s backwards;
   }
 }
 
 @media (max-width: 480px) {
-  .kfa-root {
+  .root {
     padding: 1.5vmin;
   }
 
-  .kfa-app {
+  .app {
     padding-bottom: 2vmin;
   }
 
-  .kfa-title {
+  .title {
     font-size: 5vw;
     padding-left: 0.25em;
   }
 
-  .kfa-image {
+  .image {
     margin-top: 1.5rem;
   }
 
-  .kfa-hint {
+  .hint {
     font-size: 0.75rem;
     padding: 8px 12px;
     bottom: 10px;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './hostel.css';
+import styles from './hostel.module.css';
 
 const HostelPage = () => {
   const [openFaq, setOpenFaq] = useState(null);
@@ -64,24 +64,24 @@ const HostelPage = () => {
   ];
 
   return (
-    <div className="hostel__wrapper">
+    <div className={styles['hostel__wrapper']}>
       {/* HERO SECTION */}
-      <div id="hostel__hero" className="hostel__hero">
+      <div id="hostel__hero" className={styles['hostel__hero']}>
         <img src="hero img.jpg" alt="Hero Background" />
-        <div className="hostel__hero-overlay"></div>
+        <div className={styles['hostel__hero-overlay']}></div>
         <h1>SVGI Hostel</h1>
       </div>
 
       {/* HOSTEL CONTAINER SECTION */}
-      <div className="hostel__container">
-        <div className="hostel__content">
+      <div className={styles['hostel__container']}>
+        <div className={styles['hostel__content']}>
           <p>
             The SVGI Hostel provides a peaceful and secure environment for students.
             With modern facilities, hygienic food, and 24/7 support, students can focus
             on their studies while enjoying a home-like atmosphere.
           </p>
         </div>
-        <div className="hostel__isoCardStack">
+        <div className={styles['hostel__isoCardStack']}>
           <div>
             <img src="https://assets-prd.ignimgs.com/2022/11/07/sky-children-of-the-light-button-fin2-1667846466332.jpg" alt="Hostel 1" />
             <div>
@@ -95,30 +95,30 @@ const HostelPage = () => {
       </div>
 
       {/* CARDS SECTION */}
-      <div className="hostel__cards-container">
+      <div className={styles['hostel__cards-container']}>
         {cardsData.map((card, index) => (
-          <div key={index} className="hostel__row">
+          <div key={index} className={styles['hostel__row']}>
             {card.imageFirst ? (
               <>
-                <div className="hostel__col-image">
-                  <div className="hostel__slider">
+                <div className={styles['hostel__col-image']}>
+                  <div className={styles['hostel__slider']}>
                     <img src={card.images[0]} alt={`${card.title} 1`} />
                     <img src={card.images[1]} alt={`${card.title} 2`} />
                   </div>
                 </div>
-                <div className="hostel__col-copy">
+                <div className={styles['hostel__col-copy']}>
                   <h2>{card.title}</h2>
                   <p>{card.description}</p>
                 </div>
               </>
             ) : (
               <>
-                <div className="hostel__col-copy">
+                <div className={styles['hostel__col-copy']}>
                   <h2>{card.title}</h2>
                   <p>{card.description}</p>
                 </div>
-                <div className="hostel__col-image">
-                  <div className="hostel__slider">
+                <div className={styles['hostel__col-image']}>
+                  <div className={styles['hostel__slider']}>
                     <img src={card.images[0]} alt={`${card.title} 1`} />
                     <img src={card.images[1]} alt={`${card.title} 2`} />
                   </div>
@@ -130,24 +130,24 @@ const HostelPage = () => {
       </div>
 
       {/* FAQ SECTION */}
-      <div className="hostel__faq-header">Frequently Asked Questions</div>
+      <div className={styles['hostel__faq-header']}>Frequently Asked Questions</div>
 
-      <div className="hostel__faq-content">
+      <div className={styles['hostel__faq-content']}>
         {faqData.map((faq) => (
-          <div key={faq.id} className="hostel__faq-question">
+          <div key={faq.id} className={styles['hostel__faq-question']}>
             <div 
-              className={`hostel__plus ${openFaq === faq.id ? 'hostel__plus-open' : ''}`}
+              className={`${styles['hostel__plus']} ${openFaq === faq.id ? styles['hostel__plus-open'] : ''}`}
             >
               +
             </div>
             <label 
-              className="hostel__panel-title" 
+              className={styles['hostel__panel-title']} 
               onClick={() => toggleFaq(faq.id)}
             >
               {faq.question}
             </label>
             <div 
-              className={`hostel__panel-content ${openFaq === faq.id ? 'hostel__panel-content-open' : ''}`}
+              className={`${styles['hostel__panel-content']} ${openFaq === faq.id ? styles['hostel__panel-content-open'] : ''}`}
             >
               {faq.answer}
             </div>
