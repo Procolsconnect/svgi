@@ -1,30 +1,28 @@
 import React from "react";
-import "./SocialIcons.css";
+import styles from "./Socialicons.module.css";
 
 // React Icons (Font Awesome pack)
 import { FaLinkedin, FaTwitter, FaInstagram, FaComment } from "react-icons/fa";
 
 const SocialIcons = () => {
   return (
-    <div className="sicon-root">
-      <div className="sicon-flex">
-
-        <div className="sicon-icon">
+    <div className={styles.root}>
+      <div className={styles.flex}>
+        <div className={styles.icon}>
           <FaLinkedin />
         </div>
 
-        <div className="sicon-icon">
+        <div className={styles.icon}>
           <FaTwitter />
         </div>
 
-        <div className="sicon-icon">
+        <div className={styles.icon}>
           <FaInstagram />
         </div>
 
-        <div className="sicon-icon">
+        <div className={styles.icon}>
           <FaComment />
         </div>
-
       </div>
     </div>
   );

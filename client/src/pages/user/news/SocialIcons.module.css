@@ -1,4 +1,4 @@
-.sicon-root {
+.root {
   width: 100%;
   height: 100vh;
   background: #fff;
@@ -8,21 +8,21 @@
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* safe */
+  overflow-x: hidden;
 }
 
-.sicon-flex {
+.flex {
   display: flex;
-  justify-content: space-between; /* spread 4 icons evenly */
+  justify-content: space-between;
   width: 100%;
-  max-width: 1200px; /* optional max width */
+  max-width: 1200px;
   box-sizing: border-box;
   flex-wrap: nowrap;
 }
 
-.sicon-icon {
-  flex: 0 0 calc((100% - 3 * 2%) / 4); /* 4 icons, 3 gaps of 2% */
-  aspect-ratio: 1 / 1; /* keep circle square */
+.icon {
+  flex: 0 0 calc((100% - 3 * 2%) / 4);
+  aspect-ratio: 1 / 1;
   border: 6px solid #000;
   border-radius: 50%;
   background: url("https://picsum.photos/id/811/600/600") center/cover no-repeat;
@@ -31,30 +31,30 @@
   align-items: center;
   color: #fff;
   font-size: 4rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   transition: 0.35s ease;
 }
 
-/* Gaps handled via margin-right except last icon */
-.sicon-icon:not(:last-child) {
+/* Gap between icons (2% between each, no margin on last) */
+.icon:not(:last-child) {
   margin-right: 2%;
 }
 
-.sicon-icon:hover {
+.icon:hover {
   color: #000;
   border-color: #000;
   transform: scale(1.09);
 }
 
-/* Responsive font only */
+/* Responsive font size only */
 @media (max-width: 1000px) {
-  .sicon-icon {
+  .icon {
     font-size: 3rem;
   }
 }
 
 @media (max-width: 600px) {
-  .sicon-icon {
+  .icon {
     font-size: 2.5rem;
   }
 }

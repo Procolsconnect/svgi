@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AdvHero.css';
+import styles from './AdvHero.module.css';
 
 const Hero = () => {
   const [formData, setFormData] = useState({
@@ -23,73 +23,73 @@ const Hero = () => {
   };
 
   return (
-    <div className="griddy-container">
+    <div className={styles['griddy-container']}>
 
       {/* Social Icons */}
-      <div className="griddy-float-sm">
-        <div className="griddy-fl-fl griddy-float-fb">
+      <div className={styles['griddy-float-sm']}>
+        <div className={`${styles['griddy-fl-fl']} ${styles['griddy-float-fb']}`}>
           <i className="fa fa-facebook"></i>
           <a href="#">Direct Enquiry!</a>
         </div>
-        <div className="griddy-fl-fl griddy-float-ig">
+        <div className={`${styles['griddy-fl-fl']} ${styles['griddy-float-ig']}`}>
           <i className="fa fa-instagram"></i>
           <a href="#">Admission now!</a>
         </div>
       </div>
 
       {/* GRID */}
-      <section className="griddy-section">
-        <div className="griddy-div griddy-div1 griddy-center griddy-trig">
-          <p className="griddy-nav"><a href="#">Engineering</a></p>
+      <section className={styles['griddy-section']}>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div1']} ${styles['griddy-center']} ${styles['griddy-trig']}`}>
+          <p className={styles['griddy-nav']}><a href="#">Engineering</a></p>
         </div>
-        <div className="griddy-div griddy-div2"></div>
-        <div className="griddy-div griddy-div3 griddy-center griddy-trig">
-          <p className="griddy-nav"><a href="#">Arts</a></p>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div2']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div3']} ${styles['griddy-center']} ${styles['griddy-trig']}`}>
+          <p className={styles['griddy-nav']}><a href="#">Arts</a></p>
         </div>
-        <div className="griddy-div griddy-div4 griddy-center griddy-trig">
-          <p className="griddy-nav"><a href="#">Polytechnic</a></p>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div4']} ${styles['griddy-center']} ${styles['griddy-trig']}`}>
+          <p className={styles['griddy-nav']}><a href="#">Polytechnic</a></p>
         </div>
-        <div className="griddy-div griddy-div5 griddy-center griddy-trig">
-          <p className="griddy-nav"><a href="#">Paramedical</a></p>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div5']} ${styles['griddy-center']} ${styles['griddy-trig']}`}>
+          <p className={styles['griddy-nav']}><a href="#">Paramedical</a></p>
         </div>
-        <div className="griddy-div griddy-div7"></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div7']}`}></div>
 
-        <div className="griddy-div griddy-div8"></div>
-        <div className="griddy-div griddy-div9 griddy-center"><h2>r</h2></div>
-        <div className="griddy-div griddy-div10 griddy-center"><h2>n</h2></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div8']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div9']} ${styles['griddy-center']}`}><h2>r</h2></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div10']} ${styles['griddy-center']}`}><h2>n</h2></div>
 
-        <div className="griddy-div griddy-div11"></div>
-        <div className="griddy-div griddy-div12"></div>
-        <div className="griddy-div griddy-div13"></div>
-        <div className="griddy-div griddy-div14"></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div11']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div12']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div13']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div14']}`}></div>
 
-        <div className="griddy-div griddy-div16"></div>
-        <div className="griddy-div griddy-div17 griddy-center"><h2>S</h2></div>
-        <div className="griddy-div griddy-div18 griddy-center"><h2>V</h2></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div16']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div17']} ${styles['griddy-center']}`}><h2>S</h2></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div18']} ${styles['griddy-center']}`}><h2>V</h2></div>
 
-        <div className="griddy-div griddy-div19"></div>
-        <div className="griddy-div griddy-div20"></div>
-        <div className="griddy-div griddy-div21"></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div19']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div20']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div21']}`}></div>
 
-        <div className="griddy-div griddy-div22"></div>
-        <div className="griddy-div griddy-div23"></div>
-        <div className="griddy-div griddy-div24"></div>
-        <div className="griddy-div griddy-div25 griddy-center"><h2>G</h2></div>
-        <div className="griddy-div griddy-div26 griddy-center"><h2>I</h2></div>
-        <div className="griddy-div griddy-div27"></div>
-        <div className="griddy-div griddy-div28"></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div22']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div23']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div24']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div25']} ${styles['griddy-center']}`}><h2>G</h2></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div26']} ${styles['griddy-center']}`}><h2>I</h2></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div27']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div28']}`}></div>
 
-        <div className="griddy-div griddy-div29"></div>
-        <div className="griddy-div griddy-div30"></div>
-        <div className="griddy-div griddy-div31"></div>
-        <div className="griddy-div griddy-div32"></div>
-        <div className="griddy-div griddy-div33"></div>
-        <div className="griddy-div griddy-div34"></div>
-        <div className="griddy-div griddy-div35"></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div29']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div30']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div31']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div32']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div33']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div34']}`}></div>
+        <div className={`${styles['griddy-div']} ${styles['griddy-div35']}`}></div>
       </section>
 
       {/* Registration Form */}
-      <div className="griddy-form-wrapper">
+      <div className={styles['griddy-form-wrapper']}>
         <h3>Register Now</h3>
         <label htmlFor="username">Your name</label>
         <input

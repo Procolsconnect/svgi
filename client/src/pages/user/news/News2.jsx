@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
-import './news2.css';
+import styles from './news2.module.css';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -11,6 +11,7 @@ const DownscrollEffect = () => {
   const opacityRevealRef = useRef(null);
   const liquifyScrollRef = useRef(null);
   const liquidRef = useRef(null);
+  const stickSectionRef = useRef(null);
   const reverseScrollRefs = useRef([]);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const DownscrollEffect = () => {
 
         gsap.timeline({
           scrollTrigger: {
-            trigger: ".ds-section-stick",
+            trigger: stickSectionRef.current,
             pin: true,
             start: "center center",
             end: "+=1500",
@@ -89,27 +90,27 @@ const DownscrollEffect = () => {
   };
 
   return (
-    <div className="ds-container" ref={containerRef}>
-      <div className="ds-content-wrapper">
+    <div id="smooth-wrapper" className={styles['ds-container']} ref={containerRef}>
+      <div id="smooth-content">
         {/* SECTION 1 – Behind Curtain */}
-        <section className="ds-section-one">
-          <div className="ds-section-content">
+        <section className={styles['ds-section-one']}>
+          <div className={styles['ds-section-content']}>
             {/* Left Text */}
-            <div ref={addToReverseScrollRefs} className="ds-reverse-scroll">
-              <h1 className="ds-heading">behind<br />curtain</h1>
-              <p className="ds-paragraph-top">
+            <div ref={addToReverseScrollRefs} className={styles['ds-reverse-scroll']}>
+              <h1 className={styles['ds-heading']}>behind<br />curtain</h1>
+              <p className={styles['ds-paragraph-top']}>
                 She tried the little golden key in the lock, and to her great delight it fitted !
               </p>
-              <p className="ds-paragraph">
+              <p className={styles['ds-paragraph']}>
                 Alice opened the door and found that it led into a small passage
               </p>
             </div>
 
             {/* Right Image */}
-            <div className="ds-image-wrapper">
+            <div className={styles['ds-image-wrapper']}>
               <img
                 ref={addToReverseScrollRefs}
-                className="ds-reverse-scroll ds-image"
+                className={`${styles['ds-reverse-scroll']} ${styles['ds-image']}`}
                 src="https://assets.codepen.io/204808/alice-curtain.jpg"
                 alt="Alice behind curtain"
               />
@@ -118,16 +119,16 @@ const DownscrollEffect = () => {
         </section>
 
         {/* SECTION 2 – Pinned Text Reveal */}
-        <section className="ds-section-stick">
-          <p ref={opacityRevealRef} className="ds-opacity-reveal">
+        <section className={styles['ds-section-stick']} ref={stickSectionRef}>
+          <p ref={opacityRevealRef} className={styles['ds-opacity-reveal']}>
             It was all very well to say "Drink me," but the wise little Alice was not going to do that
           </p>
         </section>
 
         {/* SECTION 3 – Liquify Video */}
-        <section className="ds-video-section">
+        <section className={styles['ds-video-section']}>
           <video
-            className="ds-video"
+            className={styles['ds-video']}
             src="https://assets.codepen.io/204808/alice-in-wonderland-vid.mov"
             muted
             autoPlay
@@ -135,12 +136,12 @@ const DownscrollEffect = () => {
             playsInline
           />
 
-          <h1 ref={liquifyScrollRef} className="ds-liquify-scroll">
+          <h1 ref={liquifyScrollRef} className={styles['ds-liquify-scroll']}>
             Alice's Adventures in Wonderland
           </h1>
 
           {/* SVG Liquify Filter */}
-          <svg className="ds-hidden">
+          <svg className={styles['ds-hidden']}>
             <filter id="liquify">
               <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="warp" />
               <feDisplacementMap

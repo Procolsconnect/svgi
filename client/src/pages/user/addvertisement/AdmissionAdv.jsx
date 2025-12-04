@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import './AdmissionAdv.css';
+import styles from './AdmissionAdv.module.css';
 
 const AdmissionPage = () => {
   const imageMotionRef = useRef(null);
@@ -21,7 +21,7 @@ const AdmissionPage = () => {
 
       // 👉 Trigger ONLY when the section TOP hits the viewport TOP
       if (rect.top <= window.innerHeight * 0.15 && rect.top >= -50) {
-        target.classList.add('animate-active');
+        target.classList.add(styles['animate-active']);
         started = true;
       }
     };
@@ -38,7 +38,7 @@ const AdmissionPage = () => {
       
       // Image motion animation
       if (imageMotionRef.current) {
-        const imageSection = imageMotionRef.current.closest('.alp-section2');
+        const imageSection = imageMotionRef.current.closest(`.${styles['alp-section2']}`);
         if (imageSection) {
           const rect = imageSection.getBoundingClientRect();
           const progress = Math.max(0, Math.min(1, 1 - (rect.top / window.innerHeight)));
@@ -67,7 +67,7 @@ const AdmissionPage = () => {
 
 // Features fade in
 if (featuresRef.current) {
-  const features = featuresRef.current.querySelectorAll('.alp-feature');
+  const features = featuresRef.current.querySelectorAll(`.${styles['alp-feature']}`);
   features.forEach((feature, index) => {
     if (index < 4) {
       // First 4 cards visible immediately
@@ -107,26 +107,26 @@ if (featuresRef.current) {
   ];
 
   return (
-    <div className="alp-wrapper">
-      <div className="alp-left-heading">Your Dream Course Awaits</div>
+    <div className={styles['alp-wrapper']}>
+      <div className={styles['alp-left-heading']}>Your Dream Course Awaits</div>
       
       {/* Animation Section */}
-    <section className="alp-animation-section" ref={sectionRef}>
-      <div className="alp-scene">
-        <div className="alp-move-number">
-          <span className="alp-last-item">6</span>
+    <section className={styles['alp-animation-section']} ref={sectionRef}>
+      <div className={styles['alp-scene']}>
+        <div className={styles['alp-move-number']}>
+          <span className={styles['alp-last-item']}>6</span>
         </div>
-        <div className="alp-number-container">
-          <span className="alp-mask-number">202</span>
+        <div className={styles['alp-number-container']}>
+          <span className={styles['alp-mask-number']}>202</span>
         </div>
       </div>
 
-      <div className="alp-scene2">
-        <div className="alp-move-letter">
-          <span className="alp-last-item"></span>
+      <div className={styles['alp-scene2']}>
+        <div className={styles['alp-move-letter']}>
+          <span className={styles['alp-last-item']}></span>
         </div>
-        <div className="alp-msn-container">
-          <span className="alp-mask-text">
+        <div className={styles['alp-msn-container']}>
+          <span className={styles['alp-mask-text']}>
             admission goin<span>g</span>
           </span>
         </div>
@@ -134,51 +134,51 @@ if (featuresRef.current) {
     </section>
 
       {/* Hero Section */}
-      <section className="alp-hero-section">
-        <div className="alp-hero alp-container">
-          <div className="alp-hero__image">
-            <div className="alp-hero__image_img">
+      <section className={styles['alp-hero-section']}>
+        <div className={`${styles['alp-hero']} ${styles['alp-container']}`}>
+          <div className={styles['alp-hero__image']}>
+            <div className={styles['alp-hero__image_img']}>
               <img src="https://images.pexels.com/photos/2422259/pexels-photo-2422259.jpeg" alt="Hero" />
             </div>
-            <div className="alp-img__after_dot"></div>
+            <div className={styles['alp-img__after_dot']}></div>
           </div>
-          <div className="alp-link">
+          <div className={styles['alp-link']}>
             <a href="#" target="_blank">
-              <span className="alp-link__arrow">⟶</span>
-              <span className="alp-link__title">Register <br /> Now</span>
+              <span className={styles['alp-link__arrow']}>⟶</span>
+              <span className={styles['alp-link__title']}>Register <br /> Now</span>
             </a>
           </div>
-          <div className="alp-hero__title">
+          <div className={styles['alp-hero__title']}>
             <h1>
-              <span className="alp-span__before_dot">Kickstart</span>
+              <span className={styles['alp-span__before_dot']}>Kickstart</span>
               <span>Your Dream</span>
-              <span className="alp-title__bg_gradient">Career</span>
+              <span className={styles['alp-title__bg_gradient']}>Career</span>
             </h1>
           </div>
         </div>
       </section>
 
       {/* Carousel Section */}
-      <section className="alp-loop-images">
-        <div className="alp-carousel-track">
+      <section className={styles['alp-loop-images']}>
+        <div className={styles['alp-carousel-track']}>
           {carouselItems.map((src, index) => (
-            <div key={index} className="alp-carousel-item" style={{ '--i': index + 1 }}>
+            <div key={index} className={styles['alp-carousel-item']} style={{ '--i': index + 1 }}>
               <img src={src} alt={`carousel ${index + 1}`} />
             </div>
           ))}
            {carouselItems.map((src, index) => (
-    <div key={`b-${index}`} className="alp-carousel-item">
+    <div key={`b-${index}`} className={styles['alp-carousel-item']}>
       <img src={src} alt={`carousel duplicate ${index + 1}`} />
     </div>
   ))}
 
         </div>
-        <span className="alp-scroll-down">Scroll down <span className="alp-arrow">↓</span></span>
+        <span className={styles['alp-scroll-down']}>Scroll down <span className={styles['alp-arrow']}>↓</span></span>
       </section>
 
       {/* Image Motion Section */}
-      <section className="alp-section2">
-        <div className="alp-image-motion" ref={imageMotionRef}>
+      <section className={styles['alp-section2']}>
+        <div className={`${styles['alp-image-motion']}`} ref={imageMotionRef}>
           <picture>
             <img src="https://i.postimg.cc/1ztkf4hX/moveimage.png" alt="motion" />
           </picture>
@@ -186,17 +186,17 @@ if (featuresRef.current) {
       </section>
 
       {/* Features Section */}
-      <section className="alp-section3">
-        <div className="alp-container">
-          <h1 className="alp-title" ref={titleRef}>Carrusel Infinito</h1>
-          <p className="alp-subtitle" ref={subtitleRef}>Una experiencia visual única</p>
-          <div className="alp-text-content" ref={textContentRef}>
-            <p className="alp-text">Descubre la magia del movimiento continuo con nuestro carrusel de imágenes infinito. Cada elemento se desliza suavemente creando una experiencia visual hipnotizante que captura la atención del espectador.</p>
+      <section className={styles['alp-section3']}>
+        <div className={styles['alp-container']}>
+          <h1 className={`${styles['alp-title']}`} ref={titleRef}>Carrusel Infinito</h1>
+          <p className={`${styles['alp-subtitle']}`} ref={subtitleRef}>Una experiencia visual única</p>
+          <div className={`${styles['alp-text-content']}`} ref={textContentRef}>
+            <p className={styles['alp-text']}>Descubre la magia del movimiento continuo con nuestro carrusel de imágenes infinito. Cada elemento se desliza suavemente creando una experiencia visual hipnotizante que captura la atención del espectador.</p>
           </div>
-          <div className="alp-features" ref={featuresRef}>
-            <figure className="alp-snip0051 alp-feature">
+          <div className={`${styles['alp-features']}`} ref={featuresRef}>
+            <figure className={`${styles['alp-snip0051']} ${styles['alp-feature']}`}>
               <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample1.jpg" alt="sample1" />
-              <div className="alp-icons">
+              <div className={styles['alp-icons']}>
                 <a href="#"><i className="ion-ios-home-outline"></i></a>
                 <a href="#"><i className="ion-ios-email-outline"></i></a>
                 <a href="#"><i className="ion-ios-telephone-outline"></i></a>
@@ -207,9 +207,9 @@ if (featuresRef.current) {
               </figcaption>
             </figure>
             
-            <figure className="alp-snip0051 alp-feature">
+            <figure className={`${styles['alp-snip0051']} ${styles['alp-feature']}`}>
               <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample4.jpg" alt="sample4" />
-              <div className="alp-icons">
+              <div className={styles['alp-icons']}>
                 <a href="#"><i className="ion-ios-home-outline"></i></a>
                 <a href="#"><i className="ion-ios-email-outline"></i></a>
                 <a href="#"><i className="ion-ios-telephone-outline"></i></a>
