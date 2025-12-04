@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./overview.module.css";
+import Arrow from "../../../components/Arrow";
 
 export default function OverviewPage() {
   const [hero, setHero] = useState(null);
@@ -8,19 +9,7 @@ export default function OverviewPage() {
   const [contents, setContents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const scrollRef = useRef(null);
-  const arrowRef = useRef(null);
-  const [count, setCount] = useState(0);
-  const [clicked, setClicked] = useState(false);
-  const [rotated, setRotated] = useState(false);
-
   const API = import.meta.env.VITE_API_URL;
-
-  useEffect(() => {
-    if (!loading) {
-      arrowRef.current?.classList.add(styles.opArrowBounce);
-    }
-  }, [loading]);
 
   useEffect(() => {
     async function fetchData() {
@@ -42,32 +31,6 @@ export default function OverviewPage() {
     }
     fetchData();
   }, [API]);
-
-  const handleScrollClick = () => {
-    const sections = [...document.querySelectorAll("section")];
-
-    if (!clicked && scrollRef.current) {
-      Object.assign(scrollRef.current.style, {
-        position: "fixed",
-        bottom: "50px",
-        top: "auto",
-      });
-    }
-
-    setClicked(true);
-
-    if (count >= sections.length) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setCount(0);
-      setRotated(false);
-    } else {
-      sections[count]?.scrollIntoView({ behavior: "smooth" });
-      if (count === sections.length - 1) setRotated(true);
-      setCount((p) => p + 1);
-    }
-
-    arrowRef.current?.classList.remove(styles.opArrowBounce);
-  };
 
   const gridImages = [
     { class: styles.one, src: 11 },
@@ -91,15 +54,10 @@ export default function OverviewPage() {
       <section className={styles.opHero}>
         <img src={hero?.image} alt="Hero" />
         <div><h1>{hero?.title}</h1></div>
-      </section>
 
-      <div
-        ref={scrollRef}
-        className={`${styles.opScroll} ${clicked ? styles.opScrollClicked : ""} ${rotated ? styles.opScrollRotate : ""}`}
-        onClick={handleScrollClick}
-      >
-        <span ref={arrowRef} className={styles.opArrow}>&#8595;</span>
-      </div>
+        {/* Scroll Arrow */}
+        <Arrow sectionsSelector="section" />
+      </section>
 
       <section className={styles.opHeroSection}>
         <div className={styles.opText}>

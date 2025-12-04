@@ -74,9 +74,29 @@ const BalticSlider = () => {
       }
     }
 
+    let sliderInstance = null;
+
     if (sliderRef.current) {
-      new BeerSlider(sliderRef.current, { start: "75" });
+      // Clean up any existing slider elements first
+      const existingRange = sliderRef.current.querySelector('input[type="range"]');
+      const existingHandle = sliderRef.current.querySelector(`.${styles.handle}`);
+
+      if (existingRange) existingRange.remove();
+      if (existingHandle) existingHandle.remove();
+
+      sliderInstance = new BeerSlider(sliderRef.current, { start: "75" });
     }
+
+    // Cleanup function to prevent duplicates
+    return () => {
+      if (sliderRef.current) {
+        const range = sliderRef.current.querySelector('input[type="range"]');
+        const handle = sliderRef.current.querySelector(`.${styles.handle}`);
+
+        if (range) range.remove();
+        if (handle) handle.remove();
+      }
+    };
   }, []);
 
   return (
