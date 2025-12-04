@@ -698,3 +698,7 @@
   .alp-carousel-item { width: 14rem; height: 18rem; }
   .alp-carousel-track { gap: 1rem; }
 }
+
+.animate-active {
+  animation-play-state: running;
+}
