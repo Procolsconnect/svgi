@@ -1,63 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import BalticSlider from "./BalticSlider";
 import styles from "./aboutoverview.module.css";
+import Arrow from "../../../components/Arrow";
 
 export default function SVGIOverview() {
-  const sectionsRef = useRef([]);
-  const [index, setIndex] = useState(0);
-  const [clicked, setClicked] = useState(false);
-  const [rotate, setRotate] = useState(false);
-
-  useEffect(() => {
-    sectionsRef.current = Array.from(document.querySelectorAll(`.${styles.section}`));
-  }, []);
-
-  const handleScrollClick = () => {
-    const total = sectionsRef.current.length;
-
-    setClicked(true);
-    setTimeout(() => setClicked(false), 600);
-
-    if (index >= total) {
-      setRotate(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setIndex(0);
-      return;
-    }
-
-    const target = sectionsRef.current[index];
-    if (target) {
-      window.scrollTo({
-        top: target.offsetTop - 60,
-        behavior: "smooth",
-      });
-    }
-
-    const nextIndex = index + 1;
-    setIndex(nextIndex);
-
-    if (nextIndex === total) {
-      setRotate(true);
-    }
-  };
-
   return (
     <div className={styles.root}>
       {/* Hero */}
       <div className={styles.hero}>
         <img src="/images/instu.jpg" alt="Hero Background" />
         <h1 className={styles.heroTitle}>Overview</h1>
-      </div>
 
-      {/* Scroll Button */}
-      <div
-        id="svgio-scroll"
-        onClick={handleScrollClick}
-        className={`${styles.scrollBtn} ${clicked ? styles.clicked : ""} ${
-          rotate ? styles.rotate : ""
-        }`}
-      >
-        <span className={styles.arrowBounce}>&#8595;</span>
+        {/* Scroll Arrow */}
+        <Arrow sectionsSelector={`.${styles.section}`} />
       </div>
 
       {/* Section 1 - Tilted Images + Text */}
@@ -121,7 +76,11 @@ export default function SVGIOverview() {
           </div>
         </div>
       </section>
-      <BalticSlider />
+
+      {/* Section 3 - BalticSlider */}
+      <section className={styles.section}>
+        <BalticSlider />
+      </section>
     </div>
   );
 }
