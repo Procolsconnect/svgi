@@ -8,7 +8,7 @@
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
   font-family: 'Satoshi', sans-serif;
-  background: #f4f4f4;
+ overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
