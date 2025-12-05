@@ -10,6 +10,7 @@ const About = () => {
 
       <Routes>
         <Route index element={<AboutOverview />} />
+        <Route path="overview" element={<AboutOverview />} />
         <Route path="vission&mission" element={<VisMis />} />
         <Route path="leadership" element={<LeadershipMaterialCards />} />
       </Routes>

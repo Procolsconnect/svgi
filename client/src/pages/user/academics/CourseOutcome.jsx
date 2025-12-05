@@ -47,7 +47,7 @@ export default function CourseOutcome() {
             <div className={styles.mainSection}>
                 {/* LEFT UNRAVEL SECTION */}
                 <div className={styles.unravelSection}>
-                    <h1 ref={headlineRef} contentEditable={true}>
+                    <h1 ref={headlineRef} contentEditable={false}>
                         Upcoming courses
                     </h1>
                     <code>Our student growth plan in my college</code>

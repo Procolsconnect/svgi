@@ -52,18 +52,21 @@ const Arrow = ({ sectionsSelector = "section" }) => {
         // Add clicked class for rotation animation
         arrow.classList.add("clicked");
 
-        if (nextCount >= sections.length) {
-            // Reset to beginning - arrow stays fixed at bottom-right
-            nextCount = 0;
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            arrow.classList.remove("rotate");
-        } else {
-            const targetSection = sections[nextCount];
-            if (nextCount === sections.length - 1) arrow.classList.add("rotate");
-            smoothScroll(targetSection);
-            nextCount++;
-        }
-        setCount(nextCount);
+        // Add delay before scrolling for smoother feel
+        setTimeout(() => {
+            if (nextCount >= sections.length) {
+                // Reset to beginning - arrow stays fixed at bottom-right
+                nextCount = 0;
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                arrow.classList.remove("rotate");
+            } else {
+                const targetSection = sections[nextCount];
+                if (nextCount === sections.length - 1) arrow.classList.add("rotate");
+                smoothScroll(targetSection);
+                nextCount++;
+            }
+            setCount(nextCount);
+        }, 300);
 
         // Reset clicked animation (slower to match transition)
         setTimeout(() => {

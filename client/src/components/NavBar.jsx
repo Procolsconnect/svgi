@@ -57,6 +57,7 @@ const Header = () => {
       type: "page",
       value: "/about",
       subItems: [
+        { label: "Overview", value: "/about/overview" },
         { label: "Mission", value: "/about/vission&mission" },
         { label: "Leadership", value: "/about/leadership" },
       ],

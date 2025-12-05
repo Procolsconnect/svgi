@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './CampusOverview.module.css';
+import Arrow from '../../../components/Arrow';
 
 const CampusLife = () => {
   const scrollBtnRef = useRef(null);
@@ -8,6 +9,7 @@ const CampusLife = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [isScrollClicked, setIsScrollClicked] = useState(false);
   const [isRotated, setIsRotated] = useState(false);
+
 
   // Draggable cat functionality
   useEffect(() => {
@@ -74,29 +76,7 @@ const CampusLife = () => {
     }
   };
 
-  // Scroll arrow functionality
-  const handleScrollClick = () => {
-    const sections = document.querySelectorAll(`.${styles.section}`);
-    const scrollBtn = scrollBtnRef.current;
-
-    if (!scrollBtn) return;
-
-    setIsScrollClicked(true);
-
-    if (currentSection > sections.length - 1) {
-      setCurrentSection(0);
-      smoothScroll('toTop');
-      setIsRotated(false);
-    } else {
-      const target = sections[currentSection];
-      if (currentSection === sections.length - 1) {
-        setIsRotated(true);
-      }
-      smoothScroll(target);
-      setCurrentSection(currentSection + 1);
-    }
-  };
-
+  
   return (
     <div className={styles.wrapperMain}>
       {/* HERO */}
@@ -105,18 +85,11 @@ const CampusLife = () => {
         <div className={styles.heroOverlay}></div>
         <div className={styles.wrapper}>
           <h1>Campus Life</h1>
+    <Arrow sectionsSelector={`.${styles.section}`} />
         </div>
       </div>
 
-      {/* SCROLL ARROW */}
-      <div
-        ref={scrollBtnRef}
-        id="campus__scroll"
-        className={`${styles.scroll} ${isScrollClicked ? styles.clicked : ''} ${isRotated ? styles.rotate : ''}`}
-        onClick={handleScrollClick}
-      >
-     <span className={styles.arrowBounce}>↓</span>
-      </div>
+ 
 
       {/* BANNER SECTION */}
       <section ref={bannerRef} className={`${styles.banner} ${styles.section}`}>

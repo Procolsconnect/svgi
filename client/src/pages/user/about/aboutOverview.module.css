@@ -242,25 +242,29 @@
   scroll-margin-top: 60px;
 }
 
-/* Responsive */
+/* Responsive - Scale down but keep desktop layout */
 @media (max-width: 1200px) {
   .heroTitle {
     font-size: 46px;
   }
 
   .heroSection {
-    gap: 1.8em;
-    margin: 2.5em 2em;
+    gap: 1.5em;
+    margin: 2.5em 1.5em;
   }
 
-  .text {
-    height: auto;
+  .textTitle {
+    font-size: 2.5rem;
+  }
+
+  .textTitleBigger {
+    font-size: 2.8rem;
   }
 }
 
 @media (max-width: 992px) {
   .heroTitle {
-    font-size: 38px;
+    font-size: 40px;
   }
 
   .hero {
@@ -268,50 +272,39 @@
   }
 
   .heroSection {
-    flex-direction: column;
-    align-items: center;
-    margin: 2em 1.5em;
-    gap: 2.5em;
+    gap: 1.2em;
+    margin: 2em 1.2em;
   }
 
   .text {
-    width: 100%;
-    height: auto;
-    text-align: center;
+    width: 38%;
   }
 
   .gridContainer {
-    width: 100%;
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .gridContainer>* {
-    grid-column: auto !important;
-    grid-row: auto !important;
-    min-height: 150px;
+    min-width: 62%;
+    gap: 0.4em;
   }
 
   .bigger {
-    flex-direction: column;
-    align-items: center;
-    padding: 2em 1.5em;
-    gap: 3em;
+    padding: 2.5em 3em;
+    gap: 5em;
   }
 
   .gridTilt {
-    transform: rotate(-6deg);
     grid-template-columns: repeat(4, 100px);
-    gap: 14px;
-    justify-self: center;
-  }
-
-  .textBigger {
-    max-width: 100%;
-    text-align: center;
+    gap: 15px;
   }
 
   .textTitle {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
+  }
+
+  .textTitleBigger {
+    font-size: 2.5rem;
+  }
+
+  .textDescriptionBigger {
+    font-size: 1.1rem;
   }
 }
 
@@ -321,7 +314,7 @@
   }
 
   .heroTitle {
-    font-size: 32px;
+    font-size: 34px;
   }
 
   .heroTitle::after {
@@ -330,50 +323,61 @@
   }
 
   .heroSection {
-    margin: 2em 1em;
-    gap: 2em;
+    gap: 1em;
+    margin: 1.8em 1em;
   }
 
-  .gridContainer {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.4em;
+  .text {
+    width: 36%;
+    font-size: 0.9rem;
   }
 
-  .gridContainer>* {
-    min-height: 120px;
-  }
-
-  .bigger {
-    padding: 2em 1em;
-    gap: 2.5em;
-  }
-
-  .gridTilt {
-    grid-template-columns: repeat(3, 90px);
-    gap: 12px;
-    transform: rotate(-5deg);
+  .textShort {
+    font-size: 0.65rem;
   }
 
   .textTitle {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+
+  .textDescription {
+    font-size: 0.85rem;
+  }
+
+  .gridContainer {
+    gap: 0.35em;
+  }
+
+  .bigger {
+    padding: 2em 2em;
+    gap: 4em;
+  }
+
+  .gridTilt {
+    grid-template-columns: repeat(4, 80px);
+    gap: 12px;
+  }
+
+  .textShortBigger {
+    font-size: 0.85rem;
   }
 
   .textTitleBigger {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .textDescriptionBigger {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 }
 
 @media (max-width: 576px) {
   .hero {
-    min-height: 200px;
+    min-height: 220px;
   }
 
   .heroTitle {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   .heroTitle::after {
@@ -382,58 +386,62 @@
   }
 
   .heroSection {
-    gap: 1.5em;
+    gap: 0.8em;
     margin: 1.5em 0.8em;
   }
 
+  .text {
+    width: 35%;
+    font-size: 0.75rem;
+  }
+
+  .textShort {
+    font-size: 0.55rem;
+  }
+
   .textTitle {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
   }
 
   .textDescription {
-    font-size: 0.95rem;
+    font-size: 0.7rem;
+    padding-bottom: 0.5em;
   }
 
   .gridContainer {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.4em;
-  }
-
-  .gridContainer>* {
-    min-height: 100px;
+    gap: 0.3em;
   }
 
   .bigger {
-    padding: 1.5em 0.8em;
-    gap: 2em;
+    padding: 1.5em 1.5em;
+    gap: 3em;
   }
 
   .gridTilt {
-    grid-template-columns: repeat(2, 85px);
+    grid-template-columns: repeat(4, 65px);
     gap: 10px;
-    transform: rotate(-4deg);
-  }
-
-  .textTitleBigger {
-    font-size: 1.8rem;
-  }
-
-  .textDescriptionBigger {
-    font-size: 0.95rem;
   }
 
   .textShortBigger {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+  }
+
+  .textTitleBigger {
+    font-size: 1.6rem;
+  }
+
+  .textDescriptionBigger {
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 400px) {
   .hero {
-    min-height: 180px;
+    min-height: 200px;
   }
 
   .heroTitle {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .heroTitle::after {
@@ -441,51 +449,50 @@
   }
 
   .heroSection {
+    gap: 0.6em;
     margin: 1.2em 0.6em;
-    gap: 1.2em;
   }
 
-  .textTitle {
-    font-size: 1.5rem;
-  }
-
-  .textDescription {
-    font-size: 0.85rem;
+  .text {
+    width: 34%;
+    font-size: 0.65rem;
   }
 
   .textShort {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
+  }
+
+  .textTitle {
+    font-size: 1.2rem;
+  }
+
+  .textDescription {
+    font-size: 0.6rem;
   }
 
   .gridContainer {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.3em;
-  }
-
-  .gridContainer>* {
-    min-height: 80px;
+    gap: 0.25em;
   }
 
   .bigger {
-    padding: 1.2em 0.6em;
-    gap: 1.5em;
+    padding: 1.2em 1.2em;
+    gap: 2.5em;
   }
 
   .gridTilt {
-    grid-template-columns: repeat(2, 70px);
+    grid-template-columns: repeat(4, 55px);
     gap: 8px;
-    transform: rotate(-3deg);
-  }
-
-  .textTitleBigger {
-    font-size: 1.5rem;
-  }
-
-  .textDescriptionBigger {
-    font-size: 0.85rem;
   }
 
   .textShortBigger {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
+  }
+
+  .textTitleBigger {
+    font-size: 1.3rem;
+  }
+
+  .textDescriptionBigger {
+    font-size: 0.7rem;
   }
 }
