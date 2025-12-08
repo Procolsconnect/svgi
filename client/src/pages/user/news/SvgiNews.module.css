@@ -68,4 +68,13 @@
   .columns {
     column-count: 1;
   }
+  
+.heading {
+  font-size: 2.1em;
+  margin-bottom: 0.8em;
+  break-inside: avoid;
+  column-span: all;
+}
+
+
 }

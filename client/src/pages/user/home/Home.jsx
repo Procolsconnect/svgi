@@ -11,10 +11,11 @@ import LatestEvent from './LatestEvent.jsx';
 import OurTeam from './OurTeam.jsx';
 import RandomLogoSlider from './Logo_Section.jsx';
 import LogoSlider1 from './Logo_Section1.jsx';
-
+import FloatingIcons from '../../../components/FloatingIcons';
 const Home = () => {
   return (
     <div className='home'>
+      <FloatingIcons direction="right" vertical={true} />
       <HeroSlider />
       <Instutions />
       <Leadership />

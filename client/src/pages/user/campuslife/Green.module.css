@@ -315,7 +315,7 @@
 /* Small screens in portrait */
 @media (max-aspect-ratio: 1/1) and (max-width: 480px) {
   .gsvgiGallery {
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .gsvgiGalleryItem {

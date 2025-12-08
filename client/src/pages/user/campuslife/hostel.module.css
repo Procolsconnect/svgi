@@ -97,9 +97,7 @@
   min-height: calc(100vh - 350px);
 }
 
-.hostel__content {
-  max-width: 500px;
-}
+
 
 .hostel__content p {
   font-size: 1.1rem;
@@ -344,4 +342,166 @@
   .hostel__panel-content {
     font-size: 18px;
   }
+}  /* MOBILE RESPONSIVE - 360px to 1024px */
+        @media(max-width: 1024px) {
+          .hostel__hero {
+            min-height: 250px;
+          }
+
+          .hostel__hero h1 {
+            font-size: clamp(28px, 8vw, 42px);
+            padding: 0 1rem;
+          }
+
+          .hostel__hero h1::after {
+            width: 80px;
+            height: 4px;
+          }
+
+          .hostel__container {
+            flex-direction: column;
+            padding: 40px 5%;
+            gap: 40px;
+          }
+
+          .hostel__content {
+            max-width: 100%;
+            text-align: center;
+          }
+
+          .hostel__content p {
+            font-size: 1rem;
+            line-height: 1.7;
+          }
+
+          .hostel__isoCardStack > div {
+            width: clamp(200px, 80vw, 280px);
+            height: clamp(200px, 80vw, 280px);
+          }
+
+          .hostel__cards-container {
+            padding: 40px 5%;
+          }
+
+          .hostel__row {
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+          }
+
+          .hostel__slider {
+            height: 250px;
+          }
+
+          .hostel__col-copy {
+            padding: 10px;
+            text-align: center;
+          }
+
+          .hostel__col-copy h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+          }
+
+          .hostel__col-copy p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+          }
+
+          .hostel__faq-header {
+            font-size: 2rem;
+            padding: 40px 20px 30px;
+          }
+
+          .hostel__faq-content {
+            padding: 0 15px 40px;
+          }
+
+          .hostel__faq-question {
+            padding: 15px 0;
+          }
+
+          .hostel__plus {
+            font-size: 1.5rem;
+            width: 25px;
+            height: 25px;
+            top: 15px;
+          }
+
+          .hostel__panel-title {
+            padding-left: 40px;
+            font-size: 1rem;
+            line-height: 1.4;
+          }
+
+          .hostel__panel-content {
+            padding-left: 40px;
+            font-size: 0.9rem;
+          }
+          /* Card Stack Container */
+.hostel__isoCardStack {
+  transform: rotateX(65deg) rotateZ(40deg);
+  transform-style: preserve-3d;
+  position: relative;
+  right: 0;
+  top: 100px;
 }
+
+.hostel__isoCardStack div {
+  transform-style: preserve-3d;
+  background-color: white;
+  height: 30vh;
+  width: 210px;
+  position: relative;
+  border-radius: 8px;
+  display: grid;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  
+}
+
+.hostel__isoCardStack div > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+        }
+
+        /* EXTRA SMALL MOBILE - 360px to 480px */
+        @media(max-width: 480px) {
+          .hostel__hero {
+            min-height: 200px;
+          }
+
+          .hostel__container {
+            padding: 30px 4%;
+            gap: 30px;
+          }
+
+          .hostel__content p {
+            font-size: 0.9rem;
+          }
+
+          .hostel__isoCardStack > div {
+            width: clamp(180px, 85vw, 240px);
+            height: clamp(180px, 85vw, 240px);
+          }
+
+          .hostel__slider {
+            height: 200px;
+          }
+
+          .hostel__col-copy h2 {
+            font-size: 1.3rem;
+          }
+
+          .hostel__col-copy p {
+            font-size: 0.9rem;
+          }
+
+          .hostel__faq-header {
+            font-size: 1.7rem;
+            padding: 30px 15px 20px;
+          }
+        }
+      

@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap');
 .pageWrapper {
   font-family: 'Inter', 'Poppins', sans-serif;
   margin: 0;
@@ -367,7 +367,7 @@
   50% { transform: rotate(-5deg); opacity: 1; left: 45%; }
   75% { transform: rotate(10deg); left: 32%; }
   100% { transform: rotate(0deg); opacity: 1; top: 12px; left: 43%; }
-}@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap');
+}
 
 .pageWrapper {
   font-family: 'Inter', 'Poppins', sans-serif;

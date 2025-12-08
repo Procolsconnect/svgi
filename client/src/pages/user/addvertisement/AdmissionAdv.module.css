@@ -671,34 +671,280 @@
   transform: translate(0);
 }
 
+
 .alp-snip0051:hover .alp-icons a:first-child i { transition-delay: 0.1s; }
 .alp-snip0051:hover .alp-icons a:nth-child(2) i { transition-delay: 0.2s; }
 .alp-snip0051:hover .alp-icons a:nth-child(3) i { transition-delay: 0.3s; }
 
-/* Mobile Responsiveness (your original) */
-@media (max-width: 768px) {
-  .alp-section3 { padding: 4rem 1rem; }
-  .alp-title { font-size: 3.5rem; letter-spacing: -1px; }
-  .alp-title::after { width: 60px; height: 3px; }
-  .alp-subtitle { font-size: 1.2rem; margin-bottom: 3rem; letter-spacing: 2px; }
-  .alp-subtitle::before, .alp-subtitle::after { display: none; }
-  .alp-text-content { margin-bottom: 4rem; }
-  .alp-text { font-size: 1.1rem; }
-  .alp-features { grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
-  .alp-snip0051 { padding: 2.5rem 2rem; }
-}
-
-/* Extra responsive for carousel */
 @media (max-width: 1024px) {
   .alp-carousel-item { width: 16rem; height: 20rem; }
   .alp-carousel-track { gap: 1.5rem; }
 }
 
+.animate-active {
+  animation-play-state: running;
+}
 @media (max-width: 768px) {
   .alp-carousel-item { width: 14rem; height: 18rem; }
   .alp-carousel-track { gap: 1rem; }
+   .alp-animation-section {
+    height: 45vh;
+  }
+
+  .alp-scene,
+  .alp-scene2 {
+    font-size: 7rem;
+  }
+
+  .alp-mask-text {
+    font-size: 3.5rem;
+  }
+
+  .alp-left-heading {
+    position: static;
+    text-align: center;
+    font-size: 1.8rem;
+    padding: 20px 15px;
+    background: #fff;
+    color: #d81717;
+  }
+
+  .alp-hero-section {
+    padding: 20px 0;
+    min-height: auto;
+  }
+
+  .alp-hero {
+    flex-direction: column-reverse;
+    gap: 30px;
+  }
+
+  .alp-hero__title {
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+  }
+
+  .alp-hero__title h1 {
+    font-size: 45px;
+    letter-spacing: 4px;
+    align-items: center;
+  }
+
+  .alp-span__before_dot::before {
+    height: 40px;
+    width: 1.5ch;
+    margin-right: 10px;
+  }
+
+  .alp-hero__image {
+    max-width: 100%;
+    width: 80%;
+    margin-top: 0;
+  }
+
+  .alp-hero__image_img {
+    height: 300px;
+    border-top-right-radius: 100px;
+  }
+
+  .alp-img__after_dot {
+    height: 35px;
+  }
+
+  .alp-link {
+    position: static;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    width: 100%;
+  }
+
+  .alp-link a {
+    font-size: 16px;
+    letter-spacing: 4px;
+    gap: 15px;
+  }
+
+  .alp-link__arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .alp-loop-images {
+    height: 70vh;
+  }
+
+  .alp-carousel-item {
+    width: 14rem;
+    height: 16rem;
+  }
+
+  .alp-carousel-track {
+    gap: 1rem;
+    height: 20rem;
+  }
+
+  .alp-scroll-down {
+    bottom: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .alp-arrow {
+    font-size: 1.8rem;
+  }
+
+  .alp-section3 {
+    padding: 4rem 1.5rem;
+  }
+
+  .alp-title {
+    font-size: 3rem;
+    letter-spacing: -1px;
+    margin-bottom: 2rem;
+  }
+
+  .alp-title::after {
+    width: 60px;
+    height: 3px;
+  }
+
+  .alp-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+  }
+
+  .alp-subtitle::before,
+  .alp-subtitle::after {
+    font-size: 1rem;
+    left: -25px;
+    right: -25px;
+  }
+
+  .alp-text-content {
+    margin-bottom: 3rem;
+  }
+
+  .alp-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+ 
+
+  .alp-snip0051 {
+    margin: 10px;
+    max-height: 220px;
+  }
 }
 
-.animate-active {
-  animation-play-state: running;
+/* Mobile Portrait (350px - 480px) */
+@media (max-width: 480px) {
+  .alp-animation-section {
+    height: 25vh;
+  }
+
+  .alp-scene,
+  .alp-scene2 {
+    font-size: 5rem;
+  }
+
+  .alp-mask-text {
+    font-size: 2.5rem;
+  }
+
+  .alp-left-heading {
+    font-size: 1.4rem;
+    padding: 15px 10px;
+  }
+
+  .alp-hero-section {
+    padding: 15px 0;
+  }
+
+  .alp-hero {
+    gap: 20px;
+  }
+
+  .alp-hero__title h1 {
+    font-size: 32px;
+    letter-spacing: 3px;
+  }
+
+  .alp-span__before_dot::before {
+    height: 30px;
+    width: 1.2ch;
+    margin-right: 8px;
+    background-size: 5px 5px;
+  }
+
+  .alp-hero__image {
+    width: 90%;
+  }
+
+  .alp-hero__image_img {
+    height: 250px;
+    border-top-right-radius: 80px;
+  }
+
+  .alp-img__after_dot {
+    height: 30px;
+    background-size: 5px 5px;
+  }
+
+  .alp-link {
+    margin: 20px 0;
+  }
+
+  .alp-link a {
+    font-size: 14px;
+    letter-spacing: 3px;
+    gap: 12px;
+  }
+
+  .alp-link__arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .alp-loop-images {
+    height: 60vh;
+  }
+
+  .alp-carousel-item {
+    width: 12rem;
+    height: 14rem;
+  }
+
+  .alp-carousel-track {
+    gap: 0.8rem;
+    height: 18rem;
+  }
+
+  .alp-carousel-item img {
+    transform: rotateY(-30deg);
+  }
+
+  .alp-scroll-down {
+    bottom: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  .alp-arrow {
+    font-size: 1.6rem;
+  }
+
+  .alp-section3 {
+    padding: 3rem 1rem;
+  }
+
+  .alp-title {
+    font-size: 2.2rem;
+    letter-spacing: 0;
+    margin-bottom: 1.5rem;
+  }
+
 }

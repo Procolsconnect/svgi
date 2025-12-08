@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './AdvHero.module.css';
+import FloatingIcons from '../../../components/FloatingIcons';
 
 const Hero = () => {
   const [formData, setFormData] = useState({
@@ -26,16 +27,7 @@ const Hero = () => {
     <div className={styles['griddy-container']}>
 
       {/* Social Icons */}
-      <div className={styles['griddy-float-sm']}>
-        <div className={`${styles['griddy-fl-fl']} ${styles['griddy-float-fb']}`}>
-          <i className="fa fa-facebook"></i>
-          <a href="#">Direct Enquiry!</a>
-        </div>
-        <div className={`${styles['griddy-fl-fl']} ${styles['griddy-float-ig']}`}>
-          <i className="fa fa-instagram"></i>
-          <a href="#">Admission now!</a>
-        </div>
-      </div>
+<FloatingIcons direction="right" vertical={true} />
 
       {/* GRID */}
       <section className={styles['griddy-section']}>

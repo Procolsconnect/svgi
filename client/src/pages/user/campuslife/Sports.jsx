@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './sports.module.css';
-
+import Mask from './Mask';
 const SportsPage = () => {
   const bouncerRef = useRef(null);
   const [isBouncerInitialized, setIsBouncerInitialized] = useState(false);
@@ -11,76 +11,76 @@ const SportsPage = () => {
       const bounceSpeed = 7;
       const elem = bouncerRef.current;
       const elemText = elem.textContent;
-      
+
       // Check if cloned element already exists
       const existingCloned = elem.parentNode.querySelector(`.${styles.sports__cloned}`);
       if (existingCloned) {
         existingCloned.remove();
       }
-      
+
       const cloned = document.createElement('div');
       cloned.className = `${styles.sports__bouncer} ${styles.sports__cloned}`;
       cloned.style.position = 'relative';
       cloned.style.display = 'inline-block';
-      
+
       const ball = document.createElement('div');
       ball.className = styles.sports__ball;
-      
+
       elem.parentNode.insertBefore(cloned, elem.nextSibling);
       cloned.appendChild(ball);
       elem.style.display = 'none';
-      
+
       const contentArray = elemText.split(' ');
       const timers = [];
       let incrementingDelay = 0;
-      
+
       contentArray.forEach((word, j) => {
         const wordSpan = document.createElement('span');
         wordSpan.className = styles.sports__word;
         wordSpan.textContent = word;
         cloned.appendChild(wordSpan);
-        
+
         const wordLength = wordSpan.offsetWidth;
-        
+
         if (j + 1 < contentArray.length) {
           const space = document.createElement('span');
           space.innerHTML = '&nbsp;';
           cloned.appendChild(space);
         }
-        
+
         const ballLeft = wordSpan.offsetLeft + wordLength / 2;
         const ballTop = wordSpan.offsetTop;
-        
+
         const timer = setTimeout(() => {
           const leftDuration = wordLength * bounceSpeed + 'ms';
           const topDuration = (wordLength * bounceSpeed / 2) + 'ms';
           ball.style.transitionDuration = leftDuration + ', ' + topDuration;
-          
+
           const ballOffsetLeft = ball.offsetLeft;
           const delta = ballLeft - ballOffsetLeft;
           const ballHalfWay = ballOffsetLeft + delta;
           ball.style.left = ballHalfWay + 'px';
           ball.style.top = '-50px';
-          
+
           setTimeout(() => {
             ball.style.left = ballLeft + 'px';
             ball.style.top = '0px';
-            
+
             setTimeout(() => {
               wordSpan.classList.add(styles.sports__lit);
             }, wordLength * bounceSpeed / 2);
           }, wordLength * bounceSpeed / 2);
         }, incrementingDelay);
-        
+
         timers.push(timer);
         incrementingDelay += wordLength * bounceSpeed;
       });
-      
+
       const fadeTimer = setTimeout(() => {
         ball.style.opacity = '0';
       }, incrementingDelay);
       timers.push(fadeTimer);
-      
+
       setIsBouncerInitialized(true);
     }
   }, [isBouncerInitialized]);
@@ -95,41 +95,25 @@ const SportsPage = () => {
       </section>
 
       {/* SVGI Section */}
-      <section className={styles.sports__section}>
-        <div className={styles['sports__left-content']}>
-          <header className={styles['sports__video-header']}>
-            <video autoPlay playsInline muted loop preload="auto" poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/oceanshot.jpg">
-              <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/ocean-small.webm" type="video/webm" />
-              <source src="http://thenewcode.com/assets/videos/ocean-small.mp4" type="video/mp4" />
-            </video>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 285 80" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <mask id="sports__mask" x="0" y="0" width="100%" height="100%">
-                  <rect x="0" y="0" width="100%" height="100%" fill="#fff"/>
-                  <text x="95" y="50" fill="#000">SVGI</text>
-                </mask>
-              </defs>
-              <rect x="0" y="0" width="100%" height="100%" fill="#fff"/>
-            </svg>
-          </header>
-          <p className={styles.sports__description}>
-            SVGI is dedicated to fostering a culture of excellence in sports and academics.
-            Our students are encouraged to pursue their passion both on the field and in the classroom.
-            We believe teamwork, perseverance, and leadership build champions for life.
-          </p>
-        </div>
-        <div className={styles['sports__right-side']}>
-          <img src="https://pngimg.com/uploads/football_player/football_player_PNG48.png" alt="Sportsman" />
-        </div>
-      </section>
-
-      {/* Media Gallery */}
+     {/* SVGI SECTION – GUARANTEED WORKING */}
+<section className={styles.sports__section}>
+  <div className={styles['sports__left-content']}>
+   {/* Media Gallery */}
       <header id="sports__media-gallery" className={styles['sports__media-banner']}>
         <div className={styles.sports__container}>
           <p ref={bouncerRef} className={`${styles.sports__bouncer} ${styles['sports__header-logo']}`}>Sports facilities in SVGI</p>
         </div>
       </header>
+    <p className={styles.sports__description}>
+      SVGI is dedicated to fostering a culture of excellence in sports and academics through a blend of academic excellence and athletic prowess.m
+    </p>
+  </div>
 
+  <div className={styles['sports__right-side']}>
+    <img src="https://pngimg.com/uploads/football_player/football_player_PNG48.png" alt="Sportsman" />
+  </div>
+</section>
+<Mask/>
       {/* Slat 1 */}
       <article className={`${styles.sports__slat} ${styles['sports__slat--reversed']}`}>
         <div className={styles['sports__slat-body']}>
@@ -174,7 +158,7 @@ const SportsPage = () => {
         <div className={styles['sports__podium-left-content']}>
           <h1>Top 3 Winners</h1>
           <p>
-            These are our top performers! Each number represents excellence, consistency, 
+            These are our top performers! Each number represents excellence, consistency,
             and skill. Congratulations to everyone for their hard work and success.
           </p>
         </div>
