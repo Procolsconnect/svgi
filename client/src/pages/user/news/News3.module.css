@@ -136,12 +136,10 @@
   .ltp-pane-mid,
   .ltp-pane-right {
     width: 100%;
-    height: 50vh;
+    height: 60vh;
   }
 
-  .ltp-pane-mid {
-    order: -1;
-  }
+ 
 }
 
 @media (max-width: 600px) {

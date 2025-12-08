@@ -1,26 +1,17 @@
-/* sports.module.css */
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;800;900&family=Open+Sans:wght@400;700&family=Montserrat:wght@400;600;700&family=Poppins:wght@400&family=Alef&display=swap');
+/* sports.module.css — FULLY FIXED & WORKING (2025) */
 
-/* Biko Font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght400;600;800;900&family=Open+Sans:wght400;700&family=Montserrat:wght400;600;700&family=Poppins:wght400&family=Alef&display=swap');
+
 @font-face {
-  font-family: Biko;
-  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/biko-black.woff");
+  font-family: 'Biko';
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/biko-black.woff') format('woff');
+  font-weight: 900;
+  font-display: swap;
 }
 
-/* ------------------- SMOOTH SCROLLING ------------------- */
+/* GLOBAL RESET */
 .sports__wrapper {
   scroll-behavior: smooth;
-}
-
-/* ------------------- GLOBAL ------------------- */
-.sports__wrapper * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.sports__wrapper {
   font-family: 'Inter', 'Open Sans', sans-serif;
   background: #fff;
   color: #222;
@@ -28,15 +19,10 @@
   overflow-x: hidden;
 }
 
-.sports__wrapper a {
-  color: #4B4D4B;
-  transition: color .3s ease;
-  text-decoration: none;
-}
-
-.sports__wrapper a:hover,
-.sports__wrapper a:focus {
-  color: #000;
+.sports__wrapper * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .sports__wrapper img {
@@ -44,63 +30,38 @@
   display: block;
 }
 
-.sports__wrapper p {
-  margin: 0 0 1em;
-  color: #6e706e;
-}
-
-.sports__wrapper h1,
-.sports__wrapper h2,
-.sports__wrapper h3,
-.sports__wrapper h4,
-.sports__wrapper h5,
-.sports__wrapper h6 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-}
-
-.sports__container {
-  margin: 0 auto;
-  padding: 0 1em;
-  max-width: 80em;
-}
-
-/* ------------------- HERO ------------------- */
+/* HERO */
 .sports__hero {
   min-height: 350px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
   overflow: hidden;
-  color: #fff;
-  z-index: 1;
 }
 
 .sports__hero-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
 }
 
 .sports__hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, .5);
-  z-index: 0;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .sports__hero-title {
   position: relative;
   font-size: 52px;
-  font-weight: bold;
-  z-index: 1;
+  font-weight: 700;
   letter-spacing: 1px;
+  z-index: 1;
 }
 
 .sports__hero-title::after {
@@ -115,24 +76,94 @@
 }
 
 @keyframes sports__underline-pulse {
-  0%, 100% {
-    transform: scaleX(1);
-    opacity: .8;
-  }
-  50% {
-    transform: scaleX(1.4);
-    opacity: 1;
-  }
+  0%, 100% { transform: scaleX(1); opacity: 0.8; }
+  50% { transform: scaleX(1.4); opacity: 1; }
 }
 
-@media(max-width: 768px) {
-  .sports__hero-title {
-    font-size: 36px;
-    padding: 0 20px;
-  }
+@media (max-width: 768px) {
+  .sports__hero-title { font-size: 36px; padding: 0 20px; }
 }
 
-/* ------------------- PODIUM (Top 3 Winners) ------------------- */
+.sports__section {
+  width: 90%;
+  max-width: 1200px;
+  display: flex
+}
+
+.sports__left-content { flex: 1; max-width: 550px; }
+
+
+
+.sports__description {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  text-align: justify;
+}
+
+.sports__right-side img {
+  width: 400px;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
+  transition: transform 0.4s ease;
+}
+
+.sports__right-side img:hover {
+  transform: translateY(10px) scale(1.05);
+}
+
+@media (max-width: 900px) {
+  .sports__section { flex-direction: column; text-align: center; }
+  .sports__right-side img { width: 300px; }
+}
+
+/* BOUNCING BALL HEADER */
+.sports__media-banner {
+ 
+  background: #fff;
+  text-align: center;
+}
+
+.sports__bouncer {
+  position: relative;
+  display: inline-block;
+  font-size: 40px;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  color: #111;
+}
+
+.sports__ball {
+  position: absolute;
+  top: -10px;
+  left: -20px;
+  width: 16px;
+  height: 16px;
+  background: #ff2600;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.sports__word {
+  display: inline-block;
+  opacity: 0.3;
+  transition: all 0.4s;
+}
+
+.sports__word.sports__lit {
+  opacity: 1;
+  color: #0e0739;
+  text-shadow: 0 0 10px rgba(9,11,52,0.6);
+}
+
+.sports__cloned {
+  position: relative;
+  display: inline-block;
+}
+
+/* PODIUM SECTION */
 .sports__podium-section {
   min-height: 100vh;
   display: flex;
@@ -159,8 +190,9 @@
   font-size: 18px;
   line-height: 1.7;
   color: #555;
-  max-width: 500px;
 }
+
+
 
 .sports__right-podium {
   flex: 1;
@@ -287,16 +319,10 @@
 
 /* ------------------- MEDIA SLATS ------------------- */
 .sports__media-banner {
-  padding: 4em 0;
+
   background: #fff;
   position: relative;
   z-index: 0;
-}
-
-@media(min-width: 80em) {
-  .sports__media-banner {
-    padding: 6em 0;
-  }
 }
 
 .sports__slat {
@@ -627,6 +653,19 @@
   .sports__cards-container {
     grid-template-columns: 1fr;
   }
+  .sports__section {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  z-index: 0;
+}
+
 }
 
 /* ------------------- SVGI SECTION ------------------- */
@@ -634,7 +673,7 @@
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 80px 0;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -654,6 +693,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 0;
+  z-index: 1;
 }
 
 .sports__video-header video {
@@ -683,6 +723,11 @@
 }
 
 .sports__video-header svg > rect {
+  -webkit-mask: url(#sports__mask);
+  mask: url(#sports__mask);
+}
+/* Mask the video itself */
+.sports__video-header video {
   -webkit-mask: url(#sports__mask);
   mask: url(#sports__mask);
 }

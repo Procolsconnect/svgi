@@ -1,127 +1,177 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Rankings & Posters Layout</title>
-  <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600,700" rel="stylesheet">
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milo Card Over Map</title>
+
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      overflow: hidden;
-      font-family: 'Work Sans', sans-serif;
-    }
-    .home {
-      width: 100%;
-      height: 100vh;
-      background-image: url('https://images.unsplash.com/photo-1446771326090-d910bfaf00f6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=9216e1a8598a8530ce329b41a8f3725d');
-      background-size: cover;
+    body {
+  
+      font-family: Arial, sans-serif;
+      background-image:url('https://jeffbridgforth.com/codepen/places-map.png');
+      background-size: contain;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
       background-position: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center; /* center cards vertically */
-      padding: 40px 80px 0 80px;
-      box-sizing: border-box;
-      color: white;
-    }
-    /* CARDS */
-    .cards {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      gap: 40px;
-      margin-top: 20px; /* moved slightly down */
-    }
-    .card-wrapper {
-      max-width: 420px;
-      color: white;
-      margin-top: 10px; /* fine adjustment downward */
-    }
-    /* Left side text */
-    .text-wrapper {
-      text-align: left;
-      margin-bottom: 10px;
-    }
-    /* Right side text */
-    .text-wrapper-right {
-      text-align: right;
-      margin-bottom: 10px;
-    }
-    h2 {
-      margin: 0 0 6px 0;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    p {
-      margin: 0;
-      font-size: 0.85rem;
-      opacity: 0.85;
-      letter-spacing: 0.4px;
-    }
-    .image-card {
-      width: 420px;
-      height: 230px;
       overflow: hidden;
-      border-radius: 0;
-      border: 1px solid rgba(255,255,255,0.35);
-      box-shadow: 0 15px 40px rgba(0,0,0,.6);
-      background: rgba(255,255,255,0.03);
     }
-    .image-card img {
+
+ 
+
+    /* -------------------------------------------------- */
+    /*                     MILO STYLE                     */
+    /* -------------------------------------------------- */
+
+    .credits { 
+      position: relative;
+      margin-top: 60px;
+      width: auto; 
+      font-family: arial; 
+      font-size: 9px; 
+      text-shadow: none; 
+      letter-spacing: 0.5px; 
+      color: #828282; 
+      text-align: center;
+    } 
+
+    .aff {
+      position: absolute;
+      text-shadow: none;
+      padding: 0px;
+      text-align: center;
+      background-color: #212e1e;
+      line-height: 10px; 
+      width: 210px; 
+    right: 10px; 
+    bottom: 53px;
+      border-radius: 0px;
+      padding: 5px;
+      padding-bottom: 10px;
+      rotate: 3deg;
+    }
+
+  .testino { 
+    background-color: rgba(255, 248, 240, 0.92); 
+    box-shadow: 0px 0px 0px #000;
+    position: absolute;
+    text-shadow: none;
+    max-height: 220px;
+    text-align: justify; 
+    overflow-y: auto;
+    width: 17vw;
+    overflow-x: hidden;
+    padding: 5px; 
+    line-height: 14px; 
+    right: 20px; 
+    top: 90px;
+    rotate: 2.5deg;
+    scrollbar-gutter: stable;
+    z-index: 1; 
+      box-sizing: content-box;
+  }
+.text-inner {
+  height: 100%;
+  overflow-y: auto;           /* scroll inside container */
+  overflow-x: hidden;
+  padding-right: 5px;         /* prevent text behind scrollbar */
+}
+    /* Milo container with IMG replacing background-image */
+    .milo {
+      width:37vw;
+      height: 450px;
+      position: relative;
+      left: 45vw;
+      top: 10vh;  
+      display: inline-block;
+    }
+
+    .milo .bg-image {
+    display: inline-block; 
+    position: absolute;
+
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      z-index: -1;
+    } 
+    .milo .bg-image::before {
+    content: "";
+    width: 75px;
+    height: 26px;
+    background: rgba(255, 255, 180, 0.55);
+    border: 1px solid rgba(180, 170, 120, 0.35);
+    transform: translateX(-50%) rotate(-4deg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.28);
+      z-index: 0;
+  }
+
+    .gif1 {
+      -webkit-clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 0% 100%);
+      width: auto;
+      height: 70px;
+      margin-left: 5px;
     }
-    @media (max-width: 1024px) {
-      .cards {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-        margin-top: 10px; /* adjusted downward on smaller screens */
-      }
-      .card-wrapper {
-        max-width: 90%;
-        margin-top: 5px; /* smaller adjustment */
-      }
-      .image-card {
-        width: 90%;
-        height: 220px;
-      }
-      .text-wrapper, .text-wrapper-right {
-        text-align: center;
-      }
+
+    .gif2 {
+      width: auto;
+      height: 80px;
+      border-radius: 50%;
+      rotate: 7deg;
+      margin-top: -15px;
+      margin-right: -115px;
     }
+
+    .gif3 {
+      -webkit-clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+      width: auto;
+      height: 70px;
+    }
+
+    c { font-family: calibri; text-transform: uppercase;font-size:9px; letter-spacing:2px; color:#dcdcdc; background-color:#212e1e; line-height: 11px; }
+    m { font-family: tahoma; font-size: 8px; color: #6b3220; text-transform: uppercase; letter-spacing: 2px; }
+    m1 { font-family: tahoma; font-size: 9.5px; color: #453125; }
+    y { font-family: arial; font-size: 8px; color: #041a0b; text-transform: uppercase; }
+    k { font-family: georgia; color:#86a67e; text-transform: uppercase; font-size: 8px; }
+    g { font-size: 9px; font-family: georgia; color: #764334;}
+    g1 { font-family: trebuchet ms; font-size: 9.5px; line-height: 10px; color: #163021; }
+    n { font-family: georgia; color: #0e2236; font-size: 9.5px; font-style: italic; }
+    n1 { font-family: trebuchet ms; color: #6f7e69; font-size: 8.5px; text-transform: uppercase;}
+    r { font-family: tahoma; color: #171717; font-size: 10px; }
+    r1 { font-family: tahoma; color: #e1d7cb; font-size: 9.5px; }
+    r2 { font-family: tahoma; color: #868078; font-size: 9.5px; }
+
+    a:link { color: #e1d7cb; }
+    a:visited { color: #e1d7cb; }
   </style>
-</head>
-<body>
-  <section class="home">
-    <!-- LEFT & RIGHT CARDS BELOW -->
-    <div class="cards">
-      <!-- LEFT: Text + Image -->
-      <div class="card-wrapper">
-        <div class="text-wrapper">
-          <h2>Rankings 2025</h2>
-          <p>Top performing institutions evaluated nationwide</p>
-        </div>
-        <div class="image-card">
-          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&q=80&w=1200" alt="Left Image">
-        </div>
-      </div>
-      <!-- RIGHT: Text + Image -->
-      <div class="card-wrapper">
-        <div class="text-wrapper-right">
-          <h2>Poster 2025</h2>
-          <p>Latest creative posters released nationwide</p>
-        </div>
-        <div class="image-card">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200" alt="Right Image">
-        </div>
-      </div>
+  </head>
+  <body>
+<div class="milo">
+<div class="milo-img">
+  <img class="bg-image" src="sky clg.jpg" />
+</div>
+          <div class="testino">
+            <r>
+              <c>milo ian kenney</c> <y>(gemini sun, gemini rising & aquarius moon)</y> è cresciuto tra i collettivi e i centri sociali di <m>brooklyn</m>, in mezzo alle teste calde della lotta anticapitalista. ha una madre mezza turca da cui ha ereditato i colori mediterranei e l'indole da leader politico, e conta almeno tre zie e una decina di cugine con le quali ha condiviso <n>case, libri, auto (soprattutto multe), <s>vestiti</s> e ideali.</n> leader della pubblica istruzione, cacciato più di una volta dal <g1>club di dibattito</g1> e segnato sull'anniversario scolastico <m1>as most likely to say “why would i lie” when he's lying</m1>. il suo hobby preferito è la <m>cleptomania</m> e dice un po' troppe cazzate con la scusa di voler rendere le cose più interessanti. <y>(he's a 1 but there's just something about him)</y> ...
+            </r>
+          </div>
+
+          <br>
+
+          <div class="aff">
+            <r1><c>CABIN XI</c> • JAZZ • PUCK<br>
+            <n1>willa • jax • maeve • opal • juliet</n1><br>
+            <i>nilufer</i>, amber, <i>len</i>, eleanor, <i>silene</i><br>
+            edward, samuel, zeke, <s>logan</s>.<br>
+            <r2>( <i>aidan, caleb, oliver, llyr</i> )</r2><br>
+          </div>
+
+ 
+
+   
+
     </div>
   </section>
-</body>
-</html>
+
+  </body>
+  </html>

@@ -8,7 +8,7 @@ const LuxuryTriplePane = () => {
         
         <div className={`${styles['ltp-pane']} ${styles['ltp-pane-left']}`}>
           <img 
-            src="https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/large-2479-s-classsaloon.jpg?itok=QTxMln2k" 
+            src="https://i.pinimg.com/564x/db/2c/6c/db2c6cba9f57d327eb721bd4f0734e11.jpg" 
             alt="Mercedes S-Class luxury interior"
           />
         </div>

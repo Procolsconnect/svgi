@@ -13,41 +13,42 @@ const MergedPage = () => {
   const [stackK, setStackK] = useState(0);
   const stackN = 7; // matches --n:7 in original markup
 
-  useEffect(() => {
-    // Hover Animation: attach to .introFigure elements
-    if (window.NodeList && !NodeList.prototype.forEach) {
-      NodeList.prototype.forEach = Array.prototype.forEach;
+  // 3D Tilt Effect Handlers
+  const handleTiltMove = (e) => {
+    const figure = e.currentTarget;
+    const image = figure.querySelector("img");
+    if (!image) return;
+
+    const x = e.pageX;
+    const y = e.pageY;
+    const targetCoords = figure.getBoundingClientRect();
+    // Calculate center relative to page
+    // Note: getBoundingClientRect is relative to viewport.
+    // pageX/Y includes scroll. We need consistent coords.
+    // Easier approach: Use event.nativeEvent.offsetX/Y for local, or keep original logic but verify rect.
+
+    // Original Logic adapted:
+    // Original: const targetX = targetCoords.left + this.offsetWidth / 2; (this likely implied absolute page coords in original context if using pageX/Y)
+    // Actually, let's stick to viewport logic if we use clientX/Y, or page logic if pageX/Y.
+    // rect.left + window.scrollX gives page position.
+
+    const rect = figure.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2 + window.scrollX;
+    const centerY = rect.top + rect.height / 2 + window.scrollY;
+
+    const angleX = (centerY - y) / -25;
+    const angleY = (centerX - x) / 25;
+
+    image.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+  };
+
+  const handleTiltLeave = (e) => {
+    const figure = e.currentTarget;
+    const image = figure.querySelector("img");
+    if (image) {
+      image.style.transform = "rotateX(0deg) rotateY(0deg)";
     }
-    const figures = document.querySelectorAll(`.${styles.introFigure}`);
-    const handlers = [];
-    figures.forEach((figure) => {
-      const image = figure.querySelector("img");
-      if (!image) return;
-      const onMove = function (event) {
-        const x = event.pageX;
-        const y = event.pageY;
-        const targetCoords = this.getBoundingClientRect();
-        const targetX = targetCoords.left + this.offsetWidth / 2;
-        const targetY = targetCoords.top + this.offsetHeight / 2;
-        const angleX = (targetY - y) / -25;
-        const angleY = (targetX - x) / 25;
-        image.style.transform =
-          "rotateX(" + angleX + "deg) rotateY(" + angleY + "deg)";
-      };
-      const onOut = function () {
-        image.style.transform = "rotateX(0deg) rotateY(0deg)";
-      };
-      figure.addEventListener("mousemove", onMove);
-      figure.addEventListener("mouseout", onOut);
-      handlers.push({ figure, onMove, onOut });
-    });
-    return () => {
-      handlers.forEach(({ figure, onMove, onOut }) => {
-        figure.removeEventListener("mousemove", onMove);
-        figure.removeEventListener("mouseout", onOut);
-      });
-    };
-  }, []);
+  };
 
   useEffect(() => {
     // Sync CSS variable --k on stack slider
@@ -93,7 +94,11 @@ const MergedPage = () => {
       <div className={styles.container}>
         <h2 className={styles.introTitle}>
           AppHarvest
-          <span className={styles.introFigure}>
+          <span
+            className={styles.introFigure}
+            onMouseMove={handleTiltMove}
+            onMouseOut={handleTiltLeave}
+          >
             <img
               src="https://www.appharvest.com/wp-content/uploads/2021/02/image-1.png"
               srcSet="https://www.appharvest.com/wp-content/uploads/2021/02/image-1@2x.png 2x"
@@ -111,7 +116,11 @@ const MergedPage = () => {
             />
           </span>
           is on a mission
-          <span className={styles.introFigure}>
+          <span
+            className={styles.introFigure}
+            onMouseMove={handleTiltMove}
+            onMouseOut={handleTiltLeave}
+          >
             <img
               src="https://www.appharvest.com/wp-content/uploads/2021/02/image-2.png"
               srcSet="https://www.appharvest.com/wp-content/uploads/2021/02/image-2@2x.png 2x"
@@ -123,7 +132,11 @@ const MergedPage = () => {
             />
           </span>
           to feed the future, from the heart of
-          <span className={`${styles.introFigure} ${styles.introFigure3}`}>
+          <span
+            className={`${styles.introFigure} ${styles.introFigure3}`}
+            onMouseMove={handleTiltMove}
+            onMouseOut={handleTiltLeave}
+          >
             <img
               src="https://www.appharvest.com/wp-content/uploads/2021/02/image-3.png"
               srcSet="https://www.appharvest.com/wp-content/uploads/2021/02/image-3@2x.png 2x"
@@ -152,7 +165,7 @@ const MergedPage = () => {
             className={styles.item}
             style={{
               backgroundImage:
-                "ur[](https://www.mc3.edu/news/assets/2019/03/international-festival/international-festival-740x416.jpg)",
+                "url(https://www.mc3.edu/news/assets/2019/03/international-festival/international-festival-740x416.jpg)",
             }}
           >
             <div className={styles.itemDesc}>
@@ -167,7 +180,7 @@ const MergedPage = () => {
             className={styles.item}
             style={{
               backgroundImage:
-                "ur[](https://www.cloudfest.com/blog/wp-content/uploads/hackathon-contest-programmers.jpg)",
+                "url(https://www.cloudfest.com/blog/wp-content/uploads/hackathon-contest-programmers.jpg)",
             }}
           >
             <div className={styles.itemDesc}>
@@ -179,7 +192,7 @@ const MergedPage = () => {
             className={styles.item}
             style={{
               backgroundImage:
-                "ur[](https://towsontigers.com/images/2025/5/15/051525_CAA_OUTDOOR_TRACK_CHAMPIONSHIPS_TOWSON_02.jpg)",
+                "url(https://towsontigers.com/images/2025/5/15/051525_CAA_OUTDOOR_TRACK_CHAMPIONSHIPS_TOWSON_02.jpg)",
             }}
           >
             <div className={styles.itemDesc}>
@@ -191,7 +204,7 @@ const MergedPage = () => {
             className={styles.item}
             style={{
               backgroundImage:
-                "ur[](https://media.licdn.com/dms/image/v2/D5612AQFcbTkg-Xy48A/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1712336327303?e=2147483647&v=beta&t=X2mvMoTPHLmK2t3ojU-8pSR_tnEVo0WRn09VXNLjuhE)",
+                "url(https://media.licdn.com/dms/image/v2/D5612AQFcbTkg-Xy48A/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1712336327303?e=2147483647&v=beta&t=X2mvMoTPHLmK2t3ojU-8pSR_tnEVo0WRn09VXNLjuhE)",
             }}
           >
             <div className={styles.itemDesc}>
@@ -203,7 +216,7 @@ const MergedPage = () => {
             className={styles.item}
             style={{
               backgroundImage:
-                "ur[](https://cdn.collegeraptor.com/wp/wp-content/uploads/2015/08/3456361414_ab1dbdc451_o.jpg)",
+                "url(https://cdn.collegeraptor.com/wp/wp-content/uploads/2015/08/3456361414_ab1dbdc451_o.jpg)",
             }}
           >
             <div className={styles.itemDesc}>
@@ -215,7 +228,7 @@ const MergedPage = () => {
             className={styles.item}
             style={{
               backgroundImage:
-                "ur[](https://nwsa.mdc.edu/img/theater/theater-play-2.jpg)",
+                "url(https://nwsa.mdc.edu/img/theater/theater-play-2.jpg)",
             }}
           >
             <div className={styles.itemDesc}>

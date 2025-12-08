@@ -184,6 +184,12 @@
   .ds-section-one {
     padding: 3rem;
   }
+  .ds-heading {
+  font-size: clamp(5rem, 11.077vw + 0.731rem, 12.5rem);
+  line-height: 0.95;
+  font-weight: 600;
+  line-height: 0.8;
+}
   
   .ds-section-content {
     gap: 3rem;

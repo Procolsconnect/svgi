@@ -13,7 +13,7 @@ export default function RankingsPosters() {
           </div>
           <div className={styles.imageCard}>
             <img
-              src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&q=80&w=1200"
+              src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200"
               alt="Rankings 2025"
             />
           </div>
