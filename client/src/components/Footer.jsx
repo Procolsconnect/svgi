@@ -37,9 +37,9 @@ const FooterRaindrop = () => {
           />
         </defs>
         <g className="ft-waves">
-          <use xlinkHref="#ft-gentle-wave" x="50" y="0" fill="#03ffff" fillOpacity=".4" />
-          <use xlinkHref="#ft-gentle-wave" x="50" y="3" fill="#03ffff" fillOpacity=".6" />
-          <use xlinkHref="#ft-gentle-wave" x="50" y="6" fill="#03ffff" fillOpacity=".8" />
+          <use xlinkHref="#ft-gentle-wave" x="40" y="0" fill="#03ffff" fillOpacity=".4" />
+          <use xlinkHref="#ft-gentle-wave" x="50" y="3" fill="#03ffff" fillOpacity=".5" />
+          <use xlinkHref="#ft-gentle-wave" x="50" y="6" fill="#03ffff" fillOpacity=".7" />
         </g>
       </svg>
 

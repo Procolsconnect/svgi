@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Overview.module.css';
+import Arrow from '../../../components/Arrow';
 
 const TrainingPlacementsPage = () => {
   const [scrollClicked, setScrollClicked] = useState(false);
@@ -224,18 +225,12 @@ const TrainingPlacementsPage = () => {
         <img src="hero img.jpg" alt="Hero Background" />
         <div className={styles.heroOverlay} />
         <h1 className={styles.heroTitle}>Training & Placements</h1>
+          <Arrow sectionsSelector={`.${styles.section}`} />
       </div>
 
-      {/* Scroll Button */}
-      <div
-        className={`${styles.scroll} ${scrollClicked ? styles.clicked : ''} ${scrollRotate ? styles.rotate : ''}`}
-        onClick={handleScrollClick}
-      >
-        <span className={styles.arrowBounce}>↓</span>
-      </div>
 
       {/* About Section */}
-      <section className={styles.aboutWrapper} ref={el => sectionsRef.current[0] = el}>
+      <section className={`${styles.aboutWrapper} ${styles.section}`} ref={el => sectionsRef.current[0] = el}>
         <div className={styles.container}>
           <div className={styles.row}>
             <div className={styles.colLg6}>
@@ -262,7 +257,7 @@ const TrainingPlacementsPage = () => {
       </section>
 
       {/* Slider Section */}
-      <section className={styles.sliderSection} ref={el => sectionsRef.current[1] = el}>
+      <section className={`${styles.sliderSection} ${styles.section}`} ref={el => sectionsRef.current[1] = el}>
         <div className={styles.header}>
           <p className={styles.subtitle}>In Our College Have</p>
           <h1 className={styles.mainTitle}>Centralized Placement Process for all Campuses</h1>
@@ -333,7 +328,7 @@ const TrainingPlacementsPage = () => {
       </section>
 
       {/* Placement Training Section */}
-      <section className={styles.placementTrainingSection} ref={el => sectionsRef.current[2] = el}>
+      <section className={`${styles.placementTrainingSection}${styles.section}`} ref={el => sectionsRef.current[2] = el}>
         <div className={styles.placementContainer}>
           <div className={styles.leftContent}>
             <h2>Placement Training</h2>
@@ -360,7 +355,7 @@ const TrainingPlacementsPage = () => {
       </section>
 
       {/* Career Counselling Section */}
-      <section className={styles.careerSection} ref={el => sectionsRef.current[3] = el}>
+      <section className={`${styles.careerSection} ${styles.section}`} ref={el => sectionsRef.current[3] = el}>
         <h1>Career Counselling and Higher Education</h1>
         <div className={styles.careerHeader}>
           {[1, 2, 3, 4, 5].map((num) => (
@@ -375,7 +370,7 @@ const TrainingPlacementsPage = () => {
       </section>
 
       {/* Industry Certifications Section */}
-      <section className={styles.industryCertificationsSection} ref={el => sectionsRef.current[4] = el}>
+      <section className={`${styles.industryCertificationsSection}${styles.section}`} ref={el => sectionsRef.current[4] = el}>
         <h1>Industry Certifications</h1>
         <p>
           Industry certifications are recognized credentials that validate a professional's skills and knowledge in a specific field. They help students and professionals gain credibility, increase employability, and demonstrate expertise in their chosen domain. Obtaining certifications from recognized institutions or organizations provides a competitive edge in the job market and enhances career growth opportunities.
@@ -426,7 +421,7 @@ const TrainingPlacementsPage = () => {
       </section>
 
       {/* Pyramid Section */}
-      <section className={styles.pyramidSection} ref={el => sectionsRef.current[5] = el}>
+      <section className={`${styles.pyramidSection} ${styles.section}`} ref={el => sectionsRef.current[5] = el}>
         <h1>Placement Training Functions</h1>
         <div className={styles.pyramid}>
           {[

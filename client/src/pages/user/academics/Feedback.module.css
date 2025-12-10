@@ -294,8 +294,8 @@
   margin: auto;
 }
 
-.faqSection { background: #0A192F; padding: 60px 0; }
-.faqContainer { width: 80%; margin: 2rem auto; padding: 0 20px; }
+.faqSection { background: #0A192F; padding: 20px 0; }
+.faqContainer { width: 100%; margin: 2rem auto; padding: 0 20px; }
 
 .lineHeading {
   font-family: sans-serif;
@@ -304,9 +304,10 @@
   line-height: 1.1;
   display: flex;
   align-items: center;
-  width: 90%;
+  justify-content: center;
+  width: 100%;
   margin: 10px auto 40px;
-  font-size: 26px;
+  font-size: 1em;
   text-shadow: 1px 1px 1px #000;
 }
 
@@ -325,8 +326,8 @@
 
 .largeHeading {
   font-family: sans-serif;
-  margin: 0 0 40px 10%;
-  font-size: 36px;
+  margin: 0 60px 80px 70px;
+  font-size: 2.5em;
   line-height: 1.3;
   color: #fff;
   text-shadow: 1px 1px 1px #000;
@@ -410,13 +411,12 @@
 }
 
 .borderImage {
-  display: grid;
-  margin: 1em auto;
-  width: 100%;
-  color: black;
+   display: grid;
+  grid-template-columns: min(80vw, 40em);
   justify-content: center;
-  padding: 3em 0;
   background: url(https://images.unsplash.com/photo-1546345414-16d37d6baa05?w=1400) 50% / cover;
+  color: rgb(17, 17, 17);
+  padding: 3em 0;
 }
 
 @media (max-width: 900px) {
@@ -428,6 +428,26 @@
     flex-direction: column;
     padding: 2rem 1rem;
   }
+  .largeHeading {
+  font-family: sans-serif;
+  font-size: 1.4em;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  margin-left: 10px;
+  
+}
+.lineHeading {
+  font-family: sans-serif;
+  color: #ccd6f6;
+  font-weight: 600;
+  margin: -30 0 40px 10%;
+  line-height: 1.1;
+  display: flex;
+
+  font-size: 1em;
+  text-shadow: 1px 1px 1px #000;
+}
+
   .photoWrapper { position: static; margin-bottom: 2rem; }
   .cardContainer { width: 80%; margin: 0 auto; }
 }

@@ -107,17 +107,17 @@ const SVGIFeedback = () => {
       </section>
 
       {/* Lightbox (uncomment when needed) */}
-      {/* <div className={`${styles.lightbox} ${lightboxActive ? styles.active : ''}`} onClick={() => setLightboxActive(false)}>
+      <div className={`${styles.lightbox} ${lightboxActive ? styles.active : ''}`} onClick={() => setLightboxActive(false)}>
         <span className={styles.lightboxClose} onClick={() => setLightboxActive(false)}>×</span>
         <img src="https://images.unsplash.com/photo-1642478881792-4726327bb0bc?crop=entropy&cs=srgb&fm=jpg" alt="Full" onClick={e => e.stopPropagation()} />
-      </div> */}
+      </div>
 
       <section className={styles.gridLayout}>
         <h2>Heading: the grid layout solution</h2>
         <p>The content is restricted to a certain max-width in the middle, but the section and consequently its image background is full-width.</p>
       </section>
 
-      <section className={styles.borderImage}>
+      <section className={`${styles.borderImage}`}>
         <h2>Heading: border-image solution</h2>
         <p>The section is restricted to a certain max-width in the middle, but the border-image created backdrop is full-width.</p>
       </section>
@@ -187,9 +187,6 @@ const SVGIFeedback = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className={styles.footer}>
-          <p>View This in Action on <a href="https://phillweb.dev/" target="_blank" rel="noopener noreferrer">MY WEBSITE</a></p>
         </div>
       </section>
     </div>

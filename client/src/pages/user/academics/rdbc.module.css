@@ -178,36 +178,3 @@
     background-image: linear-gradient(var(--hh-bg-color-highlight), var(--hh-bg-color-highlight));
 }
 
-/* RESPONSIVE */
-@media (max-width: 1200px) {
-    .hhRightHeading { right: 600px; }
-}
-
-@media (max-width: 992px) {
-    .hhTopRow { width: 90vw; }
-    .hhRightHeading { right: 400px; font-size: 2.5rem; }
-    .hhLeftHeading { font-size: 2.5rem; right: 20px; }
-    .hhBottomRow { flex-direction: column; height: auto; padding: 20px; }
-    .hhBottomRowColumnTwo { width: 100%; height: 150px; }
-    .hhBottomRowColumnOne p { width: 100%; }
-}
-
-@media (max-width: 768px) {
-    .hhHero h1 { font-size: 36px; padding: 0 20px; }
-    .hhTopRow { width: 100%; height: 150px; }
-    .hhTopRowColumnTwo { flex: 0 0 50vw; }
-    .hhLeftHeading, .hhRightHeading {
-        position: static;
-        text-align: center;
-        margin: 20px auto;
-        font-size: 2.5rem;
-    }
-    .hhRightHeading { margin-top: 0; }
-}
-
-@media (max-width: 576px) {
-    .hhLeftHeading, .hhRightHeading { font-size: 2rem; }
-    .hhTopRow { height: 30px; }
-    .hhBottomRowColumnTwo { flex: 0 0 10vw; }
-    .hhBottomRowColumnOne { padding-left: 20px; }
-}
