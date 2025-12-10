@@ -374,7 +374,105 @@
   .headingText span {
     font-size: 36px;
   }
+
+   .recruitSection {
+    width: 100%;
+    padding: 40px 16px;
+  }
+
+  .headingBox {
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  .headingLine {
+    width: 6px;
+    height: 55px;
+  }
+
+  .headingText span {
+    font-size: 28px;
+    letter-spacing: 2px;
+  }
+
+  .headingText span::after {
+    height: 4px;
+    width: 100%;
+  }
+
+  .slider {
+    height: 120px;
+  }
+
+  .list {
+    min-width: calc(120px * 10);
+  }
+
+  .item {
+    width: 120px;
+    height: 120px;
+  }
+
+  .item img {
+    padding: 10px;
+  }
+
+  @keyframes autoRun {
+    from { left: 100%; }
+    to   { left: calc(120px * -1); }
+  }
+
+   .heroSection {
+    min-height: auto;
+    padding: 60px 0 40px;
+  }
+
+  .heroContent {
+    grid-template-columns: 1fr;   /* single column */
+    gap: 2.5rem;
+    min-height: auto;
+    text-align: center;
+  }
+
+  .heroText h1 {
+    font-size: 3.2rem;
+    min-height: unset;
+    line-height: 1.05;
+  }
+
+  .heroText p {
+    font-size: 1rem;
+    margin: 0 auto 2rem;
+  }
+
+  .heroImage {
+    height: 420px;
+  }
+
+  .heroImg {
+    max-width: 110%;
+    max-height: 420px;
+  }
+
+  /* Shapes scaling down */
+  .shape1 {
+    width: 360px;
+    height: 300px;
+    right: 1%;
+  }
+
+  .shape2 {
+    width: 50px;
+    height: 50px;
+  }
+
+  .shape3 {
+    width: 40px;
+    height: 40px;
+  }
 }
+
+
 
 @media (max-width: 600px) {
   .heroTitle {
@@ -398,6 +496,35 @@
     height: 60px;
     width: 8px;
   }
+ .cardsSection {
+    padding: 40px 0;
+  }
+
+  .cardsContainer {
+    width: 92%;
+    max-width: 100%;
+  }
+
+  .cardRow {
+    grid-template-columns: 1fr;   /* FORCE single column */
+    gap: 2.5rem;
+  }
+
+  .cardImage {
+    order: -1; /* Image comes first */
+  }
+
+  .cardCopy h2 {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+
+  .cardCopy p {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 auto;
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -417,4 +544,76 @@
     width: 400px;
     height: 350px;
   }
+ .cardsSection {
+    padding: 25px 0;
+  }
+
+  .cardCopy h2 {
+    font-size: 1.8rem;
+  }
+
+  .cardCopy p {
+    font-size: 0.95rem;
+  }
+   .headingText span {
+    font-size: 22px;
+  }
+
+  .slider {
+    height: 95px;
+  }
+
+  .item {
+    width: 95px;
+    height: 95px;
+  }
+
+  .list {
+    min-width: calc(95px * 10);
+  }
+
+  .item img {
+    padding: 8px;
+  }
+
+  @keyframes autoRun {
+    from { left: 100%; }
+    to   { left: calc(95px * -1); }
+  }
+  .heroSection {
+    padding: 40px 0 25px;
+  }
+
+  .heroText h1 {
+    font-size: 2.4rem;
+  }
+
+  .heroText p {
+    font-size: 0.95rem;
+  }
+
+  .heroImage {
+    height: 340px;
+  }
+
+  .heroImg {
+    max-width: 100%;
+    max-height: 340px;
+  }
+
+  .shape1 {
+    width: 280px;
+    height: 240px;
+  }
+  
+  .shape2 {
+    width: 50px;
+    height: 50px;
+  }
+
+  .shape3 {
+    width: 30px;
+    height: 40px;
+  }
+
 }
