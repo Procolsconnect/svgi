@@ -6,6 +6,7 @@
   margin: 0;
   background: #fdfdfd;
   color: #333;
+  overflow: hidden;
 }
 
 .page h1,
@@ -22,7 +23,7 @@
   align-items: center;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   color: white;
   width: 100%;
 }
@@ -477,20 +478,23 @@
   color: #0a1a5c;
   padding: 40px 20px;
   display: flex;
-  min-height: 100vh;
+height: 100vh;
 }
 
 .placementContainer {
+height: 100vh;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 80px;
+  gap: 40px;
   max-width: 1300px;
   width: 90%;
 }
 
 .leftContent {
   flex: 1;
+  padding-left: 10px;
 }
 
 .leftContent h2 {
@@ -498,21 +502,23 @@
   font-weight: 700;
   margin-bottom: 20px;
   color: #0a1a5c;
+  padding-left: 30px;
 }
 
 .leftContent p {
   font-size: 1.05rem;
   line-height: 1.8;
   color: #333;
-  max-width: 550px;
+  max-width: 95%;
   text-align: justify;
+  padding-left: 30px;
 }
 
 .diagram {
   position: relative;
   width: 30vw;
   min-width: 380px;
-  height: 50vh;
+  height: 40vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -966,6 +972,13 @@
     grid-template-columns: 1fr;
     gap: 25px;
   }
+  .leftContent p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #333;
+  max-width: 100%;
+  text-align: justify;
+}
 }
 
 @media (max-width: 700px) {

@@ -6,10 +6,10 @@
 }
 
 .ft-footer {
-  min-height: 450px;           /* ← YOUR FIXED HEIGHT */
+  min-height: 500px;           /* ← YOUR FIXED HEIGHT */
   background: #15161d;
   position: relative;
-  overflow: hidden;
+  
 }
 .ft-footer > * {
   z-index: 1;
@@ -35,6 +35,7 @@
   background-color: #181828 !important;
   color: #b0b0b0;
   font-family: Rubik, sans-serif;
+  padding-bottom: 30px;
 }
 
 .ft-container {
@@ -232,7 +233,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 30vw;
+  height: 17vw;
   max-height: 120px;
   z-index: 1;
 }
@@ -273,8 +274,9 @@
   }
   
   .ft-footer-menu {
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    font-size: 13px;
   }
   
   .ft-footer-socials {
@@ -284,4 +286,12 @@
   .ft-socials {
     justify-content: center;
   }
+  .ft-waves-svg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 17vw;
+  z-index: 1;
+}
 }
