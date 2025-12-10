@@ -11,7 +11,11 @@ const TrainingPlacementsPage = () => {
   const [expandedCard, setExpandedCard] = useState(null);
   const [cardInfo, setCardInfo] = useState({ title: '', desc: '' });
   const [cards, setCards] = useState([]);
-  
+
+  const [processedSteps, setProcessedSteps] = useState(0);
+  const [cloneStyle, setCloneStyle] = useState(null);
+  const cardsRef = useRef([]);
+
   const containerRef = useRef(null);
   const trackRef = useRef(null);
   const sectionsRef = useRef([]);
@@ -59,7 +63,7 @@ const TrainingPlacementsPage = () => {
   const handleScrollClick = () => {
     setScrollClicked(true);
     const totalSections = sectionsRef.current.length;
-    
+
     if (currentSection >= totalSections) {
       setCurrentSection(0);
       smoothScroll(-1);
@@ -78,7 +82,7 @@ const TrainingPlacementsPage = () => {
 
     setCards(prevCards => {
       const newCards = [...prevCards];
-      if (direction === 'next') {
+      if (direction === 'next' || direction === 'prev') {
         const first = newCards.shift();
         newCards.push(first);
       } else {
@@ -90,18 +94,80 @@ const TrainingPlacementsPage = () => {
   };
 
   const handleCardClick = (index) => {
-    if (!isDragging && expandedCard === null) {
-      setExpandedCard(index);
+    if (isDragging || expandedCard !== null) return;
+
+    const cardEl = cardsRef.current[index];
+    if (!cardEl) return;
+
+    const rect = cardEl.getBoundingClientRect();
+    const pos = positions[index] || positions[5];
+
+    // Set initial clone style to match the card's current position and size
+    setCloneStyle({
+      position: 'fixed',
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height,
+      clipPath: pos.clip,
+      transform: 'none',
+      transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      zIndex: 1000,
+      margin: 0,
+    });
+
+    setExpandedCard(index);
+
+    // Trigger animation to center
+    setTimeout(() => {
+      const maxHeight = window.innerHeight * 0.8;
+      const finalWidth = 500;
+      const finalHeight = Math.min(325, maxHeight);
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      setCloneStyle(prev => ({
+        ...prev,
+        top: centerY - finalHeight / 2,
+        left: centerX - finalWidth / 2,
+        width: finalWidth,
+        height: finalHeight,
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+      }));
+
       setCardInfo({
         title: cards[index].title,
         desc: cards[index].desc
       });
-    }
+    }, 20);
   };
 
   const closeCard = () => {
-    setExpandedCard(null);
+    if (expandedCard === null) return;
+
+    const index = expandedCard;
+    const cardEl = cardsRef.current[index];
+
+    if (cardEl) {
+      const rect = cardEl.getBoundingClientRect();
+      const pos = positions[index] || positions[5];
+
+      setCloneStyle(prev => ({
+        ...prev,
+        top: rect.top,
+        left: rect.left,
+        width: rect.width,
+        height: rect.height,
+        clipPath: pos.clip
+      }));
+    }
+
     setCardInfo({ title: '', desc: '' });
+
+    setTimeout(() => {
+      setExpandedCard(null);
+      setCloneStyle(null);
+    }, 800);
   };
 
   const handleDragStart = (e) => {
@@ -110,27 +176,30 @@ const TrainingPlacementsPage = () => {
     const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
     setStartX(clientX);
     setDragDistance(0);
+    setProcessedSteps(0);
   };
 
   const handleDragMove = (e) => {
     if (!isDragging) return;
-    e.preventDefault();
+
     const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
     const distance = clientX - startX;
     setDragDistance(distance);
-    
+
     const threshold = 60;
-    if (Math.abs(distance) >= threshold) {
+    const steps = Math.floor(Math.abs(distance) / threshold);
+
+    if (steps > processedSteps) {
       const direction = distance > 0 ? 'prev' : 'next';
       rotateSlider(direction);
-      setStartX(clientX);
-      setDragDistance(0);
+      setProcessedSteps(steps);
     }
   };
 
   const handleDragEnd = () => {
     setIsDragging(false);
     setDragDistance(0);
+    setProcessedSteps(0);
   };
 
   useEffect(() => {
@@ -158,7 +227,7 @@ const TrainingPlacementsPage = () => {
       </div>
 
       {/* Scroll Button */}
-      <div 
+      <div
         className={`${styles.scroll} ${scrollClicked ? styles.clicked : ''} ${scrollRotate ? styles.rotate : ''}`}
         onClick={handleScrollClick}
       >
@@ -199,7 +268,7 @@ const TrainingPlacementsPage = () => {
           <h1 className={styles.mainTitle}>Centralized Placement Process for all Campuses</h1>
         </div>
 
-        <div 
+        <div
           className={`${styles.sliderContainer} ${isDragging ? styles.dragging : ''}`}
           ref={containerRef}
           onMouseDown={handleDragStart}
@@ -215,7 +284,8 @@ const TrainingPlacementsPage = () => {
               const pos = positions[index] || positions[5];
               return (
                 <div
-                  key={index}
+                  key={card.title}
+                  ref={el => cardsRef.current[index] = el}
                   className={`${styles.card} ${expandedCard === index ? styles.expanded : ''}`}
                   style={{
                     height: `${pos.height}px`,
@@ -235,7 +305,7 @@ const TrainingPlacementsPage = () => {
           </div>
         </div>
 
-        <button 
+        <button
           className={`${styles.closeBtn} ${expandedCard !== null ? styles.visible : ''}`}
           onClick={closeCard}
         >
@@ -244,12 +314,15 @@ const TrainingPlacementsPage = () => {
           </svg>
         </button>
 
-        {expandedCard !== null && (
-          <div className={styles.expandedImageWrapper}>
-            <img 
-              src={cards[expandedCard].image} 
-              alt={cards[expandedCard].title} 
-              className={styles.expandedImage}
+        {expandedCard !== null && cloneStyle && (
+          <div
+            className={styles.card}
+            style={cloneStyle}
+          >
+            <img
+              src={cards[expandedCard].image}
+              alt={cards[expandedCard].title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
           </div>
         )}
@@ -274,14 +347,14 @@ const TrainingPlacementsPage = () => {
           <div className={styles.diagram}>
             <div className={styles.outerCircle}></div>
             <div className={styles.centerCircle}>Placement<br />Training</div>
-            <div className={`${styles.outerItem} ${styles.item1}`}>Career Awareness & Student Registration</div>
-            <div className={`${styles.outerItem} ${styles.item2}`}>Aptitude & Soft Skills Development</div>
-            <div className={`${styles.outerItem} ${styles.item3}`}>Technical Skill Enhancement</div>
-            <div className={`${styles.outerItem} ${styles.item4}`}>Resume & Profile Building</div>
-            <div className={`${styles.outerItem} ${styles.item5}`}>Group Discussion & Interview Prep</div>
-            <div className={`${styles.outerItem} ${styles.item6}`}>Pre-Placement Orientation</div>
-            <div className={`${styles.outerItem} ${styles.item7}`}>Campus Recruitment Drive</div>
-            <div className={`${styles.outerItem} ${styles.item8}`}>Feedback & Continuous Improvement</div>
+            <div className={`${styles.outerItem} ${styles.item1}`}><span>Career Awareness & Student Registration</span></div>
+            <div className={`${styles.outerItem} ${styles.item2}`}><span>Aptitude & Soft Skills Development</span></div>
+            <div className={`${styles.outerItem} ${styles.item3}`}><span>Technical Skill Enhancement</span></div>
+            <div className={`${styles.outerItem} ${styles.item4}`}><span>Resume & Profile Building</span></div>
+            <div className={`${styles.outerItem} ${styles.item5}`}><span>Group Discussion & Interview Prep</span></div>
+            <div className={`${styles.outerItem} ${styles.item6}`}><span>Pre-Placement Orientation</span></div>
+            <div className={`${styles.outerItem} ${styles.item7}`}><span>Campus Recruitment Drive</span></div>
+            <div className={`${styles.outerItem} ${styles.item8}`}><span>Feedback & Continuous Improvement</span></div>
           </div>
         </div>
       </section>

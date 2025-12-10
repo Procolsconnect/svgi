@@ -10,37 +10,21 @@ export default function SVGIOverview() {
       <div className={styles.hero}>
         <img src="/images/instu.jpg" alt="Hero Background" />
         <h1 className={styles.heroTitle}>Overview</h1>
-
-        {/* Scroll Arrow */}
         <Arrow sectionsSelector={`.${styles.section}`} />
       </div>
 
       {/* Section 1 - Tilted Images + Text */}
       <section className={`${styles.section} ${styles.bigger}`}>
         <div className={styles.gridTilt}>
-          <img
-            src="https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=500&q=60"
-            alt=""
-          />
-          <img
-            src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=60"
-            alt=""
-          />
-          <img
-            src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=500&q=60"
-            alt=""
-          />
-          <img
-            src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=500&q=60"
-            alt=""
-          />
+          <img src="https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=500&q=60" alt="" />
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=60" alt="" />
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=500&q=60" alt="" />
+          <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=500&q=60" alt="" />
         </div>
 
         <div className={`${styles.text} ${styles.textBigger}`}>
           <p className={styles.textShortBigger}>Lorem ipsum dolor sit amet</p>
-          <h1 className={styles.textTitleBigger}>
-            Lorem ipsum dolor sit amet
-          </h1>
+          <h1 className={styles.textTitleBigger}>Lorem ipsum dolor sit amet</h1>
           <p className={styles.textDescriptionBigger}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae,
             maiores velit laudantium similique impedit aliquid.
@@ -51,7 +35,13 @@ export default function SVGIOverview() {
       {/* Section 2 - Text + Grid Layout */}
       <section className={`${styles.section} ${styles.gridLayout}`}>
         <div className={styles.heroSection}>
+          {/* This title is visible ONLY on mobile — above the grid */}
+          <h1 className={`${styles.textTitle} ${styles.mobileOnlyTitle}`}>
+            Lorem ipsum dolor sit amet
+          </h1>
+
           <div className={styles.text}>
+            {/* Original title — stays here for desktop */}
             <p className={styles.textShort}>Lorem ipsum dolor sit amet</p>
             <h1 className={styles.textTitle}>Lorem ipsum dolor sit amet</h1>
             <p className={styles.textDescription}>

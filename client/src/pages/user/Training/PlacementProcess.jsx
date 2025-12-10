@@ -73,7 +73,6 @@ const PlacementProcessPage = () => {
 
   return (
     <div className={styles.page}>
-
       <div className={styles.hero}>
         <img src="hero img.jpg" alt="Placement Background" />
         <div className={styles.heroOverlay} />
