@@ -1,18 +1,18 @@
-/* CourseOutcome.module.css */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
-
-.root * , .root *::after, .root *::before { margin: 0; padding: 0; box-sizing: border-box; }
-.root { 
-  font-size: 22.5%; 
-  font-family: 'Playfair Display', serif;
-  background-color: #f9fafb;
+.reset * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* HERO - 100% WIDTH (as you wanted) */
+.container {
+  font-family: 'Playfair Display', serif;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
 .hero {
   min-height: 350px;
-  width: 100vw;
-  max-width: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,93 +21,188 @@
   overflow: hidden;
   color: white;
 }
-.hero img {
-  width: 100%; height: 100%; object-fit: cover;
-  position: absolute; top: 0; left: 0; z-index: 0;
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
-.hero::after {
-  content: ""; position: absolute; inset: 0;
-  background: rgba(0,0,0,0.5); z-index: 0;
+
+.heroOverlay {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
 }
-.hero h1 {
-  position: relative; font-size: 52px; font-weight: bold; z-index: 1;
-  letter-spacing: 1px; color: #ffffff !important;
-  text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+
+.heroTitle {
+  position: relative;
+  font-size: 52px;
+  font-weight: bold;
+  z-index: 1;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
 }
-.hero h1::after {
-  content: ""; display: block; width: 120px; height: 5px;
+
+.heroUnderline {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 5px;
   margin: 14px auto 0;
   background: linear-gradient(90deg, #ff512f, #dd2476);
   border-radius: 3px;
-  animation: underline-pulse 2s infinite;
-}
-@keyframes underline-pulse {
-  0%, 100% { transform: scaleX(1); opacity: 0.8; }
-  50% { transform: scaleX(1.4); opacity: 1; }
-}
-@media(max-width: 768px) {
-  .hero h1 { font-size: 36px; padding: 0 20px; }
+  animation: underlinePulse 2s infinite;
 }
 
-/* NEW: Nice spacing for heading & sub-heading (not stuck to edges) */
-.section-heading-wrapper {
-  padding: 6rem 5% 2rem;   /* Top, Left/Right, Bottom */
+@keyframes underlinePulse {
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 36px;
+    padding: 0 20px;
+  }
+}
+
+.sectionHeadingWrapper {
+  padding: 6rem 5% 2rem;
   text-align: center;
 }
-@media(max-width: 768px) {
-  .section-heading-wrapper { padding: 4rem 5% 2rem; }
+
+@media (max-width: 768px) {
+  .sectionHeadingWrapper {
+    padding: 4rem 5% 2rem;
+  }
 }
 
-.section-title {
-  font-size: 5.5rem !important;
+.sectionTitle {
+  font-size: 5.5rem;
   color: #1a1a1a;
   font-weight: 800;
   font-family: 'Playfair Display', serif;
   margin-bottom: 1rem;
 }
-@media(max-width: 768px) {
-  .section-title { font-size: 4rem !important; }
+
+@media (min-width: 768px) {
+  .sectionTitle {
+    font-size: 4rem;
+  }
 }
 
-.section-subtitle {
+.sectionSubtitle {
   font-size: 2rem;
   color: #444;
   font-weight: 500;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-/* Cards - 100% your original */
-.main { 
-  display: flex; flex-wrap: wrap; justify-content: center; 
-  padding: 0 3%; gap: 2rem;
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 3%;
+  gap: 2rem;
+  padding-bottom: 4rem;
 }
-.wrap { margin: 0; transform-style: preserve-3d; perspective: 100rem; cursor: pointer; }
-.container {
-  --rX: 0; --rY: 0; --bX: 50%; --bY: 80%;
-  width: 30rem; height: 36rem;
+
+.wrap {
+  margin: 0;
+  transform-style: preserve-3d;
+  perspective: 100rem;
+  cursor: pointer;
+}
+
+.card {
+  width: 29rem;
+  height: 31rem;
   border: 1px solid hsl(0, 0%, 100%);
-  border-radius: 1.6rem; padding: 4rem;
-  display: flex; align-items: flex-end;
+  border-radius: 1.6rem;
+  padding: 4rem;
+  display: flex;
+  align-items: flex-end;
   position: relative;
-  transform: rotateX(calc(var(--rX) * 1deg)) rotateY(calc(var(--rY) * 1deg));
-  background: linear-gradient(hsla(0, 0%, 100%, .1), hsla(0, 0%, 100%, .1)),
-              url("https://images.unsplash.com/photo-1559113513-d5e09c78b9dd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max");
-  background-position: var(--bX) var(--bY);
+  background: linear-gradient(hsla(0, 0%, 100%, 0.1), hsla(0, 0%, 100%, 0.1)),
+    url("https://images.unsplash.com/photo-1559113513-d5e09c78b9dd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max");
   background-size: 40rem auto;
-  box-shadow: 0 0 3rem .5rem hsla(0, 0%, 0%, .2);
-  transition: transform .6s 1s;
+  box-shadow: 0 0 3rem 0.5rem hsla(0, 0%, 0%, 0.2);
+  transition: transform 0.6s 1s;
 }
-.container::before, .container::after {
-  content: ""; width: 2rem; height: 2rem;
-  border: 1px solid #fff; position: absolute; z-index: 2; opacity: .3; transition: .3s;
+
+.card::before,
+.card::after {
+  content: "";
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #fff;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.3;
+  transition: 0.3s;
 }
-.container::before { top: 2rem; right: 2rem; border-bottom-width: 0; border-left-width: 0; }
-.container::after  { bottom: 2rem; left: 2rem; border-top-width: 0; border-right-width: 0; }
-.container--active { transition: none; }
-.container--2 { filter: hue-rotate(80deg) saturate(140%); }
-.container--3 { filter: hue-rotate(160deg) saturate(140%); }
-.container p { color: hsla(0, 0%, 100%, .8); font-size: 2.1rem; line-height: 1.4; font-weight: 500; }
-.wrap:hover .container::before,
-.wrap:hover .container::after {
-  width: calc(100% - 4rem); height: calc(100% - 4rem);
+
+.card::before {
+  top: 2rem;
+  right: 2rem;
+  border-bottom-width: 0;
+  border-left-width: 0;
+}
+
+.card::after {
+  bottom: 2rem;
+  left: 2rem;
+  border-top-width: 0;
+  border-right-width: 0;
+}
+
+.cardActive {
+  transition: none;
+}
+
+.card2 {
+  filter: hue-rotate(80deg) saturate(140%);
+}
+
+.card3 {
+  filter: hue-rotate(160deg) saturate(140%);
+}
+
+.cardText {
+  color: hsla(0, 0%, 100%, 0.8);
+  font-size: 2.1rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.wrap:hover .card::before,
+.wrap:hover .card::after {
+  width: calc(100% - 4rem);
+  height: calc(100% - 4rem);
+}
+
+
+/* Responsive Card Size */
+@media (max-width: 768px) {
+  .card {
+    width: 20rem;
+    height: 25rem;
+    padding: 2rem;
+  }
 }

@@ -1,6 +1,7 @@
 // SVGIOverview.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Arrow from '../../../components/Arrow';
 import axios from 'axios';
 import {
     AiOutlinePhone,
@@ -73,39 +74,6 @@ export default function SVGIOverview() {
     }
 }, [overview, hero]); // run again when overview/hero are loaded
 
-
-    // SCROLL ARROW FUNCTIONALITY (fixed)
-const handleScrollClick = () => {
-    const sections = Array.from(document.querySelectorAll('section'));
-    const btn = scrollRef.current;
-
-    if (btn && !clicked) {
-        btn.style.position = 'fixed';
-        btn.style.top = 'auto';
-        btn.style.bottom = '50px';
-    }
-
-    setClicked(true);
-
-    if (count > sections.length - 1) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        setRotated(false);
-        setCount(0);
-    } else {
-        const target = sections[count];
-        if (target) {
-            setTimeout(() => {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }, 200); // 50–100ms delay is usually enough
-        }
-        if (count === (sections.length - 1)) setRotated(true);
-        setCount(prev => prev + 1);
-    }
-
-    if (arrowRef.current) arrowRef.current.classList.remove('svgio-arrow-bounce');
-};
-
-
     const detectIcon = (text) => {
         if (!text) return <AiOutlineInfoCircle />;
         const lower = text.toLowerCase();
@@ -131,32 +99,20 @@ const handleScrollClick = () => {
                 <img className={styles.heroImg} src={hero.image} alt={hero.title} />
                 <div className={styles.wrapper}>
                     <h1 className={styles.heroTitle}>{hero.title}</h1>
+               <Arrow sectionsSelector="section" />
+
                 </div>
             </div>
 
-            {/* SCROLL ARROW */}
-            <div
-                ref={scrollRef}
-                className={`${styles.scroll} ${clicked ? styles.scrollClicked : ''} ${rotated ? styles.scrollRotate : ''}`}
-                onClick={handleScrollClick}
-                aria-label="Scroll"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleScrollClick(); }}
-            >
-                <span ref={arrowRef} className={`${styles.arrow} ${styles.arrowBounce}`}> &#8595;</span>
-                     
-            </div>
-
             {/* SECTION 1 */}
-            <section className={styles.gradientSection}>
+            <div className={styles.gradientSection}>
                 <img className={styles.gradientShape} src={overview.image1} alt="" />
                 <div className={styles.gradientText}>
                     <h2>{overview.title1}</h2>
                     <p>{overview.para1}</p>
                 </div>
-            </section>
-
+            </div>
+        
             {/* SECTION 2 */}
             <section className={styles.section} id="svgio-overview">
                 <div className={styles.wrapGrid}>

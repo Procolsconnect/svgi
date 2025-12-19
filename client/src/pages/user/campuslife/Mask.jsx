@@ -26,66 +26,27 @@ export default function SvgVideoMask({
 
   return (
     <section className={styles.section}>
-      <div className={styles.leftContent}>
-    <header className={styles.headerMask}>
-  <video
-    ref={videoRef}
-    className={styles.coverVideo}
-    autoPlay
-    playsInline
-    muted
-    loop
-    preload="metadata"
-    poster={poster}
-    style={{
-      maskImage: 'url(#textmask)',
-      maskRepeat: 'no-repeat',
-      maskPosition: 'center',
-      maskSize: 'contain',
-      WebkitMaskImage: 'url(#textmask)',
-      WebkitMaskRepeat: 'no-repeat',
-      WebkitMaskPosition: 'center',
-      WebkitMaskSize: 'contain',
-    }}
-  >
-    {sources.map((s, i) => (
-      <source key={i} src={s.src} type={s.type} />
-    ))}
-    Your browser does not support the video tag.
-  </video>
-
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 285 80"
-    preserveAspectRatio="xMidYMid meet"
-    className={styles.svgMask}
-    style={{ background: 'transparent', pointerEvents: 'none' }}
-    aria-hidden="true"
-  >
-    <defs>
-      <mask id="textmask">
-        <rect width="100%" height="100%" fill="#000" />
-        <text
-          x="50%"
-          y="55%"
-          textAnchor="middle"
-          fontFamily="Biko, system-ui, sans-serif"
-          fontWeight="700"
-          fontSize="48px"
-          letterSpacing="6px"
-          text-transform="uppercase"
-          fill="#fff"
+      <header className={styles.headerMask}>
+        <video
+          ref={videoRef}
+          className={styles.coverVideo}
+          autoPlay
+          playsInline
+          muted
+          loop
+          preload="metadata"
+          poster={poster}
         >
-          {title}
-        </text>
-      </mask>
-    </defs>
-    {/* ← DELETE EVERYTHING ELSE INSIDE SVG — NO <rect>, NO nothing */}
-  </svg>
-</header>
-      </div>
+          {sources.map((s, i) => (
+            <source key={i} src={s.src} type={s.type} />
+          ))}
+          Your browser does not support the video tag.
+        </video>
 
-   
+        <div className={styles.overlay}>
+          <h1 className={styles.textMask}>{title}</h1>
+        </div>
+      </header>
     </section>
   );
 }

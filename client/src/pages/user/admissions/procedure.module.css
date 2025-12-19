@@ -71,8 +71,17 @@
 }
 
 @keyframes underlinePulse {
-  0%, 100% { transform: scaleX(1); opacity: 0.8; }
-  50% { transform: scaleX(1.4); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
 }
 
 /* TEXT + VIDEO */
@@ -140,9 +149,10 @@
 
 /* BUBBLE CHAT SECTION */
 .bubbleSection {
-  font-size: 62.5%; /* 1rem = 10px */
+  font-size: 62.5%;
+  /* 1rem = 10px */
   background: #f9fafb;
-  padding: 4rem 0;
+  padding: 4.2rem 0;
 }
 
 .leftHeading {
@@ -202,42 +212,53 @@
 
 /* Mobile Responsive for Bubble Section */
 @media (max-width: 768px) {
-  .bubbleSection {
-    font-size: 50%;
-  }
+
 
   .leftHeading {
-    font-size: 3rem;
-    margin-left: 2rem;
-    padding-left: 0.8rem;
+    font-size: 2.4rem;
+    margin-left: 2.4rem;
+    padding-left: 0.6rem;
     border-left: 0.3rem solid #333333;
+    margin-bottom: 1.2rem;
   }
 
   .container {
-    padding: 2rem;
+    padding: 2.4rem;
   }
 
   .bubble {
-    padding: 2rem;
+    padding: 1.8rem;
+    margin-bottom: -0.3rem;
   }
 
   .bubble p {
-    font-size: 2.5rem;
-    padding: 2.5rem;
-    border-radius: 10rem;
+    font-size: 1rem;
+    padding: 0.9rem;
+    border-radius: 8.4rem;
+    line-height: 1.4;
   }
 
   .bubble::before {
-    border-width: 0.3rem;
+    inset: 0.08rem;
+    border: 0.15rem dotted #00008B;
   }
 
   .bubble:nth-child(2n + 1)::before {
-    border-top-left-radius: 12rem;
-    border-bottom-left-radius: 12rem;
+    border-top-left-radius: 9.6rem;
+    border-bottom-left-radius: 9.6rem;
   }
 
   .bubble:nth-child(2n)::before {
-    border-top-right-radius: 12rem;
-    border-bottom-right-radius: 12rem;
+    border-top-right-radius: 9.6rem;
+    border-bottom-right-radius: 9.6rem;
+  }
+
+  .content {
+    padding: 36px 0;
+  }
+
+  .text {
+    font-size: 1.2rem;
+    max-width: 100%;
   }
 }

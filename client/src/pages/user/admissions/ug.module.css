@@ -5,7 +5,7 @@
   margin: 0;
   background-color: #f9fafb;
 }
-  
+
 /* HERO SECTION */
 .heroSection {
   min-height: 350px;
@@ -33,7 +33,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 0;
 }
 
@@ -59,8 +59,17 @@
 }
 
 @keyframes underlinePulse {
-  0%, 100% { transform: scaleX(1); opacity: 0.8; }
-  50% { transform: scaleX(1.4); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
 }
 
 .mainContainer {
@@ -153,9 +162,17 @@
   position: relative;
 }
 
-.trans90 { transform: rotate(90deg); }
-.trans180 { transform: rotate(180deg); }
-.trans270 { transform: rotate(270deg); }
+.trans90 {
+  transform: rotate(90deg);
+}
+
+.trans180 {
+  transform: rotate(180deg);
+}
+
+.trans270 {
+  transform: rotate(270deg);
+}
 
 .posLeft {
   position: absolute;
@@ -169,7 +186,9 @@
   top: 200%;
 }
 
-.fLeft { float: left; }
+.fLeft {
+  float: left;
+}
 
 .div1,
 .div2 {
@@ -210,15 +229,13 @@
   grid-area: -3 / 2 / -1 / 5;
   height: 50%;
   width: 66%;
-  background: repeating-linear-gradient(
-    135deg,
-    #001f54,
-    #001f54 11.5px,
-    transparent 11.5px,
-    transparent 27px,
-    #001f54 27px,
-    #001f54 35.5px
-  );
+  background: repeating-linear-gradient(135deg,
+      #001f54,
+      #001f54 11.5px,
+      transparent 11.5px,
+      transparent 27px,
+      #001f54 27px,
+      #001f54 35.5px);
   justify-self: center;
   align-self: center;
 }
@@ -322,11 +339,11 @@
   animation: featherFade 1.5s linear 0.5s forwards;
 }
 
-/* Birds */
+
+
+/* Common bird styles */
 .bird,
-.bird:before,
-.bird:after,
-[class*="bird--"] {
+.birdItem {
   opacity: 1;
   display: block;
   position: absolute;
@@ -341,8 +358,50 @@
   animation-iteration-count: infinite;
 }
 
-[class*="bird--"]:not(.bird30):after,
-[class*="bird--"]:not(.bird30):before {
+/* Pseudo elements for all birds */
+.bird:before,
+.bird:after,
+.birdItem:before,
+.birdItem:after {
+  content: "";
+  display: block;
+  position: absolute;
+  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+  background-size: auto 100%;
+  width: 60px;
+  height: 33px;
+  top: 0;
+  left: 0;
+  animation-name: flyCycle;
+  animation-timing-function: steps(3);
+  animation-iteration-count: infinite;
+}
+
+/* Single bird size adjustments (Small birds) */
+.bird1:after,
+.bird1:before,
+.bird2:after,
+.bird2:before,
+.bird4:after,
+.bird4:before,
+.bird5:after,
+.bird5:before,
+.bird7:after,
+.bird7:before,
+.bird8:after,
+.bird8:before,
+.bird10:after,
+.bird10:before,
+.bird11:after,
+.bird11:before,
+.bird13:after,
+.bird13:before,
+.bird14:after,
+.bird14:before,
+.bird16:after,
+.bird16:before,
+.bird17:after,
+.bird17:before {
   width: 30px;
   height: 33px;
   top: -8px;
@@ -351,20 +410,323 @@
 }
 
 @keyframes flyCycle {
-  100% { background-position: -360px 0; }
+  100% {
+    background-position: -360px 0;
+  }
 }
 
 @keyframes textFade {
-  0% { color: transparent; opacity: 1; top: -50%; left: auto; }
-  1% { color: transparent; opacity: 0; }
-  50% { color: transparent; opacity: 0; }
-  100% { color: #131335; opacity: 1; }
+  0% {
+    color: transparent;
+    opacity: 1;
+    top: -50%;
+    left: auto;
+  }
+
+  1% {
+    color: transparent;
+    opacity: 0;
+  }
+
+  50% {
+    color: transparent;
+    opacity: 0;
+  }
+
+  100% {
+    color: #131335;
+    opacity: 1;
+  }
 }
 
 @keyframes featherFade {
-  0% { top: -100px; opacity: 0; }
-  25% { transform: rotate(10deg); left: 30%; }
-  50% { transform: rotate(-5deg); opacity: 1; left: 45%; }
-  75% { transform: rotate(10deg); left: 32%; }
-  100% { transform: rotate(0deg); opacity: 1; top: 12px; left: 43%; }
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+
+  25% {
+    transform: rotate(10deg);
+    left: 30%;
+  }
+
+  50% {
+    transform: rotate(-5deg);
+    opacity: 1;
+    left: 45%;
+  }
+
+  75% {
+    transform: rotate(10deg);
+    left: 32%;
+  }
+
+  100% {
+    transform: rotate(0deg);
+    opacity: 1;
+
+    .buttonBird:hover .bird30:after {
+      left: 50px;
+      top: 50px;
+      transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+    }
+  }
+}
+
+.buttonBird:hover .bird30:before {
+  left: -50px;
+  top: 50px;
+  transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+}
+
+.buttonBird .feather {
+  position: absolute;
+  width: 18%;
+  left: 40%;
+  top: 12px;
+  display: none;
+  opacity: 0;
+  fill: #131335;
+}
+
+.buttonBird.active {
+  background-color: transparent;
+  transition: all 0.2s linear 0.1s;
+}
+
+.buttonBird.active .buttonBirdText {
+  color: #131335;
+  animation: textFade 1.5s 0.2s;
+}
+
+.buttonBird.active .feather {
+  display: block;
+  animation: featherFade 1.5s linear 0.5s forwards;
+}
+
+
+/* Common bird styles */
+.bird,
+.birdItem {
+  opacity: 1;
+  display: block;
+  position: absolute;
+  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+  background-size: auto 100%;
+  width: 60px;
+  height: 33px;
+  top: 0;
+  left: 0;
+  animation-name: flyCycle;
+  animation-timing-function: steps(3);
+  animation-iteration-count: infinite;
+}
+
+/* Pseudo elements for all birds */
+.bird:before,
+.bird:after,
+.birdItem:before,
+.birdItem:after {
+  content: "";
+  display: block;
+  position: absolute;
+  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+  background-size: auto 100%;
+  width: 60px;
+  height: 33px;
+  top: 0;
+  left: 0;
+  animation-name: flyCycle;
+  animation-timing-function: steps(3);
+  animation-iteration-count: infinite;
+}
+
+/* Single bird size adjustments (Small birds) */
+.bird1:after,
+.bird1:before,
+.bird2:after,
+.bird2:before,
+.bird4:after,
+.bird4:before,
+.bird5:after,
+.bird5:before,
+.bird7:after,
+.bird7:before,
+.bird8:after,
+.bird8:before,
+.bird10:after,
+.bird10:before,
+.bird11:after,
+.bird11:before,
+.bird13:after,
+.bird13:before,
+.bird14:after,
+.bird14:before,
+.bird16:after,
+.bird16:before,
+.bird17:after,
+.bird17:before {
+  width: 30px;
+  height: 33px;
+  top: -8px;
+  left: 8px;
+  z-index: -100;
+}
+
+@keyframes flyCycle {
+  100% {
+    background-position: -360px 0;
+  }
+}
+
+@keyframes textFade {
+  0% {
+    color: transparent;
+    opacity: 1;
+    top: -50%;
+    left: auto;
+  }
+
+  1% {
+    color: transparent;
+    opacity: 0;
+  }
+
+  50% {
+    color: transparent;
+    opacity: 0;
+  }
+
+  100% {
+    color: #131335;
+    opacity: 1;
+  }
+}
+
+@keyframes featherFade {
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+
+  25% {
+    transform: rotate(10deg);
+    left: 30%;
+  }
+
+  50% {
+    transform: rotate(-5deg);
+    opacity: 1;
+    left: 45%;
+  }
+
+  75% {
+    transform: rotate(10deg);
+    left: 32%;
+  }
+
+  100% {
+    transform: rotate(0deg);
+    opacity: 1;
+    top: 12px;
+    left: 43%;
+  }
+}
+
+/* MOBILE RESPONSIVENESS - FLUID VW SCALING */
+@media (max-width: 768px) {
+
+  /* Hero */
+  .heroSection {
+    min-height: 35vh;
+  }
+
+  .heroTitle {
+    font-size: 5.2vw;
+    letter-spacing: 0.1vw;
+  }
+
+  .heroTitle::after {
+    width: 12vw;
+    height: 0.5vw;
+    margin: 1.4vw auto 0;
+  }
+
+  /* Main Container */
+  .mainContainer {
+    padding: 3.2vw;
+  }
+
+  /* Header */
+  .headerLogo {
+    width: 13.1vw;
+    height: 2.7vw;
+  }
+
+  .headerText {
+    font-size: 1.6vw;
+  }
+
+  .headerSection i {
+    margin-right: 1.2vw;
+    font-size: 2vw;
+  }
+
+  /* Decorative Divs */
+  .divArea1,
+  .divArea2,
+  .div1,
+  .div2 {
+    border-width: 2vw;
+  }
+
+  /* Titles */
+  .title2 {
+    font-size: 4.8vw;
+  }
+
+  /* Transforms/Positions */
+  .posLeft {
+    top: -50%;
+    left: -50%;
+  }
+
+  .posRight {
+    top: 200%;
+    left: 50%;
+  }
+
+  .content .italic {
+    top: 10vw;
+    left: -20vw;
+    font-size: 1.6vw;
+  }
+
+  .content h2 {
+    font-size: 2.4vw;
+  }
+
+  .content p {
+    font-size: 1.4vw;
+    line-height: normal;
+    margin: 1vw 0;
+  }
+
+  /* Pattern */
+  .pattern1 {
+    background: repeating-linear-gradient(135deg,
+        #001f54,
+        #001f54 1.15vw,
+        transparent 1.15vw,
+        transparent 2.7vw,
+        #001f54 2.7vw,
+        #001f54 3.55vw);
+  }
+
+  /* Bird Button */
+  .buttonBird {
+    transform: scale(0.6);
+    transform-origin: center;
+    margin-top: 30vw;
+  }
 }

@@ -14,8 +14,8 @@ const PostgraduateCoursesPage = () => {
       <div className={styles.hero}>
         <img src="hero img.jpg" alt="Hero Background" className={styles.heroImage} />
         <div className={styles.wrapper}>
-                            <h1 className={styles.heroTitle}>Postgraduate Courses</h1>
-                        </div>
+          <h1 className={styles.heroTitle}>Postgraduate Courses</h1>
+        </div>
       </div>
 
       <div className={styles.wrap}>
@@ -31,11 +31,11 @@ const PostgraduateCoursesPage = () => {
 
         <div className={styles.detailtop}>
           <div className={styles.productimg}>
-            <img 
-              src="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80" 
-              alt="" 
-              className={styles.coverImg} 
-              style={{ objectPosition: 'center -330px' }} 
+            <img
+              src="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80"
+              alt=""
+              className={styles.coverImg}
+              
             />
             <div className={styles.boxtop}>
               <div className={`${styles.boxtitle} ${styles.boxtitletop1}`}>VINTAGE</div>
@@ -59,19 +59,19 @@ const PostgraduateCoursesPage = () => {
         <div className={styles.detailbottom}>
           <div className={styles.leftitem}>
             <div className={styles.itemimg}>
-              <img 
-                src="https://images.unsplash.com/photo-1519406686401-e9ef2420c15b?ixlib=rb-0.3.5&auto=format&fit=crop&w=1950&q=80" 
-                alt="" 
-                className={styles.coverImg} 
+              <img
+                src="https://images.unsplash.com/photo-1519406686401-e9ef2420c15b?ixlib=rb-0.3.5&auto=format&fit=crop&w=1950&q=80"
+                alt=""
+                className={styles.coverImg}
               />
             </div>
           </div>
           <div className={styles.rightitem}>
             <div className={styles.itemimg}>
-              <img 
-                src="https://images.unsplash.com/photo-1519406728390-b536d7be138f?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80" 
-                alt="" 
-                className={styles.coverImg} 
+              <img
+                src="https://images.unsplash.com/photo-1519406728390-b536d7be138f?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80"
+                alt=""
+                className={styles.coverImg}
               />
             </div>
           </div>
@@ -81,7 +81,7 @@ const PostgraduateCoursesPage = () => {
       <div className={styles.wrapperNo4}>
         <p>THE complete PG cource are in side the button So</p>
         <h1>Click the Button</h1>
-        <button 
+        <button
           className={`${styles.buttonBird} ${isButtonActive ? styles.active : ''}`}
           onClick={handleButtonClick}
         >
@@ -89,7 +89,7 @@ const PostgraduateCoursesPage = () => {
             {isButtonActive ? 'DONE' : 'OPEN'}
           </p>
           <svg version="1.1" className={styles.feather} xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               viewBox="0 0 75 38" style={{enableBackground: 'new 0 0 75 38'}} xmlSpace="preserve">
+            viewBox="0 0 75 38" style={{ enableBackground: 'new 0 0 75 38' }} xmlSpace="preserve">
             <g>
               <path d="M20.8,31.6c3.1-0.7,2.9-2.3,2,1c9.1,4.4,20.4,3.7,29.1-0.8l0,0c0.7-2.1,1-3.9,1-3.9c0.6,0.8,0.8,1.7,1,2.9
                   c4.1-2.3,7.6-5.3,10.2-8.3c0.4-2.2,0.4-4,0.4-4.1c0.6,0.4,0.9,1.2,1.2,2.1c4.5-6.1,5.4-11.2,3.7-13.5c1.1-2.6,1.6-5.4,1.2-7.7
@@ -99,36 +99,9 @@ const PostgraduateCoursesPage = () => {
             </g>
           </svg>
           <span className={styles.bird}></span>
-          <span className={styles.bird1}></span>
-          <span className={styles.bird2}></span>
-          <span className={styles.bird3}></span>
-          <span className={styles.bird4}></span>
-          <span className={styles.bird5}></span>
-          <span className={styles.bird6}></span>
-          <span className={styles.bird7}></span>
-          <span className={styles.bird8}></span>
-          <span className={styles.bird9}></span>
-          <span className={styles.bird10}></span>
-          <span className={styles.bird11}></span>
-          <span className={styles.bird12}></span>
-          <span className={styles.bird13}></span>
-          <span className={styles.bird14}></span>
-          <span className={styles.bird15}></span>
-          <span className={styles.bird16}></span>
-          <span className={styles.bird17}></span>
-          <span className={styles.bird18}></span>
-          <span className={styles.bird19}></span>
-          <span className={styles.bird20}></span>
-          <span className={styles.bird21}></span>
-          <span className={styles.bird22}></span>
-          <span className={styles.bird23}></span>
-          <span className={styles.bird24}></span>
-          <span className={styles.bird25}></span>
-          <span className={styles.bird26}></span>
-          <span className={styles.bird27}></span>
-          <span className={styles.bird28}></span>
-          <span className={styles.bird29}></span>
-          <span className={styles.bird30}></span>
+          {Array.from({ length: 30 }).map((_, i) => (
+            <span key={i} className={`${styles.birdItem} ${styles[`bird${i + 1}`]}`}></span>
+          ))}
         </button>
       </div>
     </div>

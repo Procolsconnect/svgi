@@ -1,4 +1,3 @@
-
 .container {
   --bg-main: #eee;
   --white: #ffffff;
@@ -6,10 +5,10 @@
   --red: #FF0000;
 }
 
-.container * { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
+.container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .container {
@@ -19,37 +18,40 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.4;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
 }
 
-.container a { 
-  color: #00f; 
-  text-decoration: underline; 
+.container a {
+  color: #00f;
+  text-decoration: underline;
 }
 
-.container a:hover { 
-  text-decoration: none; 
+.container a:hover {
+  text-decoration: none;
 }
 
 /* ================
    Wrapper & Hero
    ================ */
 .wrapper {
-  position: relative; 
-  width: 100%; 
-  z-index: 1;
-  overflow: hidden; /* Crucial: prevent scrollbars during animation */
-}
-
-.content { 
   position: relative;
   width: 100%;
-  overflow: hidden; /* Prevent overflow */
+  z-index: 1;
+  overflow: hidden;
+  /* Crucial: prevent scrollbars during animation */
 }
 
-.section { 
-  width: 100%; 
-  height: 100vh; 
+.content {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* Prevent overflow */
+}
+
+.section {
+  width: 100%;
+  height: 100vh;
 }
 
 .heroBgImage {
@@ -66,20 +68,24 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transform-origin: center center; /* Better scaling origin */
-  will-change: transform; /* Performance optimization */
+  transform-origin: center center;
+  /* Better scaling origin */
+  will-change: transform;
+  /* Performance optimization */
 }
+
 /* image overlay */
 .imageContainer {
   position: absolute;
-  top: 0; 
-  left: 0; 
+  top: 0;
+  left: 0;
   right: 0;
   width: 100%;
   height: 100vh;
   z-index: 2;
   perspective: 500px;
-  overflow: hidden; /* Crucial: hide overflow during scale */
+  overflow: hidden;
+  /* Crucial: hide overflow during scale */
   pointer-events: none;
 }
 
@@ -96,17 +102,18 @@
   background: var(--bg-main);
   padding: 60px 20px;
   width: 100%;
-height: 50%;
+  height: 50%;
   position: relative;
-  z-index: 3; /* Ensure it's above the pinned section */
+  z-index: 3;
+  /* Ensure it's above the pinned section */
 }
 
-.bouncerContainer { 
-  width: 100%; 
-  max-width: 1100px; 
-  padding: 0 20px; 
-  text-align: center; 
-  margin: 0 auto; 
+.bouncerContainer {
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 20px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .bouncer {
@@ -118,7 +125,7 @@ height: 50%;
   width: 100%;
   max-width: 100%;
   cursor: text;
-  background: rgba(255,255,255,0.0);
+  background: rgba(255, 255, 255, 0.0);
   -webkit-user-modify: read-write;
   border: none;
   font-family: inherit;
@@ -149,55 +156,76 @@ height: 50%;
   background: var(--red);
   margin-left: -5px;
   transition-property: left, top;
-  transition-timing-function: cubic-bezier(.25,.1,.25,1), cubic-bezier(.25,.1,.25,1);
+  transition-timing-function: cubic-bezier(.25, .1, .25, 1), cubic-bezier(.25, .1, .25, 1);
   display: none;
   z-index: 10;
 }
 
 /* ================
-   Fancy Text (Article grid)
+   Fancy Text (Row layout)
    ================ */
+
+.fancyText {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin: 5rem auto;
+  max-width: 1200px;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 3;
+}
+
+.fancyRow {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+
+
+.fancyContent {
+  flex: 1;
+}
+
+.fancyImageContainer {
+  flex: 1;
+  height: 400px;
+  /* Fixed height for consistency */
+  border-radius: 8px;
+  overflow: hidden;
+}
 
 .fancyImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;     /* fills entire right side cleanly */
-  border-radius: 8px;
-  flex: 1;               /* ensures perfect vertical fill */
-}
-.fancyText {
-  display: grid;
-  grid-template-columns: 2fr 3fr auto 1fr;
-  margin: calc(1rem + 5vh) 1rem;
-  gap: 1rem;
-  align-items: start;
-  position: relative;
-  z-index: 3; /* Ensure it's above the pinned section */
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
-.fancyTextBody { 
-  grid-column: 3 / 4; 
+.fancyImage:hover {
+  transform: scale(1.05);
 }
 
 .fancyTitle {
-  font-size: calc(1em + 10vw);
-  line-height: 1;
-  margin: 0 0 0.5em;
+  font-size: calc(1em + 8vw);
   font-weight: 800;
-  grid-column: 2 / 4;
+  line-height: 1;
+  margin-bottom: 0.5em;
+  color: #222;
   max-width: 8ch;
   word-break: break-word;
 }
 
 .fancyText p {
-  font-size: calc(0.875em + .625vw);
-  line-height: 1.5;
-  margin: 0 0 1em;
-  max-width: 50ch;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 1rem;
 }
 
-.pink { 
-  display: none; 
+.pink {
+  display: none;
 }
 
 /* ===========================
@@ -208,7 +236,8 @@ height: 50%;
   padding: 80px 20px;
   margin-top: 20px;
   position: relative;
-  z-index: 3; /* Ensure it's above the pinned section */
+  z-index: 3;
+  /* Ensure it's above the pinned section */
 }
 
 .pageTitle {
@@ -233,29 +262,35 @@ height: 50%;
 }
 
 @media (max-width: 1000px) {
-  .cardsContainer { 
-    grid-template-columns: repeat(3, 1fr); 
+  .cardsContainer {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 760px) {
-  .cardsContainer { 
-    grid-template-columns: repeat(2, 1fr); 
-    padding: 18px; 
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 18px;
   }
-  
-  .fancyText { 
-    grid-template-columns: 1fr; 
-    margin: 2rem 1rem; 
+
+  .fancyRow {
+    flex-direction: column;
+    gap: 2rem;
   }
-  
-  .fancyTextBody { 
-    grid-column: 1 / -1; 
+
+  /* Make Row 1 (Text-Image in DOM) stack as Image-Text (column-reverse) */
+  .fancyRow:not(.reverseRow) {
+    flex-direction: column-reverse;
   }
-  
-  .fancyTitle { 
-    max-width: 18ch; 
-    font-size: calc(1.4rem + 6vw); 
+
+  .fancyImageContainer {
+    width: 100%;
+    height: 300px;
+  }
+
+  .fancyTitle {
+    font-size: 2.5rem;
+    max-width: 100%;
   }
 }
 
@@ -269,9 +304,9 @@ height: 50%;
 
 .gameCardCover {
   position: absolute;
-  top: 0; 
+  top: 0;
   left: 0;
-  width: 100%; 
+  width: 100%;
   height: 100%;
   overflow: hidden;
   background-size: cover;
@@ -281,27 +316,27 @@ height: 50%;
   will-change: transform;
   transform: skewX(0.001deg);
   transition: transform 0.35s ease-in-out, box-shadow 0.35s ease-in-out;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
 }
 
 .gameCardCover::after {
   content: "";
   position: absolute;
-  top: 0; 
+  top: 0;
   left: 0;
-  width: 100%; 
+  width: 100%;
   height: 120%;
-  background: linear-gradient(226deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 35%, rgba(255,255,255,0.2) 42%, rgba(255,255,255,0) 60%);
+  background: linear-gradient(226deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 35%, rgba(255, 255, 255, 0.2) 42%, rgba(255, 255, 255, 0) 60%);
   transform: translateY(-20%);
-  transition: transform 0.65s cubic-bezier(0.18,0.9,0.58,1);
+  transition: transform 0.65s cubic-bezier(0.18, 0.9, 0.58, 1);
   pointer-events: none;
   border-radius: 8px;
 }
 
 .gameCard:hover .gameCardCover {
   transform: rotateX(7deg) translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
 .gameCard:hover .gameCardCover::after {
@@ -311,12 +346,12 @@ height: 50%;
 .gameCard::before {
   content: "";
   position: absolute;
-  top: 5%; 
+  top: 5%;
   left: 5%;
-  width: 90%; 
+  width: 90%;
   height: 90%;
-  background: rgba(0,0,0,0.5);
-  box-shadow: 0 6px 12px 12px rgba(0,0,0,0.35);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 12px 12px rgba(0, 0, 0, 0.35);
   transform-origin: top center;
   transform: skewX(0.001deg);
   transition: transform 0.35s ease-in-out, opacity 0.5s ease-in-out;
@@ -330,6 +365,153 @@ height: 50%;
 }
 
 /* small utility spacing */
-.spacer { 
-  height: 40px; 
+.spacer {
+  height: 40px;
+}
+
+/* ================
+   Mobile Responsive Styles
+   ================ */
+
+@media (max-width: 480px) {
+
+  /* Reset hero section for mobile */
+  .wrapper {
+    min-height: 100vh;
+  }
+
+  .section {
+    height: 100vh;
+  }
+
+  .heroSection {
+    height: 100vh;
+  }
+
+  .imageContainer {
+    height: 100vh;
+    width: fit-content;
+    perspective: none;
+  }
+
+  .heroImage {
+    will-change: auto;
+  }
+
+  /* Bouncer section mobile adjustments */
+  .secondSection {
+    height: auto;
+    min-height: auto;
+    padding: 40px 16px;
+  }
+
+  .bouncerContainer {
+    padding: 0 12px;
+    max-width: 100%;
+  }
+
+  .bouncer {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  .ball {
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+  }
+
+  /* Fancy Text section - single column layout */
+  /* Fancy Text section mobile adjustments */
+  .fancyText {
+    margin: 2rem 1rem;
+    padding: 0;
+    gap: 3rem;
+  }
+
+  .fancyImageContainer {
+    height: 220px;
+  }
+
+  .fancyTitle {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .pink {
+    display: none;
+  }
+
+  /* Student Clubs Cards section */
+  .cardsSection {
+    padding: 40px 12px;
+    margin-top: 10px;
+  }
+
+  .pageTitle {
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 12px;
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  .gameCard {
+    padding-bottom: 140%;
+  }
+
+  .gameCardCover {
+    border-radius: 6px;
+  }
+
+  .gameCard:hover .gameCardCover {
+    transform: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  .gameCard:hover .gameCardCover::after {
+    transform: translateY(-20%);
+  }
+
+  .gameCard:hover::before {
+    opacity: 0.5;
+    transform: none;
+  }
+
+  .spacer {
+    height: 20px;
+  }
+}
+
+/* Extra small devices (portrait phones) */
+@media (max-width: 360px) {
+  .bouncer {
+    font-size: 18px;
+  }
+
+  .fancyTitle {
+    font-size: 24px;
+  }
+
+  .fancyText p {
+    font-size: 13px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .cardsContainer {
+    grid-template-columns: 1fr;
+    grid-gap: 16px;
+  }
+
+  .gameCard {
+    padding-bottom: 120%;
+  }
 }

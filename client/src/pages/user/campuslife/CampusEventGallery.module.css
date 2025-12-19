@@ -34,13 +34,11 @@
 .portfolio {
   position: relative;
   background: #ffffff;
-  /* Height will be auto-calculated via JS using --stripWidth */
+  /* Height managed by GSAP ScrollTrigger */
 }
 
 /* Sticky Wrapper */
 .galleryWrapper {
-  position: sticky;
-  top: 0;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -48,6 +46,8 @@
   padding: 0 2rem;
   background: #ffffff;
 }
+
+
 
 /* Horizontal Strip */
 .galleryStrip {

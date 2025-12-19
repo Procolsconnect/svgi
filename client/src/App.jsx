@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserLayout from "./Layouts/UserLayout.jsx";
-import AdminLayout from "./layouts/AdminLayout.jsx";
+import AdminLayout from "./Layouts/AdminLayout.jsx";
 import Home from "./pages/user/home/Home.jsx";
 import Admissions from "./pages/user/admissions/Admissions.jsx";
 import Academics from "./pages/user/academics/Academics.jsx"
@@ -23,9 +23,9 @@ const App = () => {
           <Route path="academics/*" element={<Academics />} />
           <Route path="about/*" element={<AboutOverview />} />
           <Route path="placement/*" element={<PlacementAndTraining />} />
-          <Route path="campuslife/*" element={<Campuslife/>} />
-          <Route path="advertisement/*" element={<Advertisement/>} />
-          <Route path="news/*" element={<News/>} />
+          <Route path="campuslife/*" element={<Campuslife />} />
+          <Route path="advertisement/*" element={<Advertisement />} />
+          <Route path="news/*" element={<News />} />
         </Route>
 
         {/* <Route path="/admin" element={<AdminLayout />}>

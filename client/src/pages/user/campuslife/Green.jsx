@@ -63,16 +63,16 @@ export default function GreenSvgiCampus() {
     <div className={styles.gsvgiCampusRoot}>
       {/* Hero Section */}
       <div className={`${styles.gsvgiHeroSection} ${styles.gsvgiHeroOverlay}`}>
-        <img 
-          className={styles.gsvgiHeroImage} 
-          src="https://images.unsplash.com/photo-1516655855035-d5215bcb5604?auto=format&fit=crop&w=1000&q=80" 
-          alt="Hero Background" 
+        <img
+          className={styles.gsvgiHeroImage}
+          src="https://images.unsplash.com/photo-1516655855035-d5215bcb5604?auto=format&fit=crop&w=1000&q=80"
+          alt="Hero Background"
         />
         <h1 className={styles.gsvgiHeroTitle}>Green SVGI</h1>
       </div>
 
       {/* Title Section */}
-      <div style={{ padding: '40px' }}>
+      <div className={styles.gsvgiTitleSection}>
         <h1 className={styles.gsvgiPageTitle}>
           <div>
             <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="S">S</span>
@@ -121,8 +121,8 @@ export default function GreenSvgiCampus() {
       </div>
 
       {/* Preview Section */}
-      <div style={{ position: 'relative', minHeight: '75vh', margin: '20px' }}>
-  
+      <div className={styles.gsvgiContainer}>
+
         <div className={styles.gsvgiViewport}>
           <div className={styles.gsvgiBgContainer} style={{ backgroundPosition: bgPosition }}></div>
         </div>

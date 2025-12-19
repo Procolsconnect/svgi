@@ -270,22 +270,22 @@ const MergedHeroComponent = () => {
       <div ref={wrapperRef} className={styles.wrapper}>
         <div className={styles.content}>
           <section
-  ref={heroSectionRef}
-  className={`${styles.section} ${styles.heroSection}`}
->
-  <img
-   src={heroBgImg}
-    alt="Hero Background"
-    className={styles.heroImage}
-  />
-</section>
+            ref={heroSectionRef}
+            className={`${styles.section} ${styles.heroSection}`}
+          >
+            <img
+              src={heroBgImg}
+              alt="Hero Background"
+              className={styles.heroImage}
+            />
+          </section>
         </div>
 
- <div className={styles.imageContainer}>
-          <img 
+        <div className={styles.imageContainer}>
+          <img
             ref={heroImageRef}
-            src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp" 
-            alt="Hero overlay" 
+            src="https://assets-global.website-files.com/63ec206c5542613e2e5aa784/643312a6bc4ac122fc4e3afa_main%20home.webp"
+            alt="Hero overlay"
             className={styles.heroImage}
           />
         </div>
@@ -308,36 +308,46 @@ const MergedHeroComponent = () => {
           </p>
         </div>
       </section>
-{/* Fancy Text Section */}
+      {/* Fancy Text Section */}
       <div className={styles.fancyText} aria-labelledby="news-heading">
-  <img
-    src={fancyData?.rowoneImage}
-    alt="Hero overlay"
-    className={styles.fancyImage}
-  />
-  <img
-    src={fancyData?.rowtwoImage}
-    alt="Hero overlay"
-    className={styles.fancyImage}
-  />
+        {/* Row 1: Text Left, Image Right */}
+        <div className={styles.fancyRow}>
+          <div className={styles.fancyContent}>
+            <h1 id="news-heading" className={styles.fancyTitle}>
+              Meghan And Harry's Baby
+            </h1>
+        
+          </div>
+          <div className={styles.fancyImageContainer}>
+            <img
+              src={fancyData?.rowoneImage}
+              alt="Meghan and Harry's Baby News"
+              className={styles.fancyImage}
+            />
+          </div>
+        </div>
 
-
-        <h1 id="news-heading" className={styles.fancyTitle}>
-          Meghan And Harry's Baby
-        </h1>
-
-        <div className={styles.fancyTextBody}>
-          <p>
-            Buckingham Palace announced that Meghan had gone into labour during the early hours of May 6. 
-            Harry was by her side, and an announcement would be made soon, read the broadcast. Shortly after, 
-            <a href="https://www.instagram.com/sussexroyal/">@sussexroyal</a>, 
-            the official Instagram of the couple, shared the news that a baby boy had been born.
-          </p>
-
-          <p>
-            Upon greeting media outside Frogmore Cottage during the afternoon of May 6, Harry said: 
-            "I'm so incredibly proud of my wife... How any woman does what they do is beyond comprehension."
-          </p>
+        {/* Row 2: Image Left, Text Right */}
+        <div className={`${styles.fancyRow} ${styles.reverseRow}`}>
+          <div className={styles.fancyImageContainer}>
+            <img
+              src={fancyData?.rowtwoImage}
+              alt="Harry Greeting Media"
+              className={styles.fancyImage}
+            />
+          </div>
+          <div className={styles.fancyContent}>
+            <p>
+              Upon greeting media outside Frogmore Cottage during the afternoon of May 6, Harry said:
+              "I'm so incredibly proud of my wife... How any woman does what they do is beyond comprehension."
+            </p>
+                <p>
+              Buckingham Palace announced that Meghan had gone into labour during the early hours of May 6.
+              Harry was by her side, and an announcement would be made soon, read the broadcast. Shortly after,
+              <a href="https://www.instagram.com/sussexroyal/">@sussexroyal</a>,
+              the official Instagram of the couple, shared the news that a baby boy had been born.
+            </p>
+          </div>
         </div>
 
         <span className={styles.pink}>2/3</span>
