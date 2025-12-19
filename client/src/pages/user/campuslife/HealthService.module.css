@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@900&family=Open+Sans:wght@400;700&display=swap');
+
 /* SCOPE EVERYTHING INSIDE .container */
 .container * {
   box-sizing: border-box;
@@ -7,7 +9,11 @@
   margin: 0;
   font-family: 'Inter', sans-serif, system-ui;
   background: var(--surface-2);
+  /* Make this the scroll container to ensure sticky works and overflow is handled */
+  height: 100vh;
+  overflow-y: auto;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 /* HERO */
@@ -40,7 +46,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 0;
 }
 
@@ -67,12 +73,24 @@
 }
 
 @keyframes underlinePulse {
-  0%,100% { transform:scaleX(1); opacity:0.8; }
-  50% { transform:scaleX(1.4); opacity:1; }
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
 }
 
-@media(max-width:768px){
-  .hero h1 { font-size:36px; padding:0 1rem; }
+@media(max-width:768px) {
+  .hero h1 {
+    font-size: 36px;
+    padding: 0 1rem;
+  }
 }
 
 /* FACILITIES */
@@ -129,28 +147,35 @@
   width: 100%;
   padding-bottom: 100%;
   border-radius: 50%;
-  background: url('https://images.unsplash.com/photo-1685630248371-9d42fd97f52f?auto=format&fit=crop&w=928&q=80')
-    center/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1685630248371-9d42fd97f52f?auto=format&fit=crop&w=928&q=80') center/cover no-repeat;
 }
 
-@media(max-width:768px){
+@media(max-width:768px) {
   .home {
     flex-direction: column;
     text-align: center;
     padding: 0;
     gap: 2rem;
   }
-  .textSide, .circle {
+
+  .textSide,
+  .circle {
     width: 100%;
     padding: 0 1rem;
   }
-  .sectionHeading { text-align: center; }
+
+  .sectionHeading {
+    text-align: center;
+  }
 }
 
 /* LOCAL CSS VARIABLES */
 .container {
   --content: 66ch;
   --gutter: 2rem;
+  --surface-2: #f2f5f7;
+  /* Open Props-like gray */
+  --text-1: #212529;
 }
 
 /* SCROLLING SECTIONS */
@@ -175,15 +200,22 @@
   --x: 100%;
 }
 
+/* Specific grid placement for even sections */
+.scrollSectionEven img {
+  grid-column: 2;
+}
+
+.scrollSectionEven p {
+  grid-column: 1;
+}
+
 .scrollSection img {
   width: 260px;
   max-width: 30vw;
   height: auto;
   object-fit: cover;
-  clip-path: polygon(
-    0 10%, 10% 0, 100% 0,
-    100% 90%, 90% 100%, 0 100%
-  );
+  clip-path: polygon(0 10%, 10% 0, 100% 0,
+      100% 90%, 90% 100%, 0 100%);
   scale: 1.5;
   view-timeline: --item;
   animation: itemReveal both ease-in;
@@ -207,11 +239,85 @@
 }
 
 @keyframes itemReveal {
-  from { opacity: 0; translate: var(--x,0) 80px; }
-  to { opacity: 1; translate: 0 0; }
+  from {
+    opacity: 0;
+    translate: var(--x, 0) 80px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
 }
 
 .scrollSection p::first-line {
   text-transform: uppercase;
   font-weight: bold;
+}
+
+/* MOBILE RESPONSIVENESS - EXACT DESKTOP SCALE */
+@media (max-width: 768px) {
+  .container {
+    --gutter: 1rem;
+    height: 100vh;
+    /* Ensure scroll container persists */
+  }
+
+  .main {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  /* Force Grid Layout same as Desktop but Scaled */
+  .scrollSection {
+    display: grid;
+    gap: 0.1rem;
+    grid-template-columns: 40vw 1fr;
+    /* Image | Text */
+    align-items: center;
+    padding: 10vh 0;
+    /* Adjust vertical spacing */
+    min-height: 70vh;
+  }
+
+  .scrollSectionEven {
+    grid-template-columns: 1fr 40vw;
+    /* Text | Image */
+  }
+
+  /* Images: Scale to fit the 40vw column */
+  .scrollSection img {
+    grid-column: 1;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    /* Keep the animation properties */
+    scale: 1.5;
+    clip-path: polygon(0 10%, 10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
+  }
+
+  /* Even section images go to col 2 */
+  .scrollSectionEven img {
+    grid-column: 2;
+  }
+
+  /* Text: Scale font to fit in the remaining space */
+  .scrollSection p {
+    grid-column: 2;
+    font-size: 3.5vw;
+    /* Fluid font size */
+    line-height: 1.4;
+    padding: 2vw;
+    /* Keep sticky behavior */
+    position: sticky;
+    bottom: 5%;
+    z-index: 2;
+  }
+
+  .scrollSectionEven p {
+    grid-column: 1;
+  }
+
+  /* Reset any accidentally applied mobile overrides if any exist */
 }

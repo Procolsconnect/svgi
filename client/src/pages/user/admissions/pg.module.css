@@ -29,11 +29,13 @@
   left: 0;
   z-index: 0;
 }
+
 .wrapper {
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
 }
+
 .hero::after {
   content: "";
   position: absolute;
@@ -65,8 +67,17 @@
 
 
 @keyframes underlinePulse {
-  0%, 100% { transform: scaleX(1); opacity: 0.8; }
-  50% { transform: scaleX(1.4); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
 }
 
 /* RESET & BASE STYLES */
@@ -146,12 +157,13 @@
 
 .coverImg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
 }
 
 .detailtop:before {
@@ -301,15 +313,13 @@
   content: "";
   width: 240px;
   height: 100px;
-  background: repeating-linear-gradient(
-    135deg,
-    #001f54,
-    #001f54 11.5px,
-    transparent 11.5px,
-    transparent 27px,
-    #001f54 27px,
-    #001f54 35.5px
-  );
+  background: repeating-linear-gradient(135deg,
+      #001f54,
+      #001f54 11.5px,
+      transparent 11.5px,
+      transparent 27px,
+      #001f54 27px,
+      #001f54 35.5px);
   position: absolute;
   bottom: 50px;
   left: 20%;
@@ -418,10 +428,44 @@
 }
 
 /* Birds */
+/* Ensure all bird classes exist for React styles object */
+.bird1,
+.bird2,
+.bird3,
+.bird4,
+.bird5,
+.bird6,
+.bird7,
+.bird8,
+.bird9,
+.bird10,
+.bird11,
+.bird12,
+.bird13,
+.bird14,
+.bird15,
+.bird16,
+.bird17,
+.bird18,
+.bird19,
+.bird20,
+.bird21,
+.bird22,
+.bird23,
+.bird24,
+.bird25,
+.bird26,
+.bird27,
+.bird28,
+.bird29,
+.bird30 {
+  /* Just hooks for React, styles are in .birdItem or explicit overrides */
+  position: absolute;
+}
+
+/* Common bird styles */
 .bird,
-.bird:before,
-.bird:after,
-[class*="bird--"] {
+.birdItem {
   opacity: 1;
   display: block;
   position: absolute;
@@ -436,9 +480,50 @@
   animation-iteration-count: infinite;
 }
 
-/* Smaller birds */
-[class*="bird--"]:not(.bird30):after,
-[class*="bird--"]:not(.bird30):before {
+/* Pseudo elements for all birds */
+.bird:before,
+.bird:after,
+.birdItem:before,
+.birdItem:after {
+  content: "";
+  display: block;
+  position: absolute;
+  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+  background-size: auto 100%;
+  width: 60px;
+  height: 33px;
+  top: 0;
+  left: 0;
+  animation-name: flyCycle;
+  animation-timing-function: steps(3);
+  animation-iteration-count: infinite;
+}
+
+/* Single bird size adjustments (Small birds) */
+.bird1:after,
+.bird1:before,
+.bird2:after,
+.bird2:before,
+.bird4:after,
+.bird4:before,
+.bird5:after,
+.bird5:before,
+.bird7:after,
+.bird7:before,
+.bird8:after,
+.bird8:before,
+.bird10:after,
+.bird10:before,
+.bird11:after,
+.bird11:before,
+.bird13:after,
+.bird13:before,
+.bird14:after,
+.bird14:before,
+.bird16:after,
+.bird16:before,
+.bird17:after,
+.bird17:before {
   width: 30px;
   height: 33px;
   top: -8px;
@@ -448,20 +533,224 @@
 
 /* Animations */
 @keyframes flyCycle {
-  100% { background-position: -360px 0; }
+  100% {
+    background-position: -360px 0;
+  }
 }
 
 @keyframes textFade {
-  0% { color: transparent; opacity: 1; top: -50%; left: auto; }
-  1% { color: transparent; opacity: 0; }
-  50% { color: transparent; opacity: 0; }
-  100% { color: #131335; opacity: 1; }
+  0% {
+    color: transparent;
+    opacity: 1;
+    top: -50%;
+    left: auto;
+  }
+
+  1% {
+    color: transparent;
+    opacity: 0;
+  }
+
+  50% {
+    color: transparent;
+    opacity: 0;
+  }
+
+  100% {
+    color: #131335;
+    opacity: 1;
+  }
 }
 
 @keyframes featherFade {
-  0% { top: -100px; opacity: 0; }
-  25% { transform: rotate(10deg); left: 30%; }
-  50% { transform: rotate(-5deg); opacity: 1; left: 45%; }
-  75% { transform: rotate(10deg); left: 32%; }
-  100% { transform: rotate(0deg); opacity: 1; top: 12px; left: 43%; }
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+
+  25% {
+    transform: rotate(10deg);
+    left: 30%;
+  }
+
+  50% {
+    transform: rotate(-5deg);
+    opacity: 1;
+    left: 45%;
+  }
+
+  75% {
+    transform: rotate(10deg);
+    left: 32%;
+  }
+
+  100% {
+    transform: rotate(0deg);
+    opacity: 1;
+    top: 50px;
+    transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+  }
+}
+
+/* MOBILE RESPONSIVENESS - FLUID VW SCALING */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 35vh;
+  }
+
+  .heroTitle {
+    font-size: 5.2vw;
+    letter-spacing: 0.1vw;
+  }
+
+  .heroTitle::after {
+    width: 12vw;
+    height: 0.5vw;
+    margin: 1.4vw auto 0;
+  }
+
+  .wrap {
+    width: 96vw;
+    padding: 0 1vw;
+  }
+
+  /* Scale down Header */
+  .header {
+    margin-top: 4vw;
+  }
+
+  .header h3 {
+    margin-left: 9.7vw;
+    height: 12vw;
+  }
+
+  .header h3:before {
+    display: inline-block;
+    font-size: 2vw;
+    padding-right: 0.5vw;
+  }
+
+  .header h3 span {
+    line-height: 12vw;
+    font-size: 2vw;
+    padding: 0.2vw 0.8vw;
+  }
+
+  /* TOP SECTION */
+  .detailtop {
+    height: 50vw;
+  }
+
+  .productimg {
+    top: -30vw;
+    object-fit: contain;
+  }
+
+  .detailtop:before {
+    top: 28vw;
+    left: 6vw;
+    width: 25%;
+    height: 27.78%;
+  }
+
+  .detailtop:after {
+    width: 48vw;
+    height: 27vw;
+    border-width: 2vw;
+    bottom: 8.2vw;
+    right: 6vw;
+  }
+
+  .boxtitle,
+  .detailcontent h1 {
+    font-size: 3vw;
+  }
+
+  .boxtitletop1 {
+    top: -6vw;
+  }
+
+  .boxtitletop2 {
+    top: 1.2vw;
+    right: -14vw;
+  }
+
+  .boxtitlebottom1 {
+    left: -7vw;
+    bottom: -4vw;
+  }
+
+  .boxtitlebottom2 {
+    top: 5vw;
+  }
+
+  /* CONTENT SECTION */
+  .detailcontent {
+    padding: 6vw 8vw;
+  }
+
+  .detailcontent .subtitle,
+  .detailcontent h3 {
+    font-size: 2.4vw;
+  }
+
+  .detailcontent h3 {
+    top: 18vw;
+    left: -10vw;
+  }
+
+  .detailcontent p {
+    font-size: 1.6vw;
+    line-height: 2.2vw;
+    margin: 1.2vw 0;
+  }
+
+  /* BOTTOM SECTION */
+  .detailbottom {
+    height: 50vw;
+    padding: 0 8vw;
+  }
+
+  .detailbottom .leftitem .itemimg {
+    left: 12vw;
+  }
+
+  .detailbottom .leftitem:after {
+    top: 16vw;
+    left: 6vw;
+    width: calc(50% - 4vw);
+    border-width: 2vw;
+  }
+
+  .detailbottom .rightitem .itemimg {
+    right: 12vw;
+    bottom: 8vw;
+  }
+
+  .detailbottom .rightitem:before {
+    top: 10vw;
+    right: 6vw;
+    width: 24vw;
+    height: 20vw;
+  }
+
+  .detailbottom .rightitem:after {
+    width: 24vw;
+    height: 10vw;
+    bottom: 5vw;
+    background: repeating-linear-gradient(135deg,
+        #001f54,
+        #001f54 1.15vw,
+        transparent 1.15vw,
+        transparent 2.7vw,
+        #001f54 2.7vw,
+        #001f54 3.55vw);
+  }
+
+  /* Bird Button */
+  .buttonBird {
+    transform: scale(0.6);
+    transform-origin: center;
+    margin-top: 10vw;
+  }
 }

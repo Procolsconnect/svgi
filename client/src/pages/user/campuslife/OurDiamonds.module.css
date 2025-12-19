@@ -6,7 +6,7 @@
 
 /* GENERAL STYLES */
 .diamond-showcase {
-  margin: 0;
+
   font-family: 'Playfair Display', serif;
   background-color: #f9fafb;
 }
@@ -15,13 +15,14 @@
 .diamond-hero {
   min-height: 350px;
   width: 100%;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
   text-align: center;
   position: relative;
   overflow: hidden;
   color: white;
+  overflow: hidden;
 }
 
 .diamond-hero img {
@@ -131,7 +132,7 @@
     .diamond-card-animation-layer {
       animation: diamond-slide-in linear both;
       animation-timeline: view();
-      animation-range: cover 0% contain 15%;
+      animation-range: cover 0% contain 10%;
     }
   }
 }

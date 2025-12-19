@@ -1,41 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './PlacementProcess.module.css';
 
 const PlacementProcessPage = () => {
-  const [typedBold, setTypedBold] = useState(0);
-  const [typedItalic, setTypedItalic] = useState(0);
+  const [typedBold, setTypedBold] = useState('');
+  const boldText = 'Placement Process';
 
-  const boldText = 'Online Education';
-  const italicText = 'education';
+  const indexRef = useRef(0);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    let boldIndex = 0;
-    let italicIndex = 0;
 
-    const typeBold = setInterval(() => {
-      if (boldIndex < boldText.length) {
-        setTypedBold(prev => prev + boldText.charAt(boldIndex));
-        boldIndex++;
-      } else {
-        clearInterval(typeBold);
+    setTypedBold('');
+    indexRef.current = 0;
+
+    intervalRef.current = setInterval(() => {
+      if (indexRef.current >= boldText.length) {
+        clearInterval(intervalRef.current);
+        return;
       }
+
+      setTypedBold(boldText.slice(0, indexRef.current + 1));
+      indexRef.current += 1;
     }, 150);
 
-    const typeItalic = setInterval(() => {
-          if (italicIndex < italicText.length) {
-            setTypedItalic(prev => prev + italicText.charAt(italicIndex));
-            italicIndex++;
-          } else {
-            clearInterval(typeItalic);
-          }
-        }, 150);
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, []);
 
-        return () => {
-      clearInterval(typeBold,typeItalic)
-
-    }
-  }, 
-  []);
 
   const companies = [
     "https://media.istockphoto.com/id/1382305677/fr/vectoriel/illustration-vectorielle-de-logo-finance-%C3%A0-la-mode.jpg?s=612x612&w=0&k=20&c=XskfWT1IJtf2ijCRPOlIE1zOirMJhr6cJMWUFeq8usQ=",
@@ -86,12 +78,6 @@ const PlacementProcessPage = () => {
               <h1>
                 <span className={styles.bold}>{typedBold}</span>
 
-                {typedBold === boldText && (
-                  <>
-                    <br />
-                    <span className={styles.italic}>{typedItalic}</span>
-                  </>
-                )}
               </h1>
 
               <p>

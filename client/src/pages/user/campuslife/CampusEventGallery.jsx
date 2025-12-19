@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './CampusEventGallery.module.css';
 
 const apiurl = import.meta.env.VITE_API_URL;
+gsap.registerPlugin(ScrollTrigger);
 
 const HorizontalScrollGallery = () => {
   const portfolioRef = useRef(null);
   const stripRef = useRef(null);
+  const wrapperRef = useRef(null);
   const [projectImages, setProjectImages] = useState([]);
 
   useEffect(() => {
@@ -18,39 +22,31 @@ const HorizontalScrollGallery = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!stripRef.current || !portfolioRef.current) return;
+    if (!stripRef.current || !wrapperRef.current || projectImages.length === 0) return;
 
-      const strip = stripRef.current;
-      const portfolio = portfolioRef.current;
-      const rect = portfolio.getBoundingClientRect();
+    const strip = stripRef.current;
 
-      if (rect.top > 0) {
-        strip.style.transform = "translateX(0px)";
-        return;
-      }
-
-      const scrolled = Math.abs(rect.top);
-      const maxScroll = strip.scrollWidth - window.innerWidth;
-      const translateX = Math.min(scrolled, maxScroll);
-      strip.style.transform = `translateX(-${translateX}px)`;
+    // Calculate total scrollable width
+    const getScrollAmount = () => {
+      let stripWidth = strip.scrollWidth;
+      return -(stripWidth - window.innerWidth);
     };
 
-    const updateStripWidth = () => {
-      if (stripRef.current && portfolioRef.current) {
-        const stripWidth = stripRef.current.scrollWidth;
-        portfolioRef.current.style.setProperty('--stripWidth', `${stripWidth}px`);
+    const tween = gsap.to(strip, {
+      x: getScrollAmount,
+      ease: "none",
+      scrollTrigger: {
+        trigger: wrapperRef.current,
+        start: "top top",
+        end: () => `+=${getScrollAmount() * -1}`,
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true,
       }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', updateStripWidth);
-    handleScroll();
-    updateStripWidth();
+    });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', updateStripWidth);
+      tween.kill();
     };
   }, [projectImages]);
 
@@ -69,7 +65,7 @@ const HorizontalScrollGallery = () => {
       </section>
 
       {/* Horizontal Scroll Gallery */}
-      <section className={styles.portfolio} ref={portfolioRef}>
+      <section className={styles.portfolio} ref={wrapperRef}>
         <div className={styles.galleryWrapper}>
           <div className={styles.galleryStrip} ref={stripRef}>
             {projectImages.map((imgSrc, index) => (

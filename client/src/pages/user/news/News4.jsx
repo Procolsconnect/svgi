@@ -3,7 +3,7 @@ import Swiper from 'swiper';
 import { Pagination, Autoplay, Parallax } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import styles from './news4.module.css';
+import styles from './News4.module.css';
 
 const VerticalParallaxSlider = () => {
   const swiperRef = useRef(null);
@@ -11,7 +11,7 @@ const VerticalParallaxSlider = () => {
   const slides = [
     { id: 1, image: 'https://picsum.photos/id/1011/1200/800', title: 'we help you make modern interior', description: 'we will help you to make an elegant and luxurious interior designed by professional interior designer.', link: '#' },
     { id: 2, image: 'https://picsum.photos/id/1026/1200/800', title: 'we help you make modern interior', description: 'we will help you to make an elegant and luxurious interior designed by professional interior designer.', link: '#' },
-    { id: 3, image: 'https://picsum.photos/id/201/1200/800',  title: 'we help you make modern interior', description: 'we will help you to make an elegant and luxurious interior designed by professional interior designer.', link: '#' },
+    { id: 3, image: 'https://picsum.photos/id/201/1200/800', title: 'we help you make modern interior', description: 'we will help you to make an elegant and luxurious interior designed by professional interior designer.', link: '#' },
     { id: 4, image: 'https://picsum.photos/id/167/1200/800', title: 'we help you make modern interior', description: 'we will help you to make an elegant and luxurious interior designed by professional interior designer.', link: '#' },
   ];
 

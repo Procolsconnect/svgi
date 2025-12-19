@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
-import styles from './news2.module.css';
+import styles from './News2.module.css';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -31,18 +31,18 @@ const DownscrollEffect = () => {
             pinSpacing: true
           }
         })
-        .to(splitLetters.chars, {
-          opacity: 1,
-          duration: 1,
-          ease: "none",
-          stagger: 1
-        })
-        .to({}, { duration: 10 })
-        .to(opacityRevealRef.current, {
-          opacity: 0,
-          scale: 1.2,
-          duration: 50
-        });
+          .to(splitLetters.chars, {
+            opacity: 1,
+            duration: 1,
+            ease: "none",
+            stagger: 1
+          })
+          .to({}, { duration: 10 })
+          .to(opacityRevealRef.current, {
+            opacity: 0,
+            scale: 1.2,
+            duration: 50
+          });
       }
 
       // Reverse scroll effect
@@ -73,8 +73,8 @@ const DownscrollEffect = () => {
             scrub: true
           }
         })
-        .to(liquidRef.current, { attr: { scale: 0 } }, 0)
-        .to(liquifyScrollRef.current, { opacity: 1, y: 0 }, 0);
+          .to(liquidRef.current, { attr: { scale: 0 } }, 0)
+          .to(liquifyScrollRef.current, { opacity: 1, y: 0 }, 0);
       }
     }, containerRef);
 
@@ -157,7 +157,7 @@ const DownscrollEffect = () => {
           </svg>
         </section>
 
-     
+
       </div>
     </div>
   );

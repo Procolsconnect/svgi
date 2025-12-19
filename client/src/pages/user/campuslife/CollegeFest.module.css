@@ -9,7 +9,7 @@
 }
 
 .pageWrapper {
-  font-family: 'Playfair Display', serif;
+ 
   background-color: #f9fafb;
 }
 
@@ -53,7 +53,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 0;
 }
 
@@ -77,27 +77,41 @@
 }
 
 @keyframes underlinePulse {
-  0%, 100% { transform: scaleX(1); opacity: 0.8; }
-  50% { transform: scaleX(1.4); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
 }
 
 /* Hover Animation Section */
 .container {
-  width: 100%;
-  max-width: 1200px;
+
+  padding: 2rem;
   margin: 0 auto;
-  padding: 80px 20px;
+  max-width: 80rem;
+  line-height: 1.4;
+  font-family: "Barlow Condensed", sans-serif;
+  color: #111;
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .introTitle {
-  font-size: 4vw;
-  font-weight: 600;
-  line-height: 1.1;
-  color: #222;
-  position: relative;
-  display: inline-block;
+    font-size: 4.5rem;
   word-spacing: 0.1em;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
+   font-weight: 900;
 }
 
 .introTitle span {
@@ -107,17 +121,21 @@
 }
 
 .introFigure {
-  position: relative;
   display: inline-block;
-  margin: 0 10px;
-  height: 1em;
   transform: scale(1);
   transition: transform 0.3s ease-out;
   perspective: 125px;
+  position: relative;
   z-index: 1;
+  vertical-align: middle;
   -webkit-user-select: none;
   user-select: none;
   margin: 0 0.2em;
+}
+
+.introFigure:hover {
+  transform: scale(1.65);
+  z-index: 2;
 }
 
 .introFigure::after {
@@ -130,16 +148,13 @@
   left: -25px;
 }
 
-.introFigure:hover {
-  transform: scale(1.65);
-  z-index: 2;
-}
-
-.introFigure > img + img {
+.introFigure>img+img {
   display: none;
 }
 
-.introFigure > img:first-of-type {
+/* Images visible by default on all screen sizes */
+
+.introFigure>img:first-of-type {
   height: 0.75em;
   width: auto;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
@@ -147,18 +162,19 @@
   border-radius: 6px;
 }
 
-.introFigure:hover > img:first-of-type {
+.introFigure:hover>img:first-of-type {
   transition: transform 0.1s linear;
 }
 
 .introImage {
-  position: absolute;
-  left: 50%;
-  top: -40%;
-  transform: translateX(-50%);
+  position: relative;
+  left: auto;
+  top: 0;
+  transform: none;
   pointer-events: none;
   height: auto;
   width: auto;
+  display: block;
 }
 
 .introImage1 {
@@ -246,8 +262,10 @@
 }
 
 .gameSection .slick-slider {
-  position: relative; /* needed for dots absolute positioning */
-  overflow: hidden; /* keeps horizontal scroll hidden */
+  position: relative;
+  /* needed for dots absolute positioning */
+  overflow: hidden;
+  /* keeps horizontal scroll hidden */
 }
 
 .gameSection .slick-dots {
@@ -262,14 +280,15 @@
   overflow: visible;
 }
 
-.gameSection .slick-slide {
+
+.gameSection :global(.slick-slide) {
   padding: 0 7px;
   box-sizing: border-box;
 }
 
 .gameSection .item {
   margin: 0 15px 60px;
-  width: 320px !important;
+  width: 320px;
   height: 400px;
   display: flex;
   align-items: flex-end;
@@ -281,8 +300,9 @@
   cursor: pointer;
 }
 
-.gameSection .slick-current {
-  width: 500px !important;
+/* Expand the item when its parent slide is active/current */
+.gameSection :global(.slick-current) .item {
+  width: 500px;
   box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.25);
 }
 
@@ -306,7 +326,7 @@
   transition: all 0.4s ease-in-out;
 }
 
-.gameSection .slick-current .itemDesc {
+.gameSection :global(.slick-current) .itemDesc {
   transform: none;
 }
 
@@ -316,7 +336,7 @@
   transition: all 0.4s ease-in-out 0.2s;
 }
 
-.gameSection .slick-current .itemDesc p {
+.gameSection :global(.slick-current) .itemDesc p {
   opacity: 1;
   transform: translateY(0);
 }
@@ -415,7 +435,7 @@
   rotate: calc((1 - var(--sin))*var(--a));
 }
 
-.stackSlider > div {
+.stackSlider>div {
   display: flex;
   gap: 2em;
   grid-area: 4/2;
@@ -479,7 +499,7 @@
   margin: 0 0 10px;
 }
 
-.slantedSection .rr > div {
+.slantedSection .rr>div {
   text-align: center;
   padding: 40px 20px;
 }
@@ -524,12 +544,12 @@
   border-top: var(--rr-height) solid transparent;
 }
 
-.slantedSection .rrLeft > div {
+.slantedSection .rrLeft>div {
   margin-right: var(--rr-slant);
   margin-left: calc(var(--rr-slant) / 2);
 }
 
-.slantedSection .rrRight > div {
+.slantedSection .rrRight>div {
   margin-right: calc(var(--rr-slant) / 2);
   margin-left: calc(var(--rr-slant) / 4);
 }
@@ -547,22 +567,26 @@
 }
 
 /* Responsive */
+/* Responsive - Scaled Desktop View (Miniature) */
 @media (max-width: 768px) {
-  .hero h1 {
-    font-size: 36px;
-    padding: 0 20px;
+  .pageWrapper {
+    font-size: 3vw;
+    /* Base scale */
   }
 
   .container {
-    padding: 1rem;
-  }
-
-  .introTitle {
     font-size: 2.5rem;
+    padding: 1rem;
     line-height: 1.2;
   }
 
-  .introFigure > img:first-of-type {
+  /* Intro Scaling */
+  .introTitle {
+    font-size: 7vw;
+    line-height: 1.2;
+  }
+
+  .introFigure>img:first-of-type {
     height: 0.6em;
   }
 
@@ -570,44 +594,116 @@
     margin: 0 0.1em;
   }
 
-  .pageWrapper {
-    font-size: 14px;
-  }
-
   .lineTitle {
-    width: 250px;
+    width: 60vw;
   }
 
+  /* Carousel Scaling */
   .gameSection {
-    padding: 30px 15px 20px;
+    padding: 10vw 5vw;
   }
 
+  /* Override fixed widths with vw */
   .gameSection .item {
-    margin: 0 10px 40px;
-    width: 200px !important;
-    height: 280px;
+    margin: 0 2vw 10vw;
+    width: 45vw;
+    /* Scaled down from 320px */
+    height: 60vw;
+    /* Scaled aspect ratio */
+    border-radius: 3vw;
   }
 
-  .gameSection .slick-current {
-    width: 270px !important;
-    box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
+  .gameSection :global(.slick-current) .item {
+    width: 75vw;
+    /* Scaled down from 500px */
+    box-shadow: 2vw 6vw 6vw rgba(0, 0, 0, 0.25);
   }
 
   .gameSection .itemDesc {
-    padding: 0 14px 5px;
-    transform: translateY(calc(100% - 42px));
+    padding: 0 4vw 2vw;
+    transform: translateY(calc(100% - 9vw));
   }
 
-  .slantedSection .rrLeft,
+  /* Slanted Sections - Restore Desktop Layout but Scaled */
+  .slantedSection {
+    padding: 5vw;
+    --rr-height: 40vw;
+    /* Scaled height */
+    --rr-slant: 20vw;
+    /* Scaled slant */
+    --rr-width: 50%;
+    /* Keep 50% split */
+  }
+
+  .slantedSection .rr>div {
+    padding: 5vw 2vw;
+  }
+
+  .slantedSection h2 {
+    font-size: 4.5vw;
+  }
+
+  .slantedSection p {
+    font-size: 3vw;
+  }
+
+  /* Explicitly Keep Floats/Side-by-Side */
+  .slantedSection .rrLeft {
+    float: left;
+    width: calc(var(--rr-width) + 5%);
+    margin-bottom: 0;
+    /* Reset previous stack margin */
+  }
+
   .slantedSection .rrRight {
-    float: none;
-    width: 100%;
-    margin-bottom: 20px;
+    float: right;
+    width: calc(var(--rr-width) - var(--rr-gutter) - 5%);
+    margin-bottom: 0;
   }
 
-  .slantedSection .rrLeft::after,
+  /* Re-enable borders with new vars */
+  .slantedSection .rrLeft::after {
+    display: block;
+    right: 0;
+    border-left: var(--rr-slant) solid var(--rr-bg);
+    border-bottom: var(--rr-height) solid var(--pg-bg);
+  }
+
   .slantedSection .rrRight::before {
-    display: none;
+    display: block;
+    left: calc(var(--rr-slant) * -1);
+    border-right: var(--rr-slant) solid var(--rr-bg);
+    border-top: var(--rr-height) solid transparent;
+  }
+
+  /* Stack Slider Scaling */
+  .latestEventsSection {
+    padding: 10vw 2vw;
+  }
+
+  .latestEventsSection h1 {
+    font-size: 8vw;
+    margin-bottom: 5vw;
+  }
+
+  .latestEventsSection .eventsContainer {
+    gap: 2vw;
+    flex-direction: column;
+    /* Or keep row if fitting? Stack slider is wide. */
+    /* Stack slider is designed for wide, let's scale it way down to fit width */
+    transform: scale(0.6);
+    transform-origin: top center;
+    width: 166%;
+    /* Compensate for 0.6 scale (100/0.6) */
+    align-self: center;
+    margin-left: -33%;
+    /* Center it back */
+  }
+
+  /* Adjust gap since we scaled the container */
+  .stackSlider {
+    font-size: 1.25em;
+    /* relative to scaled parent */
   }
 }
 
@@ -615,4 +711,175 @@
   .pageWrapper {
     font-size: 14px;
   }
+}
+
+/* ================
+   Mobile Styles (max-width: 480px)
+   ================ */
+@media (max-width: 480px) {
+
+  /* Hero Section Mobile */
+  .hero {
+    min-height: 250px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero h1::after {
+    width: 80px;
+    height: 3px;
+  }
+
+  /* Hover Animation Section - Fix images visibility */
+  .container {
+    padding: 40px 16px;
+  }
+
+  .introTitle {
+    font-size: 2.5rem;
+    line-height: 1.5;
+    display: block;
+    text-align: center;
+  }
+
+  .introFigure {
+    display: inline-block;
+    margin: 8px 4px;
+    height: auto;
+    perspective: none;
+    transform: none !important;
+  }
+
+  .introFigure:hover {
+    transform: none;
+  }
+
+  .introFigure>img:first-of-type {
+    height: 60px;
+    width: auto;
+    max-width: 100px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    position: relative;
+    display: block;
+  }
+
+  .introImage {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100% !important;
+    max-width: 100px;
+    height: auto !important;
+  }
+
+  .introImage1,
+  .introImage2 {
+    width: 80px !important;
+  }
+
+  .introFigure3 .introImage {
+    width: 60px !important;
+  }
+
+  .introTomato,
+  .introLeaf {
+    display: none;
+  }
+
+  /* Carousel Section - Single line without dots */
+  .gameSection {
+    padding: 30px 12px;
+  }
+
+  /* Hide dots on mobile */
+  .gameSection :global(.slick-dots) {
+    display: none !important;
+  }
+
+  /* Hide arrows on mobile for touch swipe */
+  .gameSection :global(.slick-arrow) {
+    display: none !important;
+  }
+
+  .lineTitle {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  /* Single item full width slider */
+  .gameSection .item {
+    margin: 0 8px 20px;
+    width: calc(100vw - 48px) !important;
+    height: 300px;
+    border-radius: 12px;
+  }
+
+  .gameSection :global(.slick-current) .item {
+    width: calc(100vw - 48px) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .gameSection :global(.slick-slide) {
+    padding: 0;
+  }
+
+  .gameSection .itemDesc {
+    padding: 0 16px 16px;
+    transform: none;
+  }
+
+  .gameSection .itemDesc h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .gameSection .itemDesc p {
+    opacity: 1;
+    transform: none;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* Slanted Section Mobile */
+  .slantedSection {
+    padding: 20px 16px;
+    --rr-height: auto;
+    --rr-slant: 0;
+  }
+
+  .slantedSection .rrLeft,
+  .slantedSection .rrRight {
+    float: none;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .slantedSection .rrLeft::after,
+  .slantedSection .rrRight::before {
+    display: none;
+  }
+
+  .slantedSection .rr>div {
+    padding: 24px 16px;
+    margin: 0;
+  }
+
+  .slantedSection h2 {
+    font-size: 20px;
+  }
+
+  .slantedSection p {
+    font-size: 14px;
+  }
+  .latestEventsSection {
+    height: 50vh;
+  background: #070410;
+  color: white;
+  font-family: Poppins, sans-serif;
+  padding: 60px 50px;
+}
 }

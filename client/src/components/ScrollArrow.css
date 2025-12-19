@@ -14,16 +14,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 49;
     transition: all 1.2s ease;
-}
-
-#scroll.clicked {
-    transform: rotate(360deg);
 }
 
 #scroll.rotate {
     transform: rotate(180deg);
+}
+
+#scroll.clicked {
+    transform: rotate(360deg);
 }
 
 .arrow-bounce {

@@ -11,12 +11,12 @@
 .swiperCarouselHeader {
   display: flex;
   justify-content: center;
-  align-items: center;
+
 }
 
 .swiperCarouselTitle {
   color: #dbd56e;
-  background: -webkit-linear-gradient(25deg, #eee, #333);
+  background: -webkit-linear-gradient(25deg, #787676, #333);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -25,19 +25,31 @@
   overflow: hidden;
   white-space: nowrap;
   border-right: 2px solid;
-  animation: swiperCarouselType 1.5s steps(90) 1.5s 1 normal both,
-             swiperCarouselCursor 1s step-end infinite;
+  /* Animation removed from base class, added to modifier class below */
   position: relative;
+  margin-top: 3rem;
+}
+
+.swiperCarouselTitleAnimate {
+  animation: swiperCarouselType 1.5s steps(90) 0s 1 normal both,
+    swiperCarouselCursor 1s step-end infinite;
 }
 
 /* Typewriter */
 @keyframes swiperCarouselType {
-  from { width: 0; }
-  to { width: 100%; }
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes swiperCarouselCursor {
-  50% { border-color: transparent; }
+  50% {
+    border-color: transparent;
+  }
 }
 
 /* ============================================
@@ -45,7 +57,7 @@
 ============================================ */
 .swiperCarouselWrapper {
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -61,7 +73,9 @@
 .swiperCarouselWrapper :global(.swiper-slide) {
   scale: 1.25;
   width: 250px;
-  height: 300px;
+  height: 140px;
+  min-height: 80px;
+  max-height: 180px;
   transition: scale 250ms ease-in-out;
 }
 
@@ -129,7 +143,7 @@
 @media (max-width: 768px) {
   .swiperCarouselBody {
     height: 80vh;
-    padding: 1rem 0;
+    padding: 2rem 0;
   }
 
   .swiperCarouselWrapper {
@@ -174,7 +188,7 @@
 
   .swiperCarouselTitle {
     font-size: 1.4rem;
-    padding: 0 1rem;
+ 
   }
 }
 

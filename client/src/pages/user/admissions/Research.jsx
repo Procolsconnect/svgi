@@ -12,10 +12,10 @@ const UndergraduateCoursesPage = () => {
     <div className={styles.pageWrapper}>
       {/* HERO SECTION */}
       <div className={styles.heroSection}>
-        <img 
-          src="hero img.jpg" 
-          alt="Hero Background" 
-          className={styles.heroImage} 
+        <img
+          src="hero img.jpg"
+          alt="Hero Background"
+          className={styles.heroImage}
         />
         <h1 className={styles.heroTitle}>Research Courses</h1>
       </div>
@@ -54,15 +54,15 @@ const UndergraduateCoursesPage = () => {
           <h2 className={`${styles.italic} ${styles.trans90}`}>PRODUCT DETAILS</h2>
           <h2>Kogi Cosby sweater ethical squid irony</h2>
           <p>
-            In the tumultuous business of cutting-in and attending to a whale, there is much running backwards 
-            and forwards among the crew. Now hands are wanted here, and then again hands are wanted there. 
-            There is no staying in any one place; for at one and the same time everything has to be done everywhere. 
+            In the tumultuous business of cutting-in and attending to a whale, there is much running backwards
+            and forwards among the crew. Now hands are wanted here, and then again hands are wanted there.
+            There is no staying in any one place; for at one and the same time everything has to be done everywhere.
             It is much the same with him who endeavors the description of the scene.
           </p>
           <p>
-            We must now retrace our way a little. It was mentioned that upon first breaking ground in the whale's back, 
-            the blubber-hook was inserted into the original hole there cut by the spades of the mates. But how did so 
-            clumsy and weighty a mass as that same hook get fixed in that hole? It was inserted there by my particular 
+            We must now retrace our way a little. It was mentioned that upon first breaking ground in the whale's back,
+            the blubber-hook was inserted into the original hole there cut by the spades of the mates. But how did so
+            clumsy and weighty a mass as that same hook get fixed in that hole? It was inserted there by my particular
             friend Queequeg, whose duty it was, as harpooneer.
           </p>
         </div>
@@ -108,37 +108,11 @@ const UndergraduateCoursesPage = () => {
           </svg>
 
           {/* All 30 flying birds */}
+          {/* All 30 flying birds */}
           <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird}></span>
-          <span className={styles.bird30}></span>
+          {Array.from({ length: 30 }).map((_, i) => (
+            <span key={i} className={`${styles.birdItem} ${styles[`bird${i + 1}`]}`}></span>
+          ))}
         </button>
       </div>
     </div>

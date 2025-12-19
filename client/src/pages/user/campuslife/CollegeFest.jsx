@@ -19,22 +19,13 @@ const MergedPage = () => {
     const image = figure.querySelector("img");
     if (!image) return;
 
-    const x = e.pageX;
-    const y = e.pageY;
-    const targetCoords = figure.getBoundingClientRect();
-    // Calculate center relative to page
-    // Note: getBoundingClientRect is relative to viewport.
-    // pageX/Y includes scroll. We need consistent coords.
-    // Easier approach: Use event.nativeEvent.offsetX/Y for local, or keep original logic but verify rect.
+    // Use offsetX/Y for stable local coordinates regardless of scroll/scale
+    const x = e.nativeEvent.offsetX;
+    const y = e.nativeEvent.offsetY;
 
-    // Original Logic adapted:
-    // Original: const targetX = targetCoords.left + this.offsetWidth / 2; (this likely implied absolute page coords in original context if using pageX/Y)
-    // Actually, let's stick to viewport logic if we use clientX/Y, or page logic if pageX/Y.
-    // rect.left + window.scrollX gives page position.
-
-    const rect = figure.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2 + window.scrollX;
-    const centerY = rect.top + rect.height / 2 + window.scrollY;
+    // Center is simply half of offset dimensions
+    const centerX = figure.offsetWidth / 2;
+    const centerY = figure.offsetHeight / 2;
 
     const angleX = (centerY - y) / -25;
     const angleY = (centerX - x) / 25;
@@ -64,7 +55,7 @@ const MergedPage = () => {
     autoplay: true,
     autoplaySpeed: 2000,
     speed: 800,
-    slidesToShow: 1,
+    slidesToShow: 1.5,
     slidesToScroll: 1,
     swipeToSlide: true,
     draggable: true,
@@ -72,7 +63,8 @@ const MergedPage = () => {
     dots: true,
     centerMode: false,
     pauseOnHover: false,
-    adaptiveHeight: false,
+    adaptiveHeight: true,
+    focusOnSelect: true,
   };
 
   const handleStackInc = (inc) => {
@@ -92,7 +84,7 @@ const MergedPage = () => {
 
       {/* Hover Animation Section */}
       <div className={styles.container}>
-        <h2 className={styles.introTitle}>
+        <h1 className={styles.introTitle}>
           AppHarvest
           <span
             className={styles.introFigure}
@@ -101,19 +93,14 @@ const MergedPage = () => {
           >
             <img
               src="https://www.appharvest.com/wp-content/uploads/2021/02/image-1.png"
-              srcSet="https://www.appharvest.com/wp-content/uploads/2021/02/image-1@2x.png 2x"
+              // srcSet="https://www.appharvest.com/wp-content/uploads/2021/02/image-1@2x.png 2x"
               width="235"
               height="95"
               alt=""
               className={`${styles.introImage} ${styles.introImage1}`}
               loading="lazy"
             />
-            <img
-              src="https://www.appharvest.com/wp-content/uploads/2021/02/tomato@2x.png"
-              alt="tomato"
-              className={styles.introTomato}
-              loading="lazy"
-            />
+        
           </span>
           is on a mission
           <span
@@ -123,10 +110,6 @@ const MergedPage = () => {
           >
             <img
               src="https://www.appharvest.com/wp-content/uploads/2021/02/image-2.png"
-              srcSet="https://www.appharvest.com/wp-content/uploads/2021/02/image-2@2x.png 2x"
-              width="364"
-              height="95"
-              alt=""
               className={`${styles.introImage} ${styles.introImage2}`}
               loading="lazy"
             />
@@ -139,22 +122,16 @@ const MergedPage = () => {
           >
             <img
               src="https://www.appharvest.com/wp-content/uploads/2021/02/image-3.png"
-              srcSet="https://www.appharvest.com/wp-content/uploads/2021/02/image-3@2x.png 2x"
               width="149"
               height="95"
               alt=""
               className={styles.introImage}
               loading="lazy"
             />
-            <img
-              src="https://www.appharvest.com/wp-content/uploads/2021/02/leaf@2x.png"
-              alt="leaf"
-              className={styles.introLeaf}
-              loading="lazy"
-            />
+         
           </span>
           Appalachia.
-        </h2>
+        </h1>
       </div>
 
       {/* Carousel Section (react-slick replacing OwlCarousel) */}
@@ -251,32 +228,32 @@ const MergedPage = () => {
             <article style={{ "--i": 0, "--a": "-7deg" }}>
               <h2>Magizh 2025</h2>
               <em>This is the first time such a grand function has <br /> been held in our college.</em>
-              <img src="magizh.jpg" alt="Magizh 2025 event" />
+              <img src="/images/magizh.jpg" alt="Magizh 2025 event" />
             </article>
             <article style={{ "--i": 1, "--a": "8deg" }}>
               <h2>National Service awareness</h2>
               <em>A discussion was held for students on National Service Awareness.</em>
-              <img src="national.jpg" alt="National Service awareness event" />
+              <img src="/images/national.jpg" alt="National Service awareness event" />
             </article>
             <article style={{ "--i": 2, "--a": "-3deg" }}>
               <h2>1st year inauguration ceremony</h2>
               <em>Department of BE / B.tech</em>
-              <img src="inauguration.jpg" alt="1st year inauguration ceremony" />
+              <img src="/images/inauguration.jpg" alt="1st year inauguration ceremony" />
             </article>
             <article style={{ "--i": 3, "--a": "6deg" }}>
               <h2>Tech Trend Path of success</h2>
               <em>The future of technology is bright and full of possibilities.</em>
-              <img src="tech.jpg" alt="Tech Trend Path of success event" />
+              <img src="/imaes/tech.jpg" alt="Tech Trend Path of success event" />
             </article>
             <article style={{ "--i": 4, "--a": "-11deg" }}>
               <h2>Freshers Day 2025</h2>
               <em>Department of Computer Application</em>
-              <img src="Freshers.jpg" alt="Freshers Day 2025 event" />
+              <img src="/images/Freshers.jpg" alt="Freshers Day 2025 event" />
             </article>
             <article style={{ "--i": 5, "--a": "9deg" }}>
               <h2>Farewell Day 2025</h2>
               <em>Grand celebration of the physiotherapy class.</em>
-              <img src="farewell.jpg" alt="Farewell Day 2025 event" />
+              <img src="/images/farewell.jpg" alt="Farewell Day 2025 event" />
             </article>
             <article style={{ "--i": 6, "--a": "-4deg" }}>
               <h2>Cougar</h2>

@@ -53,31 +53,8 @@ const TrainingPlacementsPage = () => {
     setCards(cardData);
   }, []);
 
-  const smoothScroll = (targetIndex) => {
-    if (targetIndex === -1) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (sectionsRef.current[targetIndex]) {
-      sectionsRef.current[targetIndex].scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
-  const handleScrollClick = () => {
-    setScrollClicked(true);
-    const totalSections = sectionsRef.current.length;
-
-    if (currentSection >= totalSections) {
-      setCurrentSection(0);
-      smoothScroll(-1);
-      setScrollRotate(false);
-    } else {
-      smoothScroll(currentSection);
-      if (currentSection === totalSections - 1) {
-        setScrollRotate(true);
-      }
-      setCurrentSection(currentSection + 1);
-    }
-  };
-
+  
   const rotateSlider = (direction) => {
     if (expandedCard !== null) return;
 
@@ -225,7 +202,7 @@ const TrainingPlacementsPage = () => {
         <img src="hero img.jpg" alt="Hero Background" />
         <div className={styles.heroOverlay} />
         <h1 className={styles.heroTitle}>Training & Placements</h1>
-          <Arrow sectionsSelector={`.${styles.section}`} />
+             <Arrow sectionsSelector="section" />
       </div>
 
 
@@ -262,7 +239,6 @@ const TrainingPlacementsPage = () => {
           <p className={styles.subtitle}>In Our College Have</p>
           <h1 className={styles.mainTitle}>Centralized Placement Process for all Campuses</h1>
         </div>
-
         <div
           className={`${styles.sliderContainer} ${isDragging ? styles.dragging : ''}`}
           ref={containerRef}

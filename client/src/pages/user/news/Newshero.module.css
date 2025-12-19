@@ -63,7 +63,8 @@
 
 /* ==================== VIDEO + TEXT SECTION ==================== */
 .newshero-feature {
-  background: rgb(28, 27, 27);
+
+  background: rgba(103, 103, 99, 0.272);
   padding: 140px 5vw;
   display: flex;
   align-items: center;

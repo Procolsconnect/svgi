@@ -90,7 +90,7 @@ const UndergraduateCoursesPage = () => {
           </div>
         </div>
 
-        <div 
+        <div
           className={styles.topImage}
           style={{ backgroundImage: loading || error ? 'none' : `url(${courseData.image1})` }}
         ></div>
@@ -113,25 +113,25 @@ const UndergraduateCoursesPage = () => {
           <h2 className={`${styles.italic} ${styles.trans90}`}>PRODUCT DETAILS</h2>
           <h2>Kogi Cosby sweater ethical squid irony</h2>
           <p>
-            In the tumultuous business of cutting-in and attending to a whale, there is much running backwards 
-            and forwards among the crew. Now hands are wanted here, and then again hands are wanted there. 
-            There is no staying in any one place; for at one and the same time everything has to be done everywhere. 
-            It is much the same with him who endeavors the description of the scene. 
+            In the tumultuous business of cutting-in and attending to a whale, there is much running backwards
+            and forwards among the crew. Now hands are wanted here, and then again hands are wanted there.
+            There is no staying in any one place; for at one and the same time everything has to be done everywhere.
+            It is much the same with him who endeavors the description of the scene.
           </p>
           <p>
-            We must now retrace our way a little. It was mentioned that upon first breaking ground in the whale's back, 
-            the blubber-hook was inserted into the original hole there cut by the spades of the mates. But how did so 
-            clumsy and weighty a mass as that same hook get fixed in that hole? It was inserted there by my particular 
+            We must now retrace our way a little. It was mentioned that upon first breaking ground in the whale's back,
+            the blubber-hook was inserted into the original hole there cut by the spades of the mates. But how did so
+            clumsy and weighty a mass as that same hook get fixed in that hole? It was inserted there by my particular
             friend Queequeg, whose duty it was, as harpooneer.
           </p>
         </div>
 
-        <div 
+        <div
           className={styles.bottomImg}
           style={{ backgroundImage: loading || error ? 'none' : `url(${courseData.image3})` }}
         ></div>
 
-        <div 
+        <div
           className={styles.centerImg}
           style={{ backgroundImage: loading || error ? 'none' : `url(${courseData.image2})` }}
         ></div>
@@ -144,7 +144,7 @@ const UndergraduateCoursesPage = () => {
       <div className={styles.wrapperNo4}>
         <p>THE complete UG course are inside the button So</p>
         <h1>Click the Button</h1>
-        <button 
+        <button
           className={`${styles.buttonBird} ${isButtonActive ? styles.active : ''}`}
           onClick={handleButtonClick}
         >
@@ -152,7 +152,7 @@ const UndergraduateCoursesPage = () => {
             {isButtonActive ? 'DONE' : 'OPEN'}
           </p>
           <svg version="1.1" className={styles.feather} xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-               viewBox="0 0 75 38" style={{enableBackground: 'new 0 0 75 38'}} xmlSpace="preserve">
+            viewBox="0 0 75 38" style={{ enableBackground: 'new 0 0 75 38' }} xmlSpace="preserve">
             <g>
               <path d="M20.8,31.6c3.1-0.7,2.9-2.3,2,1c9.1,4.4,20.4,3.7,29.1-0.8l0,0c0.7-2.1,1-3.9,1-3.9c0.6,0.8,0.8,1.7,1,2.9
                   c4.1-2.3,7.6-5.3,10.2-8.3c0.4-2.2,0.4-4,0.4-4.1c0.6,0.4,0.9,1.2,1.2,2.1c4.5-6.1,5.4-11.2,3.7-13.5c1.1-2.6,1.6-5.4,1.2-7.7
@@ -162,36 +162,9 @@ const UndergraduateCoursesPage = () => {
             </g>
           </svg>
           <span className={styles.bird}></span>
-          <span className={styles.bird1}></span>
-          <span className={styles.bird2}></span>
-          <span className={styles.bird3}></span>
-          <span className={styles.bird4}></span>
-          <span className={styles.bird5}></span>
-          <span className={styles.bird6}></span>
-          <span className={styles.bird7}></span>
-          <span className={styles.bird8}></span>
-          <span className={styles.bird9}></span>
-          <span className={styles.bird10}></span>
-          <span className={styles.bird11}></span>
-          <span className={styles.bird12}></span>
-          <span className={styles.bird13}></span>
-          <span className={styles.bird14}></span>
-          <span className={styles.bird15}></span>
-          <span className={styles.bird16}></span>
-          <span className={styles.bird17}></span>
-          <span className={styles.bird18}></span>
-          <span className={styles.bird19}></span>
-          <span className={styles.bird20}></span>
-          <span className={styles.bird21}></span>
-          <span className={styles.bird22}></span>
-          <span className={styles.bird23}></span>
-          <span className={styles.bird24}></span>
-          <span className={styles.bird25}></span>
-          <span className={styles.bird26}></span>
-          <span className={styles.bird27}></span>
-          <span className={styles.bird28}></span>
-          <span className={styles.bird29}></span>
-          <span className={styles.bird30}></span>
+          {Array.from({ length: 30 }).map((_, i) => (
+            <span key={i} className={`${styles.birdItem} ${styles[`bird${i + 1}`]}`}></span>
+          ))}
         </button>
       </div>
     </div>
