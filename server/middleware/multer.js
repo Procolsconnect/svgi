@@ -14,12 +14,16 @@ cloudinary.config({
 // 🔹 CLOUDINARY STORAGE CONFIG
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: async (_, file) => {
+  params: async (req, file) => {
     const ext = file.originalname.split(".").pop().toLowerCase();
 
     // Detect if file is a document
     const documentExt = ["pdf", "ppt", "pptx"];
     const isDocument = documentExt.includes(ext);
+
+    // Detect if file is a video
+    const videoExt = ["mp4", "mov", "avi", "mkv", "webm"];
+    const isVideo = videoExt.includes(ext);
 
     // Clean file name
     const sanitizedName = file.originalname
@@ -28,11 +32,18 @@ const storage = new CloudinaryStorage({
       .replace(/\s+/g, "_")
       .replace(/[^a-zA-Z0-9_-]/g, "");
 
+    let resource_type = "auto";
+    if (isDocument) resource_type = "raw";
+    else if (isVideo) resource_type = "video";
+    else resource_type = "image";
+
     return {
       folder: "svgi",
-      resource_type: isDocument ? "raw" : "auto",  // KEY LINE
+      resource_type: resource_type,
       public_id: `${Date.now()}-${sanitizedName}`,
-      format: ext,
+      // Cloudinary format can be tricky for videos, 
+      // sometimes it's better to let it detect from the public_id or omit it
+      format: isVideo ? undefined : ext,
     };
   },
 });

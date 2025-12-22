@@ -1,4 +1,4 @@
-const { AboutOverviewHero, AboutOverviewContent } = require("../../models/about");
+const { AboutOverviewHero, AboutOverviewIntro, AboutOverviewGrid } = require("../../models/about");
 
 // CREATE HERO
 async function createOverviewHero(body, file) {
@@ -37,58 +37,96 @@ async function deleteOverviewHero(id) {
     return hero;
 }
 
-// ================= Overview Content ==================
+// ================= Overview Intro ==================
 
-// CREATE OVERVIEW
-async function createOverview(body, files) {
-    return await AboutOverviewContent.create({
-        sectionOne: {
-            title: body.sectionOneTitle,
-            description: body.sectionOneDescription,
-            shortText: body.sectionOneShortText,
-            images: files.sectionOneImages?.map(f => f.path) || [],
-        },
-        sectionTwo: {
-            title: body.sectionTwoTitle,
-            description: body.sectionTwoDescription,
-            shortText: body.sectionTwoShortText,
-            gridImages: files.sectionTwoImages?.map(f => f.path) || [],
-        },
+async function createOverviewIntro(body, files) {
+    return await AboutOverviewIntro.create({
+        title: body.title,
+        description: body.description,
+        shortText: body.shortText,
+        images: files?.images?.map(f => f.path) || [],
     });
 }
 
-// GET ALL OVERVIEW
-async function getAllOverview() {
-    return await AboutOverviewContent.find().sort({ createdAt: -1 });
+async function getAllOverviewIntro() {
+    return await AboutOverviewIntro.find().sort({ createdAt: -1 });
 }
 
-// GET OVERVIEW BY ID
-async function getOverviewById(id) {
-    const data = await AboutOverviewContent.findById(id);
-    if (!data) throw new Error("Overview not found");
+async function getOverviewIntroById(id) {
+    const data = await AboutOverviewIntro.findById(id);
+    if (!data) throw new Error("Intro not found");
     return data;
 }
 
-// UPDATE OVERVIEW
-async function updateOverview(id, body, files) {
-    const updateData = {
-        sectionOne: { ...body.sectionOne },
-        sectionTwo: { ...body.sectionTwo },
-    };
-    if (files.sectionOneImages)
-        updateData.sectionOne.images = files.sectionOneImages.map(f => f.path);
-    if (files.sectionTwoImages)
-        updateData.sectionTwo.gridImages = files.sectionTwoImages.map(f => f.path);
+async function updateOverviewIntro(id, body, files) {
+    const intro = await AboutOverviewIntro.findById(id);
+    if (!intro) throw new Error("Intro not found");
 
-    const updated = await AboutOverviewContent.findByIdAndUpdate(id, updateData, { new: true });
-    if (!updated) throw new Error("Overview not found");
-    return updated;
+    if (body.title) intro.title = body.title;
+    if (body.description) intro.description = body.description;
+    if (body.shortText) intro.shortText = body.shortText;
+
+    // Handle Image Array Merging
+    // body.images might be a string (one existing URL) or an array of strings
+    let existingImages = [];
+    if (body.images) {
+        existingImages = Array.isArray(body.images) ? body.images : [body.images];
+    }
+    const newImages = files?.images?.map(f => f.path) || [];
+    intro.images = [...existingImages, ...newImages];
+
+    return await intro.save();
 }
 
-// DELETE OVERVIEW
-async function deleteOverview(id) {
-    const deleted = await AboutOverviewContent.findByIdAndDelete(id);
-    if (!deleted) throw new Error("Overview not found");
+async function deleteOverviewIntro(id) {
+    const deleted = await AboutOverviewIntro.findByIdAndDelete(id);
+    if (!deleted) throw new Error("Intro not found");
+    return deleted;
+}
+
+// ================= Overview Grid ==================
+
+async function createOverviewGrid(body, files) {
+    return await AboutOverviewGrid.create({
+        title: body.title,
+        description: body.description,
+        shortText: body.shortText,
+        gridImages: files?.gridImages?.map(f => f.path) || [],
+    });
+}
+
+async function getAllOverviewGrid() {
+    return await AboutOverviewGrid.find().sort({ createdAt: -1 });
+}
+
+async function getOverviewGridById(id) {
+    const data = await AboutOverviewGrid.findById(id);
+    if (!data) throw new Error("Grid not found");
+    return data;
+}
+
+async function updateOverviewGrid(id, body, files) {
+    const grid = await AboutOverviewGrid.findById(id);
+    if (!grid) throw new Error("Grid not found");
+
+    if (body.title) grid.title = body.title;
+    if (body.description) grid.description = body.description;
+    if (body.shortText) grid.shortText = body.shortText;
+
+    // Handle Image Array Merging
+    let existingImages = [];
+    if (body.gridImages) {
+        existingImages = Array.isArray(body.gridImages) ? body.gridImages : [body.gridImages];
+    }
+    const newImages = files?.gridImages?.map(f => f.path) || [];
+    grid.gridImages = [...existingImages, ...newImages];
+
+    return await grid.save();
+}
+
+async function deleteOverviewGrid(id) {
+    const deleted = await AboutOverviewGrid.findByIdAndDelete(id);
+    if (!deleted) throw new Error("Grid not found");
     return deleted;
 }
 
@@ -98,9 +136,14 @@ module.exports = {
     getOverviewHeroById,
     updateOverviewHero,
     deleteOverviewHero,
-    createOverview,
-    getAllOverview,
-    getOverviewById,
-    updateOverview,
-    deleteOverview
+    createOverviewIntro,
+    getAllOverviewIntro,
+    getOverviewIntroById,
+    updateOverviewIntro,
+    deleteOverviewIntro,
+    createOverviewGrid,
+    getAllOverviewGrid,
+    getOverviewGridById,
+    updateOverviewGrid,
+    deleteOverviewGrid
 };

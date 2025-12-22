@@ -49,11 +49,24 @@ app.use(session({
 // 6. Routes
 setRoutes(app);
 
-// 7. Start server
+// 7. Global Error Handler
+app.use((err, req, res, next) => {
+  console.error("Global Error Handler:", err.message);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || "Internal Server Error",
+  });
+});
+
+// 8. Start server
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server started on http://localhost:${port}`);
 });
+
+// Increase timeout for slow uploads (10 minutes)
+server.timeout = 600000;
+
 connectDB();
 
 module.exports = app;

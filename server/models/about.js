@@ -24,21 +24,21 @@ const AboutOverviewHeroSchema = new mongoose.Schema({
 }, { timestamps: true });
 const AboutOverviewHero = mongoose.model("AboutOverviewHero", AboutOverviewHeroSchema);
 
-const OverviewContentSchema = new mongoose.Schema({
-    sectionOne: {
-        images: [String],
-        shortText: String,
-        title: String,
-        description: String,
-    },
-    sectionTwo: {
-        shortText: String,
-        title: String,
-        description: String,
-        gridImages: [String],
-    },
+const OverviewIntroSchema = new mongoose.Schema({
+    images: [String],
+    shortText: String,
+    title: String,
+    description: String,
 }, { timestamps: true });
-const AboutOverviewContent = mongoose.model("AboutOverviewContent", OverviewContentSchema);
+const AboutOverviewIntro = mongoose.model("AboutOverviewIntro", OverviewIntroSchema);
+
+const OverviewGridSchema = new mongoose.Schema({
+    shortText: String,
+    title: String,
+    description: String,
+    gridImages: [String],
+}, { timestamps: true });
+const AboutOverviewGrid = mongoose.model("AboutOverviewGrid", OverviewGridSchema);
 
 // ------------------ LEADERSHIP MODELS ------------------
 const LeadershipHeroSchema = new mongoose.Schema({
@@ -80,10 +80,10 @@ const vmHeroSchema = new mongoose.Schema({
 const VMHeroSchema = mongoose.model("VMHeroSchema", vmHeroSchema);
 
 const vmCardSchema = new mongoose.Schema({
-title: { type: String, required: true },
-desc: { type: String, required: true },
-image: { type: String, required: true },
-link: { type: String, required: true }
+    title: { type: String, required: true },
+    desc: { type: String, required: true },
+    image: { type: String, required: true },
+    link: { type: String, required: true }
 }, { timestamps: true });
 const VMCardSchema = mongoose.model("VMCardSchema", vmCardSchema);
 
@@ -136,7 +136,7 @@ const campusCircleSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const  CampusCircle = mongoose.model("CampusCircle", campusCircleSchema);
+const CampusCircle = mongoose.model("CampusCircle", campusCircleSchema);
 
 
 
@@ -145,7 +145,8 @@ const  CampusCircle = mongoose.model("CampusCircle", campusCircleSchema);
 module.exports = {
     BalticData,
     AboutOverviewHero,
-    AboutOverviewContent,
+    AboutOverviewIntro,
+    AboutOverviewGrid,
     LeadershipHero,
     MaterialCard,
     QuoteCard,
