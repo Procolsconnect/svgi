@@ -153,15 +153,12 @@ const SwiperCarousel = () => {
 
       <div className={`swiper ${styles.swiperCarouselWrapper}`} ref={swiperRef}>
         <div className="swiper-wrapper"></div>
-
         <div
           className={`swiper-button-next swiper-carousel-next`}
         ></div>
-
         <div
           className={`swiper-button-prev swiper-carousel-prev`}
         ></div>
-
       </div>
     </div>
   );

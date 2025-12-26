@@ -107,7 +107,7 @@ const CampusLife = () => {
       <section className={`${styles.campusSection} ${styles.section}`}>
         {/* Left Panel */}
         <div className={styles.leftPanel}>
-          <img src="https://vit.ac.in/sites/default/files/inline-images/VIT-Students.jpg" alt="Campus Students" />
+          <img src="/images/arts.jpeg" alt="Campus Students" />
         </div>
 
         {/* Right Panel */}

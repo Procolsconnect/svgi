@@ -79,6 +79,14 @@ export default function VisionMissionAdmin() {
 
     if (!componentId) {
         return (
+            <div className="admin-section">
+                <div className="section-header">
+                    <div>
+                        <button className="back-link" onClick={() => navigate("/admin/about")}>← Back to About</button>
+                        <h1>VM Components</h1>
+                        <p>Select a component to manage</p>
+                    </div>
+                </div>
             <div className="component-cards">
                 <div className="component-card" onClick={() => navigate("/admin/about/vision-mission/hero")}>
                     <div className="card-icon"><i className="fa fa-image"></i></div>
@@ -95,6 +103,7 @@ export default function VisionMissionAdmin() {
                     <h3>Core Values</h3>
                     <p>Values and Ethics</p>
                 </div>
+            </div>
             </div>
         )
     }

@@ -68,10 +68,13 @@
 }
 
 @keyframes underlinePulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scaleX(1);
     opacity: 0.8;
   }
+
   50% {
     transform: scaleX(1.4);
     opacity: 1;
@@ -264,21 +267,59 @@
 }
 
 .info {
-  margin: 10px 0;
-  padding: 3px 10px;
-  border-radius: 8px;
-  font-size: 15px;
-  color: #1d3557;
+  width: 100%;
   display: flex;
-  gap: 10px;
   align-items: center;
+  justify-content: flex-start;
+  /* Changed from center to align icons vertically */
+  gap: 12px;
+  padding: 12px 20px;
+  margin-bottom: 12px;
+  
+  border-radius: 12px;
+  color: #475569;
+  font-size: 0.95rem;
   font-weight: 500;
-  transition: all 0.3s ease;
-  max-width: 250px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  text-align: left;
+}
+
+.info:hover {
+  background: #e0f2fe;
+  color: #2563eb;
+}
+
+.info svg,
+.info i {
+  font-size: 1.2rem;
+  color: #2563eb;
+  flex-shrink: 0;
+  width: 24px;
+  /* Fixed width for icon ensures text starts at same spot */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info span {
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.info a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
   overflow: hidden;
 }
 
+/* The following rules were removed as they are replaced by the new .info, .info svg, .info i, and .info span rules */
+/*
 .infoIcon {
   flex-shrink: 0;
   display: flex;
@@ -327,12 +368,15 @@
   .wrapGrid {
     flex-direction: column;
   }
+
   .col {
     flex: 1 1 100%;
   }
+
   .gradientSection {
     flex-direction: column;
   }
+
   .gradientShape {
     width: 100%;
     max-width: none;
@@ -344,6 +388,7 @@
     shape-outside: linear-gradient(to bottom, white 40%, transparent 95%);
     shape-image-threshold: 0.35;
   }
+
   .gradientSection h2 {
     text-align: center;
   }

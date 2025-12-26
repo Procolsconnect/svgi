@@ -1,0 +1,240 @@
+.section {
+    padding: 60px 20px;
+    background: #f0f7ff;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* Left Side Styles */
+.rankingDetails {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #0c3b6d;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.nirfLogoContainer {
+    margin: 10px 0;
+}
+
+.nirfLogo {
+    max-width: 200px;
+    height: 150px;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.rankNumber {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0c3b6d;
+    line-height: 1;
+}
+
+.rankLabel {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Center Divider Styles - Unique Design */
+.dividerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: 60px;
+}
+
+.verticalLine {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(to bottom, transparent, #1c69d4, transparent);
+}
+
+.centerElement {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diamond {
+    width: 15px;
+    height: 15px;
+    background: #1c69d4;
+    transform: rotate(45deg);
+    z-index: 2;
+    box-shadow: 0 0 15px rgba(28, 105, 212, 0.5);
+}
+
+.pulse {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #1c69d4;
+    transform: rotate(45deg);
+    animation: pulseAnim 2s infinite ease-out;
+    opacity: 0;
+}
+
+@keyframes pulseAnim {
+    0% {
+        transform: rotate(45deg) scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: rotate(45deg) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Right Side Styles - Image Slider */
+.imageSlider {
+    flex: 1;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    background: #f8f9fa;
+    aspect-ratio: 4 / 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.sliderWrapper {
+    position: relative;
+    flex: 1;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.activeSlide {
+    opacity: 1;
+    z-index: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sliderDots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.activeDot {
+    background: #1c69d4;
+    width: 20px;
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .rankingDetails,
+    .imageSlider {
+        width: 100%;
+    }
+
+    .dividerContainer {
+        flex-direction: row;
+        height: 60px;
+        width: 100%;
+    }
+
+    .verticalLine {
+        height: 2px;
+        width: auto;
+        flex: 1;
+        background: linear-gradient(to right, transparent, #1c69d4, transparent);
+    }
+
+    .centerElement {
+        margin: 0 20px;
+    }
+
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+}

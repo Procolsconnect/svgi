@@ -14,4 +14,5 @@ module.exports = function setRoutes(app) {
   campusRoutes(app);
   AdvertisemenRoutes(app);
   about(app);
+  newsRoutes(app);
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import styles from "./WhySvg.module.css";
+import axios from "axios";
 
 const apiurl = import.meta.env.VITE_API_URL;
 
@@ -11,19 +12,14 @@ const ServiceOfferings = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-/*************  ✨ Windsurf Command ⭐  *************/
-/**
- * Fetches the service offerings from the API and updates the state
- * @returns {Promise<void>} 
- */
-/*******  52c85ef0-c1fc-4428-a999-8d7d1958f3db  *******/    const fetchCards = async () => {
+    const fetchCards = async () => {
       try {
-        const response = await fetch(`${apiurl}/api/service-offerings`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch service offerings");
+        const response = await axios.get(`${apiurl}/api/service-offerings`);
+        if (response.data && response.data.success) {
+          setCards(response.data.data);
+        } else {
+          throw new Error(response.data.message || "Failed to fetch service offerings");
         }
-        const data = await response.json();
-        setCards(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -44,15 +40,15 @@ const ServiceOfferings = () => {
         <h1 className={styles.serviceTitle}>Why Choose SVGI?</h1>
       </div>
 
-      {loading && <p className="loading-text">Loading offerings...</p>}
-      {error && <p className="error-text">{error}</p>}
+      {loading && <p className={styles.loadingText}>Loading offerings...</p>}
+      {error && <p className={styles.errorText}>{error}</p>}
 
       <div className={styles.serviceGrid}>
         {cards.map((card, index) => (
           <div
-            key={card.id}
+            key={card._id}
             className={styles.serviceCard}
-            onMouseEnter={() => setHoveredCard(card.id)}
+            onMouseEnter={() => setHoveredCard(card._id)}
             onMouseLeave={() => setHoveredCard(null)}
           >
             <div className={styles.cardBackground}></div>

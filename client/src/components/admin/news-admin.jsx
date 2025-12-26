@@ -1,135 +1,231 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
+import axios from "axios"
 import DataTable from "../data-table"
 import FormModal from "../form-modal"
 import "../admin-section.css"
 
-const newsComponents = [
-  { id: 1, name: "News Hero", type: "Newshero.jsx", items: 3, status: "Active" },
-  { id: 2, name: "Ranking", type: "Ranking.jsx", items: 5, status: "Active" },
-  { id: 3, name: "News 2", type: "News2.jsx", items: 6, status: "Active" },
-  { id: 4, name: "News 3", type: "News3.jsx", items: 4, status: "Active" },
-  { id: 5, name: "News 4", type: "News4.jsx", items: 5, status: "Active" },
-  { id: 6, name: "SVGI News", type: "SvgiNews.jsx", items: 8, status: "Active" },
-  { id: 7, name: "Social Icons", type: "SocialIcons.jsx", items: 6, status: "Active" },
-  { id: 8, name: "Newsletter", type: "Milo.jsx", items: 2, status: "Active" },
+// --- 1. GLOBAL CONFIGURATION ---
+const API_BASE = "http://localhost:3000/api"
+
+const SECTION_CONFIG = {
+  "news-hero": {
+    endpoint: "/newshero",
+    title: "News Hero",
+    columns: [
+      { key: "index", label: "Sr. No." },
+      { key: "title", label: "Title" },
+      { key: "description", label: "Description" },
+      { key: "image", label: "Image" },
+    ],
+    fields: [
+      { name: "title", label: "Title", type: "text", required: true },
+      { name: "description", label: "Description", type: "textarea", required: true },
+      { name: "image", label: "Hero Image", type: "file", required: true },
+    ]
+  },
+  "news-report": {
+    endpoint: "/newsreport",
+    title: "News Report",
+    columns: [
+      { key: "index", label: "Sr. No." },
+      { key: "title", label: "Title" },
+      { key: "description", label: "Description" },
+      { key: "video_url", label: "Video URL" },
+    ],
+    fields: [
+      { name: "title", label: "Title", type: "text", required: true },
+      { name: "description", label: "Description", type: "textarea", required: true },
+      { name: "video_url", label: "Video URL", type: "text", required: true },
+    ]
+  },
+  "news-card": {
+    endpoint: "/newscard",
+    title: "News Card",
+    columns: [
+      { key: "index", label: "Sr. No." },
+      { key: "title", label: "Title" },
+      { key: "description", label: "Description" },
+      { key: "image", label: "Image" },
+    ],
+    fields: [
+      { name: "title", label: "Title", type: "text", required: true },
+      { name: "description", label: "Description", type: "textarea", required: true },
+      { name: "image", label: "Card Image", type: "file", required: true },
+    ]
+  },
+  "news-svgi": {
+    endpoint: "/NewsSvgi",
+    title: "SVGI News",
+    columns: [
+      { key: "index", label: "Sr. No." },
+      { key: "title", label: "Title" },
+      { key: "image1", label: "Image 1" },
+      { key: "image2", label: "Image 2" },
+    ],
+    fields: [
+      { name: "title", label: "Title", type: "text", required: true },
+      { name: "description", label: "Description", type: "textarea", required: true },
+      { name: "image1", label: "Image 1", type: "file", required: true },
+      { name: "image2", label: "Image 2", type: "file", required: true },
+    ]
+  },
+  "news-section": {
+    endpoint: "/newssection",
+    title: "News Section",
+    columns: [
+      { key: "index", label: "Sr. No." },
+      { key: "title", label: "Title" },
+      { key: "description", label: "Description" },
+      { key: "image", label: "Image" },
+    ],
+    fields: [
+      { name: "title", label: "Title", type: "text", required: true },
+      { name: "description", label: "Description", type: "textarea", required: true },
+      { name: "image", label: "Section Image", type: "file", required: true },
+    ]
+  },
+  "news-college": {
+    endpoint: "/newscollege",
+    title: "News College",
+    columns: [
+      { key: "index", label: "Sr. No." },
+      { key: "type", label: "Type" },
+      { key: "text", label: "Text" },
+      { key: "url", label: "Image URL" },
+    ],
+    fields: [
+      {
+        name: "type",
+        label: "Type",
+        type: "select",
+        options: [
+          { value: "text", label: "Text" },
+          { value: "image", label: "Image" }
+        ],
+        required: true
+      },
+      { name: "text", label: "Text Content (if type is Text)", type: "textarea" },
+      { name: "image", label: "Upload Image (if type is Image)", type: "file" },
+    ]
+  }
+}
+
+const NEWS_SECTIONS = [
+  { id: 1, name: "News Hero", slug: "news-hero", icon: "fa-newspaper" },
+  { id: 2, name: "News Report", slug: "news-report", icon: "fa-video" },
+  { id: 3, name: "News Card", slug: "news-card", icon: "fa-th-large" },
+  { id: 4, name: "SVGI News", slug: "news-svgi", icon: "fa-university" },
+  { id: 5, name: "News Section", slug: "news-section", icon: "fa-puzzle-piece" },
+  { id: 6, name: "News College", slug: "news-college", icon: "fa-school" },
 ]
 
 export default function NewsAdmin() {
   const { id: componentId } = useParams()
   const navigate = useNavigate()
-  const [data, setData] = useState(newsComponents)
+
+  const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingItem, setEditingItem] = useState(null)
-  const [selectedComponent, setSelectedComponent] = useState(null)
-  const [componentItems, setComponentItems] = useState([])
+
+  const currentConfig = SECTION_CONFIG[componentId]
+
+  const fetchData = async () => {
+    if (!currentConfig) return
+    setLoading(true)
+    try {
+      const response = await axios.get(`${API_BASE}${currentConfig.endpoint}`)
+      setItems(response.data.data || [])
+    } catch (error) {
+      console.error("Fetch Error:", error)
+      setItems([])
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    if (componentId) {
-      const component = data.find(c => c.name.toLowerCase().replace(/\s+/g, '-') === componentId)
-      if (component) {
-        setSelectedComponent(component)
-        setComponentItems([
-          { id: 1, headline: `Latest news about ${component.name}`, date: "2024-03-20", status: "Active" },
-        ])
+    if (componentId) fetchData()
+  }, [componentId])
+
+  const handleSave = async (formData) => {
+    if (!currentConfig) return
+    setSubmitting(true)
+
+    try {
+      const dataToSend = new FormData()
+      Object.keys(formData).forEach(key => {
+        const val = formData[key]
+        if (val !== null && val !== undefined) {
+          if (Array.isArray(val)) {
+            val.forEach(item => dataToSend.append(key, item))
+          } else {
+            dataToSend.append(key, val)
+          }
+        }
+      })
+
+      const config = {
+        headers: { "Content-Type": "multipart/form-data" },
+        timeout: 600000
       }
-    } else {
-      setSelectedComponent(null)
-    }
-  }, [componentId, data])
 
-  const itemColumns = [
-    { key: "id", label: "ID" },
-    { key: "headline", label: "Headline" },
-    { key: "date", label: "Date" },
-    { key: "status", label: "Status" },
-  ]
-
-  const handleAdd = () => {
-    setEditingItem(null)
-    setIsModalOpen(true)
-  }
-
-  const handleEdit = (item) => {
-    setEditingItem(item)
-    setIsModalOpen(true)
-  }
-
-  const handleDelete = (id) => {
-    if (confirm("Are you sure you want to delete this?")) {
-      if (selectedComponent) {
-        setComponentItems(componentItems.filter((item) => item.id !== id))
+      const id = editingItem?._id || editingItem?.id
+      if (id) {
+        await axios.put(`${API_BASE}${currentConfig.endpoint}/${id}`, dataToSend, config)
       } else {
-        setData(data.filter((item) => item.id !== id))
+        await axios.post(`${API_BASE}${currentConfig.endpoint}`, dataToSend, config)
       }
+
+      setIsModalOpen(false)
+      fetchData()
+      alert("Successfully saved!")
+    } catch (error) {
+      console.error("Save Error:", error)
+      alert(`Failed: ${error.response?.data?.message || error.message}`)
+    } finally {
+      setSubmitting(false)
     }
   }
 
-  const handleSave = (formData) => {
-    if (selectedComponent) {
-      if (editingItem) {
-        setComponentItems(componentItems.map((item) => (item.id === editingItem.id ? { ...item, ...formData } : item)))
-      } else {
-        setComponentItems([...componentItems, { id: Date.now(), ...formData, status: "Active" }])
-      }
-    } else {
-      if (editingItem) {
-        setData(data.map((item) => (item.id === editingItem.id ? { ...item, ...formData } : item)))
-      } else {
-        setData([...data, { id: Date.now(), ...formData, status: "Active" }])
-      }
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this item?")) return
+    try {
+      await axios.delete(`${API_BASE}${currentConfig.endpoint}/${id}`)
+      fetchData()
+    } catch (error) {
+      alert("Delete failed")
     }
-    setIsModalOpen(false)
   }
 
-  const handleManage = (component) => {
-    const slug = component.name.toLowerCase().replace(/\s+/g, '-')
-    navigate(`/admin/news/${slug}`)
-  }
-
-  const handleBack = () => {
-    navigate("/admin/news")
-  }
-
-  if (selectedComponent) {
+  if (!componentId) {
     return (
       <div className="admin-section">
         <div className="section-header">
-          <div>
-            <button className="back-link" onClick={handleBack}>
-              <i className="fa fa-arrow-left"></i> Back to Components
-            </button>
-            <h1>Manage {selectedComponent.name}</h1>
-            <p>Edit specific items for {selectedComponent.name}</p>
-          </div>
-          <button className="add-btn" onClick={handleAdd}>
-            <i className="fa fa-plus"></i>
-            Add News Item
-          </button>
+          <h1>News Section Admin</h1>
+          <p>Click a section to manage its content.</p>
         </div>
-
-        <div className="table-section">
-          <h2>{selectedComponent.name} Articles</h2>
-          <DataTable
-            columns={itemColumns}
-            data={componentItems}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
+        <div className="component-cards">
+          {NEWS_SECTIONS.map((section) => (
+            <div key={section.id} className="component-card" onClick={() => navigate(`/admin/news/${section.slug}`)}>
+              <div className="card-icon"><i className={`fa ${section.icon}`}></i></div>
+              <h3>{section.name}</h3>
+              <p>Manage news content</p>
+            </div>
+          ))}
         </div>
+      </div>
+    )
+  }
 
-        <FormModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSave={handleSave}
-          title={editingItem ? "Edit Article" : "Add Article"}
-          fields={[
-            { name: "headline", label: "Headline", type: "text", required: true },
-            { name: "date", label: "Date", type: "date", required: true },
-            { name: "content", label: "Full Content", type: "textarea", required: true },
-          ]}
-          initialData={editingItem}
-        />
+  if (!currentConfig) {
+    return (
+      <div className="admin-section">
+        <button onClick={() => navigate("/admin/news")} className="back-link">← Back</button>
+        <h1>Coming Soon</h1>
+        <p>This section is still being set up.</p>
       </div>
     )
   }
@@ -138,71 +234,32 @@ export default function NewsAdmin() {
     <div className="admin-section">
       <div className="section-header">
         <div>
-          <h1>News Section</h1>
-          <p>Manage 8 news components</p>
+          <button onClick={() => navigate("/admin/news")} className="back-link">← Back to Dashboard</button>
+          <h1>{currentConfig.title}</h1>
+          <p>{loading ? "Refreshing..." : `Managing items for ${currentConfig.title}`}</p>
         </div>
-        <button className="add-btn" onClick={handleAdd}>
-          <i className="fa fa-plus"></i>
-          Add Component
+        <button
+          className="add-btn"
+          onClick={() => { setEditingItem(null); setIsModalOpen(true); }}
+        >
+          <i className="fa fa-plus"></i> Add New
         </button>
       </div>
 
-      <div className="info-cards">
-        <div className="info-card blue">
-          <i className="fa fa-newspaper"></i>
-          <div>
-            <h3>8</h3>
-            <p>Components</p>
-          </div>
-        </div>
-        <div className="info-card green">
-          <i className="fa fa-check-circle"></i>
-          <div>
-            <h3>39</h3>
-            <p>Total Items</p>
-          </div>
-        </div>
-      </div>
-      <div className="component-cards">
-        {data.map((component) => (
-          <div key={component.id} className="component-card" onClick={() => handleManage(component)}>
-            <div className="card-icon">
-              <i className="fa fa-puzzle-piece"></i>
-            </div>
-            <h3>{component.name}</h3>
-            <p>{component.items} items</p>
-            <div className="card-actions">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleEdit(component)
-                }}
-              >
-                <i className="fa fa-edit"></i>
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleDelete(component.id)
-                }}
-              >
-                <i className="fa fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <DataTable
+        columns={currentConfig.columns}
+        data={items}
+        onEdit={(item) => { setEditingItem(item); setIsModalOpen(true); }}
+        onDelete={handleDeleteItem => handleDelete(handleDeleteItem)}
+      />
 
       <FormModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSave}
-        title={editingItem ? "Edit Component" : "Add Component"}
-        fields={[
-          { name: "name", label: "Component Name", type: "text", required: true },
-          { name: "type", label: "File Name", type: "text", required: true },
-          { name: "items", label: "Number of Items", type: "number" },
-        ]}
+        submitting={submitting}
+        title={editingItem ? "Edit Item" : "Add New Item"}
+        fields={currentConfig.fields}
         initialData={editingItem}
       />
     </div>

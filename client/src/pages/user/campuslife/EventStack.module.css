@@ -1,0 +1,200 @@
+/* EventStack.module.css */
+
+@property --p {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: true;
+}
+
+@property --v {
+    syntax: '<number>';
+    initial-value: 0;
+    inherits: true;
+}
+
+.latestEventsSection {
+    background: #070410;
+    color: white;
+    font-family: Poppins, sans-serif;
+    padding: 60px 50px;
+    width: 100%;
+}
+
+.eventsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 50vh;
+}
+
+.latestEventsSection h1 {
+    font-size: 4rem;
+    max-width: 300px;
+    margin: 0;
+}
+
+.stackSlider {
+    --p: var(--k);
+    --abs-p: abs(var(--k) - var(--p));
+    --end: clamp(0, var(--abs-p) - 1, 1);
+    --dir: calc((1 - 2*var(--end))*sign(var(--k) - var(--p)));
+    --fwd: calc(.5*(1 + var(--dir)));
+    --v: var(--k);
+    --abs-v: abs(var(--v) - var(--p));
+    --prg: calc(var(--abs-v)/(1 - var(--end) + var(--end)*(var(--n) - 1)));
+    grid-gap: .5em 4em;
+    grid-template: repeat(2, max-content) 1fr max-content/ max-content 1fr;
+    display: grid;
+    color: #f1f5f9;
+    font-size: 1em;
+    counter-reset: k calc(1 + var(--k)) n var(--n);
+    transition: --p 0s 0.8s, --v 0.8s;
+    position: relative;
+    min-height: 15em;
+}
+
+.stackSlider::before,
+.stackSlider em {
+    /* color: RGB(from currentColor r g b/ .6); */
+    opacity: 0.6;
+}
+
+.stackSlider::before {
+    grid-area: 1/2;
+    width: 3ch;
+    text-align: right;
+    content: counter(k) '/' counter(n);
+}
+
+.stackSlider article {
+    --abs-top: abs(var(--k) - var(--i));
+    --not-top: min(1, var(--abs-top));
+    --top: calc(1 - var(--not-top));
+    --val-mov: ((1 - var(--fwd))*var(--p) + var(--fwd)*var(--k) - var(--i));
+    --abs-mov: abs(var(--val-mov));
+    --not-mov: min(1, var(--abs-mov));
+    --mov: calc(1 - var(--not-mov));
+    grid-area: 1/1/-1/-1;
+    display: grid;
+    grid-template: subgrid / subgrid;
+    z-index: mod(calc(var(--n) - 1 + var(--i) - var(--k)), var(--n));
+    transition: z-index 0.8s cubic-bezier(1, -.9, 0, 1.9);
+}
+
+.stackSlider h2,
+.stackSlider em {
+    translate: 0 calc(var(--not-top)*1lh);
+    opacity: var(--top);
+    transition: 0.4s calc(var(--top)*0.4s);
+    transition-property: translate, opacity;
+}
+
+.stackSlider h2 {
+    grid-area: 2/2;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.stackSlider em {
+    grid-area: 3/2;
+    font-style: normal;
+}
+
+.stackSlider img {
+    --sin: sin(var(--prg)*.5turn);
+    grid-area: 1/1/-1;
+    border: solid 2px rgba(82, 82, 122, .5);
+    height: 13em;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: .75em;
+    translate: calc(-150%*var(--mov)*sqrt(var(--sin)));
+    rotate: calc((1 - var(--sin))*var(--a));
+}
+
+.navButtons {
+    display: flex;
+    gap: 1em;
+    grid-area: 4/2;
+    z-index: calc((1 - min(1, var(--abs-p)))*var(--n));
+    margin-top: 0.5em;
+}
+
+.navButtons button {
+    --prc: calc(var(--hov, 0)*100%);
+    --c: color-mix(in hsl, #818cf8 var(--prc), #52527a);
+    border: none;
+    width: 1em;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(82, 82, 122, 0.2);
+    color: color-mix(in hsl, #818cf8 var(--prc), currentcolor);
+    font: 900 1.5em/1 sans-serif;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+    transition-property: background-color, color;
+}
+
+.navButtons button::before {
+    content: '\25B6';
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8em;
+    line-height: 1;
+    transition: transform 0.3s ease-out;
+}
+
+.navButtons button[data-inc='-1']::before {
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.navButtons button:is(:hover, :focus) {
+    --hov: 1;
+}
+
+@media (max-width: 992px) {
+    .eventsContainer {
+        gap: 3rem;
+    }
+
+    .latestEventsSection h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .latestEventsSection {
+        padding: 40px 20px;
+    }
+
+    .eventsContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .latestEventsSection h1 {
+        max-width: 100%;
+        font-size: 2.5rem;
+    }
+
+    .stackSlider {
+        width: 100%;
+        justify-content: center;
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width: 480px) {
+    .stackSlider {
+        transform: scale(0.7);
+        margin-left: -15%;
+    }
+}

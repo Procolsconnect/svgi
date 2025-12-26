@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap');
 
-.root {
-  font-family: 'Poppins', sans-serif;
-  background: var(--svgio-bg);
-  color: var(--svgio-text);
-  scroll-behavior: smooth;
+.pageWrapper {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f9fafb;
 }
 
 /* HERO SECTION */
-.hero {
+.heroSection {
   min-height: 350px;
   width: 100%;
   display: flex;
@@ -30,28 +30,22 @@
   z-index: 0;
 }
 
-.wrapper {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.hero::after {
+.heroSection::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(6, 5, 5, 0.5);
-  opacity: 0.4;
+  background: rgba(0, 0, 0, 0.5);
   z-index: 0;
 }
-
 
 .heroTitle {
   position: relative;
   font-size: 52px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: bold;
   z-index: 1;
+  letter-spacing: 1px;
+  font-family: 'Playfair Display', serif;
+  margin: 0;
 }
 
 .heroTitle::after {
@@ -64,7 +58,6 @@
   border-radius: 3px;
   animation: underlinePulse 2s infinite;
 }
-
 
 @keyframes underlinePulse {
 
@@ -80,239 +73,164 @@
   }
 }
 
-/* RESET & BASE STYLES */
-.pageWrapper * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
-  font-size: 62.5%;
+.mainContainer {
+  display: grid;
+  padding: 32px;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(20, 1fr);
 }
 
-.pageWrapper a {
-  color: unset;
-  font-size: unset;
-  text-decoration: none;
+.headerSection {
+  grid-area: 1 / 1 / 2 / 4;
+  display: flex;
+  align-items: center;
 }
 
-/* WRAP CONTAINER */
-.wrap {
-  width: 960px;
-  margin: 0 auto;
-  font-size: 0;
+.headerSection i {
+  margin-right: 12px;
 }
 
-/* HEADER */
-.header {
-  display: inline-block;
-  width: 100%;
-  vertical-align: middle;
-  margin-top: 40px;
-}
-
-.header h3 {
-  height: 120px;
-  text-align: left;
-  margin-left: 97px;
-}
-
-.header h3:before {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: "\f060";
-  display: inline-block;
-  font-size: 2rem;
-  color: #000;
-  padding-right: 5px;
-}
-
-.header h3 span {
-  line-height: 120px;
-  font-size: 2rem;
-  color: #fff;
-  font-weight: 900;
-  padding: 2px 8px;
+.headerLogo {
+  width: 131px;
+  height: 27px;
   background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* TOP SECTION */
-.detailtop {
-  width: 100%;
-  height: 500px;
-  position: relative;
+.headerText {
+  color: #fff;
+  margin: 0;
 }
 
-.productimg {
-  width: 75%;
-  height: 55.56%;
-  background-color: #ddd;
-  position: absolute;
-  top: -300px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  z-index: 2;
+.topImage {
+  grid-area: 3/ 2 / 7 / -2;
+  background-size: cover;
+  background-position: center;
+
 }
 
-.coverImg {
-  position: absolute;
-  width: 100vw;
+.centerImg {
+  grid-area: -8 / 2 / -5 / 5;
+  background-size: cover;
+  background-position: center;
+}
+
+.bottomImg {
+  grid-area: -6 / 4 / -2 / -2;
+  background-size: cover;
+  background-position: center;
+}
+
+.divArea1,
+.divArea2 {
+  background-color: #001F54;
+  z-index: -100;
+  width: 66%;
+}
+
+.divArea1 {
+  grid-area: 2 / 1 / 5 / 4;
+  height: 66%;
+}
+
+.divArea2 {
+  grid-area: -7 / -4 / -5 / -1;
   height: 100%;
-  object-fit: cover;
-  top: 0;
-  left: 0;
-  z-index: 1;
-
 }
 
-.detailtop:before {
-  content: "";
-  width: 25%;
-  height: 27.78%;
-  background-color: #001f54;
-  position: absolute;
-  top: 280px;
-  left: 60px;
+.title2 {
+  font-size: 48px;
+  font-weight: 1000;
+  white-space: nowrap;
 }
 
-.detailtop:after {
-  content: "";
-  width: 480px;
-  height: 270px;
-  position: absolute;
-  bottom: 82px;
-  right: 60px;
-  border: 20px solid #001f54;
-  z-index: 1;
-}
-
-.boxtop {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.boxbottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-.boxtitle,
-.detailcontent h1 {
-  font-size: 3rem;
-  font-weight: 900;
-}
-
-.boxtitletop1 {
-  position: relative;
-  top: -60px;
-}
-
-.boxtitletop2 {
-  position: relative;
-  top: 12px;
-  right: -140px;
-  transform: rotate(90deg);
-}
-
-.boxtitlebottom1 {
-  position: relative;
-  left: -70px;
-  bottom: -40px;
-  transform: rotate(-90deg);
-}
-
-.boxtitlebottom2 {
-  position: relative;
-  top: 50px;
-  left: 0;
-  transform: scale(-1, -1);
-}
-
-/* CONTENT SECTION */
-.detailcontent {
-  width: 100%;
-  padding: 60px 80px;
-  position: relative;
-}
-
-.detailcontent h3,
-.detailcontent .subtitle {
-  font-size: 24px;
-}
-
-.detailcontent h3 {
+.italic {
   font-style: italic;
-  position: absolute;
-  top: 180px;
-  left: -100px;
-  transform: rotate(90deg);
+  margin: 0;
+  white-space: nowrap;
 }
 
-.subtitle {
-  font-weight: 900;
+.rightTopSection {
+  grid-area: 2 / -4 / 3 / -2;
+  position: relative;
+  justify-self: end;
+  align-self: end;
 }
 
-.detailcontent p {
-  font-size: 1.6rem;
-  margin: 1.2rem 0;
-  line-height: 2.2rem;
-}
-
-/* BOTTOM SECTION */
-.detailbottom {
-  width: 100%;
-  height: 500px;
-  padding: 0 80px;
-  margin: auto;
+.leftBottomSection {
+  grid-area: 7 / 2 / 8 / 3;
   position: relative;
 }
 
-.detailbottom .leftitem .itemimg {
-  width: 37.5%;
-  padding-bottom: 31.25%;
-  position: absolute;
-  top: 0;
-  left: 120px;
-  z-index: 2;
+.trans90 {
+  transform: rotate(90deg);
 }
 
-.detailbottom .leftitem:after {
-  content: "";
-  width: calc(50% - 40px);
-  height: 20.83%;
-  border: 20px solid #001f54;
-  position: absolute;
-  top: 160px;
-  left: 60px;
+.trans180 {
+  transform: rotate(180deg);
 }
 
-.detailbottom .rightitem .itemimg {
-  width: 50%;
-  padding-bottom: 41.67%;
-  position: absolute;
-  right: 120px;
-  bottom: 80px;
-  z-index: 1;
+.trans270 {
+  transform: rotate(270deg);
 }
 
-.detailbottom .rightitem:before {
-  content: "";
-  width: 240px;
-  height: 200px;
-  background-color: #001f54;
+.posLeft {
+  position: absolute;
+  left: -50%;
+  top: -50%;
+}
+
+.posRight {
+  position: absolute;
+  left: 50%;
+  top: 200%;
+}
+
+.fLeft {
+  float: left;
+}
+
+.div1,
+.div2 {
+  border: 20px solid #001F54;
+  z-index: -100;
+  height: 66%;
+  width: 80%;
+}
+
+.div1 {
+  grid-area: 5 / 4 / 8 / -1;
+  justify-self: center;
+  align-self: center;
+}
+
+.div2 {
+  grid-area: -7 / 1 / -4 / -4;
+  justify-self: center;
+  align-self: center;
+}
+
+.content {
+  grid-area: 9 / 3 / 13 / -2;
+  position: relative;
+}
+
+.content .italic {
   position: absolute;
   top: 100px;
-  right: 60px;
-  z-index: 1;
+  left: -200px;
 }
 
-.detailbottom .rightitem:after {
-  content: "";
-  width: 240px;
-  height: 100px;
+.content h2 {
+  margin: 0;
+}
+
+.pattern1 {
+  grid-area: -3 / 2 / -1 / 5;
+  height: 50%;
+  width: 66%;
   background: repeating-linear-gradient(135deg,
       #001f54,
       #001f54 11.5px,
@@ -320,13 +238,11 @@
       transparent 27px,
       #001f54 27px,
       #001f54 35.5px);
-  position: absolute;
-  bottom: 50px;
-  left: 20%;
-  z-index: 3;
+  justify-self: center;
+  align-self: center;
 }
 
-/* BUTTON WRAPPER SECTION */
+/* BUTTON BIRD SECTION */
 .wrapperNo4 {
   display: flex;
   flex-direction: column;
@@ -343,13 +259,11 @@
 .wrapperNo4 p {
   margin: 0 0 10px 0;
   text-align: center;
-  font-size: 1.6rem;
 }
 
 .wrapperNo4 h1 {
   margin: 0 0 30px 0;
   text-align: center;
-  font-size: 3rem;
 }
 
 .buttonBird {
@@ -357,13 +271,14 @@
   height: 88px;
   background-color: #131335;
   border-radius: 5px;
-  position: relative;
+  position: absolute;
   opacity: 1;
   padding: 0;
   border: none;
   display: flex;
   justify-content: center;
   cursor: pointer;
+  margin-top: 12%;
 }
 
 .buttonBirdText {
@@ -411,7 +326,6 @@
   fill: #131335;
 }
 
-/* Active Button State */
 .buttonBird.active {
   background-color: transparent;
   transition: all 0.2s linear 0.1s;
@@ -428,40 +342,7 @@
 }
 
 /* Birds */
-/* Ensure all bird classes exist for React styles object */
-.bird1,
-.bird2,
-.bird3,
-.bird4,
-.bird5,
-.bird6,
-.bird7,
-.bird8,
-.bird9,
-.bird10,
-.bird11,
-.bird12,
-.bird13,
-.bird14,
-.bird15,
-.bird16,
-.bird17,
-.bird18,
-.bird19,
-.bird20,
-.bird21,
-.bird22,
-.bird23,
-.bird24,
-.bird25,
-.bird26,
-.bird27,
-.bird28,
-.bird29,
-.bird30 {
-  /* Just hooks for React, styles are in .birdItem or explicit overrides */
-  position: absolute;
-}
+
 
 /* Common bird styles */
 .bird,
@@ -531,7 +412,6 @@
   z-index: -100;
 }
 
-/* Animations */
 @keyframes flyCycle {
   100% {
     background-position: -360px 0;
@@ -582,24 +462,22 @@
   75% {
     transform: rotate(10deg);
     left: 32%;
-  }
-
-  100% {
-    transform: rotate(0deg);
-    opacity: 1;
-    top: 50px;
-    transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+    top: -550px;
+    opacity: 0;
+    transition: left 1.5s cubic-bezier(0.42, 0, 0.58, 1), top 1.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.5s linear 1s;
   }
 }
 
 /* MOBILE RESPONSIVENESS - FLUID VW SCALING */
 @media (max-width: 768px) {
-  .hero {
+
+  /* Hero */
+  .heroSection {
     min-height: 35vh;
   }
 
   .heroTitle {
-    font-size: 5.2vw;
+    font-size: 5vw;
     letter-spacing: 0.1vw;
   }
 
@@ -609,135 +487,30 @@
     margin: 1.4vw auto 0;
   }
 
-  .wrap {
-    width: 96vw;
-    padding: 0 1vw;
+  /* Main Container - Maintain Grid Ratios */
+  .mainContainer {
+    padding: 3.2vw;
   }
 
-  /* Scale down Header */
-  .header {
-    margin-top: 4vw;
+  /* Header */
+  .headerLogo {
+    width: 13.1vw;
+    height: 2.7vw;
   }
 
-  .header h3 {
-    margin-left: 9.7vw;
-    height: 12vw;
-  }
-
-  .header h3:before {
-    display: inline-block;
-    font-size: 2vw;
-    padding-right: 0.5vw;
-  }
-
-  .header h3 span {
-    line-height: 12vw;
-    font-size: 2vw;
-    padding: 0.2vw 0.8vw;
-  }
-
-  /* TOP SECTION */
-  .detailtop {
-    height: 50vw;
-  }
-
-  .productimg {
-    top: -30vw;
-    object-fit: contain;
-  }
-
-  .detailtop:before {
-    top: 28vw;
-    left: 6vw;
-    width: 25%;
-    height: 27.78%;
-  }
-
-  .detailtop:after {
-    width: 48vw;
-    height: 27vw;
-    border-width: 2vw;
-    bottom: 8.2vw;
-    right: 6vw;
-  }
-
-  .boxtitle,
-  .detailcontent h1 {
-    font-size: 3vw;
-  }
-
-  .boxtitletop1 {
-    top: -6vw;
-  }
-
-  .boxtitletop2 {
-    top: 1.2vw;
-    right: -14vw;
-  }
-
-  .boxtitlebottom1 {
-    left: -7vw;
-    bottom: -4vw;
-  }
-
-  .boxtitlebottom2 {
-    top: 5vw;
-  }
-
-  /* CONTENT SECTION */
-  .detailcontent {
-    padding: 6vw 8vw;
-  }
-
-  .detailcontent .subtitle,
-  .detailcontent h3 {
-    font-size: 2.4vw;
-  }
-
-  .detailcontent h3 {
-    top: 18vw;
-    left: -10vw;
-  }
-
-  .detailcontent p {
+  .headerText {
     font-size: 1.6vw;
-    line-height: 2.2vw;
-    margin: 1.2vw 0;
   }
 
-  /* BOTTOM SECTION */
-  .detailbottom {
-    height: 50vw;
-    padding: 0 8vw;
+  .headerSection i {
+    margin-right: 1.2vw;
+    font-size: 2vw;
   }
 
-  .detailbottom .leftitem .itemimg {
-    left: 12vw;
-  }
-
-  .detailbottom .leftitem:after {
-    top: 16vw;
-    left: 6vw;
-    width: calc(50% - 4vw);
-    border-width: 2vw;
-  }
-
-  .detailbottom .rightitem .itemimg {
-    right: 12vw;
-    bottom: 8vw;
-  }
-
-  .detailbottom .rightitem:before {
-    top: 10vw;
-    right: 6vw;
-    width: 24vw;
-    height: 20vw;
-  }
-
-  .detailbottom .rightitem:after {
-    width: 24vw;
-    height: 10vw;
-    bottom: 5vw;
+  .pattern1 {
+    grid-area: -3 / 2 / -1 / 5;
+    height: 50%;
+    width: 90%;
     background: repeating-linear-gradient(135deg,
         #001f54,
         #001f54 1.15vw,
@@ -745,12 +518,53 @@
         transparent 2.7vw,
         #001f54 2.7vw,
         #001f54 3.55vw);
+    justify-self: center;
+    align-self: center;
   }
 
-  /* Bird Button */
+  /* Decorative Divs */
+  .divArea1,
+  .divArea2,
+  .div1,
+  .div2 {
+    border-width: 2vw;
+  }
+
+  /* Titles */
+  .title2 {
+    font-size: 4.8vw;
+  }
+
+  /* Specific Transforms/Positions - Scale offsets */
+  .posLeft {
+    top: -25%;
+    left: -25%;
+  }
+
+  .posRight {
+    top: 150%;
+    left: 50%;
+  }
+
+  .content .italic {
+    top: 10vw;
+    left: -20vw;
+    font-size: 1.6vw;
+  }
+
+  .content h2 {
+    font-size: 2.4vw;
+  }
+
+  .content p {
+    font-size: 1.4vw;
+    line-height: normal;
+    margin: 1vw 0;
+  }
+
   .buttonBird {
     transform: scale(0.6);
     transform-origin: center;
-    margin-top: 10vw;
+    margin-top: 30vw;
   }
 }

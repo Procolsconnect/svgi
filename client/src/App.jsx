@@ -45,15 +45,19 @@ const App = () => {
           <Route path="home/:componentId" element={<HomeAdmin />} />
           <Route path="admissions" element={<AdmissionsAdmin />} />
           <Route path="admissions/:id" element={<AdmissionsAdmin />} />
+          <Route path="admissions/:id/:componentId" element={<AdmissionsAdmin />} />
           <Route path="academics" element={<AcademicsAdmin />} />
           <Route path="academics/:id" element={<AcademicsAdmin />} />
+          <Route path="academics/:id/:componentId" element={<AcademicsAdmin />} />
           <Route path="about" element={<AboutAdmin />} />
           <Route path="about/:pageId" element={<AboutAdmin />} />
           <Route path="about/:pageId/:componentId" element={<AboutAdmin />} />
           <Route path="placement" element={<PlacementAdmin />} />
           <Route path="placement/:id" element={<PlacementAdmin />} />
+          <Route path="placement/:id/:componentId" element={<PlacementAdmin />} />
           <Route path="campuslife" element={<CampusLifeAdmin />} />
           <Route path="campuslife/:id" element={<CampusLifeAdmin />} />
+          <Route path="campuslife/:id/:componentId" element={<CampusLifeAdmin />} />
           <Route path="news" element={<NewsAdmin />} />
           <Route path="news/:id" element={<NewsAdmin />} />
           <Route path="advertisement" element={<AdvertisementAdmin />} />

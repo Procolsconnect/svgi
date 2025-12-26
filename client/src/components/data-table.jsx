@@ -74,25 +74,30 @@ export default function DataTable({ columns, data, onEdit, onDelete }) {
     /* --- Replace the Media Logic (approx line 81-103) with this --- */
 
     // 1. Add plural names to the list
-    const mediaKeys = ["media", "image", "image_url", "url", "media_url", "images", "gridImages"]
+    const mediaKeys = ["media", "image","image2","image3", "img", "image_url", "url", "media_url", "images", "gridImages", "logo_url", "imagesCard", "videosCard", "toursCard", "image1", "ug", "pg", "research", "procedure"]
 
     if (mediaKeys.includes(column.key) && value) {
       const imageList = Array.isArray(value) ? value : [value];
       const maxVisible = 3;
-      const visibleImages = imageList.slice(0, maxVisible);
+      const visibleItems = imageList.slice(0, maxVisible);
       const extraCount = imageList.length - maxVisible;
 
       return (
         <div className="table-media-preview-group">
-          {visibleImages.map((imgUrl, idx) => {
-            const isVideo = imgUrl?.match(/\.(mp4|webm|ogg|mov)$/) || imgUrl?.includes("/video/upload/");
+          {visibleItems.map((item, idx) => {
+            // Extract URL if item is an object (e.g., {image: "url"})
+            const url = typeof item === 'object' ? (item.image || item.url || item.media_url) : item;
+
+            if (!url) return null;
+
+            const isVideo = url.match(/\.(mp4|webm|ogg|mov)$/) || url.includes("/video/upload/");
             return (
               <div key={idx} className="table-media-item">
                 {isVideo ? (
-                  <div className="video-placeholder mini"><video src={imgUrl} autoPlay muted loop></video></div>
+                  <div className="video-placeholder mini"><video src={url} autoPlay muted loop></video></div>
                 ) : (
                   <img
-                    src={imgUrl}
+                    src={url}
                     alt="Preview"
                     className="table-thumb"
                     onError={(e) => { e.target.src = "https://via.placeholder.com/40?text=Error" }}

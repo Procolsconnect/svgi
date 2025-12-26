@@ -1,17 +1,55 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./CollegeFest.module.css";
+import EventStack from "./EventStack";
 
-/* Note:
- - Ensure images like "hero img.jpg", "magizh.jpg", etc. are available in your public folder
-   or import them and replace the src strings accordingly.
-*/
 const MergedPage = () => {
-  const stackRef = useRef(null);
-  const [stackK, setStackK] = useState(0);
-  const stackN = 7; // matches --n:7 in original markup
+  const eventData = [
+    {
+      title: "Magizh 2025",
+      description: "This is the first time such a grand function has <br /> been held in our college.",
+      image: "/images/magizh.jpg",
+      angle: "-7deg"
+    },
+    {
+      title: "National Service awareness",
+      description: "A discussion was held for students on National Service Awareness.",
+      image: "/images/national.jpg",
+      angle: "8deg"
+    },
+    {
+      title: "1st year inauguration ceremony",
+      description: "Department of BE / B.tech",
+      image: "/images/inagration.jpg",
+      angle: "-3deg"
+    },
+    {
+      title: "Tech Trend Path of success",
+      description: "The future of technology is bright and full of possibilities.",
+      image: "/images/tech.jpg",
+      angle: "6deg"
+    },
+    {
+      title: "Freshers Day 2025",
+      description: "Department of Computer Application",
+      image: "/images/Freshers.jpg",
+      angle: "-11deg"
+    },
+    {
+      title: "Farewell Day 2025",
+      description: "Grand celebration of the physiotherapy class.",
+      image: "/images/farawell.jpg",
+      angle: "9deg"
+    },
+    {
+      title: "Cougar",
+      description: "Puma concolor",
+      image: "/images/farawell.jpg",
+      angle: "-4deg"
+    }
+  ];
 
   // 3D Tilt Effect Handlers
   const handleTiltMove = (e) => {
@@ -19,11 +57,9 @@ const MergedPage = () => {
     const image = figure.querySelector("img");
     if (!image) return;
 
-    // Use offsetX/Y for stable local coordinates regardless of scroll/scale
     const x = e.nativeEvent.offsetX;
     const y = e.nativeEvent.offsetY;
 
-    // Center is simply half of offset dimensions
     const centerX = figure.offsetWidth / 2;
     const centerY = figure.offsetHeight / 2;
 
@@ -41,16 +77,9 @@ const MergedPage = () => {
     }
   };
 
-  useEffect(() => {
-    // Sync CSS variable --k on stack slider
-    if (stackRef.current) {
-      stackRef.current.style.setProperty("--k", String(stackK));
-    }
-  }, [stackK]);
-
   // Carousel (react-slick) settings mirroring OwlCarousel behavior
   const carouselSettings = {
-    variableWidth: true, // similar to autoWidth
+    variableWidth: true,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -65,13 +94,6 @@ const MergedPage = () => {
     pauseOnHover: false,
     adaptiveHeight: true,
     focusOnSelect: true,
-  };
-
-  const handleStackInc = (inc) => {
-    setStackK((prev) => {
-      const next = (prev + inc + stackN) % stackN;
-      return next;
-    });
   };
 
   return (
@@ -93,14 +115,12 @@ const MergedPage = () => {
           >
             <img
               src="https://www.appharvest.com/wp-content/uploads/2021/02/image-1.png"
-              // srcSet="https://www.appharvest.com/wp-content/uploads/2021/02/image-1@2x.png 2x"
               width="235"
               height="95"
               alt=""
               className={`${styles.introImage} ${styles.introImage1}`}
               loading="lazy"
             />
-        
           </span>
           is on a mission
           <span
@@ -128,7 +148,6 @@ const MergedPage = () => {
               className={styles.introImage}
               loading="lazy"
             />
-         
           </span>
           Appalachia.
         </h1>
@@ -217,56 +236,7 @@ const MergedPage = () => {
       </section>
 
       {/* Latest Events Stack */}
-      <section className={styles.latestEventsSection}>
-        <div className={styles.eventsContainer}>
-          <h1>Latest Events</h1>
-          <section
-            className={styles.stackSlider}
-            ref={stackRef}
-            style={{ "--n": stackN, "--k": stackK, position: "relative" }}
-          >
-            <article style={{ "--i": 0, "--a": "-7deg" }}>
-              <h2>Magizh 2025</h2>
-              <em>This is the first time such a grand function has <br /> been held in our college.</em>
-              <img src="/images/magizh.jpg" alt="Magizh 2025 event" />
-            </article>
-            <article style={{ "--i": 1, "--a": "8deg" }}>
-              <h2>National Service awareness</h2>
-              <em>A discussion was held for students on National Service Awareness.</em>
-              <img src="/images/national.jpg" alt="National Service awareness event" />
-            </article>
-            <article style={{ "--i": 2, "--a": "-3deg" }}>
-              <h2>1st year inauguration ceremony</h2>
-              <em>Department of BE / B.tech</em>
-              <img src="/images/inauguration.jpg" alt="1st year inauguration ceremony" />
-            </article>
-            <article style={{ "--i": 3, "--a": "6deg" }}>
-              <h2>Tech Trend Path of success</h2>
-              <em>The future of technology is bright and full of possibilities.</em>
-              <img src="/imaes/tech.jpg" alt="Tech Trend Path of success event" />
-            </article>
-            <article style={{ "--i": 4, "--a": "-11deg" }}>
-              <h2>Freshers Day 2025</h2>
-              <em>Department of Computer Application</em>
-              <img src="/images/Freshers.jpg" alt="Freshers Day 2025 event" />
-            </article>
-            <article style={{ "--i": 5, "--a": "9deg" }}>
-              <h2>Farewell Day 2025</h2>
-              <em>Grand celebration of the physiotherapy class.</em>
-              <img src="/images/farewell.jpg" alt="Farewell Day 2025 event" />
-            </article>
-            <article style={{ "--i": 6, "--a": "-4deg" }}>
-              <h2>Cougar</h2>
-              <em>Puma concolor</em>
-              <img src="images/cougar.jpg" alt="Cougar" />
-            </article>
-            <div>
-              <button aria-label="previous" data-inc="-1" onClick={() => handleStackInc(-1)} />
-              <button aria-label="next" data-inc="1" onClick={() => handleStackInc(1)} />
-            </div>
-          </section>
-        </div>
-      </section>
+      <EventStack events={eventData} />
 
       {/* Slanted Sections */}
       <section className={styles.slantedSection}>

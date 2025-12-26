@@ -296,3 +296,18 @@
   left: 0;
   clip-path: circle(calc(55% + 5vw) at 0% 0%);
 }
+
+.loadingText, .errorText {
+  text-align: center;
+  width: 100%;
+  margin: 1rem 0;
+  font-family: "SUSE", sans-serif;
+}
+
+.errorText {
+  color: #ef4444;
+}
+
+.loadingText {
+  color: #9ca3af;
+}

@@ -34,7 +34,6 @@
 .portfolio {
   position: relative;
   background: #ffffff;
-  /* Height managed by GSAP ScrollTrigger */
 }
 
 /* Sticky Wrapper */
@@ -45,14 +44,16 @@
   overflow: hidden;
   padding: 0 2rem;
   background: #ffffff;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
-
-
 
 /* Horizontal Strip */
 .galleryStrip {
   display: flex;
+  flex-wrap: nowrap;
   gap: 2rem;
+  width: max-content;
   will-change: transform;
 }
 
@@ -64,6 +65,7 @@
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
   border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .projectWrap img {
@@ -78,35 +80,67 @@
   transform: scale(1.05);
 }
 
-/* Responsive */
+/* =========================================
+   Responsive - Native Scroll for Touch Devices
+   (Replaces GSAP pinning on mobile)
+   ========================================= */
+
 @media (max-width: 900px) {
+  .galleryWrapper {
+    height: auto;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 3rem 1.5rem;
+    background: #ffffff;
+
+    /* Hide scrollbar for cleaner mobile look */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+  }
+
+  /* Hide scrollbar for Chrome/Safari */
+  .galleryWrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .galleryStrip {
+    display: inline-flex;
+    width: auto;
+    height: auto;
+    gap: 1.5rem;
+    /* Force override any lingering GSAP inline styles */
+    transform: none !important;
+  }
+
   .projectWrap {
-    flex: 0 0 65vw;
+    flex: 0 0 80vw;
+    height: 55vh;
+    scroll-snap-align: center;
+    white-space: normal;
+    margin-right: 0;
   }
 
   .mainHeading {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 520px) {
   .projectWrap {
-    flex: 0 0 82vw;
-  }
-
-  .galleryStrip {
-    gap: 1rem;
-  }
-
-  .galleryWrapper {
-    padding: 0 1rem;
+    flex: 0 0 85vw;
+    height: 50vh;
   }
 
   .panel {
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.25rem;
   }
 
   .mainHeading {
-    font-size: 2.4rem;
+    font-size: 2rem;
   }
 }

@@ -4,12 +4,14 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
+
 const API_BASE = "http://localhost:3000/api"
 
 const OVERVIEW_CONFIG = {
     "hero": {
         endpoint: "/about/overview/hero",
         title: "Hero Section",
+        limit: 1,
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Title" },
@@ -23,6 +25,7 @@ const OVERVIEW_CONFIG = {
     "intro": {
         endpoint: "/about/overview/intro",
         title: "Introduction Text",
+        limit: 1,
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Heading" },
@@ -39,6 +42,7 @@ const OVERVIEW_CONFIG = {
     "grid": {
         endpoint: "/about/overview/grid",
         title: "Grid Section",
+        limit: 1,
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Heading" },
@@ -91,6 +95,14 @@ export default function AboutOverview() {
 
     if (!componentId) {
         return (
+            <div className="admin-section">
+                <div className="section-header">
+                    <div>
+                        <button className="back-link" onClick={() => navigate("/admin/about")}>← Back to About</button>
+                        <h1>Overview Components</h1>
+                        <p>Select a component to manage</p>
+                    </div>
+                </div>
             <div className="component-cards">
                 <div className="component-card" onClick={() => navigate("/admin/about/overview/hero")}>
                     <div className="card-icon"><i className="fa fa-image"></i></div>
@@ -112,6 +124,7 @@ export default function AboutOverview() {
                     <h3>Then & Now Slider</h3>
                     <p>Baltic Sea Special Section</p>
                 </div>
+            </div>
             </div>
         )
     }
@@ -154,22 +167,31 @@ export default function AboutOverview() {
         }
     }
 
+    const isAddDisabled = currentConfig?.limit > 0 && items.length >= currentConfig.limit;
+
     return (
         <div className="admin-section">
             <div className="section-header">
-                <button className="back-link" onClick={() => navigate("/admin/about/overview")}>← Back</button>
+                <button className="back-link" onClick={() => navigate("/admin/about")}>← Back to About</button>
                 <h1>{currentConfig.title}</h1>
-                <button className="add-btn" onClick={() => { setEditingItem(null); setIsModalOpen(true); }} disabled={items.length >= 1 && componentId !== 'stats'}>
+                <button
+                    className="add-btn"
+                    onClick={() => { setEditingItem(null); setIsModalOpen(true); }}
+                    disabled={isAddDisabled}
+                    title={isAddDisabled ? `Maximum ${currentConfig.limit} item(s) allowed` : ""}
+                >
                     <i className="fa fa-plus"></i> Add Content
                 </button>
             </div>
 
-            <DataTable
-                columns={currentConfig.columns}
-                data={items}
-                onEdit={(item) => { setEditingItem(item); setIsModalOpen(true); }}
-                onDelete={handleDelete}
-            />
+            {/* --- DATA DISPLAY --- */}
+                <DataTable
+                    columns={currentConfig.columns}
+                    data={items}
+                    onEdit={(item) => { setEditingItem(item); setIsModalOpen(true); }}
+                    onDelete={handleDelete}
+                />
+
 
             <FormModal
                 isOpen={isModalOpen}

@@ -2,44 +2,58 @@
 @import url("https://unpkg.com/open-props");
 @import url("https://cdn.jsdelivr.net/gh/mobalti/open-props-interfaces@main/hdr-palettes-astro-op/src/styles/hdr-palettes.css");
 
-.container * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+.container {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background: #f1f5f9;
 }
 
-.container {
-  font-family: "Roboto", sans-serif;
-  background-color: #ffffff;
-  color: #fff;
-  overflow-x: hidden;
-  width: 100%;
+
+
+.placementHeader {
+  display: flex;
+  justify-content: center;
 }
 
 .type {
   color: #dbd56e;
-  background: -webkit-linear-gradient(25deg, #eee, #333);
+  background: -webkit-linear-gradient(25deg, #787676, #333);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 2.5rem;
-  font-weight: 600;
-  white-space: nowrap;
+  background-clip: text;
+  font-size: 3rem;
+  font-weight: 500;
   overflow: hidden;
+  white-space: nowrap;
   border-right: 2px solid;
-  display: inline-block;
-  animation: type 3s steps(20, end) 1s 1 normal both,
-    cursor 1s step-end infinite;
-  text-align: center;
-  margin: 2rem auto;
+  /* Animation removed from base class, added to modifier class below */
+  position: relative;
+  margin-bottom: 2em;
+
+
 }
 
-@keyframes type {
-  from { width: 0ch; }
-  to   { width: 33ch; }
+.typeAnimate {
+  animation: swiperCarouselType 2s steps(100) 0s 1 normal both,
+    swiperCarouselCursor 1s step-end infinite;
+}
+
+@keyframes swiperCarouselType {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+    /* In a grid/fit-content context, this will be the text width */
+  }
 }
 
 @keyframes cursor {
-  50% { border-color: transparent; }
+  50% {
+    border-color: transparent;
+  }
 }
 
 .section {
@@ -180,63 +194,218 @@
 
 /* Responsive */
 @media (min-width: 1024px) {
-  .section { padding: 3rem 0; }
-  .type { font-size: 3rem; }
-  .content { text-align: justify; }
+  .section {
+    padding: 3rem 0;
+  }
+
+  .type {
+    font-size: 3rem;
+  }
+
+  .content {
+    text-align: justify;
+  }
 }
 
 @media (max-width: 1023px) and (min-width: 768px) {
-  .container { height: 100vh; display: flex; flex-direction: column; }
-  .type { font-size: 2rem; }
-  .section { align-items: center; justify-content: center; height: 100%; padding: 0 20px; }
-  .scrollWrapper { padding: 0 1.5rem; }
-  .cardItem { min-width: 100px; max-width: 250px; }
-  .visual img { height: 180px; }
-  .content { text-align: justify; }
+  .container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .type {
+    font-size: 2rem;
+  }
+
+  .section {
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 20px;
+  }
+
+  .scrollWrapper {
+    padding: 0 1.5rem;
+  }
+
+  .cardItem {
+    min-width: 100px;
+    max-width: 250px;
+  }
+
+  .visual img {
+    height: 180px;
+  }
+
+  .content {
+    text-align: justify;
+  }
 }
 
 @media (max-width: 767px) and (min-width: 601px) {
-  .container, .container { height: 100vh; display: flex; flex-direction: column; }
-  .type { font-size: 1.8rem; margin: 10px auto; text-align: center; }
-  .scrollWrapper { padding: 0 1rem; }
-  .section { padding: 0 20px; height: 100%; background-attachment: scroll; }
-  .cards { gap: 1rem; }
-  .cardItem { min-width: 200px; max-width: 250px; }
-  .visual img { height: 160px; }
-  .content h3 { font-size: 18px; }
-  .content p { font-size: 14px; }
-  .arrowBtn { font-size: 1.5rem; }
+
+  .container,
+  .container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .type {
+    font-size: 1.8rem;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  .scrollWrapper {
+    padding: 0 1rem;
+  }
+
+  .section {
+    padding: 0 20px;
+    height: 100%;
+    background-attachment: scroll;
+  }
+
+  .cards {
+    gap: 1rem;
+  }
+
+  .cardItem {
+    min-width: 200px;
+    max-width: 250px;
+  }
+
+  .visual img {
+    height: 160px;
+  }
+
+  .content h3 {
+    font-size: 18px;
+  }
+
+  .content p {
+    font-size: 14px;
+  }
+
+  .arrowBtn {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 600px) and (min-width: 481px) {
-  .container { height: 100vh; display: flex; flex-direction: column; }
-  .type { font-size: 1.5rem; text-align: center; }
-  .scrollWrapper { padding: 0 0.5rem; }
-  .section { padding: 0 20px; height: 100%; }
-  .cards { gap: 0.8rem; }
-  .cardItem { min-width: 200px; max-width: 220px; }
-  .visual img { height: 140px; }
-  .content h3 { font-size: 1rem; }
-  .content p { font-size: 0.85rem; text-align: justify; }
-  .arrowBtn { display: none; }
+  .container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .type {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .scrollWrapper {
+    padding: 0 0.5rem;
+  }
+
+  .section {
+    padding: 0 20px;
+    height: 100%;
+  }
+
+  .cards {
+    gap: 0.8rem;
+  }
+
+  .cardItem {
+    min-width: 200px;
+    max-width: 220px;
+  }
+
+  .visual img {
+    height: 140px;
+  }
+
+  .content h3 {
+    font-size: 1rem;
+  }
+
+  .content p {
+    font-size: 0.85rem;
+    text-align: justify;
+  }
+
+  .arrowBtn {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
-  .container { height: 100vh; display: flex; flex-direction: column; width: 100%; }
-  .type { font-size: 1.2rem; text-align: center; }
-  .scrollWrapper { padding: 0 0.5rem; }
-  .section { padding: 0 20px; height: 100%; }
-  .cards { gap: 0.8rem; }
-  .cardItem { min-width: 200px; max-width: 220px; }
-  .visual img { height: 140px; }
-  .content h3 { font-size: 1rem; text-align: justify; }
-  .content p { font-size: 0.85rem; text-align: justify; }
-  .arrowBtn { display: none; }
+  .container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .type {
+    font-size: 1.4rem;
+  }
+
+  .scrollWrapper {
+    padding: 0 0.5rem;
+  }
+
+  .section {
+    padding: 0 20px;
+    height: 100%;
+  }
+
+  .cards {
+    gap: 0.8rem;
+  }
+
+  .cardItem {
+    min-width: 200px;
+    max-width: 220px;
+  }
+
+  .visual img {
+    height: 140px;
+  }
+
+  .content h3 {
+    font-size: 1rem;
+    text-align: justify;
+  }
+
+  .content p {
+    font-size: 0.85rem;
+    text-align: justify;
+  }
+
+  .arrowBtn {
+    display: none;
+  }
 }
 
 @media (max-width: 365px) {
-  .type { font-size: 1rem; }
-  .content h3 { font-size: 0.8rem; }
-  .content p { font-size: 0.7rem; }
-  .arrowBtn { padding: 0.6rem; font-size: 1rem; }
+  .type {
+    font-size: 1rem;
+  }
+
+  .content h3 {
+    font-size: 0.8rem;
+  }
+
+  .content p {
+    font-size: 0.7rem;
+  }
+
+  .arrowBtn {
+    padding: 0.6rem;
+    font-size: 1rem;
+  }
 }

@@ -84,6 +84,14 @@ export default function LeadershipAdmin() {
 
     if (!componentId) {
         return (
+              <div className="admin-section">
+                <div className="section-header">
+                    <div>
+                        <button className="back-link" onClick={() => navigate("/admin/about")}>← Back to About</button>
+                        <h1>Leadership</h1>
+                        <p>Select a component to manage</p>
+                    </div>
+                </div>
             <div className="component-cards">
                 <div className="component-card" onClick={() => navigate("/admin/about/leadership/chairman")}>
                     <div className="card-icon"><i className="fa fa-user-tie"></i></div>
@@ -100,6 +108,7 @@ export default function LeadershipAdmin() {
                     <h3>College Principals</h3>
                     <p>Academic leaders</p>
                 </div>
+            </div>
             </div>
         )
     }

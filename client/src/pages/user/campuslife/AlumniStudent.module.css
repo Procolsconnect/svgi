@@ -64,7 +64,7 @@
 
 .cafeInner {
   display: inline-block;
-  animation: 
+  animation:
     innerLeft 1s 1s ease forwards,
     textClip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) forwards;
 }
@@ -79,6 +79,7 @@
   from {
     clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
   }
+
   to {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
@@ -88,6 +89,7 @@
   from {
     transform: translateX(50%);
   }
+
   to {
     transform: none;
   }
@@ -97,6 +99,7 @@
   from {
     transform: translateX(-50%);
   }
+
   to {
     transform: none;
   }
@@ -106,6 +109,7 @@
   from {
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
   }
+
   to {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
@@ -150,6 +154,11 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .root {
+    height: auto;
+    min-height: auto;
+  }
+
   .app {
     grid-template-columns: 1fr;
     height: auto;

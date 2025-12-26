@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hero Section</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f9fafb;
+    }
+
+    /* HERO SECTION */
+    #hero {
+      min-height: 350px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      color: white;
+    }
+
+    #hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    #hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 0;
+    }
+
+    #hero h1 {
+      position: relative;
+      font-size: 52px;
+      font-weight: bold;
+      z-index: 1;
+      letter-spacing: 1px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    #hero h1::after {
+      content: "";
+      display: block;
+      width: 120px;
+      height: 5px;
+      margin: 14px auto 0;
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      border-radius: 3px;
+      animation: underline-pulse 2s infinite;
+    }
+
+    @keyframes underline-pulse {
+      0%, 100% { transform: scaleX(1); opacity: 0.8; }
+      50% { transform: scaleX(1.4); opacity: 1; }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Roboto", sans-serif;
+      font-size: 62.5%;
+    }
+    a {
+      color: unset;
+      font-size: unset;
+      text-decoration: none;
+    }
+    .wrap {
+      width: 960px;
+      margin: 0 auto;
+      font-size: 0;
+    }
+    .header {
+      display: inline-block;
+      width: 100%;
+      vertical-align: middle;
+      margin-top: 40px;
+    }
+    .header h3 {
+      height: 120px;
+      text-align: left;
+      margin-left: 97px;
+    }
+    .header h3:before {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f060";
+      display: inline-block;
+      font-size: 2rem;
+      color: #000;
+      padding-right: 5px;
+    }
+    .header h3 span {
+      line-height: 120px;
+      font-size: 2rem;
+      color: #fff;
+      font-weight: 900;
+      padding: 2px 8px;
+      background-color: #000;
+    }
+
+    /* TOP SECTION */
+    .detailtop {
+      width: 100%;
+      height: 500px; /* reduced */
+      position: relative;
+    }
+    .productimg {
+      width: 75%;
+      height: 55.56%;
+      background: url(https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80) center -330px;
+      background-color: #ddd;
+      background-size: cover;
+      position: absolute;
+      top: -300;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 2;
+    }
+    .detailtop:before {
+      content: "";
+      width: 25%;
+      height: 27.78%;
+      background-color: #001f54; /* dark blue */
+      position: absolute;
+      top: 280px;
+      left: 60px;
+    }
+    .detailtop:after {
+      content: "";
+      width: 480px;
+      height: 270px;
+      position: absolute;
+      bottom: 82px;
+      right: 60px;
+      border: 20px solid #001f54; /* dark blue */
+      z-index: 1;
+    }
+    .boxtop {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .boxbottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    .boxtitle,
+    .detailcontent h1 {
+      font-size: 4.8rem;
+      font-weight: 900;
+    }
+    .boxtitletop1 {
+      position: relative;
+      top: -60px;
+    }
+    .boxtitletop2 {
+      position: relative;
+      top: 12px;
+      right: -140px;
+      transform: rotate(90deg);
+    }
+    .boxtitlebottom1 {
+      position: relative;
+      left: -70px;
+      bottom: -40px;
+      transform: rotate(-90deg);
+    }
+    .boxtitlebottom2 {
+      position: relative;
+      top: 50px;
+      left: 0;
+      transform: scale(-1, -1);
+    }
+
+    /* CONTENT SECTION */
+    .detailcontent {
+      width: 100%;
+      padding: 60px 80px; /* reduced padding */
+      position: relative;
+    }
+    .detailcontent h3,
+    .detailcontent .subtitle {
+      font-size: 24px;
+    }
+    .detailcontent h3 {
+      font-style: italic;
+      position: absolute;
+      top: 180px; /* adjusted */
+      left: -100px;
+      transform: rotate(90deg);
+    }
+    .detailcontent .subtitle {
+      font-weight: 900;
+    }
+    .detailcontent p {
+      font-size: 1.6rem;
+      margin: 1.2rem 0; /* reduced */
+      line-height: 2.2rem;
+    }
+
+    /* BOTTOM SECTION */
+    .detailbottom {
+      width: 100%;
+      height: 500px; /* reduced */
+      padding: 0 80px; /* reduced */
+      margin: auto;
+      position: relative;
+    }
+    .detailbottom .leftitem .itemimg {
+      width: 37.5%;
+      padding-bottom: 31.25%;
+      background: url(https://images.unsplash.com/photo-1519406686401-e9ef2420c15b?ixlib=rb-0.3.5&auto=format&fit=crop&w=1950&q=80) center center;
+      background-size: cover;
+      position: absolute;
+      top: 0;
+      left: 120px;
+      z-index: 2;
+    }
+    .detailbottom .leftitem:after {
+      content: "";
+      width: calc(50% - 40px);
+      height: 20.83%;
+      border: 20px solid #001f54; /* dark blue */
+      position: absolute;
+      top: 160px;
+      left: 60px;
+    }
+    .detailbottom .rightitem .itemimg {
+      width: 50%;
+      padding-bottom: 41.67%;
+      background: url(https://images.unsplash.com/photo-1519406728390-b536d7be138f?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80) center center;
+      background-size: cover;
+      position: absolute;
+      right: 120px;
+      bottom: 80px; /* reduced */
+      z-index: 1;
+    }
+    .detailbottom .rightitem:before {
+      content: "";
+      width: 240px;
+      height: 200px;
+      background-color: #001f54; /* dark blue */
+      position: absolute;
+      top: 100px;
+      right: 60px;
+      z-index: 1;
+    }
+    .detailbottom .rightitem:after {
+      content: "";
+      width: 240px;
+      height: 100px;
+      background: repeating-linear-gradient(
+        135deg,
+        #001f54,
+        #001f54 11.5px,
+        transparent 11.5px,
+        transparent 27px,
+        #001f54 27px,
+        #001f54 35.5px
+      );
+      position: absolute;
+      bottom: 50px; /* reduced */
+      left: 20%;
+      z-index: 3;
+    }
+
+   
+
+.wrapper-no4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #BEEDFF, white);
+  height: 60vh;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.button-bird {
+  width: 300px;
+  height: 88px;
+  background-color: #131335;
+  border-radius: 5px;
+  position: absolute;
+  top: 330%;
+  opacity: 1;
+  transform: translateY(-50%);
+  padding: 0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.button-bird__text {
+  text-align: center;
+  font-size: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #BEEDFF;
+  position: absolute;
+  z-index: 1000;
+  top: 50%;
+  margin: 0;
+  transform: translateY(-50%);
+}
+
+.button-bird:focus {
+  outline: none;
+}
+
+.button-bird:hover .bird--30 {
+  left: 600px;
+  top: -550px;
+  opacity: 0;
+  transition: left 1.5s cubic-bezier(0.42, 0, 0.58, 1), top 1.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.5s linear 1s;
+}
+
+.button-bird:hover .bird--30:after {
+  left: 50px;
+  top: 50px;
+  transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+}
+
+.button-bird:hover .bird--30:before {
+  left: -50px;
+  top: 50px;
+  transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
+}
+
+.button-bird .feather {
+  position: absolute;
+  width: 18%;
+  left: 40%;
+  top: 12px;
+  display: none;
+  opacity: 0;
+  fill: #131335;
+}
+
+/* Active Button State */
+.button-bird.active {
+  background-color: transparent;
+  transition: all 0.2s linear 0.1s;
+}
+
+.button-bird.active .button-bird__text {
+  color: #131335;
+  animation: text-fade 1.5s 0.2s;
+}
+
+.button-bird.active .feather {
+  display: block;
+  animation: feather-fade 1.5s linear 0.5s forwards;
+}
+
+/* Birds positioning, animation, and sizing */
+.bird,
+.bird:before,
+.bird:after,
+.bird--1,
+.bird--1:after,
+.bird--1:before,
+.bird--2,
+.bird--2:after,
+.bird--2:before,
+.bird--3,
+.bird--3:after,
+.bird--3:before,
+.bird--4,
+.bird--4:after,
+.bird--4:before,
+.bird--5,
+.bird--5:after,
+.bird--5:before,
+.bird--6,
+.bird--6:after,
+.bird--6:before,
+.bird--7,
+.bird--7:after,
+.bird--7:before,
+.bird--8,
+.bird--8:after,
+.bird--8:before,
+.bird--9,
+.bird--9:after,
+.bird--9:before,
+.bird--10,
+.bird--10:after,
+.bird--10:before,
+.bird--11,
+.bird--11:after,
+.bird--11:before,
+.bird--12,
+.bird--12:after,
+.bird--12:before,
+.bird--13,
+.bird--13:after,
+.bird--13:before,
+.bird--14,
+.bird--14:after,
+.bird--14:before,
+.bird--15,
+.bird--15:after,
+.bird--15:before,
+.bird--16,
+.bird--16:after,
+.bird--16:before,
+.bird--17,
+.bird--17:after,
+.bird--17:before,
+.bird--18,
+.bird--18:after,
+.bird--18:before,
+.bird--19,
+.bird--19:after,
+.bird--19:before,
+.bird--20,
+.bird--20:after,
+.bird--20:before,
+.bird--21,
+.bird--21:after,
+.bird--21:before,
+.bird--22,
+.bird--22:after,
+.bird--22:before,
+.bird--23,
+.bird--23:after,
+.bird--23:before,
+.bird--24,
+.bird--24:after,
+.bird--24:before,
+.bird--25,
+.bird--25:after,
+.bird--25:before,
+.bird--26,
+.bird--26:after,
+.bird--26:before,
+.bird--27,
+.bird--27:after,
+.bird--27:before,
+.bird--28,
+.bird--28:after,
+.bird--28:before,
+.bird--29,
+.bird--29:after,
+.bird--29:before,
+.bird--30,
+.bird--30:after,
+.bird--30:before {
+  opacity: 1;
+  display: block;
+  position: absolute;
+  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+  background-size: auto 100%;
+  width: 60px;
+  height: 33px;
+  top: 0;
+  left: 0;
+  animation-name: fly-cycle;
+  animation-timing-function: steps(3);
+  animation-iteration-count: infinite;
+}
+
+/* Single bird size adjustments */
+.bird--1:after,
+.bird--1:before,
+.bird--2:after,
+.bird--2:before,
+.bird--4:after,
+.bird--4:before,
+.bird--5:after,
+.bird--5:before,
+.bird--7:after,
+.bird--7:before,
+.bird--8:after,
+.bird--8:before,
+.bird--10:after,
+.bird--10:before,
+.bird--11:after,
+.bird--11:before,
+.bird--13:after,
+.bird--13:before,
+.bird--14:after,
+.bird--14:before,
+.bird--16:after,
+.bird--16:before,
+.bird--17:after,
+.bird--17:before {
+  width: 30px;
+  height: 33px;
+  top: -8px;
+  left: 8px;
+  z-index: -100;
+}
+
+/* Animations */
+@keyframes fly-cycle {
+  100% {
+    background-position: -360px 0;
+  }
+}
+
+@keyframes text-fade {
+  0% {
+    color: transparent;
+    opacity: 1;
+    top: -50%;
+    left: auto;
+  }
+  1% {
+    color: transparent;
+    opacity: 0;
+  }
+  50% {
+    color: transparent;
+    opacity: 0;
+  }
+  100% {
+    color: #131335;
+    opacity: 1;
+  }
+}
+
+@keyframes feather-fade {
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+  25% {
+    transform: rotate(10deg);
+    left: 30%;
+  }
+  50% {
+    transform: rotate(-5deg);
+    opacity: 1;
+    left: 45%;
+  }
+  75% {
+    transform: rotate(10deg);
+    left: 32%;
+  }
+  100% {
+    transform: rotate(0deg);
+    opacity: 1;
+    top: 12px;
+    left: 43%;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <div id="hero">
+    <img src="hero img.jpg" alt="Hero Background">
+    <h1>Postgraduate Courses</h1>
+  </div>
+
+
+  
+  <div class="wrap">
+
+    <div class="header">
+      <h3><span><a href="https://codepen.io/gatesakagi/full/WyKrRB/" target="_blank">CCCLOTHES</a></span></h3>
+    </div>
+
+    <div class="detailtop">
+      <div class="productimg">
+        <div class="boxtop">
+          <div class="boxtitle boxtitletop1">VINTAGE</div>
+          <div class="boxtitle boxtitletop2">DENIM</div>
+        </div>
+        <div class="imgproduct"></div>
+        <div class="boxbottom">
+          <div class="boxtitle boxtitlebottom1">06</div>
+          <div class="boxtitle boxtitlebottom2">TOP</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detailcontent">
+      <h1>VINTAGE DENIM</h1>
+      <h3>PRODUCT DETAILS</h3>
+      <div class="subtitle">Kogi Cosby sweater ethical squid irony</div>
+      <p>In the tumultuous business of cutting-in and attending to a whale, there is much running backwards and forwards among the crew...</p>
+      <p>We must now retrace our way a little. It was mentioned that upon first breaking ground in the whale's back...</p>
+    </div>
+
+    <div class="detailbottom">
+      <div class="leftitem">
+        <div class="itemimg"></div>
+      </div>
+      <div class="rightitem">
+        <div class="itemimg"></div>
+      </div>
+    </div>
+  </div>
+
+<div class="wrapper-no4">
+  <p>THE complete UP cource are in side the button So </p><br>
+<h1> Click the Button </h1>
+    <button class="button-bird">
+        <p class="button-bird__text">OPEN</p>
+        <svg version="1.1" class="feather" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             viewBox="0 0 75 38" style="enable-background:new 0 0 75 38;" xml:space="preserve">
+        <g>
+            <path d="M20.8,31.6c3.1-0.7,2.9-2.3,2,1c9.1,4.4,20.4,3.7,29.1-0.8l0,0c0.7-2.1,1-3.9,1-3.9c0.6,0.8,0.8,1.7,1,2.9
+                c4.1-2.3,7.6-5.3,10.2-8.3c0.4-2.2,0.4-4,0.4-4.1c0.6,0.4,0.9,1.2,1.2,2.1c4.5-6.1,5.4-11.2,3.7-13.5c1.1-2.6,1.6-5.4,1.2-7.7
+                c-0.5,2.4-1.2,4.7-2.1,7.1c-5.8,11.5-16.9,21.9-30.3,25.3c13-4,23.6-14.4,29.1-25.6C62.8,9,55.6,16.5,44.7,20.7
+                c2.1,0.7,3.5,1.1,3.5,1.6c-0.1,0.4-1.3,0.6-3.2,0.4c-7-0.9-7.1,1.2-16,1.5c1,1.3,2,2.5,3.1,3.6c-1.9-0.9-3.8-2.2-5.6-3.6
+                c-0.9,0.1-10.3,4.9-22.6-12.3C5.9,17.7,11.8,26.9,20.8,31.6z"/>
+        </g>
+        </svg>
+        <span class="bird"></span>
+        <span class="bird--1"></span>
+        <span class="bird--2"></span>
+        <span class="bird--3"></span>
+        <span class="bird--4"></span>
+        <span class="bird--5"></span>
+        <span class="bird--6"></span>
+        <span class="bird--7"></span>
+        <span class="bird--8"></span>
+        <span class="bird--9"></span>
+        <span class="bird--10"></span>
+        <span class="bird--11"></span>
+        <span class="bird--12"></span>
+        <span class="bird--13"></span>
+        <span class="bird--14"></span>
+        <span class="bird--15"></span>
+        <span class="bird--16"></span>
+        <span class="bird--17"></span>
+        <span class="bird--18"></span>
+        <span class="bird--19"></span>
+        <span class="bird--20"></span>
+        <span class="bird--21"></span>
+        <span class="bird--22"></span>
+        <span class="bird--23"></span>
+        <span class="bird--24"></span>
+        <span class="bird--25"></span>
+        <span class="bird--26"></span>
+        <span class="bird--27"></span>
+        <span class="bird--28"></span>
+        <span class="bird--29"></span>
+        <span class="bird--30"></span>
+    </button>
+ </div>
+
+ <script>
+  document.addEventListener("DOMContentLoaded", function(){
+      var el = document.querySelector(".button-bird");
+      var text = document.querySelector(".button-bird__text");
+          el.addEventListener('click', function() {
+            el.classList.toggle('active');
+
+            if(el.classList.contains('active')){
+            	console.log('true');
+            	text.innerHTML = 'DONE';
+            }else{
+            	text.innerHTML = 'SEND';
+            }
+        });
+    });
+ </script>
+
+</body>
+</html>

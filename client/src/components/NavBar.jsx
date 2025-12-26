@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import "./nav.css"; // your fixed nh-header CSS
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { Menu, X, ChevronDown, ChevronRight, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import styles from "./NavBar.module.css";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,16 +11,27 @@ const Header = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      // Transition starts after 50px scroll
+      setIsScrolled(window.scrollY > 50);
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { label: "Home", type: "page", value: "/" },
+  const topNavLinks = [
+    { label: "Home", value: "/" },
+    { label: "About Us", value: "/about/overview" },
+    { label: "News", value: "/news" },
+    { label: "Infrastructure", value: "/infrastructure" },
+    { label: "Quick Links", value: "/quick-links" },
+    { label: "Alumni", value: "/alumni" },
+    { label: "Contact", value: "/contact" },
+  ];
+
+  const primaryNavItems = [
     {
       label: "Admissions",
-      type: "page",
       value: "/admissions",
       subItems: [
         { label: "Overview", value: "/admissions" },
@@ -32,7 +43,6 @@ const Header = () => {
     },
     {
       label: "Academics",
-      type: "page",
       value: "/academics",
       subItems: [
         { label: "Overview", value: "/academics" },
@@ -43,8 +53,31 @@ const Header = () => {
       ],
     },
     {
+      label: "About",
+      value: "/about",
+      subItems: [
+        { label: "Overview", value: "/about/overview" },
+        { label: "Course Outcome", value: "/about/vission&mission" },
+        { label: "Library", value: "/about/library" },
+
+      ],
+    },
+    {
+      label: "Campuslife",
+      value: "/campuslife",
+      subItems: [
+        { label: "Overview", value: "/campuslife/overview" },
+        { label: "Sports", value: "/campuslife/sports" },
+        { label: "Hostel", value: "/campuslife/hostel" },
+        { label: "Health", value: "/campuslife/health" },
+        { label: "Fest", value: "/campuslife/fest" },
+        { label: "Green", value: "/campuslife/green" },
+        { label: "Policies", value: "/campuslife/policies" },
+        { label: "Welfare", value: "/campuslife/welfare" },
+      ],
+    },
+    {
       label: "Placement",
-      type: "page",
       value: "/placement",
       subItems: [
         { label: "Overview", value: "/placement" },
@@ -53,37 +86,14 @@ const Header = () => {
       ],
     },
     {
-      label: "About",
-      type: "page",
-      value: "/about",
-      subItems: [
-        { label: "Overview", value: "/about/overview" },
-        { label: "Mission", value: "/about/vission&mission" },
-        { label: "Leadership", value: "/about/leadership" },
-      ],
+      label: "News",
+      value: "/news",
+  
     },
-    {
-      label: "Campus",
-      type: "page",
-      value: "/campuslife",
-      subItems: [
-        { label: "Overview", value: "/campuslife" },
-        { label: "Sports", value: "/campuslife/sports" },
-        { label: "Hostel", value: "/campuslife/hostel" },
-        { label: "Health", value: "/campuslife/health" },
-        { label: "Festival", value: "/campuslife/fest" },
-        { label: "Green", value: "/campuslife/green" },
-        { label: "Policies", value: "/campuslife/policies" },
-        { label: "Welfare", value: "/campuslife/welfare" },
-        { label: "OurDiamond", value: "/campuslife/diamond" },
-      ],
-    },
-    { label: "Advertisement", type: "page", value: "/advertisement", subItems: [] },
-    { label: "News", type: "page", value: "/news", subItems: [] },
   ];
 
   const handleNav = (item) => {
-    if (item.type === "page") navigate(item.value);
+    navigate(item.value);
     setIsMobileMenuOpen(false);
     setOpenMobileDropdown(null);
   };
@@ -93,87 +103,149 @@ const Header = () => {
   };
 
   return (
-    <div className="nh-header">
-      <header className={isScrolled ? "scrolled" : ""}>
-        <div className="header-container">
-          {/* Logo */}
-          <div className="logo">
-            <img src="/logos/Logo_new.png" alt="logo" />
+    <div className={`${styles['sk-header-root']} ${isScrolled ? styles['is-scrolled'] : styles['at-top']}`}>
+      {/* Fixed Sticky Wrapper */}
+
+      {/* Tier 1: News Ticker */}
+      <div className={styles['sk-ticker-bar']}>
+        <div className={styles['sk-ticker-inner']}>
+          <div className={styles['sk-ticker-label']}>LATEST NEWS</div>
+          <div className={styles['sk-ticker-content']}>
+            <marquee behavior="scroll" direction="left" onMouseOver={(e) => e.target.stop()} onMouseOut={(e) => e.target.start()}>
+              <span>NIRF 2024 Ranking: SVGI secures top position in Arts & Science category | Admissions open for 2024-25 | SVGI Alumni Meet scheduled for January 20th, 2025</span>
+            </marquee>
           </div>
-
-          {/* Desktop Nav */}
-          <nav className="nav-items">
-            {navItems.map((item) => (
-              <div className="nav-item-wrapper" key={item.label}>
-                <button className="nav-item-btn" onClick={() => handleNav(item)}>
-                  {item.label}
-                </button>
-                {item.subItems && (
-                  <div className="dropdown">
-                    {item.subItems.map((sub) => (
-                      <button
-                        key={sub.label}
-                        className="dropdown-item"
-                        onClick={() => navigate(sub.value)}
-                      >
-                        {sub.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="mobile-menu-button"
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
+      </div>
+      <div className={styles['sk-fixed-container']}>
 
-        {/* Mobile Menu */}
-        <div className={`mobile-menu ${isMobileMenuOpen ? "show" : ""}`}>
-          {navItems.map((item) => (
-            <div
-              key={item.label}
-              className={`mobile-item-wrapper ${
-                openMobileDropdown === item.label ? "open" : ""
-              }`}
-            >
-              <button
-                className="mobile-item-btn"
-                onClick={() =>
-                  item.subItems?.length ? toggleMobileDropdown(item.label) : handleNav(item)
-                }
-              >
-                {item.label}
-              </button>
-              {item.subItems && (
-                <div className="mobile-dropdown">
-                  {item.subItems.map((sub) => (
-                    <button
-                      key={sub.label}
-                      className="mobile-dropdown-item"
-                      onClick={() => {
-                        navigate(sub.value);
-                        setIsMobileMenuOpen(false);
-                        setOpenMobileDropdown(null);
-                      }}
-                    >
-                      {sub.label}
-                    </button>
-                  ))}
-                </div>
-              )}
+        {/* Tier 2: Secondary Nav */}
+        <div className={styles['sk-secondary-nav']}>
+          <div className={styles['sk-nav-container']}>
+            <div className={styles['sk-social-links']}>
+              <a href="#"><Facebook size={14} /></a>
+              <a href="#"><Twitter size={14} /></a>
+              <a href="#"><Instagram size={14} /></a>
+              <a href="#"><Linkedin size={14} /></a>
             </div>
-          ))}
+            <div className={styles['sk-top-links']}>
+              {topNavLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.value}
+                  className={link.highlight ? styles.highlight : ""}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
-      </header>
+
+        {/* Tier 3: Primary Nav */}
+        <header className={styles['sk-primary-nav']}>
+          <div className={styles['sk-nav-container']}>
+            {/* Branding */}
+            <Link to="/" className={styles['sk-brand']}>
+              <div className={styles['sk-logo-box']}>
+                <img src="/logos/Logo_new.png" alt="SVGI" />
+              </div>
+              <div className={styles['sk-brand-text']}>
+                <div className={styles['college-title']}>SRI VENKATESHVARA</div>
+                <div className={styles['college-subtitle']}>GROUP OF INSTUTION</div>
+                {/* <div className="college-meta">An Autonomous College, Affiliated to University</div> */}
+              </div>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className={styles['sk-desktop-menu']}>
+              <ul className={styles['sk-nav-list']}>
+                {primaryNavItems.map((item) => (
+                  <li key={item.label} className={styles['sk-nav-item']}>
+                    <div className={styles['sk-item-wrapper']}>
+                      <button
+                        className={styles['sk-nav-link']}
+                        onClick={() => !item.subItems && handleNav(item)}
+                      >
+                        {item.label}
+                        {item.subItems && <ChevronDown size={14} className={styles['sk-chevron']} />}
+                      </button>
+
+                      {item.subItems && (
+                        <ul className={styles['sk-dropdown']}>
+                          {item.subItems.map((sub) => (
+                            <li key={sub.label}>
+                              <Link to={sub.value} onClick={() => setIsMobileMenuOpen(false)}>
+                                {sub.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* Mobile Actions */}
+            <div className={styles['sk-mobile-actions']}>
+              <button
+                className={styles['sk-menu-toggle']}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle Menu"
+              >
+                {isMobileMenuOpen ? <X size={30} /> : <Menu size={30} />}
+              </button>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      {/* Mobile Drawer Overlay */}
+      <div className={`${styles['sk-mobile-drawer']} ${isMobileMenuOpen ? styles['is-open'] : ""}`}>
+        <div className={styles['sk-drawer-content']}>
+          <ul className={styles['sk-drawer-primary']}>
+            {primaryNavItems.map((item) => (
+              <li key={item.label} className={`${styles['sk-drawer-item']} ${openMobileDropdown === item.label ? styles['is-expanded'] : ""}`}>
+                <div className={styles['sk-drawer-row']}>
+                  <button onClick={() => item.subItems ? toggleMobileDropdown(item.label) : handleNav(item)}>
+                    {item.label}
+                  </button>
+                  {item.subItems && (
+                    <span className={styles['sk-drawer-icon']} onClick={() => toggleMobileDropdown(item.label)}>
+                      {openMobileDropdown === item.label ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
+                    </span>
+                  )}
+                </div>
+                {item.subItems && (
+                  <ul className={styles['sk-drawer-sublist']}>
+                    {item.subItems.map((sub) => (
+                      <li key={sub.label}>
+                        <Link to={sub.value} onClick={() => setIsMobileMenuOpen(false)}>
+                          {sub.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+          <div className={styles['sk-drawer-secondary']}>
+            {topNavLinks.map((link) => (
+              <Link key={link.label} to={link.value} onClick={() => setIsMobileMenuOpen(false)}>
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Header;
+
+
+

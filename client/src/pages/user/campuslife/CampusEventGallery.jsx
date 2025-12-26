@@ -24,29 +24,45 @@ const HorizontalScrollGallery = () => {
   useEffect(() => {
     if (!stripRef.current || !wrapperRef.current || projectImages.length === 0) return;
 
-    const strip = stripRef.current;
+    const mm = gsap.matchMedia();
 
-    // Calculate total scrollable width
-    const getScrollAmount = () => {
-      let stripWidth = strip.scrollWidth;
-      return -(stripWidth - window.innerWidth);
-    };
+    // Desktop Animation (Only runs if width > 900px)
+    mm.add("(min-width: 901px)", () => {
+      const strip = stripRef.current;
+      const wrapper = wrapperRef.current;
 
-    const tween = gsap.to(strip, {
-      x: getScrollAmount,
-      ease: "none",
-      scrollTrigger: {
-        trigger: wrapperRef.current,
-        start: "top top",
-        end: () => `+=${getScrollAmount() * -1}`,
-        pin: true,
-        scrub: 1,
-        invalidateOnRefresh: true,
-      }
+      const getScrollAmount = () => {
+        const stripWidth = strip.scrollWidth;
+        const viewWidth = window.innerWidth;
+        return -(stripWidth - viewWidth + 100);
+      };
+
+      gsap.to(strip, {
+        x: () => getScrollAmount(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top top",
+          end: () => `+=${Math.abs(getScrollAmount())}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        }
+      });
+
+      // Recalculate if dimensions change (e.g. images load)
+      const resizeObserver = new ResizeObserver(() => {
+        ScrollTrigger.refresh();
+      });
+      resizeObserver.observe(strip);
+
+      return () => resizeObserver.disconnect();
     });
 
     return () => {
-      tween.kill();
+      mm.revert();
     };
   }, [projectImages]);
 

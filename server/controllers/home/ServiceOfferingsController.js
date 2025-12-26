@@ -4,7 +4,11 @@ import * as service from "../../services/home/ServiceOfferingsServices.js";
 export const getServiceOfferingsController = async (req, res) => {
   try {
     const offerings = await service.getServiceOfferings();
-    res.json(offerings);
+    res.status(200).json({
+      success: true,
+      message: "Service offerings fetched successfully",
+      data: offerings
+    });
   } catch (error) {
     console.error("Error fetching service offerings:", error);
     res.status(500).json({ message: "Failed to fetch service offerings" });

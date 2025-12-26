@@ -14,9 +14,7 @@ export default function Admin() {
           setCollapsed={setSidebarCollapsed}
         />
         <section className="admin-content">
-          {/* <div className="content-header">
-           
-          </div> */}
+          <div className="content-header"></div>
           <div className="content-body">
             <Outlet />
           </div>

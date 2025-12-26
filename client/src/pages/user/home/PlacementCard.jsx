@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import styles from "./PlacementCards.module.css";
@@ -7,6 +7,26 @@ const apiurl = import.meta.env.VITE_API_URL;
 
 const PlacementCards = () => {
   const [cards, setCards] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const titleRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const fetchPlacements = async () => {
@@ -33,8 +53,11 @@ const PlacementCards = () => {
 
   return (
     <div className={styles.container}>
-      <div className="container text-center py-4 placement-heading">
-        <h1 className={styles.type}>PLACEMENT & ACHIEVEMENT CELLS</h1>
+      <div className={styles.placementHeader}>
+        <h1
+          ref={titleRef}
+          className={`${styles.type} ${isVisible ? styles.typeAnimate : ""}`}
+        >PLACEMENT & ACHIEVEMENT CELLS</h1>
       </div>
 
       <section className={styles.section}>

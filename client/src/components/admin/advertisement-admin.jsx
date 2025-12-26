@@ -1,128 +1,158 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
+import axios from "axios"
 import DataTable from "../data-table"
 import FormModal from "../form-modal"
 import "../admin-section.css"
 
-const advComponents = [
-  { id: 1, name: "Adv Hero", type: "AdvHero.jsx", items: 2, status: "Active" },
-  { id: 2, name: "Admission Adv", type: "AdmissionAdv.jsx", items: 4, status: "Active" },
+// --- 1. GLOBAL CONFIGURATION ---
+const API_BASE = "http://localhost:3000/api"
+
+const SECTION_CONFIG = {
+  "adv-card": {
+    endpoint: "/advertisementcard",
+    title: "Advertisement Card",
+    columns: [
+      { key: "index", label: "Sr. No." },
+      { key: "image", label: "Image" },
+    ],
+    fields: [
+      { name: "image", label: "Adv Image", type: "file", required: true },
+    ]
+  },
+  "adv-faculty": {
+    endpoint: "/advertisemenfaculty",
+    title: "Advertisement Faculty",
+    columns: [
+      { key: "index", label: "Sr. No." },
+      { key: "name", label: "Name" },
+      { key: "email", label: "Email" },
+      { key: "mobile", label: "Mobile" },
+      { key: "page", label: "Page" },
+      { key: "image", label: "Photo" },
+    ],
+    fields: [
+      { name: "name", label: "Faculty Name", type: "text", required: true },
+      { name: "description", label: "Description", type: "textarea", required: true },
+      { name: "mobile", label: "Mobile No.", type: "text", required: true },
+      { name: "email", label: "Email ID", type: "text", required: true },
+      { name: "page", label: "Page Link", type: "text", required: true },
+      { name: "image", label: "Photo", type: "file", required: true },
+    ]
+  }
+}
+
+const ADV_SECTIONS = [
+  { id: 1, name: "Adv Card", slug: "adv-card", icon: "fa-ad" },
+  { id: 2, name: "Faculty Adv", slug: "adv-faculty", icon: "fa-user-tie" },
 ]
 
 export default function AdvertisementAdmin() {
   const { id: componentId } = useParams()
   const navigate = useNavigate()
-  const [data, setData] = useState(advComponents)
+
+  const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingItem, setEditingItem] = useState(null)
-  const [selectedComponent, setSelectedComponent] = useState(null)
-  const [componentItems, setComponentItems] = useState([])
+
+  const currentConfig = SECTION_CONFIG[componentId]
+
+  const fetchData = async () => {
+    if (!currentConfig) return
+    setLoading(true)
+    try {
+      const response = await axios.get(`${API_BASE}${currentConfig.endpoint}`)
+      setItems(response.data.data || [])
+    } catch (error) {
+      console.error("Fetch Error:", error)
+      setItems([])
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    if (componentId) {
-      const component = data.find(c => c.name.toLowerCase().replace(/\s+/g, '-') === componentId)
-      if (component) {
-        setSelectedComponent(component)
-        setComponentItems([
-          { id: 1, title: `Active campaign for ${component.name}`, type: "Banner", status: "Active" },
-        ])
+    if (componentId) fetchData()
+  }, [componentId])
+
+  const handleSave = async (formData) => {
+    if (!currentConfig) return
+    setSubmitting(true)
+
+    try {
+      const dataToSend = new FormData()
+      Object.keys(formData).forEach(key => {
+        const val = formData[key]
+        if (val !== null && val !== undefined) {
+          if (Array.isArray(val)) {
+            val.forEach(item => dataToSend.append(key, item))
+          } else {
+            dataToSend.append(key, val)
+          }
+        }
+      })
+
+      const config = {
+        headers: { "Content-Type": "multipart/form-data" },
+        timeout: 600000
       }
-    } else {
-      setSelectedComponent(null)
-    }
-  }, [componentId, data])
 
-  const itemColumns = [
-    { key: "id", label: "ID" },
-    { key: "title", label: "Campaign Name" },
-    { key: "type", label: "Adv Type" },
-    { key: "status", label: "Status" },
-  ]
-
-  const handleAdd = () => {
-    setEditingItem(null)
-    setIsModalOpen(true)
-  }
-
-  const handleEdit = (item) => {
-    setEditingItem(item)
-    setIsModalOpen(true)
-  }
-
-  const handleDelete = (id) => {
-    if (confirm("Are you sure you want to delete this?")) {
-      if (selectedComponent) {
-        setComponentItems(componentItems.filter((item) => item.id !== id))
+      const id = editingItem?._id || editingItem?.id
+      if (id) {
+        await axios.put(`${API_BASE}${currentConfig.endpoint}/${id}`, dataToSend, config)
       } else {
-        setData(data.filter((item) => item.id !== id))
+        await axios.post(`${API_BASE}${currentConfig.endpoint}`, dataToSend, config)
       }
+
+      setIsModalOpen(false)
+      fetchData()
+      alert("Successfully saved!")
+    } catch (error) {
+      console.error("Save Error:", error)
+      alert(`Failed: ${error.response?.data?.message || error.message}`)
+    } finally {
+      setSubmitting(false)
     }
   }
 
-  const handleSave = (formData) => {
-    if (selectedComponent) {
-      if (editingItem) {
-        setComponentItems(componentItems.map((item) => (item.id === editingItem.id ? { ...item, ...formData } : item)))
-      } else {
-        setComponentItems([...componentItems, { id: Date.now(), ...formData, status: "Active" }])
-      }
-    } else {
-      if (editingItem) {
-        setData(data.map((item) => (item.id === editingItem.id ? { ...item, ...formData } : item)))
-      } else {
-        setData([...data, { id: Date.now(), ...formData, status: "Active" }])
-      }
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this item?")) return
+    try {
+      await axios.delete(`${API_BASE}${currentConfig.endpoint}/${id}`)
+      fetchData()
+    } catch (error) {
+      alert("Delete failed")
     }
-    setIsModalOpen(false)
   }
 
-  const handleManage = (component) => {
-    const slug = component.name.toLowerCase().replace(/\s+/g, '-')
-    navigate(`/admin/advertisement/${slug}`)
-  }
-
-  const handleBack = () => {
-    navigate("/admin/advertisement")
-  }
-
-  if (selectedComponent) {
+  if (!componentId) {
     return (
       <div className="admin-section">
         <div className="section-header">
-          <div>
-            <button className="back-link" onClick={handleBack}>
-              <i className="fa fa-arrow-left"></i> Back to Components
-            </button>
-            <h1>Manage {selectedComponent.name}</h1>
-            <p>Manage ads and campaigns for {selectedComponent.name}</p>
-          </div>
-          <button className="add-btn" onClick={handleAdd}>
-            <i className="fa fa-plus"></i>
-            Add Campaign
-          </button>
+          <h1>Advertisement Admin</h1>
+          <p>Click a section to manage its content.</p>
         </div>
-
-        <div className="table-section">
-          <h2>{selectedComponent.name} Campaigns</h2>
-          <DataTable
-            columns={itemColumns}
-            data={componentItems}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
+        <div className="component-cards">
+          {ADV_SECTIONS.map((section) => (
+            <div key={section.id} className="component-card" onClick={() => navigate(`/admin/advertisement/${section.slug}`)}>
+              <div className="card-icon"><i className={`fa ${section.icon}`}></i></div>
+              <h3>{section.name}</h3>
+              <p>Manage ads content</p>
+            </div>
+          ))}
         </div>
+      </div>
+    )
+  }
 
-        <FormModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSave={handleSave}
-          title={editingItem ? "Edit Campaign" : "Add Campaign"}
-          fields={[
-            { name: "title", label: "Campaign Name", type: "text", required: true },
-            { name: "type", label: "Adv Type", type: "text", required: true },
-          ]}
-          initialData={editingItem}
-        />
+  if (!currentConfig) {
+    return (
+      <div className="admin-section">
+        <button onClick={() => navigate("/admin/advertisement")} className="back-link">← Back</button>
+        <h1>Coming Soon</h1>
+        <p>This section is still being set up.</p>
       </div>
     )
   }
@@ -131,71 +161,32 @@ export default function AdvertisementAdmin() {
     <div className="admin-section">
       <div className="section-header">
         <div>
-          <h1>Advertisement Section</h1>
-          <p>Manage 2 advertisement components</p>
+          <button onClick={() => navigate("/admin/advertisement")} className="back-link">← Back to Dashboard</button>
+          <h1>{currentConfig.title}</h1>
+          <p>{loading ? "Refreshing..." : `Managing items for ${currentConfig.title}`}</p>
         </div>
-        <button className="add-btn" onClick={handleAdd}>
-          <i className="fa fa-plus"></i>
-          Add Component
+        <button
+          className="add-btn"
+          onClick={() => { setEditingItem(null); setIsModalOpen(true); }}
+        >
+          <i className="fa fa-plus"></i> Add New
         </button>
       </div>
 
-      <div className="info-cards">
-        <div className="info-card blue">
-          <i className="fa fa-bullhorn"></i>
-          <div>
-            <h3>2</h3>
-            <p>Components</p>
-          </div>
-        </div>
-        <div className="info-card green">
-          <i className="fa fa-check-circle"></i>
-          <div>
-            <h3>6</h3>
-            <p>Total Items</p>
-          </div>
-        </div>
-      </div>
-      <div className="component-cards">
-        {data.map((component) => (
-          <div key={component.id} className="component-card" onClick={() => handleManage(component)}>
-            <div className="card-icon">
-              <i className="fa fa-file"></i>
-            </div>
-            <h3>{component.name}</h3>
-            <p>{component.items} items</p>
-            <div className="card-actions">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleEdit(component)
-                }}
-              >
-                <i className="fa fa-edit"></i>
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleDelete(component.id)
-                }}
-              >
-                <i className="fa fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <DataTable
+        columns={currentConfig.columns}
+        data={items}
+        onEdit={(item) => { setEditingItem(item); setIsModalOpen(true); }}
+        onDelete={handleDeleteItem => handleDelete(handleDeleteItem)}
+      />
 
       <FormModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSave}
-        title={editingItem ? "Edit Component" : "Add Component"}
-        fields={[
-          { name: "name", label: "Component Name", type: "text", required: true },
-          { name: "type", label: "File Name", type: "text", required: true },
-          { name: "items", label: "Number of Items", type: "number" },
-        ]}
+        submitting={submitting}
+        title={editingItem ? "Edit Item" : "Add New Item"}
+        fields={currentConfig.fields}
         initialData={editingItem}
       />
     </div>

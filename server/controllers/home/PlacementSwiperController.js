@@ -13,7 +13,11 @@ const placement = require('../../services/home/PlacementSwiperService.js');
  const getPlacementSwiperController = async (req, res) => {
   try {
     const result = await placement.getPlacementSwiper();
-    res.status(200).json(result);
+    res.status(200).json({
+      success: true,
+      message: "Placement swiper fetched successfully",
+      data: result
+    });
   } catch (error) {
     console.error('Error fetching placement swiper:', error);
     res.status(500).json({ error: 'Failed to fetch placement swiper' });
@@ -24,7 +28,11 @@ const deletePlacementSwiperController = async (req, res) => {
     const id = req.params.id;
     const result = await placement.deletePlacementSwiper(id);
     if (result) {
-      res.status(200).json({ message: 'Placement swiper deleted successfully' });
+      res.status(200).json({
+        success: true,
+        message: "Placement swiper deleted successfully",
+        data: result
+      });
     } else {
       res.status(404).json({ error: 'Placement swiper not found' });
     }

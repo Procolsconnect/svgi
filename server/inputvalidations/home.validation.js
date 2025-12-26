@@ -12,19 +12,19 @@ const updateHeroSchema = Joi.object({
   description: Joi.string().trim().min(3).optional(),
   button_text: Joi.string().trim().max(100).optional(),
   status: Joi.number().integer().valid(0, 1).optional()
-});
+}).unknown(true);
 const createInstitutionSchema = Joi.object({
   title: Joi.string().trim().min(3).max(255).required(),
   description: Joi.string().trim().min(3).required(),
   link: Joi.string().trim().max(100).required(),
-  status: Joi.number().integer().valid(0, 1).required()
+  status: Joi.number().integer().valid(0, 1).default(1)
 });
 const updateInstitutionSchema = Joi.object({
   title: Joi.string().trim().min(3).max(255).optional(),
   description: Joi.string().trim().min(3).optional(),
   link: Joi.string().trim().max(100).optional(),
   status: Joi.number().integer().valid(0, 1).optional()
-});
+}).unknown(true);
 
 module.exports = {
    createHeroSchema,

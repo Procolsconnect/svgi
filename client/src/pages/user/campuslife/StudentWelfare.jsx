@@ -47,9 +47,9 @@ const MergedHeroComponent = () => {
         ease: "power1.inOut"
       }, "<");
 
-    // Clean up ScrollTrigger instances
+    // Clean up only this section's ScrollTriggers
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().filter(t => t.trigger === wrapperRef.current).forEach(t => t.kill());
     };
   }, []);
 
@@ -238,31 +238,23 @@ const MergedHeroComponent = () => {
   const [cardData, setCardData] = useState([]);
 
   useEffect(() => {
-    axios.get(`${apiurl}/api/campus/welfarehero`)
-      .then(res => {
-        setHeroBgImg(res.data.data.map(img => img.image));
-      })
-      .catch(err => console.error(err));
+    Promise.all([
+      axios.get(`${apiurl}/api/campus/welfarehero`),
+      axios.get(`${apiurl}/api/campus/bouncertitle`),
+      axios.get(`${apiurl}/api/campus/fancytext`),
+      axios.get(`${apiurl}/api/campus/studentclubs`)
+    ]).then(([hero, bouncer, fancy, clubs]) => {
+      setHeroBgImg(hero.data.data.map(img => img.image));
+      setBouncerTitle(bouncer.data.data.map(title => title.title));
+      setFancyData(fancy.data.data[0]);
+      setCardData(clubs.data.data);
 
-    axios.get(`${apiurl}/api/campus/bouncertitle`)
-      .then(res => {
-        setBouncerTitle(res.data.data.map(title => title.title))
-      })
-      .catch(err => console.error(err));
-
-    axios.get(`${apiurl}/api/campus/fancytext`)
-      .then(res => {
-        setFancyData(res.data.data[0])
-      })
-      .catch(err => console.error(err));
-
-    axios.get(`${apiurl}/api/campus/studentclubs`)
-      .then(res => {
-        setCardData(res.data.data)
-      })
-      .catch(err => console.error(err));
-  },
-    []);
+      // Delay refresh slightly to allow DOM to update
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 500);
+    }).catch(err => console.error(err));
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -274,7 +266,7 @@ const MergedHeroComponent = () => {
             className={`${styles.section} ${styles.heroSection}`}
           >
             <img
-              src={heroBgImg}
+              src={heroBgImg && heroBgImg[0]}
               alt="Hero Background"
               className={styles.heroImage}
             />
@@ -316,7 +308,7 @@ const MergedHeroComponent = () => {
             <h1 id="news-heading" className={styles.fancyTitle}>
               Meghan And Harry's Baby
             </h1>
-        
+
           </div>
           <div className={styles.fancyImageContainer}>
             <img
@@ -341,7 +333,7 @@ const MergedHeroComponent = () => {
               Upon greeting media outside Frogmore Cottage during the afternoon of May 6, Harry said:
               "I'm so incredibly proud of my wife... How any woman does what they do is beyond comprehension."
             </p>
-                <p>
+            <p>
               Buckingham Palace announced that Meghan had gone into labour during the early hours of May 6.
               Harry was by her side, and an announcement would be made soon, read the broadcast. Shortly after,
               <a href="https://www.instagram.com/sussexroyal/">@sussexroyal</a>,
@@ -379,11 +371,13 @@ const MergedHeroComponent = () => {
         </div>
       </section>
       {/* Campus Events Gallery Section */}
-      <section >
+      <section className={styles.galleryWrapperSection}>
         <CampusEventsGallery />
-        <AlumaniStudent />
-        {/* <OurDiamonds/> */}
+      </section>
 
+      {/* Alumni Section */}
+      <section className={styles.fullWidthSection}>
+        <AlumaniStudent />
       </section>
     </div>
   );

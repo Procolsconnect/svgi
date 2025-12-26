@@ -7,27 +7,23 @@ const AdmissionPage = () => {
   const subtitleRef = useRef(null);
   const textContentRef = useRef(null);
   const featuresRef = useRef(null);
- const sectionRef = useRef(null);
-  let started = false;
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     const target = sectionRef.current;
     if (!target) return;
 
     const handleScroll = () => {
-      if (started) return;
-
       const rect = target.getBoundingClientRect();
-
-      // 👉 Trigger ONLY when the section TOP hits the viewport TOP
-      if (rect.top <= window.innerHeight * 0.15 && rect.top >= -50) {
+      // Trigger when the top of the section reaches the top of the screen
+      if (rect.top <= 200) {
         target.classList.add(styles['animate-active']);
-        started = true;
+        window.removeEventListener('scroll', handleScroll);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    handleScroll(); // Check immediately on load
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -35,7 +31,7 @@ const AdmissionPage = () => {
     // Simple scroll-based animations without GSAP
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      
+
       // Image motion animation
       if (imageMotionRef.current) {
         const imageSection = imageMotionRef.current.closest(`.${styles['alp-section2']}`);
@@ -65,24 +61,24 @@ const AdmissionPage = () => {
         }
       }
 
-// Features fade in
-if (featuresRef.current) {
-  const features = featuresRef.current.querySelectorAll(`.${styles['alp-feature']}`);
-  features.forEach((feature, index) => {
-    if (index < 4) {
-      // First 4 cards visible immediately
-      feature.style.opacity = '1';
-      feature.style.transform = 'translateY(0) scale(1)';
-    } else {
-      // Remaining cards fade in on scroll
-      const rect = feature.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.8) {
-        feature.style.opacity = '1';
-        feature.style.transform = 'translateY(0) scale(1)';
+      // Features fade in
+      if (featuresRef.current) {
+        const features = featuresRef.current.querySelectorAll(`.${styles['alp-feature']}`);
+        features.forEach((feature, index) => {
+          if (index < 4) {
+            // First 4 cards visible immediately
+            feature.style.opacity = '1';
+            feature.style.transform = 'translateY(0) scale(1)';
+          } else {
+            // Remaining cards fade in on scroll
+            const rect = feature.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.8) {
+              feature.style.opacity = '1';
+              feature.style.transform = 'translateY(0) scale(1)';
+            }
+          }
+        });
       }
-    }
-  });
-}
     }
 
     window.addEventListener('scroll', handleScroll);
@@ -108,30 +104,31 @@ if (featuresRef.current) {
 
   return (
     <div className={styles['alp-wrapper']}>
-      <div className={styles['alp-left-heading']}>Your Dream Course Awaits</div>
-      
-      {/* Animation Section */}
-    <section className={styles['alp-animation-section']} ref={sectionRef}>
-      <div className={styles['alp-scene']}>
-        <div className={styles['alp-move-number']}>
-          <span className={styles['alp-last-item']}>6</span>
-        </div>
-        <div className={styles['alp-number-container']}>
-          <span className={styles['alp-mask-number']}>202</span>
-        </div>
-      </div>
 
-      <div className={styles['alp-scene2']}>
-        <div className={styles['alp-move-letter']}>
-          <span className={styles['alp-last-item']}></span>
+
+      {/* Animation Section */}
+      <section className={styles['alp-animation-section']} ref={sectionRef}>
+        <div className={styles['alp-scene']}>
+          <div className={styles['alp-move-number']}>
+            <span className={styles['alp-last-item']}>6</span>
+          </div>
+          <div className={styles['alp-number-container']}>
+            <span className={styles['alp-mask-number']}>202</span>
+          </div>
         </div>
-        <div className={styles['alp-msn-container']}>
-          <span className={styles['alp-mask-text']}>
-            admission goin<span>g</span>
-          </span>
+
+        <div className={styles['alp-scene2']}>
+          <div className={styles['alp-move-letter']}>
+            <span className={styles['alp-last-item']}></span>
+          </div>
+          <div className={styles['alp-msn-container']}>
+            <span className={styles['alp-mask-text']}>
+              admission goin<span>g</span>
+            </span>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <div className={styles['alp-left-heading']}>Your Dream Course Awaits</div>
 
       {/* Hero Section */}
       <section className={styles['alp-hero-section']}>
@@ -158,6 +155,8 @@ if (featuresRef.current) {
         </div>
       </section>
 
+
+
       {/* Carousel Section */}
       <section className={styles['alp-loop-images']}>
         <div className={styles['alp-carousel-track']}>
@@ -166,11 +165,11 @@ if (featuresRef.current) {
               <img src={src} alt={`carousel ${index + 1}`} />
             </div>
           ))}
-           {carouselItems.map((src, index) => (
-    <div key={`b-${index}`} className={styles['alp-carousel-item']}>
-      <img src={src} alt={`carousel duplicate ${index + 1}`} />
-    </div>
-  ))}
+          {carouselItems.map((src, index) => (
+            <div key={`b-${index}`} className={styles['alp-carousel-item']}>
+              <img src={src} alt={`carousel duplicate ${index + 1}`} />
+            </div>
+          ))}
 
         </div>
         <span className={styles['alp-scroll-down']}>Scroll down <span className={styles['alp-arrow']}>↓</span></span>
@@ -206,7 +205,7 @@ if (featuresRef.current) {
                 <p>If good things lasted forever, would we appreciate how precious they are?</p>
               </figcaption>
             </figure>
-            
+
             <figure className={`${styles['alp-snip0051']} ${styles['alp-feature']}`}>
               <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample4.jpg" alt="sample4" />
               <div className={styles['alp-icons']}>

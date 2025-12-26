@@ -49,9 +49,11 @@ const SECTION_CONFIG = {
   "why-svg": {
     endpoint: "/service-offerings",
     title: "Why SVG",
+    limit: 4,
     columns: [
       { key: "index", label: "Sr. No." },
       { key: "title", label: "Title" },
+      { key: "description", label: "Description" },
       { key: "image", label: "Icon/Image" },
     ],
     fields: [
@@ -86,7 +88,7 @@ const SECTION_CONFIG = {
     fields: [
       { name: "title", label: "Achievement Title", type: "text", required: true },
       { name: "description", label: "Details", type: "textarea", required: true },
-      { name: "image", label: "Image", type: "file", required: true },
+      { name: "img", label: "Image", type: "file", required: true },
     ]
   },
   "latest-event": {
@@ -95,6 +97,7 @@ const SECTION_CONFIG = {
     columns: [
       { key: "index", label: "Sr. No." },
       { key: "title", label: "Event Name" },
+      { key: "desc", label: "Description" },
       { key: "img", label: "Event Banner" },
     ],
     fields: [
@@ -154,6 +157,22 @@ const SECTION_CONFIG = {
     fields: [
       { name: "image", label: "Upload Image", type: "file", required: true },
     ]
+  },
+  "campus": {
+    endpoint: "/campus",
+    title: "Campus Infrastructure",
+    limit: 1,
+    columns: [
+      { key: "index", label: "Sr. No." },
+      { key: "imagesCard", label: "Images" },
+      { key: "videosCard", label: "Videos" },
+      { key: "toursCard", label: "Tours" },
+    ],
+    fields: [
+      { name: "images", label: "Infrastructure Images (Max 5)", type: "file", multiple: true, required: true },
+      { name: "video", label: "Infrastructure Video", type: "file", required: true },
+      { name: "image", label: "360 Tour Image/Banner", type: "file", required: true },
+    ]
   }
 }
 
@@ -161,16 +180,16 @@ const SECTION_CONFIG = {
 const HOMEPAGE_SECTIONS = [
   { id: 1, name: "Hero Slider", slug: "hero-slider", icon: "fa-images" },
   { id: 2, name: "Institutions", slug: "institutions", icon: "fa-university" },
-  { id: 3, name: "Why SVG", slug: "why-svg", icon: "fa-question-circle" },
-  { id: 4, name: "Placement Records", slug: "placement-records", icon: "fa-trophy" },
-  { id: 5, name: "Student Achievements", slug: "student-achievements", icon: "fa-medal" },
-  { id: 6, name: "Latest Event", slug: "latest-event", icon: "fa-calendar-alt" },
-  { id: 7, name: "Our Team", slug: "our-team", icon: "fa-users" },
-  { id: 8, name: "Logo Section 1", slug: "logo-section", icon: "fa-certificate" },
-  { id: 9, name: "Logo Section 2", slug: "logo-section-2", icon: "fa-handshake" },
-  { id: 10, name: "Placement Card", slug: "placement-card", icon: "fa-id-card" },
-  { id: 11, name: "Campus", slug: "campus", icon: "fa-school" },
-  { id: 12, name: "Leadership", slug: "leadership", icon: "fa-user-tie" },
+  { id: 3, name: "Placement Records", slug: "placement-records", icon: "fa-trophy" },
+  { id: 4, name: "Why SVG", slug: "why-svg", icon: "fa-question-circle" },
+  { id: 5, name: "Campus Infra", slug: "campus", icon: "fa-school" },
+  { id: 6, name: "Placement Card", slug: "placement-card", icon: "fa-id-card" },
+  { id: 7, name: "Latest Event", slug: "latest-event", icon: "fa-calendar-alt" },
+  { id: 8, name: "Student Achievements", slug: "student-achievements", icon: "fa-medal" },
+  { id: 9, name: "Our Team", slug: "our-team", icon: "fa-users" },
+  { id: 10, name: "Logo Section 1", slug: "logo-section", icon: "fa-certificate" },
+  { id: 11, name: "Logo Section 2", slug: "logo-section-2", icon: "fa-handshake" },
+
 ]
 
 export default function HomeAdmin() {

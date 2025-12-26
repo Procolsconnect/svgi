@@ -3,7 +3,11 @@
 .wrapperSlider {
   font-family: "Poppins", sans-serif;
   position: relative;
-  width: 100%;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   height: 100vh;
   background: black;
   overflow: hidden;
@@ -18,6 +22,7 @@
 .mainSlider {
   position: relative;
   width: 100%;
+  /* Changed back to 100% to fix white line/overflow issue */
   height: 100%;
 }
 
@@ -243,17 +248,35 @@
 }
 
 @media (max-width: 768px) {
-  .infoText {
-    top: 120px;
-  }
+
 
   .pagination {
     bottom: 30px;
-    gap: 15px;
   }
 
   .percentage {
     width: 30px;
     height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .infoText {
+    top: 100px;
+  }
+
+
+  .infoText h2 {
+    font-size: 22px;
+  }
+
+  .infoText p {
+    font-size: 14px;
+  }
+
+  .infoText a {
+    height: 48px;
+    margin-top: 25px;
+    font-size: 13px;
   }
 }

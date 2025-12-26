@@ -68,11 +68,11 @@ export default function SVGIOverview() {
     }, []);
 
     // arrow bounce on mount
-   useEffect(() => {
-    if (arrowRef.current) {
-        arrowRef.current.classList.add("svgio-arrow-bounce");
-    }
-}, [overview, hero]); // run again when overview/hero are loaded
+    useEffect(() => {
+        if (arrowRef.current) {
+            arrowRef.current.classList.add("svgio-arrow-bounce");
+        }
+    }, [overview, hero]); // run again when overview/hero are loaded
 
     const detectIcon = (text) => {
         if (!text) return <AiOutlineInfoCircle />;
@@ -93,13 +93,13 @@ export default function SVGIOverview() {
     if (!overview || !hero) return <div min-h-screen>Loading…</div>;
 
     return (
-       <div className={styles.root}>
+        <div className={styles.root}>
             {/* HERO */}
             <div className={styles.hero}>
                 <img className={styles.heroImg} src={hero.image} alt={hero.title} />
                 <div className={styles.wrapper}>
                     <h1 className={styles.heroTitle}>{hero.title}</h1>
-               <Arrow sectionsSelector="section" />
+                    <Arrow sectionsSelector="section" />
 
                 </div>
             </div>
@@ -112,7 +112,7 @@ export default function SVGIOverview() {
                     <p>{overview.para1}</p>
                 </div>
             </div>
-        
+
             {/* SECTION 2 */}
             <section className={styles.section} id="svgio-overview">
                 <div className={styles.wrapGrid}>

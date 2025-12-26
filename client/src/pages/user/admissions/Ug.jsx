@@ -51,17 +51,15 @@ const UndergraduateCoursesPage = () => {
     setIsButtonActive(!isButtonActive);
   };
 
-  const topTextParts = (loading || error || !courseData.top_text)
-    ? ['LINEN', 'BLAZER']
-    : courseData.top_text.trim().split(/\s+/, 2);
-  const topText1 = topTextParts[0] || 'LINEN';
-  const topText2 = topTextParts[1] || 'BLAZER';
+  const topTextFull = (courseData.top_text || "UG COURSE").trim();
+  const topTextParts = topTextFull.split(/\s+/);
+  const topText1 = topTextParts[0] || 'UG';
+  const topText2 = topTextParts.slice(1).join(" ") || 'COURSE';
 
-  const bottomTextParts = (loading || error || !courseData.bottom_text)
-    ? ['TOP', '01']
-    : courseData.bottom_text.trim().split(/\s+/, 2);
-  const bottomText1 = bottomTextParts[0] || 'TOP';
-  const bottomText2 = bottomTextParts[1] || '01';
+  const bottomTextFull = (courseData.bottom_text || "UG 01").trim();
+  const bottomTextParts = bottomTextFull.split(/\s+/);
+  const bottomText1 = bottomTextParts[0] || 'UG';
+  const bottomText2 = bottomTextParts.slice(1).join(" ") || 'COURSE';
 
   return (
     <div className={styles.pageWrapper}>

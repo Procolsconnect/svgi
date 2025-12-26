@@ -3,7 +3,7 @@
 .admin-wrapper {
   font-family: "Nunito", sans-serif;
   min-height: 100vh;
-  background-image: url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=2070&q=80");
+  background-image: url("https://unsplash.com/photos/christmas-composition-frame-made-of-golden-balls-decorations-on-pastel-beige-background-christmas-winter-new-year-concept-flat-lay-top-view-fW4pwvtQzn8");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -18,9 +18,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 1600px;
-  min-height: calc(100vh - 40px);
-  background: rgb(254, 254, 254);
-  box-shadow: 0 0.5px 0 1px rgba(255, 255, 255, 0.23) inset, 0 1px 0 0 rgba(255, 255, 255, 0.66) inset, 0 4px 16px rgba(0, 0, 0, 0.12);
+  height: calc(100vh - 40px);
   border-radius: 15px;
   overflow: hidden;
   margin-left: 280px;
@@ -36,6 +34,7 @@
   flex-direction: column;
   background: #f6f7fb;
   overflow: hidden;
+  height: 100vh;
 }
 
 .content-header {
