@@ -1,6 +1,6 @@
 .section {
     padding: 60px 20px;
-    background: #f0f7ff;
+    background: #ffffff;
     overflow: hidden;
 }
 
@@ -22,6 +22,7 @@
 }
 
 .title {
+    font-family: 'SUSE';
     font-size: 2.5rem;
     font-weight: 800;
     color: #0c3b6d;
@@ -132,7 +133,6 @@
 .imageSlider {
     flex: 1;
     position: relative;
-    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     background: #f8f9fa;
@@ -225,7 +225,7 @@
     }
 
     .statsGrid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -235,6 +235,6 @@
     }
 
     .statsGrid {
-        grid-template-columns: 1fr;
-    }
+       grid-template-columns: repeat(4, 1fr);
+    } 
 }

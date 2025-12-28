@@ -153,7 +153,6 @@ const Header = () => {
               <div className={styles['sk-brand-text']}>
                 <div className={styles['college-title']}>SRI VENKATESHVARA</div>
                 <div className={styles['college-subtitle']}>GROUP OF INSTUTION</div>
-                {/* <div className="college-meta">An Autonomous College, Affiliated to University</div> */}
               </div>
             </Link>
 

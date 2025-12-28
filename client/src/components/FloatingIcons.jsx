@@ -10,7 +10,7 @@ const VerticalFloat = () => {
       </div>
 
       <div className={`${styles.griddyFlFl} ${styles.griddyFloatIg}`}>
-        <a href="#">Admission now!</a>
+        <a href="/advertisement">Admission now!</a>
       </div>
 
     </div>

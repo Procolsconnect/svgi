@@ -6,7 +6,7 @@
   display: grid;
   place-items: center;
   height: 100vh;
-  background: #f1f5f9;
+  background:  #ffffff;
 }
 
 
@@ -186,6 +186,7 @@
 
 .arrowLeft {
   left: 0.6rem;
+  z-index: 999;
 }
 
 .arrowRight {

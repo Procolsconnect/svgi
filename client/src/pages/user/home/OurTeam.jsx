@@ -9,6 +9,9 @@ const TeamCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  const [startX, setStartX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
   useEffect(() => {
     const fetchTeam = async () => {
       try {
@@ -35,12 +38,47 @@ const TeamCarousel = () => {
 
   const handleArrowClick = (dir) => updateCarousel(currentIndex + dir);
 
+  // Swipe Detection Logic
+  const handleDragStart = (e) => {
+    setStartX(e.pageX || e.touches[0].pageX);
+    setIsDragging(true);
+  };
+
+  const handleDragEnd = (e) => {
+    if (!isDragging) return;
+    const endX = e.pageX || e.changedTouches[0].pageX;
+    const diff = startX - endX;
+
+    // Threshold of 50px for swipe detection
+    if (Math.abs(diff) > 50) {
+      handleArrowClick(diff > 0 ? 1 : -1);
+    }
+
+    setIsDragging(false);
+  };
+
+  const handleDragMove = (e) => {
+    if (!isDragging) return;
+    // Prevent default scroll behavior when dragging horizontally
+    if (e.touches) {
+      // Optional: logic to allow vertical scroll if horizontal diff is small
+    }
+  };
+
   return (
-    <div className={styles.carouselWrapper}>
+    <div
+      className={styles.carouselWrapper}
+      onMouseDown={handleDragStart}
+      onMouseUp={handleDragEnd}
+      onMouseLeave={() => setIsDragging(false)}
+      onTouchStart={handleDragStart}
+      onTouchEnd={handleDragEnd}
+      onTouchMove={handleDragMove}
+    >
       <h1 className={styles.aboutTitle}>OUR STUDENTS</h1>
 
       <div className={styles.carouselContainer}>
-        <button className={`${styles.navArrow} ${styles.left}`} onClick={() => handleArrowClick(-1)}>
+        <button className={`${styles.navArrow} ${styles.left}`} onClick={(e) => { e.stopPropagation(); handleArrowClick(-1); }}>
           ‹
         </button>
 
@@ -57,14 +95,19 @@ const TeamCarousel = () => {
             else className += ` ${styles.hidden}`;
 
             return (
-              <div key={i} className={className} onClick={() => updateCarousel(i)}>
-                <img src={member.img} alt={member.name} />
+              <div
+                key={i}
+                className={className}
+                onClick={(e) => { e.stopPropagation(); updateCarousel(i); }}
+                onDragStart={(e) => e.preventDefault()}
+              >
+                <img src={member.img} alt={member.name} draggable="false" />
               </div>
             );
           })}
         </div>
 
-        <button className={`${styles.navArrow} ${styles.right}`} onClick={() => handleArrowClick(1)}>
+        <button className={`${styles.navArrow} ${styles.right}`} onClick={(e) => { e.stopPropagation(); handleArrowClick(1); }}>
           ›
         </button>
       </div>

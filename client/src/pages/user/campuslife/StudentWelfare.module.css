@@ -39,6 +39,8 @@
   width: 100%;
   z-index: 1;
   overflow: hidden;
+  background-color: #000;
+  /* Dark fallback to prevent white flash */
   /* Crucial: prevent scrollbars during animation */
 }
 

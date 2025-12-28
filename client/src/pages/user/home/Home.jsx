@@ -14,6 +14,8 @@ import RandomLogoSlider from './Logo_Section.jsx';
 import LogoSlider1 from './Logo_Section1.jsx';
 import FloatingIcons from '../../../components/FloatingIcons.jsx';
 import Popup from '../../../components/Popup.jsx';
+import Stats from './Stats.jsx';
+import Milo from '../news/Milo.jsx';
 const Home = () => {
    const eventData = [
     {
@@ -65,6 +67,7 @@ const Home = () => {
       <FloatingIcons direction="right" vertical={true} />
       <Popup />
       <HeroSlider />
+      <Stats/>
       <Instutions />
       <RankingSection />
       <Leadership />
@@ -77,6 +80,7 @@ const Home = () => {
       <OurTeam />
       <RandomLogoSlider />
       <LogoSlider1 />
+      <Milo/>
     </div>
   )
 }

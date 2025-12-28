@@ -129,7 +129,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  padding-left: 10%;
+  padding-left: 2%;
   box-sizing: border-box;
   color: var(--fclr);
   max-width: calc(100% - 48px);
@@ -155,7 +155,8 @@
 
   .leadersLeftHeading {
     position: static !important;
-    margin: 0 auto 10px;
+    margin: 0 auto 30px;
+    /* Reduced from 50px */
     text-align: center;
     font-size: 2.2rem !important;
     max-width: 100%;
@@ -168,13 +169,15 @@
     align-items: center;
     gap: 48px;
     padding: 0 20px;
-    padding-bottom: 13%;
+    padding-bottom: 0;
+    margin-bottom: 100px;
   }
 
   .leadersCard {
     width: 100% !important;
     min-width: var(--scale) !important;
-    height: 254px !important;
+    height: 300px !important;
+    /* Increased from 254px to 300px */
     margin: 0 !important;
   }
 

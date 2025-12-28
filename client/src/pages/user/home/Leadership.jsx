@@ -3,11 +3,7 @@ import React from "react";
 import styles from "./Leadership.module.css";
 
 export default function Leaders() {
-  const changeModelStyle = (e, deg, invert = 0) => {
-    const card = e.target.closest(`.${styles.leadersCard}`);
-    const img = card.querySelector(`.${styles.leadersImageModel}`);
-    img.style.filter = `hue-rotate(${deg}deg) invert(${invert})`;
-  };
+
 
   return (
     <div className={styles.leadersBodyWrapper}>

@@ -1,9 +1,7 @@
-/* ============================================
-   BASE LAYOUT
-============================================ */
+
 .swiperCarouselBody {
   display: grid;
-  place-items: center;
+  align-items: center;
   height: 100vh;
   background: white;
 }
@@ -11,7 +9,6 @@
 .swiperCarouselHeader {
   display: flex;
   justify-content: center;
-
 }
 
 .swiperCarouselTitle {
@@ -57,12 +54,11 @@
 ============================================ */
 .swiperCarouselWrapper {
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* IMPORTANT: SWIPER CLASSES FIXED WITH :global() */
 
 .swiperCarouselWrapper :global(.swiper-wrapper) {
   display: flex;
@@ -71,9 +67,9 @@
 }
 
 .swiperCarouselWrapper :global(.swiper-slide) {
-  scale: 1.25;
+  scale: 1.35;
   width: 250px;
-  height: 140px;
+  height: 180px;
   min-height: 80px;
   max-height: 180px;
   transition: scale 250ms ease-in-out;
@@ -113,9 +109,16 @@
   height: 3rem;
   width: 3rem;
   border-radius: 0.5rem;
+  border-radius: 0.5rem;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 50;
+  /* Ensure arrows are above slides */
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 :global(.swiper-carousel-prev) {
@@ -131,11 +134,7 @@
   background-color: #4A261F;
 }
 
-:global(.swiper-carousel-prev::after),
-:global(.swiper-carousel-next::after) {
-  font-size: 1.5rem !important;
-  color: white !important;
-}
+/* Icons are now SVGs inside, no pseudo-elements needed */
 
 /* ============================================
    MOBILE RESPONSIVE
@@ -187,8 +186,8 @@
   }
 
   .swiperCarouselTitle {
-    font-size: 1.4rem;
- 
+    font-size: 2.4rem;
+
   }
 }
 

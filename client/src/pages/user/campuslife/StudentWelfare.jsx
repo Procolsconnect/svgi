@@ -1,11 +1,10 @@
 // MergedHeroComponent.jsx
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './StudentWelfare.module.css';
 import CampusEventsGallery from './CampusEventGallery';
 import AlumaniStudent from './AlumaniStudent';
-import OurDiamonds from './OurDiamonds';
 import axios from 'axios';
 const apiurl = import.meta.env.VITE_API_URL;
 
@@ -21,36 +20,36 @@ const MergedHeroComponent = () => {
   const heroSectionRef = useRef(null);
   const secondSectionRef = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // GSAP Hero scroll/zoom animation
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: wrapperRef.current,
-        start: "top top",
-        end: "+=150%",
-        pin: true,
-        scrub: true,
-        markers: false,// Set to true for debugging
-        anticipatePin: 1
-      }
-    });
+    let ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top top",
+          end: "+=150%",
+          pin: true,
+          scrub: true,
+          markers: false,// Set to true for debugging
+          anticipatePin: 1
+        }
+      });
 
-    tl.to(heroImageRef.current, {
-      scale: 2,
-      z: 350,
-      transformOrigin: "center center",
-      ease: "power1.inOut"
-    })
-      .to(heroSectionRef.current, {
-        scale: 1.1,
+      tl.to(heroImageRef.current, {
+        scale: 2,
+        z: 350,
         transformOrigin: "center center",
         ease: "power1.inOut"
-      }, "<");
+      })
+        .to(heroSectionRef.current, {
+          scale: 1.1,
+          transformOrigin: "center center",
+          ease: "power1.inOut"
+        }, "<");
+    }, wrapperRef);
 
-    // Clean up only this section's ScrollTriggers
-    return () => {
-      ScrollTrigger.getAll().filter(t => t.trigger === wrapperRef.current).forEach(t => t.kill());
-    };
+    // Clean up
+    return () => ctx.revert();
   }, []);
 
   useEffect(() => {

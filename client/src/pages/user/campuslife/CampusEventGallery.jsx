@@ -2,13 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-coverflow';
+
 import styles from './CampusEventGallery.module.css';
 
 const apiurl = import.meta.env.VITE_API_URL;
 gsap.registerPlugin(ScrollTrigger);
 
 const HorizontalScrollGallery = () => {
-  const portfolioRef = useRef(null);
   const stripRef = useRef(null);
   const wrapperRef = useRef(null);
   const [projectImages, setProjectImages] = useState([]);
@@ -22,6 +27,7 @@ const HorizontalScrollGallery = () => {
   }, []);
 
   useEffect(() => {
+    // Only run GSAP if we have images and refs, and importantly, strictly for desktop via matchMedia inside GSAP
     if (!stripRef.current || !wrapperRef.current || projectImages.length === 0) return;
 
     const mm = gsap.matchMedia();
@@ -80,8 +86,8 @@ const HorizontalScrollGallery = () => {
         </p>
       </section>
 
-      {/* Horizontal Scroll Gallery */}
-      <section className={styles.portfolio} ref={wrapperRef}>
+      {/* Desktop Gallery (GSAP) */}
+      <section className={`${styles.portfolio} ${styles.desktopOnly}`} ref={wrapperRef}>
         <div className={styles.galleryWrapper}>
           <div className={styles.galleryStrip} ref={stripRef}>
             {projectImages.map((imgSrc, index) => (
@@ -95,6 +101,37 @@ const HorizontalScrollGallery = () => {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Mobile Gallery (Swiper) */}
+      <section className={styles.mobileOnly}>
+        <Swiper
+          effect={'coverflow'}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          pagination={true}
+          modules={[EffectCoverflow, Pagination, Autoplay]}
+          className={styles.swiperContainer}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+        >
+          {projectImages.map((imgSrc, index) => (
+            <SwiperSlide key={index} className={styles.swiperSlide}>
+              <img src={imgSrc} alt={`Mobile event ${index + 1}`} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
     </div>
   );

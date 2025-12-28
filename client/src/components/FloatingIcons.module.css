@@ -7,7 +7,7 @@
 
 /* Slim vertical tab — exact look like your screenshot */
 .griddyFlFl {
-  background: rgb(119, 46, 46);   /* your original color */
+  background: #0d0a5e;   /* your original color */
  width: 34px;          /* slim vertical width */
   height: 170px;                  /* tall panel like screenshot */
   position: absolute;

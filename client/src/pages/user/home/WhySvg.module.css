@@ -3,12 +3,33 @@
 .serviceContainer {
   background-color: #111827;
   color: white;
-  height: 100vh;
+  min-height: auto;
+  /* Changed from 100vh as data-driven request */
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
+  padding: 40px 20px;
+  /* Increased top/bottom padding */
+  /* overflow: hidden; */
+}
+
+/* ... existing code ... */
+
+.serviceCard {
+  position: relative;
+  background-color: #1f2937;
+  padding: 1.25rem;
+  overflow: visible;
+  /* changed to visible or hidden? hidden keeps logo clipped, but we need space */
   overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 300px;
+  /* Increased from 200px to prevent overlap */
 }
 
 .serviceHeader {
@@ -205,6 +226,7 @@
     margin-bottom: 1rem;
   }
 
+  /* Desktop padding overrides for aesthetics */
   .serviceCard:nth-child(1) .cardContentWrapper {
     padding-right: 8rem;
   }
@@ -219,6 +241,42 @@
 
   .serviceCard:nth-child(4) .cardContentWrapper {
     padding-left: 8rem;
+  }
+}
+
+/* Mobile specific overlap prevention */
+
+@media (max-width: 1023px) {
+  .serviceCard {
+    min-height: 300px;
+    /* Increased height for mobile to safely fit content and logo */
+  }
+
+  /* For bottom-right logo */
+  .serviceCard:nth-child(1) .cardContentWrapper {
+    padding-right: 20%;
+    padding-bottom: 20px;
+  }
+
+  /* Move content to top for bottom-logo cards (1 & 2) on mobile */
+  .serviceCard:nth-child(1),
+  .serviceCard:nth-child(2) {
+    justify-content: flex-start;
+  }
+
+  /* For bottom-left logo */
+  .serviceCard:nth-child(2) .cardContentWrapper {
+    padding-left: 20%;
+    padding-bottom: 20px;
+  }
+
+  /* Top logos (3 & 4) generally don't overlap bottom text, but add safety */
+  .serviceCard:nth-child(3) .cardContentWrapper {
+    padding-top: 20px;
+  }
+
+  .serviceCard:nth-child(4) .cardContentWrapper {
+    padding-top: 20px;
   }
 }
 
@@ -248,8 +306,15 @@
 
 .cardCircle {
   position: absolute;
-  width: 18vw;
-  height: 9.9vh;
+  /* Use vmin to keep it square and proportional to the viewport */
+  width: 25vmin;
+  height: 25vmin;
+  /* Max/Min clamps can help with extreme sizes */
+  max-width: 200px;
+  max-height: 200px;
+  min-width: 120px;
+  min-height: 120px;
+
   z-index: 0;
   background-size: cover;
   background-position: center;
@@ -257,47 +322,69 @@
 
 @media (min-width: 768px) {
   .cardCircle {
-    width: 34%;
-    height: 52%;
+    /* Larger size on desktop, but still square */
+    width: 30vmin;
+    height: 30vmin;
+    max-width: 300px;
+    max-height: 300px;
   }
 
   .serviceContainer {
     background-color: #111827;
     color: white;
-    height: 120vh;
+    min-height: 100vh;
+    height: auto;
+    /* Restore to 100vh or fit content */
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 20px;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 }
+
+/* 
+Positioning for the 4 quadrants 
+Grid Layout Assumption:
+1 2
+3 4
+*/
 
 .cardCircle.card1 {
   bottom: 0;
   right: 0;
-  clip-path: circle(calc(55% + 5vw) at 100% 100%);
+  /* Circle at bottom-right corner */
+  clip-path: circle(100% at 100% 100%);
+  border-top-left-radius: 100%;
+  /* Fallback/Addition for smoother look */
 }
 
 .cardCircle.card2 {
   bottom: 0;
   left: 0;
-  clip-path: circle(calc(55% + 5vw) at 0% 100%);
+  /* Circle at bottom-left corner */
+  clip-path: circle(100% at 0% 100%);
+  border-top-right-radius: 100%;
 }
 
 .cardCircle.card3 {
   top: 0;
   right: 0;
-  clip-path: circle(calc(55% + 5vw) at 100% 0%);
+  /* Circle at top-right corner */
+  clip-path: circle(100% at 100% 0%);
+  border-bottom-left-radius: 100%;
 }
 
 .cardCircle.card4 {
   top: 0;
   left: 0;
-  clip-path: circle(calc(55% + 5vw) at 0% 0%);
+  /* Circle at top-left corner */
+  clip-path: circle(100% at 0% 0%);
+  border-bottom-right-radius: 100%;
 }
 
-.loadingText, .errorText {
+.loadingText,
+.errorText {
   text-align: center;
   width: 100%;
   margin: 1rem 0;
