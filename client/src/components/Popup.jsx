@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Popup.css';
+import './popup.css';
 
 const SharpPopupSlider = () => {
   const [isVisible, setIsVisible] = useState(true);
