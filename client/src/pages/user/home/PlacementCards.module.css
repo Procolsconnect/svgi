@@ -60,7 +60,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: var(--hdr-purple-14) url("../../../public/images/WhatsApp Image 2025-08-01 at 18.12.00_1c4f7de8.jpg") no-repeat center center / cover;
+  background: var(--hdr-purple-14) url("/images/Placementcard.jpg") no-repeat center center / cover;
   background-attachment: fixed;
   display: flex;
   flex-direction: column;

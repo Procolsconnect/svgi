@@ -301,3 +301,18 @@
   background: #e1efff;
   border-style: solid;
 }
+
+/* Fix for text selection visibility */
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+.modal-content input::selection,
+.modal-content textarea::selection {
+  background-color: #3390FF;
+  /* Standard highlight blue */
+  color: #ffffff;
+}

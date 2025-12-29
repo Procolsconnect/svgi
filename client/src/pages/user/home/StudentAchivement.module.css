@@ -116,6 +116,7 @@
   }
 
   .card h1 {
-    padding: 160px 0px 60px 10px;
+    padding: 200px 0px 60px 10px;
+    /* Increased top padding to push title below image */
   }
 }
