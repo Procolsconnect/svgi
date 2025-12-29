@@ -60,9 +60,12 @@ app.use((err, req, res, next) => {
 
 // 8. Start server
 const port = process.env.PORT || 3000;
-const server = app.listen(port, () => {
-  console.log(`Server started on http://localhost:${port}`);
-});
+if (require.main === module) {
+  const server = app.listen(port, () => {
+    console.log(`Server started on http://localhost:${port}`);
+  });
+  server.timeout = 600000;
+}
 
 // Increase timeout for slow uploads (10 minutes)
 server.timeout = 600000;
