@@ -1,11 +1,11 @@
-const UgService= require('../../services/admissions/ugService');
+const UgService = require('../../services/admissions/UgService');
 
 async function createugHeroController(req, res) {
 
   try {
 
     const data = req.body;
-    const hero = await UgService.createHero(data,req.file);
+    const hero = await UgService.createHero(data, req.file);
     res.status(201).json({
       success: true,
       message: 'Hero created successfully',
@@ -42,7 +42,7 @@ const updateugHeroController = async (req, res) => {
     const id = req.params.id;
     const data = req.body;
     const file = req.file;
-    const hero = await UgService.updateHero(id,data,file);
+    const hero = await UgService.updateHero(id, data, file);
     res.status(200).json({
       success: true,
       message: 'Hero updated successfully',
@@ -56,8 +56,8 @@ const updateugHeroController = async (req, res) => {
     });
   }
 };
- 
- const deleteugHeroController = async (req, res) => {
+
+const deleteugHeroController = async (req, res) => {
   try {
     const id = req.params.id;
     const hero = await UgService.deleteHero(id);
@@ -171,12 +171,12 @@ async function deleteUgCourse(req, res) {
 
 
 
-module.exports = { 
+module.exports = {
   getugHeroController,
   createugHeroController,
   updateugHeroController,
   deleteugHeroController,
-    createUgCourse,
+  createUgCourse,
   getAllUgCourses,
   getUgCourse,
   updateUgCourse,
