@@ -68,7 +68,7 @@ if (require.main === module) {
 }
 
 // Increase timeout for slow uploads (10 minutes)
-server.timeout = 600000;
+
 
 connectDB();
 
