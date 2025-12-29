@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Socialicons.module.css";
+import styles from "./SocialIcons.module.css";
 
 // React Icons (Font Awesome pack)
 import { FaLinkedin, FaTwitter, FaInstagram, FaComment } from "react-icons/fa";

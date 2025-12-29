@@ -12,14 +12,21 @@ export default function FormModal({ isOpen, onClose, onSave, title, fields, init
     } else {
       const emptyData = {}
       fields.forEach((field) => {
-        emptyData[field.name] = ""
+        if (field.type === "dynamic-list") {
+          emptyData[field.name] = []
+        } else if (field.multiple && field.type === "file") {
+          emptyData[field.name] = []
+        } else {
+          emptyData[field.name] = ""
+        }
       })
       setFormData(emptyData)
     }
   }, [initialData, fields, isOpen])
 
-  const handleChange = (e, field) => {
-    const { name, value, type, files } = e.target
+  const handleChange = (e, field, index = null) => {
+    const { value, type, files } = e.target
+    const name = field.name
     if (type === "file") {
       const newFiles = Array.from(files)
 
@@ -40,12 +47,35 @@ export default function FormModal({ isOpen, onClose, onSave, title, fields, init
           [name]: newFiles[0],
         }))
       }
+    } else if (field.type === "dynamic-list" && index !== null) {
+      setFormData((prev) => {
+        const newList = [...(prev[name] || [])]
+        // Assuming list items are objects like { text: "..." }
+        newList[index] = { ...newList[index], [field.itemKey || 'text']: value }
+        return { ...prev, [name]: newList }
+      })
     } else {
       setFormData((prev) => ({
         ...prev,
         [name]: type === "number" ? Number(value) : value,
       }))
     }
+  }
+
+  const addItem = (field) => {
+    const fieldName = field.name;
+    const itemKey = field.itemKey || 'text';
+    setFormData((prev) => ({
+      ...prev,
+      [fieldName]: [...(prev[fieldName] || []), { [itemKey]: "" }]
+    }))
+  }
+
+  const removeItem = (fieldName, index) => {
+    setFormData((prev) => ({
+      ...prev,
+      [fieldName]: prev[fieldName].filter((_, i) => i !== index)
+    }))
   }
 
   const removeFile = (fieldName, index) => {
@@ -63,11 +93,11 @@ export default function FormModal({ isOpen, onClose, onSave, title, fields, init
   if (!isOpen) return null
 
   return (
-    <div className="modal-overlay" onClick={!submitting ? onClose : undefined}>
+    <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>{title}</h2>
-          <button className="close-btn" onClick={onClose} disabled={submitting}>
+          <button className="close-btn" onClick={onClose}>
             <i className="fa fa-times"></i>
           </button>
         </div>
@@ -77,7 +107,7 @@ export default function FormModal({ isOpen, onClose, onSave, title, fields, init
             {fields.map((field) => (
               <div key={field.name} className="form-group">
                 <label htmlFor={field.name}>
-                  {field.label}
+                  {typeof field.label === 'object' ? (field.label.plural || field.label.singular) : field.label}
                   {field.required && <span className="required">*</span>}
                 </label>
                 {field.type === "textarea" ? (
@@ -85,7 +115,7 @@ export default function FormModal({ isOpen, onClose, onSave, title, fields, init
                     id={field.name}
                     name={field.name}
                     value={formData[field.name] || ""}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e, field)}
                     required={field.required}
                     rows={4}
                     disabled={submitting}
@@ -95,7 +125,7 @@ export default function FormModal({ isOpen, onClose, onSave, title, fields, init
                     id={field.name}
                     name={field.name}
                     value={formData[field.name] || ""}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e, field)}
                     required={field.required}
                     disabled={submitting}
                   >
@@ -106,6 +136,37 @@ export default function FormModal({ isOpen, onClose, onSave, title, fields, init
                       </option>
                     ))}
                   </select>
+                ) : field.type === "dynamic-list" ? (
+                  <div className="dynamic-list-container">
+                    {(formData[field.name] || []).map((item, idx) => (
+                      <div key={idx} className="dynamic-list-item">
+                        <input
+                          type="text"
+                          name={field.name}
+                          value={item[field.itemKey || 'text'] || ""}
+                          onChange={(e) => handleChange(e, field, idx)}
+                          placeholder={`${field.label.singular || (typeof field.label === 'string' ? field.label : 'Item')} ${idx + 1}`}
+                          disabled={submitting}
+                        />
+                        <button
+                          type="button"
+                          className="remove-item-btn"
+                          onClick={() => removeItem(field.name, idx)}
+                          disabled={submitting}
+                        >
+                          <i className="fa fa-trash"></i>
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      className="add-item-btn"
+                      onClick={() => addItem(field)}
+                      disabled={submitting}
+                    >
+                      <i className="fa fa-plus"></i> Add {field.label.singular || (typeof field.label === 'string' ? field.label : "Item")}
+                    </button>
+                  </div>
                 ) : field.type === "file" ? (
                   <div className="file-input-wrapper">
                     <input
@@ -150,7 +211,7 @@ export default function FormModal({ isOpen, onClose, onSave, title, fields, init
                     id={field.name}
                     name={field.name}
                     value={formData[field.name] || ""}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e, field)}
                     required={field.required}
                     placeholder={field.placeholder}
                     disabled={submitting}
@@ -161,7 +222,7 @@ export default function FormModal({ isOpen, onClose, onSave, title, fields, init
           </div>
 
           <div className="modal-footer">
-            <button type="button" className="cancel-btn" onClick={onClose} disabled={submitting}>
+            <button type="button" className="cancel-btn" onClick={onClose}>
               Cancel
             </button>
             <button type="submit" className="save-btn" disabled={submitting}>

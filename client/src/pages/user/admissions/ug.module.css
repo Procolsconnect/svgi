@@ -228,18 +228,32 @@
 
 .content h2 {
   margin: 0;
+  padding-bottom: 10px;
+
+ 
+}
+.content p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 1rem;
+  padding-bottom: 10px;
+ 
 }
 
 /* Bottom pattern */
 .pattern1 {
-  grid-area: -3/2/-1/5;
+  grid-area: -3 / 2 / -1 / 5;
   height: 50%;
   width: 66%;
-  background-image: url('https://hexschool.github.io/THE_F2E_Design/week4-product%20gallery/assets/pattern%20unit.png');
-  background-repeat: repeat-x;
+  background: repeating-linear-gradient(135deg,
+      #001f54,
+      #001f54 11.5px,
+      transparent 11.5px,
+      transparent 27px,
+      #001f54 27px,
+      #001f54 35.5px);
   justify-self: center;
   align-self: center;
-  filter: hue-rotate(-120deg) saturate(300%);
 }
 
 /* BUTTON BIRD SECTION */

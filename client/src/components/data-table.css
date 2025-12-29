@@ -242,3 +242,28 @@
   font-size: 0.9rem;
   color: #555;
 }
+
+.dynamic-list-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 300px;
+}
+
+.dynamic-list-preview .badge {
+  background: rgba(73, 57, 113, 0.1);
+  color: rgb(73, 57, 113);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dynamic-list-preview .preview-text {
+  font-size: 0.85rem;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

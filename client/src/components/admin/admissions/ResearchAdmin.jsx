@@ -24,19 +24,21 @@ const RESEARCH_CONFIG = {
     "courses": {
         endpoint: "/research", // Note: Endpoint is just /research for courses list based on route file
         title: "Research Courses",
-        limit: 50,
-        columns: [
+        limit: 1,
+       columns: [
             { key: "index", label: "Sr. No." },
-            { key: "title", label: "Course Title" },
-            { key: "description", label: "Description" },
-            { key: "image1", label: "Main Image" },
+            { key: "image1", label: "Image 1" },
+            { key: "image2", label: "Image 2" },
+            { key: "image3", label: "Image 3" },
+            { key: "top_text", label: "Top Text" },
+            { key: "bottom_text", label: "Bottom Text" },
         ],
         fields: [
-            { name: "title", label: "Course Title", type: "text", required: true },
-            { name: "description", label: "Description", type: "textarea", required: true },
             { name: "image1", label: "Image 1", type: "file", required: true },
-            { name: "image2", label: "Image 2", type: "file", required: false },
-            { name: "image3", label: "Image 3", type: "file", required: false },
+            { name: "image2", label: "Image 2", type: "file", required: true },
+            { name: "image3", label: "Image 3", type: "file", required: true },
+            { name: "top_text", label: "Top Text", type: "text", required: false },
+            { name: "bottom_text", label: "Bottom Text", type: "text", required: false },
         ]
     },
 }

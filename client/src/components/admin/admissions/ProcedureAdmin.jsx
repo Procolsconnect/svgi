@@ -23,17 +23,24 @@ const PROCEDURE_CONFIG = {
     },
     "videos": {
         endpoint: "/procedure",
-        title: "Admission Procedures",
-        limit: 10,
+        title: "Admission Procedures Content",
+        limit: 2, 
         columns: [
             { key: "index", label: "Sr. No." },
-            { key: "title", label: "Title" },
+            { key: "content", label: "Main Content" },
             { key: "video", label: "Video" },
+            {key:"steps",label:"Steps",type:"dynamic-list",itemKey:"text"}
         ],
         fields: [
-            { name: "title", label: "Procedure Title", type: "text", required: true },
-            { name: "description", label: "Description", type: "textarea", required: true },
+            { name: "content", label: "Main Content", type: "textarea", required: true },
             { name: "video", label: "Video File", type: "file", required: true },
+            {
+                name: "steps",
+                label: { singular: "Step", plural: "Steps" },
+                type: "dynamic-list",
+                required: true,
+                itemKey: "text"
+            },
         ]
     },
 }
@@ -67,7 +74,7 @@ export default function ProcedureAdmin() {
         if (componentId && currentConfig) {
             fetchData()
         }
-    }, [componentId])
+    }, [componentId, currentConfig])
 
     if (!componentId) {
         return (
@@ -87,8 +94,8 @@ export default function ProcedureAdmin() {
                     </div>
                     <div className="component-card" onClick={() => navigate("/admin/admissions/procedure/videos")}>
                         <div className="card-icon"><i className="fa fa-video"></i></div>
-                        <h3>Videos</h3>
-                        <p>Procedure Videos</p>
+                        <h3>Procedure Content</h3>
+                        <p>Main Text, Video & Steps</p>
                     </div>
                 </div>
             </div>
@@ -100,7 +107,13 @@ export default function ProcedureAdmin() {
         try {
             const dataToSend = new FormData()
             Object.keys(formData).forEach(key => {
-                const val = formData[key]
+                let val = formData[key]
+                // Important: steps must be a JSON string for the backend to parse it correctly
+                if (key === "steps") {
+                    // Filter out empty steps if necessary, then stringify
+                    const steps = Array.isArray(val) ? val.filter(s => s.text && s.text.trim() !== "") : []
+                    val = JSON.stringify(steps)
+                }
                 dataToSend.append(key, val)
             })
 
@@ -149,7 +162,10 @@ export default function ProcedureAdmin() {
             <DataTable
                 columns={currentConfig.columns}
                 data={items}
-                onEdit={(item) => { setEditingItem(item); setIsModalOpen(true); }}
+                onEdit={(item) => {
+                    setEditingItem(item);
+                    setIsModalOpen(true);
+                }}
                 onDelete={handleDelete}
             />
 

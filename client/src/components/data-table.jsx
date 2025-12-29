@@ -74,7 +74,7 @@ export default function DataTable({ columns, data, onEdit, onDelete }) {
     /* --- Replace the Media Logic (approx line 81-103) with this --- */
 
     // 1. Add plural names to the list
-    const mediaKeys = ["media", "image","image2","image3", "img", "image_url", "url", "media_url", "images", "gridImages", "logo_url", "imagesCard", "videosCard", "toursCard", "image1", "ug", "pg", "research", "procedure"]
+    const mediaKeys = ["media", "image", "image2", "image3", "img", "image_url", "url", "media_url", "images", "gridImages", "logo_url", "imagesCard", "videosCard", "toursCard", "image1", "ug", "pg", "research", "procedure"]
 
     if (mediaKeys.includes(column.key) && value) {
       const imageList = Array.isArray(value) ? value : [value];
@@ -112,8 +112,27 @@ export default function DataTable({ columns, data, onEdit, onDelete }) {
         </div>
       );
     }
-    // C. Default: Just show plain text
-    return <span className="cell-text">{value}</span>
+    // D. Handle Dynamic List (Array of Objects)
+    if (column.type === "dynamic-list" && Array.isArray(value)) {
+      return (
+        <div className="dynamic-list-preview">
+          <span className="badge">{value.length} items</span>
+          {value.length > 0 && (
+            <span className="preview-text">
+              : {value[0][column.itemKey || 'text']?.substring(0, 30)}...
+            </span>
+          )}
+        </div>
+      );
+    }
+
+    // E. Default: Just show plain text
+    // Ensure we don't try to render an object directly
+    const displayValue = (typeof value === 'object' && value !== null)
+      ? JSON.stringify(value).substring(0, 50) + "..."
+      : value;
+
+    return <span className="cell-text">{displayValue}</span>
   }
 
   // --- MAIN JSX RENDER ---

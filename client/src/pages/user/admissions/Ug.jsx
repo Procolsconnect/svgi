@@ -77,7 +77,7 @@ const UndergraduateCoursesPage = () => {
       <div className={styles.container}>
         <div className={styles.header}>
           <i className="fa fa-arrow-left fa-2x"></i>
-          <div><h5>CCCLOTHES</h5></div>
+          <div><h5>UG COURSES</h5></div>
         </div>
 
         <div className={`${styles['top-img']}`} style={{ backgroundImage: `url(${courseData.image1})` }}></div>
@@ -96,20 +96,14 @@ const UndergraduateCoursesPage = () => {
         <div className={styles.div1}></div>
 
         <div className={styles.content}>
-          <div className={styles.title2}>LINEN BLAZER</div>
-          <h2 className={`${styles.italic} ${styles['trans-90']}`}>PRODUCT DETAILS</h2>
-          <h2>Kogi Cosby sweater ethical squid irony</h2>
+          <div className={styles.title2}> UNDER GRADUATE</div>
+          <h2 className={`${styles.italic} ${styles['trans-90']}`}>UG DETAILS</h2>
+          <h2>Lets craft your career journey from here </h2>
           <p>
-            In the tumultuous business of cutting-in and attending to a whale, there is much running backwards
-            and forwards among the crew. Now hands are wanted here, and then again hands are wanted there.
-            There is no staying in any one place; for at one and the same time everything has to be done everywhere.
-            It is much the same with him who endeavors the description of the scene.
+       The value of an undergraduate (UG) degree is that it creates a solid base for a student's future in school and work. It helps students learn important knowledge, build key skills, and find out what they are good at through hands-on experiences and specialization. 
           </p>
           <p>
-            We must now retrace our way a little. It was mentioned that upon first breaking ground in the whale's back,
-            the blubber-hook was inserted into the original hole there cut by the spades of the mates. But how did so
-            clumsy and weighty a mass as that same hook get fixed in that hole? It was inserted there by my particular
-            friend Queequeg, whose duty it was, as harpooneer.
+          A UG program leads to more education, better job opportunities, and career advancement while boosting confidence, communication, and personal growth. It is the first big step that readies students to face the real world with understanding and ability.
           </p>
         </div>
 
