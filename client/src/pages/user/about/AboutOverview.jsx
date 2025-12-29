@@ -1,6 +1,6 @@
 import React from "react";
 import BalticSlider from "./BalticSlider";
-import styles from "./aboutoverview.module.css";
+import styles from "./aboutOverview.module.css";
 import Arrow from "../../../components/Arrow";
 
 export default function SVGIOverview() {
