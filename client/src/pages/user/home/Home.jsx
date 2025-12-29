@@ -67,7 +67,7 @@ const Home = () => {
       <FloatingIcons direction="right" vertical={true} />
       <Popup />
       <HeroSlider />
-      <Stats/>
+      {/* <Stats/> */}
       <Instutions />
       <RankingSection />
       <Leadership />
