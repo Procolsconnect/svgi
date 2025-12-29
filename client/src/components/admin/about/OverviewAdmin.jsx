@@ -5,7 +5,7 @@ import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
 
-const API_BASE = "http://localhost:3000/api"
+const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const OVERVIEW_CONFIG = {
     "hero": {
@@ -103,28 +103,28 @@ export default function AboutOverview() {
                         <p>Select a component to manage</p>
                     </div>
                 </div>
-            <div className="component-cards">
-                <div className="component-card" onClick={() => navigate("/admin/about/overview/hero")}>
-                    <div className="card-icon"><i className="fa fa-image"></i></div>
-                    <h3>Overview Hero</h3>
-                    <p>Main Banner Image</p>
+                <div className="component-cards">
+                    <div className="component-card" onClick={() => navigate("/admin/about/overview/hero")}>
+                        <div className="card-icon"><i className="fa fa-image"></i></div>
+                        <h3>Overview Hero</h3>
+                        <p>Main Banner Image</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/about/overview/intro")}>
+                        <div className="card-icon"><i className="fa fa-align-left"></i></div>
+                        <h3>Introduction Text</h3>
+                        <p>Top Intro Section</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/about/overview/grid")}>
+                        <div className="card-icon"><i className="fa fa-th"></i></div>
+                        <h3>Grid Section</h3>
+                        <p>Image Grid Content</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/about/overview/then&nowslider")}>
+                        <div className="card-icon"><i className="fa fa-sliders-h"></i></div>
+                        <h3>Then & Now Slider</h3>
+                        <p>Baltic Sea Special Section</p>
+                    </div>
                 </div>
-                <div className="component-card" onClick={() => navigate("/admin/about/overview/intro")}>
-                    <div className="card-icon"><i className="fa fa-align-left"></i></div>
-                    <h3>Introduction Text</h3>
-                    <p>Top Intro Section</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/about/overview/grid")}>
-                    <div className="card-icon"><i className="fa fa-th"></i></div>
-                    <h3>Grid Section</h3>
-                    <p>Image Grid Content</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/about/overview/then&nowslider")}>
-                    <div className="card-icon"><i className="fa fa-sliders-h"></i></div>
-                    <h3>Then & Now Slider</h3>
-                    <p>Baltic Sea Special Section</p>
-                </div>
-            </div>
             </div>
         )
     }
@@ -185,12 +185,12 @@ export default function AboutOverview() {
             </div>
 
             {/* --- DATA DISPLAY --- */}
-                <DataTable
-                    columns={currentConfig.columns}
-                    data={items}
-                    onEdit={(item) => { setEditingItem(item); setIsModalOpen(true); }}
-                    onDelete={handleDelete}
-                />
+            <DataTable
+                columns={currentConfig.columns}
+                data={items}
+                onEdit={(item) => { setEditingItem(item); setIsModalOpen(true); }}
+                onDelete={handleDelete}
+            />
 
 
             <FormModal

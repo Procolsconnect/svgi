@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api"
+const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const LIBRARY_CONFIG = {
     "hero": {
@@ -112,7 +112,7 @@ export default function LibraryAdmin() {
 
     if (!componentId) {
         return (
-               <div className="admin-section">
+            <div className="admin-section">
                 <div className="section-header">
                     <div>
                         <button className="back-link" onClick={() => navigate("/admin/academics")}>← Back to Academics</button>
@@ -120,33 +120,33 @@ export default function LibraryAdmin() {
                         <p>Select a component to manage</p>
                     </div>
                 </div>
-            <div className="component-cards">
-                <div className="component-card" onClick={() => navigate("/admin/academics/library/hero")}>
-                    <div className="card-icon"><i className="fa fa-image"></i></div>
-                    <h3>Hero Section</h3>
-                    <p>Library Banner</p>
+                <div className="component-cards">
+                    <div className="component-card" onClick={() => navigate("/admin/academics/library/hero")}>
+                        <div className="card-icon"><i className="fa fa-image"></i></div>
+                        <h3>Hero Section</h3>
+                        <p>Library Banner</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/academics/library/resources")}>
+                        <div className="card-icon"><i className="fa fa-book"></i></div>
+                        <h3>Resources</h3>
+                        <p>Digital Resources List</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/academics/library/images")}>
+                        <div className="card-icon"><i className="fa fa-images"></i></div>
+                        <h3>Gallery</h3>
+                        <p>Library Images</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/academics/library/videos")}>
+                        <div className="card-icon"><i className="fa fa-video"></i></div>
+                        <h3>Main Video</h3>
+                        <p>Featured Video</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/academics/library/videocards")}>
+                        <div className="card-icon"><i className="fa fa-film"></i></div>
+                        <h3>Video Cards</h3>
+                        <p>Additional Videos</p>
+                    </div>
                 </div>
-                <div className="component-card" onClick={() => navigate("/admin/academics/library/resources")}>
-                    <div className="card-icon"><i className="fa fa-book"></i></div>
-                    <h3>Resources</h3>
-                    <p>Digital Resources List</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/academics/library/images")}>
-                    <div className="card-icon"><i className="fa fa-images"></i></div>
-                    <h3>Gallery</h3>
-                    <p>Library Images</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/academics/library/videos")}>
-                    <div className="card-icon"><i className="fa fa-video"></i></div>
-                    <h3>Main Video</h3>
-                    <p>Featured Video</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/academics/library/videocards")}>
-                    <div className="card-icon"><i className="fa fa-film"></i></div>
-                    <h3>Video Cards</h3>
-                    <p>Additional Videos</p>
-                </div>
-            </div>
             </div>
         )
     }

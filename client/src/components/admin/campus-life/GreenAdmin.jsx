@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api/campus"
+const API_BASE = import.meta.env.VITE_API_URL + "/api/campus"
 
 const GREEN_CONFIG = {
     "hero": {
@@ -84,7 +84,7 @@ export default function GreenAdmin() {
 
     if (!componentId) {
         return (
-              <div className="admin-section">
+            <div className="admin-section">
                 <div className="section-header">
                     <div>
                         <button className="back-link" onClick={() => navigate("/admin/campuslife")}>← Back to Campus Life</button>
@@ -92,23 +92,23 @@ export default function GreenAdmin() {
                         <p>Select a component to manage</p>
                     </div>
                 </div>
-            <div className="component-cards">
-                <div className="component-card" onClick={() => navigate("/admin/campuslife/green/hero")}>
-                    <div className="card-icon"><i className="fa fa-image"></i></div>
-                    <h3>Hero Section</h3>
-                    <p>Main Banner</p>
+                <div className="component-cards">
+                    <div className="component-card" onClick={() => navigate("/admin/campuslife/green/hero")}>
+                        <div className="card-icon"><i className="fa fa-image"></i></div>
+                        <h3>Hero Section</h3>
+                        <p>Main Banner</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/campuslife/green/images")}>
+                        <div className="card-icon"><i className="fa fa-images"></i></div>
+                        <h3>Images</h3>
+                        <p>Green Campus Images</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/campuslife/green/gallery")}>
+                        <div className="card-icon"><i className="fa fa-photo-video"></i></div>
+                        <h3>Gallery</h3>
+                        <p>Full Image Gallery</p>
+                    </div>
                 </div>
-                <div className="component-card" onClick={() => navigate("/admin/campuslife/green/images")}>
-                    <div className="card-icon"><i className="fa fa-images"></i></div>
-                    <h3>Images</h3>
-                    <p>Green Campus Images</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/campuslife/green/gallery")}>
-                    <div className="card-icon"><i className="fa fa-photo-video"></i></div>
-                    <h3>Gallery</h3>
-                    <p>Full Image Gallery</p>
-                </div>
-            </div>
             </div>
         )
     }

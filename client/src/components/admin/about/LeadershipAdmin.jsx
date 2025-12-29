@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api"
+const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const LEADERSHIP_CONFIG = {
     "chairman": {
@@ -84,7 +84,7 @@ export default function LeadershipAdmin() {
 
     if (!componentId) {
         return (
-              <div className="admin-section">
+            <div className="admin-section">
                 <div className="section-header">
                     <div>
                         <button className="back-link" onClick={() => navigate("/admin/about")}>← Back to About</button>
@@ -92,23 +92,23 @@ export default function LeadershipAdmin() {
                         <p>Select a component to manage</p>
                     </div>
                 </div>
-            <div className="component-cards">
-                <div className="component-card" onClick={() => navigate("/admin/about/leadership/chairman")}>
-                    <div className="card-icon"><i className="fa fa-user-tie"></i></div>
-                    <h3>Chairman's Message</h3>
-                    <p>Main leadership message</p>
+                <div className="component-cards">
+                    <div className="component-card" onClick={() => navigate("/admin/about/leadership/chairman")}>
+                        <div className="card-icon"><i className="fa fa-user-tie"></i></div>
+                        <h3>Chairman's Message</h3>
+                        <p>Main leadership message</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/about/leadership/directors")}>
+                        <div className="card-icon"><i className="fa fa-users"></i></div>
+                        <h3>Board of Directors</h3>
+                        <p>Management team</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/about/leadership/principals")}>
+                        <div className="card-icon"><i className="fa fa-user-graduate"></i></div>
+                        <h3>College Principals</h3>
+                        <p>Academic leaders</p>
+                    </div>
                 </div>
-                <div className="component-card" onClick={() => navigate("/admin/about/leadership/directors")}>
-                    <div className="card-icon"><i className="fa fa-users"></i></div>
-                    <h3>Board of Directors</h3>
-                    <p>Management team</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/about/leadership/principals")}>
-                    <div className="card-icon"><i className="fa fa-user-graduate"></i></div>
-                    <h3>College Principals</h3>
-                    <p>Academic leaders</p>
-                </div>
-            </div>
             </div>
         )
     }

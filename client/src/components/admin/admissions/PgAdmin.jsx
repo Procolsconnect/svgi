@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api"
+const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const PG_CONFIG = {
     "hero": {
@@ -24,7 +24,7 @@ const PG_CONFIG = {
     "courses": {
         endpoint: "/pgcourse",
         title: "Postgraduate Courses",
-    limit: 1,
+        limit: 1,
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "image1", label: "Image 1" },

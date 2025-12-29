@@ -31,7 +31,7 @@ const RankingSection = () => {
                     <h2 className={styles.title}>RANKINGS 2025</h2>
                     <div className={styles.nirfLogoContainer}>
                         <img
-                            src="/logos/Logo_new.png"
+                            src="/logos/svgilogo.png"
                             alt="NIRF Logo"
                             className={styles.nirfLogo}
                         />

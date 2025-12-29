@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api/campus"
+const API_BASE = import.meta.env.VITE_API_URL + "/api/campus"
 
 const HOSTEL_CONFIG = {
     "hero": {
@@ -87,7 +87,7 @@ export default function HostelAdmin() {
     if (!componentId) {
         return (
 
-              <div className="admin-section">
+            <div className="admin-section">
                 <div className="section-header">
                     <div>
                         <button className="back-link" onClick={() => navigate("/admin/campuslife")}>← Back to Campus Life</button>
@@ -95,23 +95,23 @@ export default function HostelAdmin() {
                         <p>Select a component to manage</p>
                     </div>
                 </div>
-            <div className="component-cards">
-                <div className="component-card" onClick={() => navigate("/admin/campuslife/hostel/hero")}>
-                    <div className="card-icon"><i className="fa fa-image"></i></div>
-                    <h3>Hero Section</h3>
-                    <p>Main Banner</p>
+                <div className="component-cards">
+                    <div className="component-card" onClick={() => navigate("/admin/campuslife/hostel/hero")}>
+                        <div className="card-icon"><i className="fa fa-image"></i></div>
+                        <h3>Hero Section</h3>
+                        <p>Main Banner</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/campuslife/hostel/cards")}>
+                        <div className="card-icon"><i className="fa fa-th-large"></i></div>
+                        <h3>Cards</h3>
+                        <p>Hostel Info Cards</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/campuslife/hostel/faq")}>
+                        <div className="card-icon"><i className="fa fa-question-circle"></i></div>
+                        <h3>FAQs</h3>
+                        <p>Frequently Asked Questions</p>
+                    </div>
                 </div>
-                <div className="component-card" onClick={() => navigate("/admin/campuslife/hostel/cards")}>
-                    <div className="card-icon"><i className="fa fa-th-large"></i></div>
-                    <h3>Cards</h3>
-                    <p>Hostel Info Cards</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/campuslife/hostel/faq")}>
-                    <div className="card-icon"><i className="fa fa-question-circle"></i></div>
-                    <h3>FAQs</h3>
-                    <p>Frequently Asked Questions</p>
-                </div>
-            </div>
             </div>
         )
     }

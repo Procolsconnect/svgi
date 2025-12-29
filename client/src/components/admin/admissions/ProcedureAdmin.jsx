@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api"
+const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const PROCEDURE_CONFIG = {
     "hero": {
@@ -24,12 +24,12 @@ const PROCEDURE_CONFIG = {
     "videos": {
         endpoint: "/procedure",
         title: "Admission Procedures Content",
-        limit: 2, 
+        limit: 2,
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "content", label: "Main Content" },
             { key: "video", label: "Video" },
-            {key:"steps",label:"Steps",type:"dynamic-list",itemKey:"text"}
+            { key: "steps", label: "Steps", type: "dynamic-list", itemKey: "text" }
         ],
         fields: [
             { name: "content", label: "Main Content", type: "textarea", required: true },

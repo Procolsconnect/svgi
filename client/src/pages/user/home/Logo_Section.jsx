@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import styles from "./logo_section.module.css";
 
@@ -6,26 +6,35 @@ const apiurl = import.meta.env.VITE_API_URL;
 
 const RandomLogoSlider = () => {
   const [logos, setLogos] = useState([]);
+  const logoRefs = useRef([]); // Stores refs to the 4 LI elements
+  const logosRef = useRef([]); // Access latest logos in interval
 
   useEffect(() => {
     axios
       .get(`${apiurl}/api/logosection1`)
       .then((res) => {
         const data = Array.isArray(res.data.data) ? res.data.data : res.data;
-        if (Array.isArray(data)) setLogos(data);
-        else console.error("Unexpected response format:", res.data);
+        if (Array.isArray(data)) {
+          setLogos(data);
+          logosRef.current = data;
+        } else {
+          console.error("Unexpected response format:", res.data);
+        }
       })
       .catch((err) => console.error("Error fetching logos:", err));
   }, []);
 
   useEffect(() => {
-    if (logos.length < 5) return;
-    const positions = document.querySelectorAll(`.${styles.randomLogoPositions} .${styles.randomLogoPosition}`);
-    if (!positions.length) return;
+    // Wait until we have enough logos (more than 4 to make animations meaningful) 
+    // and the refs are populated
+    if (logos.length <= 4) return;
 
-    const timer = 1050;
+    // Ensure refs are valid
+    if (logoRefs.current.length < 4) return;
+
+    const timer = 1050; // 1050ms interval from original script
     let oldX = 0;
-    let counter = 4;
+    let counter = 4; // Start picking from the 5th logo (index 4)
 
     const generateRandomPosition = (min, max, avoid) => {
       let val;
@@ -35,38 +44,60 @@ const RandomLogoSlider = () => {
       return val;
     };
 
-    const interval = setInterval(() => {
+    const intervalId = setInterval(() => {
+      // Logic copied from original script
       const x = generateRandomPosition(0, 3, oldX);
       const y = counter;
 
-      if (!positions[x] || !logos[y]) return;
+      const currentLi = logoRefs.current[x];
+      // Use logosRef to get the fresh list of logos (though logos list likely static after load)
+      const nextLogo = logosRef.current[y];
 
-      positions[x].classList.remove("in");
-      positions[x].classList.add(styles.out);
+      if (!currentLi || !nextLogo) return;
 
+      // 1. Start Fade Out (Add 'out' class)
+      currentLi.classList.remove("in"); // Remove 'in' just in case (optional in CSS modules unless defined)
+      currentLi.classList.add(styles.out);
+
+      // 2. Timeout for Swap (350ms)
       setTimeout(() => {
-        if (logos[y]) {
-          positions[x].innerHTML = `<img src="${logos[y].img}" alt="${logos[y].name || "logo"}" />`;
-          positions[x].style.display = "none";
-          void positions[x].offsetWidth;
-          positions[x].style.display = "block";
+        if (!currentLi) return;
+
+        // Swap Image Data directly in DOM
+        const img = currentLi.querySelector("img");
+        if (img) {
+          img.src = nextLogo.img;
+          img.alt = nextLogo.name || "logo";
         }
+
+        // Force Reflow / Reset Transition
+        // This is the CRITICAL part from the original script to prevent glitches
+        currentLi.style.display = "none";
+        // Void operator forces access to offsetWidth, triggering reflow
+        void currentLi.offsetWidth;
+        currentLi.style.display = "block";
+
       }, 350);
 
+      // 3. Timeout for Fade In (650ms)
       setTimeout(() => {
-        positions[x].classList.remove(styles.out);
-        positions[x].classList.add("in");
+        if (!currentLi) return;
+        currentLi.classList.remove(styles.out);
+        currentLi.classList.add("in");
       }, 650);
 
       oldX = x;
-      counter = counter === logos.length - 1 ? 0 : counter + 1;
+      // Cycle through full list
+      counter = counter === logosRef.current.length - 1 ? 0 : counter + 1;
+
     }, timer);
 
-    return () => clearInterval(interval);
-  }, [logos]);
+    return () => clearInterval(intervalId);
+  }, [logos]); // Re-run if logos loaded
 
   if (logos.length === 0) return <p>Loading logos...</p>;
 
+  // Initial render of first 4 logos
   return (
     <div className={styles.randomLogoSlider}>
       <div className={styles.randomLogoContainer}>
@@ -74,19 +105,22 @@ const RandomLogoSlider = () => {
 
         <ol className={styles.randomLogoPositions}>
           {logos.slice(0, 4).map((logo, i) => (
-            <li className={`${styles.randomLogoPosition} in`} key={i}>
+            <li
+              key={i}
+              className={styles.randomLogoPosition}
+              ref={(el) => (logoRefs.current[i] = el)}
+            >
               <img src={logo.img} alt={logo.name || "logo"} />
             </li>
           ))}
         </ol>
 
-        <ul className={styles.randomLogoNetworkList} style={{ display: "none" }}>
+        {/* Hidden Preload List for all logos to ensure browser caches imagery */}
+        <div style={{ display: 'none' }}>
           {logos.map((logo, i) => (
-            <li key={i}>
-              <img src={logo.img} alt={logo.name || "logo"} />
-            </li>
+            <img key={i} src={logo.img} alt="preload" />
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

@@ -148,11 +148,11 @@ const Header = () => {
             {/* Branding */}
             <Link to="/" className={styles['sk-brand']}>
               <div className={styles['sk-logo-box']}>
-                <img src="/logos/Logo_new.png" alt="SVGI" />
+                <img src="/logos/svgilogo.png" alt="SVGI" />
               </div>
               <div className={styles['sk-brand-text']}>
-                <div className={styles['college-title']}>SRI VENKATESHVARA</div>
-                <div className={styles['college-subtitle']}>GROUP OF INSTUTION</div>
+                <div className={styles['college-title']}>SHREE VENKATESHVARA</div>
+                <div className={styles['college-subtitle']}>GROUP OF INSTITUTIONS</div>
               </div>
             </Link>
 

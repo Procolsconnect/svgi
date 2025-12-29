@@ -8,7 +8,7 @@ import "../admin-section.css"
 // --- 1. GLOBAL CONFIGURATION ---
 // This object maps each section to its API endpoint, table columns, and form fields.
 // If you add a NEW component, just add a new entry here!
-const API_BASE = "http://localhost:3000/api"
+const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const SECTION_CONFIG = {
   "hero-slider": {

@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api/campus"
+const API_BASE = import.meta.env.VITE_API_URL + "/api/campus"
 
 const POLICIES_CONFIG = {
     "hero": {
@@ -86,7 +86,7 @@ export default function PoliciesAdmin() {
 
     if (!componentId) {
         return (
-              <div className="admin-section">
+            <div className="admin-section">
                 <div className="section-header">
                     <div>
                         <button className="back-link" onClick={() => navigate("/admin/campuslife")}>← Back to Campus Life</button>
@@ -94,23 +94,23 @@ export default function PoliciesAdmin() {
                         <p>Select a component to manage</p>
                     </div>
                 </div>
-            <div className="component-cards">
-                <div className="component-card" onClick={() => navigate("/admin/campuslife/policies/hero")}>
-                    <div className="card-icon"><i className="fa fa-image"></i></div>
-                    <h3>Hero Section</h3>
-                    <p>Main Banner</p>
+                <div className="component-cards">
+                    <div className="component-card" onClick={() => navigate("/admin/campuslife/policies/hero")}>
+                        <div className="card-icon"><i className="fa fa-image"></i></div>
+                        <h3>Hero Section</h3>
+                        <p>Main Banner</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/campuslife/policies/title")}>
+                        <div className="card-icon"><i className="fa fa-heading"></i></div>
+                        <h3>Title</h3>
+                        <p>Page Title & Description</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/campuslife/policies/cards")}>
+                        <div className="card-icon"><i className="fa fa-file-alt"></i></div>
+                        <h3>Policies</h3>
+                        <p>Policy Cards</p>
+                    </div>
                 </div>
-                <div className="component-card" onClick={() => navigate("/admin/campuslife/policies/title")}>
-                    <div className="card-icon"><i className="fa fa-heading"></i></div>
-                    <h3>Title</h3>
-                    <p>Page Title & Description</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/campuslife/policies/cards")}>
-                    <div className="card-icon"><i className="fa fa-file-alt"></i></div>
-                    <h3>Policies</h3>
-                    <p>Policy Cards</p>
-                </div>
-            </div>
             </div>
         )
     }

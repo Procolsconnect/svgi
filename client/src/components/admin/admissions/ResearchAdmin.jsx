@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api"
+const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const RESEARCH_CONFIG = {
     "hero": {
@@ -25,7 +25,7 @@ const RESEARCH_CONFIG = {
         endpoint: "/research", // Note: Endpoint is just /research for courses list based on route file
         title: "Research Courses",
         limit: 1,
-       columns: [
+        columns: [
             { key: "index", label: "Sr. No." },
             { key: "image1", label: "Image 1" },
             { key: "image2", label: "Image 2" },

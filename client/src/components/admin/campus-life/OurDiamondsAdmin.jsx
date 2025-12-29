@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api/campus"
+const API_BASE = import.meta.env.VITE_API_URL + "/api/campus"
 
 const DIAMOND_CONFIG = {
     "alumni": {
@@ -58,7 +58,7 @@ export default function OurDiamondsAdmin() {
 
     if (!componentId) {
         return (
-              <div className="admin-section">
+            <div className="admin-section">
                 <div className="section-header">
                     <div>
                         <button className="back-link" onClick={() => navigate("/admin/campuslife")}>← Back to Campus Life</button>
@@ -66,13 +66,13 @@ export default function OurDiamondsAdmin() {
                         <p>Select a component to manage</p>
                     </div>
                 </div>
-            <div className="component-cards">
-                <div className="component-card" onClick={() => navigate("/admin/campuslife/diamonds/alumni")}>
-                    <div className="card-icon"><i className="fa fa-user-graduate"></i></div>
-                    <h3>Alumni & Students</h3>
-                    <p>Our Pride</p>
+                <div className="component-cards">
+                    <div className="component-card" onClick={() => navigate("/admin/campuslife/diamonds/alumni")}>
+                        <div className="card-icon"><i className="fa fa-user-graduate"></i></div>
+                        <h3>Alumni & Students</h3>
+                        <p>Our Pride</p>
+                    </div>
                 </div>
-            </div>
             </div>
         )
     }

@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api"
+const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const RECORDS_CONFIG = {
     "hero": {
@@ -149,43 +149,43 @@ export default function PlacementRecordsAdmin() {
                         <p>Select a component to manage</p>
                     </div>
                 </div>
-            <div className="component-cards">
-                <div className="component-card" onClick={() => navigate("/admin/placement/records/hero")}>
-                    <div className="card-icon"><i className="fa fa-image"></i></div>
-                    <h3>Hero Section</h3>
-                    <p>Main Banner</p>
+                <div className="component-cards">
+                    <div className="component-card" onClick={() => navigate("/admin/placement/records/hero")}>
+                        <div className="card-icon"><i className="fa fa-image"></i></div>
+                        <h3>Hero Section</h3>
+                        <p>Main Banner</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/records/slider")}>
+                        <div className="card-icon"><i className="fa fa-images"></i></div>
+                        <h3>Slider</h3>
+                        <p>Record Highlights</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/records/workspace")}>
+                        <div className="card-icon"><i className="fa fa-briefcase"></i></div>
+                        <h3>Workspace</h3>
+                        <p>Placement Office Gallery</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/records/team")}>
+                        <div className="card-icon"><i className="fa fa-users"></i></div>
+                        <h3>Team</h3>
+                        <p>Placement Officers</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/records/companies")}>
+                        <div className="card-icon"><i className="fa fa-building"></i></div>
+                        <h3>Companies</h3>
+                        <p>Recruiting Partners</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/records/faq")}>
+                        <div className="card-icon"><i className="fa fa-question-circle"></i></div>
+                        <h3>FAQs</h3>
+                        <p>Common Questions</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/records/video")}>
+                        <div className="card-icon"><i className="fa fa-video"></i></div>
+                        <h3>Video</h3>
+                        <p>Featured Record Video</p>
+                    </div>
                 </div>
-                <div className="component-card" onClick={() => navigate("/admin/placement/records/slider")}>
-                    <div className="card-icon"><i className="fa fa-images"></i></div>
-                    <h3>Slider</h3>
-                    <p>Record Highlights</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/placement/records/workspace")}>
-                    <div className="card-icon"><i className="fa fa-briefcase"></i></div>
-                    <h3>Workspace</h3>
-                    <p>Placement Office Gallery</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/placement/records/team")}>
-                    <div className="card-icon"><i className="fa fa-users"></i></div>
-                    <h3>Team</h3>
-                    <p>Placement Officers</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/placement/records/companies")}>
-                    <div className="card-icon"><i className="fa fa-building"></i></div>
-                    <h3>Companies</h3>
-                    <p>Recruiting Partners</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/placement/records/faq")}>
-                    <div className="card-icon"><i className="fa fa-question-circle"></i></div>
-                    <h3>FAQs</h3>
-                    <p>Common Questions</p>
-                </div>
-                <div className="component-card" onClick={() => navigate("/admin/placement/records/video")}>
-                    <div className="card-icon"><i className="fa fa-video"></i></div>
-                    <h3>Video</h3>
-                    <p>Featured Record Video</p>
-                </div>
-            </div>
             </div>
         )
     }

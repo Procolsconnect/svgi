@@ -4,7 +4,7 @@ import axios from "axios"
 import DataTable from "../../data-table"
 import FormModal from "../../form-modal"
 
-const API_BASE = "http://localhost:3000/api"
+const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const PROCESS_CONFIG = {
     "hero": {
@@ -80,18 +80,18 @@ export default function PlacementProcessAdmin() {
                         <p>Select a component to manage</p>
                     </div>
                 </div>
-            <div className="component-cards">
-                <div className="component-card" onClick={() => navigate("/admin/placement/process/hero")}>
-                    <div className="card-icon"><i className="fa fa-image"></i></div>
-                    <h3>Hero Section</h3>
-                    <p>Main Banner</p>
+                <div className="component-cards">
+                    <div className="component-card" onClick={() => navigate("/admin/placement/process/hero")}>
+                        <div className="card-icon"><i className="fa fa-image"></i></div>
+                        <h3>Hero Section</h3>
+                        <p>Main Banner</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/process/cards")}>
+                        <div className="card-icon"><i className="fa fa-cogs"></i></div>
+                        <h3>Process Cards</h3>
+                        <p>Placement Steps</p>
+                    </div>
                 </div>
-                <div className="component-card" onClick={() => navigate("/admin/placement/process/cards")}>
-                    <div className="card-icon"><i className="fa fa-cogs"></i></div>
-                    <h3>Process Cards</h3>
-                    <p>Placement Steps</p>
-                </div>
-            </div>
             </div>
         )
     }
