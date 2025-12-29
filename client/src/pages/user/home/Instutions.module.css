@@ -1,4 +1,3 @@
-
 .container {
   background: #ffffff !important;
   display: flex;
@@ -27,8 +26,22 @@
   position: absolute;
 }
 
-.title { margin: 0; font-size: clamp(2.5rem, 8vw, 5rem); text-align: center; }
-.desc { width: 74ch; max-width: calc(100% - 4rem); text-wrap: balance; font-family: monospace; margin-bottom: 4rem; line-height: 1.5; opacity: 0.8; text-align: center; }
+.title {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  text-align: center;
+}
+
+.desc {
+  width: 74ch;
+  max-width: calc(100% - 4rem);
+  text-wrap: balance;
+  font-family: monospace;
+  margin-bottom: 4rem;
+  line-height: 1.5;
+  opacity: 0.8;
+  text-align: center;
+}
 
 .grid {
   display: grid;
@@ -41,7 +54,7 @@
   width: 820px;
   max-width: calc(100% - 1rem);
   container-type: inline-size;
-transition: grid-template-columns 0.6s ease-in-out;
+  transition: grid-template-columns 0.6s ease-in-out;
 
 }
 
@@ -56,57 +69,159 @@ transition: grid-template-columns 0.6s ease-in-out;
   user-select: none;
 }
 
-.card { width: 100%; height: 100%; position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 1rem; padding: 0 0 1rem calc(clamp(2rem, 8cqi, 80px) * 0.5 - 9px); font-family: monospace; overflow: hidden; }
-.cardTitle { position: absolute; top: 1rem;rotate: 90deg; left: calc(clamp(2rem, 8cqi, 80px) * 0.5); transform-origin: 0 50%; font-size: 1rem; font-weight: 400; text-transform: uppercase; margin: 0; white-space: nowrap; opacity: 0.7; transition: opacity 0.72s ease; }
-.cardDesc { font-size: 13px; line-height: 1.25; text-wrap: balance; opacity: 0; transition: opacity 0.72s ease; transition-delay: 0.15s; padding-left: 20px;}
-.icon { width: 27px; opacity: 0.6; transition: opacity 0.72s ease; }
-.link { position: absolute; bottom: 1rem; height: 18px; color: inherit; text-decoration: none; opacity: 0; transition: opacity 0.72s ease; transition-delay: 0.15s; }
-.link span { display: inline-block;  white-space: nowrap;  position: absolute; bottom:2px; left: 13px;
-  line-height: 18px; translate: calc(clamp(2rem, 8cqi, 80px) * 0.5); font-weight: 500; }
-.cardImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; filter: grayscale(1) brightness(1.5); scale: 1.1; transition: filter 0.72s ease, scale 0.72s ease; transition-delay: 0.15s; mask: radial-gradient(100% 100% at 100% 0, #fff, #0000); }
-.cardLink { text-decoration: none; color: black; display: block; width: 100%; height: 100%; }
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 0 0 1rem calc(clamp(2rem, 8cqi, 80px) * 0.5 - 9px);
+  font-family: monospace;
+  overflow: hidden;
+}
+
+.cardTitle {
+  position: absolute;
+  top: 1rem;
+  rotate: 90deg;
+  left: calc(clamp(2rem, 8cqi, 80px) * 0.5);
+  transform-origin: 0 50%;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0;
+  white-space: nowrap;
+  opacity: 0.7;
+  transition: opacity 0.72s ease;
+}
+
+.cardDesc {
+  font-size: 13px;
+  line-height: 1.25;
+  text-wrap: balance;
+  opacity: 0;
+  transition: opacity 0.72s ease;
+  transition-delay: 0.15s;
+  padding-left: 20px;
+}
+
+.icon {
+  width: 27px;
+  opacity: 0.6;
+  transition: opacity 0.72s ease;
+}
+
+.link {
+  position: absolute;
+  bottom: 1rem;
+  height: 18px;
+  color: inherit;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.72s ease;
+  transition-delay: 0.15s;
+}
+
+.link span {
+  display: inline-block;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 2px;
+  left: 13px;
+  line-height: 18px;
+  translate: calc(clamp(2rem, 8cqi, 80px) * 0.5);
+  font-weight: 500;
+}
+
+.cardImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  filter: grayscale(1) brightness(1.5);
+  scale: 1.1;
+  transition: filter 0.72s ease, scale 0.72s ease;
+  transition-delay: 0.15s;
+  mask: radial-gradient(100% 100% at 100% 0, #fff, #0000);
+}
+
+.cardLink {
+  text-decoration: none;
+  color: black;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
 /* Active state (same as original) */
 .item[data-active="true"] .cardTitle,
-.item[data-active="true"] .icon { opacity: 1; }
+.item[data-active="true"] .icon {
+  opacity: 1;
+}
+
 .item[data-active="true"] .cardDesc,
-.item[data-active="true"] .link { opacity: 0.8; }
-.item[data-active="true"] .cardImg { filter: grayscale(0) brightness(1); scale: 1; }
+.item[data-active="true"] .link {
+  opacity: 0.8;
+}
+
+.item[data-active="true"] .cardImg {
+  filter: grayscale(0) brightness(1);
+  scale: 1;
+}
 
 @media (max-width: 760px) {
   .grid {
     display: flex;
-    flex-direction: column; /* stack vertically */
+    flex-direction: column;
+    /* stack vertically */
     gap: 16px;
     padding: 0 1rem;
     width: 100%;
     max-width: 100%;
-    height: auto; /* auto height so cards don't expand by default */
+    height: auto;
+    /* auto height so cards don't expand by default */
   }
 
   .item {
     width: 100%;
     min-width: auto;
-    height: 60px; /* collapsed height for mobile */
-    overflow: hidden; /* keep collapsed */
-    grid-column: auto; /* no spanning */
-    transition: height 0.5s ease; /* smooth expand/collapse */
+    height: 60px;
+    /* collapsed height for mobile */
+    overflow: hidden;
+    /* keep collapsed */
+    grid-column: auto;
+    /* no spanning */
+    transition: height 0.5s ease;
+    /* smooth expand/collapse */
   }
+
   .item .icon {
-    position: absolute;     /* make it absolute */
-    top: 1rem;              /* distance from top */
-    right: 1rem;            /* distance from right */
-    left: auto;             /* remove desktop left positioning */
-    opacity: 0.8;           /* slightly visible by default */
+    position: absolute;
+    /* make it absolute */
+    top: 1rem;
+    /* distance from top */
+    right: 1rem;
+    /* distance from right */
+    left: auto;
+    /* remove desktop left positioning */
+    opacity: 0.8;
+    /* slightly visible by default */
     transition: opacity 0.72s ease, top 0.3s ease, right 0.3s ease;
     z-index: 10;
   }
+
   .item[data-active="true"] .icon {
     opacity: 1;
   }
+
   /* Expanded card */
   .item[data-active="true"] {
-    height:13rem; /* expanded height */
+    height: 13rem;
+    /* expanded height */
   }
 
   /* Preserve desktop card layout and effects */
@@ -130,6 +245,17 @@ transition: grid-template-columns 0.6s ease-in-out;
     transition-delay: 0.15s;
   }
 
+  .cardDesc {
+    /* Fix for overflow */
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    /* Limit to 6 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 30px;
+    /* Ensure space before link */
+  }
+
   .item[data-active="true"] .cardDesc,
   .item[data-active="true"] .link,
   .item[data-active="true"] .icon {
@@ -147,7 +273,7 @@ transition: grid-template-columns 0.6s ease-in-out;
     scale: 1.1;
     transition: filter 0.72s ease, scale 0.72s ease;
     transition-delay: 0.15s;
-    mask: radial-gradient(100% 100% at 100% ,#ffffff, #0000);
+    mask: radial-gradient(100% 100% at 100%, #ffffff, #0000);
   }
 
   .item[data-active="true"] .cardImg {
@@ -156,20 +282,4 @@ transition: grid-template-columns 0.6s ease-in-out;
   }
 
 
-.card { width: 100%; height: 100%; position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 1rem; padding: 0 0 1rem calc(clamp(2rem, 8cqi, 80px) * 0.5 - 9px); font-family: monospace; overflow: hidden; }
-.cardTitle { position: absolute;rotate: 0deg; top: 1rem; left: calc(clamp(2rem, 8cqi, 80px) * 0.5); transform-origin: 0 50%; font-size: 1rem; font-weight: 400; text-transform: uppercase; margin: 0; white-space: nowrap; opacity: 0.7; transition: opacity 0.72s ease; }
-.cardDesc { font-size: 13px; line-height: 1.25; text-wrap: balance; opacity: 0; transition: opacity 0.72s ease; transition-delay: 0.15s; padding-left: 20px;}
-.icon { width: 27px; opacity: 0.6; transition: opacity 0.72s ease; }
-.link { position: absolute; bottom: 1rem; height: 18px; color: inherit; text-decoration: none; opacity: 0; transition: opacity 0.72s ease; transition-delay: 0.15s; }
-.link span { display: inline-block;  white-space: nowrap;  position: absolute; bottom:2px; left: 13px;
-  line-height: 18px; translate: calc(clamp(2rem, 8cqi, 80px) * 0.5); font-weight: 500; }
-
-.cardLink { text-decoration: none; color: black; display: block; width: 100%; height: 100%; }
-
-/* Active state (same as original) */
-.item[data-active="true"] .cardTitle,
-.item[data-active="true"] .icon { opacity: 1; }
-.item[data-active="true"] .cardDesc,
-.item[data-active="true"] .link { opacity: 0.8; }
-.item[data-active="true"] .cardImg { filter: grayscale(0) brightness(1); scale: 1; }
 }

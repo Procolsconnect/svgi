@@ -195,6 +195,6 @@
 @media (max-width: 480px) {
     .stackSlider {
         transform: scale(0.7);
-        margin-left: -15%;
+        /* margin-left: -15%; removed to fix alignment */
     }
 }

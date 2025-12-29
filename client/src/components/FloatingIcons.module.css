@@ -7,9 +7,12 @@
 
 /* Slim vertical tab — exact look like your screenshot */
 .griddyFlFl {
-  background: #0d0a5e;   /* your original color */
- width: 34px;          /* slim vertical width */
-  height: 170px;                  /* tall panel like screenshot */
+  background: #0d0a5e;
+  /* your original color */
+  width: 34px;
+  /* slim vertical width */
+  height: 170px;
+  /* tall panel like screenshot */
   position: absolute;
   right: 0;
   border-radius: 0 8px 8px 0px;
@@ -17,8 +20,9 @@
   align-items: center;
   justify-content: center;
   writing-mode: vertical-rl;
-  text-orientation: sideways;   /* letters rotate to face left side */
-  transform: rotate(180deg);  
+  text-orientation: sideways;
+  /* letters rotate to face left side */
+  transform: rotate(180deg);
   color: #fff;
   font-size: 14px;
   font-weight: 500;
@@ -39,9 +43,10 @@
   text-decoration: none;
 }
 
-/* icon stays normal orientation */
-.griddyFlFl i {
-  writing-mode: vertical-lr;
-  font-size: 20px;
-
+@media (max-width: 768px) {
+  .griddyFloatSm {
+    top: 45vh;
+    transform: scale(0.8);
+    transform-origin: right center;
+  }
 }

@@ -88,6 +88,8 @@ const SwiperCarousel = () => {
             forceToAxis: true,
             releaseOnEdges: true,
           }}
+          touchReleaseOnEdges={true}
+          cssMode={isMobile}
           grabCursor={true}
           navigation={{
             nextEl: ".swiper-carousel-next",

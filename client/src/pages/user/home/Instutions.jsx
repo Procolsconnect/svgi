@@ -6,8 +6,10 @@ const InstitutionsGrid = () => {
   const [institutions, setInstitutions] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [tappedIndex, setTappedIndex] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 760);
   const listRef = useRef(null);
-   const apiurl = import.meta.env.VITE_API_URL
+  const apiurl = import.meta.env.VITE_API_URL
+
   useEffect(() => {
     const fetchInstitutions = async () => {
       try {
@@ -31,8 +33,9 @@ const InstitutionsGrid = () => {
     if (!list || institutions.length === 0) return;
 
     const updateGrid = () => {
-      const isMobile = window.innerWidth <= 760;
-      if (isMobile) {
+      const mobile = window.innerWidth <= 760;
+      setIsMobile(mobile);
+      if (mobile) {
         list.style.gridTemplateColumns = `repeat(${institutions.length}, 1fr)`;
       } else {
         const cols = institutions
@@ -61,9 +64,9 @@ const InstitutionsGrid = () => {
       const li = e.target.closest("li");
       if (!li) return;
       const index = Array.from(list.children).indexOf(li);
-      const isMobile = window.innerWidth <= 760;
+      const mobile = window.innerWidth <= 760;
 
-      if (isMobile) {
+      if (mobile) {
         e.preventDefault();
         if (tappedIndex === index) {
           window.open(li.querySelector("a").href, "_self");
@@ -105,7 +108,7 @@ const InstitutionsGrid = () => {
             key={inst.id}
             className={styles.item}
             data-active={i === activeIndex}
-            data-expanded={window.innerWidth <= 760 && tappedIndex === i}
+            data-expanded={isMobile && tappedIndex === i}
           >
             <a href={inst.link} className={styles.cardLink}>
               <article className={styles.card}>
