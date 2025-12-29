@@ -218,14 +218,15 @@ const TrainingPlacementsPage = () => {
             <div className={styles.colLg6}>
               <div>
                 <h6 className={styles.textPrimary}>About Us</h6>
-                <h2>What is Lorem Ipsum?</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has been the industry's standard dummy text ever since the 1500s.</p>
+                <h2>How we train our students?</h2>
+                <p>SVGI training and placement cell can help shape their skills to empower every student's career</p>
               </div>
               <ul className={styles.list}>
-                <li>It has survived not only five centuries, but also the leap into electronic typesetting.</li>
-                <li>Get a view of events and trends. Be updated on our recent news.</li>
-                <li>A reader will be distracted by readable content when looking at its layout.</li>
-                <li>Stay informed with our latest developments and achievements.</li>
+                <li>SVGI's Placement Training program develops confident, skilled, and industry-ready professionals.</li>
+                <li>Training enhances technical skills, communication, problem-solving, and professional behavior.</li>
+                <li>Students participate in expert-led sessions, workshops, mock interviews, and résumé building.</li>
+                <li>Program bridges academic learning with corporate expectations for modern workplace demands.</li>
+                <li>Focus on analytical thinking, teamwork, and career-specific competencies to secure job opportunities.</li>
               </ul>
               <button className={styles.btnPrimary}>Learn More</button>
             </div>
@@ -309,9 +310,7 @@ const TrainingPlacementsPage = () => {
           <div className={styles.leftContent}>
             <h2>Placement Training</h2>
             <p>
-              Our Placement Training process is designed with a structured approach to help every student
-              achieve professional readiness. From skill development to final campus recruitment, each
-              stage ensures confidence, capability, and career success.
+            Training & Placement cell, which is a unit of Career Development Centre, plays a predominant role in shaping up the career goals of students. Its primary objective is to assist students in making and implementing informed educational and occupational choices. The concept of career Counselling & Higher Education should be explicitly presented to students early in their university lives. It also aims to empower students through career counselling services, so that they could act responsibly when career-related concerns arise during the course of their entire program or course.
             </p>
           </div>
 
@@ -341,13 +340,13 @@ const TrainingPlacementsPage = () => {
           ))}
         </div>
         <p>
-          <span className={styles.dropcap}>C</span>areer Counselling & Higher Education cell, which is a unit of Career Development Centre, plays a predominant role in shaping up the career goals of students. Its primary objective is to assist students in making and implementing informed educational and occupational choices. The concept of career Counselling & Higher Education should be explicitly presented to students early in their university lives. It also aims to empower students through career counselling services, so that they could act responsibly when career-related concerns arise during the course of their entire program or course.
+          <span className={styles.dropcap}>I</span>ndustry certifications are recognized credentials that validate a professional’s skills and knowledge in a specific field. They help students and professionals gain credibility, increase employability, and demonstrate expertise in their chosen domain. Obtaining certifications from recognized institutions or organizations provides a competitive edge in the job market and enhances career growth opportunities.
         </p>
       </section>
 
       {/* Industry Certifications Section */}
       <section className={`${styles.industryCertificationsSection}${styles.section}`} ref={el => sectionsRef.current[4] = el}>
-        <h1>Industry Certifications</h1>
+        <h1>Industrial  Certifications</h1>
         <p>
           Industry certifications are recognized credentials that validate a professional's skills and knowledge in a specific field. They help students and professionals gain credibility, increase employability, and demonstrate expertise in their chosen domain. Obtaining certifications from recognized institutions or organizations provides a competitive edge in the job market and enhances career growth opportunities.
         </p>

@@ -1,4 +1,4 @@
-const {Academicshero,AcademicsCard,AcademicsContent} = require('../../models/academics');
+const { Academicshero, AcademicsCard, AcademicsContent } = require('../../models/academics');
 
 async function createHero(body, file) {
   const data = {
@@ -22,18 +22,18 @@ async function updateHero(id, body, file) {
   if (!hero) throw new Error("Hero not found");
 
   if (file) {
-    hero.image =file.path
+    hero.image = file.path
   }
   hero.title = body.title ?? hero.title;
   const updatedHero = await hero.save();
   return updatedHero;
 }
- async function deleteHero(id) {
+async function deleteHero(id) {
   const deletedHero = await Academicshero.findByIdAndDelete(id);
   if (!deletedHero) throw new Error("Hero not found");
   return deletedHero;
 }
- 
+
 
 // CREATE
 async function createCard(body, file) {
@@ -84,6 +84,7 @@ async function getCardById(id) {
 }
 
 async function createContent(body) {
+  if (!body) throw new Error("Content data (body) is missing");
   const data = {
     content: body.content,
     name: body.name,
@@ -104,13 +105,13 @@ async function getContents() {
 async function updateContent(id, body) {
   const content = await AcademicsContent.findById(id);
   if (!content) throw new Error("Content not found");
+  if (!body) throw new Error("Update data (body) is missing");
 
   // Update fields
-  if (file) content.image = file.path;
   content.content = body.content ?? content.content;
   content.name = body.name ?? content.name;
 
-  const updated = await card.save();
+  const updated = await content.save();
   return updated;
 }
 

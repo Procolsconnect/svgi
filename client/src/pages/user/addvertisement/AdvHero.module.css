@@ -26,8 +26,8 @@
   height: 100%;
   background: linear-gradient(to bottom, transparent, rgba(192, 192, 192, 0.4) 85%);
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
 }
 
 .griddy-div {
@@ -64,45 +64,167 @@
 }
 
 /* GRID AREAS */
-.griddy-div1 { grid-area: 2/ 2 / 1 / 1; }
-.griddy-div2 { grid-area: 1 / 2 / 2 / 3; }
-.griddy-div3 { grid-area: 1 / 3 / 2 / 4; }
-.griddy-div4 { grid-area: 1 / 4 / 2 / 5; }
-.griddy-div5 { grid-area: 1 / 5 / 2 / 6; }
-.griddy-div7 { grid-area: 1 / 7 / 2 / 8; }
-.griddy-div8 { grid-area: 2 / 1 / 3 / 2; }
-.griddy-div9 { grid-area: 2 / 2 / 3 / 3; }
-.griddy-div9 h2 { padding-bottom: 6.5rem; padding-left: 6.5rem; } 
-.griddy-div10 { grid-area: 2 / 3 / 3 / 4; }
-.griddy-div10 h2 { padding-bottom: 5.5rem; padding-right: 5.5rem; }
-.griddy-div11 { grid-area: 2 / 4 / 3 / 5; }
-.griddy-div12 { grid-area: 2 / 5 / 3 / 6; }
-.griddy-div13 { grid-area: 2 / 6 / 3 / 7; }
-.griddy-div14 { grid-area: 2 / 7 / 3 / 8; }
-.griddy-div16 { grid-area: 3 / 2 / 4 / 3; }
-.griddy-div17 { grid-area: 3 / 3 / 4 / 4; }
-.griddy-div17 h2 { padding-bottom: 4.5rem; padding-left: 4.5rem; }
-.griddy-div18 { grid-area: 3 / 4 / 4 / 5; }
-.griddy-div18 h2 { padding-bottom: 3.5rem; padding-right: 4.5rem; }
-.griddy-div19 { grid-area: 3 / 5 / 4 / 6; }
-.griddy-div20 { grid-area: 3 / 6 / 4 / 7; }
-.griddy-div21 { grid-area: 3 / 7 / 4 / 8; }
-.griddy-div22 { grid-area: 4 / 1 / 5 / 2; }
-.griddy-div23 { grid-area: 4 / 2 / 5 / 3; }
-.griddy-div24 { grid-area: 4 / 3 / 5 / 4; }
-.griddy-div25 { grid-area: 4 / 4 / 5 / 5; }
-.griddy-div25 h2 { padding-bottom: 2.5rem; padding-left: 3.5rem; }
-.griddy-div26 { grid-area: 4 / 5 / 5 / 6; }
-.griddy-div26 h2 { padding-bottom: -1.5rem; padding-right: 3.5rem; }
-.griddy-div27 { grid-area: 4 / 6 / 5 / 7; }
-.griddy-div28 { grid-area: 4 / 7 / 5 / 8; }
-.griddy-div29 { grid-area: 5 / 1 / 6 / 2; }
-.griddy-div30 { grid-area: 5 / 2 / 6 / 3; }
-.griddy-div31 { grid-area: 5 / 3 / 6 / 4; }
-.griddy-div32 { grid-area: 5 / 4 / 6 / 5; }
-.griddy-div33 { grid-area: 5 / 5 / 6 / 6; }
-.griddy-div34 { grid-area: 5 / 6 / 6 / 7; }
-.griddy-div35 { grid-area: 5 / 7 / 6 / 8; }
+.griddy-div1 {
+  grid-area: 3/ 2 / 2 / 1;
+}
+
+.griddy-div2 {
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+.griddy-div3 {
+  grid-area: 2 / 3 / 3 / 4;
+}
+
+.griddy-div4 {
+  grid-area: 2 / 4 / 3 / 5;
+}
+
+.griddy-div5 {
+  grid-area: 2 / 5 / 3 / 6;
+}
+
+.griddy-div7 {
+  grid-area: 2 / 7 / 3 / 8;
+}
+
+.griddy-div8 {
+  grid-area: 3 / 1 / 4 / 2;
+}
+
+.griddy-div9 {
+  grid-area: 3 / 2 / 4 / 3;
+}
+
+.griddy-div9 h2 {
+  padding-bottom: 6.5rem;
+  padding-left: 6.5rem;
+}
+
+.griddy-div10 {
+  grid-area: 3 / 3 / 4 / 4;
+}
+
+.griddy-div10 h2 {
+  padding-bottom: 5.5rem;
+  padding-right: 5.5rem;
+}
+
+.griddy-div11 {
+  grid-area: 3 / 4 / 4 / 5;
+}
+
+.griddy-div12 {
+  grid-area: 3 / 5 / 4 / 6;
+}
+
+.griddy-div13 {
+  grid-area: 3 / 6 / 4 / 7;
+}
+
+.griddy-div14 {
+  grid-area: 3 / 7 / 4 / 8;
+}
+
+.griddy-div16 {
+  grid-area: 4 / 2 / 5 / 3;
+}
+
+.griddy-div17 {
+  grid-area: 4 / 3 / 5 / 4;
+}
+
+.griddy-div17 h2 {
+  padding-bottom: 4.5rem;
+  padding-left: 4.5rem;
+}
+
+.griddy-div18 {
+  grid-area: 4 / 4 / 5 / 5;
+}
+
+.griddy-div18 h2 {
+  padding-bottom: 3.5rem;
+  padding-right: 4.5rem;
+}
+
+.griddy-div19 {
+  grid-area: 4 / 5 / 5 / 6;
+}
+
+.griddy-div20 {
+  grid-area: 4 / 6 / 5 / 7;
+}
+
+.griddy-div21 {
+  grid-area: 4 / 7 / 5 / 8;
+}
+
+.griddy-div22 {
+  grid-area: 5 / 1 / 6 / 2;
+}
+
+.griddy-div23 {
+  grid-area: 5 / 2 / 6 / 3;
+}
+
+.griddy-div24 {
+  grid-area: 5 / 3 / 6 / 4;
+}
+
+.griddy-div25 {
+  grid-area: 5 / 4 / 6 / 5;
+}
+
+.griddy-div25 h2 {
+  padding-bottom: 2.5rem;
+  padding-left: 3.5rem;
+}
+
+.griddy-div26 {
+  grid-area: 5 / 5 / 6 / 6;
+}
+
+.griddy-div26 h2 {
+  padding-bottom: -1.5rem;
+  padding-right: 3.5rem;
+}
+
+.griddy-div27 {
+  grid-area: 5 / 6 / 6 / 7;
+}
+
+.griddy-div28 {
+  grid-area: 5 / 7 / 6 / 8;
+}
+
+.griddy-div29 {
+  grid-area: 6 / 1 / 7 / 2;
+}
+
+.griddy-div30 {
+  grid-area: 6 / 2 / 7 / 3;
+}
+
+.griddy-div31 {
+  grid-area: 6 / 3 / 7 / 4;
+}
+
+.griddy-div32 {
+  grid-area: 6 / 4 / 7 / 5;
+}
+
+.griddy-div33 {
+  grid-area: 6 / 5 / 7 / 6;
+}
+
+.griddy-div34 {
+  grid-area: 6 / 6 / 7 / 7;
+}
+
+.griddy-div35 {
+  grid-area: 6 / 7 / 7 / 8;
+}
 
 /* FLOATING ICONS */
 .griddy-fl-fl {
@@ -146,17 +268,18 @@
 
 /* REGISTRATION FORM */
 .griddy-form-wrapper {
-  height: 85%;
+  height: 70%;
   width: 400px;
   background-color: rgba(255, 255, 255, 0.13);
   position: absolute;
   left: 40px;
-  top: 50px;
+  top: 24vh; 
+  /* Moved down to match grid shift */
   border-radius: 10px;
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-  padding: 40px 35px;
+  padding: 20px 25px;
 }
 
 .griddy-form-wrapper * {
@@ -176,19 +299,20 @@
 
 .griddy-form-wrapper label {
   display: block;
-  margin-top: 30px;
-  font-size: 16px;
+  margin-top: 10px;
+  /* Reduced from 30px to fit everything comfortably */
+  font-size: 14px;
   font-weight: 500;
 }
 
 .griddy-form-wrapper input {
   display: block;
-  height: 50px;
+  height: 40px;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.07);
   border-radius: 3px;
-  padding: 0 10px;
-  margin-top: 8px;
+  padding: 0 5px;
+  margin-top: 5px;
   font-size: 14px;
   font-weight: 300;
 }
@@ -197,13 +321,40 @@
   color: #252424;
 }
 
+.griddy-select {
+  display: block;
+  height: 40px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.15);
+  /* Slightly darker for contrast */
+  border-radius: 3px;
+  padding: 0 10px; 
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #c42a2a;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.griddy-select option {
+  background: white;
+  color: #c42a2a;
+}
+
+.griddy-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .griddy-form-wrapper button {
-  margin-top: 50px;
+  margin-top: 10px;
   width: 100%;
   background-color: #ffffff;
   color: #080710;
-  padding: 15px 0;
-  font-size: 18px;
+  padding: 10px 0;
+  font-size: 16px;
   font-weight: 600;
   border-radius: 5px;
   cursor: pointer;
@@ -222,7 +373,8 @@
   .griddy-form-wrapper {
     width: 320px;
     left: 20px;
-    top: 30px;
+    top: 15vh;
+    /* Adjusted to clear navbar */
     padding: 30px 25px;
     height: auto;
     max-height: 85%;
@@ -254,12 +406,35 @@
     font-size: clamp(8em, 25vw, 25.5em);
   }
 
-  .griddy-div9 h2 { padding-bottom: 5rem; padding-left: 5rem; }
-  .griddy-div10 h2 { padding-bottom: 4rem; padding-right: 4rem; }
-  .griddy-div17 h2 { padding-bottom: 3.5rem; padding-left: 3.5rem; }
-  .griddy-div18 h2 { padding-bottom: 2.5rem; padding-right: 3.5rem; }
-  .griddy-div25 h2 { padding-bottom: 2rem; padding-left: 2.5rem; }
-  .griddy-div26 h2 { padding-bottom: 1rem; padding-right: 2.5rem; }
+  .griddy-div9 h2 {
+    padding-bottom: 5rem;
+    padding-left: 5rem;
+  }
+
+  .griddy-div10 h2 {
+    padding-bottom: 4rem;
+    padding-right: 4rem;
+  }
+
+  .griddy-div17 h2 {
+    padding-bottom: 3.5rem;
+    padding-left: 3.5rem;
+  }
+
+  .griddy-div18 h2 {
+    padding-bottom: 2.5rem;
+    padding-right: 3.5rem;
+  }
+
+  .griddy-div25 h2 {
+    padding-bottom: 2rem;
+    padding-left: 2.5rem;
+  }
+
+  .griddy-div26 h2 {
+    padding-bottom: 1rem;
+    padding-right: 2.5rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -270,7 +445,8 @@
   .griddy-form-wrapper {
     width: 280px;
     left: 15px;
-    top: 50px;
+    top: 15vh;
+    /* Adjusted to clear navbar */
     padding: 25px 20px;
   }
 
@@ -299,12 +475,35 @@
     font-size: clamp(5em, 25vw, 25.5em);
   }
 
-  .griddy-div9 h2 { padding-bottom: 3.5rem; padding-left: 3.5rem; }
-  .griddy-div10 h2 { padding-bottom: 3rem; padding-right: 3rem; }
-  .griddy-div17 h2 { padding-bottom: 2.5rem; padding-left: 2.5rem; }
-  .griddy-div18 h2 { padding-bottom: 2rem; padding-right: 2.5rem; }
-  .griddy-div25 h2 { padding-bottom: 1.5rem; padding-left: 2rem; }
-  .griddy-div26 h2 { padding-bottom: 0.5rem; padding-right: 2rem; }
+  .griddy-div9 h2 {
+    padding-bottom: 3.5rem;
+    padding-left: 3.5rem;
+  }
+
+  .griddy-div10 h2 {
+    padding-bottom: 3rem;
+    padding-right: 3rem;
+  }
+
+  .griddy-div17 h2 {
+    padding-bottom: 2.5rem;
+    padding-left: 2.5rem;
+  }
+
+  .griddy-div18 h2 {
+    padding-bottom: 2rem;
+    padding-right: 2.5rem;
+  }
+
+  .griddy-div25 h2 {
+    padding-bottom: 1.5rem;
+    padding-left: 2rem;
+  }
+
+  .griddy-div26 h2 {
+    padding-bottom: 0.5rem;
+    padding-right: 2rem;
+  }
 
   .griddy-center a {
     font-size: clamp(12px, 5vw, 18px);
@@ -345,19 +544,20 @@
     top: 30vh;
     padding: 20px 18px;
   }
+
   .griddy-section {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, rgba(192, 192, 192, 0.4) 85%);
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  
-}
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(192, 192, 192, 0.4) 85%);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+
+  }
 
   .griddy-form-wrapper h3 {
     font-size: 20px;
-    line-height: 28px;  
+    line-height: 28px;
   }
 
   .griddy-form-wrapper label {
@@ -381,12 +581,35 @@
     font-size: clamp(3em, 25vw, 25.5em);
   }
 
-  .griddy-div9 h2 { padding-bottom: 2.5rem; padding-left: 2.5rem; }
-  .griddy-div10 h2 { padding-bottom: 2rem; padding-right: 2rem; }
-  .griddy-div17 h2 { padding-bottom: 1.8rem; padding-left: 1.8rem; }
-  .griddy-div18 h2 { padding-bottom: 1.5rem; padding-right: 1.8rem; }
-  .griddy-div25 h2 { padding-bottom: 1rem; padding-left: 1.5rem; }
-  .griddy-div26 h2 { padding-bottom: 0.3rem; padding-right: 1.5rem; }
+  .griddy-div9 h2 {
+    padding-bottom: 2.5rem;
+    padding-left: 2.5rem;
+  }
+
+  .griddy-div10 h2 {
+    padding-bottom: 2rem;
+    padding-right: 2rem;
+  }
+
+  .griddy-div17 h2 {
+    padding-bottom: 1.8rem;
+    padding-left: 1.8rem;
+  }
+
+  .griddy-div18 h2 {
+    padding-bottom: 1.5rem;
+    padding-right: 1.8rem;
+  }
+
+  .griddy-div25 h2 {
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .griddy-div26 h2 {
+    padding-bottom: 0.3rem;
+    padding-right: 1.5rem;
+  }
 
   .griddy-center a {
     font-size: clamp(10px, 5vw, 18px);
@@ -450,10 +673,33 @@
     font-size: 13px;
   }
 
-  .griddy-div9 h2 { padding-bottom: 2rem; padding-left: 2rem; }
-  .griddy-div10 h2 { padding-bottom: 1.5rem; padding-right: 1.5rem; }
-  .griddy-div17 h2 { padding-bottom: 1.5rem; padding-left: 1.5rem; }
-  .griddy-div18 h2 { padding-bottom: 1.2rem; padding-right: 1.5rem; }
-  .griddy-div25 h2 { padding-bottom: 0.8rem; padding-left: 1.2rem; }
-  .griddy-div26 h2 { padding-bottom: 0.2rem; padding-right: 1.2rem; }
+  .griddy-div9 h2 {
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+  }
+
+  .griddy-div10 h2 {
+    padding-bottom: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .griddy-div17 h2 {
+    padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .griddy-div18 h2 {
+    padding-bottom: 1.2rem;
+    padding-right: 1.5rem;
+  }
+
+  .griddy-div25 h2 {
+    padding-bottom: 0.8rem;
+    padding-left: 1.2rem;
+  }
+
+  .griddy-div26 h2 {
+    padding-bottom: 0.2rem;
+    padding-right: 1.2rem;
+  }
 }

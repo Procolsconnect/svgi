@@ -1,4 +1,4 @@
-const { Feedbackhero, Feedbackreview ,Feedbackfaq} = require("../../models/academics");
+const { Feedbackhero, Feedbackreview, Feedbackfaq } = require("../../models/academics");
 
 async function createHero(body, file) {
   const data = {
@@ -65,7 +65,7 @@ async function updateReview(id, body, file) {
     review.image = file.path;
   }
   review.name = body.name ?? review.name;
-review.review = body.review ?? review.review;
+  review.review = body.review ?? review.review;
   const updatedReview = await review.save();
   return updatedReview;
 }
@@ -105,6 +105,7 @@ async function getFaqById(id) {
 async function updateFaq(id, body) {
   const faq = await Feedbackfaq.findById(id);
   if (!faq) throw new Error("FAQ not found");
+  if (!body) throw new Error("FAQ data (body) is missing");
 
   faq.question = body.question ?? faq.question;
   faq.answer = body.answer ?? faq.answer;
@@ -121,7 +122,7 @@ async function deleteFaq(id) {
 }
 
 module.exports = {
-  
+
 };
 
 

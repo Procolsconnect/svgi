@@ -8,10 +8,12 @@ const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const VM_CONFIG = {
     "hero": {
-        endpoint: "/about/vision/hero",
-        title: "Vision Hero",
+        endpoint: "/about/vismishero",
+        title: "Vision & Mission Hero",
+        limit: 1,
         columns: [
             { key: "index", label: "Sr. No." },
+            { key: "title", label: "Title" },
             { key: "image", label: "Image" },
         ],
         fields: [
@@ -19,29 +21,52 @@ const VM_CONFIG = {
             { name: "image", label: "Image", type: "file", required: true },
         ]
     },
-    "mission": {
-        endpoint: "/about/vision/mission",
-        title: "Mission Pillars",
+    "cards": {
+        endpoint: "/about/vismiscard",
+        title: "Vision & Mission Cards",
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Title" },
+            { key: "desc", label: "Description" },
+            { key: "image", label: "Image" },
         ],
         fields: [
-            { name: "title", label: "Pillar Title", type: "text", required: true },
-            { name: "description", label: "Description", type: "textarea", required: true },
+            { name: "title", label: "Title", type: "text", required: true },
+            { name: "desc", label: "Description", type: "textarea", required: true },
+            { name: "image", label: "Image", type: "file", required: true },
+            { name: "link", label: "Link URL", type: "text", required: true },
         ]
     },
-    "values": {
-        endpoint: "/about/vision/values",
-        title: "Core Values",
+    "list": {
+        endpoint: "/about/vismislist",
+        title: "MVV Sections (List)",
+        limit: 1,
         columns: [
             { key: "index", label: "Sr. No." },
-            { key: "title", label: "Value Name" },
+            { key: "mission.title", label: "Mission Title" },
+            { key: "vision.title", label: "Vision Title" },
         ],
         fields: [
-            { name: "title", label: "Value Name", type: "text", required: true },
-            { name: "description", label: "Description", type: "textarea", required: true },
-            { name: "icon", label: "Icon Class", type: "text" },
+            { name: "missionTitle", label: "Mission Title", type: "text", required: true },
+            { name: "visionTitle", label: "Vision Title", type: "text", required: true },
+            { name: "valuesTitle", label: "Values Title", type: "text", required: true },
+        ]
+    },
+    "circle": {
+        endpoint: "/about/vismiscircle",
+        title: "Circular Section",
+        limit: 1,
+        columns: [
+            { key: "index", label: "Sr. No." },
+            { key: "logo", label: "Logo" },
+            { key: "academics.title", label: "Academics" },
+        ],
+        fields: [
+            { name: "logo", label: "Center Logo", type: "file", required: true },
+            { name: "academicsTitle", label: "Academics Title", type: "text", required: true },
+            { name: "researchTitle", label: "Research Title", type: "text", required: true },
+            { name: "campusTitle", label: "Campus Title", type: "text", required: true },
+            { name: "placementsTitle", label: "Placements Title", type: "text", required: true },
         ]
     }
 }
@@ -90,18 +115,23 @@ export default function VisionMissionAdmin() {
                 <div className="component-cards">
                     <div className="component-card" onClick={() => navigate("/admin/about/vision-mission/hero")}>
                         <div className="card-icon"><i className="fa fa-image"></i></div>
-                        <h3>Vision Hero</h3>
-                        <p>Hero banner for VM page</p>
+                        <h3>VM Hero</h3>
+                        <p>Hero banner section</p>
                     </div>
-                    <div className="component-card" onClick={() => navigate("/admin/about/vision-mission/mission")}>
-                        <div className="card-icon"><i className="fa fa-bullseye"></i></div>
-                        <h3>Mission Pillars</h3>
-                        <p>Core Mission Blocks</p>
+                    <div className="component-card" onClick={() => navigate("/admin/about/vision-mission/cards")}>
+                        <div className="card-icon"><i className="fa fa-th-large"></i></div>
+                        <h3>Feature Cards</h3>
+                        <p>Grid items with links</p>
                     </div>
-                    <div className="component-card" onClick={() => navigate("/admin/about/vision-mission/values")}>
-                        <div className="card-icon"><i className="fa fa-heart"></i></div>
-                        <h3>Core Values</h3>
-                        <p>Values and Ethics</p>
+                    <div className="component-card" onClick={() => navigate("/admin/about/vision-mission/list")}>
+                        <div className="card-icon"><i className="fa fa-list-ul"></i></div>
+                        <h3>MVV List</h3>
+                        <p>Mission, Vision, Values</p>
+                    </div>
+                    <div className="component-card" onClick={() => navigate("/admin/about/vision-mission/circle")}>
+                        <div className="card-icon"><i className="fa fa-circle-notch"></i></div>
+                        <h3>Circular Grid</h3>
+                        <p>Logo-centered categories</p>
                     </div>
                 </div>
             </div>

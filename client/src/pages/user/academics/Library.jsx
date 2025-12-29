@@ -1,7 +1,19 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import styles from "./library.module.css";
 
+const API_BASE = import.meta.env.VITE_API_URL + "/api";
+
 export default function LibraryPage() {
+  const [libraryData, setLibraryData] = useState({
+    hero: null,
+    images: [],
+    video: null,
+    videoCards: [],
+    resources: []
+  });
+  const [loading, setLoading] = useState(true);
+
   const carouselRef = useRef(null);
   const speedRef = useRef(0.5);
   const positionRef = useRef(0);
@@ -11,9 +23,40 @@ export default function LibraryPage() {
   const playBtnRef = useRef(null);
 
   useEffect(() => {
-    const carousel = carouselRef.current;
-    let frame;
+    const fetchAllData = async () => {
+      try {
+        const [heroRes, imagesRes, videoRes, cardRes, resRes] = await Promise.all([
+          axios.get(`${API_BASE}/libraryhero`),
+          axios.get(`${API_BASE}/libraryimage`),
+          axios.get(`${API_BASE}/libraryvideo`),
+          axios.get(`${API_BASE}/libraryvideocard`),
+          axios.get(`${API_BASE}/library/resources`)
+        ]);
 
+        setLibraryData({
+          hero: heroRes.data.data?.[0] || null,
+          images: imagesRes.data.data || [],
+          video: videoRes.data.data?.[0] || null,
+          videoCards: cardRes.data.data || [],
+          resources: resRes.data.data || []
+        });
+      } catch (error) {
+        console.error("Error fetching library data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllData();
+  }, []);
+
+  useEffect(() => {
+    if (libraryData.images.length === 0) return;
+
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    let frame;
     const moveCarousel = () => {
       positionRef.current -= speedRef.current;
 
@@ -41,177 +84,197 @@ export default function LibraryPage() {
       carousel.removeEventListener("mouseenter", pause);
       carousel.removeEventListener("mouseleave", resume);
     };
-  }, []);
+  }, [libraryData.images]);
 
   const playVideo = () => {
     if (thumbRef.current) thumbRef.current.style.display = "none";
     if (playBtnRef.current) playBtnRef.current.style.display = "none";
     if (videoRef.current) {
       videoRef.current.style.display = "block";
-      videoRef.current.src += "?autoplay=1";
+      // If it's a youtube link, add autoplay. If it's a direct file, it might need different handling.
+      if (videoRef.current.src.includes('youtube.com')) {
+        videoRef.current.src += "?autoplay=1";
+      } else {
+        videoRef.current.play();
+      }
     }
   };
+
+  const { hero, images, video, videoCards, resources } = libraryData;
+
+  if (loading) {
+    return <div className={styles.loading}>Loading Library Content...</div>;
+  }
 
   return (
     <div className={styles.body}>
       {/* HERO SECTION */}
       <div className={styles.hero}>
-        <img src="/images/instu.jpg" alt="Hero Background" />
+        <img src={hero?.image || "/images/instu.jpg"} alt="Hero Background" />
         <div>
-          <h1>Our Library</h1>
+          <h1>{hero?.title || "Our Library"}</h1>
         </div>
       </div>
 
       {/* MAIN / CAROUSEL */}
       <main className={styles.main}>
         <div className={styles.mainHeader}>
-          <span className={styles.badge}>Join over 100,000 happy creators</span>
-          <h1 className={styles.title}>Engage Audiences<br />with Stunning Videos</h1>
+          <span className={styles.badge}></span>
+          <h1 className={styles.title}> Discover Wisdom<br />One Page at a Time</h1>
           <p className={styles.subtitle}>
-            Boost Your Brand with High-Impact Short Videos from our expert content creators.
-            Our team is ready to propel your business forward.
+            A library provides access to books, digital resources, and learning materials that support students’ academic growth.
           </p>
         </div>
 
-        <div className={styles.carouselWrapper}>
-          <div className={styles.carouselContainer}>
-            <div className={styles.carouselTrack} ref={carouselRef}>
-              <div className={styles.carouselCard}><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="Business" /></div>
-              <div className={styles.carouselCard}><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80" alt="Creative" /></div>
-              <div className={styles.carouselCard}><img src="https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?w=800&q=80" alt="Outdoor" /></div>
-              <div className={styles.carouselCard}><img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?w=800&q=80" alt="Wellness" /></div>
-              <div className={styles.carouselCard}><img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=800&q=80" alt="Technology" /></div>
-              <div className={styles.carouselCard}><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80" alt="Lifestyle" /></div>
+        {images.length > 0 && (
+          <div className={styles.carouselWrapper}>
+            <div className={styles.carouselContainer}>
+              <div className={styles.carouselTrack} ref={carouselRef}>
+                {images.map((img, idx) => (
+                  <div key={img._id || idx} className={styles.carouselCard}>
+                    <img src={img.image} alt={`Gallery item ${idx}`} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </main>
 
       {/* VIDEO + ABOUT SECTION */}
       <div className={styles.contentWrapper}>
         <div className={styles.thumbnailContainer}>
-          <iframe
-            ref={videoRef}
-            className={styles.video}
-            src="https://www.youtube.com/embed/mmtisRvZ0-4"
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-          <img ref={thumbRef} className={styles.thumbnail} src="https://img.youtube.com/vi/mmtisRvZ0-4/maxresdefault.jpg" alt="Video Thumbnail" />
+          {video?.video ? (
+            <>
+              <video
+                ref={videoRef}
+                className={styles.video}
+                src={video.video}
+                controls
+                style={{ display: "none" }}
+              />
+              <div ref={thumbRef} className={styles.thumbnail} style={{ backgroundColor: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <i className="fa fa-play-circle" style={{ fontSize: '5rem', color: '#fff' }}></i>
+              </div>
+            </>
+          ) : (
+            <>
+              <iframe
+                ref={videoRef}
+                className={styles.video}
+                src="https://www.youtube.com/embed/mmtisRvZ0-4"
+                frameBorder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+              <img ref={thumbRef} className={styles.thumbnail} src="https://img.youtube.com/vi/mmtisRvZ0-4/maxresdefault.jpg" alt="Video Thumbnail" />
+            </>
+          )}
+
           <div ref={playBtnRef} className={styles.startVideo} onClick={playVideo}>
             <img src="https://i.imgur.com/v2zNG32.png" alt="Play Button" />
           </div>
         </div>
 
         <div className={styles.videoDescription}>
-          <h2>About This Video</h2>
+          <h2>{video?.title || "About Libraries"}</h2>
           <p>
-            This video highlights the innovative ways we empower educators and students with
-            meaningful insights. By leveraging technology, we streamline engagement and simplify learning.
+            {video?.description || `SVGI features eight well-organized libraries, each focused on a specific field such as Engineering, Arts & Science, Nursing, Paramedical, and more. Each library houses over 700 books, journals, and reference materials, in addition to five digital libraries that provide e-resources to enhance advanced learning.`}
           </p>
-          <p className={styles.mt3}>
-            Our mission is to create a path to student success, ensuring every learner gets
-            the support they need.
-          </p>
+          {!video?.description && (
+            <p className={styles.mt3}>
+              These libraries create a quiet, resource-rich environment where students can study, conduct research, and access up-to-date academic content, fostering strong academic development across all departments
+            </p>
+          )}
         </div>
       </div>
 
       {/* TABLE SECTION */}
-      <h2 className={styles.sectionHeading}>Learning Resources (as on 21.03.2025)</h2>
-
-      <table className={styles.videoTable}>
-        <thead>
-          <tr><th>Library Resources</th><th>Vellore-Campus</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Total Number of Books</td><td>2,50,886</td></tr>
-          <tr><td>Total Number of Back Volumes</td><td>18,350</td></tr>
-          <tr><td>Print Journals / Magazines</td><td>412</td></tr>
-          <tr><td>National</td><td>330</td></tr>
-          <tr><td>International</td><td>82</td></tr>
-          <tr>
-            <td>Online databases / E-Journals<br /><small>(On and Off Campus access facility)</small></td>
-            <td>16,829</td>
-          </tr>
-          <tr>
-            <td colSpan="2">
-              ABI Inform Complete, ACM-DL, ACS Publications, ASCE-DL, ASME-DL,
-              ASTM Journals, EBSCO, ScienceDirect, Wiley, Springer, Scopus, Web of Science, and more.
-            </td>
-          </tr>
-          <tr>
-            <td>E-Books<br /><small>(On and Off Campus access)</small></td>
-            <td>3,64,708</td>
-          </tr>
-        </tbody>
-      </table>
+      {resources.length > 0 && (
+        <>
+          <h2 className={styles.sectionHeading}>Learning Resources (as on 21.03.2025)</h2>
+          {resources.map((res, idx) => (
+            <div key={res._id || idx} style={{ marginBottom: '2rem' }}>
+              <table className={styles.videoTable}>
+                <thead>
+                  <tr><th>Library Resources</th><th>{res.campus || "Vellore-Campus"}</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Total Number of Books</td><td>{res.totalBooks}</td></tr>
+                  <tr><td>Total Number of Back Volumes</td><td>{res.totalBackVolumes}</td></tr>
+                  <tr><td>Print Journals / Magazines</td><td>{res.printJournalsMagazines}</td></tr>
+                  <tr><td>National</td><td>{res.national}</td></tr>
+                  <tr><td>International</td><td>{res.international}</td></tr>
+                  <tr>
+                    <td>Online databases / E-Journals<br /><small>(On and Off Campus access facility)</small></td>
+                    <td>{res.onlineDatabases}</td>
+                  </tr>
+                  <tr>
+                    <td colSpan="2">
+                      {res.databaseList}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>E-Books<br /><small>(On and Off Campus access)</small></td>
+                    <td>{res.ebooks}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </>
+      )}
 
       {/* MORE VIDEOS */}
-      <h2 className={styles.sectionHeading}>More Videos</h2>
-
-      <table className={styles.videoTable}>
-        <tbody>
-          <tr>
-            <td>
-              <b className={styles.videoTitle}><a href="#">Features</a></b>
-              <p className={styles.videoP}>
-                Integrated library system, RFID check-in/out,
-                touchscreen kiosks, virtual machines, CCTV surveillance, and more.
-              </p>
-            </td>
-            <td>
-              <div className={styles.image}>
-                <img src="/images/training.jpg" alt="Welcome" />
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <hr className={styles.videoHr} />
-
-      <table className={styles.videoTable}>
-        <tbody>
-          <tr>
-            <td>
-              <div className={styles.image}>
-                <img src="/images/training 1.jpg" alt="Assets" />
-              </div>
-            </td>
-            <td>
-              <b className={styles.videoTitle}><a href="#">Special Features</a></b>
-              <p className={styles.videoP}>
-                High-quality librarians, updated textbooks, e-resources,
-                scanning facilities, and more.
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <hr className={styles.videoHr} />
-
-      <table className={styles.videoTable}>
-        <tbody>
-          <tr>
-            <td>
-              <b className={styles.videoTitle}><a href="#">225 Years of Service</a></b>
-              <p className={styles.videoP}>
-                A historical look at the US Coast Guard’s legacy in rescue,
-                disaster response, and national security.
-              </p>
-            </td>
-            <td>
-              <div className={styles.image}>
-                <img src="/images/tech .jpg" alt="History" />
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <hr className={styles.videoHr} />
+      {videoCards.length > 0 && (
+        <>
+          <h2 className={styles.sectionHeading}>More Videos</h2>
+          {videoCards.map((card, idx) => (
+            <React.Fragment key={card._id || idx}>
+              <table className={styles.videoTable}>
+                <tbody>
+                  <tr>
+                    {idx % 2 === 0 ? (
+                      <>
+                        <td>
+                          <b className={styles.videoTitle}><a href="#">{card.title}</a></b>
+                          <p className={styles.videoP}>{card.description}</p>
+                        </td>
+                        <td>
+                          <div className={styles.image}>
+                            {card.video.endsWith('.mp4') || card.video.includes('video/upload') ? (
+                              <video src={card.video} controls style={{ width: '100%', borderRadius: '10px' }} />
+                            ) : (
+                              <img src={card.video} alt={card.title} />
+                            )}
+                          </div>
+                        </td>
+                      </>
+                    ) : (
+                      <>
+                        <td>
+                          <div className={styles.image}>
+                            {card.video.endsWith('.mp4') || card.video.includes('video/upload') ? (
+                              <video src={card.video} controls style={{ width: '100%', borderRadius: '10px' }} />
+                            ) : (
+                              <img src={card.video} alt={card.title} />
+                            )}
+                          </div>
+                        </td>
+                        <td>
+                          <b className={styles.videoTitle}><a href="#">{card.title}</a></b>
+                          <p className={styles.videoP}>{card.description}</p>
+                        </td>
+                      </>
+                    )}
+                  </tr>
+                </tbody>
+              </table>
+              <hr className={styles.videoHr} />
+            </React.Fragment>
+          ))}
+        </>
+      )}
     </div>
   );
 }

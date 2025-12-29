@@ -54,6 +54,25 @@ const OVERVIEW_CONFIG = {
             { name: "description", label: "Detailed Text", type: "textarea", required: true },
             { name: "gridImages", label: "Grid Images", type: "file", multiple: true },
         ]
+    },
+    "then&nowslider": {
+        endpoint: "/about/baltic-data",
+        title: "Then & Now Slider",
+        limit: 1,
+        columns: [
+            { key: "index", label: "Sr. No." },
+            { key: "winter.title", label: "Winter Title" },
+            { key: "summer.title", label: "Summer Title" },
+            { key: "contentSection.title", label: "Content Title" },
+        ],
+        fields: [
+            { name: "winterTitle", label: "Winter Title", type: "text", required: true },
+            { name: "winterDescription", label: "Winter Description", type: "textarea", required: true },
+            { name: "summerTitle", label: "Summer Title", type: "text", required: true },
+            { name: "summerDescription", label: "Summer Description", type: "textarea", required: true },
+            { name: "contentTitle", label: "Content Title", type: "text", required: true },
+            { name: "contentDescription", label: "Content Description", type: "textarea", required: true },
+        ]
     }
 }
 
@@ -74,7 +93,7 @@ export default function AboutOverview() {
         setLoading(true)
         try {
             const response = await axios.get(`${API_BASE}${currentConfig.endpoint}`)
-            setItems(response.data.data || [])
+            setItems(response.data.data ? (Array.isArray(response.data.data) ? response.data.data : [response.data.data]) : [])
         } catch (error) {
             setItems([])
         } finally {
@@ -88,10 +107,6 @@ export default function AboutOverview() {
         }
     }, [componentId])
 
-    // If this is the "Then & Now" (Baltic) section, we use a separate simple view
-    if (componentId === "then&nowslider") {
-        return <BalticManager />
-    }
 
     if (!componentId) {
         return (
@@ -172,7 +187,7 @@ export default function AboutOverview() {
     return (
         <div className="admin-section">
             <div className="section-header">
-                <button className="back-link" onClick={() => navigate("/admin/about")}>← Back to About</button>
+                <button className="back-link" onClick={() => navigate("/admin/about/overview")}>← Back to Overview</button>
                 <h1>{currentConfig.title}</h1>
                 <button
                     className="add-btn"
@@ -199,69 +214,19 @@ export default function AboutOverview() {
                 onSave={handleSave}
                 title={editingItem ? "Edit Content" : "Add Content"}
                 fields={currentConfig.fields}
-                initialData={editingItem}
+                initialData={
+                    componentId === "then&nowslider" && editingItem ? {
+                        ...editingItem,
+                        winterTitle: editingItem.winter?.title,
+                        winterDescription: editingItem.winter?.description,
+                        summerTitle: editingItem.summer?.title,
+                        summerDescription: editingItem.summer?.description,
+                        contentTitle: editingItem.contentSection?.title,
+                        contentDescription: editingItem.contentSection?.description,
+                    } : editingItem
+                }
                 submitting={submitting}
             />
-        </div>
-    )
-}
-
-// --- SPECIAL CASE: BALTIC MANAGER ---
-// This handles the unique nested structure without complex configs
-function BalticManager() {
-    const navigate = useNavigate()
-    const [data, setData] = useState(null)
-    const [loading, setLoading] = useState(true)
-
-    const fetchBaltic = async () => {
-        try {
-            const res = await axios.get(`${API_BASE}/about/baltic-data`)
-            // API returns data as { success: true, data: { winter: {}, summer: {}, ...} }
-            setData(res.data.data)
-        } catch (e) {
-            console.error(e)
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    useEffect(() => { fetchBaltic() }, [])
-
-    if (loading) return <div>Loading Baltic Data...</div>
-
-    return (
-        <div className="admin-section">
-            <button className="back-link" onClick={() => navigate("/admin/about/overview")}>← Back</button>
-            <h1>Then & Now (Baltic Sea)</h1>
-
-            {data ? (
-                <div className="baltic-view">
-                    <div className="baltic-card-grid">
-                        <section className="data-box">
-                            <h3>Winter Section</h3>
-                            <p><strong>Title:</strong> {data.winter?.title}</p>
-                            <p><strong>Desc:</strong> {data.winter?.description}</p>
-                        </section>
-                        <section className="data-box">
-                            <h3>Summer Section</h3>
-                            <p><strong>Title:</strong> {data.summer?.title}</p>
-                            <p><strong>Desc:</strong> {data.summer?.description}</p>
-                        </section>
-                        <section className="data-box">
-                            <h3>Content Section</h3>
-                            <p><strong>Title:</strong> {data.contentSection?.title}</p>
-                            <p><strong>Desc:</strong> {data.contentSection?.description}</p>
-                        </section>
-                    </div>
-                    <div style={{ marginTop: '20px' }}>
-                        <button className="add-btn" onClick={() => alert("Open Edit Modal Here")}>
-                            <i className="fa fa-edit"></i> Edit All Sections
-                        </button>
-                    </div>
-                </div>
-            ) : (
-                <div className="no-data">No data found. Click Add to create.</div>
-            )}
         </div>
     )
 }

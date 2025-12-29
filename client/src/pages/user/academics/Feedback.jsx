@@ -1,40 +1,48 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from './Feedback.module.css';
 
+const API_BASE = import.meta.env.VITE_API_URL + "/api";
+
 const SVGIFeedback = () => {
+  const [hero, setHero] = useState(null);
+  const [testimonials, setTestimonials] = useState([]);
+  const [faqsData, setFaqsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [lightboxActive, setLightboxActive] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [activeFAQ, setActiveFAQ] = useState({});
 
-  const testimonials = [
-    { img: "https://randomuser.me/api/portraits/men/32.jpg", name: "Rahul Sharma", text: "The labs and faculty support are top-notch. Got placed in a reputed company!" },
-    { img: "https://randomuser.me/api/portraits/women/44.jpg", name: "Priya Mehta", text: "Cultural events and placement training helped me grow holistically." },
-    { img: "https://randomuser.me/api/portraits/men/45.jpg", name: "Akash Verma", text: "Digital resources made learning easy and flexible. Highly recommend SVGI!" },
-    { img: "https://randomuser.me/api/portraits/women/65.jpg", name: "Sneha Kapoor", text: "Safe campus, good hostel, and supportive staff. Feels like home." },
-    { img: "https://randomuser.me/api/portraits/men/12.jpg", name: "Vikram Singh", text: "Mock interviews and GD sessions prepared me perfectly for placements." }
-  ];
+  useEffect(() => {
+    const fetchFeedbackData = async () => {
+      try {
+        const [heroRes, reviewRes, faqRes] = await Promise.all([
+          axios.get(`${API_BASE}/feedbackhero`),
+          axios.get(`${API_BASE}/feedbackreview`),
+          axios.get(`${API_BASE}/faq`)
+        ]);
 
-  const faqs = [
-    [
-      { q: "Do you work full time as a developer?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit..." },
-      { q: "Do you require a deposit before working?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit..." },
-      { q: "Will I own the website?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit..." },
-      { q: "Are there other costs involved?", a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...", hasExtra: true }
-    ],
-    [
-      { q: "What is hosting? Will I need it?", a: "Lorem ipsum dolor sit amet..." },
-      { q: "Will you work for equity on a new idea I have?", a: "Lorem ipsum dolor sit amet..." },
-      { q: "How much experience do you have?", a: "Lorem ipsum dolor sit amet..." },
-      { q: "What if I need changes. Can I edit it myself?", a: "Lorem ipsum dolor sit amet..." }
-    ]
-  ];
+        setHero(heroRes.data.data?.[0] || null);
+        setTestimonials(reviewRes.data.data || []);
+        setFaqsData(faqRes.data.data || []);
+      } catch (error) {
+        console.error("Error fetching feedback data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeedbackData();
+  }, []);
 
   useEffect(() => {
+    if (testimonials.length === 0) return;
     const timer = setTimeout(() => {
       setCurrentSlide(prev => (prev + 1) % testimonials.length);
     }, 4500);
     return () => clearTimeout(timer);
-  }, [currentSlide]);
+  }, [currentSlide, testimonials.length]);
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -48,12 +56,23 @@ const SVGIFeedback = () => {
     setActiveFAQ(prev => ({ ...prev, [index]: !prev[index] }));
   };
 
+  // Split FAQs into two columns if we have data
+  const midIndex = Math.ceil(faqsData.length / 2);
+  const faqColumns = [
+    faqsData.slice(0, midIndex),
+    faqsData.slice(midIndex)
+  ];
+
+  if (loading) {
+    return <div className={styles.loading}>Loading Feedback...</div>;
+  }
+
   return (
     <div className="bg-white">
       {/* Hero */}
       <div className={styles.heroSection}>
-        <img src="/images/instu.jpg" alt="Hero Background" />
-        <h1 className={styles.heroTitle}>Feedback</h1>
+        <img src={hero?.image || "/images/instu.jpg"} alt="Hero Background" />
+        <h1 className={styles.heroTitle}>{hero?.title || "Feedback"}</h1>
       </div>
 
       {/* Feedback Section */}
@@ -64,7 +83,7 @@ const SVGIFeedback = () => {
             <div className={styles.floatingCard} onClick={() => setLightboxActive(true)}>
               <div className={styles.cardPicture}>
                 <div className={styles.cardFrame}></div>
-                <img src="https://images.unsplash.com/photo-1642478881792-4726327bb0bc?crop=entropy&cs=srgb&fm=jpg" alt="SVGI Group Avatar" />
+                <img src={hero?.image} alt="SVGI Group Avatar" />
               </div>
               <h4><b>SVGI Group</b></h4>
               <p>Overall Institutional Feedback Report</p>
@@ -106,89 +125,86 @@ const SVGIFeedback = () => {
         </div>
       </section>
 
-      {/* Lightbox (uncomment when needed) */}
+      {/* Lightbox */}
       <div className={`${styles.lightbox} ${lightboxActive ? styles.active : ''}`} onClick={() => setLightboxActive(false)}>
         <span className={styles.lightboxClose} onClick={() => setLightboxActive(false)}>×</span>
-        <img src="https://images.unsplash.com/photo-1642478881792-4726327bb0bc?crop=entropy&cs=srgb&fm=jpg" alt="Full" onClick={e => e.stopPropagation()} />
+        <img src={hero?.image || "https://images.unsplash.com/photo-1642478881792-4726327bb0bc?crop=entropy&cs=srgb&fm=jpg"} alt="Full" onClick={e => e.stopPropagation()} />
       </div>
 
       <section className={styles.gridLayout}>
-        <h2>Heading: the grid layout solution</h2>
-        <p>The content is restricted to a certain max-width in the middle, but the section and consequently its image background is full-width.</p>
+        <h2>PROCOLS</h2>
+        <p>
+          Overall, students can demonstrate support and exhibit effective coordination with us during placement training, leading to positive outcomes.
+        </p>
       </section>
 
       <section className={`${styles.borderImage}`}>
-        <h2>Heading: border-image solution</h2>
-        <p>The section is restricted to a certain max-width in the middle, but the border-image created backdrop is full-width.</p>
+        <h2>Jilaba</h2>
+        <p>The students can be talented and they can  make our work as a simple in selecting a Good employee for our company</p>
       </section>
 
       {/* Testimonial Slider */}
-      <section className={styles.testimWrapper}>
-        <div className={styles.testimContainer}>
-          <span className={`${styles.testimArrow} ${styles.testimArrowLeft}`} onClick={() => setCurrentSlide((currentSlide - 1 + testimonials.length) % testimonials.length)}>‹</span>
-          <span className={`${styles.testimArrow} ${styles.testimArrowRight}`} onClick={() => setCurrentSlide((currentSlide + 1) % testimonials.length)}>›</span>
+      {testimonials.length > 0 && (
+        <section className={styles.testimWrapper}>
+          <div className={styles.testimContainer}>
+            <span className={`${styles.testimArrow} ${styles.testimArrowLeft}`} onClick={() => setCurrentSlide((currentSlide - 1 + testimonials.length) % testimonials.length)}>‹</span>
+            <span className={`${styles.testimArrow} ${styles.testimArrowRight}`} onClick={() => setCurrentSlide((currentSlide + 1) % testimonials.length)}>›</span>
 
-          <div className={styles.testimDots}>
-            {testimonials.map((_, idx) => (
-              <span
-                key={idx}
-                className={`${styles.testimDot} ${currentSlide === idx ? styles.testimDotActive : ''}`}
-                onClick={() => setCurrentSlide(idx)}
-              />
-            ))}
-          </div>
+            <div className={styles.testimDots}>
+              {testimonials.map((_, idx) => (
+                <span
+                  key={idx}
+                  className={`${styles.testimDot} ${currentSlide === idx ? styles.testimDotActive : ''}`}
+                  onClick={() => setCurrentSlide(idx)}
+                />
+              ))}
+            </div>
 
-          <div className={styles.testimContent}>
-            {testimonials.map((testimonial, idx) => (
-              <div key={idx} className={`${styles.testimSlide} ${currentSlide === idx ? styles.testimSlideActive : ''}`}>
-                <div className={styles.testimImg}>
-                  <img src={testimonial.img} alt={testimonial.name} />
+            <div className={styles.testimContent}>
+              {testimonials.map((testimonial, idx) => (
+                <div key={testimonial._id || idx} className={`${styles.testimSlide} ${currentSlide === idx ? styles.testimSlideActive : ''}`}>
+                  <div className={styles.testimImg}>
+                    <img src={testimonial.image} alt={testimonial.name} />
+                  </div>
+                  <h2>{testimonial.name}</h2>
+                  <p>"{testimonial.review}"</p>
                 </div>
-                <h2>{testimonial.name}</h2>
-                <p>"{testimonial.text}"</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* FAQ Section */}
-      <section className={styles.faqSection}>
-        <div className={styles.faqContainer}>
-          <h2 className={styles.lineHeading}>Frequently Asked Questions</h2>
-          <h3 className={styles.largeHeading}>
-            Some of the most common questions asked about Website Design & Development.
-          </h3>
-          <div className={styles.faqGrid}>
-            {faqs.map((column, colIdx) => (
-              <div key={colIdx}>
-                {column.map((faq, faqIdx) => {
-                  const key = `${colIdx}-${faqIdx}`;
-                  return (
-                    <div key={key}>
-                      <button className={styles.collapsibleBtn} onClick={() => toggleFAQ(key)}>
-                        {faq.q} <span style={{ float: 'right', fontWeight: 'bold' }}>{activeFAQ[key] ? '-' : '+'}</span>
-                      </button>
-                      <div className={`${styles.faqContent} ${activeFAQ[key] ? styles.faqContentActive : ''}`}>
-                        <p>{faq.a}</p>
-                        {faq.hasExtra && (
-                          <>
-                            <ul>
-                              <li>Custom LI</li>
-                              <li>Custom LI</li>
-                            </ul>
-                            <p>Contact me via <a href="mailto:#">EMAIL</a></p>
-                          </>
-                        )}
+      {faqsData.length > 0 && (
+        <section className={styles.faqSection}>
+          <div className={styles.faqContainer}>
+            <h2 className={styles.lineHeading}>Frequently Asked Questions</h2>
+            <h3 className={styles.largeHeading}>
+              Some of the most common questions asked about SVGI and its academic environment.
+            </h3>
+            <div className={styles.faqGrid}>
+              {faqColumns.map((column, colIdx) => (
+                <div key={colIdx}>
+                  {column.map((faq, faqIdx) => {
+                    const key = `${colIdx}-${faqIdx}`;
+                    return (
+                      <div key={faq._id || key}>
+                        <button className={styles.collapsibleBtn} onClick={() => toggleFAQ(key)}>
+                          {faq.question} <span style={{ float: 'right', fontWeight: 'bold' }}>{activeFAQ[key] ? '-' : '+'}</span>
+                        </button>
+                        <div className={`${styles.faqContent} ${activeFAQ[key] ? styles.faqContentActive : ''}`}>
+                          <p>{faq.answer}</p>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };

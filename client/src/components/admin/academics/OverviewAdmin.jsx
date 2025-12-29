@@ -24,15 +24,15 @@ const OVERVIEW_CONFIG = {
     "intro": { // Mapping "content" to "intro" for UI consistency
         endpoint: "/academicscontent",
         title: "Introduction Text",
-        limit: 1,
+        limit: 10,
         columns: [
             { key: "index", label: "Sr. No." },
-            { key: "title", label: "Heading" },
-            { key: "description", label: "Description" },
+            { key: "name", label: "Name" },
+            { key: "content", label: "Content" },
         ],
         fields: [
-            { name: "title", label: "Section Heading", type: "text", required: true },
-            { name: "description", label: "Description", type: "textarea", required: true },
+            { name: "name", label: "Name", type: "text", required: true },
+            { name: "content", label: "Content", type: "textarea", required: true },
         ]
     },
     "cards": {

@@ -1,10 +1,31 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import styles from "./balticSlider.module.css";
 
+const API_BASE = import.meta.env.VITE_API_URL + "/api";
+
 const BalticSlider = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const sliderRef = useRef(null);
 
   useEffect(() => {
+    const fetchBalticData = async () => {
+      try {
+        const response = await axios.get(`${API_BASE}/about/baltic-data`);
+        setData(response.data.data);
+      } catch (error) {
+        console.error("Error fetching baltic data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBalticData();
+  }, []);
+
+  useEffect(() => {
+    if (loading || !data) return;
+
     class BeerSlider {
       constructor(el, { start = "50" } = {}) {
         this.start = Math.min(100, Math.max(0, parseInt(el.dataset.start || start) || 50));
@@ -97,7 +118,9 @@ const BalticSlider = () => {
         if (handle) handle.remove();
       }
     };
-  }, []);
+  }, [loading, data]);
+
+  if (loading) return <div>Loading Slider...</div>;
 
   return (
     <>
@@ -113,11 +136,8 @@ const BalticSlider = () => {
           </svg>
 
           <section className={`${styles.text} ${styles.textRight}`}>
-            <h2>Baltic sea during Winter time</h2>
-            <p>
-              At -10.6 °C | 12.9 °F on average, January is the coldest month.
-              It is also the driest month with precipitation of only 12 mm.
-            </p>
+            <h2>{data?.winter?.title || "Baltic sea during Winter time"}</h2>
+            <p>{data?.winter?.description}</p>
           </section>
         </div>
 
@@ -133,11 +153,8 @@ const BalticSlider = () => {
             </svg>
 
             <section className={`${styles.text} ${styles.textLeft}`}>
-              <h2>Baltic sea during Summer time</h2>
-              <p>
-                With an average of 22.8 °C | 73.0 °F, July is the warmest month.
-                In June, rainfall reaches its peak with 98 mm.
-              </p>
+              <h2>{data?.summer?.title || "Baltic sea during Summer time"}</h2>
+              <p>{data?.summer?.description}</p>
             </section>
           </div>
         </div>
@@ -145,12 +162,8 @@ const BalticSlider = () => {
 
       {/* Content Section */}
       <section className={styles.contentSection}>
-        <h1>Welcome to the Baltic seaside</h1>
-        <p>
-          The Baltic Sea is a mediterranean sea of the Atlantic Ocean, enclosed by Denmark,
-          Estonia, Finland, Latvia, Lithuania, Sweden, Germany, Poland, and Russia.
-          It stretches from 53°N to 66°N latitude.
-        </p>
+        <h1>{data?.contentSection?.title || "Welcome to the Baltic seaside"}</h1>
+        <p>{data?.contentSection?.description}</p>
       </section>
 
       {/* SVG Clip Path Definition */}

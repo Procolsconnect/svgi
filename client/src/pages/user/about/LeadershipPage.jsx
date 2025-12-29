@@ -1,56 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "./leadership.module.css";
 
+const API_BASE = import.meta.env.VITE_API_URL + "/api";
+
 export default function LeadershipPage() {
+  const [hero, setHero] = useState(null);
+  const [materialCards, setMaterialCards] = useState([]);
+  const [quoteCards, setQuoteCards] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeCard, setActiveCard] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [heroRes, materialRes, quoteRes] = await Promise.all([
+          axios.get(`${API_BASE}/leadership/hero`),
+          axios.get(`${API_BASE}/leadership/material-card`),
+          axios.get(`${API_BASE}/leadership/quote`)
+        ]);
+
+        setHero(heroRes.data.data);
+        setMaterialCards(materialRes.data.data || []);
+        setQuoteCards(quoteRes.data.data || []);
+      } catch (error) {
+        console.error("Error fetching leadership data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleCardToggle = (index) => {
     setActiveCard(activeCard === index ? null : index);
   };
 
-  const materialCards = [
-    {
-      name: "Christopher Walken",
-      movie: "The Deer Hunter",
-      img: "https://material-cards.s3-eu-west-1.amazonaws.com/thumb-christopher-walken.jpg",
-      color: "Red",
-      desc: "He has appeared in more than 100 films and television shows, including The Deer Hunter, Annie Hall...",
-    },
-    {
-      name: "Sean Penn",
-      movie: "Mystic River",
-      img: "https://material-cards.s3-eu-west-1.amazonaws.com/thumb-sean-penn.jpg",
-      color: "Pink",
-      desc: "He has won two Academy Awards, for his roles in Mystic River (2003) and Milk (2008)...",
-    },
-    {
-      name: "Clint Eastwood",
-      movie: "Million Dollar Baby",
-      img: "https://material-cards.s3-eu-west-1.amazonaws.com/thumb-clint-eastwood.jpg",
-      color: "Purple",
-      desc: "He rose to international fame with his role as the Man with No Name in Sergio Leone's Dollars trilogy...",
-    },
-  ];
+  if (loading) return <div>Loading Leadership...</div>;
 
-  const quoteCards = [
-    { title: "Mountain View", text: "Check out all of these gorgeous mountain trips..." },
-    { title: "To The Beach", text: "Plan your next beach trip with these fabulous destinations" },
-    { title: "Desert Destinations", text: "It's the desert you've always dreamed of" },
-    { title: "Explore The Galaxy", text: "Seriously, straight up, just blast off into outer space today" },
-  ];
+  // Helper to normalize color names for CSS modules (e.g. 'red' -> 'Red')
+  const getColorClass = (c) => {
+    if (!c) return styles['Red'];
+    const normalized = c.charAt(0).toUpperCase() + c.slice(1).toLowerCase();
+    return styles[normalized] || styles['Red'];
+  };
+
+  // Featured top cards
+  const topCards = materialCards.slice(0, 2);
+  // We'll show ALL material cards in the grid as per user preference (avoiding "only one card" issue)
+  const fullGridCards = materialCards;
 
   return (
     <div className={styles.body}>
       {/* HERO */}
       <div id="lp-hero" className={styles.hero}>
-        <img src="/images/instu.jpg" alt="Hero Background" />
-        <h1>Leadership</h1>
+        <img src={hero?.image || "/images/instu.jpg"} alt="Hero Background" />
+        <h1>{hero?.title || "Leadership"}</h1>
       </div>
 
       {/* Leadership Heading */}
       <div className={styles.leftHeading}>Leadership That Inspires</div>
 
-      {/* Card Row 1 */}
+      {/* Card Row 1 - Static Chairman */}
       <div className={styles.wholeCard}>
         <div className={styles.card}>
           <div className={styles.overflow}>
@@ -75,7 +86,7 @@ export default function LeadershipPage() {
         </p>
       </div>
 
-      {/* Card Row 2 */}
+      {/* Card Row 2 - Static Secretary */}
       <div className={styles.wholeCards}>
         <div className={`${styles.card} ${styles.card2}`}>
           <div className={styles.overflow}>
@@ -100,84 +111,117 @@ export default function LeadershipPage() {
       </div>
 
       {/* MATERIAL CARDS SECTION */}
-      <section className={styles.materialSection}>
-        <div className={styles.container}>
-          <div className={styles.pageHeader}>
-            <h1>
-              Material Cards Demo
-              <br />
-              <small>
-                See full features on{" "}
-                <a href="https://github.com/marlenesco/material-cards" target="_blank" rel="noreferrer">
-                  Github
-                </a>
-              </small>
-            </h1>
+      {fullGridCards.length > 0 && (
+        <section className={styles.materialSection}>
+          <div className={styles.container}>
+            <div className={styles.pageHeader}>
+              <h1>
+                Material Cards Demo
+                <br />
+                <small>
+                  See full features on{" "}
+                  <a href="https://github.com/marlenesco/material-cards" target="_blank" rel="noreferrer">
+                    Github
+                  </a>
+                </small>
+              </h1>
+            </div>
+
+            <div className={styles.row}>
+              {fullGridCards.map((card, index) => (
+                <div key={index} className={styles.colMd4}>
+                  <article
+                    className={`${styles.materialCard} ${getColorClass(card.color)} ${activeCard === index ? styles.mcActive : ""
+                      }`}
+                  >
+                    <div className={styles.mcContent}>
+                      <div className={styles.imgContainer}>
+                        <img src={card.img} alt={card.name} />
+                      </div>
+                      <div className={styles.cardHeader}>
+                        <span>{card.name}</span>
+                        <strong>{card.movie}</strong>
+                      </div>
+                      <div className={styles.mcDescription}>{card.desc}</div>
+                    </div>
+
+                    <button className={styles.mcBtnAction} onClick={() => handleCardToggle(index)}>
+                      <i className={activeCard === index ? "fa fa-times" : "fa fa-bars"}></i>
+                    </button>
+
+                    <div className={styles.mcFooter}>
+                      <h4>Social</h4>
+                      <div className={styles.socialLinks}>
+                        {card.social?.facebook && (
+                          <a href={card.social.facebook} target="_blank" rel="noreferrer" className={styles.socialLink}>
+                            <i className="fab fa-facebook"></i>
+                          </a>
+                        )}
+                        {card.social?.twitter && (
+                          <a href={card.social.twitter} target="_blank" rel="noreferrer" className={styles.socialLink}>
+                            <i className="fab fa-twitter"></i>
+                          </a>
+                        )}
+                        {card.social?.linkedin && (
+                          <a href={card.social.linkedin} target="_blank" rel="noreferrer" className={styles.socialLink}>
+                            <i className="fab fa-linkedin"></i>
+                          </a>
+                        )}
+                        {card.social?.googlePlus && (
+                          <a href={card.social.googlePlus} target="_blank" rel="noreferrer" className={styles.socialLink}>
+                            <i className="fab fa-google-plus"></i>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              ))}
+            </div>
           </div>
+        </section>
+      )}
 
-          <div className={styles.row}>
-            {materialCards.map((card, index) => (
-              <div key={index} className={styles.colMd4}>
-                <article
-                  className={`${styles.materialCard} ${styles[card.color]} ${
-                    activeCard === index ? styles.mcActive : ""
-                  }`}
-                >
-                  <div className={styles.mcContent}>
-                    <div className={styles.imgContainer}>
-                      <img src={card.img} alt={card.name} />
-                    </div>
-                    <div className={styles.cardHeader}>
-                      <span>{card.name}</span>
-                      <strong>
-                        Star {card.movie}
-                      </strong>
-                    </div>
-                    <div className={styles.mcDescription}>{card.desc}</div>
-                  </div>
+      {/* QUOTE SECTION + GRID CARDS */}
+      {quoteCards.length > 0 && (
+        <section className={styles.quoteSection}>
+          <main className={styles.quoteMain}>
+            <blockquote>I have never said any of those.</blockquote>
+            <small>~ Multiple sources.</small>
+          </main>
 
-                  <button className={styles.mcBtnAction} onClick={() => handleCardToggle(index)}>
-                    <i className={activeCard === index ? "fa fa-times" : "fa fa-bars"}></i>
+          <div className={styles.pageContent}>
+            {quoteCards.map((c, i) => (
+              <div key={i} className={styles.gridCard}>
+                {/* Dynamically applying the background image to match the original design's appearance */}
+                <div
+                  className={styles.cardBg}
+                  style={{
+                    backgroundImage: `url(${c.image})`,
+                    position: 'absolute',
+                    top: 0, left: 0,
+                    width: '100%',
+                    height: '110%',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    zIndex: 0
+                  }}
+                />
+                <div className={styles.gridContent}>
+                  <h2 className={styles.title}>{c.title}</h2>
+                  <p className={styles.copy}>{c.text}</p>
+                  <button className={styles.btn}>
+                    {c.link ? "Read More" : "View Trips"}
                   </button>
-
-                  <div className={styles.mcFooter}>
-                    <h4>Social</h4>
-                    <div className={styles.socialLinks}>
-                      <a href="#" className={styles.socialLink}><i className="fab fa-facebook"></i></a>
-                      <a href="#" className={styles.socialLink}><i className="fab fa-twitter"></i></a>
-                      <a href="#" className={styles.socialLink}><i className="fab fa-linkedin"></i></a>
-                      <a href="#" className={styles.socialLink}><i className="fab fa-google-plus"></i></a>
-                    </div>
-                  </div>
-                </article>
+                </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* QUOTE SECTION + GRID CARDS */}
-      <section className={styles.quoteSection}>
-        <main className={styles.quoteMain}>
-          <blockquote>I have never said any of those.</blockquote>
-          <small>~ Multiple sources.</small>
-        </main>
-
-        <div className={styles.pageContent}>
-          {quoteCards.map((c, i) => (
-            <div key={i} className={styles.gridCard}>
-              <div className={styles.gridContent}>
-                <h2 className={styles.title}>{c.title}</h2>
-                <p className={styles.copy}>{c.text}</p>
-                <button className={styles.btn}>View Trips</button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <img src="/sun.png" alt="" className={styles.sun} />
-        <img src="/left.png" alt="" className={styles.left} />
-      </section>
+          <img src="/sun.png" alt="" className={styles.sun} />
+          <img src="/left.png" alt="" className={styles.left} />
+        </section>
+      )}
     </div>
   );
 }

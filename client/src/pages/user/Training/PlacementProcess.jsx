@@ -45,14 +45,14 @@ const PlacementProcessPage = () => {
   const cards = [
     {
       image: "https://picsum.photos/id/1053/800/600",
-      title: "Distribution of Executable Versions",
-      description: "We ensure seamless placement opportunities by connecting students with top-tier companies, offering comprehensive training and support throughout the process.",
+      title: "Internal campus assistance",
+      description: "We provide a smooth campus placement experience by offering structured training, industry-focused guidance, and dedicated support. Our goal is to connect students with top companies, helping them secure successful career opportunities.",
       imageFirst: true
     },
     {
       image: "https://picsum.photos/id/1041/800/600",
-      title: "Industry-Ready Training",
-      description: "Our curriculum is designed in collaboration with industry experts to bridge the gap between academics and real-world corporate requirements.",
+      title: "External collaborative assistance",
+      description: "We developed our curriculum in partnership with industry experts to connect academic learning with real-world corporate needs.",
       imageFirst: false
     },
     {
@@ -81,8 +81,7 @@ const PlacementProcessPage = () => {
               </h1>
 
               <p>
-                Unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,<br />
-                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+         The SVGI Placement Process is a well-organized and student-focused approach aimed at equipping learners for successful careers by improving their skills, familiarizing them with industry standards, and linking them with top recruiters. By implementing structured training, evaluations, counseling, and recruitment events, this process guarantees that each qualified student makes a seamless transition from their academic journey to a professional career with both confidence and capability.
               </p>
             </div>
 

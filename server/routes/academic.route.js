@@ -6,13 +6,13 @@ const outcome = require("../controllers/academics/OutcomeController");
 
 
 module.exports = function academicRoutes(app) {
-// ---------------- HERO ROUTES ----------------
+  // ---------------- HERO ROUTES ----------------
   app.post("/api/academicshero", upload.single("image"), academics.createacademicsHeroController);
   app.get("/api/academicshero", academics.getacademicsHeroController);
   app.put("/api/academicshero/:id", upload.single("image"), academics.updateacademicsHeroController);
   app.delete("/api/academicshero/:id", academics.deleteacademicsHeroController);
 
-// ---------------- CARD ROUTES ----------------
+  // ---------------- CARD ROUTES ----------------
   app.post("/api/academicscard", upload.single("image"), academics.createacademicsCardController);
   app.get("/api/academicscard", academics.getacademicsCardController);
   app.get("/api/academicscard/:id", academics.getacademicsCardByIdController);
@@ -20,29 +20,29 @@ module.exports = function academicRoutes(app) {
   app.delete("/api/academicscard/:id", academics.deleteacademicsCardController);
 
   //---------------- CONTENT ROUTES ----------------
-  app.post("/api/academicscontent",academics.createacademicsContentController);
+  app.post("/api/academicscontent", upload.none(), academics.createacademicsContentController);
   app.get("/api/academicscontent", academics.getacademicsContentsController);
-  app.put("/api/academicscontent/:id",academics.updateacademicsContentController);
+  app.put("/api/academicscontent/:id", upload.none(), academics.updateacademicsContentController);
   app.delete("/api/academicscontent/:id", academics.deleteacademicsContentController);
 
-//feedback
-  app.post("/api/feedbackhero",upload.single("image"), feedback.createfeedbackHero);
-  app.get("/api/feedbackhero",feedback.getfeedbackHero);
-  app.put("/api/feedbackhero/:id",upload.single("image"), feedback.updatefeedbackHero);
-  app.delete("/api/feedbackhero/:id",feedback.deletefeedbackHero);
-  
-//feedback review
-  app.post("/api/feedbackreview",upload.single("image"),feedback.createfeedbackReview);
-  app.get("/api/feedbackreview",feedback.getfeedbackReview);
-  app.put("/api/feedbackreview/:id",upload.single("image"),feedback.updatefeedbackReview);
-  app.delete("/api/feedbackreview/:id",feedback.deletefeedbackReview);
+  //feedback
+  app.post("/api/feedbackhero", upload.single("image"), feedback.createfeedbackHero);
+  app.get("/api/feedbackhero", feedback.getfeedbackHero);
+  app.put("/api/feedbackhero/:id", upload.single("image"), feedback.updatefeedbackHero);
+  app.delete("/api/feedbackhero/:id", feedback.deletefeedbackHero);
 
-// FAQ ROUTES
-app.post("/api/faq",feedback.createFaqController);
-app.get("/api/faq",feedback.getFaqController);
-app.get("/api/faq/:id",feedback.getFaqByIdController);
-app.put("/api/faq/:id",feedback.updateFaqController);
-app.delete("/api/faq/:id",feedback.deleteFaqController);
+  //feedback review
+  app.post("/api/feedbackreview", upload.single("image"), feedback.createfeedbackReview);
+  app.get("/api/feedbackreview", feedback.getfeedbackReview);
+  app.put("/api/feedbackreview/:id", upload.single("image"), feedback.updatefeedbackReview);
+  app.delete("/api/feedbackreview/:id", feedback.deletefeedbackReview);
+
+  // FAQ ROUTES
+  app.post("/api/faq", upload.none(), feedback.createFaqController);
+  app.get("/api/faq", feedback.getFaqController);
+  app.get("/api/faq/:id", feedback.getFaqByIdController);
+  app.put("/api/faq/:id", upload.none(), feedback.updateFaqController);
+  app.delete("/api/faq/:id", feedback.deleteFaqController);
 
 
 
@@ -72,26 +72,26 @@ app.delete("/api/faq/:id",feedback.deleteFaqController);
   app.put("/api/libraryvideocard/:id", upload.single("video"), library.updatelibraryVideoCardController);
   app.delete("/api/libraryvideocard/:id", library.deletelibraryVideoCardController);
 
-// ---------------- RESOURCES ROUTES ----------------
+  // ---------------- RESOURCES ROUTES ----------------
 
-app.post("/api/library/resources", library.createLibraryResourcesController);
-app.get("/api/library/resources", library.getLibraryResourcesController);
-app.get("/api/library/resources/:id", library.getLibraryResourcesByIdController);
-app.put("/api/library/resources/:id", library.updateLibraryResourcesController);
-app.delete("/api/library/resources/:id", library.deleteLibraryResourcesController);
- 
+  app.post("/api/library/resources", upload.none(), library.createLibraryResourcesController);
+  app.get("/api/library/resources", library.getLibraryResourcesController);
+  app.get("/api/library/resources/:id", library.getLibraryResourcesByIdController);
+  app.put("/api/library/resources/:id", upload.none(), library.updateLibraryResourcesController);
+  app.delete("/api/library/resources/:id", library.deleteLibraryResourcesController);
 
-//outcome routes
-app.post("/api/outcome",  upload.fields([
+
+  //outcome routes
+  app.post("/api/outcome", upload.fields([
     { name: "image", maxCount: 1 },
     { name: "pdf", maxCount: 1 }
-  ]),outcome.createOutcome);
-app.get("/api/outcome", outcome.getAllOutcomes);
-app.get("/api/outcome/:id", outcome.getOutcomeById);
-app.put("/api/outcome/:id", upload.fields([
+  ]), outcome.createOutcome);
+  app.get("/api/outcome", outcome.getAllOutcomes);
+  app.get("/api/outcome/:id", outcome.getOutcomeById);
+  app.put("/api/outcome/:id", upload.fields([
     { name: "image", maxCount: 1 },
     { name: "pdf", maxCount: 1 }
   ]), outcome.updateOutcome);
-app.delete("/api/outcome/:id", outcome.deleteOutcome);
+  app.delete("/api/outcome/:id", outcome.deleteOutcome);
 
 };

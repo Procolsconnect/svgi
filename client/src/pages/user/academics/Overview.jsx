@@ -61,11 +61,10 @@ export default function OverviewPage() {
 
       <section className={styles.opHeroSection}>
         <div className={styles.opText}>
-          <p className={styles.opTextShort}>Lorem ipsum dolor sit amet</p>
-          <h1 className={styles.opTextTitle}>Lorem ipsum dolor sit amet</h1>
+          <p className={styles.opTextShort}>shree Venkateshwara Group of Institutions </p>
+          <h1 className={styles.opTextTitle}>Academics</h1>
           <p className={styles.opTextDescription}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Laboriosam sequi magni doloremque fugit temporibus, voluptate possimus.
+           At Shree Venkateshwara Group of Institutions (SVGI), academics focus on quality education, student-centric learning, and strong skill development. The institution follows a flexible Choice Based Credit System with well-structured core and elective courses supported by ability and skill enhancement modules. SVGI emphasizes modern teaching methods and activity-based learning through practical labs, projects, workshops, and internships, ensuring students gain real-world exposure and industry-ready competencies. Continuous academic support, assessments, and mentoring help every student progress confidently and achieve their academic goals.
           </p>
           <a className={styles.opTextButton} href="#">Learn more</a>
         </div>

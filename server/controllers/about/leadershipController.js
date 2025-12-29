@@ -37,7 +37,7 @@ async function deleteHeroController(req, res) {
 // -------- MATERIAL CARD CONTROLLERS --------
 async function createMaterialCardController(req, res) {
     try {
-        const card = await leadershipService.createMaterialCard(req.body);
+        const card = await leadershipService.createMaterialCard(req.body, req.file);
         res.json({ success: true, data: card });
     } catch (err) {
         res.status(500).json({ success: false, message: "Failed to create material card", error: err.message });
@@ -53,7 +53,7 @@ async function getMaterialCardsController(req, res) {
 }
 async function updateMaterialCardController(req, res) {
     try {
-        const card = await leadershipService.updateMaterialCard(req.params.id, req.body);
+        const card = await leadershipService.updateMaterialCard(req.params.id, req.body, req.file);
         res.json({ success: true, data: card });
     } catch (err) {
         res.status(500).json({ success: false, message: "Failed to update material card", error: err.message });

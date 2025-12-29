@@ -42,9 +42,7 @@ export default function HeroHighlight() {
             <section className={styles.hhBottomRow}>
                 <div className={styles.hhBottomRowColumnOne}>
                     <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa
-                        consectetur illum accusantium vel pariatur? Commodi unde labore culpa
-                        blanditiis in!
+                       SVGI adheres to strict guidelines and discipline to foster a safe, respectful, and focused campus environment where students can learn without distractions. In addition, the institution prioritizes capacity development through regular skill-building activities, workshops, and training programs that assist students in enhancing their academic, professional, and personal growth.
                     </p>
                 </div>
                 <div className={styles.hhBottomRowColumnTwo}></div>
@@ -52,142 +50,106 @@ export default function HeroHighlight() {
 
             {/* HIGHLIGHT SECTION */}
             <section className={styles.hhHighlightSection}>
-                <h1>The Carbon in Our Apple Pies</h1>
+                <h1>Regulations & Safety</h1>
 
                 <p>
-                    Galaxies ship of the imagination across the centuries at the edge of
-                    forever take root and flourish billions upon billions. Stirred by
-                    starlight how far away not a sunrise but a galaxyrise Sea of
-                    Tranquility concept of the number one dispassionate extraterrestrial
-                    observer. The carbon in our apple pies emerged into consciousness Sea
-                    of Tranquility something incredible is waiting to be known made in the
-                    interiors of collapsing stars inconspicuous motes of rock and gas.
+                 The possession or use of prohibited items, including drugs, tobacco, cigarettes, alcohol, or any other intoxicating substances, is strictly forbidden within the SVGI campus and hostels. 
+                  {" "}
+                    <mark className={styles.hhTextHighlight}>
+                        Students must refrain from any behaviour that may disturb the peace, safety, or well-being of others.
+                    </mark>{" "} Visitors are allowed only with prior approval from the designated hostel authorities. All residents are expected to follow campus safety guidelines and cooperate fully with wardens and staff members. Any violation of these regulations will lead to immediate disciplinary action as per SVGI rules.
                 </p>
 
                 <p>
-                    Great turbulent clouds something incredible is waiting to be known
-                    Jean-François Champollion hundreds of thousands science hearts of the
-                    stars.{" "}
+                    <h3>Campus Discipline</h3>
+                    SVGI upholds a rigorously regulated campus to guarantee a secure learning atmosphere. Students are anticipated to adhere to all institutional policies without exception. {" "}
                     <mark className={styles.hhTextHighlight}>
-                        Bits of moving fluff
+                         Respectful conduct is obligatory
                     </mark>{" "}
-                    another world brain is the seed of intelligence how far away bits of
-                    moving fluff realm of the galaxies? Cosmic fugue a still more glorious
-                    dawn awaits rings of Uranus dream of the mind's eye not a sunrise but a
-                    galaxyrise the only home we've ever known.
+                 in both academic and non-academic settings. Any instance of misconduct is regarded with utmost seriousness by the administration. The overarching objective is to foster a sense of responsibility and an emphasis on academic achievement.
                 </p>
 
                 <p>
-                    Quasar intelligent beings cosmic ocean realm of the galaxies
-                    Jean-François Champollion descended from astronomers?
-                    <mark className={styles.hhTextHighlight}>
-                        Flatland prime number concept of the number one Euclid the carbon in
-                        our apple pies bits of moving fluff
+                    <h3>Academic Integrity</h3>
+                   Students are required to attend all classes, laboratories, and academic events punctually. 
+                    <mark className={styles.hhTextHighlight}> 
+                      Consistent attendance significantly impacts academic performance. 
                     </mark>
-                    . Star stuff harvesting star light inconspicuous motes of rock and gas
-                    the ash of stellar alchemy encyclopaedia galactica bits of moving
-                    fluff the only home we've ever known. Made in the interiors of
-                    collapsing stars the ash of stellar alchemy made in the interiors of
-                    collapsing stars not a sunrise but a galaxyrise made in the interiors
-                    of collapsing stars something incredible is waiting to be known.
+                    Arriving late to classrooms is discouraged to prevent disruptions. Any absenteeism must be substantiated with appropriate documentation. Punctuality is indicative of discipline and a commitment to one’s studies.
                 </p>
 
                 <p>
-                    Permanence of the stars billions upon billions tingling of the spine
-                    culture realm of the galaxies corpus callosum. Hydrogen atoms rich in
-                    mystery vastness is bearable only through love prime number paroxysm of
-                    global death another world. Encyclopaedia galactica emerged into
-                    consciousness the sky calls to us at the edge of forever across the
-                    centuries emerged into consciousness.
+                    <h3>Dress Code Compliance</h3>
+                  A neat and professional dress code is to be observed within the campus. Students are expected to present themselves in attire that is appropriate for an academic setting. 
                     <mark className={styles.hhTextHighlight}>
-                        At the edge of forever descended from astronomers vanquish the
-                        impossible descended from astronomers another world invent the
-                        universe
+                  Where applicable, uniforms must be worn in accordance with the specified guidelines
                     </mark>
-                    .
+                    The wearing of improper clothing within academic buildings is prohibited. Compliance with the dress code is essential for maintaining the decorum of the institution.
                 </p>
 
                 <p>
-                    Galaxies Hypatia trillion radio telescope paroxysm of global death
-                    emerged into consciousness. Vanquish the impossible Orion's sword
-                    hearts of the stars muse about are creatures of the cosmos made in the
-                    interiors of collapsing stars? Made in the interiors of collapsing
-                    stars two ghostly white figures in coveralls and helmets are softly
-                    dancing dream of the mind's eye Apollonius of Perga
+                    <h3>Anti-Ragging Policy</h3>
+                 SVGI enforces a zero-tolerance policy against ragging in any form.
+All students must abide by anti-ragging regulations strictly.
+
                     <mark className={styles.hhTextHighlight}>
-                        inconspicuous motes of rock and gas
+                       Any harassment—verbal, physical, or emotional—is punishable.
                     </mark>{" "}
-                    Apollonius of Perga?
+                 Violators will face immediate actions under institutional rules.
+The policy ensures every student feels safe and respected.
+
                 </p>
 
                 <p>
-                    Not a sunrise but a galaxyrise a very small stage in a vast cosmic
-                    arena preserve and cherish that pale blue dot consciousness shores of
-                    the cosmic ocean decipherment? Of brilliant syntheses rich in mystery
-                    something incredible is waiting to be known colonies rings of Uranus
-                    hundreds of thousands?
+                    <h3>Behaviour & Conduct</h3>
+                  Students must treat faculty, staff, and peers with courtesy.
+Good communication and respectful behaviour are essential.
+
                     <mark className={styles.hhTextHighlight}>
-                        From which we spring of brilliant syntheses extraordinary claims
-                        require extraordinary evidence Orion's sword Sea of Tranquility
-                        descended from astronomers
+                   Actions that disrupt harmony on campus are not permitted.
                     </mark>
-                    .
+                    Students should follow instructions given by staff members.
+Healthy conduct builds a positive learning environment.
+
                 </p>
 
                 <p>
-                    Cosmos of brilliant syntheses Rig Veda rings of Uranus explorations
-                    rich in heavy atoms. Shores of the cosmic ocean extraordinary claims
-                    require extraordinary evidence made
+                    <h3>Campus Cleanliness</h3>
+                   Maintaining cleanliness is the shared responsibility of all students.
+Campuses, classrooms, and labs must be kept neat at all times.
+
                     <mark className={styles.hhTextHighlight}>
-                        in the interiors of collapsing stars the carbon in our apple pies
-                        paroxysm
+                      Students should use facilities responsibly without causing damage.
                     </mark>{" "}
-                    of global death realm of the galaxies? Hundreds of thousands globular
-                    star cluster across the centuries a mote of dust suspended in a
-                    sunbeam globular star cluster made in the interiors of collapsing
-                    stars.
+                Waste must be disposed of only in designated areas.
+Clean surroundings support a healthy academic atmosphere.
+
                 </p>
 
                 <p>
-                    Tunguska event Hypatia dispassionate extraterrestrial observer colonies
-                    preserve and cherish that pale blue dot as a patch of light. A still
-                    more glorious dawn awaits the only home we've ever known globular star
-                    cluster invent the universe
+                    <h3>Academic Participation</h3>
+                  Workshops, seminars, and skill programs are mandatory for students.
+These activities enhance academic and professional growth.
+
                     <mark className={styles.hhTextHighlight}>
-                        Cambrian explosion Flatland
+                      Participation helps students gain real-world experience.
                     </mark>
-                    . Vastness is bearable only through love invent the universe dream of
-                    the mind's eye kindling the energy hidden in matter gathered by gravity
-                    inconspicuous motes of rock and gas.
+               Assignments and projects must be completed on time.
+Active involvement improves overall learning outcomes.
+
                 </p>
 
                 <p>
-                    Intelligent beings something incredible is waiting to be known
-                    extraordinary claims require extraordinary evidence a very small stage
-                    in a vast cosmic arena realm of the galaxies hundreds of thousands.
-                    <mark className={styles.hhTextHighlight}>
-                        Vanquish the impossible astonishment
-                    </mark>
-                    . Tunguska event invent the universe a still more glorious dawn awaits
-                    at the edge of forever? Across the centuries vanquish the impossible
-                    bits of moving fluff prime number great turbulent clouds courage of our
-                    questions?
-                </p>
+                    <h3>Hostel Discipline</h3>
+                  Hostel residents must follow all rules set by the hostel management.
+Entry and exit timings must be strictly adhered to.
 
-                <p>
-                    Finite but unbounded circumnavigated of brilliant syntheses the carbon
-                    in our apple pies trillion cosmic ocean? Light years how far away
-                    vanquish the impossible another world concept of the number one Euclid.
-                    Emerged into consciousness white dwarf citizens of distant epochs Sea
-                    of Tranquility great turbulent
                     <mark className={styles.hhTextHighlight}>
-                        clouds invent the universe
+                    Rooms should be kept clean and maintained regularly.
                     </mark>
-                    . Courage of our questions courage of our questions two ghostly white
-                    figures in coveralls and helmets are softly dancing bits of moving
-                    fluff kindling the energy hidden in matter Sea of Tranquility and
-                    billions upon billions upon billions upon billions upon billions upon
-                    billions upon billions.
+Students must cooperate with wardens and hostel staff.
+Hostel discipline ensures safety and comfort for everyone.
+
                 </p>
             </section>
         </div>

@@ -28,22 +28,21 @@ async function deleteHero(id) {
 }
 
 // ------------------ MATERIAL CARDS ------------------
-async function createMaterialCard(body) {
+async function createMaterialCard(body, file) {
     const card = new MaterialCard({
         name: body.name,
         movie: body.movie,
-        img: body.img,
+        img: file?.path || body.img || null,
         color: body.color,
         desc: body.desc,
         social: {
-            facebook: body.social?.facebook || "",
-            twitter: body.social?.twitter || "",
-            linkedin: body.social?.linkedin || "",
-            googlePlus: body.social?.googlePlus || ""
+            facebook: body.facebook || body.social?.facebook || "",
+            twitter: body.twitter || body.social?.twitter || "",
+            linkedin: body.linkedin || body.social?.linkedin || "",
+            googlePlus: body.googlePlus || body.social?.googlePlus || ""
         }
     });
 
-    // Save it to the database
     return await card.save();
 }
 
@@ -51,26 +50,24 @@ async function getMaterialCards() {
     return await MaterialCard.find().sort({ createdAt: -1 });
 }
 
-async function updateMaterialCard(id, body) {
+async function updateMaterialCard(id, body, file) {
     const card = await MaterialCard.findById(id);
     if (!card) throw new Error("Material card not found");
 
-    // Update top-level fields if provided
     if (body.name) card.name = body.name;
     if (body.movie) card.movie = body.movie;
-    if (body.img) card.img = body.img;
+    if (file) card.img = file.path;
+    else if (body.img) card.img = body.img;
+
     if (body.color) card.color = body.color;
     if (body.desc) card.desc = body.desc;
 
-    // Update nested social fields safely
-    if (body.social) {
-        card.social = {
-            facebook: body.social.facebook ?? card.social.facebook,
-            twitter: body.social.twitter ?? card.social.twitter,
-            linkedin: body.social.linkedin ?? card.social.linkedin,
-            googlePlus: body.social.googlePlus ?? card.social.googlePlus,
-        };
-    }
+    card.social = {
+        facebook: body.facebook ?? (body.social?.facebook || card.social.facebook),
+        twitter: body.twitter ?? (body.social?.twitter || card.social.twitter),
+        linkedin: body.linkedin ?? (body.social?.linkedin || card.social.linkedin),
+        googlePlus: body.googlePlus ?? (body.social?.googlePlus || card.social.googlePlus),
+    };
 
     return await card.save();
 }

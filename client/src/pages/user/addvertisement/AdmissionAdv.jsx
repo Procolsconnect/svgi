@@ -187,10 +187,10 @@ const AdmissionPage = () => {
       {/* Features Section */}
       <section className={styles['alp-section3']}>
         <div className={styles['alp-container']}>
-          <h1 className={`${styles['alp-title']}`} ref={titleRef}>Carrusel Infinito</h1>
-          <p className={`${styles['alp-subtitle']}`} ref={subtitleRef}>Una experiencia visual única</p>
+          <h1 className={`${styles['alp-title']}`} ref={titleRef}>Info About Admission</h1>
+          <p className={`${styles['alp-subtitle']}`} ref={subtitleRef}>Through the Guidance of Admission Officers</p>
           <div className={`${styles['alp-text-content']}`} ref={textContentRef}>
-            <p className={styles['alp-text']}>Descubre la magia del movimiento continuo con nuestro carrusel de imágenes infinito. Cada elemento se desliza suavemente creando una experiencia visual hipnotizante que captura la atención del espectador.</p>
+            <p className={styles['alp-text']}>Reliable guidance, transparent communication, and a student-first approach define our admission officers.</p>
           </div>
           <div className={`${styles['alp-features']}`} ref={featuresRef}>
             <figure className={`${styles['alp-snip0051']} ${styles['alp-feature']}`}>

@@ -24,7 +24,7 @@ const Header = () => {
     { label: "About Us", value: "/about/overview" },
     { label: "News", value: "/news" },
     { label: "Infrastructure", value: "/infrastructure" },
-    { label: "Quick Links", value: "/quick-links" },
+    { label: "Advertisement", value: "/advertisement" },
     { label: "Alumni", value: "/alumni" },
     { label: "Contact", value: "/contact" },
   ];
@@ -57,8 +57,8 @@ const Header = () => {
       value: "/about",
       subItems: [
         { label: "Overview", value: "/about/overview" },
-        { label: "Course Outcome", value: "/about/vission&mission" },
-        { label: "Library", value: "/about/library" },
+        { label: "Vision & Mission", value: "/about/vission&mission" },
+        { label: "Leadership", value: "/about/leadership" },
 
       ],
     },

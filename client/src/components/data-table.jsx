@@ -43,12 +43,17 @@ export default function DataTable({ columns, data, onEdit, onDelete }) {
   // --- 3. CELL RENDERING HELPER ---
   // This function decides HOW to display the data inside each table cell
   const renderCellContent = (column, rowData, rowIndex) => {
-    const value = rowData[column.key]
-
     // A. Handle Auto-Numbering (If key is "index")
     if (column.key === "index") {
       return <span className="cell-text">{rowIndex + 1}</span>
     }
+
+    // Resolve nested value if key contains dots (e.g., "winter.title")
+    const getValue = (obj, path) => {
+      return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+    };
+
+    const value = column.key.includes('.') ? getValue(rowData, column.key) : rowData[column.key];
 
     // B. Handle Status Column
     if (column.key === "status") {

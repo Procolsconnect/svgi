@@ -1,26 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import styles from "./vismis.module.css";
 
-const cards = [
-  {
-    title: "Card Title 1",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum veritatis eaque necessitatibus, explicabo.",
-    img: "https://picsum.photos/id/1/800/800",
-    aria: "Read more about Card Title 1",
-  },
-  {
-    title: "Card Title 2",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum veritatis.",
-    img: "https://picsum.photos/id/2/800/800",
-    aria: "Read more about Card Title 2",
-  },
-  {
-    title: "Card Title 3",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum veritatis eaque necessitatibus, explicabo vero hic, perspiciatis unde minus.",
-    img: "https://picsum.photos/id/3/800/800",
-    aria: "Read more about Card Title 3",
-  },
-];
+const API_BASE = import.meta.env.VITE_API_URL + "/api";
 
 const circleItems = [
   { id: "Academics", title: "Academics" },
@@ -30,6 +12,8 @@ const circleItems = [
 ];
 
 export default function CampusCanvas() {
+  const [hero, setHero] = useState(null);
+  const [dynamicCards, setDynamicCards] = useState([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [itemsShown, setItemsShown] = useState(new Array(circleItems.length).fill(false));
   const rotateRef = useRef(null);
@@ -39,6 +23,22 @@ export default function CampusCanvas() {
     if (typeof window === "undefined") return false;
     return window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [heroRes, cardsRes] = await Promise.all([
+          axios.get(`${API_BASE}/about/vismishero`),
+          axios.get(`${API_BASE}/about/vismiscard`)
+        ]);
+        setHero(heroRes.data.data);
+        setDynamicCards(cardsRes.data.data || []);
+      } catch (error) {
+        console.error("Error fetching VisMis data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
@@ -118,21 +118,21 @@ export default function CampusCanvas() {
     <div className={styles.root}>
       {/* HERO */}
       <div id="hero" className={styles.hero}>
-        <img src="hero img.jpg" alt="Hero Background" />
-        <h1>Our Mission and Visions</h1>
+        <img src={hero?.image || "hero img.jpg"} alt="Hero Background" />
+        <h1>{hero?.title || "Our Mission and Visions"}</h1>
       </div>
 
       {/* CARDS */}
-      <ol className={styles.cards__container} title="Blog entries" aria-label="cards list">
-        {cards.map((c, i) => (
+      <ol className={styles.cards__container} title="Vision & Mission" aria-label="cards list">
+        {dynamicCards.map((c, i) => (
           <li className={styles.card} key={i}>
             <div className={styles.card__thumb}>
-              <img className="animate" src={c.img} alt={`Card image ${i + 1}`} />
+              <img className="animate" src={c.image} alt={c.title} />
             </div>
             <div className={styles.card__content}>
               <h3 className={styles.card__title}>{c.title}</h3>
-              <p className={styles.card__text}>{c.text}</p>
-              <a className={styles.card__btn} aria-label={c.aria} href="#">
+              <p className={styles.card__text}>{c.desc}</p>
+              <a className={styles.card__btn} aria-label={`Read more about ${c.title}`} href={c.link || "#"}>
                 <svg
                   width="18"
                   height="18"

@@ -14,25 +14,25 @@ module.exports = function routes(app) {
     app.delete("/api/about/overview/hero/:id", OverviewController.deleteOverviewHero);
 
     /* ------------------ ABOUT OVERVIEW INTRO ------------------ */
-    app.post("/api/about/overview/intro", upload.fields([{ name: "images", maxCount: 10 }]),OverviewController.createOverviewIntro);
+    app.post("/api/about/overview/intro", upload.fields([{ name: "images", maxCount: 10 }]), OverviewController.createOverviewIntro);
     app.get("/api/about/overview/intro", OverviewController.getAllOverviewIntro);
     app.get("/api/about/overview/intro/:id", OverviewController.getOverviewIntroById);
     app.put("/api/about/overview/intro/:id", upload.fields([{ name: "images", maxCount: 10 }]),
-    OverviewController.updateOverviewIntro);
+        OverviewController.updateOverviewIntro);
     app.delete("/api/about/overview/intro/:id", OverviewController.deleteOverviewIntro);
 
     /* ------------------ ABOUT OVERVIEW GRID ------------------ */
-    app.post("/api/about/overview/grid", upload.fields([{ name: "gridImages", maxCount: 9 }]),OverviewController.createOverviewGrid);
+    app.post("/api/about/overview/grid", upload.fields([{ name: "gridImages", maxCount: 9 }]), OverviewController.createOverviewGrid);
     app.get("/api/about/overview/grid", OverviewController.getAllOverviewGrid);
     app.get("/api/about/overview/grid/:id", OverviewController.getOverviewGridById);
     app.put("/api/about/overview/grid/:id", upload.fields([{ name: "gridImages", maxCount: 4 }]),
-    OverviewController.updateOverviewGrid);
+        OverviewController.updateOverviewGrid);
     app.delete("/api/about/overview/grid/:id", OverviewController.deleteOverviewGrid);
 
     /* ------------------ BALTIC ------------------ */
-    app.post("/api/about/baltic-data", BalticController.createBalticDataController);
+    app.post("/api/about/baltic-data", upload.none(), BalticController.createBalticDataController);
     app.get("/api/about/baltic-data", BalticController.getBalticDataController);
-    app.put("/api/about/baltic-data/:id", BalticController.updateBalticDataController);
+    app.put("/api/about/baltic-data/:id", upload.none(), BalticController.updateBalticDataController);
     app.delete("/api/about/baltic-data/:id", BalticController.deleteBalticDataController);
 
     /* ------------------ LEADERSHIP HERO ------------------ */

@@ -22,7 +22,7 @@ import PlacementAdmin from "./components/admin/placement-admin.jsx";
 import CampusLifeAdmin from "./components/admin/campus-life-admin.jsx";
 import NewsAdmin from "./components/admin/news-admin.jsx";
 import AdvertisementAdmin from "./components/admin/advertisement-admin.jsx";
-
+ 
 const App = () => {
   return (
     <Router>

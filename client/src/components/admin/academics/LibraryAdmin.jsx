@@ -40,10 +40,12 @@ const LIBRARY_CONFIG = {
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Title" },
+            { key: "description", label: "Description" },
             { key: "video", label: "Video" },
         ],
         fields: [
             { name: "title", label: "Title", type: "text", required: true },
+            { name: "description", label: "Description", type: "text", required: true },
             { name: "video", label: "Video File", type: "file", required: true },
         ]
     },
@@ -54,27 +56,38 @@ const LIBRARY_CONFIG = {
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Title" },
+            { key: "description", label: "Description" },
             { key: "video", label: "Video" },
         ],
         fields: [
             { name: "title", label: "Title", type: "text", required: true },
             { name: "video", label: "Video File", type: "file", required: true },
+            { name: "description", label: "Description", type: "text", required: true },
+
         ]
     },
     "resources": {
         endpoint: "/library/resources",
-        title: "Digital Resources",
-        limit: 50,
+        title: "Library Resources",
+        limit: 10,
         columns: [
             { key: "index", label: "Sr. No." },
-            { key: "title", label: "Title" },
-            { key: "count", label: "Count/Link" },
-            { key: "image", label: "Icon/Image" },
+            { key: "campus", label: "Campus" },
+            { key: "totalBooks", label: "Total Books" },
+            { key: "totalBackVolumes", label: "Back Volumes" },
+            { key: "printJournalsMagazines", label: "Journals/Magazines" },
+            { key: "ebooks", label: "E-Books" },
         ],
         fields: [
-            { name: "title", label: "Resource Title", type: "text", required: true },
-            { name: "count", label: "Count or Link", type: "text", required: true },
-            { name: "image", label: "Icon Image", type: "file", required: true },
+            { name: "campus", label: "Campus (svgc/svgp/...) ", type: "text", required: true },
+            { name: "totalBooks", label: "Total Books", type: "text", required: true },
+            { name: "totalBackVolumes", label: "Total Back Volumes", type: "text", required: true },
+            { name: "printJournalsMagazines", label: "Print Journals & Magazines", type: "text", required: true },
+            { name: "national", label: "National Journals", type: "text", required: true },
+            { name: "international", label: "International Journals", type: "text", required: true },
+            { name: "onlineDatabases", label: "Online Databases", type: "text", required: true },
+            { name: "databaseList", label: "Database List", type: "text", required: true },
+            { name: "ebooks", label: "E-Books", type: "text", required: true },
         ]
     }
 }

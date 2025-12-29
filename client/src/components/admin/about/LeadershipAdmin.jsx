@@ -7,46 +7,55 @@ import FormModal from "../../form-modal"
 const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const LEADERSHIP_CONFIG = {
-    "chairman": {
-        endpoint: "/about/leadership/chairman",
-        title: "Chairman's Message",
+    "hero": {
+        endpoint: "/leadership/hero",
+        title: "Leadership Hero",
+        limit: 1,
         columns: [
             { key: "index", label: "Sr. No." },
-            { key: "name", label: "Name" },
-            { key: "designation", label: "Designation" },
+            { key: "title", label: "Title" },
+            { key: "image", label: "Image" },
         ],
         fields: [
-            { name: "name", label: "Chairman Name", type: "text", required: true },
-            { name: "designation", label: "Designation", type: "text", required: true },
-            { name: "message", label: "Message", type: "textarea", required: true },
+            { name: "title", label: "Title", type: "text", required: true },
             { name: "image", label: "Photo", type: "file", required: true },
         ]
     },
-    "directors": {
-        endpoint: "/about/leadership/directors",
-        title: "Board of Directors",
+    "material": {
+        endpoint: "/leadership/material-card",
+        title: "Leadership Cards",
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "name", label: "Name" },
-        ],
-        fields: [
-            { name: "name", label: "Director Name", type: "text", required: true },
-            { name: "designation", label: "Designation", type: "text", required: true },
-            { name: "image", label: "Photo", type: "file", required: true },
-        ]
-    },
-    "principals": {
-        endpoint: "/about/leadership/principals",
-        title: "College Principals",
-        columns: [
-            { key: "index", label: "Sr. No." },
-            { key: "name", label: "Name" },
-            { key: "college", label: "College" },
+            { key: "movie", label: "Role/Designation" },
+            { key: "img", label: "Photo" },
         ],
         fields: [
             { name: "name", label: "Name", type: "text", required: true },
-            { name: "college", label: "College Name", type: "text", required: true },
+            { name: "movie", label: "Role/Designation", type: "text", required: true },
+            { name: "desc", label: "Short Bio", type: "textarea", required: true },
             { name: "image", label: "Photo", type: "file", required: true },
+            { name: "color", label: "Accent Color (HEX)", type: "text" },
+            { name: "facebook", label: "Facebook URL", type: "text" },
+            { name: "twitter", label: "Twitter URL", type: "text" },
+            { name: "linkedin", label: "LinkedIn URL", type: "text" },
+            { name: "googlePlus", label: "Google Plus URL", type: "text" },
+        ]
+    },
+    "quote": {
+        endpoint: "/leadership/quote",
+        title: "Quote Cards",
+        columns: [
+            { key: "index", label: "Sr. No." },
+            { key: "title", label: "Author" },
+            { key: "text", label: "Quote" },
+            { key: "image", label: "Photo" },
+        ],
+        fields: [
+            { name: "title", label: "Author Name", type: "text", required: true },
+            { name: "text", label: "Quote Text", type: "textarea", required: true },
+            { name: "image", label: "Author Photo", type: "file", required: true },
+            { name: "link", label: "Read More Link", type: "text" },
         ]
     }
 }
@@ -93,20 +102,20 @@ export default function LeadershipAdmin() {
                     </div>
                 </div>
                 <div className="component-cards">
-                    <div className="component-card" onClick={() => navigate("/admin/about/leadership/chairman")}>
+                    <div className="component-card" onClick={() => navigate("/admin/about/leadership/hero")}>
                         <div className="card-icon"><i className="fa fa-user-tie"></i></div>
-                        <h3>Chairman's Message</h3>
-                        <p>Main leadership message</p>
+                        <h3>Leadership Hero</h3>
+                        <p>Hero banner section</p>
                     </div>
-                    <div className="component-card" onClick={() => navigate("/admin/about/leadership/directors")}>
+                    <div className="component-card" onClick={() => navigate("/admin/about/leadership/material")}>
                         <div className="card-icon"><i className="fa fa-users"></i></div>
-                        <h3>Board of Directors</h3>
-                        <p>Management team</p>
+                        <h3>Leadership Cards</h3>
+                        <p>Profile cards for leaders</p>
                     </div>
-                    <div className="component-card" onClick={() => navigate("/admin/about/leadership/principals")}>
-                        <div className="card-icon"><i className="fa fa-user-graduate"></i></div>
-                        <h3>College Principals</h3>
-                        <p>Academic leaders</p>
+                    <div className="component-card" onClick={() => navigate("/admin/about/leadership/quote")}>
+                        <div className="card-icon"><i className="fa fa-quote-left"></i></div>
+                        <h3>Quote Cards</h3>
+                        <p>Thematic quotes with photos</p>
                     </div>
                 </div>
             </div>

@@ -9,13 +9,29 @@
 }
 
 @keyframes underlinePulse {
-  0%, 100% { transform: scaleX(1); opacity: 0.8; }
-  50% { transform: scaleX(1.4); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* HERO */
@@ -174,6 +190,7 @@
 .thumbnailContainer {
   position: relative;
   width: 65%;
+  aspect-ratio: 16 / 9;
   border-radius: 0.75rem;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -181,13 +198,16 @@
 
 .video {
   width: 100%;
-  height: 360px;
+  height: 100%;
   display: none;
   border-radius: 12px;
+  object-fit: cover;
 }
 
 .thumbnail {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
@@ -223,7 +243,9 @@
   font-weight: 600;
 }
 
-.mt3 { margin-top: 1rem; }
+.mt3 {
+  margin-top: 1rem;
+}
 
 /* SECTION HEADING */
 .sectionHeading {
@@ -238,8 +260,8 @@
 
 /* TABLE */
 .videoTable {
-  width: 90%;
-  margin: 0 auto 4rem auto;
+  width: 92%;
+  margin: 3rem auto;
   border-collapse: collapse;
   background: #fff;
   border-radius: 0.75rem;
@@ -290,12 +312,20 @@
 }
 
 .image {
-  height: 250px;
-  width: 350px;
+  width: 400px;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+}
+
+.image img,
+.image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .image:hover {
@@ -314,52 +344,52 @@
   .hero {
     min-height: 250px;
   }
-  
-  .hero h1 { 
+
+  .hero h1 {
     font-size: 36px;
     padding: 0 20px;
   }
-  
-  .mainHeader { 
-    padding: 0 1rem; 
+
+  .mainHeader {
+    padding: 0 1rem;
   }
-  
-  .title { 
+
+  .title {
     font-size: 2rem;
   }
-  
-  .subtitle { 
+
+  .subtitle {
     font-size: 1rem;
   }
-  
-  .carouselWrapper { 
+
+  .carouselWrapper {
     height: 50vh;
   }
-  
-  .carouselCard { 
+
+  .carouselCard {
     flex: 0 0 220px;
     height: 280px;
   }
-  
-  .contentWrapper { 
+
+  .contentWrapper {
     flex-direction: column;
     padding: 0 15px;
   }
-  
+
   .thumbnailContainer,
-  .videoDescription { 
+  .videoDescription {
     width: 100%;
   }
-  
+
   .videoDescription {
     margin-top: 1.5rem;
   }
-  
-  .sectionHeading { 
+
+  .sectionHeading {
     font-size: 1.4rem;
     margin: 2rem 0 1rem 0;
   }
-  
+
   .videoTable {
     width: 100%;
     font-size: 0.85rem;
@@ -418,44 +448,44 @@
   .hero {
     min-height: 200px;
   }
-  
-  .hero h1 { 
+
+  .hero h1 {
     font-size: 28px;
   }
-  
-  .mainHeader { 
+
+  .mainHeader {
     padding: 0 0.75rem;
   }
-  
-  .title { 
+
+  .title {
     font-size: 1.6rem;
   }
-  
-  .subtitle { 
+
+  .subtitle {
     font-size: 0.9rem;
   }
-  
-  .carouselWrapper { 
+
+  .carouselWrapper {
     height: 51vh;
   }
-  
-  .carouselCard { 
+
+  .carouselCard {
     flex: 0 0 180px;
 
   }
-  
+
   .contentWrapper {
     padding: 0 10px;
   }
-  
-  .sectionHeading { 
+
+  .sectionHeading {
     font-size: 1.2rem;
   }
-  
+
   .videoTable {
     font-size: 0.8rem;
   }
-  
+
   .videoTitle {
     font-size: 15px;
   }
@@ -463,7 +493,22 @@
   .videoP {
     font-size: 13px;
   }
-  .videoHr{
-    display: hidden;
+
+  .videoTable {
+    font-size: 0.8rem;
+    width: 95%;
+    margin: 1.5rem auto;
+  }
+
+  .videoTitle {
+    font-size: 15px;
+  }
+
+  .videoP {
+    font-size: 13px;
+  }
+
+  .videoHr {
+    display: none;
   }
 }

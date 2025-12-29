@@ -33,7 +33,7 @@ async function deleteVMHero(id) {
 
 
 // -------------------- Card Section ----------------
-async function createVMCard(body, file){
+async function createVMCard(body, file) {
     const card = new VMCardSchema({
         title: body.title,
         image: file?.path || null || body.image,
@@ -43,11 +43,11 @@ async function createVMCard(body, file){
     return await card.save();
 }
 
-async function getVMCard(){
-    return VMCardSchema.find().sort({createdAt : -1})
+async function getVMCard() {
+    return VMCardSchema.find().sort({ createdAt: -1 })
 }
 
-async function getVMCardByID(id){
+async function getVMCardByID(id) {
     return VMCardSchema.findById(id);
 }
 
@@ -72,16 +72,16 @@ async function deleteVMCard(id) {
 async function createMVVSection(body) {
     const data = {
         mission: {
-            title: body.mission.title,
-            sections: body.mission.sections,
+            title: body.missionTitle || body.mission?.title,
+            sections: body.mission?.sections || [],
         },
         vision: {
-            title: body.vision.title,
-            lines: body.vision.lines,
+            title: body.visionTitle || body.vision?.title,
+            lines: body.vision?.lines || [],
         },
         values: {
-            title: body.values.title,
-            list: body.values.list,
+            title: body.valuesTitle || body.values?.title,
+            list: body.values?.list || [],
         }
     };
 
@@ -104,22 +104,22 @@ async function updateMVVSection(id, body) {
     if (!section) throw new Error("MVV section not found");
 
     // Mission
-    if (body.mission) {
-        if (body.mission.title) section.mission.title = body.mission.title;
-        if (body.mission.sections) section.mission.sections = body.mission.sections;
+    if (body.missionTitle || body.mission?.title) {
+        section.mission.title = body.missionTitle || body.mission.title;
     }
+    if (body.mission?.sections) section.mission.sections = body.mission.sections;
 
     // Vision
-    if (body.vision) {
-        if (body.vision.title) section.vision.title = body.vision.title;
-        if (body.vision.lines) section.vision.lines = body.vision.lines;
+    if (body.visionTitle || body.vision?.title) {
+        section.vision.title = body.visionTitle || body.vision.title;
     }
+    if (body.vision?.lines) section.vision.lines = body.vision.lines;
 
     // Values
-    if (body.values) {
-        if (body.values.title) section.values.title = body.values.title;
-        if (body.values.list) section.values.list = body.values.list;
+    if (body.valuesTitle || body.values?.title) {
+        section.values.title = body.valuesTitle || body.values.title;
     }
+    if (body.values?.list) section.values.list = body.values.list;
 
     return await section.save();
 }
@@ -137,23 +137,23 @@ async function createCampusCircle(body, file) {
         logo: file?.path || body.logo || null,
 
         academics: {
-            title: body.academics.title,
-            items: body.academics.items
+            title: body.academicsTitle || body.academics?.title,
+            items: body.academics?.items || []
         },
 
         research: {
-            title: body.research.title,
-            items: body.research.items
+            title: body.researchTitle || body.research?.title,
+            items: body.research?.items || []
         },
 
         campus: {
-            title: body.campus.title,
-            items: body.campus.items
+            title: body.campusTitle || body.campus?.title,
+            items: body.campus?.items || []
         },
 
         placements: {
-            title: body.placements.title,
-            items: body.placements.items
+            title: body.placementsTitle || body.placements?.title,
+            items: body.placements?.items || []
         }
     };
 
@@ -177,31 +177,31 @@ async function updateCampusCircle(id, body, file) {
 
     // Update logo
     if (file) circle.logo = file.path;
-    if (body.logo) circle.logo = body.logo;
+    else if (body.logo) circle.logo = body.logo;
 
     // Update Academics
-    if (body.academics) {
-        if (body.academics.title) circle.academics.title = body.academics.title;
-        if (body.academics.items) circle.academics.items = body.academics.items;
+    if (body.academicsTitle || body.academics?.title) {
+        circle.academics.title = body.academicsTitle || body.academics.title;
     }
+    if (body.academics?.items) circle.academics.items = body.academics.items;
 
     // Update Research
-    if (body.research) {
-        if (body.research.title) circle.research.title = body.research.title;
-        if (body.research.items) circle.research.items = body.research.items;
+    if (body.researchTitle || body.research?.title) {
+        circle.research.title = body.researchTitle || body.research.title;
     }
+    if (body.research?.items) circle.research.items = body.research.items;
 
     // Update Campus
-    if (body.campus) {
-        if (body.campus.title) circle.campus.title = body.campus.title;
-        if (body.campus.items) circle.campus.items = body.campus.items;
+    if (body.campusTitle || body.campus?.title) {
+        circle.campus.title = body.campusTitle || body.campus.title;
     }
+    if (body.campus?.items) circle.campus.items = body.campus.items;
 
     // Update Placements
-    if (body.placements) {
-        if (body.placements.title) circle.placements.title = body.placements.title;
-        if (body.placements.items) circle.placements.items = body.placements.items;
+    if (body.placementsTitle || body.placements?.title) {
+        circle.placements.title = body.placementsTitle || body.placements.title;
     }
+    if (body.placements?.items) circle.placements.items = body.placements.items;
 
     return await circle.save();
 }

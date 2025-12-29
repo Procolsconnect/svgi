@@ -14,6 +14,7 @@ const Campuslife = () => {
     <div>
       <Routes>
         <Route index element={<CampusOverview/>}/>
+      <Route path="overview" element={<CampusOverview/>}/>
       <Route path="sports" element={<Sports/>}/>
       <Route path="hostel" element={<Hostel/>}/>
       <Route path='health' element={<Health/>}/>

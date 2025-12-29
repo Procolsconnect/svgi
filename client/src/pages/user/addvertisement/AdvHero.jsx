@@ -6,15 +6,24 @@ const Hero = () => {
   const [formData, setFormData] = useState({
     username: '',
     phone: '',
-    email: ''
+    college: '',
+    course: ''
   });
+
+  const coursesByCollege = {
+    arts: ["Tamil", "English", "BCA", "Math"],
+    engineering: ["BE-CSE", "BE-ECE", "BE-EEE", "BE-MECH", "BE-CIVIL", "B.Tech-IT"],
+    polytechnic: ["DME", "DEEE", "DECE", "DCN"],
+    paramedical: ["B.Sc Nursing", "B.Pharm", "D.Pharm", "BPT"]
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => {
+      const newData = { ...prev, [name]: value };
+      if (name === 'college') newData.course = ''; // Reset course when college changes
+      return newData;
+    });
   };
 
   const handleSubmit = (e) => {
@@ -27,7 +36,7 @@ const Hero = () => {
     <div className={styles['griddy-container']}>
 
       {/* Social Icons */}
-<FloatingIcons direction="right" vertical={true} />
+      <FloatingIcons direction="right" vertical={true} />
 
       {/* GRID */}
       <section className={styles['griddy-section']}>
@@ -103,16 +112,35 @@ const Hero = () => {
           onChange={handleInputChange}
         />
 
-        <label htmlFor="email">Email id</label>
-        <input
-          type="email"
-          placeholder="Student mail id"
-          id="email"
-          name="email"
-          value={formData.email}
+        <label htmlFor="college">College</label>
+        <select
+          id="college"
+          name="college"
+          value={formData.college}
           onChange={handleInputChange}
-        />
+          className={styles['griddy-select']}
+        >
+          <option value="">Select College</option>
+          <option value="arts">Arts</option>
+          <option value="engineering">Engineering</option>
+          <option value="polytechnic">Polytechnic</option>
+          <option value="paramedical">Paramedical</option>
+        </select>
 
+        <label htmlFor="course">Course</label>
+        <select
+          id="course"
+          name="course"
+          value={formData.course}
+          onChange={handleInputChange}
+          disabled={!formData.college}
+          className={styles['griddy-select']}
+        >
+          <option value="">Select Course</option>
+          {formData.college && coursesByCollege[formData.college].map((c, i) => (
+            <option key={i} value={c}>{c}</option>
+          ))}
+        </select>
         <button type="button" onClick={handleSubmit}>Submit</button>
       </div>
     </div>
