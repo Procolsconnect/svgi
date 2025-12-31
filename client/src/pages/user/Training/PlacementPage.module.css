@@ -38,7 +38,7 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 0;
 }
 
@@ -64,8 +64,17 @@
 }
 
 @keyframes underlinePulse {
-  0%, 100% { transform: scaleX(1); opacity: 0.8; }
-  50% { transform: scaleX(1.4); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
 }
 
 /* Layout */
@@ -146,7 +155,9 @@
   transition: all 1s ease-out 0.6s;
 }
 
-.info.active { opacity: 1; }
+.info.active {
+  opacity: 1;
+}
 
 .info h3 {
   font-size: 1.8em;
@@ -155,7 +166,10 @@
   margin: 0;
 }
 
-.topLeft { top: 30px; left: 30px; }
+.topLeft {
+  top: 30px;
+  left: 30px;
+}
 
 .sliderPrevNextControl {
   position: absolute;
@@ -183,9 +197,14 @@
   color: #000000;
 }
 
-.sliderPrevNextControl label:hover { background: #ffffff; }
+.sliderPrevNextControl label:hover {
+  background: #ffffff;
+}
 
-.disabled { opacity: 0.5; pointer-events: none; }
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 
 /* Gallery & Team */
 .officeGallery {
@@ -216,7 +235,9 @@
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.galleryItem:hover img { transform: scale(1.05); }
+.galleryItem:hover img {
+  transform: scale(1.05);
+}
 
 .galleryCaption {
   position: absolute;
@@ -230,9 +251,14 @@
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.galleryItem:hover .galleryCaption { opacity: 1; }
+.galleryItem:hover .galleryCaption {
+  opacity: 1;
+}
 
-.galleryCaption h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+.galleryCaption h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
 
 .teamMembers {
   display: grid;
@@ -268,7 +294,9 @@
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.memberCard:hover .memberImage img { transform: scale(1.05); }
+.memberCard:hover .memberImage img {
+  transform: scale(1.05);
+}
 
 .memberSocial {
   position: absolute;
@@ -285,7 +313,9 @@
   z-index: 10;
 }
 
-.memberCard:hover .memberSocial { bottom: 0; }
+.memberCard:hover .memberSocial {
+  bottom: 0;
+}
 
 .memberSocial a {
   color: #000000;
@@ -312,8 +342,17 @@
   text-align: center;
 }
 
-.memberInfo h3 { font-size: 1.4rem; color: #000000; margin-bottom: 0.5rem; }
-.memberInfo p { color: #000000; font-weight: 600; margin-bottom: 0.5rem; }
+.memberInfo h3 {
+  font-size: 1.4rem;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.memberInfo p {
+  color: #000000;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
 
 /* Training Infographic */
 .leftHeading {
@@ -343,8 +382,13 @@
   justify-items: center;
 }
 
-.infoGraphic li:nth-child(5) { grid-column: 2; }
-.infoGraphic li:nth-child(6) { grid-column: 3; }
+.infoGraphic li:nth-child(5) {
+  grid-column: 2;
+}
+
+.infoGraphic li:nth-child(6) {
+  grid-column: 3;
+}
 
 .infoGraphic li {
   position: relative;
@@ -357,7 +401,10 @@
   cursor: pointer;
 }
 
-.numberWrap { position: absolute; }
+.numberWrap {
+  position: absolute;
+}
+
 .number {
   font-family: "Maven Pro", sans-serif;
   font-size: 9em;
@@ -408,7 +455,9 @@
   z-index: 1;
 }
 
-.infoGraphic li:hover .coverWrap .numberCover { border-radius: 100%; }
+.infoGraphic li:hover .coverWrap .numberCover {
+  border-radius: 100%;
+}
 
 .content {
   margin: 7em 2em 1em 6em;
@@ -490,12 +539,15 @@
   margin-bottom: 2rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
+
 .videoWrapper,
 .videoContainer {
-  position: relative;   /* THIS is the key */
+  position: relative;
+  /* THIS is the key */
   width: 100%;
   overflow: hidden;
 }
+
 .playButton {
   position: absolute;
 
@@ -510,7 +562,7 @@
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 2px solid #ffffff;
- 
+
   z-index: 10;
 
 
@@ -536,14 +588,20 @@
   border-radius: 12px;
 }
 
-.recruitersGrid { display: flex; flex-wrap: wrap; gap: 40px; }
+.recruitersGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
 
 .recruiterCategory {
   flex: 1 1 calc(50% - 20px);
   min-width: 300px;
 }
 
-.recruiterCategory.fullWidth { flex: 1 1 100%; }
+.recruiterCategory.fullWidth {
+  flex: 1 1 100%;
+}
 
 .recruiterCategory h3 {
   color: #003366;
@@ -602,13 +660,13 @@
   width: 300px;
   height: 1px;
   margin-top: 6px;
-  background: rgba(204,214,246,.2);
+  background: rgba(204, 214, 246, .2);
   transition: all 0.6s ease-in-out;
 }
 
 .lineHeading:hover::after {
   width: 180px;
-  background: rgba(204,214,246,.6);
+  background: rgba(204, 214, 246, .6);
 }
 
 .largeHeading {
@@ -618,13 +676,19 @@
   margin: 0 0 2rem 0;
 }
 
-.faqSection { display: flex; flex-wrap: wrap; gap: 2%; }
+.faqSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
+}
 
-.faqColumn { flex: 1 1 46%; }
+.faqColumn {
+  flex: 1 1 46%;
+}
 
 .collapsible {
   background-color: #112240;
-  border: 1px solid hsla(0,0%,51.4%,.16);
+  border: 1px solid hsla(0, 0%, 51.4%, .16);
   border-radius: 7px;
   color: #ccd6f6;
   padding: 12px;
@@ -633,20 +697,29 @@
   cursor: pointer;
   margin-bottom: 8px;
   width: 100%;
-  box-shadow: 0 10px 30px -15px rgba(0,0,0,1);
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 1);
   transition: box-shadow 0.2s ease;
 }
 
-.collapsible:hover { box-shadow: 0 10px 60px -15px rgba(0,0,0,1); }
+.collapsible:hover {
+  box-shadow: 0 10px 60px -15px rgba(0, 0, 0, 1);
+}
 
-.collapsible::after { content: "+"; float: right; font-weight: bold; }
-.active::after { content: "−"; }
+.collapsible::after {
+  content: "+";
+  float: right;
+  font-weight: bold;
+}
+
+.active::after {
+  content: "−";
+}
 
 .faqContent {
   overflow: hidden;
   transition: max-height 0.25s ease-in-out, margin 0.25s ease;
   background: #0b1629;
-  border: 1px solid hsla(0,0%,51.4%,.16);
+  border: 1px solid hsla(0, 0%, 51.4%, .16);
   border-radius: 7px;
   padding: 0 2%;
 }
@@ -671,7 +744,10 @@
   font-size: 14px;
 }
 
-.myFooter a { color: #00C58E; text-decoration: none; }
+.myFooter a {
+  color: #00C58E;
+  text-decoration: none;
+}
 
 /* Animation */
 .animateOnScroll {
@@ -682,12 +758,32 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .heroTitle { font-size: 36px; padding: 0 20px; }
-  .sectionHeader h2 { font-size: 2rem; }
-  .pageHeading { font-size: 2rem; margin-left: 3%; }
-  .faqColumn { flex: 1 1 100%; }
-  .largeHeading { font-size: 36px; }
-  .recruiterCategory { flex: 1 1 100%; }
+  .heroTitle {
+    font-size: 36px;
+    padding: 0 20px;
+  }
+
+  .sectionHeader h2 {
+    font-size: 2rem;
+  }
+
+  .pageHeading {
+    font-size: 2rem;
+    margin-left: 3%;
+  }
+
+  .faqColumn {
+    flex: 1 1 100%;
+  }
+
+  .largeHeading {
+    font-size: 36px;
+  }
+
+  .recruiterCategory {
+    flex: 1 1 100%;
+  }
+
   .leftHeading {
     font-size: 2rem;
     margin: 2rem 1rem 1.5rem;
@@ -699,13 +795,15 @@
   }
 
   .infoGraphic {
-    grid-template-columns: 1fr 1fr;  /* 2 columns instead of 4 */
+    grid-template-columns: 1fr 1fr;
+    /* 2 columns instead of 4 */
     gap: 1rem;
   }
 
   .infoGraphic li:nth-child(5),
   .infoGraphic li:nth-child(6) {
-    grid-column: auto; /* remove forced desktop positioning */
+    grid-column: auto;
+    /* remove forced desktop positioning */
   }
 
   .number {
@@ -740,7 +838,8 @@
     font-size: 1.3rem;
     top: -1em;
   }
-   .teamMembersSection {
+
+  .teamMembersSection {
     padding: 2rem 1rem;
   }
 
@@ -769,7 +868,8 @@
   .teamMemberRole {
     font-size: 0.85rem;
   }
-   .videoSection {
+
+  .videoSection {
     padding: 2rem 1rem;
   }
 
@@ -799,36 +899,50 @@
     font-size: 0.9rem;
     text-align: center;
   }
+
   .largeHeading {
-  font-size: 1.4em;
-  line-height: 1.1;
-  color: #fff;
-  margin: 0 0 2rem 0;
-}
+    font-size: 1.4em;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 2rem 0;
+  }
 
 }
 
 
 
 @media (max-width: 450px) {
-  .inner article img { height: 250px; }
-  .pageHeading { font-size: 1.8rem; margin-left: 2%; }
-  .number { font-size: 6em; }
-    .infoGraphic {
-    grid-template-columns: 1fr; /* single column stack */
+  .inner article img {
+    height: 250px;
+  }
+
+  .pageHeading {
+    font-size: 1.8rem;
+    margin-left: 2%;
+  }
+
+  .number {
+    font-size: 6em;
+  }
+
+  .infoGraphic {
+    grid-template-columns: 1fr;
+    /* single column stack */
   }
 
   .number {
     font-size: 4.2em;
   }
-/* Recruiters */
-.recruitersSection {
-  background-color: #f0f4f8;
-  padding: 5px;
-  width: 100%;
-  margin: 3rem 0;
-  border-radius: 12px;
-}
+
+  /* Recruiters */
+  .recruitersSection {
+    background-color: #f0f4f8;
+    padding: 5px;
+    width: 100%;
+    margin: 3rem 0;
+    border-radius: 12px;
+  }
+
   .coverWrap {
     width: 10em;
     height: 7em;
@@ -851,7 +965,8 @@
   .content p {
     font-size: 0.8em;
   }
-   .teamMembersGrid {
+
+  .teamMembersGrid {
     grid-template-columns: 1fr;
   }
 
@@ -866,6 +981,7 @@
   .teamMemberRole {
     font-size: 0.8rem;
   }
+
   .videoWrapper iframe,
   .videoWrapper video {
     aspect-ratio: 4 / 3;

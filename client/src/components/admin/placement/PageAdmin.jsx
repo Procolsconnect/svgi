@@ -46,6 +46,7 @@ const RECORDS_CONFIG = {
         ],
         fields: [
             { name: "title", label: "Title", type: "text", required: true },
+            { name: "description", label: "Description", type: "textarea", required: true },
             { name: "image", label: "Image", type: "file", required: true },
         ]
     },
@@ -62,6 +63,9 @@ const RECORDS_CONFIG = {
         fields: [
             { name: "name", label: "Name", type: "text", required: true },
             { name: "designation", label: "Designation", type: "text", required: true },
+            { name: "profile", label: "Profile/Bio", type: "textarea", required: true },
+            { name: "linkedin", label: "LinkedIn URL", type: "text", required: true },
+            { name: "email", label: "Email Address", type: "text", required: true },
             { name: "image", label: "Image", type: "file", required: true },
         ]
     },
@@ -71,11 +75,11 @@ const RECORDS_CONFIG = {
         limit: 50,
         columns: [
             { key: "index", label: "Sr. No." },
-            { key: "category", label: "Category" },
-            { key: "images", label: "Logos", type: "images" },
+            { key: "title", label: "Category" },
+            { key: "companies", label: "Logos", type: "images" },
         ],
         fields: [
-            { name: "category", label: "Category Name", type: "text", required: true },
+            { name: "title", label: "Category Name", type: "text", required: true },
             { name: "images", label: "Company Logos", type: "file", multiple: true, required: true },
         ]
     },
@@ -100,10 +104,10 @@ const RECORDS_CONFIG = {
         limit: 1,
         columns: [
             { key: "index", label: "Sr. No." },
-            { key: "image", label: "Poster/Image" },
+            { key: "video", label: "Video" },
         ],
         fields: [
-            { name: "image", label: "Video Poster", type: "file", required: true },
+            { name: "video", label: "Upload Video", type: "file", required: true },
         ]
     }
 }

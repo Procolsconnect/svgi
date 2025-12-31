@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './PlacementPage.module.css';
+import axios from 'axios';
+
+const apiurl = import.meta.env.VITE_API_URL;
 
 const PlacementPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -7,19 +10,15 @@ const PlacementPage = () => {
   const [activeFAQ, setActiveFAQ] = useState([]);
   const videoRef = useRef(null);
 
-  const slides = [
-    { title: "Malacca", image: "https://farm9.staticflickr.com/8059/28286750501_dcc27b1332_h_d.jpg" },
-    { title: "Cameron Highland", image: "https://farm6.staticflickr.com/5812/23394215774_b76cd33a87_h_d.jpg" },
-    { title: "New Delhi", image: "https://farm8.staticflickr.com/7455/27879053992_ef3f41c4a0_h_d.jpg" },
-    { title: "Ladakh", image: "https://farm8.staticflickr.com/7367/27980898905_72d106e501_h_d.jpg" },
-    { title: "Nubra Valley", image: "https://farm8.staticflickr.com/7356/27980899895_9b6c394fec_h_d.jpg" }
-  ];
-
-  const teamMembers = [
-    { name: "Ahmed Mohammed", role: "Design Director", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" },
-    { name: "Sarah Ali", role: "Frontend Developer", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" },
-    { name: "Khaled Abdullah", role: "Project Manager", image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" }
-  ];
+  // Dynamic states
+  const [heroData, setHeroData] = useState(null);
+  const [slides, setSlides] = useState([]);
+  const [workspace, setWorkspace] = useState([]);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [faqs, setFaqs] = useState([]);
+  const [videoData, setVideoData] = useState(null);
+  const [recruiters, setRecruiters] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const trainingProcess = [
     { number: 1, title: "Develop", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: "📝", color: "#3498db" },
@@ -28,17 +27,6 @@ const PlacementPage = () => {
     { number: 4, title: "Plan", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: "🗺️", color: "#f1c40f" },
     { number: 5, title: "Educate", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: "💡", color: "#e74c3c" },
     { number: 6, title: "Educate", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: "💡", color: "#3498db" }
-  ];
-
-  const faqs = [
-    { question: "Do you work full time as a developer?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consequat neque eu odio convallis, porta consequat erat rhoncus." },
-    { question: "Do you require a deposit before working?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate porttitor lectus, vitae tincidunt dolor eleifend vitae." },
-    { question: "Will I own the website?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sollicitudin eros in finibus posuere." },
-    { question: "Are there other costs involved?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-    { question: "What is hosting? Will I need it?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt diam odio, sit amet tincidunt est tincidunt at." },
-    { question: "Will you work for equity on a new idea I have?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt diam odio, sit amet tincidunt est tincidunt at." },
-    { question: "How much experience do you have?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-    { question: "What if I need changes. Can I edit it myself?", answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt diam odio, sit amet tincidunt est tincidunt at." }
   ];
 
   const handlePrevSlide = () => currentSlide > 0 && setCurrentSlide(currentSlide - 1);
@@ -58,6 +46,35 @@ const PlacementPage = () => {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [heroRes, sliderRes, workspaceRes, teamRes, faqRes, videoRes, recruitersRes] = await Promise.all([
+          axios.get(`${apiurl}/api/placementrecordhero`),
+          axios.get(`${apiurl}/api/placementrecordsslider`),
+          axios.get(`${apiurl}/api/placementrecordsworkspace`),
+          axios.get(`${apiurl}/api/placementrecordsteam`),
+          axios.get(`${apiurl}/api/placement-records-faq`),
+          axios.get(`${apiurl}/api/placement-records-video`),
+          axios.get(`${apiurl}/api/company-category`)
+        ]);
+
+        if (heroRes.data.success && heroRes.data.data.length > 0) setHeroData(heroRes.data.data[0]);
+        if (sliderRes.data.success) setSlides(sliderRes.data.data);
+        if (workspaceRes.data.success) setWorkspace(workspaceRes.data.data);
+        if (teamRes.data.success) setTeamMembers(teamRes.data.data);
+        if (faqRes.data.success) setFaqs(faqRes.data.data);
+        if (videoRes.data.success && videoRes.data.data.length > 0) setVideoData(videoRes.data.data[0]);
+        if (recruitersRes.data.success) setRecruiters(recruitersRes.data.data);
+
+      } catch (error) {
+        console.error("Error fetching PlacementPage dynamic data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
     const handleScroll = () => {
       document.querySelectorAll(`.${styles.animateOnScroll}`).forEach(el => {
         if (el.getBoundingClientRect().top < window.innerHeight / 1.3) {
@@ -71,13 +88,15 @@ const PlacementPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  if (loading) return null;
+
   return (
     <div className={styles.page}>
       {/* Hero Section */}
       <div className={styles.hero}>
-        <img src="hero img.jpg" alt="Hero Background" />
+        <img src={heroData ? heroData.image : "hero img.jpg"} alt="Hero Background" />
         <div className={styles.heroOverlay} />
-        <h1 className={styles.heroTitle}>Placement Records and Highlights</h1>
+        <h1 className={styles.heroTitle}>{heroData ? heroData.title : "Placement Records and Highlights"}</h1>
       </div>
 
       <div className={styles.container}>
@@ -111,16 +130,12 @@ const PlacementPage = () => {
         </div>
 
         <div className={styles.officeGallery}>
-          {[
-            { src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1170&q=80", title: "Collaborative Workspace", desc: "Where creative minds meet to exchange ideas" },
-            { src: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1170&q=80", title: "Brainstorming Sessions", desc: "Where the best creative ideas are born" },
-            { src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1170&q=80", title: "Break Area", desc: "For recharging energy and inspiration" }
-          ].map((item, i) => (
+          {workspace.map((item, i) => (
             <div key={i} className={`${styles.galleryItem} ${styles.animateOnScroll}`}>
-              <img src={item.src} alt={item.title} />
+              <img src={item.image} alt={item.title} />
               <div className={styles.galleryCaption}>
                 <h3>{item.title}</h3>
-                <p>{item.desc}</p>
+                <p>{item.description}</p>
               </div>
             </div>
           ))}
@@ -139,11 +154,12 @@ const PlacementPage = () => {
                 <img src={member.image} alt={member.name} />
               </div>
               <div className={styles.memberSocial}>
-                <a href="#">𝕏</a><a href="#">in</a><a href="#">Be</a><a href="#">Dr</a>
+                <a href={member.linkedin || "#"}>in</a>
+                <a href={member.email ? `mailto:${member.email}` : "#"}>📧</a>
               </div>
               <div className={styles.memberInfo}>
                 <h3>{member.name}</h3>
-                <p>{member.role}</p>
+                <p>{member.designation}</p>
               </div>
             </div>
           ))}
@@ -179,7 +195,7 @@ const PlacementPage = () => {
         <div className={styles.videoSection}>
           <div className={styles.videoContainer}>
             <video ref={videoRef} poster="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1170&q=80" onEnded={handleVideoEnded}>
-              <source src="team-video.mp4" type="video/mp4" />
+              <source src={videoData ? videoData.video : "team-video.mp4"} type="video/mp4" />
               Your browser does not support video playback
             </video>
             <div className={styles.videoOverlay} style={{ opacity: videoPlaying ? 0 : 1, pointerEvents: videoPlaying ? 'none' : 'auto' }}>
@@ -199,32 +215,16 @@ const PlacementPage = () => {
             <p>Leading companies that trust us to deliver top talent</p>
           </div>
           <div className={styles.recruitersGrid}>
-            {/* Example one category – repeat pattern for others */}
-            <div className={styles.recruiterCategory}>
-              <h3>Consulting Companies</h3>
-              <div className={styles.companyGrid}>
-                {['EY', 'McKinsey & Company', 'accenture', 'PwC', 'Deloitte', 'IBM', 'BCG'].map((c, i) => (
-                  <img key={i} src={`https://via.placeholder.com/150x100?text=${c}`} alt={c} />
-                ))}
+            {recruiters.map((category, i) => (
+              <div key={i} className={styles.recruiterCategory}>
+                <h3>{category.title}</h3>
+                <div className={styles.companyGrid}>
+                  {category.companies && category.companies.map((company, j) => (
+                    <img key={j} src={company.image} alt="recruiter logo" />
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className={styles.recruiterCategory}>
-              <h3>Software Companies</h3>
-              <div className={styles.companyGrid}>
-                {['EY', 'McKinsey & Company', 'accenture', 'PwC', 'Deloitte', 'IBM', 'BCG'].map((c, i) => (
-                  <img key={i} src={`https://via.placeholder.com/150x100?text=${c}`} alt={c} />
-                ))}
-              </div>
-            </div>
-            <div className={styles.recruiterCategory}>
-              <h3>Core Companies</h3>
-              <div className={styles.companyGrid}>
-                {['EY', 'McKinsey & Company', 'accenture', 'PwC', 'Deloitte', 'IBM', 'BCG'].map((c, i) => (
-                  <img key={i} src={`https://via.placeholder.com/150x100?text=${c}`} alt={c} />
-                ))}
-              </div>
-            </div>
-            {/* ... repeat other categories with same class names ... */}
+            ))}
           </div>
         </div>
       </div>
@@ -233,10 +233,10 @@ const PlacementPage = () => {
       <section className={styles.mainSection}>
         <div className={styles.faqContainer}>
           <h2 className={styles.lineHeading}>Frequently Asked Questions</h2>
-          <h3 className={styles.largeHeading}>Some of the most common questions asked about Website Design & Development.</h3>
+          <h3 className={styles.largeHeading}>Some of the most common questions asked about Placement.</h3>
           <div className={styles.faqSection}>
             <div className={styles.faqColumn}>
-              {faqs.slice(0, 4).map((faq, i) => (
+              {faqs.slice(0, Math.ceil(faqs.length / 2)).map((faq, i) => (
                 <div key={i}>
                   <button className={`${styles.collapsible} ${activeFAQ.includes(i) ? styles.active : ''}`} onClick={() => toggleFAQ(i)}>
                     {faq.question}
@@ -248,16 +248,19 @@ const PlacementPage = () => {
               ))}
             </div>
             <div className={styles.faqColumn}>
-              {faqs.slice(4, 8).map((faq, i) => (
-                <div key={i + 4}>
-                  <button className={`${styles.collapsible} ${activeFAQ.includes(i + 4) ? styles.active : ''}`} onClick={() => toggleFAQ(i + 4)}>
-                    {faq.question}
-                  </button>
-                  <div className={styles.faqContent} style={{ maxHeight: activeFAQ.includes(i + 4) ? '200px' : '0', margin: activeFAQ.includes(i + 4) ? '12px 0' : '0' }}>
-                    <p>{faq.answer}</p>
+              {faqs.slice(Math.ceil(faqs.length / 2)).map((faq, i) => {
+                const index = i + Math.ceil(faqs.length / 2);
+                return (
+                  <div key={index}>
+                    <button className={`${styles.collapsible} ${activeFAQ.includes(index) ? styles.active : ''}`} onClick={() => toggleFAQ(index)}>
+                      {faq.question}
+                    </button>
+                    <div className={styles.faqContent} style={{ maxHeight: activeFAQ.includes(index) ? '200px' : '0', margin: activeFAQ.includes(index) ? '12px 0' : '0' }}>
+                      <p>{faq.answer}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

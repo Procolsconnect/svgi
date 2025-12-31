@@ -351,6 +351,26 @@
 
 .sk-drawer-content {
     padding: 100px 40px 60px;
+    position: relative;
+}
+
+.sk-drawer-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: var(--sk-white);
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.sk-drawer-close:hover {
+    color: var(--sk-yellow);
 }
 
 .sk-drawer-primary {

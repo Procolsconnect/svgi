@@ -88,7 +88,7 @@ const Header = () => {
     {
       label: "News",
       value: "/news",
-  
+
     },
   ];
 
@@ -204,6 +204,15 @@ const Header = () => {
       {/* Mobile Drawer Overlay */}
       <div className={`${styles['sk-mobile-drawer']} ${isMobileMenuOpen ? styles['is-open'] : ""}`}>
         <div className={styles['sk-drawer-content']}>
+          {/* Add Close Button inside drawer */}
+          <button
+            className={styles['sk-drawer-close']}
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-label="Close Menu"
+          >
+            <X size={30} />
+          </button>
+
           <ul className={styles['sk-drawer-primary']}>
             {primaryNavItems.map((item) => (
               <li key={item.label} className={`${styles['sk-drawer-item']} ${openMobileDropdown === item.label ? styles['is-expanded'] : ""}`}>

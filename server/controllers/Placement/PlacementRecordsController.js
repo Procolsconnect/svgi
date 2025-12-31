@@ -353,7 +353,7 @@ async function deletePlacementRecordsFaqController(req, res) {
 
 async function createPlacementRecordsVideoController(req, res) {
   try {
-    const data = await PlacementRecordsService.createPlacementRecordsVideo(req.body);
+    const data = await PlacementRecordsService.createPlacementRecordsVideo(req.body, req.file);
     res.json({
       success: true,
       message: "PlacementRecordsVideo created successfully",
@@ -409,7 +409,7 @@ async function deletePlacementRecordsVideoController(req, res) {
 }
 
 
- 
+
 module.exports = {
   createPlacementRecordsHeroController,
   getPlacementRecordsHeroController,
@@ -431,7 +431,7 @@ module.exports = {
   getCompanyCategoryController,
   updateCompanyCategoryController,
   deleteCompanyCategoryController,
-   createPlacementRecordsFaqController,
+  createPlacementRecordsFaqController,
   getPlacementRecordsFaqController,
   updatePlacementRecordsFaqController,
   deletePlacementRecordsFaqController,
