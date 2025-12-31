@@ -3,7 +3,7 @@ const { CampusEventGallery } = require("../../models/campus");
 // CREATE
 async function createEventGalleryImage(body, file) {
     const data = {
-        title: body.name,
+        title: body.title,
         image: file?.path || null,
     };
     return await new CampusEventGallery(data).save();

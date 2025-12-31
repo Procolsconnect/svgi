@@ -42,7 +42,7 @@ async function deletePolicyHero(id) {
 async function createPolicyTitle(body) {
     const data = {
         title: body.title,
-        subTitle: body.subtitle,
+        subTitle: body.subTitle,
     };
     return await new PolicyTitle(data).save();
 }
@@ -61,7 +61,7 @@ async function updatePolicyTitle(id, body) {
     const data = await PolicyTitle.findById(id);
     if (!data) throw new Error("Campus Policy Titles not found");
     if (body.title) data.title = body.title;
-    if (body.subTitle) data.subTitle = body.subtitle;
+    if (body.subTitle) data.subTitle = body.subTitle;
     return await data.save();
 }
 
@@ -74,8 +74,8 @@ async function deletePolicyTitle(id) {
 // Cards
 async function createPolicyCard(body, file) {
     const data = {
-        title: body.cardtitle,
-        image: file?.path || body.cardimage,
+        title: body.title,
+        image: file?.path || body.image,
     };
     return await new PolicyCard(data).save();
 }
@@ -96,9 +96,9 @@ async function updatePolicyCard(id, body, file) {
     if (file) {
         hero.image = file.path;
     } else if (body.image) {
-        hero.image = body.cardimage;
+        hero.image = body.image;
     }
-    if (body.title) hero.title = body.cardtitle;
+    if (body.title) hero.title = body.title;
     return await hero.save();
 }
 

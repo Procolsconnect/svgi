@@ -5,6 +5,7 @@ async function createAlumaniStudent(body, file) {
     const data = {
         title: body.title,
         image: file?.path || null,
+        achievement: body.achievement,
     };
     return await new AlumaniStudent(data).save();
 }
@@ -24,10 +25,11 @@ async function getAlumaniStudentById(id) {
 // UPDATE
 async function updateAlumaniStudent(id, body, file) {
     const image = await AlumaniStudent.findById(id);
-    if (!image) throw new Error("Campus Event Gallery Image not found");
+    if (!image) throw new Error("Campus Alumani Student not found");
 
     if (file) image.image = file.path;
     if (body.title) image.title = body.title;
+    if (body.achievement) image.achievement = body.achievement;
 
     return await image.save();
 }

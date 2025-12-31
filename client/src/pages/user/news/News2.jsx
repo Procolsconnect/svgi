@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import styles from './News2.module.css';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
+
+const API_URL = import.meta.env.VITE_API_URL + "/api";
 
 const DownscrollEffect = () => {
   const containerRef = useRef(null);
@@ -13,8 +16,25 @@ const DownscrollEffect = () => {
   const liquidRef = useRef(null);
   const stickSectionRef = useRef(null);
   const reverseScrollRefs = useRef([]);
+  const [sectionData, setSectionData] = useState(null);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/newssection`);
+        if (response.data.success && response.data.data.length > 0) {
+          setSectionData(response.data.data[0]);
+        }
+      } catch (error) {
+        console.error("Error fetching news section data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    // Only run animation if sectionData is loaded or after a timeout to ensure SplitText can find the headings
+    // However, since some content is static, we can run it on mount
     const ctx = gsap.context(() => {
       // Text reveal in black section
       if (opacityRevealRef.current) {
@@ -81,7 +101,7 @@ const DownscrollEffect = () => {
     return () => {
       ctx.revert();
     };
-  }, []);
+  }, [sectionData]); // Rerun when data arrives
 
   const addToReverseScrollRefs = (el) => {
     if (el && !reverseScrollRefs.current.includes(el)) {
@@ -97,12 +117,12 @@ const DownscrollEffect = () => {
           <div className={styles['ds-section-content']}>
             {/* Left Text */}
             <div ref={addToReverseScrollRefs} className={styles['ds-reverse-scroll']}>
-              <h1 className={styles['ds-heading']}>behind<br />curtain</h1>
+              <h1 className={styles['ds-heading']} dangerouslySetInnerHTML={{ __html: sectionData?.title?.replace(' ', '<br />') || "behind<br />curtain" }}></h1>
               <p className={styles['ds-paragraph-top']}>
-                She tried the little golden key in the lock, and to her great delight it fitted !
+                {sectionData?.description ? sectionData.description.split('.')[0] + '.' : "She tried the little golden key in the lock, and to her great delight it fitted !"}
               </p>
               <p className={styles['ds-paragraph']}>
-                Alice opened the door and found that it led into a small passage
+                {sectionData?.description ? sectionData.description.split('.').slice(1).join('.') : "Alice opened the door and found that it led into a small passage"}
               </p>
             </div>
 
@@ -111,8 +131,8 @@ const DownscrollEffect = () => {
               <img
                 ref={addToReverseScrollRefs}
                 className={`${styles['ds-reverse-scroll']} ${styles['ds-image']}`}
-                src="https://assets.codepen.io/204808/alice-curtain.jpg"
-                alt="Alice behind curtain"
+                src={sectionData?.image || "https://assets.codepen.io/204808/alice-curtain.jpg"}
+                alt="Section Image"
               />
             </div>
           </div>

@@ -164,11 +164,16 @@ const SECTION_CONFIG = {
     limit: 1,
     columns: [
       { key: "index", label: "Sr. No." },
+      { key: "title", label: "Title" },
+      { key: "since", label: "Since" },
       { key: "imagesCard", label: "Images" },
       { key: "videosCard", label: "Videos" },
       { key: "toursCard", label: "Tours" },
     ],
     fields: [
+      { name: "title", label: "Section Title", type: "text", required: true },
+      { name: "description", label: "Section Description", type: "textarea", required: true },
+      { name: "since", label: "Since Year", type: "text", required: true },
       { name: "images", label: "Infrastructure Images (Max 5)", type: "file", multiple: true, required: true },
       { name: "video", label: "Infrastructure Video", type: "file", required: true },
       { name: "image", label: "360 Tour Image/Banner", type: "file", required: true },

@@ -76,12 +76,24 @@
 }
 
 @keyframes sports__underline-pulse {
-  0%, 100% { transform: scaleX(1); opacity: 0.8; }
-  50% { transform: scaleX(1.4); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {
-  .sports__hero-title { font-size: 36px; padding: 0 20px; }
+  .sports__hero-title {
+    font-size: 36px;
+    padding: 0 20px;
+  }
 }
 
 .sports__section {
@@ -90,7 +102,10 @@
   display: flex
 }
 
-.sports__left-content { flex: 1; max-width: 550px; }
+.sports__left-content {
+  flex: 1;
+  max-width: 550px;
+}
 
 
 
@@ -105,7 +120,7 @@
 
 .sports__right-side img {
   width: 400px;
-  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
   transition: transform 0.4s ease;
 }
 
@@ -114,13 +129,19 @@
 }
 
 @media (max-width: 900px) {
-  .sports__section { flex-direction: column; text-align: center; }
-  .sports__right-side img { width: 300px; }
+  .sports__section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sports__right-side img {
+    width: 300px;
+  }
 }
 
 /* BOUNCING BALL HEADER */
 .sports__media-banner {
- 
+
   background: #fff;
   text-align: center;
 }
@@ -155,7 +176,7 @@
 .sports__word.sports__lit {
   opacity: 1;
   color: #0e0739;
-  text-shadow: 0 0 10px rgba(9,11,52,0.6);
+  text-shadow: 0 0 10px rgba(9, 11, 52, 0.6);
 }
 
 .sports__cloned {
@@ -303,15 +324,19 @@
     text-align: center;
     padding: 40px 20px;
   }
+
   .sports__podium-left-content {
     order: 2;
   }
+
   .sports__right-podium {
     order: 1;
   }
+
   .sports__podium-left-content h1 {
     font-size: 50px;
   }
+
   .sports__podium-left-content p {
     font-size: 16px;
   }
@@ -461,19 +486,23 @@
 }
 
 .sports__slider {
-  flex: 1.1;
+  flex: 1.5;
+  /* Increased to allow larger images */
   position: relative;
   overflow: hidden;
-  border-radius: 4px;
-  height: 420px;
+  border-radius: 0;
+  /* Removed border radius */
+  height: 550px;
+  /* Increased height for larger images */
   display: flex;
-  align-items: center;
+  align-items: stretch;
 }
 
 .sports__slide-track {
   display: flex;
-  width: calc(300px * 8);
-  animation: sports__scroll 30s linear infinite;
+  gap: 25px;
+  /* Added gap between images */
+  animation: sports__scroll 40s linear infinite;
 }
 
 .sports__slide-track:hover {
@@ -482,8 +511,10 @@
 
 .sports__slide {
   flex: 0 0 auto;
-  width: 300px;
+  width: 450px;
+  /* Increased width */
   height: 100%;
+  border-radius: 0;
 }
 
 .sports__slide img {
@@ -496,6 +527,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -503,6 +535,7 @@
 
 .sports__right-box {
   flex: 1;
+  /* Keeps its relative size */
   background: #002147;
   color: #fff;
   padding: 40px 50px;
@@ -510,7 +543,8 @@
   align-items: center;
   font-size: 1rem;
   line-height: 1.9;
-  border-radius: 4px;
+  border-radius: 0;
+  /* Removed border radius */
 }
 
 .sports__right-box p {
@@ -522,9 +556,11 @@
   .sports__content-wrapper {
     flex-direction: column;
   }
+
   .sports__slider {
     height: 300px;
   }
+
   .sports__right-box {
     padding: 25px;
   }
@@ -653,18 +689,19 @@
   .sports__cards-container {
     grid-template-columns: 1fr;
   }
+
   .sports__section {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 80px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  position: relative;
-  z-index: 0;
-}
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    z-index: 0;
+  }
 
 }
 
@@ -722,10 +759,11 @@
   fill: white;
 }
 
-.sports__video-header svg > rect {
+.sports__video-header svg>rect {
   -webkit-mask: url(#sports__mask);
   mask: url(#sports__mask);
 }
+
 /* Mask the video itself */
 .sports__video-header video {
   -webkit-mask: url(#sports__mask);
@@ -766,13 +804,16 @@
     flex-direction: column;
     text-align: center;
   }
+
   .sports__right-side img {
     width: 300px;
     transform: none;
   }
+
   .sports__left-content {
     max-width: 100%;
   }
+
   .sports__description {
     text-align: center;
   }

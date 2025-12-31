@@ -1,13 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef ,useCallback} from 'react';
+import axios from 'axios';
 import styles from './Overview.module.css';
 import Arrow from '../../../components/Arrow';
 
+const API_BASE = import.meta.env.VITE_API_URL + "/api";
+
+const positions = [
+  { height: 310, z: 220, rotateY: 48, y: 0, clip: "polygon(0px 0px, 100% 10%, 100% 90%, 0px 100%)" },
+  { height: 290, z: 165, rotateY: 35, y: 0, clip: "polygon(0px 0px, 100% 8%, 100% 92%, 0px 100%)" },
+  { height: 248, z: 110, rotateY: 15, y: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
+  { height: 210, z: 66, rotateY: 15, y: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
+  { height: 177, z: 46, rotateY: 6, y: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
+  { height: 155, z: 0, rotateY: 0, y: 0, clip: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" },
+  { height: 177, z: 54, rotateY: 348, y: 0, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
+  { height: 210, z: 89, rotateY: -15, y: 0, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
+  { height: 248, z: 135, rotateY: -15, y: 1, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
+  { height: 290, z: 195, rotateY: 325, y: 0, clip: "polygon(0px 8%, 100% 0px, 100% 100%, 0px 92%)" },
+  { height: 310, z: 240, rotateY: 312, y: 0, clip: "polygon(0px 10%, 100% 0px, 100% 100%, 0px 90%)" }
+];
+
 const TrainingPlacementsPage = () => {
-  const [scrollClicked, setScrollClicked] = useState(false);
-  const [scrollRotate, setScrollRotate] = useState(false);
-  const [currentSection, setCurrentSection] = useState(0);
+  const [hero, setHero] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
-  const [dragDistance, setDragDistance] = useState(0);
   const [startX, setStartX] = useState(0);
   const [expandedCard, setExpandedCard] = useState(null);
   const [cardInfo, setCardInfo] = useState({ title: '', desc: '' });
@@ -21,46 +36,39 @@ const TrainingPlacementsPage = () => {
   const trackRef = useRef(null);
   const sectionsRef = useRef([]);
 
-  const cardData = [
-    { title: "Beverage Branding", desc: "Fresh and vibrant packaging design for premium juice products with natural ingredients", image: "https://images.unsplash.com/photo-1546548970-71785318a17b?w=600&h=800&fit=crop" },
-    { title: "Apparel Design", desc: "Minimalist fashion collection with sustainable materials and modern aesthetics", image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=800&fit=crop" },
-    { title: "Luxury Packaging", desc: "Premium product packaging with attention to detail and sophisticated finishes", image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=800&fit=crop" },
-    { title: "Cosmetics Brand", desc: "Clean beauty brand identity with elegant and timeless design approach", image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&h=800&fit=crop" },
-    { title: "Fashion Editorial", desc: "Editorial photography and art direction for contemporary fashion magazine", image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&h=800&fit=crop" },
-    { title: "Botanical Series", desc: "Natural product line with organic ingredients and eco-friendly packaging", image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&h=800&fit=crop" },
-    { title: "Product Photography", desc: "Professional product photography with creative lighting and composition", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=800&fit=crop" },
-    { title: "Streetwear Brand", desc: "Urban fashion line with bold graphics and contemporary street style", image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&h=800&fit=crop" },
-    { title: "Tech Accessories", desc: "Minimalist tech product design with user-centered functionality", image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&h=800&fit=crop" },
-    { title: "Wellness Products", desc: "Holistic wellness brand with natural and calming visual identity", image: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=600&h=800&fit=crop" },
-    { title: "Home Decor", desc: "Contemporary home accessories with Scandinavian design influence", image: "https://images.unsplash.com/photo-1564584217132-2271feaeb3c5?w=600&h=800&fit=crop" }
-  ];
-
-  const positions = [
-    { height: 310, z: 220, rotateY: 48, y: 0, clip: "polygon(0px 0px, 100% 10%, 100% 90%, 0px 100%)" },
-    { height: 290, z: 165, rotateY: 35, y: 0, clip: "polygon(0px 0px, 100% 8%, 100% 92%, 0px 100%)" },
-    { height: 248, z: 110, rotateY: 15, y: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
-    { height: 210, z: 66, rotateY: 15, y: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
-    { height: 177, z: 46, rotateY: 6, y: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
-    { height: 155, z: 0, rotateY: 0, y: 0, clip: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" },
-    { height: 177, z: 54, rotateY: 348, y: 0, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
-    { height: 210, z: 89, rotateY: -15, y: 0, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
-    { height: 248, z: 135, rotateY: -15, y: 1, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
-    { height: 290, z: 195, rotateY: 325, y: 0, clip: "polygon(0px 8%, 100% 0px, 100% 100%, 0px 92%)" },
-    { height: 310, z: 240, rotateY: 312, y: 0, clip: "polygon(0px 10%, 100% 0px, 100% 100%, 0px 90%)" }
-  ];
-
   useEffect(() => {
-    setCards(cardData);
+    const fetchContent = async () => {
+      try {
+        const [heroRes, sliderRes] = await Promise.all([
+          axios.get(`${API_BASE}/placementhero`),
+          axios.get(`${API_BASE}/placementslider`)
+        ]);
+
+        if (heroRes.data.data && heroRes.data.data.length > 0) {
+          setHero(heroRes.data.data[0]);
+        }
+
+        if (sliderRes.data.data) {
+          setCards(sliderRes.data.data);
+        }
+      } catch (err) {
+        console.error("Error fetching Training Overview data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchContent();
   }, []);
 
 
-  
-  const rotateSlider = (direction) => {
+
+  const rotateSlider = useCallback((direction) => {
     if (expandedCard !== null) return;
 
     setCards(prevCards => {
       const newCards = [...prevCards];
-      if (direction === 'next' || direction === 'prev') {
+      if (direction === 'next') {
         const first = newCards.shift();
         newCards.push(first);
       } else {
@@ -69,10 +77,15 @@ const TrainingPlacementsPage = () => {
       }
       return newCards;
     });
-  };
+  }, [expandedCard]);
 
-  const handleCardClick = (index) => {
+  const handleCardClick = useCallback((index) => {
     if (isDragging || expandedCard !== null) return;
+
+    const displayCardsCount = Math.min(cards.length, 11);
+    const startPos = Math.max(0, Math.floor((11 - displayCardsCount) / 2));
+    const cardsArrayIndex = index - startPos;
+    if (cardsArrayIndex < 0 || cardsArrayIndex >= cards.length) return;
 
     const cardEl = cardsRef.current[index];
     if (!cardEl) return;
@@ -80,7 +93,6 @@ const TrainingPlacementsPage = () => {
     const rect = cardEl.getBoundingClientRect();
     const pos = positions[index] || positions[5];
 
-    // Set initial clone style to match the card's current position and size
     setCloneStyle({
       position: 'fixed',
       top: rect.top,
@@ -89,14 +101,13 @@ const TrainingPlacementsPage = () => {
       height: rect.height,
       clipPath: pos.clip,
       transform: 'none',
-      transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      transition: 'all 0.6s cubic-bezier(0.2, 1, 0.3, 1)',
       zIndex: 1000,
       margin: 0,
     });
 
     setExpandedCard(index);
 
-    // Trigger animation to center
     setTimeout(() => {
       const maxHeight = window.innerHeight * 0.8;
       const finalWidth = 500;
@@ -114,13 +125,13 @@ const TrainingPlacementsPage = () => {
       }));
 
       setCardInfo({
-        title: cards[index].title,
-        desc: cards[index].desc
+        title: cards[cardsArrayIndex].title,
+        desc: cards[cardsArrayIndex].description || cards[cardsArrayIndex].desc
       });
-    }, 20);
-  };
+    }, 50);
+  }, [isDragging, expandedCard, cards]);
 
-  const closeCard = () => {
+  const closeCard = useCallback(() => {
     if (expandedCard === null) return;
 
     const index = expandedCard;
@@ -145,26 +156,23 @@ const TrainingPlacementsPage = () => {
     setTimeout(() => {
       setExpandedCard(null);
       setCloneStyle(null);
-    }, 800);
-  };
+    }, 600);
+  }, [expandedCard]);
 
-  const handleDragStart = (e) => {
+  const handleDragStart = useCallback((e) => {
     if (expandedCard !== null) return;
     setIsDragging(true);
     const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
     setStartX(clientX);
-    setDragDistance(0);
     setProcessedSteps(0);
-  };
+  }, [expandedCard]);
 
-  const handleDragMove = (e) => {
+  const handleDragMove = useCallback((e) => {
     if (!isDragging) return;
 
     const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
     const distance = clientX - startX;
-    setDragDistance(distance);
-
-    const threshold = 60;
+    const threshold = 40;
     const steps = Math.floor(Math.abs(distance) / threshold);
 
     if (steps > processedSteps) {
@@ -172,13 +180,12 @@ const TrainingPlacementsPage = () => {
       rotateSlider(direction);
       setProcessedSteps(steps);
     }
-  };
+  }, [isDragging, startX, processedSteps, rotateSlider]);
 
-  const handleDragEnd = () => {
+  const handleDragEnd = useCallback(() => {
     setIsDragging(false);
-    setDragDistance(0);
     setProcessedSteps(0);
-  };
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -193,16 +200,49 @@ const TrainingPlacementsPage = () => {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [expandedCard]);
+  }, [expandedCard, closeCard, rotateSlider]);
+
+  if (loading) return null; // Return null or a subtle loader to prevent design jump
+
+  // Calculate mapping to center cards in the 11 positions
+  const renderCards = () => {
+    const totalSlots = 11;
+    const displayCount = Math.min(cards.length, totalSlots);
+    const startPos = Math.floor((totalSlots - displayCount) / 2);
+
+    return cards.slice(0, displayCount).map((card, i) => {
+      const positionIndex = startPos + i;
+      const pos = positions[positionIndex] || positions[5];
+      return (
+        <div
+          key={card._id || card.title || i}
+          ref={el => cardsRef.current[positionIndex] = el}
+          className={`${styles.card} ${expandedCard === positionIndex ? styles.expanded : ''}`}
+          style={{
+            height: `${pos.height}px`,
+            clipPath: pos.clip,
+            transform: `translateZ(${pos.z}px) rotateY(${pos.rotateY}deg) translateY(${pos.y}px)`,
+            transition: isDragging ? 'none' : 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)'
+          }}
+          onClick={() => handleCardClick(positionIndex)}
+        >
+          <img src={card.image} alt={card.title} />
+          <div className={styles.hoverOverlay}>
+            <span>Click to see more</span>
+          </div>
+        </div>
+      );
+    });
+  };
 
   return (
     <div className={styles.page}>
       {/* Hero Section */}
       <div className={styles.hero}>
-        <img src="hero img.jpg" alt="Hero Background" />
+        <img src={hero?.image || "hero img.jpg"} alt="Hero Background" />
         <div className={styles.heroOverlay} />
-        <h1 className={styles.heroTitle}>Training & Placements</h1>
-             <Arrow sectionsSelector="section" />
+        <h1 className={styles.heroTitle}>{hero?.title || "Training & Placements"}</h1>
+        <Arrow sectionsSelector="section" />
       </div>
 
 
@@ -252,28 +292,7 @@ const TrainingPlacementsPage = () => {
           onTouchEnd={handleDragEnd}
         >
           <div className={`${styles.sliderTrack} ${expandedCard !== null ? styles.blurred : ''}`} ref={trackRef}>
-            {cards.map((card, index) => {
-              const pos = positions[index] || positions[5];
-              return (
-                <div
-                  key={card.title}
-                  ref={el => cardsRef.current[index] = el}
-                  className={`${styles.card} ${expandedCard === index ? styles.expanded : ''}`}
-                  style={{
-                    height: `${pos.height}px`,
-                    clipPath: pos.clip,
-                    transform: `translateZ(${pos.z}px) rotateY(${pos.rotateY}deg) translateY(${pos.y}px)`,
-                    transition: 'all 0.5s ease'
-                  }}
-                  onClick={() => handleCardClick(index)}
-                >
-                  <img src={card.image} alt={card.title} />
-                  <div className={styles.hoverOverlay}>
-                    <span>Click to see more</span>
-                  </div>
-                </div>
-              );
-            })}
+            {renderCards()}
           </div>
         </div>
 
@@ -286,18 +305,24 @@ const TrainingPlacementsPage = () => {
           </svg>
         </button>
 
-        {expandedCard !== null && cloneStyle && (
-          <div
-            className={styles.card}
-            style={cloneStyle}
-          >
-            <img
-              src={cards[expandedCard].image}
-              alt={cards[expandedCard].title}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            />
-          </div>
-        )}
+        {expandedCard !== null && cloneStyle && (() => {
+          const displayCount = Math.min(cards.length, 11);
+          const startPos = Math.floor((11 - displayCount) / 2);
+          const dataIndex = expandedCard - startPos;
+          const cardData = cards[dataIndex];
+
+          return (
+            <div className={styles.card} style={cloneStyle}>
+              {cardData && (
+                <img
+                  src={cardData.image}
+                  alt={cardData.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              )}
+            </div>
+          );
+        })()}
         <div className={`${styles.cardInfo} ${expandedCard !== null ? styles.visible : ''}`}>
           <h2>{cardInfo.title}</h2>
           <p>{cardInfo.desc}</p>
@@ -310,7 +335,7 @@ const TrainingPlacementsPage = () => {
           <div className={styles.leftContent}>
             <h2>Placement Training</h2>
             <p>
-            Training & Placement cell, which is a unit of Career Development Centre, plays a predominant role in shaping up the career goals of students. Its primary objective is to assist students in making and implementing informed educational and occupational choices. The concept of career Counselling & Higher Education should be explicitly presented to students early in their university lives. It also aims to empower students through career counselling services, so that they could act responsibly when career-related concerns arise during the course of their entire program or course.
+              Training & Placement cell, which is a unit of Career Development Centre, plays a predominant role in shaping up the career goals of students. Its primary objective is to assist students in making and implementing informed educational and occupational choices. The concept of career Counselling & Higher Education should be explicitly presented to students early in their university lives. It also aims to empower students through career counselling services, so that they could act responsibly when career-related concerns arise during the course of their entire program or course.
             </p>
           </div>
 

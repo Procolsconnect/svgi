@@ -346,6 +346,7 @@ module.exports = function campusRoutes(app) {
     // CAMPUS HOSTEL FAQ API
     app.post(
         "/api/campus/hostelfaq",
+        upload.none(),
         validate(campusSchemas.createHostelFaqSchema),
         campusHostel.createHostelFaq
     );
@@ -362,6 +363,7 @@ module.exports = function campusRoutes(app) {
 
     app.put(
         "/api/campus/hostelfaq/:id",
+        upload.none(),
         validate(campusSchemas.updateHostelFaqSchema),
         campusHostel.updateHostelFaq
     );
@@ -612,6 +614,7 @@ module.exports = function campusRoutes(app) {
     // WelfareBouncerTitle
     app.post(
         "/api/campus/bouncertitle",
+        upload.none(),
         Welfare.createBouncerTitle
     );
 
@@ -639,7 +642,7 @@ module.exports = function campusRoutes(app) {
     // Fancy Text
     app.post(
         "/api/campus/fancytext",
-        upload.single("image"),
+        upload.none(),
         Welfare.createFancyText
     );
 
@@ -655,7 +658,7 @@ module.exports = function campusRoutes(app) {
 
     app.put(
         "/api/campus/fancytext/:id",
-        upload.single("image"),
+        upload.none(),
         Welfare.updateFancyText
     );
 
@@ -724,7 +727,7 @@ module.exports = function campusRoutes(app) {
     // Policy-Title
     app.post(
         "/api/campus/policytitle",
-        upload.single("image"),
+        upload.none(),
         policy.createPolicyTitle
     );
 
@@ -740,7 +743,7 @@ module.exports = function campusRoutes(app) {
 
     app.put(
         "/api/campus/policytitle/:id",
-        upload.single("image"),
+        upload.none(),
         policy.updatePolicyTitle
     );
 

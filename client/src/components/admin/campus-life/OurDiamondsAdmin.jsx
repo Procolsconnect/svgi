@@ -14,12 +14,12 @@ const DIAMOND_CONFIG = {
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Name" },
-            { key: "description", label: "Achievement" },
+            { key: "achievement", label: "Achievement" },
             { key: "image", label: "Image" },
         ],
         fields: [
             { name: "title", label: "Student Name", type: "text", required: true },
-            { name: "description", label: "Achievement Details", type: "textarea", required: true },
+            { name: "achievement", label: "Achievement Details", type: "textarea", required: true },
             { name: "image", label: "Image", type: "file", required: true },
         ]
     }

@@ -28,11 +28,11 @@ const POLICIES_CONFIG = {
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Title" },
-            { key: "description", label: "Description" },
+            { key: "subTitle", label: "SubTitle" },
         ],
         fields: [
             { name: "title", label: "Title", type: "text", required: true },
-            { name: "description", label: "Description", type: "textarea", required: true },
+            { name: "subTitle", label: "SubTitle", type: "textarea", required: true },
         ]
     },
     "cards": {
@@ -42,12 +42,10 @@ const POLICIES_CONFIG = {
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Title" },
-            { key: "description", label: "Description" },
             { key: "image", label: "Icon/Image" },
         ],
         fields: [
             { name: "title", label: "Title", type: "text", required: true },
-            { name: "description", label: "Description", type: "textarea", required: true },
             { name: "image", label: "Icon Image", type: "file", required: true },
         ]
     }

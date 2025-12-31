@@ -17,13 +17,16 @@ const HorizontalScrollGallery = () => {
   const stripRef = useRef(null);
   const wrapperRef = useRef(null);
   const [projectImages, setProjectImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     axios.get(`${apiurl}/api/campus/eventgallery`)
       .then(res => {
-        setProjectImages(res.data.data.map(img => img.image));
+        setProjectImages(res.data.data);
       })
-      .catch(err => console.error('Error loading event images:', err));
+      .catch(err => console.error('Error loading event images:', err))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -90,48 +93,56 @@ const HorizontalScrollGallery = () => {
       <section className={`${styles.portfolio} ${styles.desktopOnly}`} ref={wrapperRef}>
         <div className={styles.galleryWrapper}>
           <div className={styles.galleryStrip} ref={stripRef}>
-            {projectImages.map((imgSrc, index) => (
-              <div key={index} className={styles.projectWrap}>
-                <img
-                  src={imgSrc}
-                  alt={`Campus event ${index + 1}`}
-                  loading="lazy"
-                />
-              </div>
-            ))}
+            {projectImages.length > 0 ? (
+              projectImages.map((item, index) => (
+                <div key={index} className={styles.projectWrap}>
+                  <img
+                    src={item.image}
+                    alt={item.title || `Campus event ${index + 1}`}
+                    loading="lazy"
+                  />
+                </div>
+              ))
+            ) : !loading && (
+              <p className={styles.noData}>No event images found.</p>
+            )}
           </div>
         </div>
       </section>
 
       {/* Mobile Gallery (Swiper) */}
       <section className={styles.mobileOnly}>
-        <Swiper
-          effect={'coverflow'}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={'auto'}
-          coverflowEffect={{
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          pagination={true}
-          modules={[EffectCoverflow, Pagination, Autoplay]}
-          className={styles.swiperContainer}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          loop={true}
-        >
-          {projectImages.map((imgSrc, index) => (
-            <SwiperSlide key={index} className={styles.swiperSlide}>
-              <img src={imgSrc} alt={`Mobile event ${index + 1}`} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {projectImages.length > 0 ? (
+          <Swiper
+            effect={'coverflow'}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={'auto'}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            pagination={true}
+            modules={[EffectCoverflow, Pagination, Autoplay]}
+            className={styles.swiperContainer}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            loop={true}
+          >
+            {projectImages.map((item, index) => (
+              <SwiperSlide key={index} className={styles.swiperSlide}>
+                <img src={item.image} alt={item.title || `Mobile event ${index + 1}`} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : !loading && (
+          <p className={styles.noData}>No event images found.</p>
+        )}
       </section>
     </div>
   );

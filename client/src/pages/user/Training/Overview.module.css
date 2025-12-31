@@ -389,6 +389,7 @@
   min-width: 375px;
   border-radius: 12px;
 }
+
 .sliderContainer.dragging .card {
   transform: translateZ(var(--z, 0px)) translateY(var(--y, 0px)) !important;
   rotate: 0deg !important;
@@ -398,6 +399,7 @@
 .sliderContainer.dragging .sliderTrack {
   transform: translateZ(0) !important;
 }
+
 .cardInfo.visible {
   opacity: 1;
   pointer-events: all;
@@ -418,7 +420,7 @@
 
 .closeBtn {
   position: fixed;
-  top: 15%;
+  top: 25%;
   right: 20%;
   width: 60px;
   height: 60px;
@@ -429,7 +431,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 1002;
+  z-index: 2000;
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease;
@@ -478,11 +480,11 @@
   color: #0a1a5c;
   padding: 40px 20px;
   display: flex;
-height: 100vh;
+  height: 100vh;
 }
 
 .placementContainer {
-height: 100vh;
+  height: 100vh;
 
   display: flex;
   align-items: center;
@@ -524,8 +526,7 @@ height: 100vh;
   justify-content: center;
   overflow: visible;
   perspective: 1200px;
-  left:20px
-
+  left: 20px
 }
 
 .centerCircle {
@@ -972,13 +973,14 @@ height: 100vh;
     grid-template-columns: 1fr;
     gap: 25px;
   }
+
   .leftContent p {
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: #333;
-  max-width: 100%;
-  text-align: justify;
-}
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #333;
+    max-width: 100%;
+    text-align: justify;
+  }
 }
 
 @media (max-width: 700px) {

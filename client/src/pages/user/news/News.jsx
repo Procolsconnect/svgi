@@ -10,14 +10,14 @@ import Milo from './Milo'
 const News = () => {
   return (
     <div>
-        <Newshero/>
-        <Ranking/>
-        <News2/>
-        <Milo/>
-        <News3/>
-        <News4/>
-        <SvgiNews/> 
-        <SocialIcons/>
+      <Newshero />
+      <Ranking />
+      <News2 />
+      <Milo />
+      <News3 />
+      <News4 />
+      <SvgiNews />
+      <SocialIcons />
     </div>
   )
 }

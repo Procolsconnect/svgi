@@ -1,14 +1,18 @@
-import React, { useRef, useEffect } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import styles from './policies.module.css';
 
-const PolicyCard = ({ index, text, tiltEffect }) => {
+const API_BASE = import.meta.env.VITE_API_URL + '/api/campus';
+
+const PolicyCard = ({ index, text, image, tiltEffect }) => {
   const wrapRef = useRef(null);
   const cardRef = useRef(null);
 
   useEffect(() => {
     const wrap = wrapRef.current;
     const card = cardRef.current;
+    if (!wrap || !card) return;
+
     const handleMouseMove = (event) => {
       const rect = wrap.getBoundingClientRect();
       const w = rect.width;
@@ -23,6 +27,8 @@ const PolicyCard = ({ index, text, tiltEffect }) => {
       } else if (tiltEffect === 'normal') {
         X = (-(offsetX - w / 2) / 3) / 3;
         Y = ((offsetY - h / 2) / 3) / 3;
+      } else {
+        X = 0; Y = 0;
       }
 
       card.style.setProperty('--rY', X.toFixed(2));
@@ -34,7 +40,6 @@ const PolicyCard = ({ index, text, tiltEffect }) => {
     };
 
     const handleMouseEnter = () => {
-      // Use styles.cardActive for the hashed class name
       card.classList.add(styles.cardActive);
     };
 
@@ -60,12 +65,17 @@ const PolicyCard = ({ index, text, tiltEffect }) => {
   }, [tiltEffect]);
 
   // Compose dynamic classes using styles object
-  const cardClass = `${styles.card} ${index === 2 ? styles.card2 : index === 3 ? styles.card3 : ''
-    }`;
+  const cardClass = `${styles.card} ${index === 2 ? styles.card2 : index === 3 ? styles.card3 : ''}`;
 
   return (
     <div ref={wrapRef} className={styles.wrap}>
-      <div ref={cardRef} className={cardClass}>
+      <div
+        ref={cardRef}
+        className={cardClass}
+        style={{
+          backgroundImage: `linear-gradient(hsla(0, 0%, 100%, 0.1), hsla(0, 0%, 100%, 0.1)), url("${image || 'https://images.unsplash.com/photo-1559113513-d5e09c78b9dd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max'}")`
+        }}
+      >
         <p className={styles.cardText}>{text}</p>
       </div>
     </div>
@@ -73,11 +83,35 @@ const PolicyCard = ({ index, text, tiltEffect }) => {
 };
 
 export default function PolicyCards() {
-  const policies = [
-    { id: 1, text: '1. Equity, Diversity and Inclusion Policy', tilt: 'reverse' },
-    { id: 2, text: '2. Anti Corruption and Anti Bribery Policy', tilt: 'normal' },
-    { id: 3, text: '3. Establishing an Ethical Ambience in the Institution', tilt: 'reverse' }
-  ];
+  const [hero, setHero] = useState(null);
+  const [titleData, setTitleData] = useState(null);
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [heroRes, titleRes, cardRes] = await Promise.all([
+          axios.get(`${API_BASE}/policyhero`),
+          axios.get(`${API_BASE}/policytitle`),
+          axios.get(`${API_BASE}/policycard`)
+        ]);
+
+        if (heroRes.data.success && heroRes.data.data.length > 0) {
+          setHero(heroRes.data.data[0]);
+        }
+        if (titleRes.data.success && titleRes.data.data.length > 0) {
+          setTitleData(titleRes.data.data[0]);
+        }
+        setCards(cardRes.data.data || []);
+      } catch (err) {
+        console.error("Error fetching policy data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -91,33 +125,50 @@ export default function PolicyCards() {
           {/* Hero Section */}
           <div className={styles.hero}>
             <img
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200"
-              alt="Hero Background"
+              src={hero?.image || "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200"}
+              alt={hero?.title || "Hero Background"}
               className={styles.heroImg}
             />
             <div className={styles.heroOverlay} />
             <div className={styles.heroTitle}>
-              SVGI Policies
+              {hero?.title || "SVGI Policies"}
               <div className={styles.heroUnderline} />
             </div>
           </div>
 
           {/* Section Heading */}
           <div className={styles.sectionHeadingWrapper}>
-            <h1 className={styles.sectionTitle}>Policies on Core Values</h1>
-            <p className={styles.sectionSubtitle}>Hover over the cards</p>
+            <h1 className={styles.sectionTitle}>{titleData?.title || "Policies on Core Values"}</h1>
+            <p className={styles.sectionSubtitle}>{titleData?.subTitle || "Hover over the cards"}</p>
           </div>
 
           {/* Cards */}
           <section className={styles.main}>
-            {policies.map((policy) => (
-              <PolicyCard
-                key={policy.id}
-                index={policy.id}
-                text={policy.text}
-                tiltEffect={policy.tilt}
-              />
-            ))}
+            {cards.length > 0 ? (
+              cards.map((policy, idx) => (
+                <PolicyCard
+                  key={policy._id || idx}
+                  index={idx + 1}
+                  text={`${idx + 1}. ${policy.title}`}
+                  image={policy.image}
+                  tiltEffect={idx % 2 === 0 ? 'reverse' : 'normal'}
+                />
+              ))
+            ) : !loading && (
+              /* Fallback cards */
+              [
+                { id: 1, text: '1. Equity, Diversity and Inclusion Policy', tilt: 'reverse' },
+                { id: 2, text: '2. Anti Corruption and Anti Bribery Policy', tilt: 'normal' },
+                { id: 3, text: '3. Establishing an Ethical Ambience in the Institution', tilt: 'reverse' }
+              ].map((p) => (
+                <PolicyCard
+                  key={p.id}
+                  index={p.id}
+                  text={p.text}
+                  tiltEffect={p.tilt}
+                />
+              ))
+            )}
           </section>
         </div>
       </div>

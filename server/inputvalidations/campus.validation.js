@@ -29,9 +29,11 @@ const updateSportsCardSchema = Joi.object({
 // Sports Acheivement
 const createSportsAcheivementSchema = Joi.object({
     title: Joi.string().trim().min(1).max(255).required(),
+    description: Joi.string().trim().min(1).required(),
 });
 const updateSportsAcheivementSchema = Joi.object({
     title: Joi.string().trim().min(1).max(255).optional(),
+    description: Joi.string().trim().min(1).optional(),
 });
 
 // Sports Video: allow either uploaded file (handled by multer) or video_url in body
@@ -46,10 +48,12 @@ const updateSportsVideoSchema = Joi.object({
 
 // Sports Athelets
 const createSportsAtheletSchema = Joi.object({
-    title: Joi.string().trim().min(1).max(255).required(),
+    name: Joi.string().trim().min(1).max(255).required(),
+    achievement: Joi.string().trim().min(1).required(),
 });
 const updateSportsAtheletSchema = Joi.object({
-    title: Joi.string().trim().min(1).max(255).optional(),
+    name: Joi.string().trim().min(1).max(255).optional(),
+    achievement: Joi.string().trim().min(1).optional(),
 });
 
 // Hostel Hero

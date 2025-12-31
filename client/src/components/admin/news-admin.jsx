@@ -5,7 +5,6 @@ import DataTable from "../data-table"
 import FormModal from "../form-modal"
 import "../admin-section.css"
 
-// --- 1. GLOBAL CONFIGURATION ---
 const API_BASE = import.meta.env.VITE_API_URL + "/api"
 
 const SECTION_CONFIG = {
@@ -60,6 +59,7 @@ const SECTION_CONFIG = {
     columns: [
       { key: "index", label: "Sr. No." },
       { key: "title", label: "Title" },
+      { key: "description", label: "Description" },
       { key: "image1", label: "Image 1" },
       { key: "image2", label: "Image 2" },
     ],
@@ -240,8 +240,7 @@ export default function NewsAdmin() {
         </div>
         <button
           className="add-btn"
-          onClick={() => { setEditingItem(null); setIsModalOpen(true); }}
-        >
+          onClick={() => { setEditingItem(null); setIsModalOpen(true); }}>
           <i className="fa fa-plus"></i> Add New
         </button>
       </div>

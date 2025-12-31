@@ -56,8 +56,8 @@
 }
 
 .ds-reverse-scroll {
-  /* Will be animated by GSAP */
-}
+height: 100%;
+width: 35%}
 
 .ds-heading {
   font-size: clamp(8rem, 11.077vw + 0.731rem, 12.5rem);
@@ -82,6 +82,7 @@
   flex-grow: 1;
   display: flex;
   align-items: flex-end;
+  height: 100vh;
 }
 
 @media (min-width: 1280px) {

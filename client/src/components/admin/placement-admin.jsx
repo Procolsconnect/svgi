@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import OverviewAdmin from "./placement/OverviewAdmin"
-import RecordsAdmin from "./placement/RecordsAdmin"
+import PageAdmin from "./placement/PageAdmin"
 import ProcessAdmin from "./placement/ProcessAdmin"
 import "../../components/admin-section.css"
 
@@ -13,8 +13,8 @@ const PAGES = [
     color: "blue"
   },
   {
-    id: "records",
-    name: "Placement Records",
+    id: "placementpage",
+    name: "Placement Page",
     description: "Manage Hero, Slider, Team, Companies, etc.",
     icon: "fa-file-alt",
     color: "green"
@@ -29,7 +29,7 @@ const PAGES = [
 ]
 
 export default function PlacementAdmin() {
-  const { id: pageId } = useParams()
+  const { pageId, componentId } = useParams()
   const navigate = useNavigate()
 
   // 1. DASHBOARD VIEW (If no page is selected)
@@ -58,15 +58,17 @@ export default function PlacementAdmin() {
     )
   }
 
+  const activePage = PAGES.find(p => p.id === pageId)
+
   // 2. PAGE ROUTING
   return (
     <div className="admin-page-container">
       {pageId === "overview" && <OverviewAdmin />}
-      {pageId === "records" && <RecordsAdmin />}
+      {pageId === "placementpage" && <PageAdmin />}
       {pageId === "process" && <ProcessAdmin />}
 
       {/* 404 Case */}
-      {!PAGES.find(p => p.id === pageId) && (
+      {!activePage && (
         <div className="admin-section">
           <h1>Page Not Found</h1>
           <button className="back-link" onClick={() => navigate("/admin/placement")}>← Back to Dashboard</button>

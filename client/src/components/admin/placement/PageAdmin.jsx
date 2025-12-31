@@ -108,7 +108,7 @@ const RECORDS_CONFIG = {
     }
 }
 
-export default function PlacementRecordsAdmin() {
+export default function PageAdmin() {
     const { componentId } = useParams()
     const navigate = useNavigate()
 
@@ -144,43 +144,43 @@ export default function PlacementRecordsAdmin() {
             <div className="admin-section">
                 <div className="section-header">
                     <div>
-                        <button className="back-link" onClick={() => navigate("/admin/placement")}>← Back to Placement</button>
-                        <h1>Placement Records </h1>
+                        <button className="back-link" onClick={() => navigate("/admin/placement")}>← Back </button>
+                        <h1>Placement Page </h1>
                         <p>Select a component to manage</p>
                     </div>
                 </div>
                 <div className="component-cards">
-                    <div className="component-card" onClick={() => navigate("/admin/placement/records/hero")}>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/placementpage/hero")}>
                         <div className="card-icon"><i className="fa fa-image"></i></div>
                         <h3>Hero Section</h3>
                         <p>Main Banner</p>
                     </div>
-                    <div className="component-card" onClick={() => navigate("/admin/placement/records/slider")}>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/placementpage/slider")}>
                         <div className="card-icon"><i className="fa fa-images"></i></div>
                         <h3>Slider</h3>
                         <p>Record Highlights</p>
                     </div>
-                    <div className="component-card" onClick={() => navigate("/admin/placement/records/workspace")}>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/placementpage/workspace")}>
                         <div className="card-icon"><i className="fa fa-briefcase"></i></div>
                         <h3>Workspace</h3>
                         <p>Placement Office Gallery</p>
                     </div>
-                    <div className="component-card" onClick={() => navigate("/admin/placement/records/team")}>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/placementpage/team")}>
                         <div className="card-icon"><i className="fa fa-users"></i></div>
                         <h3>Team</h3>
                         <p>Placement Officers</p>
                     </div>
-                    <div className="component-card" onClick={() => navigate("/admin/placement/records/companies")}>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/placementpage/companies")}>
                         <div className="card-icon"><i className="fa fa-building"></i></div>
                         <h3>Companies</h3>
                         <p>Recruiting Partners</p>
                     </div>
-                    <div className="component-card" onClick={() => navigate("/admin/placement/records/faq")}>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/placementpage/faq")}>
                         <div className="card-icon"><i className="fa fa-question-circle"></i></div>
                         <h3>FAQs</h3>
                         <p>Common Questions</p>
                     </div>
-                    <div className="component-card" onClick={() => navigate("/admin/placement/records/video")}>
+                    <div className="component-card" onClick={() => navigate("/admin/placement/placementpage/video")}>
                         <div className="card-icon"><i className="fa fa-video"></i></div>
                         <h3>Video</h3>
                         <p>Featured Record Video</p>
@@ -233,7 +233,7 @@ export default function PlacementRecordsAdmin() {
     return (
         <div className="admin-section">
             <div className="section-header">
-                <button className="back-link" onClick={() => navigate("/admin/placement/records")}>← Back</button>
+                <button className="back-link" onClick={() => navigate("/admin/placement/placementpage")}>← Back</button>
                 <h1>{currentConfig.title}</h1>
                 <button
                     className="add-btn"

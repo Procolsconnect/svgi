@@ -22,7 +22,7 @@ import PlacementAdmin from "./components/admin/placement-admin.jsx";
 import CampusLifeAdmin from "./components/admin/campus-life-admin.jsx";
 import NewsAdmin from "./components/admin/news-admin.jsx";
 import AdvertisementAdmin from "./components/admin/advertisement-admin.jsx";
- 
+
 const App = () => {
   return (
     <Router>
@@ -53,8 +53,8 @@ const App = () => {
           <Route path="about/:pageId" element={<AboutAdmin />} />
           <Route path="about/:pageId/:componentId" element={<AboutAdmin />} />
           <Route path="placement" element={<PlacementAdmin />} />
-          <Route path="placement/:id" element={<PlacementAdmin />} />
-          <Route path="placement/:id/:componentId" element={<PlacementAdmin />} />
+          <Route path="placement/:pageId" element={<PlacementAdmin />} />
+          <Route path="placement/:pageId/:componentId" element={<PlacementAdmin />} />
           <Route path="campuslife" element={<CampusLifeAdmin />} />
           <Route path="campuslife/:id" element={<CampusLifeAdmin />} />
           <Route path="campuslife/:id/:componentId" element={<CampusLifeAdmin />} />

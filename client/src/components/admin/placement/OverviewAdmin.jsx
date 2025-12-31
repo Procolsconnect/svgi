@@ -29,10 +29,12 @@ const OVERVIEW_CONFIG = {
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Title" },
             { key: "image", label: "Image" },
+            { key: "description", label: "Description" },
         ],
         fields: [
             { name: "title", label: "Title", type: "text", required: true },
             { name: "image", label: "Image", type: "file", required: true },
+            { name: "description", label: "Description", type: "text", required: true },
         ]
     }
 }

@@ -79,7 +79,7 @@ export default function DataTable({ columns, data, onEdit, onDelete }) {
     /* --- Replace the Media Logic (approx line 81-103) with this --- */
 
     // 1. Add plural names to the list
-    const mediaKeys = ["media", "image", "image2", "image3", "img", "image_url", "url", "media_url", "images", "gridImages", "logo_url", "imagesCard", "videosCard", "toursCard", "image1", "ug", "pg", "research", "procedure"]
+    const mediaKeys = ["media", "image", "image2", "image3", "img", "image_url", "url", "media_url", "images", "gridImages", "logo_url", "imagesCard", "videosCard", "toursCard", "image1", "ug", "pg", "research", "procedure", "video_url"]
 
     if (mediaKeys.includes(column.key) && value) {
       const imageList = Array.isArray(value) ? value : [value];
@@ -91,7 +91,7 @@ export default function DataTable({ columns, data, onEdit, onDelete }) {
         <div className="table-media-preview-group">
           {visibleItems.map((item, idx) => {
             // Extract URL if item is an object (e.g., {image: "url"})
-            const url = typeof item === 'object' ? (item.image || item.url || item.media_url) : item;
+            const url = typeof item === 'object' ? (item.image || item.url || item.media_url||item.video_url) : item;
 
             if (!url) return null;
 

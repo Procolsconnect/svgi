@@ -18,10 +18,12 @@ const campusSportsCardSchema = new mongoose.Schema({
 }, { timestamps: true });
 const campusSportsAcheivementSchema = new mongoose.Schema({
     title: { type: String, required: true },
+    description: { type: String, required: true },
     image: { type: String, required: true },
 }, { timestamps: true });
 const campusSportsAtheletsSchema = new mongoose.Schema({
-    title: { type: String, required: true },
+    name: { type: String, required: true },
+    achievement: { type: String, required: true },
     image: { type: String, required: true },
 }, { timestamps: true });
 
@@ -96,6 +98,7 @@ const campusEventGallery = new mongoose.Schema({
 const alumaniStudent = new mongoose.Schema({
     title: { type: String, required: true },
     image: { type: String, required: true },
+    achievement: { type: String, required: true },
 }, { timestamps: true });
 const welfareHeroImage = new mongoose.Schema({
     title: { type: String, required: true },
@@ -106,10 +109,11 @@ const bouncerTitle = new mongoose.Schema({
 }, { timestamps: true });
 
 const fancyText = new mongoose.Schema({
-    rowoneTitle: { type: String, required: true,},
-    rowoneImage: {type: String,required: true,},
-    rowtwoPara: [{type: String,required: true,}],
-    rowtwoImage: {type: String,required: true,}},
+    rowoneTitle: { type: String, required: true, },
+    rowoneImage: { type: String, required: true, },
+    rowtwoPara: [{ type: String, required: true, }],
+    rowtwoImage: { type: String, required: true, }
+},
     { timestamps: true });
 
 

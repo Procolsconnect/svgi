@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "./SvgiNews.module.css";
 
-const demoData = [
-  { type: "text", text: "SVGI College stands as a symbol of academic strength and modern education, shaping students into industry-ready professionals through innovation, discipline, and excellence." },
-  { type: "image", url: "/images/arts.jpeg" },
-  { type: "image", url: "/images/artss.jpg" },
-  { type: "text", text: "Vision-driven leadership and experienced faculty ensure that every student receives practical knowledge along with strong theoretical foundations to succeed in a competitive world." },
-  { type: "image", url: "/images/artss.jpg" },
-  { type: "text", text: "Growth-focused programs, advanced classrooms, career guidance, and skill development workshops help learners gain confidence and become global achievers." },
-  { type: "text", text: "Inspiring campus culture, technical training, placement assistance, and real-time project exposure make SVGI College the perfect destination for building a powerful future." },
-  { type: "text", text: "SVGI College believes in nurturing talent, boosting creativity, and empowering students with lifelong learning opportunities." },
-  { type: "text", text: "SVGI College believes in nurturing talent, boosting creativity, and empowering students with lifelong learning opportunities." },
-  { type: "image", url: "/images/artss.jpg" },
-  { type: "text", text: "SVGI College believes in nurturing talent, boosting creativity, and empowering students with lifelong learning opportunities." },
-];
+const API_URL = import.meta.env.VITE_API_URL + "/api";
 
 const SVGICollege = () => {
+  const [newsItems, setNewsItems] = useState([]);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/newscollege`);
+        if (response.data.success) {
+          setNewsItems(response.data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching college news:", error);
+      }
+    };
+    fetchNews();
+  }, []);
+
+  // Fallback to demo data if API is empty
+  const displayData = newsItems.length > 0 ? newsItems : [
+    { type: "text", text: "SVGI College stands as a symbol of academic strength and modern education, shaping students into industry-ready professionals through innovation, discipline, and excellence." },
+    { type: "image", url: "/images/arts.jpeg" },
+    { type: "image", url: "/images/artss.jpg" },
+    { type: "text", text: "Vision-driven leadership and experienced faculty ensure that every student receives practical knowledge along with strong theoretical foundations to succeed in a competitive world." },
+    { type: "image", url: "/images/artss.jpg" },
+  ];
+
   return (
     <div className={styles.root}>
       <div className={styles.container}>
@@ -24,13 +38,14 @@ const SVGICollege = () => {
             SVGI College – A New Generation of Learning Excellence
           </h2>
 
-          {demoData.map((item, index) => {
+          {displayData.map((item, index) => {
             if (item.type === "text") {
-              const firstLetter = item.text.charAt(0);
-              const rest = item.text.slice(1);
+              const text = item.text || "";
+              const firstLetter = text.charAt(0);
+              const rest = text.slice(1);
 
               return (
-                <p key={index} className={styles.paragraph}>
+                <p key={item._id || index} className={styles.paragraph}>
                   <span className={styles.cap}>{firstLetter}</span>
                   {rest}
                 </p>
@@ -40,7 +55,7 @@ const SVGICollege = () => {
             if (item.type === "image") {
               return (
                 <img
-                  key={index}
+                  key={item._id || index}
                   src={item.url}
                   alt="SVGI College"
                   className={styles.image}

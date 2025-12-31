@@ -82,6 +82,7 @@ async function deleteSportsCard(id) {
 async function createSportsAcheivement(body, file) {
     const data = {
         title: body.title,
+        description: body.description,
         image: file?.path,
     };
     return await new CampusSportsAcheivement(data).save();
@@ -105,6 +106,7 @@ async function updateSportsAcheivement(id, body, file) {
     if (!item) throw new Error("Campus Sports Acheivement not found");
     if (file) item.image = file.path;
     if (body.title) item.title = body.title;
+    if (body.description) item.description = body.description;
     return await item.save();
 }
 
@@ -158,7 +160,8 @@ async function deleteSportsVideo(id) {
 // CREATE
 async function createSportsAthelet(body, file) {
     const data = {
-        title: body.title,
+        name: body.name,
+        achievement: body.achievement,
         image: file?.path,
     };
     return await new CampusSportsAthelets(data).save();
@@ -181,7 +184,8 @@ async function updateSportsAthelet(id, body, file) {
     const item = await CampusSportsAthelets.findById(id);
     if (!item) throw new Error("Campus Sports Athelet not found");
     if (file) item.image = file.path;
-    if (body.title) item.title = body.title;
+    if (body.name) item.name = body.name;
+    if (body.achievement) item.achievement = body.achievement;
     return await item.save();
 }
 

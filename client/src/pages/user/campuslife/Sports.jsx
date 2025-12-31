@@ -1,9 +1,53 @@
 import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import styles from './sports.module.css';
 import Mask from './Mask';
+
+const API_BASE = import.meta.env.VITE_API_URL + "/api/campus";
+
 const SportsPage = () => {
   const bouncerRef = useRef(null);
   const [isBouncerInitialized, setIsBouncerInitialized] = useState(false);
+
+  const [hero, setHero] = useState(null);
+  const [cards, setCards] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [achievements, setAchievements] = useState([]);
+  const [athletes, setAthletes] = useState([]);
+
+  useEffect(() => {
+    const fetchSportsData = async () => {
+      try {
+        const [heroRes, cardsRes, videosRes, achievementsRes, athletesRes] = await Promise.all([
+          axios.get(`${API_BASE}/sportshero`),
+          axios.get(`${API_BASE}/sportscard`),
+          axios.get(`${API_BASE}/sportsvideo`),
+          axios.get(`${API_BASE}/sportsacheivement`),
+          axios.get(`${API_BASE}/sportsathelets`)
+        ]);
+
+        if (heroRes.data.success) setHero(heroRes.data.data?.[0]);
+        if (cardsRes.data.success) setCards(cardsRes.data.data || []);
+        if (videosRes.data.success) setVideos(videosRes.data.data || []);
+        if (achievementsRes.data.success) setAchievements(achievementsRes.data.data || []);
+        if (athletesRes.data.success) setAthletes(athletesRes.data.data || []);
+      } catch (error) {
+        console.error("Error fetching sports data:", error);
+      }
+    };
+    fetchSportsData();
+  }, []);
+
+  const getEmbedUrl = (url) => {
+    if (!url) return '';
+    if (url.includes('youtube.com/embed/')) return url;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    if (match && match[2].length === 11) {
+      return `https://www.youtube.com/embed/${match[2]}`;
+    }
+    return url;
+  };
 
   useEffect(() => {
     // Bouncer animation logic
@@ -89,69 +133,55 @@ const SportsPage = () => {
     <div className={styles.sports__wrapper}>
       {/* Hero Section */}
       <section id="sports__hero" className={styles.sports__hero}>
-        <img src="hero img.jpg" alt="Hero Background" className={styles['sports__hero-img']} />
+        <img src={hero?.image || "hero img.jpg"} alt="Hero Background" className={styles['sports__hero-img']} />
         <div className={styles['sports__hero-overlay']}></div>
-        <h1 className={styles['sports__hero-title']}>Sports</h1>
+        <h1 className={styles['sports__hero-title']}>{hero?.title || "Sports"}</h1>
       </section>
 
       {/* SVGI Section */}
-     {/* SVGI SECTION – GUARANTEED WORKING */}
-<section className={styles.sports__section}>
-  <div className={styles['sports__left-content']}>
-   {/* Media Gallery */}
-      <header id="sports__media-gallery" className={styles['sports__media-banner']}>
-        <div className={styles.sports__container}>
-          <p ref={bouncerRef} className={`${styles.sports__bouncer} ${styles['sports__header-logo']}`}>Sports facilities in SVGI</p>
+      <section className={styles.sports__section}>
+        <div className={styles['sports__left-content']}>
+          <header id="sports__media-gallery" className={styles['sports__media-banner']}>
+            <div className={styles.sports__container}>
+              <p ref={bouncerRef} className={`${styles.sports__bouncer} ${styles['sports__header-logo']}`}>Sports facilities in SVGI</p>
+            </div>
+          </header>
+          <p className={styles.sports__description}>
+            SVGI is dedicated to fostering a culture of excellence in sports and academics through a blend of academic excellence and athletic prowess.
+          </p>
         </div>
-      </header>
-    <p className={styles.sports__description}>
-      SVGI is dedicated to fostering a culture of excellence in sports and academics through a blend of academic excellence and athletic prowess.m
-    </p>
-  </div>
 
-  <div className={styles['sports__right-side']}>
-    <img src="https://pngimg.com/uploads/football_player/football_player_PNG48.png" alt="Sportsman" />
-  </div>
-</section>
-<Mask/>
-      {/* Slat 1 */}
-      <article className={`${styles.sports__slat} ${styles['sports__slat--reversed']}`}>
-        <div className={styles['sports__slat-body']}>
-          <dl><dt>Aperture</dt><dd>4.644</dd></dl>
-          <dl><dt>Focal Length</dt><dd>24mm</dd></dl>
-          <dl><dt>Shutter Speed</dt><dd>0.002s</dd></dl>
-          <dl><dt>ISO</dt><dd>250</dd></dl>
+        <div className={styles['sports__right-side']}>
+          <img src="https://pngimg.com/uploads/football_player/football_player_PNG48.png" alt="Sportsman" />
         </div>
-        <div className={styles['sports__slat-item']}>
-          <img src="https://public-619e3.firebaseapp.com/Media-Slat/img-01_med.jpg" alt="Media Image 1" />
-        </div>
-      </article>
+      </section>
+      <Mask />
 
-      {/* Slat 2 */}
-      <article className={styles.sports__slat}>
-        <div className={styles['sports__slat-body']}>
-          <dl><dt>Aperture</dt><dd>4.644</dd></dl>
-          <dl><dt>Focal Length</dt><dd>24mm</dd></dl>
-          <dl><dt>Shutter Speed</dt><dd>0.002s</dd></dl>
-          <dl><dt>ISO</dt><dd>250</dd></dl>
-        </div>
-        <div className={styles['sports__slat-item']}>
-          <img src="https://public-619e3.firebaseapp.com/Media-Slat/img-02_med.jpg" alt="Media Image 2" />
-        </div>
-      </article>
+      {/* CardSection */}
+      {cards.map((card, index) => (
+        <article key={card._id || index} className={`${styles.sports__slat} ${index % 2 === 0 ? styles['sports__slat--reversed'] : ''}`}>
+          <div className={styles['sports__slat-body']}>
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </div>
+          <div className={styles['sports__slat-item']}>
+            <img src={card.image} alt={card.title} />
+          </div>
+        </article>
+      ))}
 
-      {/* Slat 3 */}
-      <article className={`${styles.sports__slat} ${styles['sports__slat--reversed']}`}>
-        <div className={styles['sports__slat-body']}>
-          <dl><dt>Aperture</dt><dd>4.644</dd></dl>
-          <dl><dt>Focal Length</dt><dd>24mm</dd></dl>
-          <dl><dt>Shutter Speed</dt><dd>0.002s</dd></dl>
-          <dl><dt>ISO</dt><dd>250</dd></dl>
-        </div>
-        <div className={styles['sports__slat-item']}>
-          <img src="https://public-619e3.firebaseapp.com/Media-Slat/img-03_med.jpg" alt="Media Image 3" />
-        </div>
-      </article>
+      {/* Fallback if no cards */}
+      {cards.length === 0 && (
+        <article className={`${styles.sports__slat} ${styles['sports__slat--reversed']}`}>
+          <div className={styles['sports__slat-body']}>
+            <h3>Premium Facilities</h3>
+            <p>Our sports infrastructure provides students with modern courts and tracks to help them reach their peak performance.</p>
+          </div>
+          <div className={styles['sports__slat-item']}>
+            <img src="https://public-619e3.firebaseapp.com/Media-Slat/img-01_med.jpg" alt="Media Image 1" />
+          </div>
+        </article>
+      )}
 
       {/* Podium Section */}
       <section id="sports__podium" className={styles['sports__podium-section']}>
@@ -178,15 +208,26 @@ const SportsPage = () => {
       <section id="sports__video-gallery" className={styles['sports__video-gallery-section']}>
         <h2>Sports Video Gallery</h2>
         <div className={styles['sports__videos-container']}>
-          <div className={styles['sports__video-item']}>
-            <iframe src="https://www.youtube.com/embed/_XWIIwMdGyw" title="Club Brugge vs. Barcelona: Extended Highlights" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-          </div>
-          <div className={styles['sports__video-item']}>
-            <iframe src="https://www.youtube.com/embed/VU4phbm2IiU" title="Liverpool vs. Real Madrid: Extended Highlights" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-          </div>
-          <div className={styles['sports__video-item']}>
-            <iframe src="https://www.youtube.com/embed/J6vEuhViaFM" title="Man. City vs. Borussia Dortmund: Extended Highlights" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-          </div>
+          {videos.length > 0 ? videos.map((vid, idx) => (
+            <div key={vid._id || idx} className={styles['sports__video-item']}>
+              <iframe
+                src={getEmbedUrl(vid.video_url)}
+                title={vid.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )) : (
+            <>
+              <div className={styles['sports__video-item']}>
+                <iframe src="https://www.youtube.com/embed/_XWIIwMdGyw" title="Demo Video 1" frameBorder="0" allowFullScreen></iframe>
+              </div>
+              <div className={styles['sports__video-item']}>
+                <iframe src="https://www.youtube.com/embed/VU4phbm2IiU" title="Demo Video 2" frameBorder="0" allowFullScreen></iframe>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -197,26 +238,32 @@ const SportsPage = () => {
         <div className={styles['sports__content-wrapper']}>
           <div className={styles['sports__slider']}>
             <div className={styles['sports__slide-track']}>
-              <div className={styles.sports__slide}><img src="https://vit.ac.in/sites/default/files/inline-images/Sports_achievements_1.jpg" alt="Achievement 1" /></div>
-              <div className={styles.sports__slide}><img src="https://vit.ac.in/sites/default/files/inline-images/Sports_achievements_2.jpg" alt="Achievement 2" /></div>
-              <div className={styles.sports__slide}><img src="https://vit.ac.in/sites/default/files/inline-images/Sports_achievements_3.jpg" alt="Achievement 3" /></div>
-              <div className={styles.sports__slide}><img src="https://vit.ac.in/sites/default/files/inline-images/Sports_achievements_4.jpg" alt="Achievement 4" /></div>
-              <div className={styles.sports__slide}><img src="https://vit.ac.in/sites/default/files/inline-images/Sports_achievements_1.jpg" alt="Achievement 1" /></div>
-              <div className={styles.sports__slide}><img src="https://vit.ac.in/sites/default/files/inline-images/Sports_achievements_2.jpg" alt="Achievement 2" /></div>
-              <div className={styles.sports__slide}><img src="https://vit.ac.in/sites/default/files/inline-images/Sports_achievements_3.jpg" alt="Achievement 3" /></div>
-              <div className={styles.sports__slide}><img src="https://vit.ac.in/sites/default/files/inline-images/Sports_achievements_4.jpg" alt="Achievement 4" /></div>
+              {(achievements.length > 0 ? achievements.concat(achievements) : []).map((item, idx) => (
+                <div key={idx} className={styles.sports__slide}>
+                  <img src={item.image} alt={item.title} />
+                </div>
+              ))}
+              {achievements.length === 0 && (
+                <>
+                  <div className={styles.sports__slide}><img src="https://vit.ac.in/sites/default/files/inline-images/Sports_achievements_1.jpg" alt="Achievement 1" /></div>
+                  <div className={styles.sports__slide}><img src="https://vit.ac.in/sites/default/files/inline-images/Sports_achievements_2.jpg" alt="Achievement 2" /></div>
+                </>
+              )}
             </div>
           </div>
 
           <div className={styles['sports__right-box']}>
-            <p>
-              Extremely happy to announce that Ms. Ananya Chouhan, Mechanical Engineering student,
-              won Bronze Medal in J80 Class World Boat Championship (mixed category) held in Spain.
-              In addition to it, the VIT Sports Teams have brought laurels by Winning Medals in the
-              SPANDAN 2019, a National level tournament organized by Jawaharlal Institute of
-              Postgraduate Medical Education & Research (JIPMER), Puducherry and PEGASUS 2019,
-              a National level tournament organized by Christian Medical College & Hospital, Vellore.
-            </p>
+            {achievements.length > 0 ? (
+              <p>
+                <strong>{achievements[0].title}:</strong> {achievements[0].description}
+              </p>
+            ) : (
+              <p>
+                Our students consistently win top honors in national and international tournaments.
+                Ms. Ananya Chouhan won Bronze at the J80 Class World Boat Championship, and our teams
+                frequently bring laurels from national level events like SPANDAN.
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -225,53 +272,39 @@ const SportsPage = () => {
       <section id="sports__athletes" className={styles['sports__cards-section']}>
         <h2>Featured Athletes</h2>
         <div className={styles['sports__cards-container']}>
-          <div className={styles.sports__card}>
-            <div className={styles['sports__card-inner']}>
-              <div className={styles.sports__box}>
-                <div className={styles.sports__imgBox}>
-                  <img src="https://picsum.photos/seed/picsum/500/600" alt="Athlete 1" />
-                </div>
-                <div className={styles.sports__icon}>
-                  <a href="#" className={styles.sports__iconBox}>View</a>
-                </div>
-              </div>
-            </div>
-            <div className={styles['sports__card-content']}>
-              <h3>Athlete One</h3>
-            </div>
-          </div>
-
-          <div className={styles.sports__card}>
-            <div className={styles['sports__card-inner']}>
-              <div className={styles.sports__box}>
-                <div className={styles.sports__imgBox}>
-                  <img src="https://picsum.photos/id/230/500/600" alt="Athlete 2" />
-                </div>
-                <div className={styles.sports__icon}>
-                  <a href="#" className={styles.sports__iconBox}>View</a>
+          {athletes.length > 0 ? athletes.map((athlete, idx) => (
+            <div key={athlete._id || idx} className={styles.sports__card}>
+              <div className={styles['sports__card-inner']}>
+                <div className={styles.sports__box}>
+                  <div className={styles.sports__imgBox}>
+                    <img src={athlete.image} alt={athlete.name} />
+                  </div>
+                  <div className={styles.sports__icon}>
+                    <div className={styles.sports__iconBox} style={{ fontSize: '10px', color: '#fff', textAlign: 'center' }}>{athlete.achievement}</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={styles['sports__card-content']}>
-              <h3>Athlete Two</h3>
-            </div>
-          </div>
-
-          <div className={styles.sports__card}>
-            <div className={styles['sports__card-inner']}>
-              <div className={styles.sports__box}>
-                <div className={styles.sports__imgBox}>
-                  <img src="https://picsum.photos/id/260/500/600" alt="Athlete 3" />
-                </div>
-                <div className={styles.sports__icon}>
-                  <a href="#" className={styles.sports__iconBox}>View</a>
-                </div>
+              <div className={styles['sports__card-content']}>
+                <h3>{athlete.name}</h3>
               </div>
             </div>
-            <div className={styles['sports__card-content']}>
-              <h3>Athlete Three</h3>
+          )) : (
+            <div className={styles.sports__card}>
+              <div className={styles['sports__card-inner']}>
+                <div className={styles.sports__box}>
+                  <div className={styles.sports__imgBox}>
+                    <img src="https://picsum.photos/seed/picsum/500/600" alt="Athlete Placeholder" />
+                  </div>
+                  <div className={styles.sports__icon}>
+                    <a href="#" className={styles.sports__iconBox}>View</a>
+                  </div>
+                </div>
+              </div>
+              <div className={styles['sports__card-content']}>
+                <h3>Athlete One</h3>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
     </div>

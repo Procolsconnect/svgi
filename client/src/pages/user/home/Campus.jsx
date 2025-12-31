@@ -25,26 +25,25 @@ const CollegeCampus = () => {
   if (loading) return <p className={styles.cdLoading}>Loading campus details...</p>;
   if (!campusData) return <p className={styles.cdError}>No campus data found.</p>;
 
-  const { imagesCard, videosCard, toursCard } = campusData;
+  const { title, description, since, imagesCard, videosCard, toursCard } = campusData;
 
   return (
     <main className={styles.cdMain}>
       <div className={styles.cdMainInner}>
         <div className={styles.cdHeading}>
           <h1 className={styles.cdTitle}>
-            College Campus <br />
-            Infrastructure
+            {title || "College Campus Infrastructure"}
           </h1>
           <aside className={styles.cdAside}>
             <p className={styles.cdDesc}>
-              Shree Vengadeshwara Institution offers a modern, tech-enabled campus
+              {description || `Shree Vengadeshwara Institution offers a modern, tech-enabled campus
               with smart classrooms, advanced labs, digital library, high-speed
               internet, and a dedicated placement cell. Our well-maintained
               hostels, spacious seminar halls, sports facilities, and eco-friendly
               surroundings provide a perfect blend of learning and lifestyle. A
-              truly inspiring space for academic and personal growth.
+              truly inspiring space for academic and personal growth.`}
             </p>
-            <p className={styles.cdSince}>Since 2011</p>
+            <p className={styles.cdSince}>Since {since || "2011"}</p>
           </aside>
         </div>
 
@@ -72,7 +71,7 @@ const CollegeCampus = () => {
                           src={imagesCard[4].image}
                           alt="More"
                         />
-                        <span>{imagesCard.length}+</span>
+                        <span>{imagesCard.length - 4}+</span>
                       </li>
                     )}
                   </ul>

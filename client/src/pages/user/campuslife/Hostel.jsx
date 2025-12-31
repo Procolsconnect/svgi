@@ -1,75 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from './hostel.module.css';
+
+const API_URL = import.meta.env.VITE_API_URL + '/api/campus';
 
 const HostelPage = () => {
   const [openFaq, setOpenFaq] = useState(null);
+  const [hostelData, setHostelData] = useState({
+    hero: null,
+    cards: [],
+    faqs: []
+  });
+  const [loading, setLoading] = useState(true);
 
   const toggleFaq = (id) => {
     setOpenFaq(openFaq === id ? null : id);
   };
 
-  const faqData = [
-    {
-      id: 'q1',
-      question: 'What is the meaning of life?',
-      answer: '42'
-    },
-    {
-      id: 'q2',
-      question: 'How much wood would a woodchuck chuck?',
-      answer: 'A woodchuck would chuck all the wood he could chuck, if a woodchuck could chuck wood!'
-    },
-    {
-      id: 'q3',
-      question: 'What happens if Pinocchio says, "my nose will grow now"?',
-      answer: (
-        <>
-          Certain questions are better left{' '}
-          <a href="https://en.wikipedia.org/wiki/The_Unanswered_Question" target="_blank" rel="noopener noreferrer">
-            unanswered
-          </a>.
-        </>
-      )
-    }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [heroRes, cardRes, faqRes] = await Promise.all([
+          axios.get(`${API_URL}/hostelhero`),
+          axios.get(`${API_URL}/hostelcard`),
+          axios.get(`${API_URL}/hostelfaq`)
+        ]);
 
-  const cardsData = [
-    {
-      images: [
-        'https://picsum.photos/id/1053/400/250',
-        'https://picsum.photos/id/1047/400/250'
-      ],
-      title: 'Distribution of Executable Versions',
-      description: 'This processing may include your modifications in the Source form of digital data.',
-      imageFirst: true
-    },
-    {
-      images: [
-        'https://picsum.photos/id/1056/400/250',
-        'https://picsum.photos/id/1060/400/250'
-      ],
-      title: 'Description of Modifications',
-      description: 'This processing may include your modifications in the Source form of digital data.',
-      imageFirst: false
-    },
-    {
-      images: [
-        'https://picsum.photos/id/1070/400/250',
-        'https://picsum.photos/id/1084/400/250'
-      ],
-      title: 'This Agreement is Published',
-      description: 'This processing may include your modifications in the Source form of digital data.',
-      imageFirst: true
-    }
-  ];
+        setHostelData({
+          hero: heroRes.data.data?.[0] || null,
+          cards: cardRes.data.data || [],
+          faqs: faqRes.data.data || []
+        });
+      } catch (err) {
+        console.error("Error fetching hostel data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const { hero, cards, faqs } = hostelData;
+
+  if (loading) return null; // Or a subtle loader
 
   return (
     <div className={styles['hostel__wrapper']}>
       {/* HERO SECTION */}
       <div id="hostel__hero" className={styles['hostel__hero']}>
-        <img src="hero img.jpg" alt="Hero Background" />
+        <img src={hero?.image || "hero img.jpg"} alt={hero?.title || "Hero Background"} />
         <div className={styles['hostel__hero-overlay']}></div>
-        <h1>SVGI Hostel</h1>
+        <h1>{hero?.title || "SVGI Hostel"}</h1>
       </div>
 
       {/* HOSTEL CONTAINER SECTION */}
@@ -96,63 +77,101 @@ const HostelPage = () => {
 
       {/* CARDS SECTION */}
       <div className={styles['hostel__cards-container']}>
-        {cardsData.map((card, index) => (
-          <div key={index} className={styles['hostel__row']}>
-            {card.imageFirst ? (
-              <>
-                <div className={styles['hostel__col-image']}>
-                  <div className={styles['hostel__slider']}>
-                    <img src={card.images[0]} alt={`${card.title} 1`} />
-                    <img src={card.images[1]} alt={`${card.title} 2`} />
-                  </div>
+        {cards.length > 0 ? (
+          cards.map((card, index) => {
+            const imageFirst = index % 2 === 0;
+            return (
+              <div key={card._id} className={styles['hostel__row']}>
+                {imageFirst ? (
+                  <>
+                    <div className={styles['hostel__col-image']}>
+                      <div className={styles['hostel__slider']}>
+                        {/* Rendering twice to preserve the exact CSS animation structure */}
+                        <img src={card.image} alt={`${card.title} 1`} />
+                        <img src={card.image} alt={`${card.title} 2`} />
+                      </div>
+                    </div>
+                    <div className={styles['hostel__col-copy']}>
+                      <h2>{card.title}</h2>
+                      <p>{card.description}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={styles['hostel__col-copy']}>
+                      <h2>{card.title}</h2>
+                      <p>{card.description}</p>
+                    </div>
+                    <div className={styles['hostel__col-image']}>
+                      <div className={styles['hostel__slider']}>
+                        <img src={card.image} alt={`${card.title} 1`} />
+                        <img src={card.image} alt={`${card.title} 2`} />
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            );
+          })
+        ) : (
+          /* Static Fallback for Cards if API is empty */
+          <>
+            <div className={styles['hostel__row']}>
+              <div className={styles['hostel__col-image']}>
+                <div className={styles['hostel__slider']}>
+                  <img src="https://picsum.photos/id/1053/400/250" alt="Default 1" />
+                  <img src="https://picsum.photos/id/1047/400/250" alt="Default 2" />
                 </div>
-                <div className={styles['hostel__col-copy']}>
-                  <h2>{card.title}</h2>
-                  <p>{card.description}</p>
+              </div>
+              <div className={styles['hostel__col-copy']}>
+                <h2>Comfortable Accommodations</h2>
+                <p>Spacious rooms with study areas and high-speed Wi-Fi access.</p>
+              </div>
+            </div>
+            <div className={styles['hostel__row']}>
+              <div className={styles['hostel__col-copy']}>
+                <h2>Nutritious Dining</h2>
+                <p>Hygienic mess facility serving a variety of delicious and healthy meals.</p>
+              </div>
+              <div className={styles['hostel__col-image']}>
+                <div className={styles['hostel__slider']}>
+                  <img src="https://picsum.photos/id/1056/400/250" alt="Default 3" />
+                  <img src="https://picsum.photos/id/1060/400/250" alt="Default 4" />
                 </div>
-              </>
-            ) : (
-              <>
-                <div className={styles['hostel__col-copy']}>
-                  <h2>{card.title}</h2>
-                  <p>{card.description}</p>
-                </div>
-                <div className={styles['hostel__col-image']}>
-                  <div className={styles['hostel__slider']}>
-                    <img src={card.images[0]} alt={`${card.title} 1`} />
-                    <img src={card.images[1]} alt={`${card.title} 2`} />
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* FAQ SECTION */}
       <div className={styles['hostel__faq-header']}>Frequently Asked Questions</div>
 
       <div className={styles['hostel__faq-content']}>
-        {faqData.map((faq) => (
-          <div key={faq.id} className={styles['hostel__faq-question']}>
-            <div 
-              className={`${styles['hostel__plus']} ${openFaq === faq.id ? styles['hostel__plus-open'] : ''}`}
-            >
-              +
+        {faqs.length > 0 ? (
+          faqs.map((faq) => (
+            <div key={faq._id} className={styles['hostel__faq-question']}>
+              <div
+                className={`${styles['hostel__plus']} ${openFaq === faq._id ? styles['hostel__plus-open'] : ''}`}
+              >
+                +
+              </div>
+              <label
+                className={styles['hostel__panel-title']}
+                onClick={() => toggleFaq(faq._id)}
+              >
+                {faq.question}
+              </label>
+              <div
+                className={`${styles['hostel__panel-content']} ${openFaq === faq._id ? styles['hostel__panel-content-open'] : ''}`}
+              >
+                {faq.answer}
+              </div>
             </div>
-            <label 
-              className={styles['hostel__panel-title']} 
-              onClick={() => toggleFaq(faq.id)}
-            >
-              {faq.question}
-            </label>
-            <div 
-              className={`${styles['hostel__panel-content']} ${openFaq === faq.id ? styles['hostel__panel-content-open'] : ''}`}
-            >
-              {faq.answer}
-            </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p style={{ textAlign: 'center', padding: '2rem' }}>General rules and regulations information will be updated soon.</p>
+        )}
       </div>
     </div>
   );

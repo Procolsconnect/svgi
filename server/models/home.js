@@ -11,7 +11,7 @@ const homeHeroSchema = new mongoose.Schema({
   button_text: { type: String },
   status: { type: Number, default: 1 }
 }, {
-  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } 
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
 /* =========================
@@ -24,8 +24,8 @@ const homeInstitutionSchema = new mongoose.Schema({
   logo_url: { type: String },
   link: { type: String },
   status: { type: Number, default: 1 }
-}, { 
-  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } 
+}, {
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
 /* =========================
@@ -33,8 +33,8 @@ const homeInstitutionSchema = new mongoose.Schema({
 ========================= */
 const placementSwiperSchema = new mongoose.Schema({
   image_url: { type: String },
-}, { 
-  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } 
+}, {
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
 /* =========================
@@ -44,12 +44,15 @@ const serviceOfferingSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String },
   image: { type: String }
-}, { 
-  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } 
+}, {
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
 
 const campusSchema = new mongoose.Schema({
+  title: { type: String, required: true, default: "College Campus Infrastructure" },
+  description: { type: String, required: true },
+  since: { type: String, required: true, default: "2011" },
   imagesCard: [
     {
       image: { type: String, required: true },
@@ -64,7 +67,7 @@ const campusSchema = new mongoose.Schema({
   // Card 3 - 360 Tours
   toursCard: [
     {
-      image: { type: String, required: true }, 
+      image: { type: String, required: true },
     },
   ],
 })
