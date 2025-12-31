@@ -75,12 +75,13 @@ const RECORDS_CONFIG = {
         limit: 50,
         columns: [
             { key: "index", label: "Sr. No." },
-            { key: "title", label: "Category" },
+            { key: "title", label: "Type" },
             { key: "companies", label: "Logos", type: "images" },
         ],
         fields: [
-            { name: "title", label: "Category Name", type: "text", required: true },
-            { name: "images", label: "Company Logos", type: "file", multiple: true, required: true },
+            { name: "title", label: "Company Type (e.g. Software, Core)", type: "text", required: true },
+            { name: "companies", label: { singular: "Company Name", plural: "Companies" }, type: "dynamic-list", itemKey: "name", required: false },
+            { name: "images", label: "Logos", type: "file", multiple: true, required: true },
         ]
     },
     "faq": {
@@ -198,14 +199,39 @@ export default function PageAdmin() {
         setSubmitting(true)
         try {
             const dataToSend = new FormData()
-            Object.keys(formData).forEach(key => {
-                const val = formData[key]
-                if (Array.isArray(val)) {
-                    val.forEach(file => dataToSend.append(currentConfig.endpoint === "/company-category" ? "images" : key, file))
-                } else {
-                    dataToSend.append(key, val)
+
+            // Special handling for Recruiting Companies to preserve mapping
+            if (currentConfig.endpoint === "/company-category") {
+                const companies = (formData.companies || []).map((c, i) => {
+                    const img = formData.images?.[i]
+                    if (img instanceof File) {
+                        return { ...c, _isNewImage: true, image: null }
+                    } else {
+                        return { ...c, image: img } // Preserve existing URL
+                    }
+                })
+                dataToSend.append("companies", JSON.stringify(companies))
+
+                // Append only the actual new files
+                if (formData.images) {
+                    formData.images.filter(img => img instanceof File).forEach(file => {
+                        dataToSend.append("images", file)
+                    })
                 }
-            })
+
+                // Add the title
+                dataToSend.append("title", formData.title || "")
+            } else {
+                // Default handling for other components
+                Object.keys(formData).forEach(key => {
+                    const val = formData[key]
+                    if (Array.isArray(val)) {
+                        val.forEach(file => dataToSend.append(key, file))
+                    } else {
+                        dataToSend.append(key, val)
+                    }
+                })
+            }
 
             const id = editingItem?._id || editingItem?.id
             if (id) {
@@ -252,7 +278,15 @@ export default function PageAdmin() {
             <DataTable
                 columns={currentConfig.columns}
                 data={items}
-                onEdit={(item) => { setEditingItem(item); setIsModalOpen(true); }}
+                onEdit={(item) => {
+                    let editData = { ...item };
+                    // For Recruiting Companies, bridge the gap between model array and form file list
+                    if (componentId === "companies" && Array.isArray(item.companies)) {
+                        editData.images = item.companies.map(c => c.image).filter(img => img);
+                    }
+                    setEditingItem(editData);
+                    setIsModalOpen(true);
+                }}
                 onDelete={handleDelete}
             />
 

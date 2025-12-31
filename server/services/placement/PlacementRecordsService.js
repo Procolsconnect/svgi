@@ -1,4 +1,4 @@
-const { PlacementRecordsHero, PlacementRecordsSlider, PlacementRecordsWorkspace, PlacementRecordsTeam, CompanyCategory,PlacementRecordsFaq,PlacementRecordsVideo } = require('../../models/placement');
+const { PlacementRecordsHero, PlacementRecordsSlider, PlacementRecordsWorkspace, PlacementRecordsTeam, CompanyCategory, PlacementRecordsFaq, PlacementRecordsVideo } = require('../../models/placement');
 
 // CREATE HERO ******************************************
 async function createPlacementRecordsHero(body, file) {
@@ -173,10 +173,13 @@ async function deletePlacementRecordsTeam(id) {
 async function createCompanyCategory(body, files) {
   const companies = body.companies ? JSON.parse(body.companies) : [];
 
-  companies.forEach((c, index) => {
-    if (files[index]) {
-      c.image = files[index].path;
+  let fileIndex = 0;
+  companies.forEach((c) => {
+    if (c._isNewImage && files[fileIndex]) {
+      c.image = files[fileIndex].path;
+      fileIndex++;
     }
+    delete c._isNewImage;
   });
 
   const data = new CompanyCategory({
@@ -197,12 +200,15 @@ async function updateCompanyCategory(id, body, files) {
   const existing = await CompanyCategory.findById(id);
   if (!existing) throw "Company Category not found";
 
-  let companies = body.companies ? JSON.parse(body.companies) : existing.companies;
+  const companies = body.companies ? JSON.parse(body.companies) : existing.companies;
 
-  companies.forEach((c, index) => {
-    if (files[index]) {
-      c.image = files[index].path;
+  let fileIndex = 0;
+  companies.forEach((c) => {
+    if (c._isNewImage && files[fileIndex]) {
+      c.image = files[fileIndex].path;
+      fileIndex++;
     }
+    delete c._isNewImage;
   });
 
   existing.title = body.title ?? existing.title;

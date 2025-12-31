@@ -183,25 +183,25 @@ export default function FormModal({ isOpen, onClose, onSave, title, fields, init
                     {/* File Selection Preview (for multiple selection) */}
                     {field.multiple && formData[field.name] && Array.isArray(formData[field.name]) && formData[field.name].length > 0 && (
                       <div className="file-preview-list">
-                        {formData[field.name].map((file, idx) => (
-                          <div key={idx} className="file-preview-item">
-                            <div className="file-info">
-                              {typeof file === "string" ? (
-                                <img src={file} alt="preview" className="mini-thumb" />
-                              ) : (
-                                <i className="fa fa-file"></i>
-                              )}
-                              <span>{typeof file === "string" ? "Existing Image" : file.name}</span>
+                        {formData[field.name].map((file, idx) => {
+                          const isString = typeof file === "string";
+                          const previewUrl = isString ? file : URL.createObjectURL(file);
+                          return (
+                            <div key={idx} className="file-preview-item">
+                              <div className="file-info">
+                                <img src={previewUrl} alt="preview" className="mini-thumb" onError={(e) => { e.target.src = "https://via.placeholder.com/40?text=File" }} />
+                                <span>{isString ? "Existing Logo" : file.name}</span>
+                              </div>
+                              <button
+                                type="button"
+                                className="remove-file-btn"
+                                onClick={() => removeFile(field.name, idx)}
+                              >
+                                <i className="fa fa-times"></i>
+                              </button>
                             </div>
-                            <button
-                              type="button"
-                              className="remove-file-btn"
-                              onClick={() => removeFile(field.name, idx)}
-                            >
-                              <i className="fa fa-times"></i>
-                            </button>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     )}
                   </div>

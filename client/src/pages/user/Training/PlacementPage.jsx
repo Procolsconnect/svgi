@@ -220,7 +220,7 @@ const PlacementPage = () => {
                 <h3>{category.title}</h3>
                 <div className={styles.companyGrid}>
                   {category.companies && category.companies.map((company, j) => (
-                    <img key={j} src={company.image} alt="recruiter logo" />
+                    <img key={j} src={company.image} alt={company.name} />
                   ))}
                 </div>
               </div>
