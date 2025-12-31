@@ -170,7 +170,7 @@
 
 @media (max-width: 768px) {
     .latestEventsSection {
-        padding: 40px 20px;
+        padding: 20px 1px;
     }
 
     .eventsContainer {
@@ -178,6 +178,9 @@
         align-items: center;
         gap: 2rem;
         text-align: center;
+        height: auto;
+        min-height: 50vh;
+        padding-bottom: 2rem;
     }
 
     .latestEventsSection h1 {
@@ -189,6 +192,15 @@
         width: 100%;
         justify-content: center;
         transform: scale(0.9);
+    }
+
+    .stackSlider em {
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 1rem;
     }
 }
 
