@@ -1,85 +1,108 @@
 @import url('https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
-/* Split Layout Containers */
-.splitContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+/* Main Container Layout */
+.mainContainer {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
     min-height: 100vh;
-    padding: 4rem;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 10;
-}
-
-.infoSection {
-    width: 40%;
-    color: #e1d7cb;
+    width: 100%;
+    background-color: #f3f3f4;
+    overflow-x: hidden;
     font-family: 'Playfair Display', serif;
 }
 
-.title {
-    font-size: 4rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #151412;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    line-height: 1.1;
+.mapSection {
+    position: relative;
+    background: url('https://jeffbridgforth.com/codepen/places-map.png') center/contain no-repeat;
+    margin: 2rem;
+    opacity: 0.8;
 }
 
-.description {
-    font-family: 'Tahoma', sans-serif;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #040403;
-    font-weight: 800;
-    padding: 1.5rem;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(4px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.mapImage {
+    display: none;
+    /* Map is handled by background-image now for better optimization */
+}
+
+.contentSection {
+    padding: clamp(2rem, 5vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f3f3f4;
+    z-index: 10;
+}
+
+.headerSection {
+    margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+
+.title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    margin: 0;
+    color: #161414;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: clamp(0.9rem, 1.5vw, 1.25rem);
+    color: #181717;
+    opacity: 0.8;
+    margin-top: 5px;
 }
 
 .cardSection {
-    width: 50%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
+    width: 100%;
 }
 
-/* Original Milo Card Styles */
+/* Character Card - Optimized for proportional scaling */
 .milo {
-    width: 50vw;
-    height: 450px;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 600 / 450;
     position: relative;
-    display: inline-block;
+    box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.1);
+    container-type: inline-size;
+    /* Enable container queries for font scaling */
 }
 
 .bgImage {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0;
 }
 
+.cardContentWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
 .testino {
-    position: relative;
-    box-shadow: 0px 0px 0px #000;
-    text-shadow: none;
-    width: 18vw;
-    height: 36vh;
+    position: absolute;
+    width: 50%;
+    /* Proportional Lock */
+    height: 62%;
+    /* Proportional Lock */
+    top: 22%;
+    /* Proportional Lock */
+    left: 50%;
+    /* Proportional Lock */
     text-align: justify;
     overflow: auto;
-    padding: 5px;
-    line-height: 12px;
-    margin-left: 330px;
-    margin-top: 90px;
+    padding: 1%;
+    line-height: 1.15;
     rotate: 2.5deg;
 }
 
@@ -88,7 +111,7 @@
 }
 
 .testino::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .testino::-webkit-scrollbar-thumb {
@@ -97,112 +120,85 @@
 }
 
 .aff {
-    position: relative;
-    text-shadow: none;
-    padding: 0px;
+    position: absolute;
+    width: 38%;
+    top: 80%;
+    left: 54%;
     text-align: center;
     background-color: #212e1e;
-    line-height: 10px;
-    width: 16vw;
-    margin-left: 380px;
-    margin-top: -8px;
+    line-height: 1;
     border-radius: 0px;
-    padding: 5px;
-    padding-bottom: 10px;
+    padding: 1% 2%;
     rotate: 3deg;
 }
 
-.credits {
-    position: relative;
-    margin-top: 60px;
-    width: auto;
-    font-family: arial;
-    font-size: 9px;
-    text-shadow: none;
-    letter-spacing: 0.5px;
-    color: #828282;
-    text-align: center;
-}
-
+/* typography - uses relative sizes (rem/em) to stay crisp */
 .c {
     font-family: calibri;
     text-transform: uppercase;
-    font-size: 9px;
-    letter-spacing: 2px;
+    font-size: 2.2cqw;
+    /* Scaled to card */
+    letter-spacing: 0.15em;
     color: #dcdcdc;
     background-color: #212e1e;
-    line-height: 11px;
 }
 
 .m {
     font-family: tahoma;
-    font-size: 8px;
+    font-size: 2cqw;
     color: #6b3220;
     text-transform: uppercase;
-    letter-spacing: 2px;
 }
 
 .m1 {
     font-family: tahoma;
-    font-size: 9.5px;
+    font-size: 2.3cqw;
     color: #453125;
-    letter-spacing: 0px;
 }
 
 .y {
     font-family: arial;
-    font-size: 8px;
+    font-size: 1.8cqw;
     color: #041a0b;
-    letter-spacing: 0.2px;
     text-transform: uppercase;
 }
 
 .g1 {
     font-family: trebuchet ms;
-    font-size: 9.5px;
-    letter-spacing: 0.5px;
-    line-height: 10px;
+    font-size: 2.2cqw;
     color: #163021;
 }
 
 .n {
     font-family: georgia;
     color: #0e2236;
-    font-size: 9.5px;
-    letter-spacing: 0.5px;
+    font-size: 2.2cqw;
     font-style: italic;
 }
 
 .n1 {
     font-family: trebuchet ms;
     color: #6f7e69;
-    font-size: 8.5px;
-    letter-spacing: 0.5px;
+    font-size: 2cqw;
     text-transform: uppercase;
 }
 
 .r {
     font-family: tahoma;
     color: #171717;
-    font-size: 10px;
-    letter-spacing: 0px;
-    line-height: 13px;
+    font-size: 2.3cqw;
 }
 
 .r1 {
     font-family: tahoma;
     color: #e1d7cb;
-    font-size: 9.5px;
-    letter-spacing: 0px;
-    line-height: 13px;
+    font-size: 2.1cqw;
 }
 
 .r2 {
     font-family: tahoma;
     color: #868078;
-    font-size: 9.5px;
-    letter-spacing: 0px;
-    line-height: 13px;
+    font-size: 2cqw;
 }
 
 .aff a:link,
@@ -216,76 +212,94 @@
 
 /* Mobile Responsive Adjustments */
 @media (max-width: 1024px) {
-    .splitContainer {
+    .mainContainer {
+        display: flex;
         flex-direction: column;
-        padding: 1rem;
-        justify-content: flex-start;
-        gap: 3rem;
-        padding-top: 4rem;
+        min-height: auto;
     }
 
-    .infoSection {
-        width: 100%;
+    .mapSection {
+        display: block;
+        height: 35vh;
+        /* Visible height for map on mobile */
+        margin: 1rem;
+        background-size: contain;
+    }
+
+    .contentSection {
+        flex: 1;
+        padding: 3rem 1rem;
+        align-items: center;
         text-align: center;
-        margin-bottom: 2rem;
-        background: rgba(255, 255, 255, 0.6);
-        /* Added background for readability */
-        padding: 20px;
-        border-radius: 12px;
-    }
-
-    .title {
-        font-size: 2.5rem;
-    }
-
-    .cardSection {
-        width: 100%;
-        justify-content: center;
-        perspective: 1000px;
-        /* Helps with rendering */
     }
 
     .milo {
-        width: 90vw;
-        height: auto;
-        min-height: fit-content;
+        width: 100%;
+        max-width: 480px;
         margin: 0 auto;
-        display: block;
-        padding: 20px 0;
-        /* Add vertical padding for content breathing room */
-        background: rgba(255, 255, 255, 0.2);
-        /* Fallback */
-        border-radius: 10px;
     }
 
-    .bgImage {
-        height: 100%;
-        width: 100%;
-        border-radius: 10px;
-        object-fit: fill;
-        /* Stretch to cover content area on mobile so text doesn't flow off paper */
+    .cardSection {
+        justify-content: center;
+    }
+
+    /* Adjust font scaling for smaller containers on mobile */
+    .c {
+        font-size: 3cqw;
+    }
+
+    .m {
+        font-size: 2.8cqw;
+    }
+
+    .m1 {
+        font-size: 3.2cqw;
+    }
+
+    .y {
+        font-size: 2.5cqw;
+    }
+
+    .g1 {
+        font-size: 3cqw;
+    }
+
+    .n {
+        font-size: 3cqw;
+    }
+
+    .n1 {
+        font-size: 2.8cqw;
+    }
+
+    .r {
+        font-size: 3.2cqw;
+    }
+
+    .r1 {
+        font-size: 3cqw;
+    }
+
+    .r2 {
+        font-size: 2.8cqw;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .milo {
+        max-width: 100%;
     }
 
     .testino {
-        width: 85%;
-        height: auto;
-        /* Allow growth */
-        max-height: 50vh;
-        margin-left: 0;
-        margin-top: 0;
-        rotate: 0deg;
-        padding: 15px;
-        background-color: rgba(255, 255, 255, 0.7);
-        /* Stronger background for text legibility */
-        margin: 10px auto;
-        border-radius: 5px;
-    }
-
-    .aff {
-        width: 85%;
-        margin-left: 0;
-        margin-top: 10px;
-        rotate: 0deg;
-        margin: 10px auto;
+        padding: 2%;
+        line-height: 1.1;
     }
 }

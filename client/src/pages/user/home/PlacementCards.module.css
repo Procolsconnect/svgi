@@ -346,11 +346,10 @@
 @media (max-width: 480px) {
   .container {
     height: auto;
-    min-height: 50vh;
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-bottom: 2rem;
+
   }
 
   .type {

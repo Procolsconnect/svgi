@@ -50,10 +50,18 @@ const SwiperCarousel = () => {
     const fetchSwiperData = async () => {
       try {
         const res = await axios.get(`${apiurl}/api/placement-swiper`);
+        let data = [];
         if (res.data && Array.isArray(res.data)) {
-          setSwiperData(res.data);
+          data = res.data;
         } else if (res.data?.data) {
-          setSwiperData(res.data.data);
+          data = res.data.data;
+        }
+
+        // If data is too small for a smooth loop with 5 slides view, duplicate it
+        if (data.length > 0 && data.length < 10) {
+          setSwiperData([...data, ...data]);
+        } else {
+          setSwiperData(data);
         }
       } catch (err) {
         console.error("Error fetching placement swiper:", err);
@@ -62,59 +70,62 @@ const SwiperCarousel = () => {
     fetchSwiperData();
   }, []);
 
-  if (!swiperData.length) return null;
-
   return (
     <div className={styles.swiperCarouselBody}>
       <div className={styles.swiperCarouselHeader}>
         <h1
           ref={titleRef}
-          className={`${styles.swiperCarouselTitle} ${isVisible ? styles.swiperCarouselTitleAnimate : ""
-            }`}
-        >
-          Placement Records
-        </h1>
+          className={`${styles.swiperCarouselTitle} ${isVisible ? styles.swiperCarouselTitleAnimate : ""}`}
+        >Placement Records</h1>
       </div>
 
       <div className={styles.swiperCarouselWrapper}>
-        <Swiper
-          modules={[Navigation, Mousewheel]}
-          direction={isMobile ? "vertical" : "horizontal"}
-          slidesPerView={isMobile ? 3 : 5}
-          spaceBetween={isMobile ? 10 : 20}
-          centeredSlides={true}
-          loop={!isMobile}
-          mousewheel={{
-            forceToAxis: true,
-            releaseOnEdges: true,
-          }}
-          touchReleaseOnEdges={true}
-          cssMode={isMobile}
-          grabCursor={true}
-          navigation={{
-            nextEl: ".swiper-carousel-next",
-            prevEl: ".swiper-carousel-prev",
-          }}
-          className="swiper"
-          style={{ width: "100%", height: "100%" }}
-        >
-          {swiperData.map((item, index) => (
-            <SwiperSlide key={index}>
-              <img
-                src={item.image_url}
-                alt="Placement"
-              />
-            </SwiperSlide>
-          ))}
+        {swiperData.length > 0 && (
+          <Swiper
+            key={`${swiperData.length}-${isMobile}`}
+            modules={[Navigation, Mousewheel]}
+            direction={isMobile ? "vertical" : "horizontal"}
+            slidesPerView={isMobile ? 3 : 5}
+            spaceBetween={isMobile ? 0 : 0}
+            centeredSlides={true}
+            loop={swiperData.length >= 5}
+            watchSlidesProgress={true}
+            observer={true}
+            observeParents={true}
+            mousewheel={{
+              forceToAxis: true,
+              releaseOnEdges: true,
+            }}
+            touchReleaseOnEdges={true}
+            cssMode={isMobile}
+            grabCursor={true}
+            navigation={{
+              nextEl: ".swiper-carousel-next",
+              prevEl: ".swiper-carousel-prev",
+            }}
+            className="swiper"
+            style={{ width: "100%", height: "100%" }}
+          >
+            {swiperData.map((item, index) => (
+              <SwiperSlide key={index}>
+                <img
+                  src={item.image_url}
+                  alt="Placement"
+                  loading="lazy"
+                  onLoad={(e) => e.currentTarget.setAttribute("data-loaded", "true")}
+                />
+              </SwiperSlide>
+            ))}
 
-          {/* Custom Navigation Buttons with SVG Icons */}
-          <div className="swiper-carousel-next">
-            <ChevronRight color="white" size={24} />
-          </div>
-          <div className="swiper-carousel-prev">
-            <ChevronLeft color="white" size={24} />
-          </div>
-        </Swiper>
+            {/* Custom Navigation Buttons with SVG Icons */}
+            <div className="swiper-carousel-next">
+              <ChevronRight color="white" size={24} />
+            </div>
+            <div className="swiper-carousel-prev">
+              <ChevronLeft color="white" size={24} />
+            </div>
+          </Swiper>
+        )}
       </div>
     </div>
   );

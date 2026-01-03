@@ -40,6 +40,7 @@ const EventStack = ({ events = [], title = "Latest Events" }) => {
                     {events.map((event, index) => (
                         <article
                             key={index}
+                            className={index === stackK ? styles.activeArticle : ""}
                             style={{
                                 "--i": index,
                                 "--a": event.angle || "0deg"
@@ -48,20 +49,20 @@ const EventStack = ({ events = [], title = "Latest Events" }) => {
                             <h2>{event.title}</h2>
                             <em dangerouslySetInnerHTML={{ __html: event.description }}></em>
                             <img src={event.image} alt={event.title} />
+                            <div className={styles.navButtons}>
+                                <button
+                                    aria-label="previous"
+                                    data-inc="-1"
+                                    onClick={() => handleStackInc(-1)}
+                                />
+                                <button
+                                    aria-label="next"
+                                    data-inc="1"
+                                    onClick={() => handleStackInc(1)}
+                                />
+                            </div>
                         </article>
                     ))}
-                    <div className={styles.navButtons}>
-                        <button
-                            aria-label="previous"
-                            data-inc="-1"
-                            onClick={() => handleStackInc(-1)}
-                        />
-                        <button
-                            aria-label="next"
-                            data-inc="1"
-                            onClick={() => handleStackInc(1)}
-                        />
-                    </div>
                 </section>
             </div>
         </section>

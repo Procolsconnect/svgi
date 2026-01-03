@@ -168,9 +168,14 @@
     }
 }
 
+/* Support for navButtons inside article (Desktop) */
+.stackSlider article .navButtons {
+    grid-area: 4/2;
+}
+
 @media (max-width: 768px) {
     .latestEventsSection {
-        padding: 20px 1px;
+        padding: 40px 15px;
     }
 
     .eventsContainer {
@@ -179,34 +184,144 @@
         gap: 2rem;
         text-align: center;
         height: auto;
-        min-height: 50vh;
-        padding-bottom: 2rem;
+        min-height: auto;
     }
 
     .latestEventsSection h1 {
+        font-size: 2rem;
+        margin: 0 0 1rem 0;
         max-width: 100%;
-        font-size: 2.5rem;
     }
 
     .stackSlider {
         width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        transform: none;
+        min-height: 520px;
+        /* Space for the stacked elements */
+        position: relative;
+        --k: var(--v, 0);
+        transition: --p 0s 0.8s, --v 0.8s;
+
+        /* Desktop Animation Logic */
+        --p: var(--k);
+        --abs-p: abs(var(--k) - var(--p));
+        --end: clamp(0, var(--abs-p) - 1, 1);
+        --dir: calc((1 - 2*var(--end))*sign(var(--k) - var(--p)));
+        --fwd: calc(.5*(1 + var(--dir)));
+        --v: var(--k);
+        --abs-v: abs(var(--v) - var(--p));
+        --prg: calc(var(--abs-v)/(1 - var(--end) + var(--end)*(var(--n) - 1)));
+    }
+
+    .stackSlider::before {
+        display: none;
+    }
+
+    .stackSlider article {
+        --abs-top: abs(var(--k) - var(--i));
+        --not-top: min(1, var(--abs-top));
+        --top: calc(1 - var(--not-top));
+        --val-mov: ((1 - var(--fwd))*var(--p) + var(--fwd)*var(--k) - var(--i));
+        --abs-mov: abs(var(--val-mov));
+        --not-mov: min(1, var(--abs-mov));
+        --mov: calc(1 - var(--not-mov));
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        z-index: mod(calc(var(--n) - 1 + var(--i) - var(--k)), var(--n));
+        pointer-events: none;
+        transition: z-index 0.8s cubic-bezier(1, -.9, 0, 1.9);
+    }
+
+    /* Only show pointer events for the top/active article */
+    .stackSlider .activeArticle * {
+        pointer-events: auto;
+    }
+
+    .stackSlider h2,
+    .stackSlider em {
+        translate: 0 calc(var(--not-top)*1lh);
+        opacity: var(--top);
+        transition: 0.4s calc(var(--top)*0.4s);
+        transition-property: translate, opacity;
+    }
+
+    .stackSlider h2 {
+        font-size: 1.5rem;
+        margin: 0;
+        order: 1;
+        /* Title first */
+    }
+
+    .stackSlider img {
+        --sin: sin(var(--prg)*.5turn);
+        width: 260px;
+        /* Reduced image size */
+        height: auto;
+        aspect-ratio: 1;
+        /* Square for better animation feel */
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        translate: calc(-120%*var(--mov)*sqrt(var(--sin)));
+        rotate: calc((1 - var(--sin))*var(--a));
+        position: relative;
+        align-self: center;
+        order: 2;
+        /* Image second */
+        margin: 0;
+        transition: translate 0.8s, rotate 0.8s;
+    }
+
+    .stackSlider article .navButtons {
+        display: flex;
         justify-content: center;
-        transform: scale(0.9);
+        gap: 3rem;
+        z-index: 100;
+        position: relative;
+        grid-area: auto;
+        /* Override desktop grid */
+        order: 3;
+        /* Arrows third */
+        margin: 1rem 0 0 0;
+        pointer-events: auto;
+        /* Allow clicks */
     }
 
     .stackSlider em {
-        display: -webkit-box;
-        -webkit-line-clamp: 5;
-        line-clamp: 5;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        margin-bottom: 1rem;
+        display: block;
+        padding: 0 5px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        order: 4;
+        /* Description last */
+        margin: 0.5rem 0 0 0;
     }
 }
 
 @media (max-width: 480px) {
     .stackSlider {
-        transform: scale(0.7);
-        /* margin-left: -15%; removed to fix alignment */
+        min-height: 440px;
+    }
+
+    .latestEventsSection h1 {
+        font-size: 1.8rem;
+    }
+
+    .stackSlider img {
+        width: 200px;
+        /* Even smaller for mobile */
+    }
+
+    .stackSlider article .navButtons {
+        gap: 2rem;
     }
 }

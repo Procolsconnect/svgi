@@ -127,20 +127,20 @@
 
 @media (min-width: 768px) {
   .serviceCard {
-    padding: 2rem;
-    min-height: 260px;
+    padding: 3rem;
+    min-height: 350px;
   }
 }
 
 @media (min-width: 1024px) {
   .serviceCard {
-    padding: 2rem;
-    min-height: 280px;
+    padding: 3.5rem;
+    min-height: 420px;
   }
 }
 
 .serviceCard:hover {
-  box-shadow: 0 0 20px 6px rgba(0, 0, 0, 0.53);
+  box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.4);
 }
 
 .cardBackground {
@@ -226,21 +226,30 @@
     margin-bottom: 1rem;
   }
 
-  /* Desktop padding overrides for aesthetics */
-  .serviceCard:nth-child(1) .cardContentWrapper {
-    padding-right: 8rem;
+  /* Specific Alignment to avoid corner icons */
+  .serviceCard:nth-child(1),
+  .serviceCard:nth-child(2) {
+    justify-content: flex-start;
+    /* Icons are at bottom */
   }
 
-  .serviceCard:nth-child(2) .cardContentWrapper {
-    padding-left: 8rem;
+  .serviceCard:nth-child(3),
+  .serviceCard:nth-child(4) {
+    justify-content: flex-end;
+    /* Icons are at top */
   }
 
+  /* Side padding to keep text clear of icons - more aggressive to match large icons */
+  .serviceCard:nth-child(1) .cardContentWrapper,
   .serviceCard:nth-child(3) .cardContentWrapper {
-    padding-right: 8rem;
+    padding-right: 10px;
+    /* Stay clear of right-side icons */
   }
 
+  .serviceCard:nth-child(2) .cardContentWrapper,
   .serviceCard:nth-child(4) .cardContentWrapper {
-    padding-left: 8rem;
+    padding-left: 10px;
+    /* Stay clear of left-side icons */
   }
 }
 
@@ -248,35 +257,29 @@
 
 @media (max-width: 1023px) {
   .serviceCard {
-    min-height: 300px;
-    /* Increased height for mobile to safely fit content and logo */
+    min-height: 350px;
+    /* Increased for mobile room */
   }
 
-  /* For bottom-right logo */
-  .serviceCard:nth-child(1) .cardContentWrapper {
-    padding-right: 20%;
-    padding-bottom: 20px;
-  }
-
-  /* Move content to top for bottom-logo cards (1 & 2) on mobile */
+  /* Systematic push away from corner icons */
   .serviceCard:nth-child(1),
   .serviceCard:nth-child(2) {
     justify-content: flex-start;
   }
 
-  /* For bottom-left logo */
-  .serviceCard:nth-child(2) .cardContentWrapper {
-    padding-left: 20%;
-    padding-bottom: 20px;
+  .serviceCard:nth-child(3),
+  .serviceCard:nth-child(4) {
+    justify-content: flex-end;
   }
 
-  /* Top logos (3 & 4) generally don't overlap bottom text, but add safety */
+  .serviceCard:nth-child(1) .cardContentWrapper,
   .serviceCard:nth-child(3) .cardContentWrapper {
-    padding-top: 20px;
+    padding-right: 10px;
   }
 
+  .serviceCard:nth-child(2) .cardContentWrapper,
   .serviceCard:nth-child(4) .cardContentWrapper {
-    padding-top: 20px;
+    padding-left: 10px;
   }
 }
 
