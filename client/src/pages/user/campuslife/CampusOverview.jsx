@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import styles from './CampusOverview.module.css';
-import Arrow from '../../../components/Arrow';
+import CommonHero from '../../../components/CommonHero';
 
 const apiurl = import.meta.env.VITE_API_URL;
 
@@ -12,17 +12,6 @@ const CampusLife = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [isScrollClicked, setIsScrollClicked] = useState(false);
   const [isRotated, setIsRotated] = useState(false);
-  const [heroData, setHeroData] = useState(null);
-
-  useEffect(() => {
-    axios.get(`${apiurl}/api/campus/overviewhero`)
-      .then(res => {
-        if (res.data.data && res.data.data.length > 0) {
-          setHeroData(res.data.data[0]);
-        }
-      })
-      .catch(err => console.error('Error fetching overview hero:', err));
-  }, []);
 
 
   // Draggable cat functionality
@@ -94,14 +83,12 @@ const CampusLife = () => {
   return (
     <div className={styles.wrapperMain}>
       {/* HERO */}
-      <div id="campus__hero" className={styles.hero}>
-        <img src={heroData?.image || "hero img.jpg"} alt={heroData?.title || "Hero Background"} />
-        <div className={styles.heroOverlay}></div>
-        <div className={styles.wrapper}>
-          <h1>{heroData?.title || "Campus Life"}</h1>
-          <Arrow sectionsSelector={`.${styles.section}`} />
-        </div>
-      </div>
+      <CommonHero
+        apiEndpoint="/api/campus/overviewhero"
+        defaultTitle="Campus Life"
+        sectionsSelector={`.${styles.section}`}
+        showArrow={true}
+      />
 
 
 

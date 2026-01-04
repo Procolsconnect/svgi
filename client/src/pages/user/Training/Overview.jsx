@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef ,useCallback} from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import styles from './Overview.module.css';
-import Arrow from '../../../components/Arrow';
+import CommonHero from '../../../components/CommonHero';
 
 const API_BASE = import.meta.env.VITE_API_URL + "/api";
 
@@ -20,7 +20,6 @@ const positions = [
 ];
 
 const TrainingPlacementsPage = () => {
-  const [hero, setHero] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -39,14 +38,9 @@ const TrainingPlacementsPage = () => {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const [heroRes, sliderRes] = await Promise.all([
-          axios.get(`${API_BASE}/placementhero`),
+        const [sliderRes] = await Promise.all([
           axios.get(`${API_BASE}/placementslider`)
         ]);
-
-        if (heroRes.data.data && heroRes.data.data.length > 0) {
-          setHero(heroRes.data.data[0]);
-        }
 
         if (sliderRes.data.data) {
           setCards(sliderRes.data.data);
@@ -238,12 +232,13 @@ const TrainingPlacementsPage = () => {
   return (
     <div className={styles.page}>
       {/* Hero Section */}
-      <div className={styles.hero}>
-        <img src={hero?.image || "hero img.jpg"} alt="Hero Background" />
-        <div className={styles.heroOverlay} />
-        <h1 className={styles.heroTitle}>{hero?.title || "Training & Placements"}</h1>
-        <Arrow sectionsSelector="section" />
-      </div>
+      {/* Hero Section */}
+      <CommonHero
+        apiEndpoint="/api/placementhero"
+        defaultTitle="Training & Placements"
+        sectionsSelector="section"
+        showArrow={true}
+      />
 
 
       {/* About Section */}

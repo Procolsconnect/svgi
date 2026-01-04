@@ -1,389 +1,258 @@
-import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import styles from "./vismis.module.css";
+import React from 'react';
 
-const API_BASE = import.meta.env.VITE_API_URL + "/api";
-
-const circleItems = [
-  { id: "Academics", title: "Academics" },
-  { id: "Research", title: "Research" },
-  { id: "Campus", title: "Campus" },
-  { id: "Placements", title: "Placements" },
-];
-
-export default function CampusCanvas() {
-  const [hero, setHero] = useState(null);
-  const [dynamicCards, setDynamicCards] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const [itemsShown, setItemsShown] = useState(new Array(circleItems.length).fill(false));
-  const rotateRef = useRef(null);
-
-  // responsive flags
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
-  });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [heroRes, cardsRes] = await Promise.all([
-          axios.get(`${API_BASE}/about/vismishero`),
-          axios.get(`${API_BASE}/about/vismiscard`)
-        ]);
-        setHero(heroRes.data.data);
-        setDynamicCards(cardsRes.data.data || []);
-      } catch (error) {
-        console.error("Error fetching VisMis data:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    const handler = (e) => setIsMobile(e.matches);
-    if (mq.addEventListener) mq.addEventListener("change", handler);
-    else mq.addListener(handler);
-    return () => {
-      if (mq.removeEventListener) mq.removeEventListener("change", handler);
-      else mq.removeListener(handler);
-    };
-  }, []);
-
-  // staggered reveal for circle segments
-  useEffect(() => {
-    const timeouts = [];
-    circleItems.forEach((_, i) => {
-      const t = setTimeout(() => {
-        setItemsShown((prev) => {
-          const copy = [...prev];
-          copy[i] = true;
-          return copy;
-        });
-      }, 350 * i);
-      timeouts.push(t);
-    });
-    return () => timeouts.forEach((t) => clearTimeout(t));
-  }, []);
-
-  // auto-rotate
-  useEffect(() => {
-    startAutoRotate();
-    return () => stopAutoRotate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const startAutoRotate = () => {
-    stopAutoRotate();
-    rotateRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % circleItems.length);
-    }, 3000);
-  };
-
-  const stopAutoRotate = () => {
-    if (rotateRef.current) {
-      clearInterval(rotateRef.current);
-      rotateRef.current = null;
-    }
-  };
-
-  const handleCircleClick = (index) => {
-    setActiveIndex(index);
-    // restart auto-rotate
-    stopAutoRotate();
-    rotateRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % circleItems.length);
-    }, 3000);
-  };
-
-  // SVG responsive configuration
-  const svgViewBox = isMobile ? "0 10 760 700" : "-100 60 1020 500";
-  const missionTitleStyle = {
-    fontSize: isMobile ? 24 : 24,
-    fontWeight: 700,
-    fill: isMobile ? "#111" : "#fff",
-  };
-  const subTextStyle = {
-    fontSize: isMobile ? 16 : 14,
-    fill: isMobile ? "#111" : "#fff",
-    fontWeight: 600,
-  };
-  const subMissionStyle = {
-    fontSize: isMobile ? 14 : 12,
-    fill: isMobile ? "#111" : "#fff",
-  };
-
+export default function MissionVisionValues() {
   return (
-    <div className={styles.root}>
-      {/* HERO */}
-      <div id="hero" className={styles.hero}>
-        <img src={hero?.image || "hero img.jpg"} alt="Hero Background" />
-        <h1>{hero?.title || "Our Mission and Visions"}</h1>
-      </div>
-
-      {/* CARDS */}
-      <ol className={styles.cards__container} title="Vision & Mission" aria-label="cards list">
-        {dynamicCards.map((c, i) => (
-          <li className={styles.card} key={i}>
-            <div className={styles.card__thumb}>
-              <img className="animate" src={c.image} alt={c.title} />
-            </div>
-            <div className={styles.card__content}>
-              <h3 className={styles.card__title}>{c.title}</h3>
-              <p className={styles.card__text}>{c.desc}</p>
-              <a className={styles.card__btn} aria-label={`Read more about ${c.title}`} href={c.link || "#"}>
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M12 5l7 7-7 7" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            </div>
-          </li>
-        ))}
-      </ol>
-
-      {/* SVG SECTION */}
-      <div className={styles["svg-wrapper"]} aria-hidden={false}>
-        <svg
-          id="svg4136"
-          xmlns="http://www.w3.org/2000/svg"
-          version="1.1"
-          viewBox={svgViewBox}
-          preserveAspectRatio="xMidYMid meet"
-          role="img"
-          aria-label="Mission, Vision and Values illustration"
-        >
-          <g id="layer1">
-            <path id="path4806" d="m0.83398 57.5v315h261.4l-0.15234-0.11914 245.41-314.88h-506.66z" fill="#cacaca" />
-            <text x="15" y={isMobile ? 80 : 110} style={missionTitleStyle}>
-              Mission
-            </text>
-            <text x="15" y={isMobile ? 110 : 140} style={subTextStyle}>
-              We are reliable partners
-            </text>
-            <text x="15" y={isMobile ? 130 : 155} style={subMissionStyle}>
-              Provide superior products and services
-            </text>
-            <text x="15" y={isMobile ? 150 : 170} style={subMissionStyle}>
-              Deliver Swiss quality
-            </text>
-            <text x="15" y={isMobile ? 170 : 185} style={subMissionStyle}>
-              Be cost competitive
-            </text>
-            <text x="15" y={isMobile ? 195 : 210} style={subTextStyle}>
-              We are transparent &amp; strive for excellence
-            </text>
-            <text x="15" y={isMobile ? 215 : 225} style={subMissionStyle}>
-              Use synergies &amp; effective bundle skills
-            </text>
-            <text x="15" y={isMobile ? 235 : 240} style={subMissionStyle}>
-              Have efficient, resilient and transparent processes
-            </text>
-            <text x="15" y={isMobile ? 255 : 255} style={subMissionStyle}>
-              Leverage competences and expertise
-            </text>
-            <text x="15" y={isMobile ? 275 : 270} style={subMissionStyle}>
-              Monitor performance
-            </text>
-            <text x="15" y={isMobile ? 300 : 295} style={subTextStyle}>
-              We develop our suppliers
-            </text>
-            <text x="15" y={isMobile ? 320 : 310} style={subMissionStyle}>
-              Optimizing our level of vertical integration
-            </text>
-            <text x="15" y={isMobile ? 340 : 325} style={subMissionStyle}>
-              Sustaining partnerships
-            </text>
-            <text x="15" y={isMobile ? 360 : 340} style={subMissionStyle}>
-              Managing our supply base
-            </text>
-          </g>
-
-          <g id="layer2">
-            <path id="path4804" d="m514.89 57.5-108.17 138.79 254.83 365.38h138.45v-504.17h-285.11z" fill="#cacaca" />
-            <text x={isMobile ? 520 : 520} y={isMobile ? 80 : 110} style={missionTitleStyle}>
-              Vision
-            </text>
-            <text x={isMobile ? 490 : 520} y={isMobile ? 110 : 140} style={subTextStyle}>
-              We add value and competitiveness
-            </text>
-            <text x={isMobile ? 490 : 520} y={isMobile ? 130 : 160} style={subTextStyle}>
-              to Schindler Group through
-            </text>
-            <text x={isMobile ? 490 : 520} y={isMobile ? 150 : 180} style={subTextStyle}>
-              excellence in Sourcing,
-            </text>
-            <text x={isMobile ? 490 : 520} y={isMobile ? 170 : 200} style={subTextStyle}>
-              Manufacturing and Distribution
-            </text>
-          </g>
-
-          <path id="path4802" fill="none" d="m402.97 201.1-133.59 171.4h253.13l-119.54-171.4z" />
-
-          <g id="layer3">
-            <path id="rect4715" d="m0.83398 378.33v183.33h653.61l-127.86-183.33h-525.74z" fill="#cacaca" />
-            <text x="15" y={isMobile ? 420 : 430} style={missionTitleStyle}>
-              Values
-            </text>
-            <text x="15" y={isMobile ? 450 : 460} style={subTextStyle}>
-              Safety
-            </text>
-            <text x="15" y={isMobile ? 470 : 480} style={subTextStyle}>
-              Create value for the customer
-            </text>
-            <text x="15" y={isMobile ? 490 : 500} style={subTextStyle}>
-              Commitment to people development
-            </text>
-            <text x="15" y={isMobile ? 510 : 520} style={subTextStyle}>
-              Integrity and Trust
-            </text>
-            <text x="15" y={isMobile ? 530 : 540} style={subTextStyle}>
-              Quality
-            </text>
-          </g>
-        </svg>
-
-        <div className={styles["left-heading"]}>Our Core Values</div>
-      </div>
-
-      {/* CIRCLE NAV */}
-      <div className={styles["circle-heading"]}>Our Core Values</div>
-      <div className={styles.circle} role="region" aria-label="Core values circle navigation">
-        <div className={styles["circle__items"]}>
-          <div className={styles["circle__items-inner"]}>
-            <div className={styles["circle__inner"]}>
-              <img src="cour value.png" className={styles["circle__logo"]} alt="Logo" />
-            </div>
-
-            {circleItems.map((it, i) => {
-              const itemClasses = [
-                styles["circle__item"],
-                itemsShown[i] ? "" : styles["circle__item--hidden"],
-                i === activeIndex ? styles["circle__item--active"] : "",
-                styles[`circle__item--${i === 0 ? "one" : i === 1 ? "two" : i === 2 ? "three" : "four"}`],
-              ]
-                .filter(Boolean)
-                .join(" ");
-
-              return (
-                <div
-                  key={it.id}
-                  className={itemClasses}
-                  data-title={it.title}
-                  onClick={() => handleCircleClick(i)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") handleCircleClick(i);
-                  }}
-                  aria-pressed={i === activeIndex}
-                />
-              );
-            })}
+    <div style={styles.body}>
+      {/* ================= MISSION ================= */}
+      <section style={styles.section}>
+        <div style={styles.container}>
+          <div style={styles.content}>
+            <h1 style={styles.h1}>Our Mission</h1>
+            <p style={styles.p}>
+              Our mission is to deliver innovative and reliable digital solutions that
+              empower organizations and individuals to achieve sustainable growth.
+            </p>
+            <p style={styles.p}>
+              We focus on quality, integrity, and continuous improvement in everything we do.
+            </p>
+          </div>
+          <div>
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={styles.svg}>
+              <image 
+                href="https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=764&q=80"
+                width="200" 
+                height="200" 
+                preserveAspectRatio="xMidYMid slice"
+                clipPath="url(#blobClip)"
+              />
+              <clipPath id="blobClip">
+                <path d="M43.1,-68.5C56.2,-58.6,67.5,-47.3,72.3,-33.9C77.2,-20.5,75.5,-4.9,74.2,11.3C72.9,27.6,71.9,44.5,63.8,57.2C55.7,69.8,40.6,78.2,25.5,79.2C10.4,80.1,-4.7,73.6,-20.9,69.6C-37.1,65.5,-54.5,63.9,-66,54.8C-77.5,45.8,-83.2,29.3,-85.7,12.3C-88.3,-4.8,-87.7,-22.3,-79.6,-34.8C-71.5,-47.3,-55.8,-54.9,-41.3,-64.2C-26.7,-73.6,-13.4,-84.7,0.8,-86C15,-87.2,29.9,-78.5,43.1,-68.5Z"
+                  transform="translate(100 100)" />
+              </clipPath>
+              <path id="textPath1"
+                d="M43.1,-68.5C56.2,-58.6,67.5,-47.3,72.3,-33.9C77.2,-20.5,75.5,-4.9,74.2,11.3C72.9,27.6,71.9,44.5,63.8,57.2C55.7,69.8,40.6,78.2,25.5,79.2C10.4,80.1,-4.7,73.6,-20.9,69.6C-37.1,65.5,-54.5,63.9,-66,54.8C-77.5,45.8,-83.2,29.3,-85.7,12.3C-88.3,-4.8,-87.7,-22.3,-79.6,-34.8C-71.5,-47.3,-55.8,-54.9,-41.3,-64.2C-26.7,-73.6,-13.4,-84.7,0.8,-86C15,-87.2,29.9,-78.5,43.1,-68.5Z"
+                transform="translate(100 100)" 
+                fill="none" 
+                pathLength="100"
+              />
+              <text style={styles.textContent}>
+                <textPath href="#textPath1" startOffset="0%">
+                  MISSION • MISSION • MISSION • MISSION • MISSION • MISSION • MISSION
+                  <animate attributeName="startOffset" from="0%" to="100%" dur="15s" repeatCount="indefinite"/>
+                </textPath>
+              </text>
+            </svg>
           </div>
         </div>
+      </section>
 
-        <div className={styles["circle__content"]} aria-live="polite">
-          <div
-            className={`${styles["circle__content-inner"]} ${activeIndex === -1 ? styles["circle__content-inner--is-visible"] : ""}`}
-            style={{ display: activeIndex === -1 ? undefined : "none" }}
-          >
-            <p>Select a category to explore more information.</p>
+      {/* ================= VISION ================= */}
+      <section style={{...styles.section, paddingTop: '10px'}}>
+        <div style={styles.container}>
+          <div>
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={styles.svg}>
+              <image 
+                href="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=764&q=80"
+                width="200" 
+                height="200" 
+                preserveAspectRatio="xMidYMid slice"
+                clipPath="url(#blobClip)"
+              />
+              <path id="textPath2"
+                d="M43.1,-68.5C56.2,-58.6,67.5,-47.3,72.3,-33.9C77.2,-20.5,75.5,-4.9,74.2,11.3C72.9,27.6,71.9,44.5,63.8,57.2C55.7,69.8,40.6,78.2,25.5,79.2C10.4,80.1,-4.7,73.6,-20.9,69.6C-37.1,65.5,-54.5,63.9,-66,54.8C-77.5,45.8,-83.2,29.3,-85.7,12.3C-88.3,-4.8,-87.7,-22.3,-79.6,-34.8C-71.5,-47.3,-55.8,-54.9,-41.3,-64.2C-26.7,-73.6,-13.4,-84.7,0.8,-86C15,-87.2,29.9,-78.5,43.1,-68.5Z"
+                transform="translate(100 100)" 
+                fill="none" 
+                pathLength="100"
+              />
+              <text style={styles.textContent}>
+                <textPath href="#textPath2" startOffset="0%">
+                  OUR VISION • FUTURE • INNOVATION • OUR VISION • FUTURE • INNOVATION
+                  <animate attributeName="startOffset" from="0%" to="100%" dur="15s" repeatCount="indefinite"/>
+                </textPath>
+              </text>
+            </svg>
           </div>
-
-          <div
-            className={`${styles["circle__content-inner"]} ${activeIndex === 0 ? styles["circle__content-inner--is-visible"] : ""}`}
-            style={{ display: activeIndex === 0 ? undefined : "none" }}
-          >
-            <div className={styles["circle__title"]}>Academics</div>
-            <ul className={styles["circle__link-list"]}>
-              <li>
-                <a href="#">
-                  <h3>Undergraduate Programs</h3>
-                  <p>Diverse courses designed to shape future leaders.</p>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <h3>Postgraduate Programs</h3>
-                  <p>Advanced studies fostering expertise.</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div
-            className={`${styles["circle__content-inner"]} ${activeIndex === 1 ? styles["circle__content-inner--is-visible"] : ""}`}
-            style={{ display: activeIndex === 1 ? undefined : "none" }}
-          >
-            <div className={styles["circle__title"]}>Research</div>
-            <ul className={styles["circle__link-list"]}>
-              <li>
-                <a href="#">
-                  <h3>Innovation Labs</h3>
-                  <p>Advanced labs enabling interdisciplinary work.</p>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <h3>Publications</h3>
-                  <p>Impactful research with global presence.</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div
-            className={`${styles["circle__content-inner"]} ${activeIndex === 2 ? styles["circle__content-inner--is-visible"] : ""}`}
-            style={{ display: activeIndex === 2 ? undefined : "none" }}
-          >
-            <div className={styles["circle__title"]}>Campus Life</div>
-            <ul className={styles["circle__link-list"]}>
-              <li>
-                <a href="#">
-                  <h3>Clubs &amp; Societies</h3>
-                  <p>A vibrant community fostering creativity.</p>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <h3>Sports &amp; Culture</h3>
-                  <p>Top-class facilities encouraging growth.</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div
-            className={`${styles["circle__content-inner"]} ${activeIndex === 3 ? styles["circle__content-inner--is-visible"] : ""}`}
-            style={{ display: activeIndex === 3 ? undefined : "none" }}
-          >
-            <div className={styles["circle__title"]}>Placements</div>
-            <ul className={styles["circle__link-list"]}>
-              <li>
-                <a href="#">
-                  <h3>Career Services</h3>
-                  <p>Guiding students toward career excellence.</p>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <h3>Top Recruiters</h3>
-                  <p>Leading companies offering global opportunities.</p>
-                </a>
-              </li>
-            </ul>
+          <div style={styles.content}>
+            <h1 style={styles.h1}>Our Vision</h1>
+            <p style={styles.p}>
+              Our vision is to become a leading force in digital innovation by building
+              future-ready solutions that create meaningful impact.
+            </p>
+            <p style={styles.p}>
+              We aspire to inspire progress, nurture creativity, and shape a smarter,
+              technology-driven tomorrow.
+            </p>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* ================= CORE VALUES ================= */}
+      <section style={styles.coreSection}>
+        <div style={styles.coreWrapper}>
+          {/* LEFT CIRCLE */}
+          <div style={styles.coreCircle}>
+            <svg viewBox="0 0 200 200" style={{width: '100%', height: '100%'}}>
+              <circle 
+                cx="100" 
+                cy="100" 
+                r="80"
+                fill="none"
+                stroke="#bfc1c3"
+                strokeWidth="16"
+                strokeDasharray="140 400"
+                transform="rotate(-90 100 100)" 
+              />
+              <circle 
+                cx="100" 
+                cy="100" 
+                r="80"
+                fill="none"
+                stroke="#00a1d9"
+                strokeWidth="16"
+                strokeDasharray="120 400"
+                strokeDashoffset="-140"
+                transform="rotate(-90 100 100)" 
+              />
+              <circle 
+                cx="100" 
+                cy="100" 
+                r="80"
+                fill="none"
+                stroke="#0a6f7f"
+                strokeWidth="16"
+                strokeDasharray="90 400"
+                strokeDashoffset="-260"
+                transform="rotate(-90 100 100)" 
+              />
+              <circle 
+                cx="100" 
+                cy="100" 
+                r="80"
+                fill="none"
+                stroke="#a6ce39"
+                strokeWidth="16"
+                strokeDasharray="110 400"
+                strokeDashoffset="-350"
+                transform="rotate(-90 100 100)" 
+              />
+            </svg>
+            <div style={styles.coreText}>
+              <span style={styles.coreTextSpan}>Our</span>
+              <h2 style={styles.coreTextH2}>Core<br/>Values</h2>
+            </div>
+          </div>
+          {/* RIGHT VALUES */}
+          <div style={styles.valuesContainer}>
+            <div style={styles.valueBox}>Student focus</div>
+            <div style={styles.valueBox}>Strong ethics</div>
+            <div style={styles.valueBox}>Striving for excellence</div>
+            <div style={styles.valueBox}>Social development</div>
+            <div style={styles.valueBox}>Respect for all</div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+
+const styles = {
+  body: {
+    margin: 0,
+    fontFamily: '"Montserrat", sans-serif',
+    background: '#ffffff',
+  },
+  section: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '20px 20px',
+  },
+  container: {
+    maxWidth: '1200px',
+    width: '100%',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '40px',
+    alignItems: 'center',
+  },
+  content: {},
+  h1: {
+    fontSize: '40px',
+    marginBottom: '16px',
+    fontWeight: 700,
+  },
+  p: {
+    fontSize: '16px',
+    lineHeight: 1.7,
+    color: '#555',
+    marginBottom: '12px',
+  },
+  svg: {
+    width: '100%',
+    maxWidth: '400px',
+    margin: 'auto',
+    aspectRatio: '1/1',
+    display: 'block',
+  },
+  textContent: {
+    font: '700 9.5px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+    letterSpacing: '1.4px',
+    textTransform: 'uppercase',
+    fill: 'black',
+  },
+  coreSection: {
+    width: '100%',
+    padding: '60px 20px',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  coreWrapper: {
+    maxWidth: '1200px',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '40px',
+  },
+  coreCircle: {
+    flex: '0 0 260px',
+    height: '260px',
+    position: 'relative',
+  },
+  coreText: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  coreTextSpan: {
+    display: 'block',
+    fontSize: '18px',
+    color: '#0a6f7f',
+    fontWeight: 600,
+  },
+  coreTextH2: {
+    margin: 0,
+    fontSize: '46px',
+    lineHeight: 1,
+    color: '#0a6f7f',
+  },
+  valuesContainer: {
+    flex: 1,
+    background: '#001f3f',
+    padding: '30px',
+    borderRadius: '18px',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(5, 1fr)',
+    gap: '18px',
+  },
+  valueBox: {
+    background: '#ffffff',
+    padding: '22px 14px',
+    borderRadius: '14px',
+    textAlign: 'center',
+    fontSize: '18px',
+    fontWeight: 700,
+    color: '#001f3f',
+    boxShadow: '0 6px 14px rgba(0,0,0,0.15)',
+  },
+};

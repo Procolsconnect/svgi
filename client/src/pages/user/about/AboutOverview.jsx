@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BalticSlider from "./BalticSlider";
 import styles from "./aboutOverview.module.css";
-import Arrow from "../../../components/Arrow";
+import CommonHero from "../../../components/CommonHero";
 import History from "./History";
 
 const API_BASE = import.meta.env.VITE_API_URL + "/api";
 
 export default function SVGIOverview() {
-  const [hero, setHero] = useState(null);
   const [intro, setIntro] = useState(null);
   const [gridData, setGridData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,13 +15,11 @@ export default function SVGIOverview() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [heroRes, introRes, gridRes] = await Promise.all([
-          axios.get(`${API_BASE}/about/overview/hero`),
+        const [introRes, gridRes] = await Promise.all([
           axios.get(`${API_BASE}/about/overview/intro`),
           axios.get(`${API_BASE}/about/overview/grid`)
         ]);
 
-        setHero(heroRes.data.data?.[0] || null);
         setIntro(introRes.data.data?.[0] || null);
         setGridData(gridRes.data.data?.[0] || null);
       } catch (error) {
@@ -39,11 +36,13 @@ export default function SVGIOverview() {
   return (
     <div className={styles.root}>
       {/* Hero */}
-      <div className={styles.hero}>
-        <img src={hero?.image || "/images/instu.jpg"} alt="Hero Background" />
-        <h1 className={styles.heroTitle}>{hero?.title || "Overview"}</h1>
-        <Arrow sectionsSelector={`.${styles.section}`} />
-      </div>
+      <CommonHero
+        apiEndpoint="/api/about/overview/hero"
+        defaultTitle="Overview"
+        sectionsSelector={`.${styles.section}`}
+        showArrow={true}
+      />
+
 
       {/* Section 1 - Tilted Images + Text */}
       <section className={`${styles.section} ${styles.bigger}`}>

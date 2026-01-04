@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./overview.module.css";
-import Arrow from "../../../components/Arrow";
+import CommonHero from "../../../components/CommonHero";
 
 export default function OverviewPage() {
-  const [hero, setHero] = useState(null);
   const [cards, setCards] = useState([]);
   const [contents, setContents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,13 +13,11 @@ export default function OverviewPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const [heroRes, cardRes, contentRes] = await Promise.all([
-          axios.get(`${API}/api/academicshero`),
+        const [cardRes, contentRes] = await Promise.all([
           axios.get(`${API}/api/academicscard`),
           axios.get(`${API}/api/academicscontent`)
         ]);
 
-        setHero(heroRes.data.data[0] || null);
         setCards(cardRes.data.data || []);
         setContents(contentRes.data.data || []);
       } catch (err) {
@@ -51,20 +48,20 @@ export default function OverviewPage() {
 
   return (
     <div className={styles.opContainer}>
-      <section className={styles.opHero}>
-        <img src={hero?.image} alt="Hero" />
-        <div><h1>{hero?.title}</h1></div>
+      <CommonHero
+        apiEndpoint="/api/academicshero"
+        defaultTitle="Academics"
+        sectionsSelector="section"
+        showArrow={true}
+      />
 
-        {/* Scroll Arrow */}
-        <Arrow sectionsSelector="section" />
-      </section>
 
       <section className={styles.opHeroSection}>
         <div className={styles.opText}>
           <p className={styles.opTextShort}>shree Venkateshwara Group of Institutions </p>
           <h1 className={styles.opTextTitle}>Academics</h1>
           <p className={styles.opTextDescription}>
-           At Shree Venkateshwara Group of Institutions (SVGI), academics focus on quality education, student-centric learning, and strong skill development. The institution follows a flexible Choice Based Credit System with well-structured core and elective courses supported by ability and skill enhancement modules. SVGI emphasizes modern teaching methods and activity-based learning through practical labs, projects, workshops, and internships, ensuring students gain real-world exposure and industry-ready competencies. Continuous academic support, assessments, and mentoring help every student progress confidently and achieve their academic goals.
+            At Shree Venkateshwara Group of Institutions (SVGI), academics focus on quality education, student-centric learning, and strong skill development. The institution follows a flexible Choice Based Credit System with well-structured core and elective courses supported by ability and skill enhancement modules. SVGI emphasizes modern teaching methods and activity-based learning through practical labs, projects, workshops, and internships, ensuring students gain real-world exposure and industry-ready competencies. Continuous academic support, assessments, and mentoring help every student progress confidently and achieve their academic goals.
           </p>
           <a className={styles.opTextButton} href="#">Learn more</a>
         </div>

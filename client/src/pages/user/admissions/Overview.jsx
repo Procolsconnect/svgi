@@ -1,7 +1,6 @@
-// SVGIOverview.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Arrow from '../../../components/Arrow';
+import CommonHero from '../../../components/CommonHero';
 import axios from 'axios';
 import {
     AiOutlinePhone,
@@ -17,7 +16,6 @@ import styles from './overview.module.css';
 export default function SVGIOverview() {
     const [overview, setOverview] = useState(null);
     const [cards, setCards] = useState([]);
-    const [hero, setHero] = useState(null);
 
     const [count, setCount] = useState(0);
     const [clicked, setClicked] = useState(false);
@@ -54,11 +52,9 @@ export default function SVGIOverview() {
 
                 const overviewRes = await axios.get(`${API_URL}/api/overview`);
                 const cardsRes = await axios.get(`${API_URL}/api/contact-card`);
-                const heroRes = await axios.get(`${API_URL}/api/overviewhero`);
 
                 setOverview(overviewRes.data.data[0]);
                 setCards(cardsRes.data.data);
-                setHero(heroRes.data.data[0]);
             } catch (error) {
                 console.error("Fetch failed:", error);
             }
@@ -66,13 +62,6 @@ export default function SVGIOverview() {
 
         fetchData();
     }, []);
-
-    // arrow bounce on mount
-    useEffect(() => {
-        if (arrowRef.current) {
-            arrowRef.current.classList.add("svgio-arrow-bounce");
-        }
-    }, [overview, hero]); // run again when overview/hero are loaded
 
     const detectIcon = (text) => {
         if (!text) return <AiOutlineInfoCircle />;
@@ -90,19 +79,17 @@ export default function SVGIOverview() {
         return <AiOutlineInfoCircle />;
     };
 
-    if (!overview || !hero) return <div min-h-screen>Loading…</div>;
+    if (!overview) return <div min-h-screen>Loading…</div>;
 
     return (
         <div className={styles.root}>
             {/* HERO */}
-            <div className={styles.hero}>
-                <img className={styles.heroImg} src={hero.image} alt={hero.title} />
-                <div className={styles.wrapper}>
-                    <h1 className={styles.heroTitle}>{hero.title}</h1>
-                    <Arrow sectionsSelector="section" />
-
-                </div>
-            </div>
+            <CommonHero
+                apiEndpoint="/api/overviewhero"
+                defaultTitle="Admissions"
+                sectionsSelector="section"
+                showArrow={true}
+            />
 
             {/* SECTION 1 */}
             <div className={styles.gradientSection}>
