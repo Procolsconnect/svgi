@@ -3,6 +3,7 @@ import axios from "axios";
 import BalticSlider from "./BalticSlider";
 import styles from "./aboutOverview.module.css";
 import Arrow from "../../../components/Arrow";
+import History from "./History";
 
 const API_BASE = import.meta.env.VITE_API_URL + "/api";
 
@@ -99,9 +100,11 @@ export default function SVGIOverview() {
         </div>
       </section>
 
+
       {/* Section 3 - BalticSlider */}
       <section className={styles.section}>
         <BalticSlider />
+        <History />
       </section>
     </div>
   );

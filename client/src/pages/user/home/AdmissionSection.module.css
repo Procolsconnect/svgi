@@ -1,0 +1,269 @@
+.section {
+ width: 100%;
+ height: 100%;
+   
+}
+
+.bgWrapper {
+    background-color: #111827;
+    color: #ffffff;
+}
+
+/* --- MOBILE (Base Styles) --- */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Common Header */
+.sectionHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.tagline {
+    font-size: 1.875rem;
+    padding: 0.5rem;
+    color: #fde047;
+    letter-spacing: 0.1em;
+    margin: 0;
+}
+
+.mainTitle {
+    font-size: 1.875rem;
+    line-height: 1.625;
+    margin: 0.5rem 0 1rem;
+}
+
+.description {
+    font-size: 0.875rem;
+    color: #f9fafb;
+
+}
+
+/* Split Section Wrapper */
+.splitSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Mobile: Stacked */
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Action Side (Button) */
+.actionContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.admissionList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: start;
+}
+
+.admissionLink {
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Custom "Sci-Fi" Bullet */
+/* Custom Arrow Bullet */
+/* Custom Rounded Arrow Bullet (Static) */
+.admissionLink::before {
+    content: '';
+    display: block;
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    background-color: #f6f6f6;
+    border-radius: 50%;
+    margin-right: 15px;
+    /* Static Blue Arrow SVG */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f06c7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.admissionLink:hover {
+    color: #060b88;
+}
+
+/* No animation on hover for the bullet, as requested */
+.admissionLink:hover::before {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+}
+
+/* Remove old underline effect to focus on the bullet */
+.admissionLink::after {
+    display: none;
+}
+
+.exploreBtn {
+    display: inline-block;
+    background-color: transparent;
+    font-size: 1.5rem;
+    color: #1119bf;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid #1119bf;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.exploreBtn:hover {
+    background-color: #3a16cb;
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Image Side */
+.imageContent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.imageGrid {
+    display: flex;
+    flex-wrap: nowrap;
+    /* Force one row */
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    /* Reduced gap to fit */
+    width: 100%;
+}
+
+.imageWrapper1,
+.imageWrapper2,
+.imageWrapper3 {
+    flex: 1;
+    /* Distribute space evenly */
+    display: flex;
+    justify-content: center;
+}
+
+.image1,
+.image3 {
+    display: block;
+    width: 100%;
+    /* Let wrapper control width via flex, or use strict % if needed */
+    max-width: 220px;
+    /* Optional cap */
+    margin-top: 2rem;
+}
+
+.image2 {
+    display: block;
+    width: 100%;
+    margin-top: 0;
+    padding: 0.2rem;
+}
+
+
+/* --- TABLET (768px and up) --- */
+@media (min-width: 768px) {
+    .container {
+        margin: 0 auto;
+        padding: 6rem 0;
+    }
+
+    /* Header adjustments */
+    .tagline {
+        font-size: 3rem;
+    }
+
+    .mainTitle {
+        font-size: 3rem;
+        line-height: 1.375;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    /* Split Section becomes Row */
+    .splitSection {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .actionContent {
+        width: 30%;
+        align-items: flex-start;
+        /* Align contents left */
+        justify-content: flex-start;
+        padding-left: 2rem;
+    }
+
+    .admissionList {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .imageContent {
+        width: 70%;
+        margin-left: 0;
+    }
+
+    .image2 {
+        margin-top: 0;
+        padding: 0;
+    }
+}
+
+/* --- DESKTOP (1024px and up) --- */
+@media (min-width: 1024px) {
+    .actionContent {
+        width: 25%;
+    }
+
+    .imageContent {
+        width: 85%;
+        margin-left: 3rem;
+    }
+
+    .image1 {
+        display: inline-block;
+        width: auto;
+        margin-top: 1rem;
+    }
+
+    .image3 {
+        display: inline-block;
+        width: auto;
+        margin-top: 7rem;
+    }
+
+    .image2 {
+        width: auto;
+    }
+}

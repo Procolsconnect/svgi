@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
-
 /* Main Container Layout */
 .mainContainer {
     display: grid;
@@ -21,7 +18,6 @@
 
 .mapImage {
     display: none;
-    /* Map is handled by background-image now for better optimization */
 }
 
 .contentSection {
@@ -35,6 +31,7 @@
 
 .headerSection {
     margin-bottom: clamp(1.5rem, 4vw, 3rem);
+    text-align: center;
 }
 
 .title {
@@ -52,162 +49,107 @@
     margin-top: 5px;
 }
 
-.cardSection {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+/* Slider Component Styles */
+.sliderWrapper {
     width: 100%;
-}
-
-/* Character Card - Optimized for proportional scaling */
-.milo {
-    width: 100%;
-    max-width: 600px;
-    aspect-ratio: 600 / 450;
     position: relative;
-    box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.1);
-    container-type: inline-size;
-    /* Enable container queries for font scaling */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
-.bgImage {
+/* New Overflow container to clip the sliding track */
+.sliderOverflow {
+    width: 100%;
+    overflow: hidden;
+    /* Optional: round corners of the meaningful area */
+    border-radius: 12px;
+}
+
+.sliderTrack {
+    display: flex;
+    width: 100%;
+    /* Will need to be width of all items? No, flexbox handles it */
+    /* If we have 2 items visible, each is 50%. Track needs to be wide enough? */
+    /* With flex-shrink: 0 and flex-basis: 50%, the track will naturally overflow its parent */
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Smooth eased transition */
+    --slide-width: 50%;
+    /* Default desktop width */
+}
+
+.slide {
+    flex: 0 0 50%;
+    /* Each slide takes exactly 50% of the VIEWABLE area */
+    /* Add padding/margin to create the 'gap' visual without actual margin affecting math */
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    /* Important so padding is inside the 50% */
+
+    aspect-ratio: 3/4;
+    position: relative;
+}
+
+.slideImage {
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.slide:hover .slideImage {
+    transform: scale(1.03);
+}
+
+.imageLabel {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
-    z-index: 0;
-}
-
-.cardContentWrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-}
-
-.testino {
-    position: absolute;
-    width: 50%;
-    /* Proportional Lock */
-    height: 62%;
-    /* Proportional Lock */
-    top: 22%;
-    /* Proportional Lock */
-    left: 50%;
-    /* Proportional Lock */
-    text-align: justify;
-    overflow: auto;
-    padding: 1%;
-    line-height: 1.15;
-    rotate: 2.5deg;
-}
-
-.testino::-webkit-scrollbar {
-    width: 3px;
-}
-
-.testino::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.testino::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 3px;
-}
-
-.aff {
-    position: absolute;
-    width: 38%;
-    top: 80%;
-    left: 54%;
+    margin: 0 0.5rem;
+    /* Match the padding of the slide */
+    width: calc(100% - 1rem);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: #fff;
+    padding: 1.5rem 1rem 1rem;
     text-align: center;
-    background-color: #212e1e;
-    line-height: 1;
-    border-radius: 0px;
-    padding: 1% 2%;
-    rotate: 3deg;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
 
-/* typography - uses relative sizes (rem/em) to stay crisp */
-.c {
-    font-family: calibri;
-    text-transform: uppercase;
-    font-size: 2.2cqw;
-    /* Scaled to card */
-    letter-spacing: 0.15em;
-    color: #dcdcdc;
-    background-color: #212e1e;
+.slide:hover .imageLabel {
+    opacity: 1;
 }
 
-.m {
-    font-family: tahoma;
-    font-size: 2cqw;
-    color: #6b3220;
-    text-transform: uppercase;
+.navButton {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+    z-index: 2;
+    flex-shrink: 0;
 }
 
-.m1 {
-    font-family: tahoma;
-    font-size: 2.3cqw;
-    color: #453125;
-}
-
-.y {
-    font-family: arial;
-    font-size: 1.8cqw;
-    color: #041a0b;
-    text-transform: uppercase;
-}
-
-.g1 {
-    font-family: trebuchet ms;
-    font-size: 2.2cqw;
-    color: #163021;
-}
-
-.n {
-    font-family: georgia;
-    color: #0e2236;
-    font-size: 2.2cqw;
-    font-style: italic;
-}
-
-.n1 {
-    font-family: trebuchet ms;
-    color: #6f7e69;
-    font-size: 2cqw;
-    text-transform: uppercase;
-}
-
-.r {
-    font-family: tahoma;
-    color: #171717;
-    font-size: 2.3cqw;
-}
-
-.r1 {
-    font-family: tahoma;
-    color: #e1d7cb;
-    font-size: 2.1cqw;
-}
-
-.r2 {
-    font-family: tahoma;
-    color: #868078;
-    font-size: 2cqw;
-}
-
-.aff a:link,
-.aff a:visited {
-    color: #e1d7cb;
-}
-
-.aff a {
-    cursor: crosshair;
+.navButton:hover {
+    background: #161414;
+    color: #fff;
+    border-color: #161414;
 }
 
 /* Mobile Responsive Adjustments */
@@ -220,86 +162,39 @@
 
     .mapSection {
         display: block;
-        height: 35vh;
-        /* Visible height for map on mobile */
+        height: 25vh;
+        /* Reduced from 35vh */
         margin: 1rem;
         background-size: contain;
     }
 
     .contentSection {
         flex: 1;
-        padding: 3rem 1rem;
-        align-items: center;
-        text-align: center;
+        padding: 2rem 1rem;
+        /* Reduced padding */
     }
 
-    .milo {
-        width: 100%;
-        max-width: 480px;
-        margin: 0 auto;
-    }
-
-    .cardSection {
-        justify-content: center;
-    }
-
-    /* Adjust font scaling for smaller containers on mobile */
-    .c {
-        font-size: 3cqw;
-    }
-
-    .m {
-        font-size: 2.8cqw;
-    }
-
-    .m1 {
-        font-size: 3.2cqw;
-    }
-
-    .y {
-        font-size: 2.5cqw;
-    }
-
-    .g1 {
-        font-size: 3cqw;
-    }
-
-    .n {
-        font-size: 3cqw;
-    }
-
-    .n1 {
-        font-size: 2.8cqw;
-    }
-
-    .r {
-        font-size: 3.2cqw;
-    }
-
-    .r1 {
-        font-size: 3cqw;
-    }
-
-    .r2 {
-        font-size: 2.8cqw;
+    .slide {
+        aspect-ratio: 3/2;
+        /* Make slides wider/shorter on mobile vs 3/4 tall portrait */
+        /* OR set a max-height */
+        max-height: 250px;
     }
 }
 
-@media (max-width: 480px) {
-    .title {
-        font-size: 2.2rem;
+@media (max-width: 600px) {
+    .sliderTrack {
+        --slide-width: 100%;
     }
 
-    .subtitle {
-        font-size: 1rem;
+    .slide {
+        flex: 0 0 100%;
+        aspect-ratio: 4/5;
+        max-height: 350px;
+        padding: 0 0.5rem;
     }
 
-    .milo {
-        max-width: 100%;
-    }
-
-    .testino {
-        padding: 2%;
-        line-height: 1.1;
+    .navButton {
+        display: none;
     }
 }

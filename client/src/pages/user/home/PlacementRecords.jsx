@@ -86,7 +86,7 @@ const SwiperCarousel = () => {
             modules={[Navigation, Mousewheel]}
             direction={isMobile ? "vertical" : "horizontal"}
             slidesPerView={isMobile ? 3 : 5}
-            spaceBetween={isMobile ? 0 : 0}
+            spaceBetween={isMobile ? 30 : 0}
             centeredSlides={true}
             loop={swiperData.length >= 5}
             watchSlidesProgress={true}

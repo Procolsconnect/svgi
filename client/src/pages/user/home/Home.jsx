@@ -14,8 +14,9 @@ import RandomLogoSlider from './Logo_Section.jsx';
 import LogoSlider1 from './Logo_Section1.jsx';
 import FloatingIcons from '../../../components/FloatingIcons.jsx';
 import Popup from '../../../components/Popup.jsx';
-import Stats from './Stats.jsx';
 import Milo from '../news/Milo.jsx';
+import AdmissionSection from './AdmissionSection.jsx';
+import StatsSection from "../home/StatsSection";
 import axios from 'axios';
 
 const apiurl = import.meta.env.VITE_API_URL;
@@ -53,9 +54,10 @@ const Home = () => {
       <FloatingIcons direction="right" vertical={true} />
       <Popup />
       <HeroSlider />
-      {/* <Stats/> */}
       <Instutions />
       <RankingSection />
+      <AdmissionSection />
+      <StatsSection />
       <Leadership />
       <PlacementRecords />
       <WhySvg />
