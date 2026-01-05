@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './ug.module.css';
+import CommonHero from '../../../components/CommonHero';
 
 const UndergraduateCoursesPage = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const [heroData, setHeroData] = useState({ title: 'Undergraduate courses', image: 'hero img.jpg' });
   const [courseData, setCourseData] = useState({
     image1: '', image2: '', image3: '', top_text: 'LINEN BLAZER', bottom_text: 'TOP 01'
   });
@@ -16,15 +16,9 @@ const UndergraduateCoursesPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [heroRes, courseRes] = await Promise.all([
-          axios.get(`${API_URL}/api/ughero`),
+        const [courseRes] = await Promise.all([
           axios.get(`${API_URL}/api/ugcourse`)
         ]);
-
-        if (heroRes.data.success && heroRes.data.data.length > 0) {
-          const { title, image } = heroRes.data.data[0];
-          setHeroData({ title, image });
-        }
 
         if (courseRes.data.success && courseRes.data.data.length > 0) {
           const data = courseRes.data.data[0];
@@ -65,14 +59,10 @@ const UndergraduateCoursesPage = () => {
   return (
     <div className={styles.pageWrapper}>
       {/* HERO SECTION */}
-      <div className={styles.hero} id="hero">
-        {loading ? (
-          <div style={{ background: '#ccc', height: '100%', width: '100%', position: 'absolute' }}></div>
-        ) : (
-          <img src={heroData.image} alt="Hero Background" />
-        )}
-        <h1>{heroData.title}</h1>
-      </div>
+      <CommonHero
+        apiEndpoint="/api/ughero"
+        defaultTitle="Undergraduate courses"
+      />
 
       <div className={styles.container}>
         <div className={styles.header}>
@@ -100,10 +90,10 @@ const UndergraduateCoursesPage = () => {
           <h2 className={`${styles.italic} ${styles['trans-90']}`}>UG DETAILS</h2>
           <h2>Lets craft your career journey from here </h2>
           <p>
-       The value of an undergraduate (UG) degree is that it creates a solid base for a student's future in school and work. It helps students learn important knowledge, build key skills, and find out what they are good at through hands-on experiences and specialization. 
+            The value of an undergraduate (UG) degree is that it creates a solid base for a student's future in school and work. It helps students learn important knowledge, build key skills, and find out what they are good at through hands-on experiences and specialization.
           </p>
           <p>
-          A UG program leads to more education, better job opportunities, and career advancement while boosting confidence, communication, and personal growth. It is the first big step that readies students to face the real world with understanding and ability.
+            A UG program leads to more education, better job opportunities, and career advancement while boosting confidence, communication, and personal growth. It is the first big step that readies students to face the real world with understanding and ability.
           </p>
         </div>
 

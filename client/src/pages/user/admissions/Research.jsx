@@ -1,30 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './research.module.css';
+import CommonHero from '../../../components/CommonHero';
 
 const ResearchCoursesPage = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const [heroData, setHeroData] = useState({ title: 'Research Courses', image: 'hero img.jpg' });
   const [courseData, setCourseData] = useState({
     image1: '', image2: '', image3: '', top_text: 'LINEN BLAZER', bottom_text: 'TOP 01'
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [heroRes, courseRes] = await Promise.all([
-          axios.get(`${API_URL}/api/researchhero`),
+        const [courseRes] = await Promise.all([
           axios.get(`${API_URL}/api/research`)
         ]);
-
-        if (heroRes.data.success && heroRes.data.data.length > 0) {
-          const { title, image } = heroRes.data.data[0];
-          setHeroData({ title: title || 'Research Courses', image });
-        }
 
         if (courseRes.data.success && courseRes.data.data.length > 0) {
           const data = courseRes.data.data[0];
@@ -65,18 +57,10 @@ const ResearchCoursesPage = () => {
   return (
     <div className={styles.pageWrapper}>
       {/* HERO SECTION */}
-      <div className={styles.heroSection}>
-        {loading ? (
-          <div style={{ background: '#ccc', height: '100%', width: '100%', position: 'absolute' }}></div>
-        ) : (
-          <img
-            src={heroData.image}
-            alt="Hero Background"
-            className={styles.heroImage}
-          />
-        )}
-        <h1 className={styles.heroTitle}>{heroData.title}</h1>
-      </div>
+      <CommonHero
+        apiEndpoint="/api/researchhero"
+        defaultTitle="Research Courses"
+      />
 
       {/* MAIN GRID LAYOUT */}
       <div className={styles.mainContainer}>

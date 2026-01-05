@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './pg.module.css';
+import CommonHero from '../../../components/CommonHero';
 
 const PostgraduateCoursesPage = () => {
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const [heroData, setHeroData] = useState({ title: 'Postgraduate Courses', image: 'hero img.jpg' });
   const [courseData, setCourseData] = useState({
     image1: '', image2: '', image3: '', top_text: 'LINEN BLAZER', bottom_text: 'TOP 01'
   });
@@ -16,15 +16,9 @@ const PostgraduateCoursesPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [heroRes, courseRes] = await Promise.all([
-          axios.get(`${API_URL}/api/pghero`),
+        const [courseRes] = await Promise.all([
           axios.get(`${API_URL}/api/pgcourse`)
         ]);
-
-        if (heroRes.data.success && heroRes.data.data.length > 0) {
-          const { title, image } = heroRes.data.data[0];
-          setHeroData({ title: title || 'Postgraduate Courses', image });
-        }
 
         if (courseRes.data.success && courseRes.data.data.length > 0) {
           const data = courseRes.data.data[0];
@@ -65,18 +59,10 @@ const PostgraduateCoursesPage = () => {
   return (
     <div className={styles.pageWrapper}>
       {/* HERO SECTION */}
-      <div className={styles.heroSection}>
-        {loading ? (
-          <div style={{ background: '#ccc', height: '100%', width: '100%', position: 'absolute' }}></div>
-        ) : (
-          <img
-            src={heroData.image}
-            alt="Hero Background"
-            className={styles.heroImage}
-          />
-        )}
-        <h1 className={styles.heroTitle}>{heroData.title}</h1>
-      </div>
+      <CommonHero
+        apiEndpoint="/api/pghero"
+        defaultTitle="Postgraduate Courses"
+      />
 
       {/* MAIN GRID LAYOUT */}
       <div className={styles.mainContainer}>
@@ -112,12 +98,12 @@ const PostgraduateCoursesPage = () => {
           <h2 className={`${styles.italic} ${styles.trans90}`}>PG DETAILS</h2>
           <h2>Let  start to empower your skill From here  </h2>
           <p>
-           A PG (Postgraduate) degree is valuable because it helps people gain more knowledge, improve their skills, and boost their academic and job profiles. 
-           It provides advanced training, chances for research, and practical skills that get graduates ready for leadership roles and better careers.
+            A PG (Postgraduate) degree is valuable because it helps people gain more knowledge, improve their skills, and boost their academic and job profiles.
+            It provides advanced training, chances for research, and practical skills that get graduates ready for leadership roles and better careers.
           </p>
           <p>
-           A PG program improves thinking skills, decision-making, and creativity, leading to better job opportunities, teaching positions, and business growth. 
-           It is an important step that helps individuals become experts in their field.
+            A PG program improves thinking skills, decision-making, and creativity, leading to better job opportunities, teaching positions, and business growth.
+            It is an important step that helps individuals become experts in their field.
           </p>
         </div>
 

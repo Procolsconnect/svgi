@@ -2,10 +2,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import styles from './procedure.module.css';
+import CommonHero from '../../../components/CommonHero';
 
 const AdmissionsSection = () => {
   const textRef = useRef(null);
-  const [heroData, setHeroData] = useState({ title: 'Admissions Procedure', image: 'hero img.jpg' });
   const [procedureData, setProcedureData] = useState({
     content: 'Crafting digital experiences that blend innovation with intuitive design. Each pixel tells a story of creativity and purpose.',
     video: 'https://www.w3schools.com/html/mov_bbb.mp4',
@@ -19,15 +19,10 @@ const AdmissionsSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [heroRes, procedureRes] = await Promise.all([
-          axios.get(`${API_URL}/api/procedurehero`),
+        const [ procedureRes] = await Promise.all([
           axios.get(`${API_URL}/api/procedure`)
         ]);
 
-        if (heroRes.data.success && heroRes.data.data.length > 0) {
-          const { title, image } = heroRes.data.data[0];
-          setHeroData({ title: title || 'Admissions Procedure', image });
-        }
 
         if (procedureRes.data.success && procedureRes.data.data.length > 0) {
           const data = procedureRes.data.data[0];
@@ -93,15 +88,10 @@ const AdmissionsSection = () => {
   return (
     <div className={styles.wrapper}>
       {/* HERO SECTION */}
-      <section className={styles.hero}>
-        {loading ? (
-          <div style={{ background: '#ccc', height: '100%', width: '100%', position: 'absolute' }}></div>
-        ) : (
-          <img src={heroData.image} alt="Hero Background" className={styles.heroBg} />
-        )}
-        <div className={styles.heroOverlay}></div>
-        <h1 className={styles.heroTitle}>{heroData.title}</h1>
-      </section>
+      <CommonHero
+        apiEndpoint="/api/procedurehero"
+        defaultTitle="Admissions Procedure"
+      />
 
       {/* TEXT + VIDEO SECTION */}
       <section className={styles.content}>
