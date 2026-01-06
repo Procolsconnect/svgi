@@ -58,11 +58,15 @@ const OVERVIEW_CONFIG = {
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Title" },
+            { key: "phone", label: "Phone" },
+            { key: "email", label: "Email" },
             { key: "description", label: "Description" },
             { key: "image", label: "Icon" },
         ],
         fields: [
             { name: "title", label: "Title", type: "text", required: true },
+            { name: "phone", label: "Phone", type: "text", required: true },
+            { name: "email", label: "Email", type: "text", required: true },
             { name: "description", label: "Description", type: "textarea", required: true },
             { name: "image", label: "Icon Image", type: "file", required: true },
         ]

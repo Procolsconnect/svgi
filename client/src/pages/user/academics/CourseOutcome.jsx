@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./courseOutcome.module.css";
-
+import CommonHero from "../../../components/CommonHero";
 export default function CourseOutcome() {
     const headlineRef = useRef(null);
 
     // UNRAVEL EFFECT
     const unravel = (el, t = 18) => {
         let chars = el.innerText.split("");
-        const allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789. ".split("");
+        const allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP. ".split("");
         let string = "";
 
         const loop = setInterval(() => {
@@ -38,11 +38,11 @@ export default function CourseOutcome() {
     return (
         <div className={styles.body}>
             {/* HERO SECTION */}
-            <div className={styles.hero}>
-                <img src="/images/instu.jpg" alt="Hero Background" />
-                <h1>Course Outcome</h1>
-            </div>
-
+            <CommonHero
+                apiEndpoint="/api/outcomehero"
+                defaultTitle="Course Outcome"
+                sectionsSelector="section"
+            />
             {/* MAIN SECTION */}
             <div className={styles.mainSection}>
                 {/* LEFT UNRAVEL SECTION */}
@@ -50,7 +50,7 @@ export default function CourseOutcome() {
                     <h1 ref={headlineRef} contentEditable={false}>
                         Upcoming courses
                     </h1>
-                    <code>Our student growth plan in my college</code>
+                    <p>Our student growth plan focuses on developing practical skills alongside academic knowledge to prepare students for real-world challenges. We encourage critical thinking, teamwork, and problem-solving through projects, workshops, and industry exposure. Continuous mentoring and skill-based training help students identify their strengths and career goals early..</p>
                 </div>
 
                 {/* RIGHT GALLERY */}
@@ -62,7 +62,7 @@ export default function CourseOutcome() {
             </div>
 
             {/* LEFT HEADING */}
-            <div className={styles.leftHeading}>Our Student Career Foundation</div>
+            <h1 className={styles.leftHeading}>Our Student Career Foundation</h1>
 
             {/* HOVER CARDS */}
             <div className={styles.hoverGallery}>

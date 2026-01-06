@@ -1,10 +1,51 @@
-const { CourseOutcome } = require("../../models/academics");
+const { CourseOutcome, CourseOutcomehero } = require("../../models/academics");
 
 // ------------------- GET ALL -------------------
 async function getAllOutcomes() {
   return await CourseOutcome.find().sort({ createdAt: -1 });
 }
+async function getAllOutcomehero() {
+  return await CourseOutcomehero.find().sort({ createdAt: -1 });
+}
 
+async function createCourseOutcomehero(body, files) {
+  if (!files || !files.image) {
+    throw new Error("Image is required");
+  }
+
+  const imageUrl = files.image[0].path;
+
+  const outcomehero = await CourseOutcomehero.create({
+    title: body.title,
+    image: imageUrl,
+  });
+
+  return outcomehero;
+}
+
+async function updateCourseOutcomehero(id, body, files) {
+  const updateData = {
+    title: body.title,
+  };
+
+  if (files && files.image && files.image.length > 0) {
+    updateData.image = files.image[0].path;
+  }
+
+  const updated = await CourseOutcomehero.findByIdAndUpdate(id, updateData, {
+    new: true,
+  });
+
+  if (!updated) throw new Error("CourseOutcomehero not found");
+
+  return updated;
+}
+
+async function deleteCourseOutcomehero(id) {
+  const deleted = await CourseOutcomehero.findByIdAndDelete(id);
+  if (!deleted) throw new Error("CourseOutcomehero not found");
+  return deleted;
+}
 // ------------------- GET BY ID -------------------
 async function getCourseOutcomeById(id) {
   const outcome = await CourseOutcome.findById(id);
@@ -57,10 +98,22 @@ async function deleteCourseOutcome(id) {
   return deleted;
 }
 
+// ------------------- GET HERO BY ID -------------------
+async function getCourseOutcomeheroById(id) {
+  const outcomehero = await CourseOutcomehero.findById(id);
+  if (!outcomehero) throw new Error("CourseOutcomehero not found");
+  return outcomehero;
+}
+
 module.exports = {
   getAllOutcomes,
   getCourseOutcomeById,
   createCourseOutcome,
   updateCourseOutcome,
   deleteCourseOutcome,
+  getAllOutcomehero,
+  getCourseOutcomeheroById,
+  createCourseOutcomehero,
+  updateCourseOutcomehero,
+  deleteCourseOutcomehero,
 };

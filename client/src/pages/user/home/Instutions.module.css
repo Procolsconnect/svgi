@@ -126,6 +126,7 @@
 
 .link span {
   display: inline-block;
+    color: #0724a1;
   white-space: nowrap;
   position: absolute;
   bottom: 2px;

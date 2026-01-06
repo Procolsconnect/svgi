@@ -87,7 +87,7 @@ const ContactCardSchema = new mongoose.Schema(
     title: { type: String, required: true },     // SVGI Engineering College
     phone: { type: String, required: true },     // +91-4175-220101
     email: { type: String, required: true },     // engg@svgicollege.edu.in
-     description: { type: String, required: true },  // 9 am - 5 pm; Mon–Sat
+    description: { type: String, required: true },  // 9 am - 5 pm; Mon–Sat
     image: { type: String, required: true },     // cloudinary URL
   },
   { timestamps: true }

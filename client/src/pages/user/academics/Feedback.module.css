@@ -1,86 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&family=Lato:400,400i,700&family=Merriweather:400,400i,700&display=swap');
 @import url('https://cdn.rawgit.com/rtaibah/dubai-font-cdn/master/dubai-font.css');
-@import url('https://use.fontawesome.com/1744f3f671.js');
-
-@keyframes underlinePulse {
-
-  0%,
-  100% {
-    transform: scaleX(1);
-    opacity: 0.8;
-  }
-
-  50% {
-    transform: scaleX(1.4);
-    opacity: 1;
-  }
-}
-
-@keyframes testimScale {
-  0% {
-    box-shadow: 0 0 0 0 #eee;
-  }
-
-  35% {
-    box-shadow: 0 0 10px 5px #eee;
-  }
-
-  70% {
-    box-shadow: 0 0 10px 5px #1e3a8a;
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 #1e3a8a;
-  }
-}
-
-@keyframes testimContentIn {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes testimContentOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-}
-
-@keyframes testimShow {
-  from {
-    opacity: 0;
-    transform: scale(0);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes testimHide {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  to {
-    opacity: 0;
-    transform: scale(0);
-  }
-}
 
 @keyframes floatCard {
 
@@ -108,74 +27,12 @@
   }
 }
 
-@keyframes zoomIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.heroSection {
-  min-height: 350px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  color: white;
-}
-
-.heroSection img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.heroSection::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 0;
-}
-
-.heroTitle {
-  position: relative;
-  font-size: 52px;
-  font-weight: bold;
-  z-index: 1;
-  letter-spacing: 1px;
-  font-family: 'Playfair Display', serif;
-}
-
-.heroTitle::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 5px;
-  margin: 14px auto 0;
-  background: linear-gradient(90deg, #ff512f, #dd2476);
-  border-radius: 3px;
-  animation: underlinePulse 2s infinite;
-}
-
 .feedbackContainer {
+  display: flex;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 4rem 1rem;
-  display: flex;
   gap: 3rem;
   align-items: flex-start;
 }
@@ -183,13 +40,54 @@
 .photoWrapper {
   flex: 0 0 28%;
   position: sticky;
-  top: 2rem;
+  top: 5rem;
   align-self: flex-start;
 }
 
 .textWrapper {
   flex: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 150px);
+  padding-right: 1rem;
 }
+
+.textWrapper header h1 {
+  font-family: 'Merriweather', serif;
+  font-size: 3em;
+  margin-bottom: 1rem;
+  color: #1a202c;
+}
+
+.textWrapper header h1:not(:first-of-type) {
+  font-size: 2.2em;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.textWrapper ul {
+  padding: 1.5em 2.5em;
+  font-size: 1em;
+  line-height: 1.5em;
+  list-style-type: disc;
+  text-align: left;
+  color: #2d3748;
+}
+
+.textWrapper ul li {
+  margin-bottom: 0.8rem;
+}
+
+/* Custom scrollbar for text wrapper */
+.textWrapper::-webkit-scrollbar {
+  width: 0px;
+}
+
+.textWrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+
 
 .cardContainer {
   perspective: 1000px;
@@ -211,7 +109,7 @@
 }
 
 .floatingCard {
-  position: relative;
+
   cursor: pointer;
   width: 100%;
   padding: 1.5em;
@@ -240,15 +138,105 @@
 .cardPicture img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   position: absolute;
   left: 0;
   top: 0;
+  object-fit: cover;
   transition: transform 0.3s ease;
 }
 
 .cardPicture:hover img {
   transform: scale(1.1);
+}
+
+@keyframes underlinePulse {
+
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleX(1.4);
+    opacity: 1;
+  }
+}
+
+@keyframes testimScale {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 #eee;
+  }
+
+  35% {
+    box-shadow: 0 0 10px 5px #eee;
+  }
+
+  70% {
+    box-shadow: 0 0 10px 5px #1e3a8a;
+  }
+}
+
+@keyframes testimContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(100%)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+@keyframes testimContentOut {
+  from {
+    opacity: 1;
+    transform: translateY(0)
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-100%)
+  }
+}
+
+@keyframes testimShow {
+  from {
+    opacity: 0;
+    transform: scale(0)
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1)
+  }
+}
+
+@keyframes testimHide {
+  from {
+    opacity: 1;
+    transform: scale(1)
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0)
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .lightbox {
@@ -539,22 +527,41 @@
   text-decoration: none;
 }
 
+/* ====================== GRID LAYOUT & BORDER IMAGE SOLUTIONS ====================== */
 .gridLayout {
+  --w: min(80vw, 40em);
   display: grid;
-  grid-template-columns: min(80vw, 40em);
+  grid-template-columns: var(--w);
   justify-content: center;
   background: url(https://images.unsplash.com/photo-1546345414-16d37d6baa05?w=1400) 50% / cover;
   color: white;
-  padding: 3em 0;
+  padding: 4em 0;
+  width: 100%;
+  margin: 2rem 0;
 }
 
 .borderImage {
-  display: grid;
-  grid-template-columns: min(80vw, 40em);
-  justify-content: center;
-  background: url(https://images.unsplash.com/photo-1546345414-16d37d6baa05?w=1400) 50% / cover;
-  color: rgb(17, 17, 17);
-  padding: 3em 0;
+  --w: min(80vw, 40em);
+  margin: 3em auto;
+  border-image: url(https://images.unsplash.com/photo-1546345414-16d37d6baa05?w=1400) fill 0/0 calc(50vw - .5 * var(--w)) repeat;
+  width: var(--w);
+  color: black;
+  padding: 4em 0;
+}
+
+.gridLayout h2,
+.borderImage h2 {
+  font-family: "SUSE", sans-serif;
+  font-weight: 600;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.gridLayout p,
+.borderImage p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.25em;
+  line-height: 1.125;
 }
 
 @media (max-width: 900px) {

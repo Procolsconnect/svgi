@@ -94,4 +94,10 @@ module.exports = function academicRoutes(app) {
   ]), outcome.updateOutcome);
   app.delete("/api/outcome/:id", outcome.deleteOutcome);
 
+  //outcomehero routes
+  app.post("/api/outcomehero", upload.single("image"), outcome.createOutcomehero);
+  app.get("/api/outcomehero", outcome.getAllOutcomehero);
+  app.put("/api/outcomehero/:id", upload.single("image"), outcome.updateOutcomehero);
+  app.delete("/api/outcomehero/:id", outcome.deleteOutcomehero);
+
 };

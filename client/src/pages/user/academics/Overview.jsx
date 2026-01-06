@@ -55,15 +55,11 @@ export default function OverviewPage() {
         showArrow={true}
       />
 
-
+      {/* GridSection */}
       <section className={styles.opHeroSection}>
-        <div className={styles.opText}>
+        <div className={styles.opTitleBlock}>
           <p className={styles.opTextShort}>shree Venkateshwara Group of Institutions </p>
           <h1 className={styles.opTextTitle}>Academics</h1>
-          <p className={styles.opTextDescription}>
-            At Shree Venkateshwara Group of Institutions (SVGI), academics focus on quality education, student-centric learning, and strong skill development. The institution follows a flexible Choice Based Credit System with well-structured core and elective courses supported by ability and skill enhancement modules. SVGI emphasizes modern teaching methods and activity-based learning through practical labs, projects, workshops, and internships, ensuring students gain real-world exposure and industry-ready competencies. Continuous academic support, assessments, and mentoring help every student progress confidently and achieve their academic goals.
-          </p>
-          <a className={styles.opTextButton} href="#">Learn more</a>
         </div>
 
         <div className={styles.opGrid}>
@@ -73,8 +69,16 @@ export default function OverviewPage() {
             </div>
           ))}
         </div>
+
+        <div className={styles.opDescriptionBlock}>
+          <p className={styles.opTextDescription}>
+            At Shree Venkateshwara Group of Institutions (SVGI), academics focus on quality education, student-centric learning, and strong skill development. The institution follows a flexible Choice Based Credit System with well-structured core and elective courses supported by ability and skill enhancement modules. SVGI emphasizes modern teaching methods and activity-based learning through practical labs, projects, workshops, and internships, ensuring students gain real-world exposure and industry-ready competencies. Continuous academic support, assessments, and mentoring help every student progress confidently and achieve their academic goals.
+          </p>
+          <a className={styles.opTextButton} href="#">Learn more</a>
+        </div>
       </section>
 
+      {/* ProjcardSection */}
       <section className={styles.projcardContainer}>
         {cards.map((c) => (
           <div key={c._id} className={`${styles.projcard} ${styles.projcardBlue}`}>

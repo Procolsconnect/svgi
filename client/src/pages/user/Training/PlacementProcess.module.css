@@ -1,6 +1,6 @@
 .page {
   margin: 0;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Poppins',' -apple-system', "BlinkMacSystemFont", 'Segoe UI', sans-serif;
   background-color: #f9fafb;
   line-height: 1.6;
 }
@@ -39,7 +39,7 @@
 .heroTitle {
   position: relative;
   font-size: 56px;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Playfair Display', serif;
   font-weight: 700;
   z-index: 1;
   letter-spacing: 1.5px;

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import styles from './Feedback.module.css';
+import CommonHero from '../../../components/CommonHero';
 
 const API_BASE = import.meta.env.VITE_API_URL + "/api";
 
@@ -70,20 +72,26 @@ const SVGIFeedback = () => {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <div className={styles.heroSection}>
-        <img src={hero?.image || "/images/instu.jpg"} alt="Hero Background" />
-        <h1 className={styles.heroTitle}>{hero?.title || "Feedback"}</h1>
-      </div>
+      <CommonHero
+        apiEndpoint="/api/feedbackhero"
+        defaultTitle="Feedback"
+        sectionsSelector="section"
+      />
 
       {/* Feedback Section */}
       <section className={styles.feedbackContainer}>
+        {/* PHOTO CARD (Sticky when scrolled to section) */}
         <div className={styles.photoWrapper}>
           <div className={styles.cardContainer}>
             <div className={styles.cardShadow}></div>
-            <div className={styles.floatingCard} onClick={() => setLightboxActive(true)}>
+            <div
+              className={styles.floatingCard}
+              id="profileImageTrigger"
+              onClick={() => setLightboxActive(true)}
+            >
               <div className={styles.cardPicture}>
                 <div className={styles.cardFrame}></div>
-                <img src={hero?.image} alt="SVGI Group Avatar" />
+                <img src={hero?.image || "https://images.unsplash.com/photo-1642478881792-4726327bb0bc?crop=entropy&cs=srgb&fm=jpg"} alt="SVGI Group Avatar" />
               </div>
               <h4><b>SVGI Group</b></h4>
               <p>Overall Institutional Feedback Report</p>
@@ -91,11 +99,12 @@ const SVGIFeedback = () => {
           </div>
         </div>
 
+        {/* TEXT CONTENT */}
         <div className={styles.textWrapper}>
-          <h1 style={{ fontFamily: "'Merriweather',serif", fontSize: '3em' }}>
-            SVGI – Overall Feedback Summary
-          </h1>
-          <ul style={{ padding: '2.5em 2.5em', fontSize: '1em', lineHeight: '1.5em', listStyleType: 'disc', textAlign: 'left' }}>
+          <header>
+            <h1>SVGI – Overall Feedback Summary</h1>
+          </header>
+          <ul>
             <li>The overall campus environment is appreciated for being clean, secure, and student-friendly.</li>
             <li>Students expressed satisfaction with the quality of teaching across Engineering, Arts, Nursing, and Paramedical streams.</li>
             <li>Laboratory infrastructure and practical exposure were highlighted as major strengths.</li>
@@ -107,17 +116,19 @@ const SVGIFeedback = () => {
             <li>Overall satisfaction levels across departments indicate a positive student experience.</li>
           </ul>
 
-          <h1 style={{ fontFamily: "'Merriweather',serif", fontSize: '2.2em' }}>Key Observations</h1>
-          <ul style={{ padding: '1.5em 2.5em', listStyleType: 'disc' }}>
+          <header>
+            <h1>Key Observations</h1>
+          </header>
+          <ul>
             <li>Students want more hands-on workshops and real-time project exposure.</li>
             <li>Some departments requested upgraded lab equipment and additional subject-oriented tools.</li>
             <li>Few students suggested enhancing sports activities and inter-college events.</li>
           </ul>
 
-          <h1 style={{ fontFamily: "'Merriweather',serif", fontSize: '2.2em' }}>
-            Recommendations for Improvement
-          </h1>
-          <ul style={{ padding: '1.5em 2.5em', listStyleType: 'disc' }}>
+          <header>
+            <h1>Recommendations for Improvement</h1>
+          </header>
+          <ul>
             <li>Introduce department-wise industry mentorship programs.</li>
             <li>Conduct monthly technical seminars and career-oriented bootcamps.</li>
             <li>Strengthen placement preparation with mock tests, coding challenges, and GD training.</li>
@@ -126,29 +137,55 @@ const SVGIFeedback = () => {
       </section>
 
       {/* Lightbox */}
-      <div className={`${styles.lightbox} ${lightboxActive ? styles.active : ''}`} onClick={() => setLightboxActive(false)}>
-        <span className={styles.lightboxClose} onClick={() => setLightboxActive(false)}>×</span>
-        <img src={hero?.image || "https://images.unsplash.com/photo-1642478881792-4726327bb0bc?crop=entropy&cs=srgb&fm=jpg"} alt="Full" onClick={e => e.stopPropagation()} />
+      <div
+        className={`${styles.lightbox} ${lightboxActive ? styles.active : ''}`}
+        onClick={() => setLightboxActive(false)}
+      >
+        <span className={styles.lightboxClose} onClick={() => setLightboxActive(false)}>
+          &times;
+        </span>
+        <img
+          src={hero?.image || "https://images.unsplash.com/photo-1642478881792-4726327bb0bc?crop=entropy&cs=srgb&fm=jpg"}
+          alt="Full"
+          onClick={e => e.stopPropagation()}
+        />
       </div>
 
+      {/* New Sections from Snippet */}
       <section className={styles.gridLayout}>
-        <h2>PROCOLS</h2>
+        <h2>Heading: the grid layout solution</h2>
         <p>
-          Overall, students can demonstrate support and exhibit effective coordination with us during placement training, leading to positive outcomes.
+          The content is restricted to a certain max-width in the middle,
+          but the section and consequently its image background is full-width.
         </p>
       </section>
 
-      <section className={`${styles.borderImage}`}>
-        <h2>Jilaba</h2>
-        <p>The students can be talented and they can  make our work as a simple in selecting a Good employee for our company</p>
+      <section className={styles.gridLayout}>
+        <h2>Heading: border-image solution</h2>
+        <p>
+          The section is restricted to a certain max-width in the middle,
+          but the border-image created backdrop is full-width.
+        </p>
       </section>
 
       {/* Testimonial Slider */}
       {testimonials.length > 0 && (
         <section className={styles.testimWrapper}>
           <div className={styles.testimContainer}>
-            <span className={`${styles.testimArrow} ${styles.testimArrowLeft}`} onClick={() => setCurrentSlide((currentSlide - 1 + testimonials.length) % testimonials.length)}>‹</span>
-            <span className={`${styles.testimArrow} ${styles.testimArrowRight}`} onClick={() => setCurrentSlide((currentSlide + 1) % testimonials.length)}>›</span>
+            <button
+              className={`${styles.testimArrow} ${styles.testimArrowLeft}`}
+              onClick={() => setCurrentSlide((currentSlide - 1 + testimonials.length) % testimonials.length)}
+              style={{ background: 'none', border: 'none' }}
+            >
+              <ChevronLeft size={32} />
+            </button>
+            <button
+              className={`${styles.testimArrow} ${styles.testimArrowRight}`}
+              onClick={() => setCurrentSlide((currentSlide + 1) % testimonials.length)}
+              style={{ background: 'none', border: 'none' }}
+            >
+              <ChevronRight size={32} />
+            </button>
 
             <div className={styles.testimDots}>
               {testimonials.map((_, idx) => (
@@ -189,9 +226,14 @@ const SVGIFeedback = () => {
                   {column.map((faq, faqIdx) => {
                     const key = `${colIdx}-${faqIdx}`;
                     return (
-                      <div key={faq._id || key}>
-                        <button className={styles.collapsibleBtn} onClick={() => toggleFAQ(key)}>
-                          {faq.question} <span style={{ float: 'right', fontWeight: 'bold' }}>{activeFAQ[key] ? '-' : '+'}</span>
+                      <div key={faq._id || key} style={{ marginBottom: '10px' }}>
+                        <button
+                          className={styles.collapsibleBtn}
+                          onClick={() => toggleFAQ(key)}
+                          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                        >
+                          {faq.question}
+                          <span style={{ fontWeight: 'bold' }}>{activeFAQ[key] ? '-' : '+'}</span>
                         </button>
                         <div className={`${styles.faqContent} ${activeFAQ[key] ? styles.faqContentActive : ''}`}>
                           <p>{faq.answer}</p>

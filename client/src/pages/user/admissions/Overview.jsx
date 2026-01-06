@@ -79,7 +79,7 @@ export default function SVGIOverview() {
         return <AiOutlineInfoCircle />;
     };
 
-    if (!overview) return <div min-h-screen>Loading…</div>;
+    if (!overview) return <div className="min-h-screen">Loading…</div>;
 
     return (
         <div className={styles.root}>
@@ -134,39 +134,55 @@ export default function SVGIOverview() {
             <section className={styles.contactSection}>
                 <h1 className={styles.contactSectionH1}>SVGI Contact Information</h1>
                 <div className={styles.contactSectionContainer}>
-                    <div className={styles.expandContainer}>
-                        {cards.map(card => (
-                            <div className={styles.eCard} key={card._id}>
-                                <div className={styles.expandCard}>
-                                    <div className={styles.expandImage}>
-                                        <img src={card.image} alt={card.title} />
+                    <div className={styles.expandContainer} style={{ alignItems: 'flex-start' }}>
+                        {cards.map(card => {
+                            const descLink = getClickableLink(card.description);
+                            const icon = detectIcon(card.description);
+
+                            return (
+                                <div className={styles.contactCard} key={card._id}>
+                                    <div className={styles.profilWrapper}>
+                                        <img src={card.image} alt={card.title} className={styles.profilImage} />
                                     </div>
-                                    <div className={styles.expandContent}>
-                                        <h3>{card.title}</h3>
-                                        <div className={styles.info}><AiOutlinePhone /> {card.phone}</div>
-                                        <div className={styles.info}><AiOutlineMail /> {card.email}</div>
-                                        <div className={styles.info}>
-                                            {getClickableLink(card.description) ? (
-                                                <a
-                                                    href={getClickableLink(card.description)}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: "inherit" }}
-                                                >
-                                                    {detectIcon(card.description)}
-                                                    <span>{card.description}</span>
-                                                </a>
-                                            ) : (
-                                                <>
-                                                    {detectIcon(card.description)}
-                                                    <span>{card.description}</span>
-                                                </>
-                                            )}
-                                        </div>
+
+                                    <h2 className={styles.h2Name}>{card.title}</h2>
+                                    {/* <h4 className={styles.h4Role}>Staff</h4> */}
+
+                                    <div className={styles.iconContainer}>
+                                        {card.email && (
+                                            <a href={`mailto:${card.email}`} className={styles.iconLink} title={card.email}>
+                                                <AiOutlineMail />
+                                            </a>
+                                        )}
+                                        {card.phone && (
+                                            <a href={`tel:${card.phone}`} className={styles.iconLink} title={card.phone}>
+                                                <AiOutlinePhone />
+                                            </a>
+                                        )}
+                                        {descLink && (
+                                            <a href={descLink} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
+                                                {icon}
+                                            </a>
+                                        )}
                                     </div>
+
+                                    <div className={styles.contactList}>
+                                        {card.email && (
+                                            <a href={`mailto:${card.email}`}>{card.email}</a>
+                                        )}
+                                        {card.phone && (
+                                            <a href={`tel:${card.phone}`}>{card.phone}</a>
+                                        )}
+                                    </div>
+
+                                    {!descLink && card.description && (
+                                        <p className={styles.profilInfo}>
+                                            {card.description}
+                                        </p>
+                                    )}
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </section>

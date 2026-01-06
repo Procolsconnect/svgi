@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./leadership.module.css";
+import CommonHero from "../../../components/CommonHero";
 
 const API_BASE = import.meta.env.VITE_API_URL + "/api";
 
 export default function LeadershipPage() {
-  const [hero, setHero] = useState(null);
   const [materialCards, setMaterialCards] = useState([]);
   const [quoteCards, setQuoteCards] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,13 +14,11 @@ export default function LeadershipPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [heroRes, materialRes, quoteRes] = await Promise.all([
-          axios.get(`${API_BASE}/leadership/hero`),
+        const [materialRes, quoteRes] = await Promise.all([
           axios.get(`${API_BASE}/leadership/material-card`),
           axios.get(`${API_BASE}/leadership/quote`)
         ]);
 
-        setHero(heroRes.data.data);
         setMaterialCards(materialRes.data.data || []);
         setQuoteCards(quoteRes.data.data || []);
       } catch (error) {
@@ -38,30 +36,28 @@ export default function LeadershipPage() {
 
   if (loading) return <div>Loading Leadership...</div>;
 
-  // Helper to normalize color names for CSS modules (e.g. 'red' -> 'Red')
+  // Helper to normalize color names for CSS modules (e.g. 'blue' -> 'blue')
   const getColorClass = (c) => {
-    if (!c) return styles['Red'];
+    if (!c) return styles['blue'];
     const normalized = c.charAt(0).toUpperCase() + c.slice(1).toLowerCase();
-    return styles[normalized] || styles['Red'];
+    return styles[normalized] || styles['blue'];
   };
 
-  // Featured top cards
+  // Featured blue top cards
   const topCards = materialCards.slice(0, 2);
   // We'll show ALL material cards in the grid as per user preference (avoiding "only one card" issue)
   const fullGridCards = materialCards;
 
   return (
+    <>
+     <CommonHero
+        apiEndpoint="/api/leadership/hero"
+        defaultTitle="Leadership"
+        defaultImage="/images/instu.jpg"
+      />
     <div className={styles.body}>
-      {/* HERO */}
-      <div id="lp-hero" className={styles.hero}>
-        <img src={hero?.image || "/images/instu.jpg"} alt="Hero Background" />
-        <h1>{hero?.title || "Leadership"}</h1>
-      </div>
-
-      {/* Leadership Heading */}
+      {/* Leadership  */}
       <div className={styles.leftHeading}>Leadership That Inspires</div>
-
-      {/* Card Row 1 - Static Chairman */}
       <div className={styles.wholeCard}>
         <div className={styles.card}>
           <div className={styles.overflow}>
@@ -86,13 +82,13 @@ export default function LeadershipPage() {
         </p>
       </div>
 
-      {/* Card Row 2 - Static Secretary */}
+      {/* Secretary */}
       <div className={styles.wholeCards}>
         <div className={`${styles.card} ${styles.card2}`}>
           <div className={styles.overflow}>
             <div className={styles.model}>
               <img
-                src="/images/WhatsApp_Image_2025-08-01_at_16.15.06_95e75b66-removebg-preview.png"
+                src="/images/Secretary.png"
                 alt="Secretary"
                 className={styles.imageModel}
               />
@@ -100,7 +96,7 @@ export default function LeadershipPage() {
           </div>
           <div className={styles.glass}></div>
           <div className={styles.content}>
-            <h2>Mr.K.C.Karupanan</h2>
+            <h2>Mr.K.C. Karupanan</h2>
             <p>Secretary</p>
           </div>
         </div>
@@ -223,5 +219,6 @@ export default function LeadershipPage() {
         </section>
       )}
     </div>
+    </>
   );
 }

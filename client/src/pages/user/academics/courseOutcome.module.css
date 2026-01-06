@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Raleway:wght@400;700;800&display=swap');
 
 .body {
-  font-family: 'Playfair Display', serif;
+
   background-color: #f9fafb;
   color: #222;
   margin: 0;
@@ -61,10 +61,13 @@
 }
 
 @keyframes underlinePulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scaleX(1);
     opacity: 0.8;
   }
+
   50% {
     transform: scaleX(1.4);
     opacity: 1;
@@ -79,7 +82,7 @@
   gap: 2rem;
   padding: 3em 2em;
   max-width: 1200px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
 }
 
@@ -93,9 +96,11 @@
   font-size: 3em;
   line-height: 1.2;
   cursor: pointer;
+  font-family: "SUSE", sans-serif;
+  font-weight: 600;
 }
 
-.unravelSection code {
+.unravelSection p {
   display: block;
   margin-top: 1em;
   font-size: 1.5em;
@@ -107,8 +112,8 @@
 .gallery {
   flex: 1;
   position: relative;
-  height: 100vh;
-
+  min-height: 600px;
+  width: 100%;
 }
 
 .gallery img {
@@ -149,12 +154,12 @@
 /* LEFT HEADING */
 .leftHeading {
   text-align: center;
-  font-family: 'Playfair Display', serif;
+  font-family: "SUSE", sans-serif;
   font-size: 3rem;
   color: #2e2e2e;
   font-weight: 600;
   line-height: 1.2;
-  margin: 2em 0 1em;
+ 
 }
 
 /* HOVER GALLERY */
@@ -301,10 +306,16 @@
 @media (max-width: 900px) {
   .mainSection {
     flex-direction: column;
+    height: auto;
+    min-height: auto;
+    text-align: center;
   }
+
   .gallery {
-    min-height: 200px;
+    min-height: 450px;
+    height: 450px;
     width: 100%;
+    margin-top: 2rem;
   }
 }
 
@@ -313,13 +324,45 @@
     font-size: 36px;
     padding: 0 20px;
   }
+  
+
   .mainSection {
     flex-direction: column;
-    text-align:center;
+    text-align: center;
     padding: 2em 1em;
-    height: 80vh;
+    height: auto;
+    min-height: auto;
   }
+
+  .unravelSection h1 {
+    font-size: 2rem;
+  }
+
+  .unravelSection p {
+    font-size: 1.1rem;
+    padding: 0 10px;
+  }
+
   .gallery {
-    min-height: 350px;
+    min-height: 400px;
+    height: 400px;
+    margin-top: 3rem;
+  }
+
+  .gallery img:nth-child(1) {
+    width: 65%;
+  }
+
+  .gallery img:nth-child(2) {
+    width: 60%;
+  }
+
+  .gallery img:nth-child(3) {
+    width: 55%;
+  }
+
+  .leftHeading {
+    font-size: 2rem;
+    padding: 0 15px;
   }
 }

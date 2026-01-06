@@ -111,7 +111,7 @@ const Header = () => {
         <div className={styles['sk-ticker-inner']}>
           <div className={styles['sk-ticker-label']}>LATEST NEWS</div>
           <div className={styles['sk-ticker-content']}>
-            <marquee behavior="scroll" direction="left" onMouseOver={(e) => e.target.stop()} onMouseOut={(e) => e.target.start()}>
+            <marquee behavior="scroll" direction="left" onMouseOver={(e) => e.currentTarget?.stop?.()} onMouseOut={(e) => e.currentTarget?.start?.()}>
               <span>NIRF 2024 Ranking: SVGI secures top position in Arts & Science category | Admissions open for 2024-25 | SVGI Alumni Meet scheduled for January 20th, 2025</span>
             </marquee>
           </div>

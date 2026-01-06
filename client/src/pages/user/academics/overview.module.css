@@ -77,44 +77,52 @@
    TEXT SECTION
 -------------------------------------------------- */
 .opHeroSection {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 500px;
+  grid-template-rows: auto auto;
+  gap: 0 4em;
   max-width: 1200px;
-  gap: 2em;
-  justify-content: space-between;
   margin: 5em auto;
   padding: 0 2em;
   box-sizing: border-box;
+  align-items: center;
 }
 
-.opText {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.opTitleBlock {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  padding-bottom: 10px;
+}
+
+.opDescriptionBlock {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  padding-top: 10px;
 }
 
 .opTextShort {
   text-transform: uppercase;
   font-size: 0.75rem;
-  color: #479A7E;
+  color: #350693;
   margin: 0 0 8px 0;
 }
 
 .opTextTitle {
   line-height: 1.1;
   margin: 0 0 12px 0;
-  font-size: 28px;
+  font-size: 2.5rem;
   font-weight: 700;
 }
 
 .opTextDescription {
-  line-height: 1.5;
-  font-size: 1rem;
-  font-weight: 300;
-  margin: 0 0 16px 0;
-  color: #333;
-  max-width: 60ch;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 0 0 24px 0;
+  color: #444;
+  max-width: 65ch;
 }
 
 .opTextButton {
@@ -123,16 +131,25 @@
   display: inline-block;
   text-decoration: none;
   color: white;
-  background-color: #479A7E;
+  background-color: #350693;
   padding: 0.9em 1.25em;
   border-radius: 0.5em;
   font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.opTextButton:hover {
+  background-color: #2a047a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(53, 6, 147, 0.2);
 }
 
 /* --------------------------------------------------
    GRID SECTION
 -------------------------------------------------- */
 .opGrid {
+  grid-column: 2;
+  grid-row: 1 / span 2;
   width: 100%;
   max-width: 500px;
   aspect-ratio: 1 / 1;
@@ -141,6 +158,7 @@
   grid-template-rows: repeat(5, 1fr);
   gap: 10px;
   margin: auto;
+  align-self: center;
 }
 
 .opGridItem {
@@ -489,13 +507,35 @@
 -------------------------------------------------- */
 @media (max-width: 950px) {
   .opHeroSection {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 2em;
+    margin: 3em auto;
+  }
+
+  .opTitleBlock {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+    text-align: center;
   }
 
   .opGrid {
-    width: 100%;
-    max-width: 600px;
-    max-height: 400px;
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .opDescriptionBlock {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: start;
+    text-align: center;
+  }
+
+  .opTextDescription {
+    margin: 0 auto 24px;
   }
 
   .projcardContainer {

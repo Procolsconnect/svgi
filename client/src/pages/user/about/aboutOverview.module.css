@@ -201,21 +201,22 @@
 /* Bigger Section with Tilted Grid */
 .bigger {
   display: flex;
-  padding: 3em 4em;
-  gap: 6em;
+  padding: 2em 3em;
+  gap: 4em;
 }
 
 .gridTilt {
   display: grid;
-  grid-template-columns: repeat(4, 130px);
+  grid-template-columns: repeat(4, 140px);
   gap: 18px;
   transform: rotate(-9deg);
+  align-items: center;
 }
 
 .gridTilt img {
   width: 100%;
   object-fit: cover;
-  min-height: 300px;
+  min-height: 220px;
   height: auto;
   border-radius: 16px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
@@ -227,7 +228,6 @@
 }
 
 .textBigger {
-  max-width: 520px;
   height: auto;
 }
 
@@ -237,12 +237,12 @@
 }
 
 .textTitleBigger {
-  font-size: 3.2rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 
 .textDescriptionBigger {
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.8;
   color: #555;
 }
@@ -251,15 +251,40 @@
   scroll-margin-top: 60px;
 }
 
-/* Desktop adjustments (above 768px) */
-@media (max-width: 1200px) {
+/* Tablet: 1024px and below */
+@media (max-width: 1024px) {
+  .hero {
+    min-height: 300px;
+  }
+
   .heroTitle {
-    font-size: 46px;
+    font-size: 40px;
   }
 
   .heroSection {
-    gap: 1.5em;
-    margin: 2.5em 1.5em;
+    gap: 1.2em;
+    margin: 2em 1.2em;
+    flex-wrap: wrap;
+  }
+
+  .text {
+    width: 45%;
+    height: auto;
+  }
+
+  .gridContainer {
+    min-width: 50%;
+    gap: 0.4em;
+  }
+
+  .bigger {
+    padding: 2.5em 3em;
+    gap: 4em;
+  }
+
+  .gridTilt {
+    grid-template-columns: repeat(4, 110px);
+    gap: 15px;
   }
 
   .textTitle {
@@ -271,313 +296,114 @@
   }
 }
 
-@media (max-width: 992px) {
-  .heroTitle {
-    font-size: 40px;
-  }
-
-  .hero {
-    min-height: 300px;
-  }
-
-  .heroSection {
-    gap: 1.2em;
-    margin: 2em 1.2em;
-  }
-
-  .text {
-    width: 38%;
-  }
-
-  .gridContainer {
-    min-width: 62%;
-    gap: 0.4em;
-  }
-
-  .bigger {
-    padding: 2.5em 3em;
-    gap: 5em;
-  }
-
-  .gridTilt {
-    grid-template-columns: repeat(4, 100px);
-    gap: 15px;
-  }
-
-  .textTitle {
-    font-size: 2.2rem;
-  }
-
-  .textTitleBigger {
-    font-size: 2.5rem;
-  }
-
-  .textDescriptionBigger {
-    font-size: 1.1rem;
-  }
-}
-
-/* SINGLE MEDIA QUERY: 360px → 768px */
+/* Mobile: 768px and below */
 @media (max-width: 768px) {
   .hero {
-    min-height: 260px;
+    min-height: 240px;
   }
 
   .heroTitle {
-    font-size: 34px;
+    font-size: 32px;
   }
 
   .heroTitle::after {
-    width: 90px;
+    width: 80px;
     height: 4px;
   }
 
-  .heroSection {
-    gap: 1em;
-    margin: 1.8em 1em;
-    height: auto;
-  }
-
-  .bigger {
-    display: grid;
-    padding: 3em 4em;
-    gap: 6em;
-  }
-
-  .gridTilt {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-
-  /* TEXT BELOW GRID ON MOBILE - Section 2 */
+  /* Vertical Stacking for Section 2 */
   .heroSection {
     flex-direction: column;
+    gap: 0;
+    margin: 1.5em 1em;
   }
 
-  .heroSection>.text {
-    order: 2;
-    width: 100%;
-    height: auto;
-    padding: 2em 1em 0;
+  .mobileOnlyTitle {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    order: 1;
   }
 
   .heroSection>.gridContainer {
-    order: 1;
+    order: 2;
     min-width: 100%;
     height: 45vh;
   }
 
-  /* Add this single new class — everything else remains 100% unchanged */
-  .mobileTitleAbove {
-    display: none;
-    /* hidden on desktop */
-  }
-
-  /* Mobile only: Title above grid, rest of text below grid */
-  @media (max-width: 768px) {
-    .mobileTitleAbove {
-      display: block;
-      position: relative;
-      order: 1;
-      width: 100%;
-
-    }
-
-    .heroSection {
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .heroSection>.text {
-      order: 3;
-      /* description goes below grid */
-      width: 100%;
-      height: auto;
-      padding: 2rem 1rem 0;
-    }
-
-    .heroSection>.gridContainer {
-      order: 2;
-      /* grid in the middle */
-      min-width: 100%;
-    }
-
-    /* Hide the original title inside .text on mobile */
-    .heroSection>.text>.textTitle {
-      display: none;
-    }
-
-    .mobileOnlyTitle {
-      display: flex;
-      position: relative;
-      order: 1;
-      font-size: 2rem;
-
-    }
-
-    .heroSection {
-      flex-direction: column;
-    }
-
-    .heroSection>.text {
-      order: 3;
-      /* short + description → below grid */
-      width: 100%;
-      height: auto;
-      padding: 2rem 1rem 0;
-    }
-
-    .heroSection>.gridContainer {
-      order: 2;
-      /* grid in the middle */
-      min-width: 100%;
-    }
-
-    /* Hide the original title inside .text on mobile */
-    .heroSection>.text>.textTitle {
-      display: none;
-    }
-  }
-
-  /* 576px and below */
-  .hero {
-    min-height: 220px;
-  }
-
-  .heroTitle {
-    font-size: 28px;
-  }
-
-  .heroTitle::after {
-    width: 70px;
-    height: 3px;
-  }
-
-  .heroSection {
-    gap: 0.8em;
-    margin: 1.5em 0.8em;
-    height: auto;
-  }
-
-  .text {
+  .heroSection>.text {
+    order: 3;
     width: 100%;
-    font-size: 0.75rem;
+    padding: 1.5rem 0.5rem 0;
   }
 
-  .textShort {
-    font-size: 0.55rem;
+  .heroSection>.text>.textTitle {
+    display: none;
+    /* Hidden because mobileOnlyTitle is used above grid */
   }
 
-  .textTitle {
-    font-size: 1.4rem;
-    position: relative;
-    left: 5%;
-  }
-
-  .textDescription {
-    font-size: 0.7rem;
-    padding-bottom: 0.5em;
-  }
-
-  .gridContainer {
-    gap: 0.3em;
-  }
-
+  /* Section 1 - Tilted Grid Responsive */
   .bigger {
-    padding: 1.5em 1.5em;
-    gap: 3em;
+    flex-direction: column;
+    padding: 2.5rem 1.5rem;
+    gap: 3rem;
   }
 
   .gridTilt {
-    grid-template-columns: repeat(4, 65px);
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    transform: rotate(-5deg);
+    /* Less tilt on mobile */
+    justify-content: center;
   }
 
-  .textShortBigger {
-    font-size: 0.75rem;
+  .gridTilt img {
+    min-height: 180px;
+  }
+
+  .textBigger {
+    width: 100%;
   }
 
   .textTitleBigger {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
+  }
+}
+
+/* Small Mobile: 480px and below */
+@media (max-width: 480px) {
+  .hero {
+    min-height: 200px;
   }
 
-  .textDescriptionBigger {
-    font-size: 0.8rem;
+  .heroTitle {
+    font-size: 26px;
   }
 
   .mobileOnlyTitle {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
 
-  /* 400px and below */
-  @media (max-width: 400px) {
-    .hero {
-      min-height: 200px;
-    }
+  .heroSection>.gridContainer {
+    height: 40vh;
+  }
 
-    .heroTitle {
-      font-size: 24px;
-    }
+  .textTitleBigger {
+    font-size: 1.8rem;
+  }
 
-    .heroTitle::after {
-      width: 60px;
-    }
+  .textDescriptionBigger {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
 
-    .heroSection {
-      gap: 0.6em;
-      margin: 1.2em 0.6em;
-      height: 45vh;
-    }
+  .gridTilt {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
 
-    .text {
-      font-size: 0.65rem;
-      margin: 0;
-      padding: 2em 0.8em 0;
-    }
-
-    .textShort {
-      font-size: 0.5rem;
-    }
-
-    .textTitle {
-      font-size: 1.3rem;
-      position: relative;
-      left: 5%;
-    }
-
-    .textDescription {
-      font-size: 0.6rem;
-    }
-
-    .gridContainer {
-      gap: 0.25em;
-    }
-
-    .bigger {
-      padding: 1.9em 1.2em;
-      gap: 2.5em;
-    }
-
-    .gridTilt {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-    }
-
-    .textShortBigger {
-      font-size: 0.65rem;
-    }
-
-    .textTitleBigger {
-      font-size: 1.3rem;
-    }
-
-    .textDescriptionBigger {
-      font-size: 0.7rem;
-    }
-
-    .mobileOnlyTitle {
-      font-size: 1.3rem;
-      padding-bottom: 10px;
-    }
+  .gridTilt img {
+    min-height: 140px;
   }
 }

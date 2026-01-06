@@ -69,7 +69,10 @@ const courseOutcomeSchema = new mongoose.Schema({
   description: { type: String , required: true},
   pdf: { type: String, required: true }
 })
-
+ const courseoutcomeheroSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  image: { type: String }
+})
 
 const Academicshero = mongoose.model('Academicshero', academicsheroSchema);
 const AcademicsCard = mongoose.model('AcademicsCard', academicsCardSchema);
@@ -83,6 +86,7 @@ const Libraryvideo = mongoose.model('libraryvideo', libraryvideoSchema);
 const Libraryvideocard = mongoose.model('libraryvideocard', libraryvideoCardSchema);
 const LibraryResources = mongoose.model('LibraryResources', libraryResourcesSchema);
 const CourseOutcome = mongoose.model('CourseOutcome', courseOutcomeSchema);
+const CourseOutcomehero = mongoose.model('CourseOutcomehero', courseoutcomeheroSchema);
 module.exports = {
     Academicshero,
     AcademicsCard,
@@ -95,5 +99,6 @@ module.exports = {
     Libraryvideo,
     Libraryvideocard,
     LibraryResources,
-    CourseOutcome
+    CourseOutcome,
+    CourseOutcomehero
 }

@@ -121,7 +121,7 @@ const FooterRaindrop = () => {
             <div className="ft-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', padding: '12px' }}>
               <div className="ft-col-md-3">
                 <div className="ft-footer-site-info">
-                  2020 © <a href="#" style={{ textDecoration: 'none', color: 'lightgrey' }}>Top HTML & CSS Program</a>
+                  2026 © <a href="https://procols.in" style={{ textDecoration: 'none', color: 'white' }}>Developed by Procols</a>
                 </div>
               </div>
               <div className="ft-col-md-6">

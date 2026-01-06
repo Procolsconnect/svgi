@@ -1,0 +1,93 @@
+/* TABLE LAYOUT */
+.tableRow {
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+    padding: 0 20px;
+    align-items: flex-start;
+}
+
+.tableContainer {
+    flex: 2;
+    /* Table takes more space */
+    width: 100%;
+}
+
+.videoTable {
+    width: 100%;
+    margin: 0;
+    /* Reset margins since it's inside flex container */
+    /* keep existing table styles */
+}
+
+.tableSidebar {
+    flex: 1;
+    background: #07409b;
+    /* Dark blue from screenshot */
+    border-radius: 1rem;
+    padding: 1.5rem;
+    color: white;
+    margin-top: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sidebarHeader {
+    margin-bottom: 1.5rem;
+}
+
+.sidebarHeader h3 {
+    font-family: "SUSE", sans-serif;
+    font-size: 2rem;
+    /* Large header */
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+}
+
+.dots {
+    font-size: 1.5rem;
+    opacity: 0.7;
+    letter-spacing: 2px;
+}
+
+.sidebarLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sidebarLink {
+    display: block;
+    padding: 1rem;
+    border: 1px solid #facc15;
+    /* Yellow/Gold border */
+    border-radius: 99px;
+    /* Pill shape */
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: transparent;
+    font-size: 0.95rem;
+}
+
+.sidebarLink:hover {
+    background: #facc15;
+    color: #021a40;
+}
+
+/* RESPONSIVE TABLE */
+@media (max-width: 900px) {
+    .tableRow {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .tableContainer,
+    .tableSidebar {
+        width: 100%;
+        flex: none;
+    }
+}

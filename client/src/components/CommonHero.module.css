@@ -38,7 +38,9 @@
     margin: 0;
     font-size: 52px;
     font-weight: 800;
+    font-family: 'Playfair Display', serif;
     text-transform: capitalize;
+    
 }
 
 .heroTitle::after {

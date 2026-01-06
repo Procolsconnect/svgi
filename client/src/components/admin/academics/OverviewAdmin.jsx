@@ -42,12 +42,14 @@ const OVERVIEW_CONFIG = {
         columns: [
             { key: "index", label: "Sr. No." },
             { key: "title", label: "Title" },
+            {key:"subtitle",label:"subtitle"},
             { key: "description", label: "Description" },
             { key: "image", label: "Image" },
         ],
         fields: [
             { name: "title", label: "Card Title", type: "text", required: true },
             { name: "description", label: "Description", type: "textarea", required: true },
+            {name:"subtitle",label:"subtitle",type:"text",required:true},
             { name: "image", label: "Card Image", type: "file", required: true },
         ]
     }

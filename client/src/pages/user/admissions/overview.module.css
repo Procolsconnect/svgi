@@ -182,12 +182,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 80vh;
 }
 
 .contactSectionH1 {
+  font-family: "SUSE", sans-serif;
   margin-bottom: 10px;
-  margin-top: 100px;
   font-weight: 800;
   text-align: center;
 }
@@ -202,156 +202,119 @@
   gap: 20px;
 }
 
-.eCard {
-  min-height: 450px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
 
-.expandCard {
-  max-width: 300px;
-  height: 150px;
-  background: #fff;
-  margin: 30px 10px;
-  padding: 20px 20px;
-  border-radius: 4px;
+/* New Card Design */
+.contactCard {
+  width: 260px;
+  min-height: 350px;
+  padding: 30px 20px;
+  background: #34495e;
+  margin: 20px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 5px 200px rgba(0, 0, 0, 0.5);
-  transition: 0.5s ease-in-out;
-}
-
-.expandCard:hover {
-  height: 380px;
-}
-
-.expandCard:hover .expandContent {
-  visibility: visible;
-  opacity: 1;
-  transition-delay: 0.2s;
-}
-
-.expandImage {
+  align-items: center;
+  color: white;
   position: relative;
-  width: 230px;
-  height: 160px;
-  top: -60px;
-  z-index: 1;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
-.expandImage img {
-  max-width: 100%;
-  height: 170px;
-  border-radius: 4px;
+.contactCard:hover {
+  transform: translateY(-5px);
 }
 
-.expandContent {
-  position: relative;
-  padding: 10px 15px;
-  text-align: center;
-  color: #111;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.5s ease-in-out;
-}
-
-.expandContent h3 {
+.profilWrapper {
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: solid 5px #fff;
   margin-bottom: 15px;
-  margin-top: -10px;
-  font-size: 20px;
-  font-weight: 700;
-  color: #0a2540;
-}
-
-.info {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  /* Changed from center to align icons vertically */
-  gap: 12px;
-  padding: 12px 20px;
-  margin-bottom: 12px;
-  
-  border-radius: 12px;
-  color: #475569;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  text-align: left;
-}
-
-.info:hover {
-  background: #e0f2fe;
-  color: #2563eb;
-}
-
-.info svg,
-.info i {
-  font-size: 1.2rem;
-  color: #2563eb;
   flex-shrink: 0;
-  width: 24px;
-  /* Fixed width for icon ensures text starts at same spot */
+}
+
+.profilImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.h2Name {
+  font-weight: 300;
+  text-align: center;
+  color: white;
+  /* Ensure white text */
+  margin: 0 0 5px 0;
+  font-size: 1.4rem;
+}
+
+.h4Role {
+  font-weight: 300;
+  font-style: italic;
+  font-size: 12px;
+  color: #bdc3c7;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.iconContainer {
   display: flex;
-  align-items: center;
   justify-content: center;
-}
-
-.info span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.info a {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  gap: 10px;
+  margin-bottom: 20px;
   width: 100%;
-  overflow: hidden;
 }
 
-/* The following rules were removed as they are replaced by the new .info, .info svg, .info i, and .info span rules */
-/*
-.infoIcon {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-}
-
-.infoText {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: block;
-  min-width: 0;
-  color: #111;
-}
-
-.icon {
+.iconLink {
   font-size: 18px;
-  margin-right: 6px;
-}
-
-.info:hover {
-  background: #dce9ff;
-}
-
-.expandContent a {
-  color: #0466c8;
-  font-weight: 600;
+  background: #2c3e50;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+  transition: all 500ms;
   text-decoration: none;
 }
 
-.expandContent a:hover {
+.iconLink:hover {
+  background: #7f8c8d;
+  /* Grayish as requested */
+  color: white;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.contactList a {
+  color: #bdc3c7;
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.3s;
+  word-break: break-all;
+  /* Prevent long emails from breaking layout */
+  text-align: center;
+}
+
+.contactList a:hover {
+  color: white;
   text-decoration: underline;
+}
+
+.profilInfo {
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: justify;
+  /* Justify text as requested */
+  color: #ecf0f1;
+  width: 100%;
 }
 
 /* Responsive */

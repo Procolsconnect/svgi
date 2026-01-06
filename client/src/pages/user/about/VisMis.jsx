@@ -1,29 +1,30 @@
 import React from 'react';
 import CommonHero from '../../../components/CommonHero';
+import styles from './VisMis.module.css';
 
 export default function MissionVisionValues() {
   return (
-    <div style={styles.body}>
+    <div className={styles.body}>
       <CommonHero
         apiEndpoint="/api/about/vismishero"
         defaultTitle="Mission & Vision"
         showArrow={false}
       />
       {/* ================= MISSION ================= */}
-      <section style={styles.section}>
-        <div style={styles.container}>
-          <div style={styles.content}>
-            <h1 style={styles.h1}>Our Mission</h1>
-            <p style={styles.p}>
+      <section className={styles.section}>
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <h1 className={styles.h1}>Our Mission</h1>
+            <p className={styles.p}>
               Our mission is to deliver innovative and reliable digital solutions that
               empower organizations and individuals to achieve sustainable growth.
             </p>
-            <p style={styles.p}>
+            <p className={styles.p}>
               We focus on quality, integrity, and continuous improvement in everything we do.
             </p>
           </div>
-          <div>
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={styles.svg}>
+          <div className={styles.imageWrapper}>
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className={styles.svg}>
               <image
                 href="https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=764&q=80"
                 width="200"
@@ -41,7 +42,7 @@ export default function MissionVisionValues() {
                 fill="none"
                 pathLength="100"
               />
-              <text style={styles.textContent}>
+              <text className={styles.textContent}>
                 <textPath href="#textPath1" startOffset="0%">
                   MISSION • MISSION • MISSION • MISSION • MISSION • MISSION • MISSION
                   <animate attributeName="startOffset" from="0%" to="100%" dur="15s" repeatCount="indefinite" />
@@ -53,10 +54,10 @@ export default function MissionVisionValues() {
       </section>
 
       {/* ================= VISION ================= */}
-      <section style={{ ...styles.section, paddingTop: '10px' }}>
-        <div style={styles.container}>
-          <div>
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={styles.svg}>
+      <section className={styles.section} style={{ paddingTop: '10px' }}>
+        <div className={styles.container}>
+          <div className={styles.imageWrapper}>
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className={styles.svg}>
               <image
                 href="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=764&q=80"
                 width="200"
@@ -70,7 +71,7 @@ export default function MissionVisionValues() {
                 fill="none"
                 pathLength="100"
               />
-              <text style={styles.textContent}>
+              <text className={styles.textContent}>
                 <textPath href="#textPath2" startOffset="0%">
                   OUR VISION • FUTURE • INNOVATION • OUR VISION • FUTURE • INNOVATION
                   <animate attributeName="startOffset" from="0%" to="100%" dur="15s" repeatCount="indefinite" />
@@ -78,13 +79,13 @@ export default function MissionVisionValues() {
               </text>
             </svg>
           </div>
-          <div style={styles.content}>
-            <h1 style={styles.h1}>Our Vision</h1>
-            <p style={styles.p}>
+          <div className={styles.content}>
+            <h1 className={styles.h1}>Our Vision</h1>
+            <p className={styles.p}>
               Our vision is to become a leading force in digital innovation by building
               future-ready solutions that create meaningful impact.
             </p>
-            <p style={styles.p}>
+            <p className={styles.p}>
               We aspire to inspire progress, nurture creativity, and shape a smarter,
               technology-driven tomorrow.
             </p>
@@ -93,10 +94,10 @@ export default function MissionVisionValues() {
       </section>
 
       {/* ================= CORE VALUES ================= */}
-      <section style={styles.coreSection}>
-        <div style={styles.coreWrapper}>
+      <section className={styles.coreSection}>
+        <div className={styles.coreWrapper}>
           {/* LEFT CIRCLE */}
-          <div style={styles.coreCircle}>
+          <div className={styles.coreCircle}>
             <svg viewBox="0 0 200 200" style={{ width: '100%', height: '100%' }}>
               <circle
                 cx="100"
@@ -142,123 +143,21 @@ export default function MissionVisionValues() {
                 transform="rotate(-90 100 100)"
               />
             </svg>
-            <div style={styles.coreText}>
-              <span style={styles.coreTextSpan}>Our</span>
-              <h2 style={styles.coreTextH2}>Core<br />Values</h2>
+            <div className={styles.coreText}>
+              <span className={styles.coreTextSpan}>Our</span>
+              <h2 className={styles.coreTextH2}>Core<br />Values</h2>
             </div>
           </div>
           {/* RIGHT VALUES */}
-          <div style={styles.valuesContainer}>
-            <div style={styles.valueBox}>Student focus</div>
-            <div style={styles.valueBox}>Strong ethics</div>
-            <div style={styles.valueBox}>Striving for excellence</div>
-            <div style={styles.valueBox}>Social development</div>
-            <div style={styles.valueBox}>Respect for all</div>
+          <div className={styles.valuesContainer}>
+            <div className={styles.valueBox}>Student focus</div>
+            <div className={styles.valueBox}>Strong ethics</div>
+            <div className={styles.valueBox}>Striving for excellence</div>
+            <div className={styles.valueBox}>Social development</div>
+            <div className={styles.valueBox}>Respect for all</div>
           </div>
         </div>
       </section>
     </div>
   );
 }
-
-const styles = {
-  body: {
-    margin: 0,
-    fontFamily: '"Montserrat", sans-serif',
-    background: '#ffffff',
-  },
-  section: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '20px 20px',
-  },
-  container: {
-    maxWidth: '1200px',
-    width: '100%',
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: '40px',
-    alignItems: 'center',
-  },
-  content: {},
-  h1: {
-    fontSize: '40px',
-    marginBottom: '16px',
-    fontWeight: 700,
-  },
-  p: {
-    fontSize: '16px',
-    lineHeight: 1.7,
-    color: '#555',
-    marginBottom: '12px',
-  },
-  svg: {
-    width: '100%',
-    maxWidth: '400px',
-    margin: 'auto',
-    aspectRatio: '1/1',
-    display: 'block',
-  },
-  textContent: {
-    font: '700 9.5px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
-    letterSpacing: '1.4px',
-    textTransform: 'uppercase',
-    fill: 'black',
-  },
-  coreSection: {
-    width: '100%',
-    padding: '60px 20px',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  coreWrapper: {
-    maxWidth: '1200px',
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '40px',
-  },
-  coreCircle: {
-    flex: '0 0 260px',
-    height: '260px',
-    position: 'relative',
-  },
-  coreText: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
-  coreTextSpan: {
-    display: 'block',
-    fontSize: '18px',
-    color: '#0a6f7f',
-    fontWeight: 600,
-  },
-  coreTextH2: {
-    margin: 0,
-    fontSize: '46px',
-    lineHeight: 1,
-    color: '#0a6f7f',
-  },
-  valuesContainer: {
-    flex: 1,
-    background: '#001f3f',
-    padding: '30px',
-    borderRadius: '18px',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(5, 1fr)',
-    gap: '18px',
-  },
-  valueBox: {
-    background: '#ffffff',
-    padding: '22px 14px',
-    borderRadius: '14px',
-    textAlign: 'center',
-    fontSize: '18px',
-    fontWeight: 700,
-    color: '#001f3f',
-    boxShadow: '0 6px 14px rgba(0,0,0,0.15)',
-  },
-};

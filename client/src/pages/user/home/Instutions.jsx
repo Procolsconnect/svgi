@@ -121,9 +121,9 @@ const InstitutionsGrid = () => {
                   alt="Logo"
                   className={styles.icon}
                 />
-                <a href={inst.link} className={styles.link}>
+                <div className={styles.link}>
                   <span>Watch now</span>
-                </a>
+                </div>
                 <img
                   src={`${inst.image_url}`}
                   alt={inst.title}
