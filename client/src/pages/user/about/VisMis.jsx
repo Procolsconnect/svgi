@@ -1,6 +1,6 @@
 import React from 'react';
 import CommonHero from '../../../components/CommonHero';
-import styles from './VisMis.module.css';
+import styles from './vismis.module.css';
 
 export default function MissionVisionValues() {
   return (
