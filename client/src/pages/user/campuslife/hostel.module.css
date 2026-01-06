@@ -1,4 +1,4 @@
-/* HostelPage.module.css */
+/* hostel.module.css — CONSOLIDATED MEDIA QUERIES */
 
 /* Google Fonts Import */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Archivo+Black&display=swap');
 
-/* Reset */
+/* ==================== RESET ==================== */
 .hostel__wrapper * {
   box-sizing: border-box;
 }
@@ -18,7 +18,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* HERO SECTION */
+/* ==================== HERO SECTION ==================== */
 .hostel__hero {
   min-height: 350px;
   width: 100%;
@@ -84,14 +84,7 @@
   }
 }
 
-@media(max-width: 768px) {
-  .hostel__hero h1 {
-    font-size: 36px;
-    padding: 0 20px;
-  }
-}
-
-/* Hostel Section */
+/* ==================== HOSTEL SECTION ==================== */
 .hostel__container {
   display: flex;
   align-items: center;
@@ -100,15 +93,13 @@
   min-height: calc(100vh - 350px);
 }
 
-
-
 .hostel__content p {
   font-size: 1.1rem;
   line-height: 1.6;
   color: #444;
 }
 
-/* Card Stack Container */
+/* ==================== CARD STACK CONTAINER ==================== */
 .hostel__isoCardStack {
   transform: rotateX(65deg) rotateZ(40deg);
   transform-style: preserve-3d;
@@ -161,21 +152,7 @@
   border-radius: 8px;
 }
 
-@media (max-width: 900px) {
-  .hostel__container {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .hostel__isoCardStack {
-    margin-top: 40px;
-    transform: rotateX(60deg) rotateZ(30deg);
-    top: 0;
-  }
-}
-
-/* CARDS SECTION */
+/* ==================== CARDS SECTION ==================== */
 .hostel__cards-container {
   width: min(100vw - 3rem, 100ch);
   margin: auto;
@@ -207,13 +184,7 @@
   color: #444;
 }
 
-@media only screen and (max-width: 65rem) {
-  .hostel__col-image {
-    order: -1;
-  }
-}
-
-/* IMAGE SLIDER (2 IMAGE AUTO MOVE) */
+/* ==================== IMAGE SLIDER (2 IMAGE AUTO MOVE) ==================== */
 .hostel__slider {
   position: relative;
   width: 100%;
@@ -261,7 +232,7 @@
   }
 }
 
-/* FAQ HEADER — LEFT ALIGNED */
+/* ==================== FAQ SECTION ==================== */
 .hostel__faq-header {
   font-size: 42px;
   border-bottom: 1px dotted #ccc;
@@ -273,21 +244,18 @@
   margin: 4rem auto 0;
 }
 
-/* FAQ CONTENT WRAPPER */
 .hostel__faq-content {
   margin: 0 auto;
   max-width: 900px;
   padding: 0 1rem;
 }
 
-/* EACH QUESTION BLOCK */
 .hostel__faq-question {
   padding: 20px 0;
   border-bottom: 1px dotted #ccc;
   position: relative;
 }
 
-/* TITLE */
 .hostel__panel-title {
   font-size: 24px;
   width: 100%;
@@ -298,7 +266,6 @@
   user-select: none;
 }
 
-/* BODY CONTENT */
 .hostel__panel-content {
   font-size: 20px;
   padding: 0 14px;
@@ -324,7 +291,6 @@
   color: #0056b3;
 }
 
-/* PLUS ICON */
 .hostel__plus {
   position: absolute;
   left: 16px;
@@ -335,27 +301,12 @@
   pointer-events: none;
 }
 
-/* ROTATION */
 .hostel__plus-open {
   transform: rotate(45deg);
 }
 
-@media (max-width: 768px) {
-  .hostel__faq-header {
-    font-size: 32px;
-  }
-
-  .hostel__panel-title {
-    font-size: 20px;
-  }
-
-  .hostel__panel-content {
-    font-size: 18px;
-  }
-}
-
-/* MOBILE RESPONSIVE - 360px to 1024px */
-@media(max-width: 1024px) {
+/* ==================== TABLET BREAKPOINT (≤1024px) ==================== */
+@media (max-width: 1024px) {
   .hostel__hero {
     min-height: 250px;
   }
@@ -386,6 +337,12 @@
     line-height: 1.7;
   }
 
+  .hostel__isoCardStack {
+    margin-top: 40px;
+    transform: rotateX(60deg) rotateZ(30deg);
+    top: 0;
+  }
+
   .hostel__isoCardStack>div {
     width: clamp(200px, 80vw, 280px);
     height: clamp(200px, 80vw, 280px);
@@ -399,6 +356,10 @@
     grid-template-columns: 1fr;
     gap: 25px;
     margin-bottom: 40px;
+  }
+
+  .hostel__col-image {
+    order: -1;
   }
 
   .hostel__slider {
@@ -422,7 +383,7 @@
 
   .hostel__faq-header {
     font-size: 2rem;
-    padding: 40px 20px 30px;
+    padding: 0 0 0;
   }
 
   .hostel__faq-content {
@@ -451,7 +412,6 @@
     font-size: 0.9rem;
   }
 
-  /* Card Stack Container */
   .hostel__isoCardStack {
     transform: rotateX(65deg) rotateZ(40deg);
     transform-style: preserve-3d;
@@ -471,7 +431,6 @@
     grid-column-start: 1;
     grid-row-start: 1;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-
   }
 
   .hostel__isoCardStack div>* {
@@ -480,8 +439,13 @@
   }
 }
 
-/* EXTRA SMALL MOBILE - 360px to 480px */
-@media(max-width: 480px) {
+/* ==================== MOBILE BREAKPOINT (≤768px) ==================== */
+@media (max-width: 768px) {
+  .hostel__hero h1 {
+    font-size: 36px;
+    padding: 0 20px;
+  }
+
   .hostel__hero {
     min-height: 200px;
   }
@@ -500,6 +464,17 @@
     height: clamp(180px, 85vw, 240px);
   }
 
+  .hostel__cards-container {
+    width: min(100vw - 3rem, 100ch);
+    margin: auto;
+    padding-block: 1rem;
+    padding: 40px 5% 0 5%;
+  }
+
+  .hostel__cards-container>*+* {
+    margin-top: min(1rem, 1vh);
+  }
+
   .hostel__slider {
     height: 200px;
   }
@@ -515,5 +490,13 @@
   .hostel__faq-header {
     font-size: 1.7rem;
     padding: 30px 15px 20px;
+  }
+
+  .hostel__panel-title {
+    font-size: 20px;
+  }
+
+  .hostel__panel-content {
+    font-size: 18px;
   }
 }

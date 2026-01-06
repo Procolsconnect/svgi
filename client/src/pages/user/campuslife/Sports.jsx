@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import styles from './sports.module.css';
 import Mask from './Mask';
+import CommonHero from '../../../components/CommonHero';
 
 const API_BASE = import.meta.env.VITE_API_URL + "/api/campus";
 
@@ -132,11 +133,11 @@ const SportsPage = () => {
   return (
     <div className={styles.sports__wrapper}>
       {/* Hero Section */}
-      <section id="sports__hero" className={styles.sports__hero}>
-        <img src={hero?.image || "hero img.jpg"} alt="Hero Background" className={styles['sports__hero-img']} />
-        <div className={styles['sports__hero-overlay']}></div>
-        <h1 className={styles['sports__hero-title']}>{hero?.title || "Sports"}</h1>
-      </section>
+    <CommonHero
+        apiEndpoint="/api/sportshero"
+        defaultTitle="Our Library"
+        defaultImage="/images/instu.jpg"
+      />
 
       {/* SVGI Section */}
       <section className={styles.sports__section}>
@@ -185,8 +186,10 @@ const SportsPage = () => {
 
       {/* Podium Section */}
       <section id="sports__podium" className={styles['sports__podium-section']}>
-        <div className={styles['sports__podium-left-content']}>
+        <div className={styles['sports__podium-title']}>
           <h1>Top 3 Winners</h1>
+        </div>
+        <div className={styles['sports__podium-description']}>
           <p>
             These are our top performers! Each number represents excellence, consistency,
             and skill. Congratulations to everyone for their hard work and success.
@@ -206,7 +209,7 @@ const SportsPage = () => {
 
       {/* Video Gallery */}
       <section id="sports__video-gallery" className={styles['sports__video-gallery-section']}>
-        <h2>Sports Video Gallery</h2>
+        <h1>Sports Video Gallery</h1>
         <div className={styles['sports__videos-container']}>
           {videos.length > 0 ? videos.map((vid, idx) => (
             <div key={vid._id || idx} className={styles['sports__video-item']}>
@@ -233,7 +236,7 @@ const SportsPage = () => {
 
       {/* Achievements Section */}
       <section id="sports__achievements" className={styles['sports__achievements-section']}>
-        <h2>Sports Achievements</h2>
+        <h1>Sports Achievements</h1>
 
         <div className={styles['sports__content-wrapper']}>
           <div className={styles['sports__slider']}>
@@ -270,7 +273,7 @@ const SportsPage = () => {
 
       {/* Featured Athletes */}
       <section id="sports__athletes" className={styles['sports__cards-section']}>
-        <h2>Featured Athletes</h2>
+        <h1>Featured Athletes</h1>
         <div className={styles['sports__cards-container']}>
           {athletes.length > 0 ? athletes.map((athlete, idx) => (
             <div key={athlete._id || idx} className={styles.sports__card}>

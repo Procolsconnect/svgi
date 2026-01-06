@@ -739,12 +739,12 @@
 }
 
 .alp-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
   margin-top: 5rem;
   justify-content: center;
-  justify-items: center;
+  min-height: 300px;
 }
 
 .alp-feature {
