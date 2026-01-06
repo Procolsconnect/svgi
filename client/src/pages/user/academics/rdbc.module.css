@@ -2,90 +2,39 @@
     margin: 0;
     font-family: 'Playfair Display', serif;
     background-color: #f9fafb;
+    overflow-x: hidden;
 }
 
-.hhHero {
-    min-height: 350px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    color: white;
-}
-
-.hhHero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-}
-
-.hhHero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 0;
-}
-
-.hhHero h1 {
-    position: relative;
-    font-size: 52px;
-    font-weight: bold;
-    z-index: 1;
-    letter-spacing: 1px;
-}
-
-.hhHero h1::after {
-    content: "";
-    display: block;
-    width: 120px;
-    height: 5px;
-    margin: 14px auto 0;
-    background: linear-gradient(90deg, #ff512f, #dd2476);
-    border-radius: 3px;
-    animation: hhUnderlinePulse 2s infinite;
-}
-
-@keyframes hhUnderlinePulse {
-
-    0%,
-    100% {
-        transform: scaleX(1);
-        opacity: 0.8;
-    }
-
-    50% {
-        transform: scaleX(1.4);
-        opacity: 1;
-    }
-}
 
 /* TOP ROW */
 .hhTopRow {
     display: flex;
     width: 70vw;
-    height: 200px;
+    height: 30vh;
+}
+
+.hhTitleGroup {
+    width: 100%;
+}
+
+.hhDescriptionSection {
+    width: 100%;
+    margin-top: 2rem;
+    clear: both;
 }
 
 .hhTopRowColumnTwo {
     height: 100%;
     flex: 0 0 30vw;
     margin-left: auto;
-    background: rgb(240, 7, 46);
+    background: #f0072e;
 }
 
 /* HEADINGS */
 .hhLeftHeading {
     position: absolute;
-    top: 400px;
-    right: 40px;
+    top: 69vh;
+    right: 3vw;
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     color: #2e2e2e;
@@ -97,13 +46,13 @@
 
 .hhRightHeading {
     position: absolute;
-    top: 400px;
+    top: 70vh;
     right: 840px;
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     color: #2e2e2e;
     font-weight: 600;
-    max-width: 300px;
+    max-width: 500px;
     line-height: 1.5;
     z-index: 10;
 }
@@ -123,7 +72,9 @@
 }
 
 .hhBottomRowColumnOne p {
-    width: 75%;
+    position: relative;
+    top: -29vh;
+    width: 70%;
     font-size: 1.2rem;
 }
 
@@ -190,93 +141,161 @@
 }
 
 
-/* RESPONSIVE DESIGN - DESKTOP SCALE ON MOBILE */
-@media (max-width: 900px) {
+/* TABLET TIER (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hhTopRowColumnTwo {
+        display: flex;
+        width: 70vw;
+        height: 20vh;
+    }
 
-    /* Keep the decorative blocks visible for desktop aesthetic */
+    .hhBottomRowColumnTwo {
+        display: flex;
+        width: 70vw;
+        height: 20vh;
+    }
+
+    .hhBottomRow {
+        display: flex;
+        flex-direction: row-reverse;
+        height: 20vh;
+    }
+
+    .hhBottomRow p {
+        display: flex;
+        height: 20vh;
+        padding-bottom: 10%;
+    }
+
+    .hhTopRow {
+        display: flex;
+        height: 20vh;
+    }
+
+    .hhLeftHeading {
+        top: 300px;
+        right: -90px;
+        font-size: 2.15rem;
+    }
+
+    .hhRightHeading {
+        top: 300px;
+        right: auto;
+        left: 20px;
+        font-size: 2.25rem;
+
+    }
+
+}
+
+/* RESPONSIVE DESIGN - DESKTOP SCALE ON MOBILE */
+@media (max-width: 767px) {
+
+    .hhTitleGroup {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .hhRightHeading {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100%;
+        max-width: 100%;
+        font-size: 2.2rem;
+        font-weight: 700;
+        display: flex !important;
+        line-height: 1.57;
+        z-index: 20;
+        padding: 0 0.5rem;
+    }
+
+    .hhRightHeading span:last-of-type {
+        align-self: flex-end;
+        text-align: right;
+    }
+
     .hhTopRow {
         display: flex;
         width: 100%;
-        height: 120px;
+        height: 140px;
         position: relative;
+        margin-top: -16.2vh;
+        /* PULL UP TOWARDS HERO */
+        z-index: 10;
     }
 
     .hhTopRowColumnTwo {
         position: relative;
         right: 117px;
-        flex: 0 0 30vw;
-        height: 90%;
+        flex: 0 0 40vw;
+        height: 100%;
+        width: 200px;
         background: rgb(240, 7, 46);
+        margin-left: auto;
     }
 
-    /* Preserve Absolute Overlap Headings to match image layout */
-    .hhLeftHeading {
-        position: absolute;
-        top: 300px;
-        right: 0px;
-        font-size: 1.2rem;
-        max-width: 180px;
-        text-align: right;
-        line-clamp: 4;
-        margin: 0;
-        padding-left: 10px;
-        line-height: 1.2;
-    }
-
-    .hhRightHeading {
-        position: absolute;
-        top: 300px;
-        left: 10px;
-        font-size: 1.3rem;
-        max-width: 37%;
-        text-align: right;
-        margin: 0;
-        padding-right: 1px;
-        line-height: 1;
-    }
-
-    /* Floating layout to fill space while keeping the block */
     .hhBottomRow {
         display: block;
         width: 100%;
-        margin-top: -15px;
+        margin-top: -10px;
+        /* OVERLAP/TIGHT POSITION */
+        position: relative;
+        z-index: 10;
     }
 
     .hhBottomRowColumnTwo {
         float: right;
-        width: 38vw;
-        height: 180px;
+        width: 43vw;
+        height: 160px;
         background: rgb(8, 29, 113);
         margin-left: 15px;
         margin-bottom: 10px;
     }
 
+    .hhLeftHeading {
+        position: relative !important;
+        top: -230px !important;
+        width: 100%;
+        max-width: 100%;
+        text-align: left;
+        font-size: 2.8rem;
+        padding: 1rem;
+        line-height: 1.5;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+
+    .hhDescriptionSection {
+        width: 100%;
+        margin-top: 2rem;
+        padding: 0 1.5rem;
+        clear: both;
+    }
+
     .hhBottomRowColumnOne {
         width: 100%;
-        padding: 10px 15px 0 10px;
+        padding: 0;
     }
 
     .hhBottomRowColumnOne p {
         width: 100%;
-        font-size: 1.05rem;
-        line-height: 1.3;
-        text-align: justify;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        text-align: center;
         color: #333;
     }
-
-
 
     .hhHighlightSection {
         padding: 2rem 1rem;
         width: 100vw;
-        margin-top: 10rem;
-
+        margin-top: -11rem;
     }
 
     .hhHighlightSection h1 {
         font-size: 2.5rem;
         margin-bottom: 2rem;
-      
     }
 
     :root {

@@ -26,22 +26,29 @@ export default function HeroHighlight() {
                 defaultImage="/images/instu.jpg"
             />
 
-            {/* TOP ROW */}
+            {/* SECTION 1: TOP HEADING */}
+            <div className={styles.hhTitleGroup}>
+                <div className={styles.hhRightHeading}>
+                    <span>Regulations  &nbsp;</span><br />
+                    <span>Discipline</span>
+                </div>
+            </div>
+
+            {/* SECTION 2: TOP DECOR ROW (RED BLOCK) */}
             <section className={styles.hhTopRow}>
                 <div className={styles.hhTopRowColumnTwo}></div>
             </section>
 
-            {/* HEADINGS */}
-            <div className={styles.hhRightHeading}>
-                Regulations ,<br />Discipline
-            </div>
-            <div className={styles.hhLeftHeading}>
-                and <br /> Capacity Development
-            </div>
-
-            {/* BOTTOM ROW */}
+            {/* SECTION 3: BOTTOM DECOR ROW (BLUE BLOCK) */}
             <section className={styles.hhBottomRow}>
                 <div className={styles.hhBottomRowColumnTwo}></div>
+            </section>
+
+            {/* SECTION 4: DESCRIPTION SECTION (NEXT SECTION) */}
+            <section className={styles.hhDescriptionSection}>
+                <div className={styles.hhLeftHeading}>
+                    and <br /> Capacity<br /> Development
+                </div>
                 <div className={styles.hhBottomRowColumnOne}>
                     <p>
                         SVGI adheres to strict guidelines and discipline to
@@ -49,7 +56,9 @@ export default function HeroHighlight() {
                         environment where students can learn without
                         distractions. In addition, the institution
                         prioritizes capacity development through regular
-                        skill-building activities, workshops, and training programs that assist students in enhancing their academic, professional, and personal growth.
+                        skill-building activities, workshops, and training
+                        programs that assist students in enhancing their
+                        academic, professional, and personal growth.
                     </p>
                 </div>
             </section>
