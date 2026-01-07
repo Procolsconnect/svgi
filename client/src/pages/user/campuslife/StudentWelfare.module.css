@@ -391,7 +391,7 @@
   }
 
   .imageContainer {
-    height: 60vh;
+    height: 100vh;
     /* Restored to full height for hero section */
     width: 100%;
     perspective: none;

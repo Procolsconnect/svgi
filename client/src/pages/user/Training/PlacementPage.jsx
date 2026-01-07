@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './PlacementPage.module.css';
 import axios from 'axios';
+import { FaEdit, FaUsers, FaPaperPlane, FaMapMarkedAlt, FaLightbulb, FaGraduationCap } from 'react-icons/fa';
 
 const apiurl = import.meta.env.VITE_API_URL;
 
@@ -21,12 +22,12 @@ const PlacementPage = () => {
   const [loading, setLoading] = useState(true);
 
   const trainingProcess = [
-    { number: 1, title: "Develop", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: "📝", color: "#3498db" },
-    { number: 2, title: "Engage", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: "👥", color: "#2ecc71" },
-    { number: 3, title: "Deliver", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: "✈️", color: "#9b59b6" },
-    { number: 4, title: "Plan", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: "🗺️", color: "#f1c40f" },
-    { number: 5, title: "Educate", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: "💡", color: "#e74c3c" },
-    { number: 6, title: "Educate", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: "💡", color: "#3498db" }
+    { number: 1, title: "Develop", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: FaEdit, color: "#3498db" },
+    { number: 2, title: "Engage", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: FaUsers, color: "#2ecc71" },
+    { number: 3, title: "Deliver", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: FaPaperPlane, color: "#9b59b6" },
+    { number: 4, title: "Plan", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: FaMapMarkedAlt, color: "#f1c40f" },
+    { number: 5, title: "Educate", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: FaLightbulb, color: "#e74c3c" },
+    { number: 6, title: "Educate", description: "Sagittis, audantium sem eveniet lacus pede porttitor aenean.", icon: FaGraduationCap, color: "#3498db" }
   ];
 
   const handlePrevSlide = () => currentSlide > 0 && setCurrentSlide(currentSlide - 1);
@@ -178,7 +179,9 @@ const PlacementPage = () => {
                   </div>
                 </div>
                 <div className={styles.content}>
-                  <div className={styles.icon}>{item.icon}</div>
+                  <div className={styles.icon}>
+                    {item.icon && React.createElement(item.icon)}
+                  </div>
                   <h2>{item.title}</h2>
                   <p>{item.description}</p>
                 </div>

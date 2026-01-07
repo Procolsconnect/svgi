@@ -70,7 +70,7 @@ const PlacementProcessPage = () => {
         <div className={styles.heroOverlay} />
         <h1 className={styles.heroTitle}>Placement Process</h1>
       </div>
-
+{/* placementprocess */}
       <main className={styles.heroSection}>
         <div className={styles.heroContainer}>
           <div className={styles.heroContent}>
@@ -149,6 +149,7 @@ const PlacementProcessPage = () => {
             ))}
           </ul>
         </div>
+        <p className='pt-10'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque aliquid quasi ipsum reprehenderit, praesentium veniam ullam magnam vitae fugiat soluta accusantium sequi eius quo sit. Ab voluptas assumenda architecto dicta.</p>
       </section>
 
     </div>
