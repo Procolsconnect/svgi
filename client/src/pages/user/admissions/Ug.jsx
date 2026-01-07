@@ -70,7 +70,9 @@ const UndergraduateCoursesPage = () => {
           <div><h5>UG COURSES</h5></div>
         </div>
 
-        <div className={`${styles['top-img']}`} style={{ backgroundImage: `url(${courseData.image1})` }}></div>
+        <div className={styles.topImgContainer}>
+          <img src={courseData.image1} alt="Course Image 1" className={styles.topImg} />
+        </div>
         <div className={styles['divArea-1']}></div>
 
         <div className={`${styles.rightTop} ${styles.end}`}>
@@ -97,8 +99,12 @@ const UndergraduateCoursesPage = () => {
           </p>
         </div>
 
-        <div className={`${styles['bottom-img']}`} style={{ backgroundImage: `url(${courseData.image3})` }}></div>
-        <div className={`${styles['center-img']}`} style={{ backgroundImage: `url(${courseData.image2})` }}></div>
+        <div className={styles.bottomImgContainer}>
+          <img src={courseData.image3} alt="Course Image 3" className={styles.bottomImg} />
+        </div>
+        <div className={styles.centerImgContainer}>
+          <img src={courseData.image2} alt="Course Image 2" className={styles.centerImg} />
+        </div>
         <div className={styles['divArea-2']}></div>
         <div className={styles.div2}></div>
         <div className={styles.pattern1}></div>

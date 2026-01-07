@@ -309,11 +309,12 @@
 
 @media (max-width: 480px) {
     .stackSlider {
-        min-height: 440px;
+        min-height: 55vh;
     }
 
     .latestEventsSection h1 {
         font-size: 1.8rem;
+        padding-top: 2rem;
     }
 
     .stackSlider img {

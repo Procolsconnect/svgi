@@ -8,19 +8,19 @@
 .container {
   margin: 0;
   font-family: 'Inter', sans-serif, system-ui;
-  background: var(--surface-2);
-  /* Make this the scroll container to ensure sticky works and overflow is handled */
+  background: #f2f5f7;
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  --content: 66ch;
+  --gutter: 2rem;
 }
 
 /* HERO */
 .hero {
   min-height: 350px;
-  width: 100vw;
-  max-width: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,8 +28,6 @@
   position: relative;
   overflow: hidden;
   color: white;
-  margin: 0;
-  padding: 0;
 }
 
 .hero img {
@@ -47,7 +45,7 @@
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 0;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -55,7 +53,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 52px;
   font-weight: bold;
-  z-index: 1;
+  z-index: 2;
   letter-spacing: 1px;
   width: 100%;
   padding: 0 2rem;
@@ -86,37 +84,26 @@
   }
 }
 
-@media(max-width:768px) {
-  .hero h1 {
-    font-size: 36px;
-    padding: 0 1rem;
-  }
-}
-
-/* FACILITIES */
+/* FACILITIES SECTION */
 .wrap {
   background: #ffffff;
   padding-block: 5rem;
-  width: 100vw;
-  max-width: 100%;
-  margin: 0;
-  padding-inline: 0;
+  width: 100%;
 }
 
 .home {
   width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   gap: 5rem;
   align-items: center;
   color: #333;
+  padding: 0 2rem;
 }
 
 .textSide {
   width: 50%;
-  padding: 0 2rem;
 }
 
 .sectionHeading {
@@ -136,9 +123,7 @@
 }
 
 .circle {
-  position: relative;
   width: 50%;
-  padding: 0 2rem;
 }
 
 .circle::after {
@@ -148,34 +133,6 @@
   padding-bottom: 100%;
   border-radius: 50%;
   background: url('https://images.unsplash.com/photo-1685630248371-9d42fd97f52f?auto=format&fit=crop&w=928&q=80') center/cover no-repeat;
-}
-
-@media(max-width:768px) {
-  .home {
-    flex-direction: column;
-    text-align: center;
-    padding: 0;
-    gap: 2rem;
-  }
-
-  .textSide,
-  .circle {
-    width: 100%;
-    padding: 0 1rem;
-  }
-
-  .sectionHeading {
-    text-align: center;
-  }
-}
-
-/* LOCAL CSS VARIABLES */
-.container {
-  --content: 66ch;
-  --gutter: 2rem;
-  --surface-2: #f2f5f7;
-  /* Open Props-like gray */
-  --text-1: #212529;
 }
 
 /* SCROLLING SECTIONS */
@@ -188,19 +145,30 @@
 .scrollSection {
   display: grid;
   gap: var(--gutter);
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 300px 1fr;
   align-items: center;
   min-height: 100vh;
   padding: 4rem 0;
-  --x: -100%;
+  --x: -100px;
 }
 
 .scrollSectionEven {
-  grid-template-columns: 1fr auto;
-  --x: 100%;
+  grid-template-columns: 1fr 300px;
+  --x: 100px;
 }
 
-/* Specific grid placement for even sections */
+.scrollSection img {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  clip-path: polygon(0 10%, 10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
+  scale: 1.5;
+  view-timeline: --item;
+  animation: itemReveal both ease-in;
+  animation-timeline: --item;
+  animation-range: cover 10% cover 35%;
+}
+
 .scrollSectionEven img {
   grid-column: 2;
 }
@@ -209,39 +177,33 @@
   grid-column: 1;
 }
 
-.scrollSection img {
-  width: 260px;
-  max-width: 30vw;
-  height: auto;
-  object-fit: cover;
-  clip-path: polygon(0 10%, 10% 0, 100% 0,
-      100% 90%, 90% 100%, 0 100%);
-  scale: 1.5;
-  view-timeline: --item;
-  animation: itemReveal both ease-in;
-  animation-timeline: --item;
-  animation-range: cover 10% cover 35%;
-}
-
 .scrollSection p {
-  background: hsl(210 17% 98% / 0.75);
-  padding: 2rem;
+  background: hsl(210 17% 98% / 0.85);
+  padding: 2.5rem;
   backdrop-filter: blur(8px);
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.3;
   z-index: 2;
   position: sticky;
   bottom: 20%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   view-timeline: --item;
   animation: itemReveal both ease-out;
   animation-timeline: --item;
   animation-range: cover 35% cover 60%;
 }
 
+.scrollSection p strong {
+  display: block;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: #0b0b0b;
+}
+
 @keyframes itemReveal {
   from {
     opacity: 0;
-    translate: var(--x, 0) 80px;
+    translate: var(--x, 0) 50px;
   }
 
   to {
@@ -250,74 +212,110 @@
   }
 }
 
-.scrollSection p::first-line {
-  text-transform: uppercase;
-  font-weight: bold;
+/* TABLET RESPONSIVENESS (768px - 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .home {
+    gap: 2rem;
+    padding: 0 3rem;
+  }
+
+  .sectionHeading {
+    font-size: 2.2rem;
+  }
+
+  .main {
+    width: 90%;
+    max-width: none;
+  }
+
+  .scrollSection {
+    grid-template-columns: 200px 1fr;
+  }
+
+  .scrollSectionEven {
+    grid-template-columns: 1fr 200px;
+  }
+
+  .scrollSection img {
+    height: 15rem;
+  }
+
+  .scrollSection p {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
 }
 
-/* MOBILE RESPONSIVENESS - EXACT DESKTOP SCALE */
-@media (max-width: 768px) {
-  .container {
-    --gutter: 1rem;
-    height: 100vh;
-    /* Ensure scroll container persists */
+/* MOBILE RESPONSIVENESS (Up to 767px) */
+@media screen and (max-width: 767px) {
+  .hero {
+    min-height: 250px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    padding: 0 1rem;
+  }
+
+  .hero h1::after {
+    width: 80px;
+  }
+
+  .wrap {
+    padding-block: 3rem;
+  }
+
+  .home {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+    padding: 0 1.5rem;
+  }
+
+  .textSide,
+  .circle {
+    width: 100%;
+  }
+
+  .sectionHeading {
+    font-size: 1.8rem;
+  }
+
+  .circle::after {
+    width: 80%;
+    margin: 0 auto;
   }
 
   .main {
     width: 100%;
     max-width: 100%;
-    padding: 0 0.5rem;
+    padding: 0 1rem;
   }
 
-  /* Force Grid Layout same as Desktop but Scaled */
-  .scrollSection {
-    display: grid;
-    gap: 0.1rem;
-    grid-template-columns: 40vw 1fr;
-    /* Image | Text */
-    align-items: center;
-    padding: 10vh 0;
-    /* Adjust vertical spacing */
-    min-height: 70vh;
-  }
-
+  .scrollSection,
   .scrollSectionEven {
-    grid-template-columns: 1fr 40vw;
-    /* Text | Image */
+    display: flex;
+    flex-direction: column;
+    min-height: 77vh;
+    padding:0 0;
   }
 
-  /* Images: Scale to fit the 40vw column */
   .scrollSection img {
-    grid-column: 1;
-    width: 100%;
-    max-width: none;
-    height: auto;
-    /* Keep the animation properties */
-    scale: 1.5;
-    clip-path: polygon(0 10%, 10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
+    height: 15rem;
+    width: 70%;
+    margin: 0 auto;
   }
 
-  /* Even section images go to col 2 */
-  .scrollSectionEven img {
-    grid-column: 2;
-  }
-
-  /* Text: Scale font to fit in the remaining space */
   .scrollSection p {
-    grid-column: 2;
-    font-size: 3.5vw;
-    /* Fluid font size */
-    line-height: 1.4;
-    padding: 2vw;
-    /* Keep sticky behavior */
     position: sticky;
-    bottom: 5%;
-    z-index: 2;
+    bottom: 25%;
+    padding: 1.5rem;
+    font-size: 1rem;
+    background: hsl(210 17% 98% / 0.9);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
   }
-
-  .scrollSectionEven p {
-    grid-column: 1;
-  }
-
-  /* Reset any accidentally applied mobile overrides if any exist */
 }

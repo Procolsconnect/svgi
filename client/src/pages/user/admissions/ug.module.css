@@ -106,29 +106,46 @@
   margin: 0;
 }
 
-.top-img {
+.topImgContainer {
   grid-area: 3/2/7/8;
-  background-size: cover;
-  background-position: center;
+  z-index: 1;
+  overflow: hidden;
 }
 
-.center-img {
+.topImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.centerImgContainer {
   grid-area: -8/2/-5/5;
-  background-size: cover;
-  background-position: center;
+  z-index: 1;
+  overflow: hidden;
 }
 
-.bottom-img {
+.centerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bottomImgContainer {
   grid-area: -6/4/-2/-2;
-  background-size: cover;
-  background-position: center;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.bottomImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .divArea-1,
 .divArea-2 {
   background-color: #001F54;
-  /* Dark Blue */
-  z-index: -100;
+  z-index: 0;
   width: 66%;
 }
 
@@ -198,7 +215,7 @@
 .div2 {
   border: 20px solid #001F54;
   /* Dark Blue */
-  z-index: -100;
+  z-index: 0;
   height: 66%;
   width: 80%;
 }
@@ -255,6 +272,8 @@
       #001f54 35.5px);
   justify-self: center;
   align-self: center;
+  /* Exact filter to make green → red */
+  filter: hue-rotate(-120deg) saturate(300%);
 }
 
 /* BUTTON BIRD SECTION */
@@ -496,7 +515,7 @@
   height: 33px;
   top: -8px;
   left: 8px;
-  z-index: -100;
+  z-index: 1;
 }
 
 /* Animations */
@@ -560,109 +579,177 @@
   }
 }
 
-/* MOBILE RESPONSIVENESS - FLUID VW SCALING */
-@media (max-width: 768px) {
-
-  /* Hero */
-  .hero {
-    min-height: 35vh;
-  }
-
-  .hero h1 {
-    font-size: 5vw;
-    letter-spacing: 0.1vw;
-  }
-
-  .hero h1::after {
-    width: 12vw;
-    height: 0.5vw;
-    margin: 1.4vw auto 0;
-  }
-
-  /* Main Container - Maintain Grid Ratios */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   .container {
-    padding: 3.2vw;
+    padding: 2.5rem;
+    grid-template-rows: repeat(22, 1fr);
+    min-height: 1200px;
   }
 
-  /* Header */
-  .header div {
-    width: 13.1vw;
-    height: 2.7vw;
-  }
-
-  .header div h5 {
-    font-size: 1.6vw;
-  }
-
-  .header i {
-    margin-right: 1.2vw;
-    font-size: 2vw;
-  }
-
-  .pattern1 {
-    grid-area: -3 / 2 / -1 / 5;
-    height: 50%;
-    width: 90%;
-    background: repeating-linear-gradient(135deg,
-        #001f54,
-        #001f54 1.15vw,
-        transparent 1.15vw,
-        transparent 2.7vw,
-        #001f54 2.7vw,
-        #001f54 3.55vw);
-    justify-self: center;
-    align-self: center;
-    filter: hue-rotate(-120deg) saturate(300%);
-  }
-
-  /* Decorative Divs */
-  .divArea-1,
-  .divArea-2,
-  .div1,
-  .div2 {
-    border-width: 2vw;
-  }
-
-  /* Titles */
   .title2 {
-    font-size: 4.8vw;
-  }
-
-  /* Specific Transforms/Positions - Scale offsets */
-  .pos-left {
-    top: -25%;
-    left: -25%;
-  }
-
-  .pos-right {
-    top: 150%;
-    left: 50%;
+    font-size: 2.5rem;
   }
 
   .content .italic {
-    top: 10vw;
-    left: -20vw;
-    font-size: 1.6vw;
+    left: -8rem;
+    top: 6rem;
+    font-size: 1.8rem;
   }
 
-  .content h2 {
-    font-size: 2.4vw;
+  .divArea-1 {
+    grid-area: 2/1/5/4;
+    height: 80%;
+    width: 80%;
   }
 
-  .content p {
-    font-size: 1.4vw;
-    line-height: normal;
-    margin: 1vw 0;
+  .div1,
+  .div2 {
+    border-width: 1rem;
+    width: 90%;
+    height: 80%;
   }
 
   .wrapper-no4 {
-    height: 60vh;
-    /* Keep consistent height */
+    height: 50vh;
   }
 
   .button-bird {
-    transform: scale(0.6);
-    transform-origin: center;
-    margin-top: 30vw;
+    width: 260px;
+    height: 75px;
+  }
+}
+
+/* MOBILE RESPONSIVENESS (Up to 767px) */
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    gap: 4rem;
+    overflow: hidden;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .topImgContainer {
+    height: 20rem;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .divArea-1 {
+    display: block;
+    position: absolute;
+    top: 5rem;
+    left: -1rem;
+    width: 40%;
+    height: 8rem;
+    z-index: 1;
+  }
+
+  .title2 {
+    font-size: 1.8rem;
+    white-space: normal;
+  }
+
+  .rightTop,
+  .leftBottom {
+    position: relative;
+    justify-self: start;
+    align-self: start;
+    transform: none;
+    margin: 1rem 0;
+  }
+
+  .trans-90,
+  .trans-180,
+  .trans-270 {
+    transform: none;
+  }
+
+  .pos-right,
+  .pos-left {
+    position: static;
+    transform: none;
+  }
+
+  .content {
+    padding: 0;
+  }
+
+  .content .italic {
+    position: static;
+    margin-bottom: 1rem;
+    display: block;
+    font-size: 1.5rem;
+  }
+
+  .centerImgContainer,
+  .bottomImgContainer {
+    height: 18rem;
+    width: 90%;
+    align-self: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .div1 {
+    display: block;
+    position: absolute;
+    top: 15rem;
+    right: -1rem;
+    width: 50%;
+    height: 10rem;
+    border-width: 0.8rem;
+    z-index: 1;
+  }
+
+  .divArea-2 {
+    display: block;
+    position: absolute;
+    bottom: 5rem;
+    right: -1rem;
+    width: 40%;
+    height: 12rem;
+    z-index: 1;
+  }
+
+  .div2 {
+    display: block;
+    position: absolute;
+    bottom: -2rem;
+    left: -1rem;
+    width: 50%;
+    height: 10rem;
+    border-width: 0.8rem;
+    z-index: 3;
+  }
+
+  .pattern1 {
+    width: 100%;
+    height: 4rem;
+    margin-top: 2rem;
+  }
+
+  .wrapper-no4 {
+    height: 50vh;
+    padding: 2rem;
+  }
+
+  .wrapper-no4 h1 {
+    font-size: 1.8rem;
+  }
+
+  .button-bird {
+    width: 240px;
+    height: 70px;
+  }
+
+  .button-bird__text {
+    font-size: 16px;
   }
 }

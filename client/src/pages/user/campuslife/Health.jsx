@@ -77,7 +77,7 @@ const HealthService = () => {
                 alt={card.title}
               />
               <p>
-                <strong>{card.title}</strong><br />
+                <strong>{card.title}</strong>
                 {card.description}
               </p>
             </section>

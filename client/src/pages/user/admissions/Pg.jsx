@@ -1,132 +1,96 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import styles from './pg.module.css';
-import CommonHero from '../../../components/CommonHero';
 
-const PostgraduateCoursesPage = () => {
-  const [isButtonActive, setIsButtonActive] = useState(false);
-  const [courseData, setCourseData] = useState({
-    image1: '', image2: '', image3: '', top_text: 'LINEN BLAZER', bottom_text: 'TOP 01'
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const API_URL = import.meta.env.VITE_API_URL;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [courseRes] = await Promise.all([
-          axios.get(`${API_URL}/api/pgcourse`)
-        ]);
-
-        if (courseRes.data.success && courseRes.data.data.length > 0) {
-          const data = courseRes.data.data[0];
-          setCourseData({
-            image1: data.image1,
-            image2: data.image2,
-            image3: data.image3,
-            top_text: data.top_text || 'LINEN BLAZER',
-            bottom_text: data.bottom_text || 'TOP 01'
-          });
-        }
-
-        setLoading(false);
-      } catch (err) {
-        console.error("Error fetching data", err);
-        setError('Failed to load data');
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [API_URL]);
-
-  const handleButtonClick = () => {
-    setIsButtonActive(!isButtonActive);
-  };
-
-  const topTextFull = (courseData.top_text || '').trim();
-  const topTextParts = topTextFull.split(/\s+/);
-  const topText1 = topTextParts[0] || 'LINEN';
-  const topText2 = topTextParts.slice(1).join(" ") || 'BLAZER';
-
-  const bottomTextFull = (courseData.bottom_text || '').trim();
-  const bottomTextParts = bottomTextFull.split(/\s+/);
-  const bottomText1 = bottomTextParts[0] || 'TOP';
-  const bottomText2 = bottomTextParts.slice(1).join(" ") || '01';
+const PostgraduateCourses = () => {
+  const [buttonActive, setButtonActive] = useState(false);
 
   return (
-    <div className={styles.pageWrapper}>
+    <div className={styles.pageContainer}>
       {/* HERO SECTION */}
-      <CommonHero
-        apiEndpoint="/api/pghero"
-        defaultTitle="Postgraduate Courses"
-      />
+      <div className={styles.hero}>
+        <img
+          className={styles.heroImg}
+          src="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80"
+          alt="Hero Background"
+        />
+        <h1 className={styles.heroTitle}>Postgraduate Courses</h1>
+      </div>
 
-      {/* MAIN GRID LAYOUT */}
-      <div className={styles.mainContainer}>
-        {/* Header */}
-        <div className={styles.headerSection}>
-          <i className="fa fa-arrow-left fa-2x"></i>
-          <div className={styles.headerLogo}>
-            <h5 className={styles.headerText}>PG COURSE</h5>
+      <div className={styles.wrap}>
+        {/* HEADER */}
+        <div className={styles.header}>
+          <h3 className={styles.headerTitle}>
+            <span className={styles.headerTitleSpan}>
+              <a href="#/" target="_blank" rel="noopener noreferrer">
+                CCCLOTHES
+              </a>
+            </span>
+          </h3>
+
+
+        </div>
+
+        <div className={styles.introSection}>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        
+        </div>
+
+        {/* TOP SECTION */}
+        <div className={styles.detailTop}>
+
+          <div className={styles.productImg}>
+            <div className={styles.boxTop}>
+              <div className={`${styles.boxTitle} ${styles.boxTitleTop1}`}>VINTAGE</div>
+              <div className={`${styles.boxTitle} ${styles.boxTitleTop2}`}>DENIM</div>
+            </div>
+            <div className={styles.imgProduct}>
+              <img src="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5" alt="Product" />
+            </div>
+            <div className={styles.boxBottom}>
+              <div className={`${styles.boxTitle} ${styles.boxTitleBottom1}`}>06</div>
+              <div className={`${styles.boxTitle} ${styles.boxTitleBottom2}`}>TOP</div>
+            </div>
           </div>
         </div>
 
-        {/* Images & Decorative Blocks */}
-        <div className={styles.topImage} style={{ backgroundImage: `url(${courseData.image1})` }} />
-        <div className={styles.divArea1}></div>
-
-        {/* Right Top Text */}
-        <div className={styles.rightTopSection}>
-          <div className={styles.title2}>{topText1}</div>
-          <div className={`${styles.title2} ${styles.trans90} ${styles.posRight}`}>{topText2}</div>
-        </div>
-
-        {/* Left Bottom Text */}
-        <div className={styles.leftBottomSection}>
-          <div className={`${styles.title2} ${styles.trans180} ${styles.fLeft}`}>{bottomText1}</div>
-          <div className={`${styles.title2} ${styles.trans270} ${styles.posLeft}`}>{bottomText2}</div>
-        </div>
-
-        <div className={styles.div1}></div>
-
-        {/* Main Content */}
-        <div className={styles.content}>
-          <div className={styles.title2}>POST GRADUATE</div>
-          <h2 className={`${styles.italic} ${styles.trans90}`}>PG DETAILS</h2>
-          <h2>Let  start to empower your skill From here  </h2>
-          <p>
-            A PG (Postgraduate) degree is valuable because it helps people gain more knowledge, improve their skills, and boost their academic and job profiles.
-            It provides advanced training, chances for research, and practical skills that get graduates ready for leadership roles and better careers.
+        {/* CONTENT SECTION */}
+        <div className={styles.detailContent}>
+          <h1 className={styles.detailContentTitle}>VINTAGE DENIM</h1>
+          <h3 className={styles.detailContentSubtitle}>PRODUCT DETAILS</h3>
+          <div className={styles.subtitle}>Kogi Cosby sweater ethical squid irony</div>
+          <p className={styles.detailContentParagraph}>
+            In the tumultuous business of cutting-in and attending to a whale, there is much running backwards
+            and forwards among the crew...
           </p>
-          <p>
-            A PG program improves thinking skills, decision-making, and creativity, leading to better job opportunities, teaching positions, and business growth.
-            It is an important step that helps individuals become experts in their field.
+          <p className={styles.detailContentParagraph}>
+            We must now retrace our way a little. It was mentioned that upon first breaking ground in the
+            whale's back...
           </p>
         </div>
 
-        <div className={styles.bottomImg} style={{ backgroundImage: `url(${courseData.image3})` }} />
-        <div className={styles.centerImg} style={{ backgroundImage: `url(${courseData.image2})` }} />
-        <div className={styles.divArea2}></div>
-        <div className={styles.div2}></div>
-        <div className={styles.pattern1}></div>
+        {/* BOTTOM SECTION */}
+        <div className={styles.detailBottom}>
+          <div className={styles.leftItem}>
+            <div className={styles.leftItemImg}> <img src="https://images.unsplash.com/photo-1519406686401-e9ef2420c15b?ixlib=rb-0.3.5" alt="Detail Left" /></div>
+          </div>
+          <div className={styles.rightItem}>
+            <div className={styles.rightItemImg}> <img src="https://images.unsplash.com/photo-1519406728390-b536d7be138f?ixlib=rb-0.3.5" alt="Detail Right" /></div>
+          </div>
+        </div>
       </div>
 
-      {/* BIRD BUTTON SECTION */}
+      {/* CTA SECTION */}
       <div className={styles.wrapperNo4}>
-        <p>THE complete PG course are inside the button So</p>
-        <h1>Click the Button</h1>
-
+        <p className={styles.wrapperNo4Paragraph}>THE complete UP course are in side the button So</p>
+        <h1 className={styles.wrapperNo4Title}>Click the Button</h1>
         <button
-          className={`${styles.buttonBird} ${isButtonActive ? styles.active : ''}`}
-          onClick={handleButtonClick}
+          className={`${styles.buttonBird} ${buttonActive ? styles.active : ''}`}
+          onClick={() => setButtonActive(!buttonActive)}
         >
-          <p className={styles.buttonBirdText}>
-            {isButtonActive ? 'DONE' : 'OPEN'}
-          </p>
-
+          <p className={styles.buttonBirdText}>{buttonActive ? 'DONE' : 'OPEN'}</p>
           <svg
             version="1.1"
             className={styles.feather}
@@ -136,26 +100,50 @@ const PostgraduateCoursesPage = () => {
             y="0px"
             viewBox="0 0 75 38"
             style={{ enableBackground: 'new 0 0 75 38' }}
-            xmlSpace="preserve"
           >
             <g>
               <path d="M20.8,31.6c3.1-0.7,2.9-2.3,2,1c9.1,4.4,20.4,3.7,29.1-0.8l0,0c0.7-2.1,1-3.9,1-3.9c0.6,0.8,0.8,1.7,1,2.9
-                  c4.1-2.3,7.6-5.3,10.2-8.3c0.4-2.2,0.4-4,0.4-4.1c0.6,0.4,0.9,1.2,1.2,2.1c4.5-6.1,5.4-11.2,3.7-13.5c1.1-2.6,1.6-5.4,1.2-7.7
-                  c-0.5,2.4-1.2,4.7-2.1,7.1c-5.8,11.5-16.9,21.9-30.3,25.3c13-4,23.6-14.4,29.1-25.6C62.8,9,55.6,16.5,44.7,20.7
-                  c2.1,0.7,3.5,1.1,3.5,1.6c-0.1,0.4-1.3,0.6-3.2,0.4c-7-0.9-7.1,1.2-16,1.5c1,1.3,2,2.5,3.1,3.6c-1.9-0.9-3.8-2.2-5.6-3.6
-                  c-0.9,0.1-10.3,4.9-22.6-12.3C5.9,17.7,11.8,26.9,20.8,31.6z" />
+                    c4.1-2.3,7.6-5.3,10.2-8.3c0.4-2.2,0.4-4,0.4-4.1c0.6,0.4,0.9,1.2,1.2,2.1c4.5-6.1,5.4-11.2,3.7-13.5c1.1-2.6,1.6-5.4,1.2-7.7
+                    c-0.5,2.4-1.2,4.7-2.1,7.1c-5.8,11.5-16.9,21.9-30.3,25.3c13-4,23.6-14.4,29.1-25.6C62.8,9,55.6,16.5,44.7,20.7
+                    c2.1,0.7,3.5,1.1,3.5,1.6c-0.1,0.4-1.3,0.6-3.2,0.4c-7-0.9-7.1,1.2-16,1.5c1,1.3,2,2.5,3.1,3.6c-1.9-0.9-3.8-2.2-5.6-3.6
+                    c-0.9,0.1-10.3,4.9-22.6-12.3C5.9,17.7,11.8,26.9,20.8,31.6z" />
             </g>
           </svg>
-
-          {/* All 30 flying birds */}
           <span className={styles.bird}></span>
-          {Array.from({ length: 30 }).map((_, i) => (
-            <span key={i} className={`${styles.birdItem} ${styles[`bird${i + 1}`]}`}></span>
-          ))}
+          <span className={styles.bird1}></span>
+          <span className={styles.bird2}></span>
+          <span className={styles.bird3}></span>
+          <span className={styles.bird4}></span>
+          <span className={styles.bird5}></span>
+          <span className={styles.bird6}></span>
+          <span className={styles.bird7}></span>
+          <span className={styles.bird8}></span>
+          <span className={styles.bird9}></span>
+          <span className={styles.bird10}></span>
+          <span className={styles.bird11}></span>
+          <span className={styles.bird12}></span>
+          <span className={styles.bird13}></span>
+          <span className={styles.bird14}></span>
+          <span className={styles.bird15}></span>
+          <span className={styles.bird16}></span>
+          <span className={styles.bird17}></span>
+          <span className={styles.bird18}></span>
+          <span className={styles.bird19}></span>
+          <span className={styles.bird20}></span>
+          <span className={styles.bird21}></span>
+          <span className={styles.bird22}></span>
+          <span className={styles.bird23}></span>
+          <span className={styles.bird24}></span>
+          <span className={styles.bird25}></span>
+          <span className={styles.bird26}></span>
+          <span className={styles.bird27}></span>
+          <span className={styles.bird28}></span>
+          <span className={styles.bird29}></span>
+          <span className={styles.bird30}></span>
         </button>
       </div>
     </div>
   );
 };
 
-export default PostgraduateCoursesPage;
+export default PostgraduateCourses;

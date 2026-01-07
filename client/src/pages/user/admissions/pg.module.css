@@ -1,14 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap');
-
-.pageWrapper {
-  font-family: 'Inter', 'Poppins', sans-serif;
+.pageContainer * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-size: 62.5%;
+}
+
+.pageContainer {
+  font-family: 'Inter', 'Poppins', sans-serif;
   background-color: #f9fafb;
 }
 
+.pageContainer a {
+  color: unset;
+  font-size: unset;
+  text-decoration: none;
+}
+
 /* HERO SECTION */
-.heroSection {
+.hero {
   min-height: 350px;
   width: 100%;
   display: flex;
@@ -20,7 +30,7 @@
   color: white;
 }
 
-.heroImage {
+.heroImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -30,7 +40,7 @@
   z-index: 0;
 }
 
-.heroSection::after {
+.hero::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -45,7 +55,6 @@
   z-index: 1;
   letter-spacing: 1px;
   font-family: 'Playfair Display', serif;
-  margin: 0;
 }
 
 .heroTitle::after {
@@ -73,164 +82,244 @@
   }
 }
 
-.mainContainer {
-  display: grid;
-  padding: 32px;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(20, 1fr);
+.wrap {
+  width: 960px;
+  margin: 0 auto;
+  font-size: 0;
 }
 
-.headerSection {
-  grid-area: 1 / 1 / 2 / 4;
-  display: flex;
-  align-items: center;
+.header {
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+  margin-top: 40px;
 }
 
-.headerSection i {
-  margin-right: 12px;
+.headerTitle {
+  height: 120px;
+  text-align: left;
+  margin-left: 97px;
 }
 
-.headerLogo {
-  width: 131px;
-  height: 27px;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.headerTitle::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "←";
+  display: inline-block;
+  font-size: 2rem;
+  color: #000;
+  padding-right: 5px;
 }
 
-.headerText {
+.headerTitleSpan {
+  line-height: 120px;
+  font-size: 2rem;
   color: #fff;
-  margin: 0;
+  font-weight: 900;
+  padding: 2px 8px;
+  background-color: #000;
 }
 
-.topImage {
-  grid-area: 3/ 2 / 7 / -2;
-  background-size: cover;
-  background-position: center;
-
+.introSection {
+  padding: 0 40px;
+  text-align: left;
 }
 
-.centerImg {
-  grid-area: -8 / 2 / -5 / 5;
-  background-size: cover;
-  background-position: center;
+.introSection p {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: #333;
+  margin-bottom: 4rem;
 }
 
-.bottomImg {
-  grid-area: -6 / 4 / -2 / -2;
-  background-size: cover;
-  background-position: center;
-}
-
-.divArea1,
-.divArea2 {
-  background-color: #001F54;
-  z-index: -100;
-  width: 66%;
-}
-
-.divArea1 {
-  grid-area: 2 / 1 / 5 / 4;
-  height: 66%;
-}
-
-.divArea2 {
-  grid-area: -7 / -4 / -5 / -1;
-  height: 100%;
-}
-
-.title2 {
-  font-size: 48px;
-  font-weight: 1000;
-  white-space: nowrap;
-}
-
-.italic {
-  font-style: italic;
-  margin: 0;
-  white-space: nowrap;
-}
-
-.rightTopSection {
-  grid-area: 2 / -4 / 3 / -2;
-  position: relative;
-  justify-self: end;
-  align-self: end;
-}
-
-.leftBottomSection {
-  grid-area: 7 / 2 / 8 / 3;
+/* TOP SECTION */
+.detailTop {
+  width: 100%;
+  height: 25rem;
   position: relative;
 }
 
-.trans90 {
+.productImg {
+  width: 75%;
+  height: 60%;
+  background-color: #ddd;
+  background-size: cover;
+  position: absolute;
+  top: -10rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 2;
+}
+
+.productImg img {
+  width: 100%;
+  height: 17.5rem;
+  object-fit: fit-content;
+}
+
+.detailTop::before {
+  content: "";
+  width: 25%;
+  height: 25%;
+  background-color: #001f54;
+  position: absolute;
+  top: 5.5rem;
+  left: 60px;
+}
+
+.detailTop::after {
+  content: "";
+  width: 32rem;
+  height: 18rem;
+  position: absolute;
+  bottom: 11.7rem;
+  right: 50px;
+  border: 1.5rem solid #001f54;
+  z-index: 1;
+}
+
+.boxTop {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.boxBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.boxTitle,
+.detailContentTitle {
+  font-size: 3rem;
+  font-weight: 900;
+}
+
+.boxTitleTop1 {
+  position: relative;
+  top: -60px;
+}
+
+.boxTitleTop2 {
+  position: relative;
+  top: 12px;
+  right: -120px;
   transform: rotate(90deg);
 }
 
-.trans180 {
-  transform: rotate(180deg);
+.boxTitleBottom1 {
+  position: relative;
+  left: -70px;
+  bottom: -6rem;
+  transform: rotate(-90deg);
 }
 
-.trans270 {
-  transform: rotate(270deg);
+.boxTitleBottom2 {
+  position: relative;
+  top: 6rem;
+  left: 0;
+  transform: scale(-1, -1);
 }
 
-.posLeft {
-  position: absolute;
-  left: -50%;
-  top: -50%;
-}
-
-.posRight {
-  position: absolute;
-  left: 50%;
-  top: 200%;
-}
-
-.fLeft {
-  float: left;
-}
-
-.div1,
-.div2 {
-  border: 20px solid #001F54;
-  z-index: -100;
-  height: 66%;
-  width: 80%;
-}
-
-.div1 {
-  grid-area: 5 / 4 / 8 / -1;
-  justify-self: center;
-  align-self: center;
-}
-
-.div2 {
-  grid-area: -7 / 1 / -4 / -4;
-  justify-self: center;
-  align-self: center;
-}
-
-.content {
-  grid-area: 9 / 3 / 13 / -2;
+/* CONTENT SECTION */
+.detailContent {
+  width: 100%;
+  padding: 60px 80px;
   position: relative;
 }
 
-.content .italic {
+.detailContentSubtitle,
+.subtitle {
+  font-size: 24px;
+}
+
+.detailContentSubtitle {
+  font-style: italic;
+  position: absolute;
+  top: 180px;
+  left: -100px;
+  transform: rotate(90deg);
+}
+
+.subtitle {
+  font-weight: 900;
+}
+
+.detailContentParagraph {
+  font-size: 1.6rem;
+  margin: 1.2rem 0;
+  line-height: 2.2rem;
+}
+
+/* BOTTOM SECTION */
+.detailBottom {
+  width: 100%;
+  height: 500px;
+  padding: 0 80px;
+  margin: auto;
+  position: relative;
+}
+
+.leftItemImg {
+  width: 37.5%;
+  padding-bottom: 31.25%;
+  background-size: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 120px;
+  z-index: 2;
+}
+
+.leftItemImg img {
+  width: 100%;
+  height: 17rem;
+  object-fit: fit-content;
+}
+
+.leftItem::after {
+  content: "";
+  width: calc(50% - 40px);
+  height: 20.83%;
+  border: 20px solid #001f54;
+  position: absolute;
+  top: 160px;
+  left: 60px;
+}
+
+.rightItemImg {
+  width: 50%;
+  padding-bottom: 41.67%;
+  background-size: cover;
+  position: absolute;
+  right: 120px;
+  bottom: -390px;
+  z-index: 1;
+}
+
+.rightItemImg img {
+  width: 100%;
+  height: 29rem;
+  object-fit: fit-content;
+}
+
+.rightItem::before {
+  content: "";
+  width: 240px;
+  height: 200px;
+  background-color: #001f54;
   position: absolute;
   top: 100px;
-  left: -200px;
+  right: 60px;
+  z-index: 1;
 }
 
-.content h2 {
-  margin: 0;
-}
-
-.pattern1 {
-  grid-area: -3 / 2 / -1 / 5;
-  height: 50%;
-  width: 66%;
+.rightItem::after {
+  content: "";
+  width: 240px;
+  height: 100px;
   background: repeating-linear-gradient(135deg,
       #001f54,
       #001f54 11.5px,
@@ -238,14 +327,15 @@
       transparent 27px,
       #001f54 27px,
       #001f54 35.5px);
-  justify-self: center;
-  align-self: center;
+  position: absolute;
+  bottom: 50px;
+  left: 20%;
+  z-index: 3;
 }
 
-/* BUTTON BIRD SECTION */
+/* CTA SECTION */
 .wrapperNo4 {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, #BEEDFF, white);
@@ -253,17 +343,21 @@
   width: 100vw;
   max-width: 100%;
   overflow: hidden;
+  flex-direction: column;
   position: relative;
 }
 
-.wrapperNo4 p {
-  margin: 0 0 10px 0;
+.wrapperNo4Paragraph {
+  font-size: 1.6rem;
   text-align: center;
+  color: #333;
 }
 
-.wrapperNo4 h1 {
-  margin: 0 0 30px 0;
-  text-align: center;
+.wrapperNo4Title {
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
 }
 
 .buttonBird {
@@ -271,14 +365,14 @@
   height: 88px;
   background-color: #131335;
   border-radius: 5px;
-  position: absolute;
+  position: relative;
   opacity: 1;
   padding: 0;
   border: none;
   display: flex;
   justify-content: center;
   cursor: pointer;
-  margin-top: 12%;
+  margin-top: 20px;
 }
 
 .buttonBirdText {
@@ -304,19 +398,19 @@
   transition: left 1.5s cubic-bezier(0.42, 0, 0.58, 1), top 1.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.5s linear 1s;
 }
 
-.buttonBird:hover .bird30:after {
+.buttonBird:hover .bird30::after {
   left: 50px;
   top: 50px;
   transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
 }
 
-.buttonBird:hover .bird30:before {
+.buttonBird:hover .bird30::before {
   left: -50px;
   top: 50px;
   transition: all 1.5s cubic-bezier(0.42, 0, 0.58, 1) -0.5s;
 }
 
-.buttonBird .feather {
+.feather {
   position: absolute;
   width: 18%;
   left: 40%;
@@ -326,6 +420,7 @@
   fill: #131335;
 }
 
+/* Active Button State */
 .buttonBird.active {
   background-color: transparent;
   transition: all 0.2s linear 0.1s;
@@ -341,12 +436,100 @@
   animation: featherFade 1.5s linear 0.5s forwards;
 }
 
-/* Birds */
-
-
-/* Common bird styles */
+/* Birds positioning, animation, and sizing */
 .bird,
-.birdItem {
+.bird::before,
+.bird::after,
+.bird1,
+.bird1::after,
+.bird1::before,
+.bird2,
+.bird2::after,
+.bird2::before,
+.bird3,
+.bird3::after,
+.bird3::before,
+.bird4,
+.bird4::after,
+.bird4::before,
+.bird5,
+.bird5::after,
+.bird5::before,
+.bird6,
+.bird6::after,
+.bird6::before,
+.bird7,
+.bird7::after,
+.bird7::before,
+.bird8,
+.bird8::after,
+.bird8::before,
+.bird9,
+.bird9::after,
+.bird9::before,
+.bird10,
+.bird10::after,
+.bird10::before,
+.bird11,
+.bird11::after,
+.bird11::before,
+.bird12,
+.bird12::after,
+.bird12::before,
+.bird13,
+.bird13::after,
+.bird13::before,
+.bird14,
+.bird14::after,
+.bird14::before,
+.bird15,
+.bird15::after,
+.bird15::before,
+.bird16,
+.bird16::after,
+.bird16::before,
+.bird17,
+.bird17::after,
+.bird17::before,
+.bird18,
+.bird18::after,
+.bird18::before,
+.bird19,
+.bird19::after,
+.bird19::before,
+.bird20,
+.bird20::after,
+.bird20::before,
+.bird21,
+.bird21::after,
+.bird21::before,
+.bird22,
+.bird22::after,
+.bird22::before,
+.bird23,
+.bird23::after,
+.bird23::before,
+.bird24,
+.bird24::after,
+.bird24::before,
+.bird25,
+.bird25::after,
+.bird25::before,
+.bird26,
+.bird26::after,
+.bird26::before,
+.bird27,
+.bird27::after,
+.bird27::before,
+.bird28,
+.bird28::after,
+.bird28::before,
+.bird29,
+.bird29::after,
+.bird29::before,
+.bird30,
+.bird30::after,
+.bird30::before {
   opacity: 1;
   display: block;
   position: absolute;
@@ -357,54 +540,35 @@
   top: 0;
   left: 0;
   animation-name: flyCycle;
-  animation-timing-function: steps(1);
+  animation-timing-function: steps(3);
   animation-iteration-count: infinite;
 }
 
-/* Pseudo elements for all birds */
-.bird:before,
-.bird:after,
-.birdItem:before,
-.birdItem:after {
-  content: "";
-  display: block;
-  position: absolute;
-  background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
-  background-size: auto 100%;
-  width: 60px;
-  height: 33px;
-  top: 0;
-  left: 0;
-  animation-name: flyCycle;
-  animation-timing-function: steps(1);
-  animation-iteration-count: infinite;
-}
-
-/* Single bird size adjustments (Small birds) */
-.bird1:after,
-.bird1:before,
-.bird2:after,
-.bird2:before,
-.bird4:after,
-.bird4:before,
-.bird5:after,
-.bird5:before,
-.bird7:after,
-.bird7:before,
-.bird8:after,
-.bird8:before,
-.bird10:after,
-.bird10:before,
-.bird11:after,
-.bird11:before,
-.bird13:after,
-.bird13:before,
-.bird14:after,
-.bird14:before,
-.bird16:after,
-.bird16:before,
-.bird17:after,
-.bird17:before {
+/* Single bird size adjustments */
+.bird1::after,
+.bird1::before,
+.bird2::after,
+.bird2::before,
+.bird4::after,
+.bird4::before,
+.bird5::after,
+.bird5::before,
+.bird7::after,
+.bird7::before,
+.bird8::after,
+.bird8::before,
+.bird10::after,
+.bird10::before,
+.bird11::after,
+.bird11::before,
+.bird13::after,
+.bird13::before,
+.bird14::after,
+.bird14::before,
+.bird16::after,
+.bird16::before,
+.bird17::after,
+.bird17::before {
   width: 30px;
   height: 33px;
   top: -8px;
@@ -412,6 +576,7 @@
   z-index: -100;
 }
 
+/* Animations */
 @keyframes flyCycle {
   100% {
     background-position: -360px 0;
@@ -462,113 +627,412 @@
   75% {
     transform: rotate(10deg);
     left: 32%;
-    top: -550px;
-    opacity: 0;
-    transition: left 1.5s cubic-bezier(0.42, 0, 0.58, 1), top 1.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.5s linear 1s;
+  }
+
+  100% {
+    transform: rotate(0deg);
+    opacity: 1;
+    top: 12px;
+    left: 43%;
   }
 }
 
-/* MOBILE RESPONSIVENESS - FLUID VW SCALING */
-@media (max-width: 768px) {
-
-  /* Hero */
-  .heroSection {
-    min-height: 35vh;
+/* TABLET RESPONSIVENESS (769px - 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .wrap {
+    width: 90%;
   }
 
   .heroTitle {
-    font-size: 5vw;
-    letter-spacing: 0.1vw;
+    font-size: 42px;
+  }
+
+  .headerTitle {
+    margin-left: 20px;
+    height: 80px;
+  }
+
+  .headerTitle::before,
+  .headerTitleSpan {
+    font-size: 1.8rem;
+    line-height: 80px;
+  }
+
+  .detailTop {
+    height: 22rem;
+    position: relative;
+  }
+
+  .productImg {
+    width: 85%;
+    top: -8rem;
+  }
+
+  .productImg img {
+    width: 100%;
+    height: 18rem;
+    object-fit: fit-content;
+  }
+
+  .detailTop::before {
+    width: 25%;
+    height: 7rem;
+    top: 6rem;
+    left: 0.1rem;
+  }
+
+  .detailTop::after {
+    width: 30rem;
+    height: 12.5rem;
+    right: 0.1rem;
+    top: -2.6rem;
+    border-width: 1rem;
+  }
+
+  .boxTitle {
+    font-size: 2.4rem !important;
+  }
+
+  .boxTitleTop2 {
+    right: -6rem;
+  }
+
+  .boxTitleTop1 {
+    top: -2.6rem;
+  }
+
+  .boxTitleBottom1 {
+    left: -4rem;
+    bottom: -6rem;
+  }
+
+  .boxTitleBottom2 {
+    top: 8rem;
+  }
+
+  .detailContent {
+    padding: 40px 40px;
+  }
+
+  .detailContentSubtitle {
+    left: -10rem;
+    top: 140px;
+    font-size: 2rem;
+  }
+
+  .introSection {
+    padding: 30px 40px;
+  }
+
+  .introSection p {
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+  }
+
+  .detailBottom {
+    height: 450px;
+    padding: 0 40px;
+  }
+
+  .leftItemImg {
+    left: 60px;
+    width: 40%;
+  }
+
+  .leftItemImg img {
+    width: 100%;
+    height: 14rem;
+    object-fit: fit-content;
+  }
+
+  .leftItem::after {
+    width: calc(50% - 20px);
+    height: 80px;
+    border-width: 15px;
+    top: 120px;
+    left: 20px;
+  }
+
+  .rightItemImg {
+    right: 60px;
+    width: 55%;
+    bottom: -250px;
+  }
+
+  .rightItemImg img {
+    width: 100%;
+    height: 25rem;
+    object-fit: fit-content;
+  }
+
+  .rightItem::before {
+    width: 12rem;
+    height: 6rem;
+    top: 80px;
+    right: 20px;
+  }
+
+  .rightItem::after {
+    width: 13rem;
+    height: 5rem;
+    bottom: 3rem;
+    left: 15%;
+  }
+}
+
+/* MOBILE RESPONSIVENESS (Up to 768px) */
+@media screen and (max-width: 767px) {
+  .wrap {
+    width: 98%;
+  }
+
+  .heroTitle {
+    font-size: 32px;
   }
 
   .heroTitle::after {
-    width: 12vw;
-    height: 0.5vw;
-    margin: 1.4vw auto 0;
+    width: 80px;
+    height: 3px;
   }
 
-  /* Main Container - Maintain Grid Ratios */
-  .mainContainer {
-    padding: 3.2vw;
+  .headerTitle {
+    margin-left: 10px;
+    height: 60px;
   }
 
-  /* Header */
-  .headerLogo {
-    width: 13.1vw;
-    height: 2.7vw;
+  .headerTitle::before,
+  .headerTitleSpan {
+    font-size: 1.5rem;
+    line-height: 60px;
   }
 
-  .headerText {
-    font-size: 1.6vw;
+  .detailTop {
+    width: 100%;
+    height: 18rem;
+    position: relative;
   }
 
-  .headerSection i {
-    margin-right: 1.2vw;
-    font-size: 2vw;
+  .productImg {
+    width: 80%;
+    height: 23vh;
+    position: absolute;
+    top: -80px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 2;
   }
 
-  .pattern1 {
-    grid-area: -3 / 2 / -1 / 5;
-    height: 50%;
-    width: 90%;
-    background: repeating-linear-gradient(135deg,
-        #001f54,
-        #001f54 1.15vw,
-        transparent 1.15vw,
-        transparent 2.7vw,
-        #001f54 2.7vw,
-        #001f54 3.55vw);
-    justify-self: center;
-    align-self: center;
+  .productImg img {
+    width: 100%;
+    height: 23vh;
+    object-fit: fit-content;
   }
 
-  /* Decorative Divs */
-  .divArea1,
-  .divArea2,
-  .div1,
-  .div2 {
-    border-width: 2vw;
+  .detailTop::before {
+    width: 35%;
+    height: 90px;
+    top: 4rem;
+    left: 4px;
+    display: block;
   }
 
-  /* Titles */
-  .title2 {
-    font-size: 4.8vw;
+  .detailTop::after {
+    width: 50%;
+    height: 150px;
+    right: 5px;
+    top: -2rem;
+    border-width: 10px;
+    display: block;
+    z-index: 1;
   }
 
-  /* Specific Transforms/Positions - Scale offsets */
-  .posLeft {
-    top: -25%;
-    left: -25%;
+  .boxTitle {
+    font-size: 1.7rem !important;
   }
 
-  .posRight {
-    top: 150%;
-    left: 50%;
+  .boxTitleTop1 {
+    top: -30px;
+    font-size: 1.7rem !important;
   }
 
-  .content .italic {
-    top: 10vw;
-    left: -20vw;
-    font-size: 1.6vw;
+  .boxTitleTop2 {
+    top: 10px;
+    right: -62px;
   }
 
-  .content h2 {
-    font-size: 2.4vw;
+  .boxTitleBottom1 {
+    left: -2.5rem;
+    bottom: -2rem;
   }
 
-  .content p {
-    font-size: 1.4vw;
-    line-height: normal;
-    margin: 1vw 0;
+  .boxTitleBottom2 {
+    top: 2rem;
   }
 
-  .buttonBird {
-    transform: scale(0.6);
-    transform-origin: center;
-    margin-top: 30vw;
+  .detailContent {
+    padding: 20px 20px;
+  }
+
+  .detailContentTitle {
+    font-size: 2.8rem;
+  }
+
+  .detailContentSubtitle {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    display: block;
+    margin-top: 10px;
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1.6rem;
+    margin-top: 5px;
+  }
+
+  .detailContentParagraph {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
+
+  .introSection {
+    padding: 20px 20px;
+  }
+
+  .introSection p {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+
+  .detailBottom {
+    width: 100%;
+    height:19rem;
+    padding: 0 10px;
+    position: relative;
+    margin-bottom: 40px ;
+  }
+
+  .leftItem,
+  .rightItem {
+    position: static;
+  }
+
+  .leftItemImg {
+    width: 45% !important;
+    height: 14rem;
+    position: absolute;
+    top: 0px;
+    left: 40px !important;
+    z-index: 2;
+  }
+
+  .leftItemImg img {
+    width: 100%;
+    height: 14rem;
+    object-fit: fit-content;
+  }
+
+  .leftItem::after {
+    width: 45%;
+    height: 60px;
+    top: 150px;
+    left: 10px;
+    border-width: 10px;
+    display: block;
+  }
+
+  .rightItemImg {
+    width: 55% !important;
+    height: 14rem;
+    position: absolute;
+    right: 2rem !important;
+    bottom: 2rem;
+    z-index: 1;
+  }
+
+  .rightItemImg img {
+    width: 100%;
+    height: 17rem;
+    object-fit: fit-content;
+  }
+
+  .rightItem::before {
+    width: 40%;
+    height: 6rem;
+    
+    right: 10px;
+    display: block;
+    z-index: 1;
+  }
+
+  .rightItem::after {
+    width: 40%;
+    height: 50px;
+    bottom: 20px;
+    left: 10%;
+    display: block;
+    z-index: 3;
   }
 
   .wrapperNo4 {
-    height: 30vh;
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .wrapperNo4Paragraph {
+    font-size: 1.4rem;
+  }
+
+  .wrapperNo4Title {
+    font-size: 2.4rem;
+  }
+
+  .buttonBird {
+    width: 240px;
+    height: 70px;
+  }
+
+  .buttonBirdText {
+    font-size: 16px;
+  }
+
+  .bird,
+  .bird_item,
+  .bird1,
+  .bird2,
+  .bird3,
+  .bird4,
+  .bird5,
+  .bird6,
+  .bird7,
+  .bird8,
+  .bird9,
+  .bird10,
+  .bird11,
+  .bird12,
+  .bird13,
+  .bird14,
+  .bird15,
+  .bird16,
+  .bird17,
+  .bird18,
+  .bird19,
+  .bird20,
+  .bird21,
+  .bird22,
+  .bird23,
+  .bird24,
+  .bird25,
+  .bird26,
+  .bird27,
+  .bird28,
+  .bird29,
+  .bird30 {
+    width: 40px;
+    height: 22px;
   }
 }

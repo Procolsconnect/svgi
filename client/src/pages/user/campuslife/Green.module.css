@@ -312,8 +312,9 @@
 /* ==================== PHOTO GALLERY ==================== */
 .gsvgiGallery {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 1px;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -321,9 +322,11 @@
 
 .gsvgiGalleryItem {
   height: 40vh;
-  flex-grow: 1;
+  flex-grow: 2;
   overflow: hidden;
   border-radius: 0px;
+  background-color:transparent;
+  /* Background for letterboxing/pillarboxing */
 }
 
 .gsvgiGalleryItem:last-child {
@@ -332,8 +335,10 @@
 
 .gsvgiGalleryImg {
   max-height: 100%;
-  min-width: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  /* Changed from cover to contain for both orientations */
   vertical-align: bottom;
 }
 
@@ -417,18 +422,18 @@
     top: 7.6em;
     right: 1em;
     width: 14em;
-   
+
   }
 
   .gsvgiGallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
+    gap: 1px;
     padding: 0 10px;
   }
 
   .gsvgiGalleryItem {
-    height: 25vh;
+
     flex-grow: unset;
     width: 100%;
   }
@@ -441,6 +446,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Support both portrait and landscape */
   }
 }
 
@@ -547,6 +553,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Support both portrait and landscape */
     min-width: 0;
   }
 }
@@ -577,7 +584,7 @@
   }
 
   .gsvgiGalleryItem {
-    height: 60vh;
+    height: fit-content;
   }
 
   .gsvgiViewport {

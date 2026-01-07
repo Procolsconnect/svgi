@@ -92,7 +92,6 @@
 
 /* Hover Animation Section */
 .container {
-
   padding: 2rem;
   margin: 0 auto;
   max-width: 80rem;
@@ -255,43 +254,46 @@
   background: #e73700;
 }
 
-/* Carousel Section (Scoped Slick Overrides) */
+/* Carousel Section - Exact HTML Match */
 .gameSection {
   padding: 60px 50px;
   background: #fff;
 }
 
-.gameSection .slick-slider {
+/* Override Slick's default behaviors */
+.gameSection :global(.slick-slider) {
   position: relative;
-  /* needed for dots absolute positioning */
-  overflow: hidden;
-  /* keeps horizontal scroll hidden */
 }
 
-.gameSection .slick-dots {
-  position: absolute;
-  bottom: 15px;
-  width: 100%;
-  text-align: center;
-  z-index: 10;
+.gameSection :global(.slick-list) {
+  overflow: visible !important;
 }
 
-.gameSection .slick-list {
-  overflow: visible;
+.gameSection :global(.slick-track) {
+  display: flex !important;
+  margin: 15px 0;
 }
-
 
 .gameSection :global(.slick-slide) {
-  padding: 0 7px;
-  box-sizing: border-box;
+  float: none !important;
+  height: auto !important;
+  width: auto !important;
 }
 
+.gameSection :global(.slick-dots) {
+  margin-top: -20px;
+  position: relative;
+  z-index: 5;
+}
+
+/* Item styling - exact match to HTML */
 .gameSection .item {
   margin: 0 15px 60px;
-  width: 320px;
+  width: 320px !important;
   height: 400px;
   display: flex;
   align-items: flex-end;
+  background: #343434 no-repeat center center / cover;
   border-radius: 16px;
   overflow: hidden;
   position: relative;
@@ -299,19 +301,8 @@
   cursor: pointer;
 }
 
-.itemBgImg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-
-/* Expand the item when its parent slide is active/current */
-.gameSection :global(.slick-current) .item {
-  width: 500px;
+.gameSection .item.active {
+  width: 500px !important;
   box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.25);
 }
 
@@ -325,6 +316,16 @@
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }
 
+.itemBgImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
 .gameSection .itemDesc {
   padding: 0 24px 12px;
   color: #fff;
@@ -335,7 +336,7 @@
   transition: all 0.4s ease-in-out;
 }
 
-.gameSection :global(.slick-current) .itemDesc {
+.gameSection .item.active .itemDesc {
   transform: none;
 }
 
@@ -345,145 +346,9 @@
   transition: all 0.4s ease-in-out 0.2s;
 }
 
-.gameSection :global(.slick-current) .itemDesc p {
+.gameSection .item.active .itemDesc p {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Latest Events Stack Section */
-.latestEventsSection {
-  background: #070410;
-  color: white;
-  font-family: Poppins, sans-serif;
-  padding: 60px 50px;
-}
-
-.latestEventsSection .eventsContainer {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 5rem;
-}
-
-.latestEventsSection h1 {
-  font-size: 4rem;
-  max-width: 300px;
-}
-
-.stackSlider {
-  --p: var(--k);
-  --abs-p: abs(var(--k) - var(--p));
-  --end: clamp(0, var(--abs-p) - 1, 1);
-  --dir: calc((1 - 2*var(--end))*sign(var(--k) - var(--p)));
-  --fwd: calc(.5*(1 + var(--dir)));
-  --v: var(--k);
-  --abs-v: abs(var(--v) - var(--p));
-  --prg: calc(var(--abs-v)/(1 - var(--end) + var(--end)*(var(--n) - 1)));
-  grid-gap: .5em 4em;
-  grid-template: repeat(2, max-content) 1fr max-content/ max-content 1fr;
-  display: grid;
-  color: #f1f5f9;
-  font-size: 1em;
-  counter-reset: k calc(1 + var(--k)) n var(--n);
-  transition: --p 0s 0.8s, --v 0.8s;
-  position: relative;
-}
-
-.stackSlider::before,
-.stackSlider em {
-  color: RGB(from currentColor r g b/ .6);
-}
-
-.stackSlider::before {
-  grid-area: 1/2;
-  width: 3ch;
-  text-align: right;
-  content: counter(k) '/' counter(n);
-}
-
-.stackSlider article {
-  --abs-top: abs(var(--k) - var(--i));
-  --not-top: min(1, var(--abs-top));
-  --top: calc(1 - var(--not-top));
-  --val-mov: ((1 - var(--fwd))*var(--p) + var(--fwd)*var(--k) - var(--i));
-  --abs-mov: abs(var(--val-mov));
-  --not-mov: min(1, var(--abs-mov));
-  --mov: calc(1 - var(--not-mov));
-  grid-area: 1/1/-1/-1;
-  display: grid;
-  grid-template: subgrid / subgrid;
-  z-index: mod(calc(var(--n) - 1 + var(--i) - var(--k)), var(--n));
-  transition: z-index 0.8s cubic-bezier(1, -.9, 0, 1.9);
-}
-
-.stackSlider h2,
-.stackSlider em {
-  translate: 0 calc(var(--not-top)*1lh);
-  opacity: var(--top);
-  transition: 0.4s calc(var(--top)*0.4s);
-  transition-property: translate, opacity;
-}
-
-.stackSlider h2 {
-  grid-area: 2/2;
-}
-
-.stackSlider em {
-  grid-area: 3/2;
-}
-
-.stackSlider img {
-  --sin: sin(var(--prg)*.5turn);
-  grid-area: 1/1/-1;
-  border: solid 2px rgba(82, 82, 122, .5);
-  height: 13em;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: .75em;
-  translate: calc(-150%*var(--mov)*sqrt(var(--sin)));
-  rotate: calc((1 - var(--sin))*var(--a));
-}
-
-.stackSlider>div {
-  display: flex;
-  gap: 2em;
-  grid-area: 4/2;
-  z-index: calc((1 - min(1, var(--abs-p)))*var(--n));
-}
-
-.stackSlider button {
-  --prc: calc(var(--hov, 0)*100%);
-  --c: color-mix(in hsl, #818cf8 var(--prc), #52527a);
-  border: none;
-  width: 1lh;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: RGB(from var(--c) r g b/ .2);
-  color: color-mix(in hsl, #818cf8 var(--prc), currentcolor);
-  font: 900 1.5em/1 sans-serif;
-  position: relative;
-  cursor: pointer;
-  transition: 0.3s ease-out;
-  transition-property: background-color, color;
-}
-
-.stackSlider button::before {
-  content: '\25B6';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.8em;
-  line-height: 1;
-  transition: transform 0.3s ease-out;
-}
-
-.stackSlider button[data-inc='-1']::before {
-  transform: translate(-50%, -50%) rotate(180deg);
-}
-
-.stackSlider button:is(:hover, :focus) {
-  --hov: 1;
 }
 
 /* Slanted Section */
@@ -499,7 +364,6 @@
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 300;
   color: #aeb8c3;
-  padding: 40px;
   overflow: hidden;
 }
 
@@ -585,8 +449,9 @@
 
   .container {
     font-size: 2.5rem;
-    padding: 1rem;
+    padding: 0;
     line-height: 1.2;
+     min-height: 50vh;
   }
 
   /* Intro Scaling */
@@ -635,17 +500,17 @@
 
   /* Slanted Sections - Restore Desktop Layout but Scaled */
   .slantedSection {
-    padding: 5vw;
+    padding: 2vw;
     --rr-height: 40vw;
     /* Scaled height */
-    --rr-slant: 20vw;
+    --rr-slant: 0vw;
     /* Scaled slant */
     --rr-width: 50%;
     /* Keep 50% split */
   }
 
   .slantedSection .rr>div {
-    padding: 5vw 2vw;
+    padding: 2vw 2vw;
   }
 
   .slantedSection h2 {
@@ -685,35 +550,9 @@
     border-top: var(--rr-height) solid transparent;
   }
 
-  /* Stack Slider Scaling */
-  .latestEventsSection {
-    padding: 10vw 2vw;
-  }
-
-  .latestEventsSection h1 {
-    font-size: 8vw;
-    margin-bottom: 5vw;
-  }
-
-  .latestEventsSection .eventsContainer {
-    gap: 2vw;
-    flex-direction: column;
-    /* Or keep row if fitting? Stack slider is wide. */
-    /* Stack slider is designed for wide, let's scale it way down to fit width */
-    transform: scale(0.6);
-    transform-origin: top center;
-    width: 166%;
-    /* Compensate for 0.6 scale (100/0.6) */
-    align-self: center;
-    margin-left: -33%;
-    /* Center it back */
-  }
-
-  /* Adjust gap since we scaled the container */
-  .stackSlider {
-    font-size: 1.25em;
-    /* relative to scaled parent */
-  }
+ 
+ 
+ 
 }
 
 @media (max-width: 767px) {
@@ -722,9 +561,7 @@
   }
 }
 
-/* ================
-   Mobile Styles (max-width: 480px)
-   ================ */
+ 
 @media (max-width: 480px) {
 
   /* Hero Section Mobile */
@@ -743,7 +580,9 @@
 
   /* Hover Animation Section - Fix images visibility */
   .container {
-    padding: 40px 16px;
+    padding: 10px 16px;
+     min-height: 40vh;
+
   }
 
   .introTitle {
@@ -885,11 +724,5 @@
     font-size: 14px;
   }
 
-  .latestEventsSection {
-    height: 50vh;
-    background: #070410;
-    color: white;
-    font-family: Poppins, sans-serif;
-    padding: 60px 50px;
-  }
+
 }

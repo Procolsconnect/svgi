@@ -11,6 +11,7 @@ const API_BASE = import.meta.env.VITE_API_URL + "/api/campus";
 const MergedPage = () => {
   const [hero, setHero] = useState(null);
   const [carouselCards, setCarouselCards] = useState([]);
+  const [activeId, setActiveId] = useState(0); // Track active card manually
   const [stackEvents, setStackEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +28,13 @@ const MergedPage = () => {
           setHero(heroRes.data.data[0]);
         }
 
-        setCarouselCards(cardRes.data.data || []);
+        if (cardRes.data.data && cardRes.data.data.length > 0) {
+          setCarouselCards(cardRes.data.data);
+          // Set first card as active by default using its ID
+          setActiveId(cardRes.data.data[0]._id);
+        } else {
+          setCarouselCards([]);
+        }
 
         // Add random angles for stack effect if not present in DB
         const angles = ["-7deg", "8deg", "-3deg", "6deg", "-11deg", "9deg", "-4deg"];
@@ -72,23 +79,22 @@ const MergedPage = () => {
     }
   };
 
-  // Carousel (react-slick) settings mirroring OwlCarousel behavior
+  // Carousel settings matching Owl Carousel HTML behavior
   const carouselSettings = {
-    variableWidth: true,
+    variableWidth: true,      // Matches Owl's autoWidth
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 2000,
-    speed: 800,
-    slidesToShow: 1.5,
+    autoplaySpeed: 2500,      // Matches Owl's autoplayTimeout
+    speed: 800,               // Matches Owl's smartSpeed
+    slidesToShow: 1,
     slidesToScroll: 1,
-    swipeToSlide: true,
-    draggable: true,
-    arrows: true,
+    swipeToSlide: true,       // Matches Owl's touchDrag
+    draggable: true,          // Matches Owl's mouseDrag
+    arrows: false,
     dots: true,
     centerMode: false,
-    pauseOnHover: false,
-    adaptiveHeight: true,
-    focusOnSelect: true,
+    focusOnSelect: false,     // Prevent Slick auto-centering
+    pauseOnHover: true,       // Matches Owl's autoplayHoverPause
   };
 
   return (
@@ -157,10 +163,12 @@ const MergedPage = () => {
               carouselCards.map((card) => {
                 // Remove \r\n from description if present
                 const cleanDesc = card.description?.replace(/[\r\n]+/g, ' ');
+                const isActive = activeId === card._id;
                 return (
                   <div
                     key={card._id}
-                    className={styles.item}
+                    className={`${styles.item} ${isActive ? styles.active : ""}`}
+                    onClick={() => setActiveId(card._id)}
                   >
                     <img src={card.image} alt={card.title} className={styles.itemBgImg} />
                     <div className={styles.itemDesc}>
@@ -172,29 +180,31 @@ const MergedPage = () => {
               })
             ) : (
               /* Fallback Carousel Items */
-              ["Cultural Fest", "Tech Symposium", "Sports Meet"].map((title, i) => (
-                <div
-                  key={i}
-                  className={styles.item}
-                  style={{
-                    backgroundImage: "url(https://picsum.photos/800/400?random=" + i + ")",
-                  }}
-                >
-                  <div className={styles.itemDesc}>
-                    <h3>{title}</h3>
-                    <p>Discover the vibrant energy of SVGI campus life.</p>
+              ["Cultural Fest", "Tech Symposium", "Sports Meet", "Annual Day", "Music Night", "Drama Theater"].map((title, i) => {
+                const isActive = activeId === i;
+                return (
+                  <div
+                    key={i}
+                    className={`${styles.item} ${isActive ? styles.active : ""}`}
+                    style={{
+                      backgroundImage: "url(https://picsum.photos/800/400?random=" + i + ")",
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                    onClick={() => setActiveId(i)}
+                  >
+                    <div className={styles.itemDesc}>
+                      <h3>{title}</h3>
+                      <p>Discover the vibrant energy of SVGI campus life.</p>
+                    </div>
                   </div>
-                </div>
-              ))
+                );
+              })
             )}
           </Slider>
         )}
       </section>
-
-      {/* Latest Events Stack */}
-      <EventStack events={stackEvents} title="Festival Events " />
-
-      {/* Slanted Sections */}
+      <EventStack events={stackEvents}  />
       <section className={styles.slantedSection}>
         <div className={`${styles.rr} ${styles.rrLeft}`}>
           <div>
