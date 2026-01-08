@@ -146,7 +146,14 @@ const Header = () => {
         <header className={styles['sk-primary-nav']}>
           <div className={styles['sk-nav-container']}>
             {/* Branding */}
-            <Link to="/" className={styles['sk-brand']}>
+            {/* Branding */}
+            <div className={styles['sk-brand']} onClick={() => {
+              if (location.pathname === "/") {
+                window.location.reload();
+              } else {
+                navigate("/");
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className={styles['sk-logo-box']}>
                 <img src="/logos/svgilogo.png" alt="SVGI" />
               </div>
@@ -154,7 +161,7 @@ const Header = () => {
                 <div className={styles['college-title']}>SHREE VENKATESHVARA</div>
                 <div className={styles['college-subtitle']}>GROUP OF INSTITUTIONS</div>
               </div>
-            </Link>
+            </div>
 
             {/* Desktop Navigation */}
             <nav className={styles['sk-desktop-menu']}>
