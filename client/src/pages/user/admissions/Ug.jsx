@@ -13,8 +13,8 @@ const ProductGallery = () => {
   return (
     <div className={styles.pageWrapper}>
       <CommonHero
-        defaultTitle="Undergraduate Courses"
-        defaultImage="https://images.unsplash.com/photo-1554895917-f74c630b5b3a?w=1200&h=350&fit=crop"
+         apiEndpoint="/api/ughero"
+                defaultTitle="Admissions"
       />
 
       <div className={styles.wrap}>

@@ -9,7 +9,7 @@ const PostgraduateCourses = () => {
     <div className={styles.pageContainer}>
       <CommonHero
         defaultTitle="Postgraduate Courses"
-        defaultImage="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80"
+         apiEndpoint="/api/pghero"
       />
 
       <div className={styles.wrap}>
