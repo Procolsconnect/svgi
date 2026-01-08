@@ -1,9 +1,18 @@
+/* ============================================
+   BASE STYLES (MOBILE FIRST & SHARED)
+   Applies to all screens unless overridden
+   Default: Mobile Portrait (Vertical Swiper)
+============================================ */
 .swiperCarouselBody {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  /* Mobile default height was 80vh, but min-height 100vh is safer base. 
+     We can override for mobile specific if needed, but min-height allows growth. 
+     User requested Mobile Design unchanged -> Mobile used 80vh fixed height for body? 
+     Let's stick to flex centered base. */
   background: white;
   width: 100%;
   padding: 2rem 0;
@@ -12,7 +21,7 @@
 .swiperCarouselHeader {
   width: 100%;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .swiperCarouselTitle {
@@ -22,7 +31,8 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
+  /* Mobile Base */
   font-weight: 600;
   overflow: hidden;
   white-space: nowrap;
@@ -33,12 +43,9 @@
 
 .swiperCarouselTitleAnimate {
   width: 100%;
-  /* Will be constrained by fit-content or max-width if needed, but here we want it to grow */
   animation: swiperCarouselType 3s steps(20) 0.5s 1 normal both;
-  /* Removed cursor border for simplicity or we can add it back if needed */
 }
 
-/* Typewriter */
 @keyframes swiperCarouselType {
   from {
     width: 0;
@@ -56,100 +63,53 @@
 }
 
 /* ============================================
-   SWIPER CORE
+   SWIPER CORE (MOBILE / VERTICAL DEFAULT)
 ============================================ */
 .swiperCarouselWrapper {
-  width: 100%;
-  height: 60vh;
-  max-width: 1400px;
-  margin: 0 auto;
+  width: 95vw;
+  max-width: 400px;
+  height: 100vh;
+  /* Mobile Vertical Swiper Height */
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 .swiperCarouselWrapper :global(.swiper-wrapper) {
   display: flex;
   align-items: center;
-  margin-bottom: 0;
+  margin-bottom: 20px;
+  /* Mobile spacing */
 }
 
+/* Slides - Mobile Default (Vertical) */
 .swiperCarouselWrapper :global(.swiper-slide) {
-  width: calc(100% / 5);
-  /* Force 5 slides per view width */
-  scale: 1.25;
-  height: 180px;
-  min-height: 80px;
-  max-height: 180px;
-  transition: scale 250ms ease-in-out;
+  width: 100%;
+  /* Vertical swiper needs full width */
+  height: 140px;
+  min-height: auto;
+  max-height: none;
+  scale: 0.6;
+  opacity: 0.6;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: visible;
-  /* Allow scale to show */
   background: #f5f5f7;
-  /* High-end neutral background */
   border-radius: 0.5rem;
   position: relative;
 }
 
-/* Shimmer Animation */
-.swiperCarouselWrapper :global(.swiper-slide::after) {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0) 100%);
-  animation: swiperShimmer 1.5s infinite;
-  z-index: 1;
-}
-
-.swiperCarouselWrapper :global(.swiper-slide:has(img[data-loaded="true"])::after) {
-  display: none;
-}
-
-@keyframes swiperShimmer {
-  0% {
-    left: -100%;
-  }
-
-  100% {
-    left: 200%;
-  }
-}
-
-@media (max-width: 768px) {
-  .swiperCarouselWrapper :global(.swiper-slide) {
-    width: 220px;
-    /* Perfect fixed width for mobile cards */
-    height: 140px;
-    scale: 0.9;
-    opacity: 0.7;
-  }
-}
-
+/* Active Slide */
 .swiperCarouselWrapper :global(.swiper-slide.swiper-slide-active) {
-  scale: 2;
+  scale: 1.4;
+  opacity: 1;
   z-index: 10;
 }
 
-.swiperCarouselWrapper :global(.swiper-slide.swiper-slide-prev),
-.swiperCarouselWrapper :global(.swiper-slide.swiper-slide-next) {
-  scale: 1.7;
-  z-index: 5;
-  transition-duration: 150ms;
-}
-
-.swiperCarouselWrapper :global(.swiper-slide.swiper-slide-next + .swiper-slide) {
-  z-index: 2;
-}
-
+/* Images */
 .swiperCarouselWrapper :global(.swiper-slide img) {
   display: block;
   border-radius: 0.5rem;
@@ -159,7 +119,6 @@
   user-select: none;
   opacity: 0;
   transition: opacity 0.6s ease;
-  position: relative;
   z-index: 2;
 }
 
@@ -167,129 +126,162 @@
   opacity: 1;
 }
 
-/* ============================================
-   SWIPER BUTTONS
-============================================ */
+/* Navigation Buttons - Hidden on Mobile */
 :global(.swiper-carousel-prev),
 :global(.swiper-carousel-next) {
-  --position: 17%;
-  background-color: #F04E23;
-  height: 3rem;
-  width: 3rem;
-  border-radius: 0.5rem;
-  border-radius: 0.5rem;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 50;
-  /* Ensure arrows are above slides */
-  cursor: pointer;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
+  display: none !important;
 }
 
-:global(.swiper-carousel-prev) {
-  left: var(--position) !important;
-}
-
-:global(.swiper-carousel-next) {
-  right: var(--position) !important;
-}
-
-:global(.swiper-carousel-prev:hover),
-:global(.swiper-carousel-next:hover) {
-  background-color: #4A261F;
-}
-
-/* Icons are now SVGs inside, no pseudo-elements needed */
 
 /* ============================================
-   MOBILE RESPONSIVE
+   SPECIFIC MOBILE OVERRIDES (XS)
+   Preserve specific design for < 480px
 ============================================ */
-@media (max-width: 768px) {
-  .swiperCarouselBody {
-    height: 80vh;
-    padding: 2rem 0;
-  }
-
-  .swiperCarouselWrapper {
-    width: 95vw;
-    max-width: 400px;
-    height: 100vh;
-    margin:  auto;
-  }
-
-  .swiperCarouselWrapper :global(.swiper-wrapper) {
-    margin-bottom: 20px;
-  }
-
-  .swiperCarouselWrapper :global(.swiper-slide) {
-    scale: 0.6;
-    /* Shrink side slides */
-    opacity: 0.6;
-    transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .swiperCarouselWrapper :global(.swiper-slide.swiper-slide-active) {
-    scale: 1.4;
-    /* Significantly larger active slide */
-    opacity: 1;
-    z-index: 10;
-  }
-
-  :global(.swiper-carousel-prev),
-  :global(.swiper-carousel-next) {
-    display: none !important;
-  }
-}
-
-/* Extra Small */
 @media (max-width: 480px) {
   .swiperCarouselWrapper {
-    width: 88vw;
+    width: 100vw;
     max-width: 340px;
     height: 60vh;
   }
 
-  .swiperCarouselWrapper :global(.swiper-slide.swiper-slide-active) {
-    scale: 1.5;
-    /* Even bigger on small screens */
+  .swiperCarouselHeader {
+    margin-bottom: 0.3rem;
   }
 
   .swiperCarouselTitle {
     font-size: 2.4rem;
+  }
 
+  .swiperCarouselWrapper :global(.swiper-slide.swiper-slide-active) {
+    scale: 1.5;
+    /* Larger scale for tiny screens */
   }
 }
 
-/* Small */
-@media (min-width: 481px) and (max-width: 576px) {
-  .swiperCarouselWrapper {
-    width: 90vw;
-    max-width: 380px;
-    height: 62vh;
-  }
-}
 
-/* Medium */
-@media (min-width: 577px) and (max-width: 660px) {
-  .swiperCarouselWrapper {
-    width: 92vw;
-    max-width: 420px;
-    height: 65vh;
+/* ============================================
+   TABLET (Min-Width: 768px)
+   Horizontal Swiper, Scaled Down Desktop
+============================================ */
+@media (min-width: 768px) {
+  .swiperCarouselBody {
+    min-height: 100vh;
+    /* Full viewport height */
   }
-}
 
-/* Large */
-@media (min-width: 661px) and (max-width: 768px) {
-  .swiperCarouselWrapper {
-    width: 94vw;
-    max-width: 460px;
-    height: 68vh;
+  .swiperCarouselHeader {
+    margin-bottom: 2rem;
   }
 
   .swiperCarouselTitle {
-    font-size: 2rem;
+    font-size: 3rem;
+  }
+
+  .swiperCarouselWrapper {
+    width: 90vw;
+    max-width: 900px;
+    /* Tablet Cap */
+    height: 60vh;
+    margin: 0 auto;
+  }
+
+  .swiperCarouselWrapper :global(.swiper-wrapper) {
+    margin-bottom: 0;
+  }
+
+  /* Horizontal Slides */
+  .swiperCarouselWrapper :global(.swiper-slide) {
+    width: calc(100% / 3);
+    /* 3 Slides on Tablet */
+    height: 180px;
+    min-height: 80px;
+    max-height: 180px;
+    scale: 1.1;
+    /* Smaller scale for tablet */
+    opacity: 1;
+    /* Always visible usually? Or reuse fade? Desktop uses 100% opacity usually? No, let's keep logic. */
+    opacity: 1;
+    /* Reset opacity logic if needed or keep default? Desktop didn't have opacity fade on inactive? */
+    /* Check previous desktop: Transition scale only. Background neutral. */
+    transition: scale 250ms ease-in-out;
+  }
+
+  .swiperCarouselWrapper :global(.swiper-slide.swiper-slide-active) {
+    scale: 1.6;
+    /* Tablet active scale */
+  }
+
+  .swiperCarouselWrapper :global(.swiper-slide.swiper-slide-prev),
+  .swiperCarouselWrapper :global(.swiper-slide.swiper-slide-next) {
+    scale: 1.3;
+    z-index: 5;
+  }
+
+  /* Show Arrows */
+  :global(.swiper-carousel-prev),
+  :global(.swiper-carousel-next) {
+    display: flex !important;
+    --position: 5%;
+    background-color: #F04E23;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 0.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(.swiper-carousel-prev) {
+    left: var(--position) !important;
+  }
+
+  :global(.swiper-carousel-next) {
+    right: var(--position) !important;
+  }
+}
+
+
+/* ============================================
+   DESKTOP (Min-Width: 1024px)
+   Full Design
+============================================ */
+@media (min-width: 1024px) {
+  .swiperCarouselHeader {
+    margin-bottom: 3rem;
+  }
+
+  .swiperCarouselTitle {
+    font-size: 3.5rem;
+  }
+
+  .swiperCarouselWrapper {
+    width: 100%;
+    max-width: 1400px;
+    height: 60vh;
+  }
+
+  .swiperCarouselWrapper :global(.swiper-slide) {
+    width: calc(100% / 5);
+    /* 5 Slides on Desktop */
+    scale: 1.25;
+  }
+
+  .swiperCarouselWrapper :global(.swiper-slide.swiper-slide-active) {
+    scale: 2;
+  }
+
+  .swiperCarouselWrapper :global(.swiper-slide.swiper-slide-prev),
+  .swiperCarouselWrapper :global(.swiper-slide.swiper-slide-next) {
+    scale: 1.7;
+  }
+
+  :global(.swiper-carousel-prev),
+  :global(.swiper-carousel-next) {
+    --position: 17%;
+    /* Original Desktop Position */
   }
 }

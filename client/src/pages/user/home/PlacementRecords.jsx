@@ -17,13 +17,13 @@ const apiurl = import.meta.env.VITE_API_URL;
 const SwiperCarousel = () => {
   const [swiperData, setSwiperData] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
   const titleRef = useRef(null);
 
   // Resize listener for responsive Direction/Slides
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 767);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

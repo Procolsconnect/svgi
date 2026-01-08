@@ -61,8 +61,8 @@ export default function Milo() {
       {/* Content Section (Right) */}
       <div className={styles.contentSection}>
         <div className={styles.headerSection}>
-          <h1 className={styles.title}>Campus Gallery</h1>
-          <p className={styles.subtitle}>Explore the latest events and moments</p>
+          <h1 className={styles.title}>News SVGI</h1>
+          <p className={styles.subtitle}>Explore the News  and Events</p>
         </div>
 
         <div className={styles.sliderWrapper}>

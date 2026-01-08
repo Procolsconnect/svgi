@@ -68,7 +68,7 @@ const Home = () => {
       <OurTeam />
       <RandomLogoSlider />
       <LogoSlider1 />
-      <Milo />
+      <Milo />  
     </div>
   )
 }
