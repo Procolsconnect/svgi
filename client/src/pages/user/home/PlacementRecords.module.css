@@ -126,8 +126,11 @@
 
 @media (max-width: 768px) {
   .swiperCarouselWrapper :global(.swiper-slide) {
-    width: 100%;
-    /* Vertical swiper needs full width */
+    width: 220px;
+    /* Perfect fixed width for mobile cards */
+    height: 140px;
+    scale: 0.9;
+    opacity: 0.7;
   }
 }
 
@@ -213,8 +216,8 @@
   .swiperCarouselWrapper {
     width: 95vw;
     max-width: 400px;
-    height: 65vh;
-    margin: 0 auto;
+    height: 100vh;
+    margin:  auto;
   }
 
   .swiperCarouselWrapper :global(.swiper-wrapper) {

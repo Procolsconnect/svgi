@@ -88,7 +88,7 @@ const SwiperCarousel = () => {
             slidesPerView={isMobile ? 3 : 5}
             spaceBetween={isMobile ? 30 : 0}
             centeredSlides={true}
-            loop={swiperData.length >= 5}
+            loop={isMobile ? false : swiperData.length >= 5}
             watchSlidesProgress={true}
             observer={true}
             observeParents={true}
@@ -97,7 +97,6 @@ const SwiperCarousel = () => {
               releaseOnEdges: true,
             }}
             touchReleaseOnEdges={true}
-            cssMode={isMobile}
             grabCursor={true}
             navigation={{
               nextEl: ".swiper-carousel-next",
