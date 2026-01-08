@@ -105,7 +105,7 @@ const InstitutionsGrid = () => {
       <ul ref={listRef} className={styles.grid}>
         {institutions.map((inst, i) => (
           <li
-            key={inst.id}
+            key={i}
             className={styles.item}
             data-active={i === activeIndex}
             data-expanded={isMobile && tappedIndex === i}

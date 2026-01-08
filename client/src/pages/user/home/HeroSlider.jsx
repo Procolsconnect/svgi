@@ -107,7 +107,7 @@ const CustomSlider = () => {
         <div className={styles.sliderWrapper}>
           {slides.map((slide, index) => (
             <div
-              key={slide.id}
+              key={index}
               className={`${styles.slide} ${index === activeIndex ? styles.slideActive : ''}`}
             >
               <div className={styles.item}>
