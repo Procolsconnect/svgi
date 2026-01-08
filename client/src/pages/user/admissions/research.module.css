@@ -306,10 +306,7 @@
 /* TABLET (768px - 1024px) */
 @media screen and (max-width: 64rem) {
 
-  /* 1024px */
-  .hero h1 {
-    font-size: 2.5rem;
-  }
+ 
 
   /* 40px */
   .wrap {
@@ -365,15 +362,6 @@
 /* MOBILE (Below ) */
 @media screen and (max-width: 767px) {
 
-  /* 768px */
-  .hero {
-    min-height: 15.625rem;
-  }
-
-  /* 250px */
-  .hero h1 {
-    font-size: 1.75rem;
-  }
 
   /* 28px */
   .wrap {

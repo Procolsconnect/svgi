@@ -66,7 +66,9 @@ const PlacementProcessPage = () => {
 
   return (
     <div className={styles.page}>
-      <CommonHero apiEndpoint="/api/placement-process-hero" />
+      <CommonHero apiEndpoint="/api/placement-process-hero"
+       defaultTitle='Placement Process' 
+      />
       {/* placementprocess */}
       <main className={styles.heroSection}>
         <div className={styles.heroContainer}>

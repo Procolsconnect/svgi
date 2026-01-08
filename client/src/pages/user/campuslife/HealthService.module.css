@@ -18,73 +18,6 @@
   /* Removed height: 100vh and overflow-y: auto to fix scroll lag */
 }
 
-/* HERO */
-.hero {
-  min-height: 400px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  color: white;
-}
-
-.hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-}
-
-.hero h1 {
-  position: relative;
-  font-family: 'Playfair Display', serif;
-  font-size: 52px;
-  font-weight: bold;
-  z-index: 2;
-  letter-spacing: 1px;
-  width: 100%;
-  padding: 0 2rem;
-}
-
-.hero h1::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 5px;
-  margin: 14px auto 0;
-  background: linear-gradient(90deg, #ff512f, #dd2476);
-  border-radius: 3px;
-  animation: underlinePulse 2s infinite;
-}
-
-@keyframes underlinePulse {
-
-  0%,
-  100% {
-    transform: scaleX(1);
-    opacity: 0.8;
-  }
-
-  50% {
-    transform: scaleX(1.4);
-    opacity: 1;
-  }
-}
-
 /* FACILITIES SECTION */
 .wrap {
   background: #ffffff;
@@ -217,9 +150,7 @@
 
 /* TABLET RESPONSIVENESS (768px - 1024px) */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  .hero h1 {
-    font-size: 42px;
-  }
+
 
   .home {
     gap: 2rem;
@@ -255,18 +186,6 @@
 
 /* MOBILE RESPONSIVENESS (Up to 767px) */
 @media screen and (max-width: 767px) {
-  .hero {
-    min-height: 250px;
-  }
-
-  .hero h1 {
-    font-size: 28px;
-    padding: 0 1rem;
-  }
-
-  .hero h1::after {
-    width: 80px;
-  }
 
   .wrap {
     padding-block: 3rem;

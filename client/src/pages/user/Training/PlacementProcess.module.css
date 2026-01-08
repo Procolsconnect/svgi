@@ -444,14 +444,7 @@
 
 
 @media (max-width: 600px) {
-  .heroTitle {
-    font-size: 40px;
-  }
-
-  .heroText h1 {
-    font-size: 3.5rem;
-  }
-
+  
   .cardCopy h2 {
     font-size: 2rem;
   }

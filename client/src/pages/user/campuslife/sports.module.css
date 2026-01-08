@@ -657,12 +657,6 @@ font-family: "SUSE", sans-serif;
 /* ==================== MOBILE BREAKPOINT (≤768px) ==================== */
 @media (max-width: 768px) {
 
-  /* Hero */
-  .sports__hero-title {
-    font-size: 36px;
-    padding: 0 20px;
-  }
-
   /* SVGI Section */
   .sports__section {
     flex-direction: column;

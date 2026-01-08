@@ -5,76 +5,7 @@
   background-color: #f9fafb;
 }
 
-/* ==================== HERO SECTION ==================== */
-.gsvgiHeroSection {
-  min-height: 350px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  color: white;
-}
 
-.gsvgiHeroImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.gsvgiHeroOverlay::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 0;
-}
-
-.gsvgiHeroTitle {
-  position: relative;
-  font-size: 52px;
-  font-weight: bold;
-  z-index: 1;
-  letter-spacing: 1px;
-}
-
-.gsvgiHeroTitle::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 5px;
-  margin: 14px auto 0;
-  background: linear-gradient(90deg, #ff512f, #dd2476);
-  border-radius: 3px;
-  animation: gsvgiUnderlinePulse 2s infinite;
-}
-
-@keyframes gsvgiUnderlinePulse {
-
-  0%,
-  100% {
-    transform: scaleX(1);
-    opacity: 0.8;
-  }
-
-  50% {
-    transform: scaleX(1.4);
-    opacity: 1;
-  }
-}
-
-@media (max-width: 768px) {
-  .gsvgiHeroTitle {
-    font-size: 36px;
-    padding: 0 20px;
-  }
-}
 
 /* ==================== PAGE TITLE & GLITCH ==================== */
 .gsvgiPageTitle {
@@ -346,13 +277,7 @@
 
 /* Tablet screens (768px - 1024px) */
 @media (max-width: 1024px) {
-  .gsvgiHeroSection {
-    min-height: 300px;
-  }
 
-  .gsvgiHeroTitle {
-    font-size: 44px;
-  }
 
   .gsvgiPageTitle {
     font-size: 2.5em;
@@ -376,20 +301,7 @@
 
 /* Mobile screens (481px - 768px) */
 @media (max-width: 768px) {
-  .gsvgiHeroSection {
-    min-height: 250px;
-  }
-
-  .gsvgiHeroTitle {
-    font-size: 32px;
-    padding: 0 15px;
-  }
-
-  .gsvgiHeroTitle::after {
-    width: 80px;
-    height: 4px;
-    margin: 10px auto 0;
-  }
+ 
 
   .gsvgiPageTitle {
     font-size: 1.8em;
@@ -455,23 +367,6 @@
   .gsvgiCampusRoot {
     overflow-x: hidden;
   }
-
-  .gsvgiHeroSection {
-    min-height: 200px;
-  }
-
-  .gsvgiHeroTitle {
-    font-size: 26px;
-    padding: 0 10px;
-    line-height: 1.3;
-  }
-
-  .gsvgiHeroTitle::after {
-    width: 60px;
-    height: 3px;
-    margin: 8px auto 0;
-  }
-
   .gsvgiPageTitle {
     font-size: 1.4em;
     line-height: 1.2;
@@ -560,9 +455,7 @@
 
 /* Very small screens (up to 360px) */
 @media (max-width: 360px) {
-  .gsvgiHeroTitle {
-    font-size: 22px;
-  }
+
 
   .gsvgiPageTitle {
     font-size: 1.2em;
@@ -579,9 +472,6 @@
 
 /* Short screens in landscape */
 @media (max-height: 480px) and (orientation: landscape) {
-  .gsvgiHeroSection {
-    min-height: 180px;
-  }
 
   .gsvgiGalleryItem {
     height: fit-content;

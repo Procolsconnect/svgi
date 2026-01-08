@@ -688,9 +688,7 @@
 }
 
 @media (max-width: 480px) {
-  .hero h1 {
-    font-size: 32px;
-  }
+
 
   .mcBtnAction {
     width: 50px;

@@ -92,7 +92,8 @@ const PlacementPage = () => {
   return (
     <div className={styles.page}>
       {/* Hero Section */}
-      <CommonHero apiEndpoint="/api/placementrecordhero" />
+      <CommonHero apiEndpoint="/api/placementrecordhero"
+        defaultTitle='Placement Records' />
 
       <div className={styles.container}>
         <h1 className={styles.pageHeading}>Placement Highlights</h1>
@@ -100,7 +101,7 @@ const PlacementPage = () => {
         {/* Image Slider */}
         <div className={styles.wrapper}>
           <div className={styles.sliderWrapper}>
-            <div className={styles.inner} style={{ marginLeft: `${-currentSlide * 100}%` }}>
+            <div className={styles.inner} style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
               {slides.map((slide, i) => (
                 <article key={i}>
                   <div className={`${styles.info} ${styles.topLeft} ${currentSlide === i ? styles.active : ''}`}>

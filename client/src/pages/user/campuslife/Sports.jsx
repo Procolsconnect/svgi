@@ -10,7 +10,6 @@ const SportsPage = () => {
   const bouncerRef = useRef(null);
   const [isBouncerInitialized, setIsBouncerInitialized] = useState(false);
 
-  const [hero, setHero] = useState(null);
   const [cards, setCards] = useState([]);
   const [videos, setVideos] = useState([]);
   const [achievements, setAchievements] = useState([]);
@@ -19,15 +18,13 @@ const SportsPage = () => {
   useEffect(() => {
     const fetchSportsData = async () => {
       try {
-        const [heroRes, cardsRes, videosRes, achievementsRes, athletesRes] = await Promise.all([
-          axios.get(`${API_BASE}/sportshero`),
+        const [ cardsRes, videosRes, achievementsRes, athletesRes] = await Promise.all([
           axios.get(`${API_BASE}/sportscard`),
           axios.get(`${API_BASE}/sportsvideo`),
           axios.get(`${API_BASE}/sportsacheivement`),
           axios.get(`${API_BASE}/sportsathelets`)
         ]);
 
-        if (heroRes.data.success) setHero(heroRes.data.data?.[0]);
         if (cardsRes.data.success) setCards(cardsRes.data.data || []);
         if (videosRes.data.success) setVideos(videosRes.data.data || []);
         if (achievementsRes.data.success) setAchievements(achievementsRes.data.data || []);

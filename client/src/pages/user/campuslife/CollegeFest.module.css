@@ -9,71 +9,6 @@
   box-sizing: border-box;
 }
 
-
-/* Hero Section */
-.hero {
-  min-height: 350px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  color: white;
-}
-
-.hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 0;
-}
-
-.hero h1 {
-  position: relative;
-  font-size: 52px;
-  font-weight: bold;
-  z-index: 1;
-  letter-spacing: 1px;
-}
-
-.hero h1::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 5px;
-  margin: 14px auto 0;
-  background: linear-gradient(90deg, #ff512f, #dd2476);
-  border-radius: 3px;
-  animation: underlinePulse 2s infinite;
-}
-
-@keyframes underlinePulse {
-
-  0%,
-  100% {
-    transform: scaleX(1);
-    opacity: 0.8;
-  }
-
-  50% {
-    transform: scaleX(1.4);
-    opacity: 1;
-  }
-}
-
 /* Hover Animation Section */
 .container {
   padding: 2rem;
@@ -556,22 +491,6 @@
 
 
 @media (max-width: 480px) {
-
-  /* Hero Section Mobile */
-  .hero {
-    min-height: 250px;
-  }
-
-  .hero h1 {
-    font-size: 32px;
-  }
-
-  .hero h1::after {
-    width: 80px;
-    height: 3px;
-  }
-
-  /* Hover Animation Section - Fix images visibility */
   .container {
     padding: 10px 16px;
     min-height: 40vh;
