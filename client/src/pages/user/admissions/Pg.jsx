@@ -18,7 +18,7 @@ const PostgraduateCourses = () => {
           <h3 className={styles.headerTitle}>
             <span className={styles.headerTitleSpan}>
               <a href="#/" target="_blank" rel="noopener noreferrer">
-                CCCLOTHES
+                PG
               </a>
             </span>
           </h3>
@@ -43,7 +43,7 @@ const PostgraduateCourses = () => {
               <div className={`${styles.boxTitle} ${styles.boxTitleTop2}`}>COURSES</div>
             </div>
             <div className={styles.imgProduct}>
-              <img src="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5" alt="Product" />
+              <img src="/images/svgi4.jpg" alt="Product" />
             </div>
             <div className={styles.boxBottom}>
               <div className={`${styles.boxTitle} ${styles.boxTitleBottom1}`}>01</div>
@@ -68,10 +68,10 @@ const PostgraduateCourses = () => {
         {/* BOTTOM SECTION */}
         <div className={styles.detailBottom}>
           <div className={styles.leftItem}>
-            <div className={styles.leftItemImg}> <img src="https://images.unsplash.com/photo-1519406686401-e9ef2420c15b?ixlib=rb-0.3.5" alt="Detail Left" /></div>
+            <div className={styles.leftItemImg}> <img src="/images/svgi2.jpg" alt="Detail Left" /></div>
           </div>
           <div className={styles.rightItem}>
-            <div className={styles.rightItemImg}> <img src="https://images.unsplash.com/photo-1519406728390-b536d7be138f?ixlib=rb-0.3.5" alt="Detail Right" /></div>
+            <div className={styles.rightItemImg}> <img src="/images/svgi1.jpg" alt="Detail Right" /></div>
           </div>
         </div>
       </div>

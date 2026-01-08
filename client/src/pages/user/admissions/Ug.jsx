@@ -27,7 +27,7 @@ const ProductGallery = () => {
         {/* TOP SECTION */}
         <div className={styles.detailTop}>
           <div className={styles.topImg}>
-            <img src="https://images.unsplash.com/photo-1513827379601-9dba5099a3f9" alt="Admission view" />
+            <img src="/images/svgi1.jpg" alt="Admission view" />
           </div>
           <div className={styles.divArea1}></div>
 
@@ -64,10 +64,10 @@ const ProductGallery = () => {
         {/* BOTTOM SECTION */}
         <div className={styles.detailBottom}>
           <div className={styles.bottomImg}>
-            <img src="https://images.unsplash.com/photo-1513827379601-9dba5099a3f9" alt="Campus view" />
+            <img src="/images/svgi2.jpg" alt="Campus view" />
           </div>
           <div className={styles.centerImg}>
-            <img src="https://images.unsplash.com/photo-1513827379601-9dba5099a3f9" alt="Student view" />
+            <img src="/images/svgi3.jpg" alt="Student view" />
           </div>
           <div className={styles.divArea2}></div>
           <div className={styles.div2}></div>
