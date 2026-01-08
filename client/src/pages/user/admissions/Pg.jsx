@@ -43,14 +43,14 @@ const PostgraduateCourses = () => {
 
           <div className={styles.productImg}>
             <div className={styles.boxTop}>
-              <div className={`${styles.boxTitle} ${styles.boxTitleTop1}`}>VINTAGE</div>
-              <div className={`${styles.boxTitle} ${styles.boxTitleTop2}`}>DENIM</div>
+              <div className={`${styles.boxTitle} ${styles.boxTitleTop1}`}>POSTGRADUATE</div>
+              <div className={`${styles.boxTitle} ${styles.boxTitleTop2}`}>COURSES</div>
             </div>
             <div className={styles.imgProduct}>
               <img src="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5" alt="Product" />
             </div>
             <div className={styles.boxBottom}>
-              <div className={`${styles.boxTitle} ${styles.boxTitleBottom1}`}>06</div>
+              <div className={`${styles.boxTitle} ${styles.boxTitleBottom1}`}>01</div>
               <div className={`${styles.boxTitle} ${styles.boxTitleBottom2}`}>TOP</div>
             </div>
           </div>
@@ -58,18 +58,16 @@ const PostgraduateCourses = () => {
 
         {/* CONTENT SECTION */}
         <div className={styles.detailContent}>
-          <h1 className={styles.detailContentTitle}>VINTAGE DENIM</h1>
-          <h3 className={styles.detailContentSubtitle}>PRODUCT DETAILS</h3>
-          <div className={styles.subtitle}>Kogi Cosby sweater ethical squid irony</div>
+          <h1 className={styles.detailContentTitle}>PG COURSES</h1>
+          <h3 className={styles.detailContentSubtitle}>PG DETAILS</h3>
+          <div className={styles.subtitle}>Let  start to empower your skill From here</div>
           <p className={styles.detailContentParagraph}>
-            In the tumultuous business of cutting-in and attending to a whale, there is much running backwards
-            and forwards among the crew...
+          A PG (Postgraduate) degree is valuable because it helps people gain more knowledge, improve their skills, and boost their academic and job profiles. It provides advanced training, chances for research, and practical skills that get graduates ready for leadership roles and better careers.
           </p>
           <p className={styles.detailContentParagraph}>
-            We must now retrace our way a little. It was mentioned that upon first breaking ground in the
-            whale's back...
+             A PG program improves thinking skills, decision-making, and creativity, leading to better job opportunities, teaching positions, and business growth. It is an important step that helps individuals become experts in their field.
           </p>
-        </div>
+        </div> 
 
         {/* BOTTOM SECTION */}
         <div className={styles.detailBottom}>

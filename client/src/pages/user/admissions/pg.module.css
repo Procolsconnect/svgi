@@ -194,7 +194,7 @@
 
 .boxTitle,
 .detailContentTitle {
-  font-size: 3rem;
+  font-size: 2.7rem;
   font-weight: 900;
 }
 
@@ -205,8 +205,8 @@
 
 .boxTitleTop2 {
   position: relative;
-  top: 12px;
-  right: -120px;
+  top: 3.6rem;
+  right: -12rem;
   transform: rotate(90deg);
 }
 
@@ -839,8 +839,8 @@
   }
 
   .detailTop::after {
-    width: 50%;
-    height: 150px;
+    width: 53%;
+    height: 153px;
     right: 5px;
     top: -2rem;
     border-width: 10px;
@@ -849,17 +849,18 @@
   }
 
   .boxTitle {
-    font-size: 1.7rem !important;
+    font-size: 1.5rem !important;
   }
 
   .boxTitleTop1 {
     top: -30px;
-    font-size: 1.7rem !important;
+    right: -20px;
+    font-size: 1.5rem !important;
   }
 
   .boxTitleTop2 {
-    top: 10px;
-    right: -62px;
+    top: 40px;
+    right: -104px;
   }
 
   .boxTitleBottom1 {

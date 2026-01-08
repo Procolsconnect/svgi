@@ -1,0 +1,198 @@
+.wrapperNo4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #BEEDFF, white);
+    height: 60vh;
+    width: 100vw;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 40px 20px;
+    gap: 20px;
+}
+
+.wrapperNo4 p {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapperNo4 h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    color: #333;
+    margin: 0 0 30px 0;
+    text-align: center;
+}
+
+.buttonBird {
+    width: 300px;
+    height: 88px;
+    background-color: #131335;
+    border-radius: 5px;
+    position: relative;
+    padding: 0;
+    border: none;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s linear 0.1s;
+}
+
+.buttonBirdText {
+    text-align: center;
+    font-size: 20px;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #ffffff !important;
+    position: absolute;
+    z-index: 1000;
+    top: 50%;
+    margin: 0;
+    font-weight: 600;
+    transform: translateY(-50%);
+}
+
+.buttonBird:focus {
+    outline: none;
+}
+
+/* Hover effect for single bird */
+.buttonBird:hover .bird {
+    left: 600px;
+    top: -550px;
+    opacity: 0;
+    transition: left 1.5s cubic-bezier(0.42, 0, 0.58, 1), top 1.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.5s linear 1s;
+}
+
+.feather {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    left: 50%;
+    top: 12px;
+    transform: translateX(-50%);
+    fill: #131335;
+    opacity: 0;
+    display: none;
+    z-index: 5;
+}
+
+/* ACTIVE STATE */
+.buttonBird.active {
+    background-color: transparent;
+
+}
+
+.buttonBird.active .buttonBirdText {
+    color: #0c0043 !important;
+    animation: textFade 1.5s 0.2s forwards;
+}
+
+.buttonBird.active .feather {
+    display: block !important;
+    animation: featherFade 1.5s linear 0.5s forwards;
+}
+
+/* BIRD STYLES */
+.bird {
+    opacity: 1;
+    display: block;
+    position: absolute;
+    background-image: url('http://cfriedri.ch/codepen/04/birds.svg');
+    background-size: auto 100%;
+    width: 60px;
+    height: 33px;
+    top: 0;
+    left: 0;
+    animation-name: flyCycle;
+    animation-timing-function: steps(3);
+    animation-iteration-count: infinite;
+}
+
+/* KEYFRAMES */
+@keyframes flyCycle {
+    100% {
+        background-position: -360px 0;
+    }
+}
+
+@keyframes textFade {
+    0% {
+        color: transparent;
+        opacity: 1;
+        top: -50%;
+    }
+
+    1% {
+        color: transparent;
+        opacity: 0;
+    }
+
+    50% {
+        color: transparent;
+        opacity: 0;
+    }
+
+    100% {
+        color: #ffffff !important;
+        opacity: 1;
+        top: 50%;
+    }
+}
+
+@keyframes featherFade {
+    0% {
+        top: -100px;
+        opacity: 0;
+    }
+
+    25% {
+        transform: translateX(-50%) rotate(10deg);
+        left: 30%;
+    }
+
+    50% {
+        transform: translateX(-50%) rotate(-5deg);
+        opacity: 1;
+        left: 45%;
+    }
+
+    75% {
+        transform: translateX(-50%) rotate(10deg);
+        left: 32%;
+        top: -550px;
+        opacity: 0;
+        transition: left 1.5s cubic-bezier(0.42, 0, 0.58, 1), top 1.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.5s linear 1s;
+    }
+
+    100% {
+        transform: translateX(-50%) rotate(0deg);
+        opacity: 1;
+        top: 12px;
+        left: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .buttonBird {
+        transform: scale(0\.9);
+        transform-origin: center;
+        min-height: 60px;
+    }
+
+    .wrapperNo4{
+      height: 30vh;
+    }
+    .wrapperNo4 h1 {
+        font-size: 28px;
+    }
+
+    .wrapperNo4 p {
+        font-size: 16px;
+    }
+}

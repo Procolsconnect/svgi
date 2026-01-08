@@ -1,6 +1,8 @@
 // AdmissionsSection.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import gsap from 'gsap';
+import SplitType from 'split-type';
 import styles from './procedure.module.css';
 import CommonHero from '../../../components/CommonHero';
 
@@ -19,10 +21,9 @@ const AdmissionsSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [ procedureRes] = await Promise.all([
+        const [procedureRes] = await Promise.all([
           axios.get(`${API_URL}/api/procedure`)
         ]);
-
 
         if (procedureRes.data.success && procedureRes.data.data.length > 0) {
           const data = procedureRes.data.data[0];
@@ -45,43 +46,42 @@ const AdmissionsSection = () => {
   }, [API_URL]);
 
   useEffect(() => {
-    const text = textRef.current;
-    if (!text || loading) return;
+    const textRefCurrent = textRef.current;
+    if (!textRefCurrent || loading) return;
 
-    // Reset innerHTML before splitting again to avoid duplication or nested structures
-    const originalText = procedureData.content;
-    const lines = originalText.split('. ').filter(Boolean);
-    text.innerHTML = lines.map(line =>
-      `<div class="${styles.lineWrapper}"><div class="${styles.line}">${line}${line.endsWith('.') ? '' : '.'}</div></div>`
-    ).join('');
+    // Split text into lines
+    const split = new SplitType(textRefCurrent, { types: 'lines' });
 
-    let timeoutIds = [];
+    // Wrap each line in a container for overflow: hidden
+    split.lines.forEach((line) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = styles.lineWrapper;
+      line.parentNode.insertBefore(wrapper, line);
+      wrapper.appendChild(line);
+      line.classList.add(styles.line);
+    });
 
-    const animate = () => {
-      const lineElements = text.querySelectorAll(`.${styles.line}`);
+    // GSAP infinite animation
+    const tl = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 0.7
+    });
 
-      lineElements.forEach((line, i) => {
-        line.style.transform = 'translateY(100%)';
-        line.style.opacity = '0.2';
-        line.style.filter = 'blur(8px)';
-
-        const tid = setTimeout(() => {
-          line.style.transition = 'transform 0.9s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.9s, filter 0.9s';
-          line.style.transform = 'translateY(0)';
-          line.style.opacity = '1';
-          line.style.filter = 'blur(0)';
-        }, i * 80);
-        timeoutIds.push(tid);
-      });
-
-      const nextRoundTid = setTimeout(animate, 5000); // Increased delay for readability
-      timeoutIds.push(nextRoundTid);
-    };
-
-    animate();
+    tl.from(`.${styles.line}`, {
+      duration: 0.9,
+      yPercent: 100,
+      opacity: 0.2,
+      filter: "blur(8px)",
+      stagger: 0.08,
+      ease: "power4.out",
+      yoyo: true,
+      repeat: 1,
+      repeatDelay: 0.7
+    });
 
     return () => {
-      timeoutIds.forEach(id => clearTimeout(id));
+      tl.kill();
+      split.revert();
     };
   }, [loading, procedureData.content]);
 

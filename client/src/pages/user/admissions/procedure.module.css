@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/pp-neue-montreal');
 
 .wrapper {
   width: 100%;
@@ -92,13 +93,6 @@
   background: #ffffff;
 }
 
-@media (max-width: 900px) {
-  .content {
-    flex-direction: column;
-    padding: 40px 20px;
-  }
-}
-
 .textContainer {
   flex: 1;
   display: flex;
@@ -111,17 +105,20 @@
 .text {
   font-size: 2rem;
   line-height: 1.4;
-  max-width: 500px;
+  position: relative;
+  max-width: 50rem;
   margin: 0;
 }
 
 .lineWrapper {
   overflow: hidden;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.2rem;
+  position: relative;
 }
 
 .line {
   display: block;
+  position: relative;
   will-change: transform, opacity, filter;
 }
 
@@ -130,18 +127,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
   background: #ffffff;
+  padding: 2rem;
 }
 
 .video {
   width: 90%;
-  max-width: 600px;
+  height: auto;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+
   .video {
     width: 100%;
   }

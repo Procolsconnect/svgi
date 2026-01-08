@@ -1,145 +1,89 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import BirdButton from '@/components/BirdButton';
+import React, { useState } from 'react';
 import styles from './ug.module.css';
-import CommonHero from '../../../components/CommonHero';
 
-const UndergraduateCoursesPage = () => {
-  const [isButtonActive, setIsButtonActive] = useState(false);
-  const [courseData, setCourseData] = useState({
-    image1: '', image2: '', image3: '', top_text: 'LINEN BLAZER', bottom_text: 'TOP 01'
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const API_URL = import.meta.env.VITE_API_URL;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [courseRes] = await Promise.all([
-          axios.get(`${API_URL}/api/ugcourse`)
-        ]);
-
-        if (courseRes.data.success && courseRes.data.data.length > 0) {
-          const data = courseRes.data.data[0];
-          setCourseData({
-            image1: data.image1,
-            image2: data.image2,
-            image3: data.image3,
-            top_text: data.top_text || 'LINEN BLAZER',
-            bottom_text: data.bottom_text || 'TOP 01'
-          });
-        }
-
-        setLoading(false);
-      } catch (err) {
-        console.error("Error fetching data", err);
-        setError('Failed to load data');
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [API_URL]);
+const ProductGallery = () => {
+  const [isActive, setIsActive] = useState(false);
 
   const handleButtonClick = () => {
-    setIsButtonActive(!isButtonActive);
+    setIsActive(!isActive);
   };
-
-  const topTextFull = (courseData.top_text).trim();
-  const topTextParts = topTextFull.split(/\s+/);
-  const topText1 = topTextParts[0] || 'LINEN';
-  const topText2 = topTextParts.slice(1).join(" ") || 'BLAZER';
-
-  const bottomTextFull = (courseData.bottom_text).trim();
-  const bottomTextParts = bottomTextFull.split(/\s+/);
-  const bottomText1 = bottomTextParts[0] || 'TOP';
-  const bottomText2 = bottomTextParts.slice(1).join(" ") || '01';
 
   return (
     <div className={styles.pageWrapper}>
       {/* HERO SECTION */}
-      <CommonHero
-        apiEndpoint="/api/ughero"
-        defaultTitle="Undergraduate courses"
-      />
+      <div className={styles.hero}>
+        <img
+          src="https://images.unsplash.com/photo-1554895917-f74c630b5b3a?w=1200&h=350&fit=crop"
+          alt="Hero Background"
+        />
+        <h1>Undergraduate Courses</h1>
+      </div>
 
-      <div className={styles.container}>
+      <div className={styles.wrap}>
+        {/* HEADER SECTION */}
         <div className={styles.header}>
-          <i className="fa fa-arrow-left fa-2x"></i>
-          <div><h5>UG COURSES</h5></div>
+          <span style={{ fontSize: '24px', cursor: 'pointer' }}>←</span>
+          <div className={styles.headerBox}>UG COURSES</div>
         </div>
 
-        <div className={styles.topImgContainer}>
-          <img src={courseData.image1} alt="Course Image 1" className={styles.topImg} />
-        </div>
-        <div className={styles['divArea-1']}></div>
+        {/* TOP SECTION */}
+        <div className={styles.detailTop}>
+          <div className={styles.topImg}>
+            <img src="https://images.unsplash.com/photo-1513827379601-9dba5099a3f9" alt="Admission view" />
+          </div>
+          <div className={styles.divArea1}></div>
 
-        <div className={`${styles.rightTop} ${styles.end}`}>
-          <div className={styles.title2}>{topText1}</div>
-          <div className={`${styles.title2} ${styles['trans-90']} ${styles['pos-right']}`}>{topText2}</div>
-        </div>
+          {/* Right Top Title */}
+          <div className={styles.rightTop}>
+            <div className={styles.title2}>UNDER </div>
+            <div className={`${styles.title2} ${styles.trans90} ${styles.posRight}`}>GRADUATE</div>
+          </div>
 
-        <div className={styles.leftBottom}>
-          <div className={`${styles.title2} ${styles['trans-180']} ${styles['f-l']}`}>{bottomText1}</div>
-          <div className={`${styles.title2} ${styles['trans-270']} ${styles['pos-left']}`}>{bottomText2}</div>
-        </div>
+          {/* Left Bottom Title */}
+          <div className={styles.leftBottom}>
+            <div className={`${styles.title2} ${styles.trans180} ${styles.fl}`}>TOP</div>
+            <div className={`${styles.title2} ${styles.trans270} ${styles.posLeft}`}>01</div>
+          </div>
 
-        <div className={styles.div1}></div>
-
-        <div className={styles.content}>
-          <div className={styles.title2}> UNDER GRADUATE</div>
-          <h2 className={`${styles.italic} ${styles['trans-90']}`}>UG DETAILS</h2>
-          <h2>Lets craft your career journey from here </h2>
-          <p>
-            The value of an undergraduate (UG) degree is that it creates a solid base for a student's future in school and work. It helps students learn important knowledge, build key skills, and find out what they are good at through hands-on experiences and specialization.
-          </p>
-          <p>
-            A UG program leads to more education, better job opportunities, and career advancement while boosting confidence, communication, and personal growth. It is the first big step that readies students to face the real world with understanding and ability.
-          </p>
+          <div className={styles.div1}></div>
         </div>
 
-        <div className={styles.bottomImgContainer}>
-          <img src={courseData.image3} alt="Course Image 3" className={styles.bottomImg} />
+        {/* CONTENT SECTION */}
+        <div className={styles.detailContent}>
+          <div className={styles.content}>
+            <h2>UG COURSES</h2>
+            <h2 className={`${styles.italic} ${styles.trans90}`}>UG DETAILS</h2>
+            <h2>Lets craft your career journey from here</h2>
+            <p>
+              The value of an undergraduate (UG) degree is that it creates a solid base for a student's future in school and work. It helps students learn important knowledge, build key skills, and find out what they are good at through hands-on experiences and specialization.
+            </p>
+            <p>
+              A UG program leads to more education, better job opportunities, and career advancement while boosting confidence, communication, and personal growth. It is the first big step that readies students to face the real world with understanding and ability.
+            </p>
+          </div>
         </div>
-        <div className={styles.centerImgContainer}>
-          <img src={courseData.image2} alt="Course Image 2" className={styles.centerImg} />
+
+        {/* BOTTOM SECTION */}
+        <div className={styles.detailBottom}>
+          <div className={styles.bottomImg}>
+            <img src="https://images.unsplash.com/photo-1513827379601-9dba5099a3f9" alt="Campus view" />
+          </div>
+          <div className={styles.centerImg}>
+            <img src="https://images.unsplash.com/photo-1513827379601-9dba5099a3f9" alt="Student view" />
+          </div>
+          <div className={styles.divArea2}></div>
+          <div className={styles.div2}></div>
+
+          {/* Pattern */}
+          <div className={styles.pattern1}></div>
         </div>
-        <div className={styles['divArea-2']}></div>
-        <div className={styles.div2}></div>
-        <div className={styles.pattern1}></div>
       </div>
 
-
-
-      <div className={styles['wrapper-no4']}>
-        <p>THE complete UG cource are in side the button So </p><br />
-        <h1> Click the Button </h1>
-        <button
-          className={`${styles['button-bird']} ${isButtonActive ? styles.active : ''}`}
-          onClick={handleButtonClick}
-        >
-          <p className={styles['button-bird__text']}>
-            {isButtonActive ? 'DONE' : 'OPEN'}
-          </p>
-          <svg version="1.1" className={styles.feather} xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 75 38" style={{ enableBackground: "new 0 0 75 38" }} xmlSpace="preserve">
-            <g>
-              <path d="M20.8,31.6c3.1-0.7,2.9-2.3,2,1c9.1,4.4,20.4,3.7,29.1-0.8l0,0c0.7-2.1,1-3.9,1-3.9c0.6,0.8,0.8,1.7,1,2.9
-                    c4.1-2.3,7.6-5.3,10.2-8.3c0.4-2.2,0.4-4,0.4-4.1c0.6,0.4,0.9,1.2,1.2,2.1c4.5-6.1,5.4-11.2,3.7-13.5c1.1-2.6,1.6-5.4,1.2-7.7
-                    c-0.5,2.4-1.2,4.7-2.1,7.1c-5.8,11.5-16.9,21.9-30.3,25.3c13-4,23.6-14.4,29.1-25.6C62.8,9,55.6,16.5,44.7,20.7
-                    c2.1,0.7,3.5,1.1,3.5,1.6c-0.1,0.4-1.3,0.6-3.2,0.4c-7-0.9-7.1,1.2-16,1.5c1,1.3,2,2.5,3.1,3.6c-1.9-0.9-3.8-2.2-5.6-3.6
-                    c-0.9,0.1-10.3,4.9-22.6-12.3C5.9,17.7,11.8,26.9,20.8,31.6z"/>
-            </g>
-          </svg>
-          <span className={styles.bird}></span>
-          {Array.from({ length: 30 }).map((_, i) => (
-            <span key={i} className={`${styles.bird} ${styles[`bird--${i + 1}`]}`}></span>
-          ))}
-        </button>
-      </div>
+      {/* BUTTON SECTION */}
+      <BirdButton isActive={isActive} onClick={handleButtonClick} />
     </div>
   );
 };
 
-export default UndergraduateCoursesPage;
+export default ProductGallery;
