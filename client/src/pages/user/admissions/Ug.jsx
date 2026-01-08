@@ -13,8 +13,8 @@ const ProductGallery = () => {
   return (
     <div className={styles.pageWrapper}>
       <CommonHero
-         apiEndpoint="/api/ughero"
-                defaultTitle="Admissions"
+        apiEndpoint="/api/ughero"
+        defaultTitle="Admissions"
       />
 
       <div className={styles.wrap}>
@@ -78,7 +78,11 @@ const ProductGallery = () => {
       </div>
 
       {/* BUTTON SECTION */}
-      <BirdButton isActive={isActive} onClick={handleButtonClick} />
+      <BirdButton
+        isActive={isActive}
+        onClick={handleButtonClick}
+        description="THE complete UG course are inside the button So"
+      />
     </div>
   );
 };

@@ -15,11 +15,12 @@
   scroll-behavior: smooth;
   --content: 66ch;
   --gutter: 2rem;
+  /* Removed height: 100vh and overflow-y: auto to fix scroll lag */
 }
 
 /* HERO */
 .hero {
-  min-height: 350px;
+  min-height: 400px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -167,6 +168,7 @@
   animation: itemReveal both ease-in;
   animation-timeline: --item;
   animation-range: cover 10% cover 35%;
+  will-change: transform, opacity;
 }
 
 .scrollSectionEven img {
@@ -191,6 +193,7 @@
   animation: itemReveal both ease-out;
   animation-timeline: --item;
   animation-range: cover 35% cover 60%;
+  will-change: transform, opacity;
 }
 
 .scrollSection p strong {
@@ -301,7 +304,7 @@
     display: flex;
     flex-direction: column;
     min-height: 77vh;
-    padding:0 0;
+    padding: 0 0;
   }
 
   .scrollSection img {

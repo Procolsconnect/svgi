@@ -126,7 +126,11 @@ const ResearchCoursesPage = () => {
       </div>
 
       {/* BUTTON SECTION */}
-      <BirdButton isActive={isActive} onClick={handleButtonClick} />
+      <BirdButton
+        isActive={isActive}
+        onClick={handleButtonClick}
+        description="THE complete Research courses are inside the button So"
+      />
     </div>
   );
 };

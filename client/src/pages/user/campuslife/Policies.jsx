@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styles from './policies.module.css';
+import CommonHero from '../../../components/CommonHero';
 
 const API_BASE = import.meta.env.VITE_API_URL + '/api/campus';
 
@@ -83,7 +84,6 @@ const PolicyCard = ({ index, text, image, tiltEffect }) => {
 };
 
 export default function PolicyCards() {
-  const [hero, setHero] = useState(null);
   const [titleData, setTitleData] = useState(null);
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -91,15 +91,11 @@ export default function PolicyCards() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [heroRes, titleRes, cardRes] = await Promise.all([
-          axios.get(`${API_BASE}/policyhero`),
+        const [titleRes, cardRes] = await Promise.all([
           axios.get(`${API_BASE}/policytitle`),
           axios.get(`${API_BASE}/policycard`)
         ]);
 
-        if (heroRes.data.success && heroRes.data.data.length > 0) {
-          setHero(heroRes.data.data[0]);
-        }
         if (titleRes.data.success && titleRes.data.data.length > 0) {
           setTitleData(titleRes.data.data[0]);
         }
@@ -123,18 +119,7 @@ export default function PolicyCards() {
       <div className={styles.reset}>
         <div className={styles.container}>
           {/* Hero Section */}
-          <div className={styles.hero}>
-            <img
-              src={hero?.image || "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200"}
-              alt={hero?.title || "Hero Background"}
-              className={styles.heroImg}
-            />
-            <div className={styles.heroOverlay} />
-            <div className={styles.heroTitle}>
-              {hero?.title || "SVGI Policies"}
-              <div className={styles.heroUnderline} />
-            </div>
-          </div>
+          <CommonHero apiEndpoint="/api/campus/policyhero" />
 
           {/* Section Heading */}
           <div className={styles.sectionHeadingWrapper}>

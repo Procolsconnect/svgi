@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import styles from './Green.module.css';
+import CommonHero from '../../../components/CommonHero';
 
 export default function GreenSvgiCampus() {
   const [focalPoint, setFocalPoint] = useState({ x: 0, y: 0 });
@@ -62,14 +63,7 @@ export default function GreenSvgiCampus() {
   return (
     <div className={styles.gsvgiCampusRoot}>
       {/* Hero Section */}
-      <div className={`${styles.gsvgiHeroSection} ${styles.gsvgiHeroOverlay}`}>
-        <img
-          className={styles.gsvgiHeroImage}
-          src="https://images.unsplash.com/photo-1516655855035-d5215bcb5604?auto=format&fit=crop&w=1000&q=80"
-          alt="Hero Background"
-        />
-        <h1 className={styles.gsvgiHeroTitle}>Green SVGI</h1>
-      </div>
+      <CommonHero apiEndpoint="/api/campus/greensvgihero" />
 
       {/* Title Section */}
       <div className={styles.gsvgiTitleSection}>

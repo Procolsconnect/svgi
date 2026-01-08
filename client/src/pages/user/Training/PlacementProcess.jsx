@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './PlacementProcess.module.css';
+import CommonHero from '../../../components/CommonHero';
 
 const PlacementProcessPage = () => {
   const [typedBold, setTypedBold] = useState('');
@@ -65,12 +66,8 @@ const PlacementProcessPage = () => {
 
   return (
     <div className={styles.page}>
-      <div className={styles.hero}>
-        <img src="hero img.jpg" alt="Placement Background" />
-        <div className={styles.heroOverlay} />
-        <h1 className={styles.heroTitle}>Placement Process</h1>
-      </div>
-{/* placementprocess */}
+      <CommonHero apiEndpoint="/api/placement-process-hero" />
+      {/* placementprocess */}
       <main className={styles.heroSection}>
         <div className={styles.heroContainer}>
           <div className={styles.heroContent}>
@@ -81,7 +78,7 @@ const PlacementProcessPage = () => {
               </h1>
 
               <p>
-         The SVGI Placement Process is a well-organized and student-focused approach aimed at equipping learners for successful careers by improving their skills, familiarizing them with industry standards, and linking them with top recruiters. By implementing structured training, evaluations, counseling, and recruitment events, this process guarantees that each qualified student makes a seamless transition from their academic journey to a professional career with both confidence and capability.
+                The SVGI Placement Process is a well-organized and student-focused approach aimed at equipping learners for successful careers by improving their skills, familiarizing them with industry standards, and linking them with top recruiters. By implementing structured training, evaluations, counseling, and recruitment events, this process guarantees that each qualified student makes a seamless transition from their academic journey to a professional career with both confidence and capability.
               </p>
             </div>
 

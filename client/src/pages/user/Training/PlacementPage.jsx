@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './PlacementPage.module.css';
 import axios from 'axios';
 import { FaEdit, FaUsers, FaPaperPlane, FaMapMarkedAlt, FaLightbulb, FaGraduationCap } from 'react-icons/fa';
+import CommonHero from '../../../components/CommonHero';
 
 const apiurl = import.meta.env.VITE_API_URL;
 
@@ -12,7 +13,6 @@ const PlacementPage = () => {
   const videoRef = useRef(null);
 
   // Dynamic states
-  const [heroData, setHeroData] = useState(null);
   const [slides, setSlides] = useState([]);
   const [workspace, setWorkspace] = useState([]);
   const [teamMembers, setTeamMembers] = useState([]);
@@ -49,8 +49,7 @@ const PlacementPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [heroRes, sliderRes, workspaceRes, teamRes, faqRes, videoRes, recruitersRes] = await Promise.all([
-          axios.get(`${apiurl}/api/placementrecordhero`),
+        const [sliderRes, workspaceRes, teamRes, faqRes, videoRes, recruitersRes] = await Promise.all([
           axios.get(`${apiurl}/api/placementrecordsslider`),
           axios.get(`${apiurl}/api/placementrecordsworkspace`),
           axios.get(`${apiurl}/api/placementrecordsteam`),
@@ -59,7 +58,6 @@ const PlacementPage = () => {
           axios.get(`${apiurl}/api/company-category`)
         ]);
 
-        if (heroRes.data.success && heroRes.data.data.length > 0) setHeroData(heroRes.data.data[0]);
         if (sliderRes.data.success) setSlides(sliderRes.data.data);
         if (workspaceRes.data.success) setWorkspace(workspaceRes.data.data);
         if (teamRes.data.success) setTeamMembers(teamRes.data.data);
@@ -94,11 +92,7 @@ const PlacementPage = () => {
   return (
     <div className={styles.page}>
       {/* Hero Section */}
-      <div className={styles.hero}>
-        <img src={heroData ? heroData.image : "hero img.jpg"} alt="Hero Background" />
-        <div className={styles.heroOverlay} />
-        <h1 className={styles.heroTitle}>{heroData ? heroData.title : "Placement Records and Highlights"}</h1>
-      </div>
+      <CommonHero apiEndpoint="/api/placementrecordhero" />
 
       <div className={styles.container}>
         <h1 className={styles.pageHeading}>Placement Highlights</h1>

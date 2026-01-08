@@ -5,11 +5,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./CollegeFest.module.css";
 import EventStack from "./EventStack";
+import CommonHero from "../../../components/CommonHero";
 
 const API_BASE = import.meta.env.VITE_API_URL + "/api/campus";
 
 const MergedPage = () => {
-  const [hero, setHero] = useState(null);
   const [carouselCards, setCarouselCards] = useState([]);
   const [activeId, setActiveId] = useState(0); // Track active card manually
   const [stackEvents, setStackEvents] = useState([]);
@@ -18,15 +18,11 @@ const MergedPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [heroRes, cardRes, eventRes] = await Promise.all([
-          axios.get(`${API_BASE}/festivalhero`),
+        const [cardRes, eventRes] = await Promise.all([
           axios.get(`${API_BASE}/festivalcard`),
           axios.get(`${API_BASE}/festivalevent`)
         ]);
 
-        if (heroRes.data.success && heroRes.data.data.length > 0) {
-          setHero(heroRes.data.data[0]);
-        }
 
         if (cardRes.data.data && cardRes.data.data.length > 0) {
           setCarouselCards(cardRes.data.data);
@@ -40,6 +36,7 @@ const MergedPage = () => {
         const angles = ["-7deg", "8deg", "-3deg", "6deg", "-11deg", "9deg", "-4deg"];
         const processedEvents = (eventRes.data.data || []).map((ev, i) => ({
           ...ev,
+          description: ev.description || ev.desc || "", // Ensure description is mapped correctly
           angle: angles[i % angles.length]
         }));
         setStackEvents(processedEvents);
@@ -100,10 +97,7 @@ const MergedPage = () => {
   return (
     <div className={styles.pageWrapper}>
       {/* HERO */}
-      <div className={styles.hero}>
-        <img src={hero?.image || "hero img.jpg"} alt={hero?.title || "Fests"} />
-        <h1>{hero?.title || "Fests"}</h1>
-      </div>
+      <CommonHero apiEndpoint="/api/campus/festivalhero" />
 
       {/* Hover Animation Section */}
       <div className={styles.container}>
@@ -204,7 +198,7 @@ const MergedPage = () => {
           </Slider>
         )}
       </section>
-      <EventStack events={stackEvents}  />
+      <EventStack events={stackEvents} />
       <section className={styles.slantedSection}>
         <div className={`${styles.rr} ${styles.rrLeft}`}>
           <div>

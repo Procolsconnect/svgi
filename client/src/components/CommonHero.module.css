@@ -40,7 +40,7 @@
     font-weight: 800;
     font-family: 'Playfair Display', serif;
     text-transform: capitalize;
-    
+
 }
 
 .heroTitle::after {
@@ -86,6 +86,8 @@
     }
 
     .heroTitle {
+        position: relative;
+        top: 2rem;
         font-size: 36px;
     }
 

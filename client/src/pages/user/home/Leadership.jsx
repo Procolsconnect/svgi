@@ -45,7 +45,7 @@ export default function Leaders() {
           <div className={styles.leadersOverflow}>
             <div className={styles.leadersModel}>
               <img
-                src="images/WhatsApp_Image_2025-08-01_at_16.15.06_95e75b66-removebg-preview.png"
+                src="images/Secretary.png"
                 alt="TopoKey"
                 className={styles.leadersImageModel}
               />

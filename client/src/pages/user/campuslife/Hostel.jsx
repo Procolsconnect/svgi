@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './hostel.module.css';
+import CommonHero from '../../../components/CommonHero';
 
 const API_URL = import.meta.env.VITE_API_URL + '/api/campus';
 
 const HostelPage = () => {
   const [openFaq, setOpenFaq] = useState(null);
   const [hostelData, setHostelData] = useState({
-    hero: null,
     cards: [],
     faqs: []
   });
@@ -20,14 +20,12 @@ const HostelPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [heroRes, cardRes, faqRes] = await Promise.all([
-          axios.get(`${API_URL}/hostelhero`),
+        const [cardRes, faqRes] = await Promise.all([
           axios.get(`${API_URL}/hostelcard`),
           axios.get(`${API_URL}/hostelfaq`)
         ]);
 
         setHostelData({
-          hero: heroRes.data.data?.[0] || null,
           cards: cardRes.data.data || [],
           faqs: faqRes.data.data || []
         });
@@ -40,18 +38,14 @@ const HostelPage = () => {
     fetchData();
   }, []);
 
-  const { hero, cards, faqs } = hostelData;
+  const { cards, faqs } = hostelData;
 
   if (loading) return null; // Or a subtle loader
 
   return (
     <div className={styles['hostel__wrapper']}>
       {/* HERO SECTION */}
-      <div id="hostel__hero" className={styles['hostel__hero']}>
-        <img src={hero?.image || "hero img.jpg"} alt={hero?.title || "Hero Background"} />
-        <div className={styles['hostel__hero-overlay']}></div>
-        <h1>{hero?.title || "SVGI Hostel"}</h1>
-      </div>
+      <CommonHero apiEndpoint="/api/campus/hostelhero" />
 
       {/* HOSTEL CONTAINER SECTION */}
       <div className={styles['hostel__container']}>

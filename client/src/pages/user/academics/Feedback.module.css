@@ -644,7 +644,19 @@
   .textWrapper header h1 {
     font-size: 1.8em;
   }
-
+.cardShadow {
+  position: absolute;
+  bottom: -13%;
+  width: 100%;
+  height: 4em;
+  background: black;
+  filter: blur(1em);
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  transform: scaleX(1) rotate3d(-30, -50, 8, 333deg);
+  animation: shadowCard 4s ease-in-out infinite;
+  opacity: 0.5;
+}
   .largeHeading {
     font-size: 1.4em;
   }

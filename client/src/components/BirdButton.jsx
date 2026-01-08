@@ -1,11 +1,16 @@
 import React from 'react';
 import styles from './BirdButton.module.css';
 
-const BirdButton = ({ isActive, onClick }) => {
+const BirdButton = ({
+    isActive,
+    onClick,
+    title = "Click the Button",
+    description = "THE complete UG course are inside the button So"
+}) => {
     return (
         <div className={styles.wrapperNo4}>
-            <p>THE complete UG course are inside the button So</p>
-            <h1>Click the Button</h1>
+            <p>{description}</p>
+            <h1>{title}</h1>
 
             <button
                 className={`${styles.buttonBird} ${isActive ? styles.active : ''}`}

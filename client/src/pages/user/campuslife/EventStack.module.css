@@ -309,7 +309,7 @@
 
 @media (max-width: 480px) {
     .stackSlider {
-        min-height: 55vh;
+        min-height: 550px;
     }
 
     .latestEventsSection h1 {

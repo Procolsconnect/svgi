@@ -1,30 +1,14 @@
-/* Scoped Reset for Component */
-.pageWrapper,
-.pageWrapper *,
-.pageWrapper *::before,
-.pageWrapper *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .pageWrapper {
-
+  box-sizing: border-box;
   background-color: #f9fafb;
 }
 
-/* @property Declarations (for Stack Slider Animations) */
-@property --p {
-  syntax: '<number>';
-  initial-value: 0;
-  inherits: true;
+.pageWrapper *,
+.pageWrapper *::before,
+.pageWrapper *::after {
+  box-sizing: border-box;
 }
 
-@property --v {
-  syntax: '<number>';
-  initial-value: 0;
-  inherits: true;
-}
 
 /* Hero Section */
 .hero {
@@ -297,7 +281,10 @@
   border-radius: 16px;
   overflow: hidden;
   position: relative;
-  transition: all 0.4s ease-in-out;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Smoother, synchronized with slider */
+  will-change: width;
+  /* HW acceleration for width changes */
   cursor: pointer;
 }
 
@@ -324,6 +311,12 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gameSection .item.active .itemBgImg {
+  transform: scale(1.1);
+  /* Subtle zoom for active card */
 }
 
 .gameSection .itemDesc {
@@ -451,7 +444,7 @@
     font-size: 2.5rem;
     padding: 0;
     line-height: 1.2;
-     min-height: 50vh;
+    min-height: 50vh;
   }
 
   /* Intro Scaling */
@@ -550,9 +543,9 @@
     border-top: var(--rr-height) solid transparent;
   }
 
- 
- 
- 
+
+
+
 }
 
 @media (max-width: 767px) {
@@ -561,7 +554,7 @@
   }
 }
 
- 
+
 @media (max-width: 480px) {
 
   /* Hero Section Mobile */
@@ -581,7 +574,7 @@
   /* Hover Animation Section - Fix images visibility */
   .container {
     padding: 10px 16px;
-     min-height: 40vh;
+    min-height: 40vh;
 
   }
 

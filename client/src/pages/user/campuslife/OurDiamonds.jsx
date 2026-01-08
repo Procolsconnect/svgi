@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './OurDiamonds.module.css';
+import CommonHero from '../../../components/CommonHero';
 
 const DiamondShowcase = () => {
   const cards = [
@@ -48,10 +49,7 @@ const DiamondShowcase = () => {
   return (
     <div className={styles['diamond-showcase']}>
       {/* HERO */}
-      <div className={styles['diamond-hero']}>
-        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=1200" alt="Hero Background" />
-        <h1>Our Diamonds</h1>
-      </div>
+      <CommonHero apiEndpoint="/api/campus/diamondhero" defaultTitle="Our Diamonds" />
 
       {/* CARDS GRID */}
       <main className={styles['diamond-main']}>
