@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import styles from './pg.module.css';
+import CommonHero from '@/components/CommonHero';
 
 const PostgraduateCourses = () => {
   const [buttonActive, setButtonActive] = useState(false);
 
   return (
     <div className={styles.pageContainer}>
-      {/* HERO SECTION */}
-      <div className={styles.hero}>
-        <img
-          className={styles.heroImg}
-          src="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80"
-          alt="Hero Background"
-        />
-        <h1 className={styles.heroTitle}>Postgraduate Courses</h1>
-      </div>
+      <CommonHero
+        defaultTitle="Postgraduate Courses"
+        defaultImage="https://images.unsplash.com/photo-1519406709381-c1f293304b28?ixlib=rb-0.3.5&auto=format&fit=crop&w=934&q=80"
+      />
 
       <div className={styles.wrap}>
         {/* HEADER */}
@@ -35,7 +31,7 @@ const PostgraduateCourses = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </p>
-        
+
         </div>
 
         {/* TOP SECTION */}
@@ -62,12 +58,12 @@ const PostgraduateCourses = () => {
           <h3 className={styles.detailContentSubtitle}>PG DETAILS</h3>
           <div className={styles.subtitle}>Let  start to empower your skill From here</div>
           <p className={styles.detailContentParagraph}>
-          A PG (Postgraduate) degree is valuable because it helps people gain more knowledge, improve their skills, and boost their academic and job profiles. It provides advanced training, chances for research, and practical skills that get graduates ready for leadership roles and better careers.
+            A PG (Postgraduate) degree is valuable because it helps people gain more knowledge, improve their skills, and boost their academic and job profiles. It provides advanced training, chances for research, and practical skills that get graduates ready for leadership roles and better careers.
           </p>
           <p className={styles.detailContentParagraph}>
-             A PG program improves thinking skills, decision-making, and creativity, leading to better job opportunities, teaching positions, and business growth. It is an important step that helps individuals become experts in their field.
+            A PG program improves thinking skills, decision-making, and creativity, leading to better job opportunities, teaching positions, and business growth. It is an important step that helps individuals become experts in their field.
           </p>
-        </div> 
+        </div>
 
         {/* BOTTOM SECTION */}
         <div className={styles.detailBottom}>

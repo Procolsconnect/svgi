@@ -1,6 +1,7 @@
 import BirdButton from '@/components/BirdButton';
 import React, { useState } from 'react';
 import styles from './ug.module.css';
+import CommonHero from '@/components/CommonHero';
 
 const ProductGallery = () => {
   const [isActive, setIsActive] = useState(false);
@@ -11,14 +12,10 @@ const ProductGallery = () => {
 
   return (
     <div className={styles.pageWrapper}>
-      {/* HERO SECTION */}
-      <div className={styles.hero}>
-        <img
-          src="https://images.unsplash.com/photo-1554895917-f74c630b5b3a?w=1200&h=350&fit=crop"
-          alt="Hero Background"
-        />
-        <h1>Undergraduate Courses</h1>
-      </div>
+      <CommonHero
+        defaultTitle="Undergraduate Courses"
+        defaultImage="https://images.unsplash.com/photo-1554895917-f74c630b5b3a?w=1200&h=350&fit=crop"
+      />
 
       <div className={styles.wrap}>
         {/* HEADER SECTION */}

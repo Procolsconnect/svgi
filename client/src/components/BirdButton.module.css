@@ -187,6 +187,8 @@
 
     .wrapperNo4{
       height: 30vh;
+      padding: 10rem auto;
+      margin: 3rem 0;
     }
     .wrapperNo4 h1 {
         font-size: 28px;
@@ -194,5 +196,6 @@
 
     .wrapperNo4 p {
         font-size: 16px;
+
     }
 }
