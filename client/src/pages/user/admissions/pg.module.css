@@ -447,10 +447,10 @@
   }
 
   .detailTop::after {
-    width: 53%;
-    height: 153px;
+    width: 57%;
+    height: 10rem;
     right: 5px;
-    top: -2rem;
+    top: -2.6rem;
     border-width: 10px;
     display: block;
     z-index: 1;

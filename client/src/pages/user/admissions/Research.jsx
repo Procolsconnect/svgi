@@ -73,7 +73,7 @@ const ResearchCoursesPage = () => {
         {/* TOP SECTION */}
         <div className={styles.detailTop}>
           <div className={styles.topImg}>
-            <img src={courseData.image1} alt="Research view 1" />
+            {courseData.image1 && <img src={courseData.image1} alt="Research view 1" />}
           </div>
           <div className={styles.divArea1}></div>
 
@@ -112,10 +112,10 @@ const ResearchCoursesPage = () => {
         {/* BOTTOM SECTION */}
         <div className={styles.detailBottom}>
           <div className={styles.bottomImg}>
-            <img src={courseData.image3} alt="Research view 3" />
+            {courseData.image3 && <img src={courseData.image3} alt="Research view 3" />}
           </div>
           <div className={styles.centerImg}>
-            <img src={courseData.image2} alt="Research view 2" />
+            {courseData.image2 && <img src={courseData.image2} alt="Research view 2" />}
           </div>
           <div className={styles.divArea2}></div>
           <div className={styles.div2}></div>
