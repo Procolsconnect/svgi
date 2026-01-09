@@ -1,8 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
+import Loading from "./components/Loading.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserLayout from "./Layouts/UserLayout.jsx";
-import AdminLayout from "./Layouts/AdminLayout.jsx";
-import Admin from "./pages/admin/Admin.jsx";
+import Contact from "./pages/user/Contact.jsx";
+const AdminLayout = React.lazy(() => import("./Layouts/AdminLayout.jsx"));
+const Admin = React.lazy(() => import("./pages/admin/Admin.jsx"));
+
 import Home from "./pages/user/home/Home.jsx";
 import Admissions from "./pages/user/admissions/Admissions.jsx";
 import Academics from "./pages/user/academics/Academics.jsx"
@@ -13,15 +16,16 @@ import ScrollToTop from "./components/ScrollToTop.jsx";
 import Advertisement from "./pages/user/addvertisement/Advertisement.jsx";
 import News from "./pages/user/news/News.jsx";
 
-import Dashboard from "./components/dashboard.jsx";
-import HomeAdmin from "./components/admin/home-admin.jsx";
-import AdmissionsAdmin from "./components/admin/admissions-admin.jsx";
-import AcademicsAdmin from "./components/admin/academics-admin.jsx";
-import AboutAdmin from "./components/admin/about-admin.jsx";
-import PlacementAdmin from "./components/admin/placement-admin.jsx";
-import CampusLifeAdmin from "./components/admin/campus-life-admin.jsx";
-import NewsAdmin from "./components/admin/news-admin.jsx";
-import AdvertisementAdmin from "./components/admin/advertisement-admin.jsx";
+// Lazy load Admin Components to further split the bundle
+const Dashboard = React.lazy(() => import("./components/dashboard.jsx"));
+const HomeAdmin = React.lazy(() => import("./components/admin/home-admin.jsx"));
+const AdmissionsAdmin = React.lazy(() => import("./components/admin/admissions-admin.jsx"));
+const AcademicsAdmin = React.lazy(() => import("./components/admin/academics-admin.jsx"));
+const AboutAdmin = React.lazy(() => import("./components/admin/about-admin.jsx"));
+const PlacementAdmin = React.lazy(() => import("./components/admin/placement-admin.jsx"));
+const CampusLifeAdmin = React.lazy(() => import("./components/admin/campus-life-admin.jsx"));
+const NewsAdmin = React.lazy(() => import("./components/admin/news-admin.jsx"));
+const AdvertisementAdmin = React.lazy(() => import("./components/admin/advertisement-admin.jsx"));
 
 const App = () => {
   return (
@@ -37,9 +41,14 @@ const App = () => {
           <Route path="campuslife/*" element={<Campuslife />} />
           <Route path="advertisement/*" element={<Advertisement />} />
           <Route path="news/*" element={<News />} />
+          <Route path="contact/*" element={<Contact />} />
         </Route>
 
-        <Route path="/admin" element={<Admin />}>
+        <Route path="/admin" element={
+          <Suspense fallback={<Loading />}>
+            <Admin />
+          </Suspense>
+        }>
           <Route index element={<Dashboard />} />
           <Route path="home" element={<HomeAdmin />} />
           <Route path="home/:componentId" element={<HomeAdmin />} />
