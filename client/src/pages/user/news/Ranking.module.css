@@ -75,7 +75,7 @@ p {
 /* ================================================== */
 /* MOBILE FIX: Left & Right Image Alignment + Better Scaling */
 /* ================================================== */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .cards {
     flex-direction: column;
     align-items: center;
@@ -110,13 +110,6 @@ p {
   /* Center text on mobile */
   .textWrapper,
   .textWrapperRight {
-    text-align: center;
-  }
-}
-
-/* Extra small phones - better height control */
-@media (max-width: 480px) {
-  .imageCard {
-    height: 200px;
+    text-align: left;
   }
 }

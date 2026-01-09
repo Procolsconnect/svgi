@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import styles from './Logo_Section.module.css';
+import styles from './logo_section.module.css';
 
 const Logo_Section = () => {
   const [allCompanies, setAllCompanies] = useState([]);
