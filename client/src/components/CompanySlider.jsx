@@ -79,7 +79,7 @@ const CompanySlider = () => {
                                     maxWidth: '100%',
                                     objectFit: 'contain',
                                     filter: 'grayscale(0%)',
-                                    opacity: 0.7,
+                                    opacity: 0.9,
                                     transition: 'all 0.3s ease'
                                 }}
                                 onMouseOver={e => {

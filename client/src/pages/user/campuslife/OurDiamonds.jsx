@@ -1,70 +1,100 @@
 import React from 'react';
 import styles from './OurDiamonds.module.css';
-import CommonHero from '../../../components/CommonHero';
 
-const DiamondShowcase = () => {
-  const cards = [
+const CoursesOutcome = () => {
+  const cardsData = [
     {
-      img: "https://assets.codepen.io/2585/Roboto.svg",
-      text: "Short and tiny content here.",
-      link: "Cool art"
+      id: 1,
+      image: 'https://assets.codepen.io/2585/Roboto.svg',
+      alt: 'Art',
+      description: 'Short and tiny content here.',
+      linkText: 'Cool art',
+      href: '#'
     },
     {
-      img: "https://assets.codepen.io/2585/Entertainment.svg",
-      text: "The words here are tolerable but a bit long.",
-      link: "By Pablo Stanley"
+      id: 2,
+      image: 'https://assets.codepen.io/2585/Entertainment.svg',
+      alt: 'Art',
+      description: 'The words here are tolerable but a bit long.',
+      linkText: 'By Pablo Stanley',
+      href: '#'
     },
     {
-      img: "https://assets.codepen.io/2585/Mechanical+Love.svg",
-      text: "I'm brief comparatively.",
-      link: "Find more"
+      id: 3,
+      image: 'https://assets.codepen.io/2585/Mechanical+Love.svg',
+      alt: 'Art',
+      description: "I'm brief comparatively.",
+      linkText: 'Find more',
+      href: '#'
     },
     {
-      img: "https://assets.codepen.io/2585/Waiting.svg",
-      text: "Sometimes the message is just right.",
-      link: "Share good art"
+      id: 4,
+      image: 'https://assets.codepen.io/2585/Waiting.svg',
+      alt: 'Art',
+      description: 'Sometimes the message is just right.',
+      linkText: 'Share good art',
+      href: '#'
     },
     {
-      img: "https://assets.codepen.io/2585/Roboto.svg",
-      text: "Short and tiny content here.",
-      link: "Cool art"
+      id: 5,
+      image: 'https://assets.codepen.io/2585/Roboto.svg',
+      alt: 'Art',
+      description: 'Short and tiny content here.',
+      linkText: 'Cool art',
+      href: '#'
     },
     {
-      img: "https://assets.codepen.io/2585/Entertainment.svg",
-      text: "The words here are tolerable but a bit long.",
-      link: "By Pablo Stanley"
+      id: 6,
+      image: 'https://assets.codepen.io/2585/Entertainment.svg',
+      alt: 'Art',
+      description: 'The words here are tolerable but a bit long.',
+      linkText: 'By Pablo Stanley',
+      href: '#'
     },
     {
-      img: "https://assets.codepen.io/2585/Mechanical+Love.svg",
-      text: "I'm brief comparatively.",
-      link: "Find more"
+      id: 7,
+      image: 'https://assets.codepen.io/2585/Mechanical+Love.svg',
+      alt: 'Art',
+      description: "I'm brief comparatively.",
+      linkText: 'Find more',
+      href: '#'
     },
     {
-      img: "https://assets.codepen.io/2585/Waiting.svg",
-      text: "Sometimes the message is just right.",
-      link: "Share good art"
+      id: 8,
+      image: 'https://assets.codepen.io/2585/Waiting.svg',
+      alt: 'Art',
+      description: 'Sometimes the message is just right.',
+      linkText: 'Share good art',
+      href: '#'
     }
   ];
 
   return (
-    <div className={styles['diamond-showcase']}>
+    <>
       {/* HERO */}
-      <CommonHero apiEndpoint="/api/campus/diamondhero" defaultTitle="Our Diamonds" />
+      <div className={styles.hero}>
+        <img
+          src="https://via.placeholder.com/1600x350/333333/ffffff?text=Hero+Background"
+          alt="Hero Background"
+          className={styles.heroImage}
+        />
+        <h1 className={styles.heroTitle}>Our Diamonds</h1>
+      </div>
 
       {/* CARDS GRID */}
-      <main className={styles['diamond-main']}>
-        {cards.map((card, index) => (
-          <div key={index} className={styles['diamond-card-animation-layer']}>
-            <article className={styles['diamond-card']}>
-              <img src={card.img} alt="Art" />
-              <p>{card.text}</p>
-              <a href="#">{card.link}</a>
+      <main className={styles.cardsMain}>
+        {cardsData.map((card) => (
+          <div key={card.id} className={styles.cardAnimationLayer}>
+            <article className={styles.card}>
+              <img src={card.image} alt={card.alt} className={styles.cardImage} />
+              <p>{card.description}</p>
+              <a href={card.href}>{card.linkText}</a>
             </article>
           </div>
         ))}
       </main>
-    </div>
+    </>
   );
 };
 
-export default DiamondShowcase;
+export default CoursesOutcome;

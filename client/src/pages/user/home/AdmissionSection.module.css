@@ -1,7 +1,7 @@
 .section {
- width: 100%;
- height: 100%;
-   
+    width: 100%;
+    height: 100%;
+
 }
 
 .bgWrapper {
@@ -49,7 +49,7 @@
 .splitSection {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     /* Mobile: Stacked */
     align-items: center;
     gap: 2rem;
@@ -132,6 +132,7 @@
     text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
 }
 
 .exploreBtn:hover {
@@ -191,7 +192,7 @@
 @media (min-width: 768px) {
     .container {
         margin: 0 auto;
-      
+
     }
 
     /* Header adjustments */

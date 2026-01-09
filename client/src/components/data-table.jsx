@@ -163,7 +163,7 @@ export default function DataTable({ columns, data, onEdit, onDelete }) {
           <thead>
             <tr>
               {columns.map((column) => (
-                <th key={column.key} onClick={() => handleSort(column.key)}>
+                <th key={column.key} onClick={() => handleSort(column.key)} className={`col-${column.key}`}>
                   {column.label}
                   {/* Show arrow if this column is being sorted */}
                   {sortConfig.key === column.key && (
@@ -180,7 +180,7 @@ export default function DataTable({ columns, data, onEdit, onDelete }) {
               <tr key={rowData._id || rowData.id || rowIndex}>
                 {/* Render each data cell */}
                 {columns.map((column) => (
-                  <td key={column.key}>
+                  <td key={column.key} className={`col-${column.key}`}>
                     {renderCellContent(column, rowData, rowIndex)}
                   </td>
                 ))}

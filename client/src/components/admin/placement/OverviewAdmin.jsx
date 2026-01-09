@@ -12,7 +12,7 @@ const OVERVIEW_CONFIG = {
         title: "Placement Hero Section",
         limit: 1,
         columns: [
-            { key: "index", label: "Sr. No." },
+            { key: "index", label: "No" },
             { key: "title", label: "Title" },
             { key: "image", label: "Image" },
         ],

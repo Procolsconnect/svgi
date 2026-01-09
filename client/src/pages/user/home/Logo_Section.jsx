@@ -1,129 +1,109 @@
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import styles from "./logo_section.module.css";
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import styles from './Logo_Section.module.css';
 
-const apiurl = import.meta.env.VITE_API_URL;
+const Logo_Section = () => {
+  const [allCompanies, setAllCompanies] = useState([]);
+  const [displayedLogos, setDisplayedLogos] = useState([]);
+  const [animatingSlot, setAnimatingSlot] = useState(null);
+  const nextLogoIndexRef = useRef(4);
+  const apiurl = import.meta.env.VITE_API_URL;
 
-const RandomLogoSlider = () => {
-  const [logos, setLogos] = useState([]);
-  const logoRefs = useRef([]); // Stores refs to the 4 LI elements
-  const logosRef = useRef([]); // Access latest logos in interval
-
+  // 1. Fetch Data
   useEffect(() => {
-    axios
-      .get(`${apiurl}/api/logosection1`)
-      .then((res) => {
-        const data = Array.isArray(res.data.data) ? res.data.data : res.data;
-        if (Array.isArray(data)) {
-          setLogos(data);
-          logosRef.current = data;
-        } else {
-          console.error("Unexpected response format:", res.data);
+    const fetchCompanies = async () => {
+      try {
+        const response = await axios.get(`${apiurl}/api/logosection1`);
+        // Check if response is successful and has data
+        if (response.data.success && Array.isArray(response.data.data) && response.data.data.length > 0) {
+          const companies = response.data.data;
+          setAllCompanies(companies);
+
+          // Initialize first 4 (or fewer if api has less)
+          // Create a safe slice, ensuring we don't error if < 4
+          setDisplayedLogos(companies.slice(0, 4));
+
+          // Set ref to 4, or 0 if fewer than 4 (though loop logic handles modulo)
+          nextLogoIndexRef.current = companies.length > 4 ? 4 : 0;
         }
-      })
-      .catch((err) => console.error("Error fetching logos:", err));
+      } catch (error) {
+        console.error("Error fetching companies for Logo Slider:", error);
+      }
+    };
+    fetchCompanies();
   }, []);
 
+  // 2. Animation Loop
   useEffect(() => {
-    // Wait until we have enough logos (more than 4 to make animations meaningful) 
-    // and the refs are populated
-    if (logos.length <= 4) return;
+    // Need at least 5 logos to have something to swap in
+    if (allCompanies.length <= 4) return;
 
-    // Ensure refs are valid
-    if (logoRefs.current.length < 4) return;
-
-    const timer = 1050; // 1050ms interval from original script
-    let oldX = 0;
-    let counter = 4; // Start picking from the 5th logo (index 4)
-
-    const generateRandomPosition = (min, max, avoid) => {
-      let val;
-      do {
-        val = Math.floor(Math.random() * (max - min + 1)) + min;
-      } while (val === avoid);
-      return val;
-    };
+    const timer = 1000; // Animation interval
+    let oldSlot = 0 ;
 
     const intervalId = setInterval(() => {
-      // Logic copied from original script
-      const x = generateRandomPosition(0, 3, oldX);
-      const y = counter;
+      // Pick random slot (0-3) to change
+      let randomSlot;
+      do {
+        randomSlot = Math.floor(Math.random() * 4);
+        // Safety check if displayedLogos has fewer than 4 items (shouldn't happen if allCompanies > 4)
+        if (randomSlot >= displayedLogos.length) randomSlot = 0;
+      } while (randomSlot === oldSlot);
 
-      const currentLi = logoRefs.current[x];
-      // Use logosRef to get the fresh list of logos (though logos list likely static after load)
-      const nextLogo = logosRef.current[y];
+      oldSlot = randomSlot;
 
-      if (!currentLi || !nextLogo) return;
+      // Trigger "Out" animation
+      setAnimatingSlot(randomSlot);
 
-      // 1. Start Fade Out (Add 'out' class)
-      currentLi.classList.remove("in"); // Remove 'in' just in case (optional in CSS modules unless defined)
-      currentLi.classList.add(styles.out);
-
-      // 2. Timeout for Swap (350ms)
+      // Swap and Trigger "In" after delay
       setTimeout(() => {
-        if (!currentLi) return;
+        setDisplayedLogos(prev => {
+          const newLogos = [...prev];
+          const nextIndex = nextLogoIndexRef.current;
 
-        // Swap Image Data directly in DOM
-        const img = currentLi.querySelector("img");
-        if (img) {
-          img.src = nextLogo.img;
-          img.alt = nextLogo.name || "logo";
-        }
+          if (allCompanies[nextIndex]) {
+            newLogos[randomSlot] = allCompanies[nextIndex];
+          }
 
-        // Force Reflow / Reset Transition
-        // This is the CRITICAL part from the original script to prevent glitches
-        currentLi.style.display = "none";
-        // Void operator forces access to offsetWidth, triggering reflow
-        void currentLi.offsetWidth;
-        currentLi.style.display = "block";
+          // Increment loop index
+          nextLogoIndexRef.current = (nextIndex + 1) % allCompanies.length;
 
-      }, 350);
+          return newLogos;
+        });
 
-      // 3. Timeout for Fade In (650ms)
-      setTimeout(() => {
-        if (!currentLi) return;
-        currentLi.classList.remove(styles.out);
-        currentLi.classList.add("in");
-      }, 650);
-
-      oldX = x;
-      // Cycle through full list
-      counter = counter === logosRef.current.length - 1 ? 0 : counter + 1;
+        // Clear animating slot to remove "out" class (and thus apply "in" or default state)
+        setAnimatingSlot(null);
+      }, 500); // Wait for CSS transition (0.5s)
 
     }, timer);
 
     return () => clearInterval(intervalId);
-  }, [logos]); // Re-run if logos loaded
+  }, [allCompanies, displayedLogos.length]);
 
-  if (logos.length === 0) return <p>Loading logos...</p>;
+  // Don't render anything if no data
+  if (allCompanies.length === 0) return null;
 
-  // Initial render of first 4 logos
   return (
-    <div className={styles.randomLogoSlider}>
-      <div className={styles.randomLogoContainer}>
-        <h1 className={styles.randomLogoSubHeader}>Companies We Represent</h1>
-
-        <ol className={styles.randomLogoPositions}>
-          {logos.slice(0, 4).map((logo, i) => (
-            <li
-              key={i}
-              className={styles.randomLogoPosition}
-              ref={(el) => (logoRefs.current[i] = el)}
-            >
-              <img src={logo.img} alt={logo.name || "logo"} />
-            </li>
+    <div className={styles.randomSlider}>
+      <div className={styles.container}>
+        <h1 className={styles.subHeader}>Companies we represent</h1>
+        <ol className={styles.positions}>
+          {displayedLogos.map((company, index) => (
+            company ? (
+              <li
+                // Use ID in key if available, else index, to ensure stability but allow CSS class change
+                key={`${index}-${company._id || company.id || index}`}
+                className={`${styles.position} ${animatingSlot === index ? styles.out : styles.in}`}
+              >
+                {/* Support both 'logo' (from previous static list) and 'image' (likely from API) keys */}
+                <img src={company.logo || company.img} alt={company.name || "Partner Logo"} />
+              </li>
+            ) : null
           ))}
         </ol>
-
-        {/* Hidden Preload List for all logos to ensure browser caches imagery */}
-        <div style={{ display: 'none' }}>
-          {logos.map((logo, i) => (
-            <img key={i} src={logo.img} alt="preload" />
-          ))}
-        </div>
       </div>
     </div>
   );
 };
 
-export default RandomLogoSlider;
+export default Logo_Section;

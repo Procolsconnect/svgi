@@ -25,7 +25,7 @@ const Header = () => {
     { label: "News", value: "/news" },
     { label: "Infrastructure", value: "/infrastructure" },
     { label: "Advertisement", value: "/advertisement" },
-    { label: "Alumni", value: "/alumni" },
+    { label: "Alumni", value: "/campuslife/diamond" },
     { label: "Contact", value: "/contact" },
   ];
 

@@ -5,7 +5,7 @@ import './contact.css'
 const Contact = () => {
     return (
         <div>
-            <CommonHero apiEndpoint="/api/contacthero"
+            <CommonHero 
                 defaultTitle='Contact Us'
                 defaultImage='/images/svgi2.jpg' />
             <section className='awards'>
