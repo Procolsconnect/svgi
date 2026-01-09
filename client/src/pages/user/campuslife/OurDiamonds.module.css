@@ -57,10 +57,13 @@
 }
 
 @keyframes underlinePulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scaleX(1);
     opacity: 0.8;
   }
+
   50% {
     transform: scaleX(1.4);
     opacity: 1;
@@ -138,7 +141,7 @@
   }
 }
 
-@media (width >= 720px) {
+@media (width >=720px) {
   .cardAnimationLayer:nth-of-type(4n + 1) {
     transform-origin: 50vw 100%;
     --side: -1;
@@ -173,7 +176,7 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.card > p {
+.card>p {
   color: #6b7280;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -182,19 +185,19 @@
   margin: 0 0 0.5rem 0;
 }
 
-.card > a,
-.card > p {
+.card>a,
+.card>p {
   font-size: 0.875rem;
   line-height: 1.25;
   text-decoration: none;
 }
 
-.card > a {
+.card>a {
   color: #3b82f6;
   cursor: pointer;
 }
 
-.card > a:hover {
+.card>a:hover {
   text-decoration: underline;
 }
 
