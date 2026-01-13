@@ -50,6 +50,10 @@ const Header = () => {
         { label: "Library", value: "/academics/library" },
         { label: "Feedback", value: "/academics/feedback" },
         { label: "RDBC", value: "/academics/rdbc" },
+        { label: "Faculty", value: "/academics/faculty" },
+        { label: "Examination", value: "/academics/examination" },
+        {label:"Schools",value:"/academics/schools"}
+
       ],
     },
     {
@@ -59,6 +63,9 @@ const Header = () => {
         { label: "Overview", value: "/about/overview" },
         { label: "Vision & Mission", value: "/about/vission&mission" },
         { label: "Leadership", value: "/about/leadership" },
+        { label: "Career @ SVGI", value: "/about/career" },
+        { label: "Milestone", value: "/about/milestone" },
+        { label: "Administrative Offices", value: "/about/administrative-offices" },
 
       ],
     },
@@ -158,7 +165,7 @@ const Header = () => {
                 <img src="/logos/svgilogo.png" alt="SVGI" />
               </div>
               <div className={styles['sk-brand-text']}>
-                <div className={styles['college-title']}>SHREE VENKATESHVARA</div>
+                <div className={styles['college-title']}>SHREE VENKATESHWARA</div>
                 <div className={styles['college-subtitle']}>GROUP OF INSTITUTIONS</div>
               </div>
             </div>

@@ -1,0 +1,279 @@
+/* administrativeOffices.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap');
+
+.wrapper {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 3rem;
+    min-height: 800px;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    position: relative;
+}
+
+.sidebarList {
+    position: sticky;
+    top: 100px;
+    list-style: none;
+    padding: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.sidebarItem {
+    border-bottom: 1px solid #eee;
+}
+
+.sidebarItem:last-child {
+    border-bottom: none;
+}
+
+.sidebarButton {
+    width: 100%;
+    text-align: left;
+    padding: 1.2rem 1.5rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #555;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebarButton:hover {
+    background-color: #f0f4f8;
+    color: #002147;
+}
+
+.sidebarButton.active {
+    background-color: #002147;
+    color: #fff;
+    font-weight: 600;
+}
+
+.sidebarButton.active::after {
+    content: '→';
+    font-size: 1.2rem;
+}
+
+/* Content Area Styling */
+.contentArea {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.headerGroup {
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    font-size: 2.2rem;
+    color: #002147;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #0e0208;
+    display: inline-block;
+}
+
+/* Image Styling */
+.imageWrapper {
+    width: 80%;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 1px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.officeImage {
+    width: 100%;
+    height: 15rem;
+    object-fit: fill;
+    transition: transform 0.5s ease;
+}
+
+.officeImage:hover {
+    transform: scale(1.02);
+}
+
+.description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 2rem;
+    white-space: pre-line;
+}
+
+/* Compact Contact Section */
+.contactContainer {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8fbff;
+    border-left: 4px solid #000000;
+    border-radius: 0 4px 4px 0;
+}
+
+.contactTitle {
+    font-size: 1.1rem;
+    font-family: 'Oswald', sans-serif;
+    color: #002147;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contactGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.contactItem {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.95rem;
+    align-items: flex-start;
+}
+
+.contactLabel {
+    font-weight: 600;
+    color: #555;
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+.contactValue {
+    color: #333;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Sub-sections (like UG/PG admissions) */
+.subSection {
+    margin-top: 2rem;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+}
+
+.subTitle {
+    font-size: 1.25rem;
+    color: #002147;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
+    }
+
+    .sidebarList {
+        position: static;
+        margin-bottom: 2rem;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+        /* Scrollbar space */
+        border-radius: 8px;
+    }
+
+    .sidebarItem {
+        border-bottom: none;
+        border-right: 1px solid #eee;
+        flex-shrink: 0;
+    }
+
+    .sidebarButton {
+        padding: 1rem 1.5rem;
+    }
+
+    .sidebarButton.active::after {
+        content: '';
+        /* Remove arrow on horizontal list styling */
+    }
+
+    .contentArea {
+        padding: 2rem;
+    }
+
+    .officeImage {
+        height: 250px;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebarList {
+        flex-direction: column;
+        overflow-x: unset;
+    }
+
+    .sidebarItem {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    .sidebarButton.active::after {
+        content: '→';
+        /* Bring back arrow for stacked mobile view */
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .contactContainer {
+        padding: 1rem;
+    }
+
+    .contactItem {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .contactLabel {
+        min-width: unset;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        color: #777;
+    }
+}

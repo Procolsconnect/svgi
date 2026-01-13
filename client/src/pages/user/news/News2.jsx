@@ -115,25 +115,29 @@ const DownscrollEffect = () => {
         {/* SECTION 1 – Behind Curtain */}
         <section className={styles['ds-section-one']}>
           <div className={styles['ds-section-content']}>
-            {/* Left Text */}
-            <div ref={addToReverseScrollRefs} className={styles['ds-reverse-scroll']}>
+            {/* Title Area */}
+            <div ref={addToReverseScrollRefs} className={`${styles['ds-reverse-scroll']} ${styles['ds-area-title']}`}>
               <h1 className={styles['ds-heading']} dangerouslySetInnerHTML={{ __html: sectionData?.title?.replace(' ', '<br />') || "behind<br />curtain" }}></h1>
-              <p className={styles['ds-paragraph-top']}>
-                {sectionData?.description ? sectionData.description.split('.')[0] + '.' : "She tried the little golden key in the lock, and to her great delight it fitted !"}
-              </p>
-              <p className={styles['ds-paragraph']}>
-                {sectionData?.description ? sectionData.description.split('.').slice(1).join('.') : "Alice opened the door and found that it led into a small passage"}
-              </p>
             </div>
 
-            {/* Right Image */}
-            <div className={styles['ds-image-wrapper']}>
+            {/* Right Image (Central in Mobile stack) */}
+            <div className={`${styles['ds-image-wrapper']} ${styles['ds-area-image']}`}>
               <img
                 ref={addToReverseScrollRefs}
                 className={`${styles['ds-reverse-scroll']} ${styles['ds-image']}`}
                 src={sectionData?.image || "https://assets.codepen.io/204808/alice-curtain.jpg"}
                 alt="Section Image"
               />
+            </div>
+
+            {/* Paragraphs Area */}
+            <div ref={addToReverseScrollRefs} className={`${styles['ds-reverse-scroll']} ${styles['ds-area-paras']}`}>
+              <p className={styles['ds-paragraph-top']}>
+                {sectionData?.description ? sectionData.description.split('.')[0] + '.' : "She tried the little golden key in the lock, and to her great delight it fitted !"}
+              </p>
+              <p className={styles['ds-paragraph']}>
+                {sectionData?.description ? sectionData.description.split('.').slice(1).join('.') : "Alice opened the door and found that it led into a small passage"}
+              </p>
             </div>
           </div>
         </section>

@@ -18,7 +18,9 @@
     opacity: 1;
     transform: translateY(0);
   }
-}/* MAIN */
+}
+
+/* MAIN */
 .main {
   position: relative;
   padding-top: 3rem;

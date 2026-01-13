@@ -1,0 +1,97 @@
+/* ffcs.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap');
+
+.wrapper {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    /* Slightly off-white background for page */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    /* Separate the content blocks */
+}
+
+/* Distinct Content Boxes */
+.contentBox,
+.featureBox {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    border-left: 5px solid #000;
+    /* Black accent separation */
+}
+
+.featureBox {
+    background: #f8f9fa;
+    /* Slightly different bg for features */
+}
+
+.heading {
+    font-size: 1.8rem;
+    color: #002147;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.textBlock p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.featureList {
+    list-style: none;
+    padding: 0;
+}
+
+.featureList li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.featureList li::before {
+    content: '➤';
+    /* Specific arrow bullet */
+    color: #000;
+    /* Black accent bullet */
+    font-size: 1rem;
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 2rem 1rem;
+    }
+
+    .contentBox,
+    .featureBox {
+        padding: 1.5rem;
+    }
+
+    .heading {
+        font-size: 1.5rem;
+    }
+}

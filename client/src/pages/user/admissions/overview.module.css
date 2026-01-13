@@ -17,6 +17,7 @@
   margin: 0 auto;
   padding: 20px;
 }
+
 .gradientSection {
   width: 90%;
   max-width: 1100px;
@@ -143,7 +144,7 @@
   width: 260px;
   min-height: 350px;
   padding: 30px 20px;
-  background: #34495e;
+  background: #0f124b;
   margin: 20px;
   display: flex;
   flex-direction: column;

@@ -3,27 +3,14 @@ import axios from 'axios';
 import styles from './CommonHero.module.css';
 import Arrow from './Arrow'; // Assuming Arrow is in the same directory or adjust path
 
-/**
- * CommonHero Component
- * 
- * Fetches hero data from a given API endpoint or uses provided props.
- * 
- * Props:
- * - apiEndpoint: string (optional) - Endpoint to fetch hero data (e.g., "/api/academicshero")
- * - defaultTitle: string (optional) - Fallback title
- * - defaultImage: string (optional) - Fallback image URL
- * - sectionsSelector: string (optional) - Selector for the arrow scroll target
- */
 const CommonHero = ({
     apiEndpoint,
-    defaultTitle = "Welcome",
-    defaultImage = "/images/default-hero.jpg",
+    defaultTitle,
+    defaultImage,
     sectionsSelector = "section",
     showArrow = false
 }) => {
     const [heroData, setHeroData] = useState(null);
-    const [loading, setLoading] = useState(!!apiEndpoint);
-
     useEffect(() => {
         if (!apiEndpoint) return;
 
@@ -50,8 +37,8 @@ const CommonHero = ({
     const image = heroData?.image || defaultImage;
 
     return (
-        <div className={styles.hero}>
-            <img src={image} alt="Hero Background" className={styles.heroImage} />
+        <header className={styles.hero}>
+            <img src={image} alt={`${title} - SVGI`} className={styles.heroImage} />
             <div className={styles.heroOverlay}></div>
 
             <div className={styles.heroContent}>
@@ -63,7 +50,7 @@ const CommonHero = ({
                     <Arrow sectionsSelector={sectionsSelector} />
                 </div>
             )}
-        </div>
+        </header>
     );
 };
 

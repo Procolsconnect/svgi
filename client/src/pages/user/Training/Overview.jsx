@@ -5,18 +5,34 @@ import CommonHero from '../../../components/CommonHero';
 
 const API_BASE = import.meta.env.VITE_API_URL + "/api";
 
+// Desktop 3D positions
 const positions = [
-  { height: 310, z: 220, rotateY: 48, y: 0, clip: "polygon(0px 0px, 100% 10%, 100% 90%, 0px 100%)" },
-  { height: 290, z: 165, rotateY: 35, y: 0, clip: "polygon(0px 0px, 100% 8%, 100% 92%, 0px 100%)" },
-  { height: 248, z: 110, rotateY: 15, y: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
-  { height: 210, z: 66, rotateY: 15, y: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
-  { height: 177, z: 46, rotateY: 6, y: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
-  { height: 155, z: 0, rotateY: 0, y: 0, clip: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" },
-  { height: 177, z: 54, rotateY: 348, y: 0, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
-  { height: 210, z: 89, rotateY: -15, y: 0, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
-  { height: 248, z: 135, rotateY: -15, y: 1, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
-  { height: 290, z: 195, rotateY: 325, y: 0, clip: "polygon(0px 8%, 100% 0px, 100% 100%, 0px 92%)" },
-  { height: 310, z: 240, rotateY: 312, y: 0, clip: "polygon(0px 10%, 100% 0px, 100% 100%, 0px 90%)" }
+  { height: 310, z: 220, rotateY: 48, y: 0, x: 0, clip: "polygon(0px 0px, 100% 10%, 100% 90%, 0px 100%)" },
+  { height: 290, z: 165, rotateY: 35, y: 0, x: 0, clip: "polygon(0px 0px, 100% 8%, 100% 92%, 0px 100%)" },
+  { height: 248, z: 110, rotateY: 15, y: 0, x: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
+  { height: 210, z: 66, rotateY: 15, y: 0, x: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
+  { height: 177, z: 46, rotateY: 6, y: 0, x: 0, clip: "polygon(0px 0px, 100% 7%, 100% 93%, 0px 100%)" },
+  { height: 155, z: 0, rotateY: 0, y: 0, x: 0, clip: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" },
+  { height: 177, z: 54, rotateY: 348, y: 0, x: 0, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
+  { height: 210, z: 89, rotateY: -15, y: 0, x: 0, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
+  { height: 248, z: 135, rotateY: -15, y: 1, x: 0, clip: "polygon(0px 7%, 100% 0px, 100% 100%, 0px 93%)" },
+  { height: 290, z: 195, rotateY: 325, y: 0, x: 0, clip: "polygon(0px 8%, 100% 0px, 100% 100%, 0px 92%)" },
+  { height: 310, z: 240, rotateY: 312, y: 0, x: 0, clip: "polygon(0px 10%, 100% 0px, 100% 100%, 0px 90%)" }
+];
+
+// Mobile Flat positions (Linear spread using translateX)
+const mobilePositions = [
+  { height: 155, z: -200, rotateY: 0, y: 0, x: -300, opacity: 0, clip: "none" }, // Hidden left
+  { height: 155, z: -150, rotateY: 0, y: 0, x: -240, opacity: 0.5, clip: "none" },
+  { height: 155, z: -100, rotateY: 0, y: 0, x: -180, opacity: 0.7, clip: "none" },
+  { height: 155, z: -50, rotateY: 0, y: 0, x: -120, opacity: 0.9, clip: "none" },
+  { height: 155, z: -25, rotateY: 0, y: 0, x: -60, opacity: 1, clip: "none" }, // Near Left
+  { height: 180, z: 0, rotateY: 0, y: 0, x: 0, opacity: 1, clip: "none" },    // Center (Active)
+  { height: 155, z: -25, rotateY: 0, y: 0, x: 60, opacity: 1, clip: "none" }, // Near Right
+  { height: 155, z: -50, rotateY: 0, y: 0, x: 120, opacity: 0.9, clip: "none" },
+  { height: 155, z: -100, rotateY: 0, y: 0, x: 180, opacity: 0.7, clip: "none" },
+  { height: 155, z: -150, rotateY: 0, y: 0, x: 240, opacity: 0.5, clip: "none" },
+  { height: 155, z: -200, rotateY: 0, y: 0, x: 300, opacity: 0, clip: "none" } // Hidden right
 ];
 
 const TrainingPlacementsPage = () => {
@@ -26,6 +42,7 @@ const TrainingPlacementsPage = () => {
   const [expandedCard, setExpandedCard] = useState(null);
   const [cardInfo, setCardInfo] = useState({ title: '', desc: '' });
   const [cards, setCards] = useState([]);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const [processedSteps, setProcessedSteps] = useState(0);
   const [cloneStyle, setCloneStyle] = useState(null);
@@ -34,6 +51,13 @@ const TrainingPlacementsPage = () => {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
   const sectionsRef = useRef([]);
+
+  // Resize listener to update isMobile
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -55,7 +79,7 @@ const TrainingPlacementsPage = () => {
     fetchContent();
   }, []);
 
-
+  // ... Other functions ...
 
   const rotateSlider = useCallback((direction) => {
     if (expandedCard !== null) return;
@@ -85,7 +109,8 @@ const TrainingPlacementsPage = () => {
     if (!cardEl) return;
 
     const rect = cardEl.getBoundingClientRect();
-    const pos = positions[index] || positions[5];
+    const currentPositions = isMobile ? mobilePositions : positions;
+    const pos = currentPositions[index] || currentPositions[5];
 
     setCloneStyle({
       position: 'fixed',
@@ -123,7 +148,7 @@ const TrainingPlacementsPage = () => {
         desc: cards[cardsArrayIndex].description || cards[cardsArrayIndex].desc
       });
     }, 50);
-  }, [isDragging, expandedCard, cards]);
+  }, [isDragging, expandedCard, cards, isMobile]);
 
   const closeCard = useCallback(() => {
     if (expandedCard === null) return;
@@ -133,7 +158,8 @@ const TrainingPlacementsPage = () => {
 
     if (cardEl) {
       const rect = cardEl.getBoundingClientRect();
-      const pos = positions[index] || positions[5];
+      const currentPositions = isMobile ? mobilePositions : positions;
+      const pos = currentPositions[index] || currentPositions[5];
 
       setCloneStyle(prev => ({
         ...prev,
@@ -151,7 +177,7 @@ const TrainingPlacementsPage = () => {
       setExpandedCard(null);
       setCloneStyle(null);
     }, 600);
-  }, [expandedCard]);
+  }, [expandedCard, isMobile]);
 
   const handleDragStart = useCallback((e) => {
     if (expandedCard !== null) return;
@@ -196,7 +222,18 @@ const TrainingPlacementsPage = () => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [expandedCard, closeCard, rotateSlider]);
 
-  if (loading) return null; // Return null or a subtle loader to prevent design jump
+  // Auto-scroll effect for mobile
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (isMobile && !isDragging && expandedCard === null) {
+        rotateSlider('next');
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isDragging, expandedCard, rotateSlider, isMobile]);
+
+  // ... 
 
   // Calculate mapping to center cards in the 11 positions
   const renderCards = () => {
@@ -204,9 +241,18 @@ const TrainingPlacementsPage = () => {
     const displayCount = Math.min(cards.length, totalSlots);
     const startPos = Math.floor((totalSlots - displayCount) / 2);
 
+    const currentPositions = isMobile ? mobilePositions : positions;
+
     return cards.slice(0, displayCount).map((card, i) => {
       const positionIndex = startPos + i;
-      const pos = positions[positionIndex] || positions[5];
+      const pos = currentPositions[positionIndex] || currentPositions[5];
+      // On mobile, use x translation; on desktop use rotateY logic
+      // Actually both can use the same transform string if desktop pos has x=0
+
+      const transform = isMobile
+        ? `translateX(${pos.x}px) translateZ(${pos.z}px) scale(${pos.height / 155})`
+        : `translateZ(${pos.z}px) rotateY(${pos.rotateY}deg) translateY(${pos.y}px)`;
+
       return (
         <div
           key={card._id || card.title || i}
@@ -215,7 +261,8 @@ const TrainingPlacementsPage = () => {
           style={{
             height: `${pos.height}px`,
             clipPath: pos.clip,
-            transform: `translateZ(${pos.z}px) rotateY(${pos.rotateY}deg) translateY(${pos.y}px)`,
+            transform: transform,
+            opacity: pos.opacity !== undefined ? pos.opacity : 1,
             transition: isDragging ? 'none' : 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)'
           }}
           onClick={() => handleCardClick(positionIndex)}
@@ -231,16 +278,12 @@ const TrainingPlacementsPage = () => {
 
   return (
     <div className={styles.page}>
-      {/* Hero Section */}
-      {/* Hero Section */}
       <CommonHero
         apiEndpoint="/api/placementhero"
         defaultTitle="Training & Placements"
         sectionsSelector="section"
         showArrow={true}
       />
-
-
       {/* About Section */}
       <section className={`${styles.aboutWrapper} ${styles.section}`} ref={el => sectionsRef.current[0] = el}>
         <div className={styles.container}>

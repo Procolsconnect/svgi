@@ -31,9 +31,9 @@ const CollegeCampus = () => {
     <main className={styles.cdMain}>
       <div className={styles.cdMainInner}>
         <div className={styles.cdHeading}>
-          <h1 className={styles.cdTitle}>
+          <h2 className={styles.cdTitle}>
             {title || "College Campus Infrastructure"}
-          </h1>
+          </h2>
           <aside className={styles.cdAside}>
             <p className={styles.cdDesc}>
               {description || `Shree Vengadeshwara Institution offers a modern, tech-enabled campus
