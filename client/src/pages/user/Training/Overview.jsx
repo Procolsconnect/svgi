@@ -316,7 +316,7 @@ const TrainingPlacementsPage = () => {
       <section className={`${styles.sliderSection} ${styles.section}`} ref={el => sectionsRef.current[1] = el}>
         <div className={styles.header}>
           <p className={styles.subtitle}>In Our College Have</p>
-          <h1 className={styles.mainTitle}>Centralized Placement Process for all Campuses</h1>
+          <h2 className={styles.mainTitle}>Centralized Placement Process for all Campuses</h2>
         </div>
         <div
           className={`${styles.sliderContainer} ${isDragging ? styles.dragging : ''}`}
@@ -394,7 +394,7 @@ const TrainingPlacementsPage = () => {
 
       {/* Career Counselling Section */}
       <section className={`${styles.careerSection} ${styles.section}`} ref={el => sectionsRef.current[3] = el}>
-        <h1>Career Counselling and Higher Education</h1>
+        <h2>Career Counselling and Higher Education</h2>
         <div className={styles.careerHeader}>
           {[1, 2, 3, 4, 5].map((num) => (
             <div key={num}>
@@ -409,7 +409,7 @@ const TrainingPlacementsPage = () => {
 
       {/* Industry Certifications Section */}
       <section className={`${styles.industryCertificationsSection}${styles.section}`} ref={el => sectionsRef.current[4] = el}>
-        <h1>Industrial  Certifications</h1>
+        <h2>Industrial  Certifications</h2>
         <p>
           Industry certifications are recognized credentials that validate a professional's skills and knowledge in a specific field. They help students and professionals gain credibility, increase employability, and demonstrate expertise in their chosen domain. Obtaining certifications from recognized institutions or organizations provides a competitive edge in the job market and enhances career growth opportunities.
         </p>
@@ -460,7 +460,7 @@ const TrainingPlacementsPage = () => {
 
       {/* Pyramid Section */}
       <section className={`${styles.pyramidSection} ${styles.section}`} ref={el => sectionsRef.current[5] = el}>
-        <h1>Placement Training Functions</h1>
+        <h2>Placement Training Functions</h2>
         <div className={styles.pyramid}>
           {[
             ['Consortium', 'Industry Conclave'],

@@ -9,24 +9,24 @@ import Green from './Green'
 import Policies from './Policies'
 import StudentWelfare from './StudentWelfare'
 import OurDiamonds from './OurDiamonds'
+import ProgrammeReps from './ProgrammeReps'
+
 const Campuslife = () => {
   return (
     <div>
       <Routes>
-        <Route index element={<CampusOverview/>}/>
-      <Route path="overview" element={<CampusOverview/>}/>
-      <Route path="sports" element={<Sports/>}/>
-      <Route path="hostel" element={<Hostel/>}/>
-      <Route path='health' element={<Health/>}/>
-      <Route path='fest' element={<CollegeFest/>}/>
-      <Route path='green' element={<Green/>}/>
-      <Route path='policies' element={<Policies/>}/>
-      <Route path='welfare' element={<StudentWelfare/>}/>
-      <Route path='diamond' element={<OurDiamonds/>}/>
-      
-
-
-
+        <Route index element={<CampusOverview />} />
+        <Route path="overview" element={<CampusOverview />} />
+        <Route path="sports" element={<Sports />} />
+        <Route path="hostel" element={<Hostel />} />
+        <Route path='health' element={<Health />} />
+        <Route path='fest' element={<CollegeFest />} />
+        <Route path='green' element={<Green />} />
+        <Route path='policies' element={<Policies />} />
+        <Route path='welfare' element={<StudentWelfare />} />
+        <Route path='diamond' element={<OurDiamonds />} />
+        <Route path='programme-reps' element={<ProgrammeReps />} />
+ 
       </Routes>
     </div>
   )

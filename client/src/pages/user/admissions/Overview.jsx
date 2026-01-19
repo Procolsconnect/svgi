@@ -132,7 +132,7 @@ export default function SVGIOverview() {
 
             {/* CONTACT CARDS */}
             <section className={styles.contactSection}>
-                <h1 className={styles.contactSectionH1}>SVGI Contact Information</h1>
+                <h2  className={styles.contactSectionH1}>SVGI Contact Information</h2 >
                 <div className={styles.contactSectionContainer}>
                     <div className={styles.expandContainer} style={{ alignItems: 'flex-start' }}>
                         {cards.map(card => {

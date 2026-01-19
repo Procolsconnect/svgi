@@ -11,9 +11,11 @@
 
 /* Title */
 .title { 
-  font-size: 32px;
-  font-weight: 600;
-  color: #000455;
+ 
+  letter-spacing: 0.025em;
+  font-size: clamp(2.2rem, 5vw, 6.5rem);
+  line-height: 1;
+  font-family: "SUSE", sans-serif;
 }
 
 .divider {

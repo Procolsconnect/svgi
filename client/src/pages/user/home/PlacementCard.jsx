@@ -54,10 +54,10 @@ const PlacementCards = () => {
   return (
     <div className={styles.container}>
       <div className={styles.placementHeader}>
-        <h1
+        <h2
           ref={titleRef}
           className={`${styles.type} ${isVisible ? styles.typeAnimate : ""}`}
-        >PLACEMENT & ACHIEVEMENT CELLS</h1>
+        >PLACEMENT & ACHIEVEMENT CELLS</h2>
       </div>
 
       <section className={styles.section}>

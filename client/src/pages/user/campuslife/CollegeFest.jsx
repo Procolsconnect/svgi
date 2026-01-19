@@ -101,7 +101,7 @@ const MergedPage = () => {
 
       {/* Hover Animation Section */}
       <div className={styles.container}>
-        <h1 className={styles.introTitle}>
+        <h2  className={styles.introTitle}>
           AppHarvest
           <span
             className={styles.introFigure}
@@ -145,7 +145,7 @@ const MergedPage = () => {
             />
           </span>
           Appalachia.
-        </h1>
+        </h2 >
       </div>
 
       {/* Carousel Section (react-slick replacing OwlCarousel) */}

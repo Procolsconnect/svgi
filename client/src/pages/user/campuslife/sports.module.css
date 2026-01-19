@@ -237,7 +237,7 @@
   align-items: center;
 }
 
-.sports__podium-title h1 {
+.sports__podium-title h2 {
   font-size: 80px;
   font-weight: 900;
   color: #111;
@@ -351,7 +351,7 @@
   background: #f9f9f9;
 }
 
-.sports__achievements-section h1 {
+.sports__achievements-section h2 {
  font-family: "SUSE", sans-serif;
   font-size: 2.7rem;
   font-weight: 800;
@@ -438,7 +438,7 @@
   background: #fff;
 }
 
-.sports__cards-section h1 {
+.sports__cards-section h2 {
 font-family: "SUSE", sans-serif;
   font-size: 2.7rem;
   font-weight: 800;
@@ -557,7 +557,7 @@ font-family: "SUSE", sans-serif;
   background: #f9f9f9;
 }
 
-.sports__video-gallery-section h1 {
+.sports__video-gallery-section h2 {
 font-family: "SUSE", sans-serif;
   font-size: 2.6rem;
   font-weight: 800;
@@ -645,7 +645,7 @@ font-family: "SUSE", sans-serif;
     padding: 20px 40px;
   }
 
-  .sports__podium-title h1 {
+  .sports__podium-title h2 {
     font-size: 60px;
   }
 
@@ -727,7 +727,7 @@ font-family: "SUSE", sans-serif;
    
   }
 
-  .sports__podium-title h1 {
+  .sports__podium-title h2 {
     font-size: 50px;
     margin-bottom: 10px;
   }

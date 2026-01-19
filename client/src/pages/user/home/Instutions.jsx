@@ -95,7 +95,7 @@ const InstitutionsGrid = () => {
   // ✅ Render
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Our Group Of Institutions</h1>
+      <h2 className={styles.title}>Our Group Of Institutions</h2>
       <p className={styles.desc}>
         <strong>"A Visionary Multi-Disciplinary Institution"</strong>
         <br />

@@ -75,7 +75,7 @@ const TeamCarousel = () => {
       onTouchEnd={handleDragEnd}
       onTouchMove={handleDragMove}
     >
-      <h1 className={styles.aboutTitle}>OUR STUDENTS</h1>
+      <h2 className={styles.aboutTitle}>OUR ALUMINIS</h2>
 
       <div className={styles.carouselContainer}>
         <button className={`${styles.navArrow} ${styles.left}`} onClick={(e) => { e.stopPropagation(); handleArrowClick(-1); }}>

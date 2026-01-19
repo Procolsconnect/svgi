@@ -161,11 +161,11 @@ const AdmissionPage = () => {
             </a>
           </div>
           <div className={styles['alp-hero__title']}>
-            <h1>
+            <h2 >
               <span className={styles['alp-span__before_dot']}>Kickstart</span>
               <span>Your Dream</span>
               <span className={styles['alp-title__bg_gradient']}>Career</span>
-            </h1>
+            </h2 >
           </div>
         </div>
       </section>
@@ -202,7 +202,7 @@ const AdmissionPage = () => {
       {/* Features Section */}
       <section className={styles['alp-section3']}>
         <div className={styles['alp-container']}>
-          <h1 className={`${styles['alp-title']}`} ref={titleRef}>Info About Admission</h1>
+          <h2  className={`${styles['alp-title']}`} ref={titleRef}>Info About Admission</h2 >
           <p className={`${styles['alp-subtitle']}`} ref={subtitleRef}>Through the Guidance of Admission Officers</p>
           <div className={`${styles['alp-text-content']}`} ref={textContentRef}>
             <p className={styles['alp-text']}>Reliable guidance, transparent communication, and a student-first approach define our admission officers.</p>

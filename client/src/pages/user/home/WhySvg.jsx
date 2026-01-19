@@ -37,7 +37,7 @@ const ServiceOfferings = () => {
           what we're offering
           <ArrowRight size={24} />
         </div>
-        <h1 className={styles.serviceTitle}>Why Choose SVGI?</h1>
+        <h2 className={styles.serviceTitle}>Why Choose SVGI?</h2>
       </div>
 
       {loading && <p className={styles.loadingText}>Loading offerings...</p>}

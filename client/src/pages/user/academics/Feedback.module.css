@@ -51,14 +51,14 @@
   padding-right: 1rem;
 }
 
-.textWrapper header h1 {
+.textWrapper header h2  {
   font-family: 'Merriweather', serif;
   font-size: clamp(1.8rem, 4vw, 3rem);
   margin-bottom: 1rem;
   color: #1a202c;
 }
 
-.textWrapper header h1:not(:first-of-type) {
+.textWrapper header h2 :not(:first-of-type) {
   font-size: 2.2em;
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -576,7 +576,7 @@
     gap: 2rem;
   }
 
-  .textWrapper header h1 {
+  .textWrapper header h2  {
     font-size: 2.5em;
   }
 
@@ -613,7 +613,7 @@
     padding-right: 0;
   }
 
-  .textWrapper header h1 {
+  .textWrapper header h2  {
     font-size: 2em;
     text-align: center;
   }
@@ -641,7 +641,7 @@
 
 /* Small Mobile */
 @media (max-width: 480px) {
-  .textWrapper header h1 {
+  .textWrapper header h2  {
     font-size: 1.8em;
   }
 .cardShadow {

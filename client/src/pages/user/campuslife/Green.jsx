@@ -67,7 +67,7 @@ export default function GreenSvgiCampus() {
 
       {/* Title Section */}
       <div className={styles.gsvgiTitleSection}>
-        <h1 className={styles.gsvgiPageTitle}>
+        <h2 className={styles.gsvgiPageTitle}>
           <div>
             <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="S">S</span>
             <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="V">V</span>
@@ -111,7 +111,7 @@ export default function GreenSvgiCampus() {
             <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="U">U</span>
             <span className={`${styles.gsvgiGlitch} ${styles.gsvgiCharacter}`} data-text="S">S</span>
           </div>
-        </h1>
+        </h2>
       </div>
 
       {/* Preview Section */}

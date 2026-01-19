@@ -36,7 +36,7 @@ const SocialNewsPaper = () => {
     <div className="snp-container">
       {/* HEADER */}
       <div className="snp-header">
-        <h1 className="snp-header-title">Social News Paper</h1>
+        <h2 className="snp-header-title">Social News Paper</h2>
         <div className="snp-header-subtitle">Edición del Día</div>
         <div className="snp-header-date">{today.toLocaleDateString("es-ES", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
       </div>

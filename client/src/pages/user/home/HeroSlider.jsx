@@ -131,7 +131,7 @@ const CustomSlider = () => {
                 )}
                 <div className={styles.parentText}>
                   <div className={`${styles.infoText} ${slide.align === 'left' ? styles.alignLeft : ''}`}>
-                    <h2>{slide.title}</h2>
+                    <h1>{slide.title}</h1>
                     <p>{slide.description}</p>
                     <a href="#">{slide.button}</a>
                   </div>

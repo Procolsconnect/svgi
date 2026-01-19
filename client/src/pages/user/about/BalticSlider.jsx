@@ -162,7 +162,7 @@ const BalticSlider = () => {
 
       {/* Content Section */}
       <section className={styles.contentSection}>
-        <h1>{data?.contentSection?.title || "Welcome to the Baltic seaside"}</h1>
+        <h2 >{data?.contentSection?.title || "Welcome to the Baltic seaside"}</h2 >
         <p>{data?.contentSection?.description}</p>
       </section>
 

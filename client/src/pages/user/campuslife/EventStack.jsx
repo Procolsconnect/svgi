@@ -31,7 +31,7 @@ const EventStack = ({ events = [], title = "Latest Events" }) => {
     return (
         <section className={styles.latestEventsSection}>
             <div className={styles.eventsContainer}>
-                {title && <h1>{title}</h1>}
+                {title && <h2>{title}</h2>}
                 <section
                     className={styles.stackSlider}
                     ref={stackRef}

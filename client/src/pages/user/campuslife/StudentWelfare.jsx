@@ -304,9 +304,9 @@ const MergedHeroComponent = () => {
         {/* Row 1: Text Left, Image Right */}
         <div className={styles.fancyRow}>
           <div className={styles.fancyContent}>
-            <h1 id="news-heading" className={styles.fancyTitle}>
+            <h2 id="news-heading" className={styles.fancyTitle}>
               Meghan And Harry's Baby
-            </h1>
+            </h2>
 
           </div>
           <div className={styles.fancyImageContainer}>

@@ -27,7 +27,7 @@
   flex-direction: column;
 }
 
-.h1 {
+.h2  {
   font-size: 40px;
   margin-bottom: 16px;
   font-weight: 700;
@@ -150,7 +150,7 @@
     /* Expands children into the main flex-column container */
   }
 
-  .h1 {
+  .h2  {
     font-size: 30px;
     order: 1;
     /* Title first */

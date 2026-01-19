@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 
-.page h1,
+.page h2,
 .page h2 {
   font-weight: 800;
   letter-spacing: 1px;
@@ -569,7 +569,7 @@
   color: #000;
 }
 
-.careerSection h1 {
+.careerSection h2 {
   text-align: center;
   padding: 20px 10px;
   font-size: 2rem;
@@ -620,7 +620,7 @@
   padding: 80px 20px;
 }
 
-.industryCertificationsSection h1 {
+.industryCertificationsSection h2 {
   text-align: left;
   color: #000;
   margin-bottom: 20px;
@@ -739,7 +739,7 @@
   align-items: center;
 }
 
-.pyramidSection h1 {
+.pyramidSection h2 {
   color: #0b3d91;
   text-align: center;
   margin: 40px 0 30px;

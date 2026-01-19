@@ -73,10 +73,10 @@ const SwiperCarousel = () => {
   return (
     <div className={styles.swiperCarouselBody}>
       <div className={styles.swiperCarouselHeader}>
-        <h1
+        <h2
           ref={titleRef}
           className={`${styles.swiperCarouselTitle} ${isVisible ? styles.swiperCarouselTitleAnimate : ""}`}
-        >Placement Records</h1>
+        >Placement Records</h2>
       </div>
 
       <div className={styles.swiperCarouselWrapper}>

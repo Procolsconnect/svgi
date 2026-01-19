@@ -15,7 +15,6 @@ import Campuslife from "./pages/user/campuslife/Campuslife.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import Advertisement from "./pages/user/addvertisement/Advertisement.jsx";
 import News from "./pages/user/news/News.jsx";
-import CdcTracker from "./pages/CdcTracker.jsx";
 
 // Lazy load Admin Components to further split the bundle
 const Dashboard = React.lazy(() => import("./components/dashboard.jsx"));
@@ -43,7 +42,6 @@ const App = () => {
           <Route path="advertisement/*" element={<Advertisement />} />
           <Route path="news/*" element={<News />} />
           <Route path="contact/*" element={<Contact />} />
-          <Route path="cdc-tracker" element={<CdcTracker />} />
         </Route>
 
         <Route path="/admin" element={

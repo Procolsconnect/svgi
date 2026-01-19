@@ -45,7 +45,8 @@ const HostelPage = () => {
   return (
     <div className={styles['hostel__wrapper']}>
       {/* HERO SECTION */}
-      <CommonHero apiEndpoint="/api/campus/hostelhero" />
+      <CommonHero apiEndpoint="/api/campus/hostelhero" 
+      defaultTitle={'Hostel'}/>
 
       {/* HOSTEL CONTAINER SECTION */}
       <div className={styles['hostel__container']}>

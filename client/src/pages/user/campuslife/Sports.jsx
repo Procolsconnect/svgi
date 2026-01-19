@@ -184,7 +184,7 @@ const SportsPage = () => {
       {/* Podium Section */}
       <section id="sports__podium" className={styles['sports__podium-section']}>
         <div className={styles['sports__podium-title']}>
-          <h1>Top 3 Winners</h1>
+          <h2>Top 3 Winners</h2>
         </div>
         <div className={styles['sports__podium-description']}>
           <p>
@@ -206,7 +206,7 @@ const SportsPage = () => {
 
       {/* Video Gallery */}
       <section id="sports__video-gallery" className={styles['sports__video-gallery-section']}>
-        <h1>Sports Video Gallery</h1>
+        <h2>Sports Video Gallery</h2>
         <div className={styles['sports__videos-container']}>
           {videos.length > 0 ? videos.map((vid, idx) => (
             <div key={vid._id || idx} className={styles['sports__video-item']}>
@@ -233,7 +233,7 @@ const SportsPage = () => {
 
       {/* Achievements Section */}
       <section id="sports__achievements" className={styles['sports__achievements-section']}>
-        <h1>Sports Achievements</h1>
+        <h2>Sports Achievements</h2>
 
         <div className={styles['sports__content-wrapper']}>
           <div className={styles['sports__slider']}>
@@ -270,7 +270,7 @@ const SportsPage = () => {
 
       {/* Featured Athletes */}
       <section id="sports__athletes" className={styles['sports__cards-section']}>
-        <h1>Featured Athletes</h1>
+        <h2>Featured Athletes</h2>
         <div className={styles['sports__cards-container']}>
           {athletes.length > 0 ? athletes.map((athlete, idx) => (
             <div key={athlete._id || idx} className={styles.sports__card}>

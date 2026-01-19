@@ -65,7 +65,7 @@ export default function HeroHighlight() {
 
             {/* HIGHLIGHT SECTION */}
             <section className={styles.hhHighlightSection}>
-                <h1>Regulations & Safety</h1>
+                <h2 >Regulations & Safety</h2 >
 
                 <p>
                     The possession or use of prohibited items, including drugs, tobacco, cigarettes, alcohol, or any other intoxicating substances, is strictly forbidden within the SVGI campus and hostels.

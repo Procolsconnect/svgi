@@ -353,7 +353,7 @@
   color: #37474F;
 }
 
-.pageHeader h1 {
+.pageHeader h2  {
   font-size: 2.5rem;
 
 }
@@ -700,7 +700,7 @@
     padding-bottom: 18%;
   } 
 
-  .pageHeader h1 {
+  .pageHeader h2  {
     font-size: 2.2rem;
   }
   .wholeCard{

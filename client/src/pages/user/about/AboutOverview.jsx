@@ -61,7 +61,7 @@ export default function SVGIOverview() {
 
         <div className={`${styles.text} ${styles.textBigger}`}>
           <p className={styles.textShortBigger}>{intro?.shortText || "Lorem ipsum dolor sit amet"}</p>
-          <h1 className={styles.textTitleBigger}>{intro?.title || "Lorem ipsum dolor sit amet"}</h1>
+          <h2 className={styles.textTitleBigger}>{intro?.title || "Lorem ipsum dolor sit amet"}</h2>
           <p className={styles.textDescriptionBigger}>
             {intro?.description || "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, maiores velit laudantium similique impedit aliquid."}
           </p>
@@ -72,14 +72,14 @@ export default function SVGIOverview() {
       <section className={`${styles.section} ${styles.gridLayout}`}>
         <div className={styles.heroSection}>
           {/* This title is visible ONLY on mobile — above the grid */}
-          <h1 className={`${styles.textTitle} ${styles.mobileOnlyTitle}`}>
+          <h2 className={`${styles.textTitle} ${styles.mobileOnlyTitle}`}>
             {gridData?.title || "Lorem ipsum dolor sit amet"}
-          </h1>
+          </h2>
 
           <div className={styles.text}>
             {/* Original title — stays here for desktop */}
             <p className={styles.textShort}>{gridData?.shortText || "Lorem ipsum dolor sit amet"}</p>
-            <h1 className={styles.textTitle}>{gridData?.title || "Lorem ipsum dolor sit amet"}</h1>
+            <h2 className={styles.textTitle}>{gridData?.title || "Lorem ipsum dolor sit amet"}</h2>
             <p className={styles.textDescription}>
               {gridData?.description || "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, necessitatibus reiciendis. Voluptatem, eaque fugiat?"}
             </p>

@@ -108,7 +108,7 @@
     margin: 6rem auto;
 }
 
-.hhHighlightSection h1 {
+.hhHighlightSection h2  {
     font-size: var(--hh-header-font-size);
     font-weight: 700;
     line-height: 1.2;
@@ -292,7 +292,7 @@
         margin-top: -11rem;
     }
 
-    .hhHighlightSection h1 {
+    .hhHighlightSection h2  {
         font-size: 2.5rem;
         margin-bottom: 2rem;
     }

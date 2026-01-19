@@ -72,26 +72,9 @@ const Schools = () => {
             name: "VIT School of Agricultural Innovations And Advanced Learning",
             image: "https://images.unsplash.com/photo-1625246333195-bf4048c593c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
         },
-        {
-            acronym: "VIT BS",
-            name: "VIT Business School",
-            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-        },
-        {
-            acronym: "V-SIGN",
-            name: "VIT School of Design",
-            image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-        },
-        {
-            acronym: "V-SMART",
-            name: "VIT School of Media, Arts and Technology",
-            image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-        },
-        {
-            acronym: "V-SPARC",
-            name: "School of Architecture",
-            image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-        }
+
+ 
+     
     ];
 
     const [activeSchool, setActiveSchool] = useState(schools[0]);
@@ -104,7 +87,7 @@ const Schools = () => {
             />
 
             <div className={styles.intro}>
-                <h1 className={styles.mainTitle}>Diverse Disciplines</h1>
+                <h2  className={styles.mainTitle}>Diverse Disciplines</h2 >
                 <p className={styles.subText}>
                     Explore our wide range of schools at our university, each dedicated to excellence in its field. Hover to view details.
                 </p>

@@ -46,7 +46,7 @@ const SVGITimeline = () => {
         {timelineData.map((item, index) => (
           <article key={index}>
             <div className={styles.timelineContent}>
-              <h1>{item.title}</h1>
+              <h2 >{item.title}</h2 >
               <time dateTime={item.year}>{item.year}</time>
               <hr />
               <p>{item.description}</p>

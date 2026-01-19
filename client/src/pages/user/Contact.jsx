@@ -10,13 +10,13 @@ const Contact = () => {
                 defaultImage='/images/svgi2.jpg' />
             <section className='awards'>
                 <div>
-                    <h1>Awards And Achievements</h1>
+                    <h2>Awards And Achievements</h2>
                     <img src="images/awards-cdc.png" alt="awards-cdc" />
                 </div>
             </section>
             <section>
                 <div className='contact'>
-                    <h1>Contact Us</h1>
+                    <h2>Contact Us</h2>
                     <div>
                         <h2 className='head'>Career Development Center</h2>
                     </div>

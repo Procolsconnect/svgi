@@ -86,7 +86,7 @@ const Logo_Section = () => {
   return (
     <div className={styles.randomSlider}>
       <div className={styles.container}>
-        <h1 className={styles.subHeader}>Companies we represent</h1>
+        <h2 className={styles.subHeader}>Companies we represent</h2>
         <ol className={styles.positions}>
           {displayedLogos.map((company, index) => (
             company ? (

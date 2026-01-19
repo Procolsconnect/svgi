@@ -117,7 +117,7 @@ const DownscrollEffect = () => {
           <div className={styles['ds-section-content']}>
             {/* Title Area */}
             <div ref={addToReverseScrollRefs} className={`${styles['ds-reverse-scroll']} ${styles['ds-area-title']}`}>
-              <h1 className={styles['ds-heading']} dangerouslySetInnerHTML={{ __html: sectionData?.title?.replace(' ', '<br />') || "behind<br />curtain" }}></h1>
+              <h2 className={styles['ds-heading']} dangerouslySetInnerHTML={{ __html: sectionData?.title?.replace(' ', '<br />') || "behind<br />curtain" }}></h2>
             </div>
 
             {/* Right Image (Central in Mobile stack) */}
@@ -160,9 +160,9 @@ const DownscrollEffect = () => {
             playsInline
           />
 
-          <h1 ref={liquifyScrollRef} className={styles['ds-liquify-scroll']}>
+          <h2 ref={liquifyScrollRef} className={styles['ds-liquify-scroll']}>
             Alice's Adventures in Wonderland
-          </h1>
+          </h2>
 
           {/* SVG Liquify Filter */}
           <svg className={styles['ds-hidden']}>

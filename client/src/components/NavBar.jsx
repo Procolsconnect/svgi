@@ -52,7 +52,8 @@ const Header = () => {
         { label: "RDBC", value: "/academics/rdbc" },
         { label: "Faculty", value: "/academics/faculty" },
         { label: "Examination", value: "/academics/examination" },
-        {label:"Schools",value:"/academics/schools"}
+        { label: "Schools", value: "/academics/schools" },
+        { label: "FFCS", value: "/academics/ffcs" }
 
       ],
     },
@@ -81,6 +82,7 @@ const Header = () => {
         { label: "Green", value: "/campuslife/green" },
         { label: "Policies", value: "/campuslife/policies" },
         { label: "Welfare", value: "/campuslife/welfare" },
+        { label: "Programme Reps", value: "/campuslife/programme-reps" },
       ],
     },
     {
@@ -90,6 +92,8 @@ const Header = () => {
         { label: "Overview", value: "/placement" },
         { label: "Placement Process", value: "/placement/placementprocess" },
         { label: "Placement Page", value: "/placement/placementpage" },
+        { label: "Cdc Office", value: "/placement/cdcoffice" },
+        // { label: "Cdc Tracker", value: "/placement/cdc-tracker" }
       ],
     },
     {

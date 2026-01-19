@@ -2,7 +2,7 @@
     height: 60vh;
 }
 
-.awards h1 {
+.awards h2 {
     text-align: start;
     font-size: 2rem;
     font-family: 'SUCE';
@@ -32,7 +32,7 @@
     overflow: hidden;
 }
 
-.contact h1 {
+.contact h2 {
     text-align: start;
     font-size: 2rem;
     font-family: 'SUCE';
@@ -65,7 +65,7 @@
 
 /* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
-    .awards h1 {
+    .awards h2 {
         font-size: 1.5rem;
         padding: 1rem;
         text-align: center;
@@ -84,7 +84,7 @@
         padding: 2rem 1rem;
     }
 
-    .contact h1 {
+    .contact h2 {
         font-size: 1.5rem;
         padding: 1rem;
         text-align: start;

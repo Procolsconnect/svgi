@@ -47,9 +47,9 @@ export default function CourseOutcome() {
             <div className={styles.mainSection}>
                 {/* LEFT UNRAVEL SECTION */}
                 <div className={styles.unravelSection}>
-                    <h1 ref={headlineRef} contentEditable={false}>
+                    <h2  ref={headlineRef} contentEditable={false}>
                         Upcoming courses
-                    </h1>
+                    </h2 >
                     <p>Our student growth plan focuses on developing practical skills alongside academic knowledge to prepare students for real-world challenges. We encourage critical thinking, teamwork, and problem-solving through projects, workshops, and industry exposure. Continuous mentoring and skill-based training help students identify their strengths and career goals early..</p>
                 </div>
 
@@ -62,7 +62,7 @@ export default function CourseOutcome() {
             </div>
 
             {/* LEFT HEADING */}
-            <h1 className={styles.leftHeading}>Our Student Career Foundation</h1>
+            <h2  className={styles.leftHeading}>Our Student Career Foundation</h2 >
 
             {/* HOVER CARDS */}
             <div className={styles.hoverGallery}>

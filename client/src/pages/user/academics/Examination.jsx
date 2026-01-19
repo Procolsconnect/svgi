@@ -14,7 +14,7 @@ defaultImage={'/images/paramedical.jpeg'}
       <div className={styles.container}>
 
         {/* Title */}
-        <h1 className={styles.title}>Controller of Examinations</h1>
+        <h2  className={styles.title}>Controller of Examinations</h2 >
         <hr className={styles.divider} />
 
         {/* Top content */}

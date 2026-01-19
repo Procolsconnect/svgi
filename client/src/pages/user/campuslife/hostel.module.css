@@ -18,72 +18,6 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* ==================== HERO SECTION ==================== */
-.hostel__hero {
-  min-height: 350px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  color: white;
-  z-index: 1;
-}
-
-.hostel__hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.hostel__hero-overlay {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 0;
-}
-
-.hostel__hero h1 {
-  position: relative;
-  font-size: 52px;
-  font-weight: bold;
-  z-index: 1;
-  letter-spacing: 1px;
-  font-family: 'Playfair Display', serif;
-}
-
-.hostel__hero h1::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 5px;
-  margin: 14px auto 0;
-  background: linear-gradient(90deg, #ff512f, #dd2476);
-  border-radius: 3px;
-  animation: hostel__underline-pulse 2s infinite;
-}
-
-@keyframes hostel__underline-pulse {
-
-  0%,
-  100% {
-    transform: scaleX(1);
-    opacity: 0.8;
-  }
-
-  50% {
-    transform: scaleX(1.4);
-    opacity: 1;
-  }
-}
-
 /* ==================== HOSTEL SECTION ==================== */
 .hostel__container {
   display: flex;
@@ -307,20 +241,7 @@
 
 /* ==================== TABLET BREAKPOINT (≤1024px) ==================== */
 @media (max-width: 1024px) {
-  .hostel__hero {
-    min-height: 250px;
-  }
-
-  .hostel__hero h1 {
-    font-size: clamp(28px, 8vw, 42px);
-    padding: 0 1rem;
-  }
-
-  .hostel__hero h1::after {
-    width: 80px;
-    height: 4px;
-  }
-
+ 
   .hostel__container {
     flex-direction: column;
     padding: 40px 5%;
@@ -441,14 +362,7 @@
 
 /* ==================== MOBILE BREAKPOINT (≤768px) ==================== */
 @media (max-width: 768px) {
-  .hostel__hero h1 {
-    font-size: 36px;
-    padding: 0 20px;
-  }
-
-  .hostel__hero {
-    min-height: 200px;
-  }
+ 
 
   .hostel__container {
     padding: 30px 4%;

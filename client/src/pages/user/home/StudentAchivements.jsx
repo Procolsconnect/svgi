@@ -142,7 +142,7 @@ const StudentAchivement = () => {
     <div className={styles.body}>
       <canvas ref={canvasRef} className={styles.backgroundCanvas}></canvas>
       
-      <h1 className={styles.title}>Student Achievements</h1>
+      <h2 className={styles.title}>Student Achievements</h2>
 
       <div className={styles.container} style={{ position: "relative", minHeight: "600px" }}>
         <div className={styles.cardGrid}>
@@ -154,7 +154,7 @@ const StudentAchivement = () => {
             >
               <div className={styles.border}></div>
               <img src={card.img} alt={card.title} />
-              <h1>{card.title}</h1>
+              <h3>{card.title}</h3>
             </div>
           ))}
         </div>

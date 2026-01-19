@@ -96,9 +96,9 @@ const AdmissionsSection = () => {
       {/* TEXT + VIDEO SECTION */}
       <section className={styles.content}>
         <div className={styles.textContainer}>
-          <h1 ref={textRef} className={styles.text}>
+          <h2  ref={textRef} className={styles.text}>
             {procedureData.content}
-          </h1>
+          </h2 >
         </div>
         <div className={styles.videoBox}>
           {procedureData.video && (

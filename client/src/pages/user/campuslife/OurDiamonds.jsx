@@ -78,7 +78,7 @@ const CoursesOutcome = () => {
           alt="Hero Background"
           className={styles.heroImage}
         />
-        <h1 className={styles.heroTitle}>Our Diamonds</h1>
+        <h2 className={styles.heroTitle}>Our Diamonds</h2>
       </div>
 
       {/* CARDS GRID */}

@@ -44,7 +44,7 @@ export default function SvgVideoMask({
         </video>
 
         <div className={styles.overlay}>
-          <h1 className={styles.textMask}>{title}</h1>
+          <h2 className={styles.textMask}>{title}</h2>
         </div>
       </header>
     </section>

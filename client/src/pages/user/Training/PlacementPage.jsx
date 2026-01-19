@@ -89,7 +89,7 @@ const PlacementPage = () => {
       <CommonHero apiEndpoint="/api/placementrecordhero" defaultTitle='Placement Records' />
 
       <div className={styles.container}>
-        <h1 className={styles.pageHeading}>Placement Highlights</h1>
+        <h2 className={styles.pageHeading}>Placement Highlights</h2>
 
         {/* Image Slider */}
         <div className={styles.wrapper}>

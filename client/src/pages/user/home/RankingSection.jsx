@@ -54,7 +54,7 @@ const RankingSection = () => {
                     viewport={{ once: true }}
                     className={styles.rankingDetails}
                 >
-                    <h1 className={styles.title}>Rankings 2025</h1>
+                    <h2 className={styles.title}>Rankings 2025</h2>
                     <div className={styles.logosContainer}>
                         <img
                             src="/logos/svgilogo.png"

@@ -111,16 +111,16 @@ export default function LeadershipPage() {
         <section className={styles.materialSection}>
           <div className={styles.container}>
             <div className={styles.pageHeader}>
-              <h1>
-                Material Cards Demo
+              <h2 >
+            Shree Venkateshwara Group of Institutions
                 <br />
                 <small>
                   See full features on{" "}
                   <a href="https://github.com/marlenesco/material-cards" target="_blank" rel="noreferrer">
-                    Github
+                 Here
                   </a>
                 </small>
-              </h1>
+              </h2 >
             </div>
 
             <div className={styles.row}>

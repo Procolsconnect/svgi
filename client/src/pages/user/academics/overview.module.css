@@ -41,14 +41,14 @@
   z-index: 0;
 }
 
-.opHero h1 {
+.opHero h2  {
   position: relative;
   font-size: 52px;
   z-index: 1;
   margin: 0;
 }
 
-.opHero h1::after {
+.opHero h2 ::after {
   content: "";
   display: block;
   width: 120px;
@@ -354,10 +354,13 @@
   padding: 3em 2em;
 }
 
-.contentsMain h1 {
+.contentsMain h2  {
   font-weight: 800;
-  font-size: 40px;
-  text-transform: uppercase;
+  font-size: 40px; 
+  letter-spacing: 0.025em;
+  font-size: clamp(2.5rem, 5vw, 6.5rem);
+  line-height: 1;
+  font-family: "SUSE", sans-serif;
   text-align: center;
   margin: auto;
 }

@@ -108,7 +108,7 @@ const PostgraduateCourses = () => {
 
         {/* CONTENT SECTION */}
         <div className={styles.detailContent}>
-          <h1 className={styles.detailContentTitle}>PG COURSES</h1>
+          <h2  className={styles.detailContentTitle}>PG COURSES</h2 >
           <h3 className={styles.detailContentSubtitle}>PG DETAILS</h3>
           <div className={styles.subtitle}>Let  start to empower your skill From here</div>
           <p className={styles.detailContentParagraph}>

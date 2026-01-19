@@ -14,7 +14,7 @@ export default function MissionVisionValues() {
       <section className={styles.section}>
         <div className={styles.container}>
           <div className={styles.content}>
-            <h1 className={styles.h1}>Our Mission</h1>
+            <h2  className={styles.h2 }>Our Mission</h2 >
             <p className={styles.p}>
               Our mission is to deliver innovative and reliable digital solutions that
               empower organizations and individuals to achieve sustainable growth.
@@ -80,7 +80,7 @@ export default function MissionVisionValues() {
             </svg>
           </div>
           <div className={styles.content}>
-            <h1 className={styles.h1}>Our Vision</h1>
+            <h2  className={styles.h2 }>Our Vision</h2 >
             <p className={styles.p}>
               Our vision is to become a leading force in digital innovation by building
               future-ready solutions that create meaningful impact.

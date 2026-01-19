@@ -118,7 +118,7 @@ export default function LibraryPage() {
       <main className={styles.main}>
         <div className={styles.mainHeader}>
           <span className={styles.badge}>10000+ Books</span>
-          <h1 className={styles.title}> Discover Wisdom<br />One Page at a Time</h1>
+          <h2  className={styles.title}> Discover Wisdom<br />One Page at a Time</h2 >
           <p className={styles.subtitle}>
             A library provides access to books, digital resources, and learning materials that support students’ academic growth.
           </p>

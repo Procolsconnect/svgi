@@ -74,10 +74,10 @@ const PlacementProcessPage = () => {
         <div className={styles.heroContainer}>
           <div className={styles.heroContent}>
             <div className={styles.heroText}>
-              <h1>
+              <h2>
                 <span className={styles.bold}>{typedBold}</span>
 
-              </h1>
+              </h2>
 
               <p>
                 The SVGI Placement Process is a well-organized and student-focused approach aimed at equipping learners for successful careers by improving their skills, familiarizing them with industry standards, and linking them with top recruiters. By implementing structured training, evaluations, counseling, and recruitment events, this process guarantees that each qualified student makes a seamless transition from their academic journey to a professional career with both confidence and capability.

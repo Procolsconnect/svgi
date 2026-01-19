@@ -40,7 +40,7 @@
   margin-bottom: 10px;
 }
 
-h2 {
+.textWrapper h2 {
   margin: 0 0 6px 0;
   font-size: 1.6rem;
   letter-spacing: 2px;
@@ -48,7 +48,7 @@ h2 {
   font-weight: 600;
 }
 
-p {
+.textWrapper p {
   margin: 0;
   font-size: 0.85rem;
   opacity: 0.85;

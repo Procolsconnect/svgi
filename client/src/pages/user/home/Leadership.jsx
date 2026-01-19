@@ -7,7 +7,7 @@ export default function Leaders() {
 
   return (
     <div className={styles.leadersBodyWrapper}>
-      <div className={styles.leadersLeftHeading}>Leadership That Inspires</div>
+      <h2 className={styles.leadersLeftHeading}>Leadership That Inspires</h2>
 
       {/* Row 1 */}
       <div className={styles.leadersRow}>

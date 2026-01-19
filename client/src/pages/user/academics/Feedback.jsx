@@ -102,7 +102,7 @@ const SVGIFeedback = () => {
         {/* TEXT CONTENT */}
         <div className={styles.textWrapper}>
           <header>
-            <h1>SVGI – Overall Feedback Summary</h1>
+            <h2 >SVGI – Overall Feedback Summary</h2 >
           </header>
           <ul>
             <li>The overall campus environment is appreciated for being clean, secure, and student-friendly.</li>
@@ -117,7 +117,7 @@ const SVGIFeedback = () => {
           </ul>
 
           <header>
-            <h1>Key Observations</h1>
+            <h2 >Key Observations</h2 >
           </header>
           <ul>
             <li>Students want more hands-on workshops and real-time project exposure.</li>
@@ -126,7 +126,7 @@ const SVGIFeedback = () => {
           </ul>
 
           <header>
-            <h1>Recommendations for Improvement</h1>
+            <h2 >Recommendations for Improvement</h2 >
           </header>
           <ul>
             <li>Introduce department-wise industry mentorship programs.</li>

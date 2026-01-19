@@ -123,7 +123,7 @@ export default function PolicyCards() {
 
           {/* Section Heading */}
           <div className={styles.sectionHeadingWrapper}>
-            <h1 className={styles.sectionTitle}>{titleData?.title || "Policies on Core Values"}</h1>
+            <h2 className={styles.sectionTitle}>{titleData?.title || "Policies on Core Values"}</h2>
             <p className={styles.sectionSubtitle}>{titleData?.subTitle || "Hover over the cards"}</p>
           </div>
 

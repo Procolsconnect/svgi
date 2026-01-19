@@ -59,7 +59,7 @@ export default function OverviewPage() {
       <section className={styles.opHeroSection}>
         <div className={styles.opTitleBlock}>
           <p className={styles.opTextShort}>shree Venkateshwara Group of Institutions </p>
-          <h1 className={styles.opTextTitle}>Academics</h1>
+          <h2  className={styles.opTextTitle}>Academics</h2 >
         </div>
 
         <div className={styles.opGrid}>
@@ -95,7 +95,7 @@ export default function OverviewPage() {
 
       <section className={styles.contentsPage}>
         <main className={styles.contentsMain}>
-          <h1>Contents</h1>
+          <h2 >Contents</h2 >
           {contents.map((c, index) => (
             <div key={c._id} className={styles.item}>
               <div className={styles.itemNumber}>{index + 1}</div>
