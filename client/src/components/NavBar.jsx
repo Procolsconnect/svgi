@@ -67,7 +67,7 @@ const Header = () => {
         { label: "Career @ SVGI", value: "/about/career" },
         { label: "Milestone", value: "/about/milestone" },
         { label: "Administrative Offices", value: "/about/administrative-offices" },
-
+   {label:"ICC" ,  value:"/about/internal-complaints-committee"}
       ],
     },
     {
@@ -83,6 +83,7 @@ const Header = () => {
         { label: "Policies", value: "/campuslife/policies" },
         { label: "Welfare", value: "/campuslife/welfare" },
         { label: "Programme Reps", value: "/campuslife/programme-reps" },
+       
       ],
     },
     {
@@ -96,11 +97,7 @@ const Header = () => {
         // { label: "Cdc Tracker", value: "/placement/cdc-tracker" }
       ],
     },
-    {
-      label: "News",
-      value: "/news",
-
-    },
+  
   ];
 
   const handleNav = (item) => {

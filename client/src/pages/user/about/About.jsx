@@ -5,6 +5,7 @@ import LeadershipMaterialCards from "./LeadershipPage";
 import Career from "./Career";
 import MilestoneSection from "./Milestone";
 import AdministrativeOffices from "./AdministrativeOffices";
+import InternalComplaintsCommittee from './InternalComplaintsCommittee'
 
 const About = () => {
   return (
@@ -18,6 +19,8 @@ const About = () => {
         <Route path="career" element={<Career />} />
         <Route path="milestone" element={<MilestoneSection />} />
         <Route path="administrative-offices" element={<AdministrativeOffices />} />
+<Route path="internal-complaints-committee" element={<InternalComplaintsCommittee />} />
+        
       </Routes>
     </div>
   );

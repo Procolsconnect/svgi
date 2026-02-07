@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const setRoutes = require('./routes');
 const path = require('path');
 const connectDB = require("./config/db");
@@ -33,16 +34,23 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 app.use(cookieParser());
 
 // 5. Session
+app.set('trust proxy', 1); // Trust first proxy (required for Vercel/Heroku)
+
 app.use(session({
   name: 'connect.sid',
   secret: process.env.SESSION_SECRET || 'dev-secret',
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    collectionName: 'sessions',
+    ttl: 12 * 60 * 60 // 4 hours
+  }),
   cookie: {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 7 * 24 * 60 * 60 * 1000
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    maxAge: 12 * 60 * 60 * 1000 // 4 hours
   }
 }));
 
